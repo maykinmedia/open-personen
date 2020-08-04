@@ -1,0 +1,10 @@
+SECRET_KEY="%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#"
+DB_NAME="openpersonen"
+DB_USER="openpersonen"
+#
+# For peer authentication via unix domain socket
+# these should be kept empty.
+#
+DB_PASSWORD=""
+DB_HOST=""
+DB_PORT=""
