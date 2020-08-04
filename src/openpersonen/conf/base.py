@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # django-admin-index
-    "ordered_model",
     "django_admin_index",
+    "ordered_model",
     # Optional applications.
     "django.contrib.admin",
     # 'django.contrib.admindocs',
@@ -103,8 +103,6 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "openpersonen.utils.context_processors.settings",
-                # REQUIRED FOR ADMIN INDEX
-                "django_admin_index.context_processors.dashboard",
             ],
             "loaders": RAW_TEMPLATE_LOADERS,
         },
