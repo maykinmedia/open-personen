@@ -21,6 +21,7 @@ django-sniplates
 # django-extra-fields
 # django-filter
 # drf-yasg  # api documentation
+zeep
 
 # WSGI servers & monitoring - production oriented
 uwsgi
