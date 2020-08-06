@@ -19,7 +19,7 @@ django-sniplates
 # API libraries
 djangorestframework
 # django-extra-fields
-# django-filter
+django-filter
 # drf-yasg  # api documentation
 zeep
 vng-api-common

@@ -10,21 +10,21 @@ class InOnderzoekSerializer(serializers.Serializer):
     datumIngangOnderzoek = DatumSerializer()
 
 
-class NationaliteitInOnderzoekSerializer(serializers):
+class NationaliteitInOnderzoekSerializer(serializers.Serializer):
     aanduidingBijzonderNederlanderschap = serializers.BooleanField()
     nationaliteit = serializers.BooleanField()
     redenOpname = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
-class DatumInOnderzoekSerializer(serializers):
+class DatumInOnderzoekSerializer(serializers.Serializer):
     datum = serializers.BooleanField()
     land = serializers.BooleanField()
     plaats = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
-class VerblijfPlaatsInOnderzoekSerializer(serializers):
+class VerblijfPlaatsInOnderzoekSerializer(serializers.Serializer):
     aanduidingBijHuisnummer = serializers.BooleanField()
     datumAanvangAdreshouding = serializers.BooleanField()
     datumIngangGeldigheid = serializers.BooleanField()
@@ -47,32 +47,32 @@ class VerblijfPlaatsInOnderzoekSerializer(serializers):
     datumIngangOnderzoek = DatumSerializer()
 
 
-class GezagsVerhoudingInOnderzoekSerializer(serializers):
+class GezagsVerhoudingInOnderzoekSerializer(serializers.Serializer):
     indicatieCurateleRegister = serializers.BooleanField()
     indicatieGezagMinderjarige = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
-class VerblijfsTitelInOnderzoekSerializer(serializers):
+class VerblijfsTitelInOnderzoekSerializer(serializers.Serializer):
     aanduiding = serializers.BooleanField()
     datumEinde = serializers.BooleanField()
     datumIngang = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
-class OuderInOnderzoekSerializer(serializers):
+class OuderInOnderzoekSerializer(serializers.Serializer):
     burgerservicenummer = serializers.BooleanField()
     datumIngangFamilierechtelijkeBetrekking = serializers.BooleanField()
     geslachtsaanduiding = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
-class KinderInOnderzoek(serializers):
+class KinderInOnderzoek(serializers.Serializer):
     burgerservicenummer = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
-class PartnerInOnderzoek(serializers):
+class PartnerInOnderzoek(serializers.Serializer):
     burgerservicenummer = serializers.BooleanField()
     geslachtsaanduiding = serializers.BooleanField()
     soortVerbintenis = serializers.BooleanField()
