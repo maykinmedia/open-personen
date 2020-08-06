@@ -31,7 +31,7 @@ django==2.2.15            # via -r requirements/base.in, django-appconf, django-
 djangorestframework-camel-case==1.2.0  # via vng-api-common
 djangorestframework==3.9.4  # via -r requirements/base.in, drf-nested-routers, drf-yasg, vng-api-common
 drf-nested-routers==0.91  # via vng-api-common
-drf-yasg==1.16.0          # via vng-api-common
+drf-yasg==1.16.0          # via -r requirements/base.in, vng-api-common
 elastic-apm==5.8.1        # via -r requirements/base.in
 gemma-zds-client==0.13.2  # via vng-api-common
 idna==2.10                # via requests
