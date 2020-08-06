@@ -5,7 +5,7 @@ from .datum import DatumSerializer
 from .inonderzoek import DatumInOnderzoekSerializer
 
 
-class GeboorteSerializer(serializers.Serializer):
+class AangaanHuwelijkPartnerschapSerializer(serializers):
     datum = DatumSerializer()
     land = CodeEnOmschrijvingSerializer()
     plaats = CodeEnOmschrijvingSerializer()

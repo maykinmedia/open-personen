@@ -58,3 +58,22 @@ class VerblijfsTitelInOnderzoekSerializer(serializers):
     datumEinde = serializers.BooleanField()
     datumIngang = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
+
+
+class OuderInOnderzoekSerializer(serializers):
+    burgerservicenummer = serializers.BooleanField()
+    datumIngangFamilierechtelijkeBetrekking = serializers.BooleanField()
+    geslachtsaanduiding = serializers.BooleanField()
+    datumIngangOnderzoek = DatumSerializer()
+
+
+class KinderInOnderzoek(serializers):
+    burgerservicenummer = serializers.BooleanField()
+    datumIngangOnderzoek = DatumSerializer()
+
+
+class PartnerInOnderzoek(serializers):
+    burgerservicenummer = serializers.BooleanField()
+    geslachtsaanduiding = serializers.BooleanField()
+    soortVerbintenis = serializers.BooleanField()
+    datumIngangOnderzoek = DatumSerializer()
