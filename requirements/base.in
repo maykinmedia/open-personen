@@ -22,6 +22,7 @@ djangorestframework
 # django-filter
 # drf-yasg  # api documentation
 zeep
+vng-api-common
 
 # WSGI servers & monitoring - production oriented
 uwsgi

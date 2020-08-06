@@ -9,37 +9,59 @@ attrs==19.3.0             # via zeep
 cached-property==1.5.1    # via zeep
 certifi==2020.6.20        # via elastic-apm, requests, sentry-sdk
 chardet==3.0.4            # via requests
+coreapi==2.3.3            # via drf-yasg
+coreschema==0.0.4         # via coreapi, drf-yasg
 defusedxml==0.6.0         # via zeep
 django-admin-index==1.4.0  # via -r requirements/base.in
 django-appconf==1.0.4     # via django-axes
 django-axes==5.4.2        # via -r requirements/base.in
-django-choices==1.7.1     # via -r requirements/base.in
+django-choices==1.7.1     # via -r requirements/base.in, vng-api-common
 django-compat==1.0.15     # via django-hijack, django-hijack-admin
+django-filter==2.3.0      # via vng-api-common
 django-hijack-admin==2.1.10  # via -r requirements/base.in
 django-hijack==2.1.10     # via -r requirements/base.in, django-hijack-admin
 django-ipware==3.0.0      # via django-axes
 django-ordered-model==3.4.1  # via django-admin-index
 django-redis==4.12.1      # via -r requirements/base.in
+django-rest-framework-condition==0.1.1  # via vng-api-common
 django-rosetta==0.9.4     # via -r requirements/base.in
 django-sniplates==0.7.0   # via -r requirements/base.in
-django==2.2.15            # via -r requirements/base.in, django-appconf, django-axes, django-choices, django-redis, django-rosetta, django-sniplates, djangorestframework
-djangorestframework==3.11.1  # via -r requirements/base.in
+django-solo==1.1.3        # via vng-api-common
+django==2.2.15            # via -r requirements/base.in, django-appconf, django-axes, django-choices, django-filter, django-redis, django-rest-framework-condition, django-rosetta, django-sniplates, drf-nested-routers, drf-yasg, vng-api-common
+djangorestframework-camel-case==1.2.0  # via vng-api-common
+djangorestframework==3.9.4  # via -r requirements/base.in, drf-nested-routers, drf-yasg, vng-api-common
+drf-nested-routers==0.91  # via vng-api-common
+drf-yasg==1.16.0          # via vng-api-common
 elastic-apm==5.8.1        # via -r requirements/base.in
+gemma-zds-client==0.13.2  # via vng-api-common
 idna==2.10                # via requests
-isodate==0.6.0            # via zeep
+inflection==0.5.0         # via drf-yasg
+iso-639==0.4.5            # via vng-api-common
+isodate==0.6.0            # via vng-api-common, zeep
+itypes==1.2.0             # via coreapi
+jinja2==2.11.2            # via coreschema
 lxml==4.5.2               # via zeep
+markupsafe==1.1.1         # via jinja2
+oyaml==0.9                # via vng-api-common
 pillow==7.2.0             # via -r requirements/base.in
 polib==1.1.0              # via django-rosetta
 psycopg2==2.8.5           # via -r requirements/base.in
+pyjwt==1.7.1              # via gemma-zds-client, vng-api-common
 python-decouple==3.3      # via -r requirements/base.in
 python-dotenv==0.14.0     # via -r requirements/base.in
 pytz==2020.1              # via -r requirements/base.in, django, zeep
+pyyaml==5.3.1             # via gemma-zds-client, oyaml, vng-api-common
 redis==3.5.3              # via django-redis
 requests-toolbelt==0.9.1  # via zeep
-requests==2.24.0          # via django-rosetta, requests-toolbelt, zeep
+requests==2.24.0          # via coreapi, django-rosetta, gemma-zds-client, requests-toolbelt, vng-api-common, zeep
+ruamel.yaml.clib==0.2.0   # via ruamel.yaml
+ruamel.yaml==0.16.10      # via drf-yasg
 sentry-sdk==0.16.3        # via -r requirements/base.in
-six==1.15.0               # via django-choices, django-compat, django-rosetta, isodate, zeep
+six==1.15.0               # via django-choices, django-compat, django-rosetta, drf-yasg, isodate, zeep
 sqlparse==0.3.1           # via django
+unidecode==1.1.1          # via vng-api-common
+uritemplate==3.0.1        # via coreapi, drf-yasg
 urllib3==1.25.10          # via elastic-apm, requests, sentry-sdk
 uwsgi==2.0.19.1           # via -r requirements/base.in
+vng-api-common==1.5.2     # via -r requirements/base.in
 zeep==3.4.0               # via -r requirements/base.in
