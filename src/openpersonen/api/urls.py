@@ -4,13 +4,34 @@ from django.urls import include, path
 from vng_api_common import routers
 from vng_api_common.schema import SchemaView as _SchemaView
 
-from openpersonen.api.views.ingeschrevenpersoon import IngeschrevenPersoon
+from openpersonen.api.views import IngeschrevenPersoon, Kinder, Ouder, Partner
 from openpersonen.api.schema import info
 
 router = routers.DefaultRouter()
-router.register(r'ingeschrevenpersoon',
-                IngeschrevenPersoon,
-                base_name='ingeschrevenpersoon')
+
+router.register(
+    'ingeschrevenpersonen',
+    IngeschrevenPersoon,
+    base_name='ingeschrevenpersoon',
+    nested=[
+        routers.nested(
+            'kinderen',
+            Kinder,
+            base_name='kinderen',
+        ),
+        routers.nested(
+            'ouders',
+            Ouder,
+            base_name='ouders',
+        ),
+        routers.nested(
+            'partners',
+            Partner,
+            base_name='partners',
+        ),
+    ]
+
+)
 
 
 # set the path to schema file
@@ -22,7 +43,7 @@ urlpatterns = [
     url(
         r"^schema/$",
         SchemaView.with_ui(
-            "redoc"
+            # "redoc"
         ),
         name="schema-redoc-ingeschreven-persoon",
     ),

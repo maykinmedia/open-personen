@@ -4,6 +4,6 @@ from .inonderzoek import KinderInOnderzoek
 from .persoon import PersoonSerializer
 
 
-class KinderSerializers(PersoonSerializer):
+class KinderSerializer(PersoonSerializer):
     leeftijd = serializers.IntegerField()
     inOnderzoek = KinderInOnderzoek()
