@@ -29,3 +29,6 @@ local.py
 # Static files
 src/openpersonen/static/bundles/
 src/openpersonen/fonts/
+
+# Tutorial example
+/drf-tutorial/

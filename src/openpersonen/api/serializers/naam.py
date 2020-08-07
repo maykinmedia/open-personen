@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .inonderzoek import InOnderzoekSerializer
+from .inonderzoek import NaamInOnderzoekSerializer
 
 
 class NaamSerializer(serializers.Serializer):
@@ -8,7 +8,7 @@ class NaamSerializer(serializers.Serializer):
     voorletters = serializers.CharField()
     voornamen = serializers.CharField()
     voorvoegsel = serializers.CharField()
-    inOnderzoek = InOnderzoekSerializer()
+    inOnderzoek = NaamInOnderzoekSerializer()
     aanhef = serializers.CharField()
     aanschrijfwijze = serializers.CharField()
     gebruikInLopendeTekst = serializers.CharField()

@@ -4,6 +4,7 @@ from rest_framework.viewsets import ViewSet
 
 from openpersonen.api.filters.ingeschrevenpersoon import IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
+from openpersonen.api.test_data import test_data
 
 
 class IngeschrevenPersoon(ViewSet):
@@ -13,7 +14,15 @@ class IngeschrevenPersoon(ViewSet):
     filterset_class = IngeschrevenPersoonFilter
 
     def list(self, request):
-        return Response(data='In list', status=HTTP_200_OK)
+
+        serializer = IngeschrevenPersoonSerializer(data=test_data, many=True)
+        serializer.is_valid()
+
+        return Response(data=serializer.validated_data, status=HTTP_200_OK)
 
     def retrieve(self, request, burgerservicenummer=None):
-        return Response(data=f'In retrieve, burgerservicenummer is {burgerservicenummer}', status=HTTP_200_OK)
+
+        serializer = IngeschrevenPersoonSerializer(data=test_data[0])
+        serializer.is_valid()
+
+        return Response(data=serializer.validated_data, status=HTTP_200_OK)

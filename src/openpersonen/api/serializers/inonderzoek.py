@@ -3,10 +3,16 @@ from rest_framework import serializers
 from .datum import DatumSerializer
 
 
-class InOnderzoekSerializer(serializers.Serializer):
+class NaamInOnderzoekSerializer(serializers.Serializer):
     geslachtsnaam = serializers.BooleanField()
     voornamen = serializers.BooleanField()
     voorvoegsel = serializers.BooleanField()
+    datumIngangOnderzoek = DatumSerializer()
+
+
+class IngeschrevenPersoonInOnderzoekSerializer(serializers.Serializer):
+    burgerservicenummer = serializers.BooleanField()
+    geslachtsaanduiding = serializers.BooleanField()
     datumIngangOnderzoek = DatumSerializer()
 
 
