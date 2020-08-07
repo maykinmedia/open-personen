@@ -12,4 +12,4 @@ class TestGetIngeschrevenPersoon(APITestCase):
         test_pk = 1
         response = self.client.get(f'/openpersonen/api/ingeschrevenpersonen/{test_pk}')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, f'In retrieve, pk is {test_pk}')
+        self.assertEqual(response.data, f'In retrieve, burgerservicenummer is {test_pk}')
