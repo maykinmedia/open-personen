@@ -1,3 +1,5 @@
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
 
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
@@ -26,3 +28,9 @@ class IngeschrevenPersoon(ViewSet):
         serializer_class = self.serializer_class
         kwargs['context'] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+        return Response(data=[], status=HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response(data={}, status=HTTP_200_OK)
