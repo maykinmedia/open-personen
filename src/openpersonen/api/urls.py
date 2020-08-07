@@ -22,7 +22,7 @@ urlpatterns = [
     url(
         r"^schema/$",
         SchemaView.with_ui(
-            # "redoc"
+            "redoc"
         ),
         name="schema-redoc-ingeschreven-persoon",
     ),
