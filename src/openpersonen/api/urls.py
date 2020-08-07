@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from django.urls import include, path
-from rest_framework import routers as drf_routers
 
 from vng_api_common import routers
 from vng_api_common.schema import SchemaView as _SchemaView
@@ -13,11 +12,6 @@ router.register(r'ingeschrevenpersoon',
                 IngeschrevenPersoon,
                 base_name='ingeschrevenpersoon')
 
-drf_routers = drf_routers.DefaultRouter()
-drf_routers.register(r'ingeschrevenpersoon',
-                     IngeschrevenPersoon,
-                     base_name='ingeschrevenpersoon')
-
 
 # set the path to schema file
 class SchemaView(_SchemaView):
@@ -25,12 +19,6 @@ class SchemaView(_SchemaView):
 
 
 urlpatterns = [
-    # API documentation
-    # url(
-    #     r"^schema/openapi(?P<format>\.json|\.yaml)$",
-    #     SchemaView(),
-    #     name="schema-json-ingeschreven-persoon",
-    # ),
     url(
         r"^schema/$",
         SchemaView.with_ui(
@@ -40,6 +28,5 @@ urlpatterns = [
     ),
 
     # actual API
-    path('', include(router.urls)),
-    path('drf/', include(drf_routers.urls)),
+    path('', include(router.urls))
 ]
