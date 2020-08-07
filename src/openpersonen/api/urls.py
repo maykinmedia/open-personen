@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.conf.urls import url
 from django.urls import include
 
@@ -19,7 +18,6 @@ router.register(
 
 # set the path to schema file
 class SchemaView(_SchemaView):
-    # schema_path = settings.SPEC_URL["openpersonen"]
     info = info
 
 

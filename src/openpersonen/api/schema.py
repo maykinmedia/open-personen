@@ -1,11 +1,18 @@
 from drf_yasg import openapi
 
 
-description = "Open Personen Schema"
+description = """
+API voor het ontsluiten van gegevens van ingeschreven personen en aanverwante gegevens uit de GBA en RNI.
+Met deze API worden de actuele gegevens van ingeschreven personen, hun kinderen, partners en ouders ontsloten.
+
+Heeft een persoon bijvoorbeeld geen geldige nationaliteit, dan wordt nationaliteit niet geretourneerd.
+
+Heeft een persoon een beëindigd partnerschap of huwelijk, dan wordt de partner niet geretourneerd.
+"""
 
 
 info = openapi.Info(
-    title="Besluiten API",
+    title="Bevragingen ingeschreven personen",
     default_version='1.0.0',
     description=description,
     contact=openapi.Contact(
