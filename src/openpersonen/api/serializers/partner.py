@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .aangaanhuwelijkpartnerschap import AangaanHuwelijkPartnerschapSerializer
-from .inonderzoek import PartnerInOnderzoek
+from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschapSerializer
+from .in_onderzoek import PartnerInOnderzoek
 from .persoon import PersoonSerializer
 
 

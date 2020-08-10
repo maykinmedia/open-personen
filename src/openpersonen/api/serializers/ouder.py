@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .datum import DatumSerializer
-from .inonderzoek import OuderInOnderzoekSerializer
+from .in_onderzoek import OuderInOnderzoekSerializer
 from .persoon import PersoonSerializer
 
 

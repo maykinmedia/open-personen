@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from .codeenomschrijving import CodeEnOmschrijvingSerializer
+from .waarde import WaardeSerializer
 from .datum import DatumSerializer
-from .inonderzoek import VerblijfsTitelInOnderzoekSerializer
+from .in_onderzoek import VerblijfsTitelInOnderzoekSerializer
 
 
 class VerblijfsTitelSerializer(serializers.Serializer):
-    aanduiding = CodeEnOmschrijvingSerializer(required=False)
+    aanduiding = WaardeSerializer(required=False)
     datumEinde = DatumSerializer(required=False)
     datumIngang = DatumSerializer(required=False)
     inOnderzoek = VerblijfsTitelInOnderzoekSerializer(required=False)

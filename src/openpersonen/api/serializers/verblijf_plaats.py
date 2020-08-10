@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .codeenomschrijving import CodeEnOmschrijvingSerializer
+from .waarde import WaardeSerializer
 from .datum import DatumSerializer
-from .inonderzoek import VerblijfPlaatsInOnderzoekSerializer
-from .verblijfbuitenland import VerblijfBuitenlandSerializer
+from .in_onderzoek import VerblijfPlaatsInOnderzoekSerializer
+from .verblijf_buitenland import VerblijfBuitenlandSerializer
 from openpersonen.api.enum.functie_adres import FunctieAdresChoices
 from ..enum.aanduiding_bij_huisnummer import AanduidginBijHuisnummerChoices
 
@@ -27,7 +27,7 @@ class VerblijfPlaatsSerializer(serializers.Serializer):
     datumIngangGeldigheid = DatumSerializer(required=False)
     datumInschrijvingInGemeente = DatumSerializer(required=False)
     datumVestigingInNederland = DatumSerializer(required=False)
-    gemeenteVanInschrijving = CodeEnOmschrijvingSerializer(required=False)
-    landVanwaarIngeschreven = CodeEnOmschrijvingSerializer(required=False)
+    gemeenteVanInschrijving = WaardeSerializer(required=False)
+    landVanwaarIngeschreven = WaardeSerializer(required=False)
     verblijfBuitenland = VerblijfBuitenlandSerializer(required=False)
     inOnderzoek = VerblijfPlaatsInOnderzoekSerializer(required=False)

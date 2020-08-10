@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .inonderzoek import KinderInOnderzoek
+from .in_onderzoek import KinderInOnderzoek
 from .persoon import PersoonSerializer
 
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .inonderzoek import NaamInOnderzoekSerializer
+from .in_onderzoek import NaamInOnderzoekSerializer
 
 
 class NaamSerializer(serializers.Serializer):

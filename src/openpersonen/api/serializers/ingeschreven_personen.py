@@ -1,15 +1,15 @@
 from rest_framework import serializers
 
 from .datum import DatumSerializer
-from .gezagsverhouding import GezagsVerhoudingSerializer
-from .inonderzoek import IngeschrevenPersoonInOnderzoekSerializer
+from .gezags_verhouding import GezagsVerhoudingSerializer
+from .in_onderzoek import IngeschrevenPersoonInOnderzoekSerializer
 from .kiesrecht import KiesrechtSerializer
 from .nationaliteit import NationaliteitSerializer
-from .opschortingbijhouding import OpschortingBijhouding
+from .opschorting_bijhouding import OpschortingBijhouding
 from .overlijden import OverlijdenSerializer
 from .persoon import PersoonSerializer
-from .verblijfplaats import VerblijfPlaatsSerializer
-from .verblijfstitel import VerblijfsTitelSerializer
+from .verblijf_plaats import VerblijfPlaatsSerializer
+from .verblijfs_titel import VerblijfsTitelSerializer
 
 
 class IngeschrevenPersoonSerializer(PersoonSerializer):
