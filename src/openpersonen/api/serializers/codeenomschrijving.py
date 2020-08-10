@@ -2,5 +2,5 @@ from rest_framework import serializers
 
 
 class CodeEnOmschrijvingSerializer(serializers.Serializer):
-    code = serializers.CharField(required=False)
-    omschrijving = serializers.CharField(required=False)
+    code = serializers.CharField(min_length=1, required=False)
+    omschrijving = serializers.CharField(min_length=1, required=False)

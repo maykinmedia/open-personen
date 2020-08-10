@@ -23,4 +23,4 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
     verblijfplaats = VerblijfPlaatsSerializer(required=False)
     gezagsverhouding = GezagsVerhoudingSerializer(required=False)
     verblijfstitel = VerblijfsTitelSerializer(required=False)
-    reisdocumenten = serializers.ListField(child=serializers.CharField(), required=False)
+    reisdocumenten = serializers.ListField(child=serializers.CharField(max_length=9), required=False)
