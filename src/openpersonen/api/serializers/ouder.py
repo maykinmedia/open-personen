@@ -6,6 +6,6 @@ from .persoon import PersoonSerializer
 
 
 class OuderSerializer(PersoonSerializer):
-    ouderAanduiding = serializers.CharField()
-    datumIngangFamilierechtelijkeBetrekking = DatumSerializer()
-    inOnderzoek = OuderInOnderzoekSerializer()
+    ouderAanduiding = serializers.CharField(required=False)
+    datumIngangFamilierechtelijkeBetrekking = DatumSerializer(required=False)
+    inOnderzoek = OuderInOnderzoekSerializer(required=False)

@@ -4,6 +4,6 @@ from .inonderzoek import GezagsVerhoudingInOnderzoekSerializer
 
 
 class GezagsVerhoudingSerializer(serializers.Serializer):
-    indicatieCurateleRegister = serializers.CharField()
-    indicatieGezagMinderjarige = serializers.CharField()
-    inOnderzoek = GezagsVerhoudingInOnderzoekSerializer()
+    indicatieCurateleRegister = serializers.CharField(required=False)
+    indicatieGezagMinderjarige = serializers.CharField(required=False)
+    inOnderzoek = GezagsVerhoudingInOnderzoekSerializer(required=False)

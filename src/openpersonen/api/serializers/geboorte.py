@@ -6,7 +6,7 @@ from .inonderzoek import DatumInOnderzoekSerializer
 
 
 class GeboorteSerializer(serializers.Serializer):
-    datum = DatumSerializer()
-    land = CodeEnOmschrijvingSerializer()
-    plaats = CodeEnOmschrijvingSerializer()
-    inOnderzoek = DatumInOnderzoekSerializer()
+    datum = DatumSerializer(required=False)
+    land = CodeEnOmschrijvingSerializer(required=False)
+    plaats = CodeEnOmschrijvingSerializer(required=False)
+    inOnderzoek = DatumInOnderzoekSerializer(required=False)

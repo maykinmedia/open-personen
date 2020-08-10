@@ -9,5 +9,5 @@ class PersoonSerializer(serializers.Serializer):
     burgerservicenummer = serializers.RegexField('^[0-9]*$', required=False, min_length=9, max_length=9)
     geheimhouding_persoonsgegevens = serializers.BooleanField(label='geheimhoudingPersoonsgegevens', required=False)
     geslachtsaanduiding = serializers.ChoiceField(GeslachtsaanduidingChoices.choices, required=False)
-    naam = NaamSerializer()
-    geboorte = GeboorteSerializer()
+    naam = NaamSerializer(required=False)
+    geboorte = GeboorteSerializer(required=False)

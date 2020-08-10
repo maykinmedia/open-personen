@@ -6,8 +6,8 @@ from .inonderzoek import DatumInOnderzoekSerializer
 
 
 class OverlijdenSerializer(serializers.Serializer):
-    indicatieOverleden = serializers.BooleanField()
-    datum = DatumSerializer()
-    land = CodeEnOmschrijvingSerializer()
-    plaats = CodeEnOmschrijvingSerializer()
-    inOnderzoek = DatumInOnderzoekSerializer()
+    indicatieOverleden = serializers.BooleanField(required=False)
+    datum = DatumSerializer(required=False)
+    land = CodeEnOmschrijvingSerializer(required=False)
+    plaats = CodeEnOmschrijvingSerializer(required=False)
+    inOnderzoek = DatumInOnderzoekSerializer(required=False)

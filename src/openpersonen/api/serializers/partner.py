@@ -6,6 +6,6 @@ from .persoon import PersoonSerializer
 
 
 class PartnerSerializer(PersoonSerializer):
-    soortVerbintenis = serializers.CharField()
-    inOnderzoek = PartnerInOnderzoek()
-    aangaanHuwelijkPartnerschap = AangaanHuwelijkPartnerschapSerializer()
+    soortVerbintenis = serializers.CharField(required=False)
+    inOnderzoek = PartnerInOnderzoek(required=False)
+    aangaanHuwelijkPartnerschap = AangaanHuwelijkPartnerschapSerializer(required=False)

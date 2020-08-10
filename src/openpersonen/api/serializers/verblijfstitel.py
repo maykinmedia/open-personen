@@ -6,7 +6,7 @@ from .inonderzoek import VerblijfsTitelInOnderzoekSerializer
 
 
 class VerblijfsTitelSerializer(serializers.Serializer):
-    aanduiding = CodeEnOmschrijvingSerializer()
-    datumEinde = DatumSerializer()
-    datumIngang = DatumSerializer()
-    inOnderzoek = VerblijfsTitelInOnderzoekSerializer()
+    aanduiding = CodeEnOmschrijvingSerializer(required=False)
+    datumEinde = DatumSerializer(required=False)
+    datumIngang = DatumSerializer(required=False)
+    inOnderzoek = VerblijfsTitelInOnderzoekSerializer(required=False)
