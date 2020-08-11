@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from openpersonen.api.enum import GeslachtsaanduidingChoices
 from .datum import DatumSerializer
 from .gezags_verhouding import GezagsVerhoudingSerializer
 from .in_onderzoek import IngeschrevenPersoonInOnderzoekSerializer
@@ -13,6 +14,7 @@ from .verblijfs_titel import VerblijfsTitelSerializer
 
 
 class IngeschrevenPersoonSerializer(PersoonSerializer):
+    geslachtsaanduiding = serializers.ChoiceField(choices=GeslachtsaanduidingChoices.choices, required=False)
     leeftijd = serializers.IntegerField(max_value=999, required=False)
     datumEersteInschrijvingGBA = DatumSerializer(required=False)
     kiesrecht = KiesrechtSerializer(required=False)
