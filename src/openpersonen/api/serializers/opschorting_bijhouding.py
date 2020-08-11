@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .datum import DatumSerializer
-from openpersonen.api.enum.reden_opschorting_bijhouding import RedenOpschortingBijhoudingChoices
+from openpersonen.api.enum import RedenOpschortingBijhoudingChoices
 
 
 class OpschortingBijhouding(serializers.Serializer):

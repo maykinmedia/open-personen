@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .in_onderzoek import NaamInOnderzoekSerializer
+from openpersonen.api.enum import AanduidingNaamgebruikChoices
 
 
 class NaamSerializer(serializers.Serializer):
@@ -9,7 +10,7 @@ class NaamSerializer(serializers.Serializer):
     voornamen = serializers.CharField(max_length=200, required=False)
     voorvoegsel = serializers.CharField(max_length=10, required=False)
     inOnderzoek = NaamInOnderzoekSerializer(required=False)
-    aanhef = serializers.CharField(min_length=1, required=False)
-    aanschrijfwijze = serializers.CharField(min_length=1, required=False)
-    gebruikInLopendeTekst = serializers.CharField(min_length=1, required=False)
-    aanduidingNaamgebruik = serializers.CharField(min_length=1, required=False)
+    aanhef = serializers.CharField(required=False)
+    aanschrijfwijze = serializers.CharField(required=False)
+    gebruikInLopendeTekst = serializers.CharField(required=False)
+    aanduidingNaamgebruik = serializers.ChoiceField(choices=AanduidingNaamgebruikChoices.choices ,required=False)

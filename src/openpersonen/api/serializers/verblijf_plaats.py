@@ -4,8 +4,7 @@ from .waarde import WaardeSerializer
 from .datum import DatumSerializer
 from .in_onderzoek import VerblijfPlaatsInOnderzoekSerializer
 from .verblijf_buitenland import VerblijfBuitenlandSerializer
-from openpersonen.api.enum.functie_adres import FunctieAdresChoices
-from ..enum.aanduiding_bij_huisnummer import AanduidginBijHuisnummerChoices
+from openpersonen.api.enum import FunctieAdresChoices, AanduidginBijHuisnummerChoices
 
 
 class VerblijfPlaatsSerializer(serializers.Serializer):

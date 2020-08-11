@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .in_onderzoek import GezagsVerhoudingInOnderzoekSerializer
-from openpersonen.api.enum.indicatie_gezag_minderjarige import IndicatieGezagMinderjarigeChoices
+from openpersonen.api.enum import IndicatieGezagMinderjarigeChoices
 
 
 class GezagsVerhoudingSerializer(serializers.Serializer):
