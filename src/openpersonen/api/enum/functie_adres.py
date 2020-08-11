@@ -2,5 +2,5 @@ from djchoices import ChoiceItem, DjangoChoices
 
 
 class FunctieAdresChoices(DjangoChoices):
-    woonadres = ChoiceItem('W', 'Woonadres')
-    briefadres = ChoiceItem('B', 'briefadres')
+    woonadres = ChoiceItem('woonadres', 'Woonadres')
+    briefadres = ChoiceItem('briefadres', 'briefadres')
