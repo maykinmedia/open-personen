@@ -10,6 +10,9 @@ class NaamSerializer(serializers.Serializer):
     voornamen = serializers.CharField(max_length=200, required=False)
     voorvoegsel = serializers.CharField(max_length=10, required=False)
     inOnderzoek = NaamInOnderzoekSerializer(required=False)
+
+
+class IngeschrevenPersoonNaamSerializer(NaamSerializer):
     aanhef = serializers.CharField(required=False)
     aanschrijfwijze = serializers.CharField(required=False)
     gebruikInLopendeTekst = serializers.CharField(required=False)
