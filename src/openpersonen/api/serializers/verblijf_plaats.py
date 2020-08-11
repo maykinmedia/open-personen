@@ -21,7 +21,7 @@ class VerblijfPlaatsSerializer(serializers.Serializer):
     indicatieVestigingVanuitBuitenland = serializers.BooleanField(required=False)
     locatiebeschrijving = serializers.CharField(max_length=35, required=False)
     straatnaam = serializers.CharField(max_length=24, required=False)
-    vanuitVertrokkenOnbekendWaarheen = serializers.CharField(required=False)
+    vanuitVertrokkenOnbekendWaarheen = serializers.BooleanField(required=False)
     datumAanvangAdreshouding = DatumSerializer(required=False)
     datumIngangGeldigheid = DatumSerializer(required=False)
     datumInschrijvingInGemeente = DatumSerializer(required=False)
