@@ -1,9 +1,9 @@
-from .aanduiding_bij_huisnummer import AanduidginBijHuisnummerChoices
-from .aanduiding_bijzonder_nederlanderschap import AanduidingBijzonderNederlanderschapChoices
-from .aanduiding_naamgebruik import AanduidingNaamgebruikChoices
-from .functie_adres import FunctieAdresChoices
-from .geslachtsaanduiding import GeslachtsaanduidingChoices
-from .indicatie_gezag_minderjarige import IndicatieGezagMinderjarigeChoices
-from .ouder_aanduiding import OuderAanduiding
-from .reden_opschorting_bijhouding import RedenOpschortingBijhoudingChoices
-from .soort_verbintenis import SoortVerbintenis
+from .aanduiding_bij_huisnummer import *  # noqa
+from .aanduiding_bijzonder_nederlanderschap import *  # noqa
+from .aanduiding_naamgebruik import *  # noqa
+from .functie_adres import *  # noqa
+from .geslachtsaanduiding import *  # noqa
+from .indicatie_gezag_minderjarige import *  # noqa
+from .ouder_aanduiding import *  # noqa
+from .reden_opschorting_bijhouding import *  # noqa
+from .soort_verbintenis import *  # noqa
