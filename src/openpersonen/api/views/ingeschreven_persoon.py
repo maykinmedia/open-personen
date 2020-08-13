@@ -17,7 +17,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
     lookup_field = "burgerservicenummer"
     lookup_value_regex = "[0-9]{9}"
     serializer_class = IngeschrevenPersoonSerializer
-    filter_class = IngeschrevenPersoonFilter
+    # filter_class = IngeschrevenPersoonFilter
     filter_backends = [
         Backend,
     ]

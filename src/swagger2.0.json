@@ -15,10 +15,10 @@
     },
     "basePath": "/openpersonen",
     "consumes": [
-        "application/json"
+        "application/hal+json"
     ],
     "produces": [
-        "application/json"
+        "application/hal+json"
     ],
     "securityDefinitions": {
         "Basic": {
@@ -336,7 +336,8 @@
                     "name": "burgerservicenummer",
                     "in": "path",
                     "required": true,
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "[0-9]{9}"
                 },
                 {
                     "name": "version",
@@ -346,7 +347,7 @@
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/kinderen": {
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen": {
             "get": {
                 "operationId": "api_ingeschrevenpersonen_kinderen_list",
                 "description": "",
@@ -357,7 +358,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Kinder"
+                                "$ref": "#/definitions/Kind"
                             }
                         },
                         "headers": {
@@ -488,7 +489,7 @@
             },
             "parameters": [
                 {
-                    "name": "ingeschrevenpersoon_burgerservicenummer",
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -501,7 +502,7 @@
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/kinderen/{id}": {
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen/{id}": {
             "get": {
                 "operationId": "api_ingeschrevenpersonen_kinderen_read",
                 "description": "",
@@ -510,7 +511,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Kinder"
+                            "$ref": "#/definitions/Kind"
                         },
                         "headers": {
                             "API-version": {
@@ -657,10 +658,11 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "[0-9]{9}"
                 },
                 {
-                    "name": "ingeschrevenpersoon_burgerservicenummer",
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -673,7 +675,162 @@
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/ouders": {
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/nationaliteithistorie": {
+            "get": {
+                "operationId": "api_ingeschrevenpersonen_nationaliteithistorie_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/NationaliteitHistorie"
+                            }
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Not acceptable",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "Unsupported media type",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "version",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders": {
             "get": {
                 "operationId": "api_ingeschrevenpersonen_ouders_list",
                 "description": "",
@@ -815,7 +972,7 @@
             },
             "parameters": [
                 {
-                    "name": "ingeschrevenpersoon_burgerservicenummer",
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -828,7 +985,7 @@
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/ouders/{id}": {
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders/{id}": {
             "get": {
                 "operationId": "api_ingeschrevenpersonen_ouders_read",
                 "description": "",
@@ -984,10 +1141,11 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "[0-9]{9}"
                 },
                 {
-                    "name": "ingeschrevenpersoon_burgerservicenummer",
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -1000,7 +1158,162 @@
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/partners": {
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partnerhistorie": {
+            "get": {
+                "operationId": "api_ingeschrevenpersonen_partnerhistorie_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PartnerHistorie"
+                            }
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Not acceptable",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "Unsupported media type",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "version",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners": {
             "get": {
                 "operationId": "api_ingeschrevenpersonen_partners_list",
                 "description": "",
@@ -1142,7 +1455,7 @@
             },
             "parameters": [
                 {
-                    "name": "ingeschrevenpersoon_burgerservicenummer",
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -1155,7 +1468,7 @@
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/partners/{id}": {
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners/{id}": {
             "get": {
                 "operationId": "api_ingeschrevenpersonen_partners_read",
                 "description": "",
@@ -1311,10 +1624,321 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
+                    "type": "string",
+                    "pattern": "[0-9]{9}"
+                },
+                {
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
+                    "in": "path",
+                    "required": true,
                     "type": "string"
                 },
                 {
-                    "name": "ingeschrevenpersoon_burgerservicenummer",
+                    "name": "version",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfplaatshistorie": {
+            "get": {
+                "operationId": "api_ingeschrevenpersonen_verblijfplaatshistorie_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/VerblijfPlaatsHistorie"
+                            }
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Not acceptable",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "Unsupported media type",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "version",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfstitelhistorie": {
+            "get": {
+                "operationId": "api_ingeschrevenpersonen_verblijfstitelhistorie_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/VerblijfsTitelHistorie"
+                            }
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Not acceptable",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "Unsupported media type",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Fout"
+                        },
+                        "headers": {
+                            "API-version": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1."
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "api"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "ingeschrevenpersonen_burgerservicenummer",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -1753,8 +2377,9 @@
                 },
                 "huisnummer": {
                     "title": "Huisnummer",
-                    "type": "integer",
-                    "maximum": 99999
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
                 },
                 "huisnummertoevoeging": {
                     "title": "Huisnummertoevoeging",
@@ -2081,7 +2706,7 @@
                 }
             }
         },
-        "KinderInOnderzoek": {
+        "KindInOnderzoek": {
             "title": "Inonderzoek",
             "type": "object",
             "properties": {
@@ -2094,7 +2719,7 @@
                 }
             }
         },
-        "Kinder": {
+        "Kind": {
             "type": "object",
             "properties": {
                 "burgerservicenummer": {
@@ -2120,7 +2745,46 @@
                     "maximum": 999
                 },
                 "inOnderzoek": {
-                    "$ref": "#/definitions/KinderInOnderzoek"
+                    "$ref": "#/definitions/KindInOnderzoek"
+                }
+            }
+        },
+        "NationaliteitHistorie": {
+            "type": "object",
+            "properties": {
+                "aanduidingBijzonderNederlanderschap": {
+                    "title": "Aanduidingbijzondernederlanderschap",
+                    "type": "string",
+                    "enum": [
+                        "behandeld_als_nederlander",
+                        "vastgesteld_niet_nederlander"
+                    ]
+                },
+                "datumIngangGeldigheid": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "nationaliteit": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "redenOpname": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "inOnderzoek": {
+                    "$ref": "#/definitions/NationaliteitInOnderzoek"
+                },
+                "geheimhoudingPersoonsgegevens": {
+                    "title": "Geheimhoudingpersoonsgegevens",
+                    "type": "boolean"
+                },
+                "datumEindeGeldigheid": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "redenBeeindigen": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "indicatieNationaliteitBeeindigd": {
+                    "title": "Indicatienationaliteitbeeindigd",
+                    "type": "boolean"
                 }
             }
         },
@@ -2229,6 +2893,79 @@
                 }
             }
         },
+        "OntbindingHuwelijkPartnerschap": {
+            "title": "Ontbindinghuwelijkpartnerschap",
+            "type": "object",
+            "properties": {
+                "indicatieHuwelijkPartnerschapBeeindigd": {
+                    "title": "Indicatiehuwelijkpartnerschapbeeindigd",
+                    "type": "boolean"
+                },
+                "datum": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "land": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "plaats": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "reden": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "inOnderzoek": {
+                    "$ref": "#/definitions/DatumInOnderzoek"
+                }
+            }
+        },
+        "PartnerHistorie": {
+            "type": "object",
+            "properties": {
+                "burgerservicenummer": {
+                    "title": "Burgerservicenummer",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "maxLength": 9,
+                    "minLength": 9
+                },
+                "geheimhoudingPersoonsgegevens": {
+                    "title": "Geheimhoudingpersoonsgegevens",
+                    "type": "boolean"
+                },
+                "naam": {
+                    "$ref": "#/definitions/Naam"
+                },
+                "geboorte": {
+                    "$ref": "#/definitions/Geboorte"
+                },
+                "geslachtsaanduiding": {
+                    "title": "Geslachtsaanduiding",
+                    "type": "string",
+                    "enum": [
+                        "man",
+                        "vrouw",
+                        "onbekend"
+                    ]
+                },
+                "soortVerbintenis": {
+                    "title": "Soortverbintenis",
+                    "type": "string",
+                    "enum": [
+                        "huwelijk",
+                        "geregistreerd_partnerschap"
+                    ]
+                },
+                "inOnderzoek": {
+                    "$ref": "#/definitions/PartnerInOnderzoek"
+                },
+                "aangaanHuwelijkPartnerschap": {
+                    "$ref": "#/definitions/AangaanHuwelijkPartnerschap"
+                },
+                "ontbindingHuwelijkPartnerschap": {
+                    "$ref": "#/definitions/OntbindingHuwelijkPartnerschap"
+                }
+            }
+        },
         "Partner": {
             "type": "object",
             "properties": {
@@ -2271,6 +3008,149 @@
                 },
                 "aangaanHuwelijkPartnerschap": {
                     "$ref": "#/definitions/AangaanHuwelijkPartnerschap"
+                }
+            }
+        },
+        "VerblijfPlaatsHistorie": {
+            "type": "object",
+            "properties": {
+                "functieAdres": {
+                    "title": "Functieadres",
+                    "type": "string",
+                    "enum": [
+                        "woonadres",
+                        "briefadres"
+                    ]
+                },
+                "huisletter": {
+                    "title": "Huisletter",
+                    "type": "string",
+                    "pattern": "^[A-Z,a-z]$",
+                    "maxLength": 1,
+                    "minLength": 1
+                },
+                "huisnummer": {
+                    "title": "Huisnummer",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                },
+                "huisnummertoevoeging": {
+                    "title": "Huisnummertoevoeging",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9]{1,4}$",
+                    "maxLength": 4,
+                    "minLength": 1
+                },
+                "aanduidingBijHuisnummer": {
+                    "title": "Aanduidingbijhuisnummer",
+                    "type": "string",
+                    "enum": [
+                        "tegenover",
+                        "bij"
+                    ]
+                },
+                "identificatiecodeNummeraanduiding": {
+                    "title": "Identificatiecodenummeraanduiding",
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 1
+                },
+                "naamOpenbareRuimte": {
+                    "title": "Naamopenbareruimte",
+                    "type": "string",
+                    "maxLength": 80,
+                    "minLength": 1
+                },
+                "postcode": {
+                    "title": "Postcode",
+                    "type": "string",
+                    "pattern": "^[1-9]{1}[0-9]{3}[A-Z]{2}$",
+                    "minLength": 1
+                },
+                "woonplaatsnaam": {
+                    "title": "Woonplaatsnaam",
+                    "type": "string",
+                    "maxLength": 80,
+                    "minLength": 1
+                },
+                "identificatiecodeAdresseerbaarObject": {
+                    "title": "Identificatiecodeadresseerbaarobject",
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 1
+                },
+                "indicatieVestigingVanuitBuitenland": {
+                    "title": "Indicatievestigingvanuitbuitenland",
+                    "type": "boolean"
+                },
+                "locatiebeschrijving": {
+                    "title": "Locatiebeschrijving",
+                    "type": "string",
+                    "maxLength": 35,
+                    "minLength": 1
+                },
+                "straatnaam": {
+                    "title": "Straatnaam",
+                    "type": "string",
+                    "maxLength": 24,
+                    "minLength": 1
+                },
+                "vanuitVertrokkenOnbekendWaarheen": {
+                    "title": "Vanuitvertrokkenonbekendwaarheen",
+                    "type": "boolean"
+                },
+                "datumAanvangAdreshouding": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "datumIngangGeldigheid": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "datumInschrijvingInGemeente": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "datumVestigingInNederland": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "gemeenteVanInschrijving": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "landVanwaarIngeschreven": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "verblijfBuitenland": {
+                    "$ref": "#/definitions/VerblijfBuitenland"
+                },
+                "inOnderzoek": {
+                    "$ref": "#/definitions/VerblijfPlaatsInOnderzoek"
+                },
+                "datumTot": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "geheimhoudingPersoonsgegevens": {
+                    "title": "Geheimhoudingpersoonsgegevens",
+                    "type": "boolean"
+                }
+            }
+        },
+        "VerblijfsTitelHistorie": {
+            "type": "object",
+            "properties": {
+                "aanduiding": {
+                    "$ref": "#/definitions/Waarde"
+                },
+                "datumEinde": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "datumIngang": {
+                    "$ref": "#/definitions/Datum"
+                },
+                "inOnderzoek": {
+                    "$ref": "#/definitions/VerblijfsTitelInOnderzoek"
+                },
+                "geheimhoudingPersoonsgegevens": {
+                    "title": "Geheimhoudingpersoonsgegevens",
+                    "type": "boolean"
                 }
             }
         }

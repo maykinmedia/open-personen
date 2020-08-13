@@ -7,7 +7,7 @@ from openpersonen.api.views.base import BaseViewSet
 
 
 class HistorieViewSet(BaseViewSet):
-    filter_class = HistorieFilter
+    # filter_class = HistorieFilter
     filter_backends = [
         Backend,
     ]

@@ -31,7 +31,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 type: array
                 items:
@@ -45,7 +45,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -57,7 +57,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -69,7 +69,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -81,7 +81,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -93,7 +93,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -105,7 +105,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -117,7 +117,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -129,7 +129,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
@@ -154,7 +154,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/IngeschrevenPersoon'
         '401':
@@ -166,7 +166,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -178,7 +178,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '404':
@@ -190,7 +190,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -202,7 +202,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -214,7 +214,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -226,7 +226,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -238,7 +238,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -250,7 +250,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -262,7 +262,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
@@ -273,12 +273,13 @@ paths:
       required: true
       schema:
         type: string
+        pattern: '[0-9]{9}'
     - name: version
       in: path
       required: true
       schema:
         type: string
-  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/kinderen:
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen:
     get:
       operationId: api_ingeschrevenpersonen_kinderen_list
       description: ''
@@ -292,11 +293,11 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Kinder'
+                  $ref: '#/components/schemas/Kind'
         '401':
           description: Unauthorized
           headers:
@@ -306,7 +307,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -318,7 +319,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -330,7 +331,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -342,7 +343,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -354,7 +355,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -366,7 +367,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -378,7 +379,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -390,13 +391,13 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
       - api
     parameters:
-    - name: ingeschrevenpersoon_burgerservicenummer
+    - name: ingeschrevenpersonen_burgerservicenummer
       in: path
       required: true
       schema:
@@ -406,7 +407,7 @@ paths:
       required: true
       schema:
         type: string
-  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/kinderen/{id}:
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen/{id}:
     get:
       operationId: api_ingeschrevenpersonen_kinderen_read
       description: ''
@@ -420,9 +421,9 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
-                $ref: '#/components/schemas/Kinder'
+                $ref: '#/components/schemas/Kind'
         '401':
           description: Unauthorized
           headers:
@@ -432,7 +433,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -444,7 +445,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '404':
@@ -456,7 +457,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -468,7 +469,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -480,7 +481,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -492,7 +493,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -504,7 +505,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -516,7 +517,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -528,7 +529,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
@@ -539,7 +540,8 @@ paths:
       required: true
       schema:
         type: string
-    - name: ingeschrevenpersoon_burgerservicenummer
+        pattern: '[0-9]{9}'
+    - name: ingeschrevenpersonen_burgerservicenummer
       in: path
       required: true
       schema:
@@ -549,7 +551,135 @@ paths:
       required: true
       schema:
         type: string
-  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/ouders:
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/nationaliteithistorie:
+    get:
+      operationId: api_ingeschrevenpersonen_nationaliteithistorie_list
+      description: ''
+      responses:
+        '200':
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NationaliteitHistorie'
+        '401':
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '403':
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '406':
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '409':
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '410':
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '415':
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '429':
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '500':
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+      tags:
+      - api
+    parameters:
+    - name: ingeschrevenpersonen_burgerservicenummer
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: version
+      in: path
+      required: true
+      schema:
+        type: string
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders:
     get:
       operationId: api_ingeschrevenpersonen_ouders_list
       description: ''
@@ -563,7 +693,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 type: array
                 items:
@@ -577,7 +707,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -589,7 +719,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -601,7 +731,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -613,7 +743,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -625,7 +755,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -637,7 +767,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -649,7 +779,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -661,13 +791,13 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
       - api
     parameters:
-    - name: ingeschrevenpersoon_burgerservicenummer
+    - name: ingeschrevenpersonen_burgerservicenummer
       in: path
       required: true
       schema:
@@ -677,7 +807,7 @@ paths:
       required: true
       schema:
         type: string
-  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/ouders/{id}:
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders/{id}:
     get:
       operationId: api_ingeschrevenpersonen_ouders_read
       description: ''
@@ -691,7 +821,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Ouder'
         '401':
@@ -703,7 +833,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -715,7 +845,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '404':
@@ -727,7 +857,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -739,7 +869,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -751,7 +881,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -763,7 +893,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -775,7 +905,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -787,7 +917,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -799,7 +929,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
@@ -810,7 +940,8 @@ paths:
       required: true
       schema:
         type: string
-    - name: ingeschrevenpersoon_burgerservicenummer
+        pattern: '[0-9]{9}'
+    - name: ingeschrevenpersonen_burgerservicenummer
       in: path
       required: true
       schema:
@@ -820,7 +951,135 @@ paths:
       required: true
       schema:
         type: string
-  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/partners:
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partnerhistorie:
+    get:
+      operationId: api_ingeschrevenpersonen_partnerhistorie_list
+      description: ''
+      responses:
+        '200':
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartnerHistorie'
+        '401':
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '403':
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '406':
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '409':
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '410':
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '415':
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '429':
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '500':
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+      tags:
+      - api
+    parameters:
+    - name: ingeschrevenpersonen_burgerservicenummer
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: version
+      in: path
+      required: true
+      schema:
+        type: string
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners:
     get:
       operationId: api_ingeschrevenpersonen_partners_list
       description: ''
@@ -834,7 +1093,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 type: array
                 items:
@@ -848,7 +1107,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -860,7 +1119,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -872,7 +1131,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -884,7 +1143,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -896,7 +1155,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -908,7 +1167,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -920,7 +1179,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -932,13 +1191,13 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
       - api
     parameters:
-    - name: ingeschrevenpersoon_burgerservicenummer
+    - name: ingeschrevenpersonen_burgerservicenummer
       in: path
       required: true
       schema:
@@ -948,7 +1207,7 @@ paths:
       required: true
       schema:
         type: string
-  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersoon_burgerservicenummer}/partners/{id}:
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners/{id}:
     get:
       operationId: api_ingeschrevenpersonen_partners_read
       description: ''
@@ -962,7 +1221,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Partner'
         '401':
@@ -974,7 +1233,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '403':
@@ -986,7 +1245,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '404':
@@ -998,7 +1257,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '406':
@@ -1010,7 +1269,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '409':
@@ -1022,7 +1281,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '410':
@@ -1034,7 +1293,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '415':
@@ -1046,7 +1305,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '429':
@@ -1058,7 +1317,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
         '500':
@@ -1070,7 +1329,7 @@ paths:
               description: 'Geeft een specifieke API-versie aan in de context van
                 een specifieke aanroep. Voorbeeld: 1.2.1.'
           content:
-            application/problem+json:
+            application/hal+json:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
@@ -1081,7 +1340,264 @@ paths:
       required: true
       schema:
         type: string
-    - name: ingeschrevenpersoon_burgerservicenummer
+        pattern: '[0-9]{9}'
+    - name: ingeschrevenpersonen_burgerservicenummer
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: version
+      in: path
+      required: true
+      schema:
+        type: string
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfplaatshistorie:
+    get:
+      operationId: api_ingeschrevenpersonen_verblijfplaatshistorie_list
+      description: ''
+      responses:
+        '200':
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VerblijfPlaatsHistorie'
+        '401':
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '403':
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '406':
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '409':
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '410':
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '415':
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '429':
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '500':
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+      tags:
+      - api
+    parameters:
+    - name: ingeschrevenpersonen_burgerservicenummer
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: version
+      in: path
+      required: true
+      schema:
+        type: string
+  /api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfstitelhistorie:
+    get:
+      operationId: api_ingeschrevenpersonen_verblijfstitelhistorie_list
+      description: ''
+      responses:
+        '200':
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VerblijfsTitelHistorie'
+        '401':
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '403':
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '406':
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '409':
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '410':
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '415':
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '429':
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        '500':
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van
+                een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+      tags:
+      - api
+    parameters:
+    - name: ingeschrevenpersonen_burgerservicenummer
       in: path
       required: true
       schema:
@@ -1415,8 +1931,9 @@ components:
           minLength: 1
         huisnummer:
           title: Huisnummer
-          type: integer
-          maximum: 99999
+          type: string
+          maxLength: 200
+          minLength: 1
         huisnummertoevoeging:
           title: Huisnummertoevoeging
           type: string
@@ -1661,7 +2178,7 @@ components:
           minLength: 1
         inOnderzoek:
           $ref: '#/components/schemas/NaamInOnderzoek'
-    KinderInOnderzoek:
+    KindInOnderzoek:
       title: Inonderzoek
       type: object
       properties:
@@ -1670,7 +2187,7 @@ components:
           type: boolean
         datumIngangOnderzoek:
           $ref: '#/components/schemas/Datum'
-    Kinder:
+    Kind:
       type: object
       properties:
         burgerservicenummer:
@@ -1691,7 +2208,34 @@ components:
           type: integer
           maximum: 999
         inOnderzoek:
-          $ref: '#/components/schemas/KinderInOnderzoek'
+          $ref: '#/components/schemas/KindInOnderzoek'
+    NationaliteitHistorie:
+      type: object
+      properties:
+        aanduidingBijzonderNederlanderschap:
+          title: Aanduidingbijzondernederlanderschap
+          type: string
+          enum:
+          - behandeld_als_nederlander
+          - vastgesteld_niet_nederlander
+        datumIngangGeldigheid:
+          $ref: '#/components/schemas/Datum'
+        nationaliteit:
+          $ref: '#/components/schemas/Waarde'
+        redenOpname:
+          $ref: '#/components/schemas/Waarde'
+        inOnderzoek:
+          $ref: '#/components/schemas/NationaliteitInOnderzoek'
+        geheimhoudingPersoonsgegevens:
+          title: Geheimhoudingpersoonsgegevens
+          type: boolean
+        datumEindeGeldigheid:
+          $ref: '#/components/schemas/Datum'
+        redenBeeindigen:
+          $ref: '#/components/schemas/Waarde'
+        indicatieNationaliteitBeeindigd:
+          title: Indicatienationaliteitbeeindigd
+          type: boolean
     OuderInOnderzoek:
       title: Inonderzoek
       type: object
@@ -1767,6 +2311,58 @@ components:
           $ref: '#/components/schemas/Waarde'
         inOnderzoek:
           $ref: '#/components/schemas/DatumInOnderzoek'
+    OntbindingHuwelijkPartnerschap:
+      title: Ontbindinghuwelijkpartnerschap
+      type: object
+      properties:
+        indicatieHuwelijkPartnerschapBeeindigd:
+          title: Indicatiehuwelijkpartnerschapbeeindigd
+          type: boolean
+        datum:
+          $ref: '#/components/schemas/Datum'
+        land:
+          $ref: '#/components/schemas/Waarde'
+        plaats:
+          $ref: '#/components/schemas/Waarde'
+        reden:
+          $ref: '#/components/schemas/Waarde'
+        inOnderzoek:
+          $ref: '#/components/schemas/DatumInOnderzoek'
+    PartnerHistorie:
+      type: object
+      properties:
+        burgerservicenummer:
+          title: Burgerservicenummer
+          type: string
+          pattern: ^[0-9]*$
+          maxLength: 9
+          minLength: 9
+        geheimhoudingPersoonsgegevens:
+          title: Geheimhoudingpersoonsgegevens
+          type: boolean
+        naam:
+          $ref: '#/components/schemas/Naam'
+        geboorte:
+          $ref: '#/components/schemas/Geboorte'
+        geslachtsaanduiding:
+          title: Geslachtsaanduiding
+          type: string
+          enum:
+          - man
+          - vrouw
+          - onbekend
+        soortVerbintenis:
+          title: Soortverbintenis
+          type: string
+          enum:
+          - huwelijk
+          - geregistreerd_partnerschap
+        inOnderzoek:
+          $ref: '#/components/schemas/PartnerInOnderzoek'
+        aangaanHuwelijkPartnerschap:
+          $ref: '#/components/schemas/AangaanHuwelijkPartnerschap'
+        ontbindingHuwelijkPartnerschap:
+          $ref: '#/components/schemas/OntbindingHuwelijkPartnerschap'
     Partner:
       type: object
       properties:
@@ -1800,3 +2396,111 @@ components:
           $ref: '#/components/schemas/PartnerInOnderzoek'
         aangaanHuwelijkPartnerschap:
           $ref: '#/components/schemas/AangaanHuwelijkPartnerschap'
+    VerblijfPlaatsHistorie:
+      type: object
+      properties:
+        functieAdres:
+          title: Functieadres
+          type: string
+          enum:
+          - woonadres
+          - briefadres
+        huisletter:
+          title: Huisletter
+          type: string
+          pattern: ^[A-Z,a-z]$
+          maxLength: 1
+          minLength: 1
+        huisnummer:
+          title: Huisnummer
+          type: string
+          maxLength: 200
+          minLength: 1
+        huisnummertoevoeging:
+          title: Huisnummertoevoeging
+          type: string
+          pattern: ^[a-zA-Z0-9]{1,4}$
+          maxLength: 4
+          minLength: 1
+        aanduidingBijHuisnummer:
+          title: Aanduidingbijhuisnummer
+          type: string
+          enum:
+          - tegenover
+          - bij
+        identificatiecodeNummeraanduiding:
+          title: Identificatiecodenummeraanduiding
+          type: string
+          maxLength: 16
+          minLength: 1
+        naamOpenbareRuimte:
+          title: Naamopenbareruimte
+          type: string
+          maxLength: 80
+          minLength: 1
+        postcode:
+          title: Postcode
+          type: string
+          pattern: ^[1-9]{1}[0-9]{3}[A-Z]{2}$
+          minLength: 1
+        woonplaatsnaam:
+          title: Woonplaatsnaam
+          type: string
+          maxLength: 80
+          minLength: 1
+        identificatiecodeAdresseerbaarObject:
+          title: Identificatiecodeadresseerbaarobject
+          type: string
+          maxLength: 16
+          minLength: 1
+        indicatieVestigingVanuitBuitenland:
+          title: Indicatievestigingvanuitbuitenland
+          type: boolean
+        locatiebeschrijving:
+          title: Locatiebeschrijving
+          type: string
+          maxLength: 35
+          minLength: 1
+        straatnaam:
+          title: Straatnaam
+          type: string
+          maxLength: 24
+          minLength: 1
+        vanuitVertrokkenOnbekendWaarheen:
+          title: Vanuitvertrokkenonbekendwaarheen
+          type: boolean
+        datumAanvangAdreshouding:
+          $ref: '#/components/schemas/Datum'
+        datumIngangGeldigheid:
+          $ref: '#/components/schemas/Datum'
+        datumInschrijvingInGemeente:
+          $ref: '#/components/schemas/Datum'
+        datumVestigingInNederland:
+          $ref: '#/components/schemas/Datum'
+        gemeenteVanInschrijving:
+          $ref: '#/components/schemas/Waarde'
+        landVanwaarIngeschreven:
+          $ref: '#/components/schemas/Waarde'
+        verblijfBuitenland:
+          $ref: '#/components/schemas/VerblijfBuitenland'
+        inOnderzoek:
+          $ref: '#/components/schemas/VerblijfPlaatsInOnderzoek'
+        datumTot:
+          $ref: '#/components/schemas/Datum'
+        geheimhoudingPersoonsgegevens:
+          title: Geheimhoudingpersoonsgegevens
+          type: boolean
+    VerblijfsTitelHistorie:
+      type: object
+      properties:
+        aanduiding:
+          $ref: '#/components/schemas/Waarde'
+        datumEinde:
+          $ref: '#/components/schemas/Datum'
+        datumIngang:
+          $ref: '#/components/schemas/Datum'
+        inOnderzoek:
+          $ref: '#/components/schemas/VerblijfsTitelInOnderzoek'
+        geheimhoudingPersoonsgegevens:
+          title: Geheimhoudingpersoonsgegevens
+          type: boolean
