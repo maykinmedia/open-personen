@@ -1,4 +1,5 @@
 import os
+from vng_api_common.conf.api import *  # noqa - imports white-listed
 
 # Django-hijack (and Django-hijack-admin)
 from django.urls import reverse_lazy
@@ -62,7 +63,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.sessions",
     # Note: If enabled, at least one Site object is required
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # django-admin-index
@@ -75,6 +76,7 @@ INSTALLED_APPS = [
     # 'django.contrib.sitemaps',
     # External applications.
     "axes",
+    "vng_api_common",  # before drf_yasg to override the management command
     "drf_yasg",
     "rest_framework",
     "rest_framework.authtoken",
@@ -381,6 +383,15 @@ ELASTIC_APM = {
     "SECRET_TOKEN": os.getenv("ELASTIC_APM_SECRET_TOKEN", "default"),
     "SERVER_URL": os.getenv("ELASTIC_APM_SERVER_URL", "http://example.com"),
 }
+
+
+# Swagger Settings
+SWAGGER_SETTINGS = BASE_SWAGGER_SETTINGS.copy()
+SWAGGER_SETTINGS.update(
+    {
+        "DEFAULT_INFO": "openpersonen.api.schema.info",
+    }
+)
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
