@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
@@ -11,6 +12,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
     lookup_field = "burgerservicenummer"
     serializer_class = IngeschrevenPersoonSerializer
+    permission_classes = [IsAuthenticated]
     filter_class = IngeschrevenPersoonFilter
     filter_backends = [Backend, ]
 

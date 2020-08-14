@@ -14,7 +14,7 @@ router = routers.DefaultRouter()
 router.register(
     'ingeschrevenpersonen',
     IngeschrevenPersoonViewSet,
-    base_name='ingeschrevenpersoon',
+    base_name='ingeschrevenpersonen',
     nested=[
         routers.nested(
             'kinderen',
