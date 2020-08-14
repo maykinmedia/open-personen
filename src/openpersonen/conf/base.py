@@ -349,9 +349,16 @@ ELASTIC_APM = {
     "SERVER_URL": os.getenv("ELASTIC_APM_SERVER_URL", "http://example.com"),
 }
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'djangorestframework_hal.renderers.HalJSONRenderer',
+    ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'djangorestframework_hal.parsers.HalJSONParser',
+    ),
 }
