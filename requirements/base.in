@@ -17,11 +17,12 @@ django-rosetta
 django-sniplates
 
 # API libraries
-# djangorestframework
+djangorestframework
 # django-extra-fields
-# django-filter
-# drf-yasg  # api documentation
+django-filter
+drf-yasg  # api documentation
 zeep
+vng-api-common
 
 # WSGI servers & monitoring - production oriented
 uwsgi
