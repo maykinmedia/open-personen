@@ -4,7 +4,7 @@ from django.urls import include, path
 from vng_api_common import routers
 from vng_api_common.schema import SchemaView as _SchemaView
 
-from openpersonen.api.views import IngeschrevenPersoon, Kinder, Ouder, Partner
+from openpersonen.api.views import IngeschrevenPersoonViewSet, KindViewSet, OuderViewSet, PartnerViewSet
 from openpersonen.api.schema import info
 
 
@@ -13,22 +13,22 @@ router = routers.DefaultRouter()
 
 router.register(
     'ingeschrevenpersonen',
-    IngeschrevenPersoon,
+    IngeschrevenPersoonViewSet,
     base_name='ingeschrevenpersoon',
     nested=[
         routers.nested(
             'kinderen',
-            Kinder,
+            KindViewSet,
             base_name='kinderen',
         ),
         routers.nested(
             'ouders',
-            Ouder,
+            OuderViewSet,
             base_name='ouders',
         ),
         routers.nested(
             'partners',
-            Partner,
+            PartnerViewSet,
             base_name='partners',
         ),
     ]

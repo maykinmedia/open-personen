@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from openpersonen.api.serializers import PartnerSerializer
 
 
-class Partner(ViewSet):
+class PartnerViewSet(ViewSet):
 
     lookup_field = "id"
     serializer_class = PartnerSerializer

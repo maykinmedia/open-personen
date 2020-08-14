@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 
 
-class IngeschrevenPersoon(ViewSet):
+class IngeschrevenPersoonViewSet(ViewSet):
 
     lookup_field = "burgerservicenummer"
     serializer_class = IngeschrevenPersoonSerializer

@@ -2,13 +2,13 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
 
-from openpersonen.api.serializers import KinderSerializer
+from openpersonen.api.serializers import KindSerializer
 
 
-class Kinder(ViewSet):
+class KindViewSet(ViewSet):
 
     lookup_field = "id"
-    serializer_class = KinderSerializer
+    serializer_class = KindSerializer
 
     def get_serializer_context(self):
         """
