@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "axes",
     "drf_yasg",
     "rest_framework",
+    "rest_framework.authtoken",
     "sniplates",
     "hijack",
     "compat",  # Part of hijack
@@ -346,4 +347,11 @@ ELASTIC_APM = {
     "SERVICE_NAME": "openpersonen",
     "SECRET_TOKEN": os.getenv("ELASTIC_APM_SECRET_TOKEN", "default"),
     "SERVER_URL": os.getenv("ELASTIC_APM_SERVER_URL", "http://example.com"),
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }

@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
@@ -9,6 +10,7 @@ class KindViewSet(ViewSet):
 
     lookup_field = "id"
     serializer_class = KindSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_context(self):
         """
