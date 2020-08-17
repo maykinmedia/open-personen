@@ -404,3 +404,6 @@ STUF_BG_ONTVANGER = {
     'administratie': 'BG-mock',
     'gebruiker': 'BG-mock',
 }
+
+STUF_BG_URL = 'https://httpbin.org/post'
+STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
