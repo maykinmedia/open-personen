@@ -1,14 +1,18 @@
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
+from vng_api_common.filters import Backend
 
+from openpersonen.api.filters import IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 
 
-class IngeschrevenPersoon(ViewSet):
+class IngeschrevenPersoonViewSet(ViewSet):
 
     lookup_field = "burgerservicenummer"
     serializer_class = IngeschrevenPersoonSerializer
+    filter_class = IngeschrevenPersoonFilter
+    filter_backends = [Backend, ]
 
     def get_serializer_context(self):
         """
