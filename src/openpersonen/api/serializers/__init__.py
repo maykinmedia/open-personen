@@ -6,7 +6,7 @@ from .gezagsverhouding import *  # noqa
 from .ingeschrevenpersonen import *  # noqa
 from .inonderzoek import *  # noqa
 from .kiesrecht import *  # noqa
-from .kinder import *  # noqa
+from .kind import *  # noqa
 from .naam import *  # noqa
 from .nationaliteit import *  # noqa
 from .opschortingbijhouding import *  # noqa
