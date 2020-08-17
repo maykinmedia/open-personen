@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from .codeenomschrijving import CodeEnOmschrijvingSerializer
+from .waarde import WaardeSerializer
 from .datum import DatumSerializer
-from .inonderzoek import DatumInOnderzoekSerializer
+from .in_onderzoek import DatumInOnderzoekSerializer
 
 
 class GeboorteSerializer(serializers.Serializer):
-    datum = DatumSerializer()
-    land = CodeEnOmschrijvingSerializer()
-    plaats = CodeEnOmschrijvingSerializer()
-    inOnderzoek = DatumInOnderzoekSerializer()
+    datum = DatumSerializer(required=False)
+    land = WaardeSerializer(required=False)
+    plaats = WaardeSerializer(required=False)
+    inOnderzoek = DatumInOnderzoekSerializer(required=False)

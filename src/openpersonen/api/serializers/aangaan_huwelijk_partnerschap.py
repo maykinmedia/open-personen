@@ -5,8 +5,7 @@ from .datum import DatumSerializer
 from .in_onderzoek import DatumInOnderzoekSerializer
 
 
-class OverlijdenSerializer(serializers.Serializer):
-    indicatieOverleden = serializers.BooleanField(required=False)
+class AangaanHuwelijkPartnerschapSerializer(serializers.Serializer):
     datum = DatumSerializer(required=False)
     land = WaardeSerializer(required=False)
     plaats = WaardeSerializer(required=False)

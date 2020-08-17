@@ -4,7 +4,7 @@ from .datum import DatumSerializer
 
 
 class KiesrechtSerializer(serializers.Serializer):
-    europeesKiesrecht = serializers.CharField()
-    uitgeslotenVanKiesrecht = serializers.CharField()
-    einddatumUitsluitingEuropeesKiesrecht = DatumSerializer()
-    einddatumUitsluitingKiesrecht = DatumSerializer()
+    europeesKiesrecht = serializers.BooleanField(required=False)
+    uitgeslotenVanKiesrecht = serializers.BooleanField(required=False)
+    einddatumUitsluitingEuropeesKiesrecht = DatumSerializer(required=False)
+    einddatumUitsluitingKiesrecht = DatumSerializer(required=False)
