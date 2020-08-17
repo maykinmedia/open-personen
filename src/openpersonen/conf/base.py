@@ -384,3 +384,6 @@ STUF_BG_ONTVANGER = {
     'administratie': os.getenv('ONTVANGER_ADMINISTRATIE', 'BG-mock'),
     'gebruiker': os.getenv('ONTVANGER_GEBRUIKER', 'BG-mock'),
 }
+
+STUF_BG_URL = 'https://httpbin.org/post'
+STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
