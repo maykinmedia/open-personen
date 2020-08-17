@@ -97,7 +97,10 @@ RAW_TEMPLATE_LOADERS = (
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(DJANGO_PROJECT_DIR, "templates"),],
+        "DIRS": [
+            os.path.join(DJANGO_PROJECT_DIR, "templates"),
+            os.path.join(DJANGO_PROJECT_DIR, "api/request_templates"),
+        ],
         "APP_DIRS": False,  # conflicts with explicity specifying the loaders
         "OPTIONS": {
             "context_processors": [
