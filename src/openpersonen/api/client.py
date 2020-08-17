@@ -1,5 +1,8 @@
 from dataclasses import dataclass
 
+import requests
+from django.template import loader
+
 
 class Singleton(type):
     """
@@ -41,7 +44,9 @@ class Client:
         pass
 
     def get_natuurlijk_persoon(self, bsn):
-        pass
+        requests.post(self.url,
+                      data=loader.render_to_string('get_natuurlijk_persoon.xml', {'bsn': bsn}),
+                      headers=self.headers)
 
     def get_vestiging(self, vestigings_nummer):
         pass
