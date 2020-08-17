@@ -358,3 +358,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+STUF_BG_URL = 'https://httpbin.org/post'
+STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
