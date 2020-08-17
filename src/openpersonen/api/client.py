@@ -23,7 +23,7 @@ class ClientConfig(metaclass=Singleton):
 
     def __init__(self):
         self.url = 'https://httpbin.org/post'
-        self.headers = {'Content-Type': 'application/xml'}
+        self.headers = {'Content-Type': 'application/soap+xml'}
 
 
 @dataclass
