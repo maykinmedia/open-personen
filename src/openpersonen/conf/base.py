@@ -365,3 +365,6 @@ REST_FRAMEWORK = {
         'djangorestframework_hal.parsers.HalJSONParser',
     ),
 }
+
+STUF_BG_URL = 'https://httpbin.org/post'
+STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
