@@ -2,10 +2,8 @@ import uuid
 
 import requests
 from django.conf import settings
-from django.http import HttpResponse
 from django.template import loader
 from django.utils import timezone, dateformat
-from rest_framework import status
 
 
 class Client:
@@ -40,67 +38,71 @@ class Client:
         request_context = self._get_request_base_context()
         request_context.update({'bsn': bsn})
 
-        requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('RequestGezinssituatieOpAdresAanvrager.xml',
-                                                   request_context),
-                      headers=settings.STUF_BG_HEADERS)
+        response = requests.post(settings.STUF_BG_URL,
+                                 data=loader.render_to_string('RequestGezinssituatieOpAdresAanvrager.xml',
+                                                              request_context),
+                                 headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
         response_context['referentienummer'] = request_context['referentienummer']
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
-        return HttpResponse(status=status.HTTP_200_OK,
-                            content_type='application/soap+xml',
-                            content=loader.render_to_string('ResponseGezinssituatieOpAdresAanvrager.xml',
-                                                            request_context))
+        response._content = bytes(loader.render_to_string('ResponseGezinssituatieOpAdresAanvrager.xml',
+                                                          request_context),
+                                  encoding='utf-8')
+
+        return response
 
     def get_kinderen_van_aanvrager(self, bsn):
         request_context = self._get_request_base_context()
         request_context.update({'bsn': bsn})
 
-        requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('RequestKinderenVanAanvrager.xml', request_context),
-                      headers=settings.STUF_BG_HEADERS)
+        response = requests.post(settings.STUF_BG_URL,
+                                 data=loader.render_to_string('RequestKinderenVanAanvrager.xml', request_context),
+                                 headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
         response_context['referentienummer'] = request_context['referentienummer']
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
-        return HttpResponse(status=status.HTTP_200_OK,
-                            content_type='application/soap+xml',
-                            content=loader.render_to_string('ResponseKinderenVanAanvrager.xml',
-                                                            request_context))
+        response._content = bytes(loader.render_to_string('ResponseKinderenVanAanvrager.xml',
+                                                          request_context),
+                                  encoding='utf-8')
+
+        return response
 
     def get_natuurlijk_persoon(self, bsn):
         request_context = self._get_request_base_context()
         request_context.update({'bsn': bsn})
 
-        requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('RequestNatuurlijkPersoon.xml', request_context),
-                      headers=settings.STUF_BG_HEADERS)
+        response = requests.post(settings.STUF_BG_URL,
+                                 data=loader.render_to_string('RequestNatuurlijkPersoon.xml', request_context),
+                                 headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
         response_context['referentienummer'] = request_context['referentienummer']
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
-        return HttpResponse(status=status.HTTP_200_OK,
-                            content_type='application/soap+xml',
-                            content=loader.render_to_string('ResponseNatuurlijkPersoon.xml',
-                                                            request_context))
+        response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoon.xml',
+                                                          request_context),
+                                  encoding='utf-8')
+
+        return response
 
     def get_vestiging(self, vestigings_nummer):
         request_context = self._get_request_base_context()
         request_context.update({'vestigings_nummer': vestigings_nummer})
 
-        requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('RequestVestiging.xml', request_context),
-                      headers=settings.STUF_BG_HEADERS)
+        response = requests.post(settings.STUF_BG_URL,
+                                 data=loader.render_to_string('RequestVestiging.xml', request_context),
+                                 headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
         response_context['referentienummer'] = request_context['referentienummer']
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
-        return HttpResponse(status=status.HTTP_200_OK,
-                            content_type='application/soap+xml',
-                            content=loader.render_to_string('ResponseVestiging.xml',
-                                                            request_context))
+        response._content = bytes(loader.render_to_string('ResponseVestiging.xml',
+                                                          request_context),
+                                  encoding='utf-8')
+
+        return response
