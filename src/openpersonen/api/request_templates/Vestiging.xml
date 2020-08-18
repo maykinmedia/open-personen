@@ -23,8 +23,8 @@
                <StUF:gebruiker>?</StUF:gebruiker>
             </StUF:ontvanger>
             <!--Optional:-->
-            <StUF:referentienummer>?</StUF:referentienummer>
-            <StUF:tijdstipBericht>?</StUF:tijdstipBericht>
+            <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
+            <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
             <StUF:entiteittype>VES</StUF:entiteittype>
          </ns:stuurgegevens>
          <ns:parameters>
@@ -33,7 +33,7 @@
             <StUF:maximumAantal>?</StUF:maximumAantal>
          </ns:parameters>
          <ns:gelijk StUF:entiteittype="VES" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?">
-            <ns:vestigingsNummer StUF:noValue="?" StUF:exact="true">{{ vestigingsNummer }}</ns:vestigingsNummer>
+            <ns:vestigingsNummer StUF:noValue="?" StUF:exact="true">{{ vestigings_nummer }}</ns:vestigingsNummer>
          </ns:gelijk>
          <ns:scope>
             <ns:object StUF:entiteittype="VES" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?">

@@ -23,8 +23,8 @@
                <StUF:gebruiker>?</StUF:gebruiker>
             </StUF:ontvanger>
             <!--Optional:-->
-            <StUF:referentienummer>?</StUF:referentienummer>
-            <StUF:tijdstipBericht>?</StUF:tijdstipBericht>
+            <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
+            <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
             <StUF:entiteittype>NPS</StUF:entiteittype>
          </ns:stuurgegevens>
          <ns:parameters>
