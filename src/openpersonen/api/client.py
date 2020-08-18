@@ -10,6 +10,14 @@ class Client:
 
     def _get_base_context(self):
         return {
+            'zender_organisatie': settings.STUF_BG_ZENDER['organisatie'],
+            'zender_applicatie': settings.STUF_BG_ZENDER['applicatie'],
+            'zender_administratie': settings.STUF_BG_ZENDER['administratie'],
+            'zender_gebruiker': settings.STUF_BG_ZENDER['gebruiker'],
+            'ontvanger_organisatie': settings.STUF_BG_ONTVANGER['organisatie'],
+            'ontvanger_applicatie': settings.STUF_BG_ONTVANGER['applicatie'],
+            'ontvanger_administratie': settings.STUF_BG_ONTVANGER['administratie'],
+            'ontvanger_gebruiker': settings.STUF_BG_ONTVANGER['gebruiker'],
             'referentienummer': str(uuid.uuid4()),
             'tijdstip_bericht': dateformat.format(timezone.now(), 'YmdHis')
         }

@@ -366,5 +366,21 @@ REST_FRAMEWORK = {
     ),
 }
 
+# StUF-BG Variables
+
 STUF_BG_URL = 'https://httpbin.org/post'
 STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
+
+STUF_BG_ZENDER = {
+    'organisatie': 'Open Personen',
+    'applicatie': 'Open Personen',
+    'administratie': 'Open Personen',
+    'gebruiker': 'Open Personen',
+}
+
+STUF_BG_ONTVANGER = {
+    'organisatie': 'BG-mock',
+    'applicatie': 'BG-mock',
+    'administratie': 'BG-mock',
+    'gebruiker': 'BG-mock',
+}
