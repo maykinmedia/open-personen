@@ -1,7 +1,7 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301">
    <soapenv:Header/>
    <soapenv:Body>
-      <ns:npsLv01-prs-NatuurlijkPersoon>
+      <ns:npsLv01-prs-KinderenVanAanvrager>
          <ns:stuurgegevens>
             <StUF:berichtcode>Lv01</StUF:berichtcode>
             <StUF:zender>
@@ -28,9 +28,9 @@
             <StUF:entiteittype>NPS</StUF:entiteittype>
          </ns:stuurgegevens>
          <ns:parameters>
-            <StUF:sortering>0</StUF:sortering>
+            <StUF:sortering>?</StUF:sortering>
             <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
-            <StUF:maximumAantal>1</StUF:maximumAantal>
+            <StUF:maximumAantal>?</StUF:maximumAantal>
          </ns:parameters>
          <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?">
             <ns:inp.bsn StUF:noValue="?" StUF:exact="true">{{ bsn }}</ns:inp.bsn>
@@ -120,7 +120,30 @@
                   <!--1 or more repetitions:-->
                   <StUF:extraElement StUF:noValue="?" StUF:exact="true" naam="?" StUF:indOnvolledigeDatum="V">?</StUF:extraElement>
                </StUF:extraElementen>
-               <!--Optional:-->
+               <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?">
+                  <ns:gerelateerde StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?">
+                     <ns:inp.bsn StUF:noValue="?" StUF:exact="true">?</ns:inp.bsn>
+                     <ns:geslachtsnaam StUF:noValue="?" StUF:exact="true">?</ns:geslachtsnaam>
+                     <ns:voorvoegselGeslachtsnaam StUF:noValue="?" StUF:exact="true">?</ns:voorvoegselGeslachtsnaam>
+                     <ns:voorletters StUF:noValue="?" StUF:exact="true">?</ns:voorletters>
+                     <ns:voornamen StUF:noValue="?" StUF:exact="true">?</ns:voornamen>
+                     <ns:geslachtsaanduiding StUF:noValue="?" StUF:exact="true">?</ns:geslachtsaanduiding>
+                     <ns:geboortedatum StUF:noValue="?" StUF:exact="true" StUF:indOnvolledigeDatum="V">?</ns:geboortedatum>
+                     <ns:verblijfsadres>
+                        <ns:aoa.identificatie StUF:noValue="?" StUF:exact="true">?</ns:aoa.identificatie>
+                        <ns:wpl.identificatie StUF:noValue="?" StUF:exact="true">?</ns:wpl.identificatie>
+                        <ns:wpl.woonplaatsNaam StUF:noValue="?" StUF:exact="true">?</ns:wpl.woonplaatsNaam>
+                        <ns:gor.openbareRuimteNaam StUF:noValue="?" StUF:exact="true">?</ns:gor.openbareRuimteNaam>
+                        <ns:gor.straatnaam StUF:noValue="?" StUF:exact="true">?</ns:gor.straatnaam>
+                        <ns:aoa.postcode StUF:noValue="?" StUF:exact="true">?</ns:aoa.postcode>
+                        <ns:aoa.huisnummer StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummer>
+                        <ns:aoa.huisletter StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisletter>
+                        <ns:aoa.huisnummertoevoeging StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummertoevoeging>
+                        <ns:inp.locatiebeschrijving StUF:noValue="?" StUF:exact="true">?</ns:inp.locatiebeschrijving>
+                     </ns:verblijfsadres>
+                  </ns:gerelateerde>
+               </ns:inp.heeftAlsKinderen>
+               <!--Zero or more repetitions:-->
                <ns:inp.heeftAlsNationaliteit StUF:entiteittype="NPSNAT" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?">
                   <ns:gerelateerde StUF:entiteittype="NAT">
                      <!--Optional:-->
@@ -131,6 +154,6 @@
                </ns:inp.heeftAlsNationaliteit>
             </ns:object>
          </ns:scope>
-      </ns:npsLv01-prs-NatuurlijkPersoon>
+      </ns:npsLv01-prs-KinderenVanAanvrager>
    </soapenv:Body>
 </soapenv:Envelope>
