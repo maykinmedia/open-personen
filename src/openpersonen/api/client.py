@@ -1,8 +1,8 @@
 import uuid
 
 import requests
-from django.template import loader
 from django.conf import settings
+from django.template import loader
 from django.utils import timezone, dateformat
 
 
@@ -23,33 +23,33 @@ class Client:
         }
 
     def get_gezinssituatie_op_adres_aanvrager(self, bsn):
-        context_dict = self._get_base_context()
-        context_dict.update({'bsn': bsn})
+        context = self._get_base_context()
+        context.update({'bsn': bsn})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('GezinssituatieOpAdresAanvrager.xml', context_dict),
+                      data=loader.render_to_string('GezinssituatieOpAdresAanvrager.xml', context),
                       headers=settings.STUF_BG_HEADERS)
 
     def get_kinderen_van_aanvrager(self, bsn):
-        context_dict = self._get_base_context()
-        context_dict.update({'bsn': bsn})
+        context = self._get_base_context()
+        context.update({'bsn': bsn})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('KinderenVanAanvrager.xml', context_dict),
+                      data=loader.render_to_string('KinderenVanAanvrager.xml', context),
                       headers=settings.STUF_BG_HEADERS)
 
     def get_natuurlijk_persoon(self, bsn):
-        context_dict = self._get_base_context()
-        context_dict.update({'bsn': bsn})
+        context = self._get_base_context()
+        context.update({'bsn': bsn})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('NatuurlijkPersoon.xml', context_dict),
+                      data=loader.render_to_string('NatuurlijkPersoon.xml', context),
                       headers=settings.STUF_BG_HEADERS)
 
     def get_vestiging(self, vestigings_nummer):
-        context_dict = self._get_base_context()
-        context_dict.update({'vestigings_nummer': vestigings_nummer})
+        context = self._get_base_context()
+        context.update({'vestigings_nummer': vestigings_nummer})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('Vestiging.xml', context_dict),
+                      data=loader.render_to_string('Vestiging.xml', context),
                       headers=settings.STUF_BG_HEADERS)
