@@ -100,6 +100,7 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(DJANGO_PROJECT_DIR, "templates"),
             os.path.join(DJANGO_PROJECT_DIR, "api/request_templates"),
+            os.path.join(DJANGO_PROJECT_DIR, "api/response_templates"),
         ],
         "APP_DIRS": False,  # conflicts with explicity specifying the loaders
         "OPTIONS": {

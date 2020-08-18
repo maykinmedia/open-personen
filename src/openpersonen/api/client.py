@@ -27,7 +27,7 @@ class Client:
         context.update({'bsn': bsn})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('GezinssituatieOpAdresAanvrager.xml', context),
+                      data=loader.render_to_string('RequestGezinssituatieOpAdresAanvrager.xml', context),
                       headers=settings.STUF_BG_HEADERS)
 
     def get_kinderen_van_aanvrager(self, bsn):
@@ -35,7 +35,7 @@ class Client:
         context.update({'bsn': bsn})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('KinderenVanAanvrager.xml', context),
+                      data=loader.render_to_string('RequestKinderenVanAanvrager.xml', context),
                       headers=settings.STUF_BG_HEADERS)
 
     def get_natuurlijk_persoon(self, bsn):
@@ -43,7 +43,7 @@ class Client:
         context.update({'bsn': bsn})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('NatuurlijkPersoon.xml', context),
+                      data=loader.render_to_string('RequestNatuurlijkPersoon.xml', context),
                       headers=settings.STUF_BG_HEADERS)
 
     def get_vestiging(self, vestigings_nummer):
@@ -51,5 +51,5 @@ class Client:
         context.update({'vestigings_nummer': vestigings_nummer})
 
         requests.post(settings.STUF_BG_URL,
-                      data=loader.render_to_string('Vestiging.xml', context),
+                      data=loader.render_to_string('RequestVestiging.xml', context),
                       headers=settings.STUF_BG_HEADERS)
