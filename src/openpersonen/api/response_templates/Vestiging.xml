@@ -1,0 +1,97 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:vesLa01-prs-Vestiging>
+         <ns:stuurgegevens>
+            <StUF:berichtcode>La01</StUF:berichtcode>
+            <StUF:zender>
+               <!--Optional:-->
+               <StUF:organisatie>?</StUF:organisatie>
+               <StUF:applicatie>?</StUF:applicatie>
+               <!--Optional:-->
+               <StUF:administratie>?</StUF:administratie>
+               <!--Optional:-->
+               <StUF:gebruiker>?</StUF:gebruiker>
+            </StUF:zender>
+            <StUF:ontvanger>
+               <!--Optional:-->
+               <StUF:organisatie>?</StUF:organisatie>
+               <StUF:applicatie>?</StUF:applicatie>
+               <!--Optional:-->
+               <StUF:administratie>?</StUF:administratie>
+               <!--Optional:-->
+               <StUF:gebruiker>?</StUF:gebruiker>
+            </StUF:ontvanger>
+            <!--Optional:-->
+            <StUF:referentienummer>?</StUF:referentienummer>
+            <StUF:tijdstipBericht>?</StUF:tijdstipBericht>
+            <!--Optional:-->
+            <StUF:crossRefnummer>?</StUF:crossRefnummer>
+            <StUF:entiteittype>VES</StUF:entiteittype>
+         </ns:stuurgegevens>
+         <ns:parameters>
+            <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+         </ns:parameters>
+         <!--Zero or more repetitions:-->
+         <ns:melding>?</ns:melding>
+         <ns:antwoord>
+            <ns:object StUF:entiteittype="VES" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?">
+               <ns:vestigingsNummer StUF:noValue="?" StUF:exact="true">?</ns:vestigingsNummer>
+               <ns:handelsnaam StUF:noValue="?" StUF:exact="true">?</ns:handelsnaam>
+               <ns:handelsnaamVerkort StUF:noValue="?" StUF:exact="true">?</ns:handelsnaamVerkort>
+               <!--You have a CHOICE of the next 2 items at this level-->
+               <ns:verblijfsadres>
+                  <ns:aoa.identificatie StUF:noValue="?" StUF:exact="true">?</ns:aoa.identificatie>
+                  <ns:wpl.identificatie StUF:noValue="?" StUF:exact="true">?</ns:wpl.identificatie>
+                  <ns:wpl.woonplaatsNaam StUF:noValue="?" StUF:exact="true">?</ns:wpl.woonplaatsNaam>
+                  <ns:gor.openbareRuimteNaam StUF:noValue="?" StUF:exact="true">?</ns:gor.openbareRuimteNaam>
+                  <ns:gor.straatnaam StUF:noValue="?" StUF:exact="true">?</ns:gor.straatnaam>
+                  <ns:aoa.postcode StUF:noValue="?" StUF:exact="true">?</ns:aoa.postcode>
+                  <ns:aoa.huisnummer StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummer>
+                  <ns:aoa.huisletter StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisletter>
+                  <ns:aoa.huisnummertoevoeging StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummertoevoeging>
+               </ns:verblijfsadres>
+               <!--Optional:-->
+               <ns:sub.verblijfBuitenland>
+                  <!--Optional:-->
+                  <ns:lnd.landcode StUF:noValue="?" StUF:exact="true">?</ns:lnd.landcode>
+                  <!--Optional:-->
+                  <ns:lnd.landnaam StUF:noValue="?" StUF:exact="true">?</ns:lnd.landnaam>
+                  <!--Optional:-->
+                  <ns:sub.adresBuitenland1 StUF:noValue="?" StUF:exact="true">?</ns:sub.adresBuitenland1>
+                  <!--Optional:-->
+                  <ns:sub.adresBuitenland2 StUF:noValue="?" StUF:exact="true">?</ns:sub.adresBuitenland2>
+                  <!--Optional:-->
+                  <ns:sub.adresBuitenland3 StUF:noValue="?" StUF:exact="true">?</ns:sub.adresBuitenland3>
+               </ns:sub.verblijfBuitenland>
+               <!--Optional:-->
+               <ns:sub.correspondentieAdres>
+                  <ns:wpl.woonplaatsNaam StUF:noValue="?" StUF:exact="true">?</ns:wpl.woonplaatsNaam>
+                  <ns:postcode StUF:noValue="?" StUF:exact="true">?</ns:postcode>
+                  <!--You have a CHOICE of the next 2 items at this level-->
+                  <ns:aoa.identificatie StUF:noValue="?" StUF:exact="true">?</ns:aoa.identificatie>
+                  <ns:gor.openbareRuimteNaam StUF:noValue="?" StUF:exact="true">?</ns:gor.openbareRuimteNaam>
+                  <ns:aoa.huisnummer StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummer>
+                  <ns:aoa.huisletter StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisletter>
+                  <ns:aoa.huisnummertoevoeging StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummertoevoeging>
+                  <ns:sub.postadresType StUF:noValue="?" StUF:exact="true">?</ns:sub.postadresType>
+                  <ns:sub.postadresNummer StUF:noValue="?" StUF:exact="true">?</ns:sub.postadresNummer>
+               </ns:sub.correspondentieAdres>
+               <!--Optional:-->
+               <ns:sub.telefoonnummer StUF:noValue="?" StUF:exact="true">?</ns:sub.telefoonnummer>
+               <!--Optional:-->
+               <ns:sub.faxnummer StUF:noValue="?" StUF:exact="true">?</ns:sub.faxnummer>
+               <!--Optional:-->
+               <ns:sub.emailadres StUF:noValue="?" StUF:exact="true">?</ns:sub.emailadres>
+               <!--Optional:-->
+               <ns:sub.url StUF:noValue="?" StUF:exact="true">?</ns:sub.url>
+               <!--Optional:-->
+               <StUF:extraElementen>
+                  <!--1 or more repetitions:-->
+                  <StUF:extraElement StUF:noValue="?" StUF:exact="true" naam="?" StUF:indOnvolledigeDatum="V">?</StUF:extraElement>
+               </StUF:extraElementen>
+            </ns:object>
+         </ns:antwoord>
+      </ns:vesLa01-prs-Vestiging>
+   </soapenv:Body>
+</soapenv:Envelope>
