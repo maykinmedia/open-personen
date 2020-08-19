@@ -35,6 +35,13 @@ class TestClient(TestCase):
         self.assertIn(settings.STUF_BG_ZENDER['gebruiker'], response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
+        # Assert contents at proper places
+        self.assertTrue(response_content.find('<StUF:zender>') <
+                        response_content.find('Open Personen') <
+                        response_content.find('</StUF:zender>'))
+        self.assertTrue(response_content.find('<StUF:ontvanger>') <
+                        response_content.find('BG-mock') <
+                        response_content.find('</StUF:ontvanger>'))
 
     @patch('django.utils.dateformat.format')
     @patch('uuid.uuid4')
@@ -60,6 +67,13 @@ class TestClient(TestCase):
         self.assertIn(settings.STUF_BG_ZENDER['gebruiker'], response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
+        # Assert contents at proper places
+        self.assertTrue(response_content.find('<StUF:zender>') <
+                        response_content.find('Open Personen') <
+                        response_content.find('</StUF:zender>'))
+        self.assertTrue(response_content.find('<StUF:ontvanger>') <
+                        response_content.find('BG-mock') <
+                        response_content.find('</StUF:ontvanger>'))
 
     @patch('django.utils.dateformat.format')
     @patch('uuid.uuid4')
@@ -85,6 +99,13 @@ class TestClient(TestCase):
         self.assertIn(settings.STUF_BG_ZENDER['gebruiker'], response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
+        # Assert contents at proper places
+        self.assertTrue(response_content.find('<StUF:zender>') <
+                        response_content.find('Open Personen') <
+                        response_content.find('</StUF:zender>'))
+        self.assertTrue(response_content.find('<StUF:ontvanger>') <
+                        response_content.find('BG-mock') <
+                        response_content.find('</StUF:ontvanger>'))
 
     @patch('django.utils.dateformat.format')
     @patch('uuid.uuid4')
@@ -110,3 +131,10 @@ class TestClient(TestCase):
         self.assertIn(settings.STUF_BG_ZENDER['gebruiker'], response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
+        # Assert contents at proper places
+        self.assertTrue(response_content.find('<StUF:zender>') <
+                        response_content.find('Open Personen') <
+                        response_content.find('</StUF:zender>'))
+        self.assertTrue(response_content.find('<StUF:ontvanger>') <
+                        response_content.find('BG-mock') <
+                        response_content.find('</StUF:ontvanger>'))
