@@ -37,10 +37,10 @@ class TestClient(TestCase):
         self.assertIn(test_dateformat, response_content)
         # Assert contents at proper places
         self.assertTrue(response_content.find('<StUF:zender>') <
-                        response_content.find('Open Personen') <
+                        response_content.find(settings.STUF_BG_ZENDER['organisatie']) <
                         response_content.find('</StUF:zender>'))
         self.assertTrue(response_content.find('<StUF:ontvanger>') <
-                        response_content.find('BG-mock') <
+                        response_content.find(settings.STUF_BG_ONTVANGER['organisatie']) <
                         response_content.find('</StUF:ontvanger>'))
 
     @patch('django.utils.dateformat.format')
@@ -69,10 +69,10 @@ class TestClient(TestCase):
         self.assertIn(test_dateformat, response_content)
         # Assert contents at proper places
         self.assertTrue(response_content.find('<StUF:zender>') <
-                        response_content.find('Open Personen') <
+                        response_content.find(settings.STUF_BG_ZENDER['organisatie']) <
                         response_content.find('</StUF:zender>'))
         self.assertTrue(response_content.find('<StUF:ontvanger>') <
-                        response_content.find('BG-mock') <
+                        response_content.find(settings.STUF_BG_ONTVANGER['organisatie']) <
                         response_content.find('</StUF:ontvanger>'))
 
     @patch('django.utils.dateformat.format')
@@ -101,10 +101,10 @@ class TestClient(TestCase):
         self.assertIn(test_dateformat, response_content)
         # Assert contents at proper places
         self.assertTrue(response_content.find('<StUF:zender>') <
-                        response_content.find('Open Personen') <
+                        response_content.find(settings.STUF_BG_ZENDER['organisatie']) <
                         response_content.find('</StUF:zender>'))
         self.assertTrue(response_content.find('<StUF:ontvanger>') <
-                        response_content.find('BG-mock') <
+                        response_content.find(settings.STUF_BG_ONTVANGER['organisatie']) <
                         response_content.find('</StUF:ontvanger>'))
 
     @patch('django.utils.dateformat.format')
@@ -133,8 +133,8 @@ class TestClient(TestCase):
         self.assertIn(test_dateformat, response_content)
         # Assert contents at proper places
         self.assertTrue(response_content.find('<StUF:zender>') <
-                        response_content.find('Open Personen') <
+                        response_content.find(settings.STUF_BG_ZENDER['organisatie']) <
                         response_content.find('</StUF:zender>'))
         self.assertTrue(response_content.find('<StUF:ontvanger>') <
-                        response_content.find('BG-mock') <
+                        response_content.find(settings.STUF_BG_ONTVANGER['organisatie']) <
                         response_content.find('</StUF:ontvanger>'))
