@@ -48,7 +48,7 @@ class Client:
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseGezinssituatieOpAdresAanvrager.xml',
-                                                          request_context),
+                                                          response_context),
                                   encoding='utf-8')
 
         return response
@@ -66,7 +66,7 @@ class Client:
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseKinderenVanAanvrager.xml',
-                                                          request_context),
+                                                          response_context),
                                   encoding='utf-8')
 
         return response
@@ -84,7 +84,7 @@ class Client:
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoon.xml',
-                                                          request_context),
+                                                          response_context),
                                   encoding='utf-8')
 
         return response
@@ -102,7 +102,7 @@ class Client:
         response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseVestiging.xml',
-                                                          request_context),
+                                                          response_context),
                                   encoding='utf-8')
 
         return response
