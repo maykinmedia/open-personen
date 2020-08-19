@@ -1,3 +1,5 @@
+from mock import patch
+
 from django.conf import settings
 from django.test import TestCase
 
@@ -9,8 +11,14 @@ class TestClient(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_get_gezinssituatie_op_adres_aanvrager(self):
+    @patch('django.utils.dateformat.format')
+    @patch('uuid.uuid4')
+    def test_get_gezinssituatie_op_adres_aanvrager(self, uuid_mock, dateformat_mock):
         test_bsn = 123456789
+        test_uuid = '00000000-0000-0000-0000-000000000000'
+        test_dateformat = '20200919094000'
+        uuid_mock.return_value = test_uuid
+        dateformat_mock.return_value = test_dateformat
 
         response = self.client.get_gezinssituatie_op_adres_aanvrager(test_bsn)
 
@@ -25,6 +33,8 @@ class TestClient(TestCase):
         self.assertIn(settings.STUF_BG_ZENDER['applicatie'], response_content)
         self.assertIn(settings.STUF_BG_ZENDER['administratie'], response_content)
         self.assertIn(settings.STUF_BG_ZENDER['gebruiker'], response_content)
+        self.assertIn(test_uuid, response_content)
+        self.assertIn(test_dateformat, response_content)
 
     def test_get_kinderen_van_aanvrager(self):
         test_bsn = 123456789
