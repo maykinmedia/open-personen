@@ -73,12 +73,12 @@ class OuderInOnderzoekSerializer(serializers.Serializer):
     datumIngangOnderzoek = DatumSerializer(required=False)
 
 
-class KinderInOnderzoek(serializers.Serializer):
+class KindInOnderzoekSerializer(serializers.Serializer):
     burgerservicenummer = serializers.BooleanField(required=False)
     datumIngangOnderzoek = DatumSerializer(required=False)
 
 
-class PartnerInOnderzoek(serializers.Serializer):
+class PartnerInOnderzoekSerializer(serializers.Serializer):
     burgerservicenummer = serializers.BooleanField(required=False)
     geslachtsaanduiding = serializers.BooleanField(required=False)
     soortVerbintenis = serializers.BooleanField(required=False)
