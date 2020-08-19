@@ -51,6 +51,7 @@ itypes==1.2.0             # via -r requirements/base.txt, coreapi
 jinja2==2.11.2            # via -r requirements/base.txt, coreschema
 lxml==4.5.2               # via -r requirements/base.txt, pyquery, zeep
 markupsafe==1.1.1         # via -r requirements/base.txt, jinja2
+mock==4.0.2               # via -r requirements/base.txt
 oyaml==0.9                # via -r requirements/base.txt, vng-api-common
 pep8==1.7.1               # via -r requirements/test-tools.in
 pillow==7.2.0             # via -r requirements/base.txt

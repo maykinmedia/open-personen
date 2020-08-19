@@ -43,6 +43,7 @@ itypes==1.2.0             # via coreapi
 jinja2==2.11.2            # via coreschema
 lxml==4.5.2               # via zeep
 markupsafe==1.1.1         # via jinja2
+mock==4.0.2               # via -r requirements/base.in
 oyaml==0.9                # via vng-api-common
 pillow==7.2.0             # via -r requirements/base.in
 polib==1.1.0              # via django-rosetta
