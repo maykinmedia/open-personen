@@ -4,6 +4,7 @@ from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
 from vng_api_common.filters import Backend
 
+from openpersonen.api.data_classes import IngeschrevenPersoon
 from openpersonen.api.filters import IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 
@@ -39,4 +40,11 @@ class IngeschrevenPersoonViewSet(ViewSet):
         return Response(data=[], status=HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
-        return Response(data={}, status=HTTP_200_OK)
+
+        burgerservicenummer = kwargs['burgerservicenummer']
+
+        instance = IngeschrevenPersoon.retrieve(burgerservicenummer)
+
+        serializer = self.serializer_class(instance)
+
+        return Response(data=serializer.data, status=HTTP_200_OK)

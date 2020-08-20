@@ -106,3 +106,6 @@ class Client:
                                   encoding='utf-8')
 
         return response
+
+
+client = Client()
