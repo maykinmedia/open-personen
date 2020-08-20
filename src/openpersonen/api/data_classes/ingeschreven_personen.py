@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
+from openpersonen.api.client import client
 from openpersonen.api.enum import GeslachtsaanduidingChoices
+from openpersonen.api.xml_to_dict_converters import get_ingeschreven_persoon_dict
 from .naam import IngeschrevenPersoonNaam
 from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
@@ -32,3 +34,9 @@ class IngeschrevenPersoon(Persoon):
 
     def get_geslachtsaanduiding_display(self):
         return GeslachtsaanduidingChoices.values[self.geslachtsaanduiding]
+
+    @classmethod
+    def retrieve(cls, bsn):
+        response = client.get_natuurlijk_persoon(bsn)
+        instance_dict = get_ingeschreven_persoon_dict(response)
+        return cls(**instance_dict)
