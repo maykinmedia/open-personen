@@ -84,4 +84,5 @@ vng-api-common==1.5.3     # via -r requirements/base.txt
 waitress==1.4.4           # via webtest
 webob==1.8.6              # via webtest
 webtest==2.0.35           # via django-webtest
+xmltodict==0.12.0         # via -r requirements/base.txt
 zeep==3.4.0               # via -r requirements/base.txt

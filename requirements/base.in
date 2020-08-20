@@ -32,3 +32,4 @@ elastic-apm  # Elastic APM integration
 -e git+git://github.com/maykinmedia/djangorestframework-hal.git@f6692d2489645cfd71ebbd59cd2fdb53a311356b#egg=djangorestframework_hal
 
 mock
+xmltodict
