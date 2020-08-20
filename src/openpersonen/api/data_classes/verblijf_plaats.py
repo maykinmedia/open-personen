@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from openpersonen.api.enum import FunctieAdresChoices, AanduidginBijHuisnummerChoices
 from .waarde import Waarde
 from .datum import Datum
 from .in_onderzoek import VerblijfPlaatsInOnderzoek
@@ -30,3 +31,9 @@ class VerblijfPlaats:
     landVanwaarIngeschreven: Waarde
     verblijfBuitenland: VerblijfBuitenland
     inOnderzoek: VerblijfPlaatsInOnderzoek
+
+    def get_aanduidingBijHuisnummer_display(self):
+        return AanduidginBijHuisnummerChoices.values[self.aanduidingBijHuisnummer]
+
+    def get_functieAdres_display(self):
+        return FunctieAdresChoices.values[self.functieAdres]

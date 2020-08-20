@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from openpersonen.api.enum import GeslachtsaanduidingChoices
 from .naam import IngeschrevenPersoonNaam
 from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
@@ -28,3 +29,6 @@ class IngeschrevenPersoon(Persoon):
     gezagsverhouding: GezagsVerhouding
     verblijfstitel: VerblijfsTitel
     reisdocumenten: list
+
+    def get_geslachtsaanduiding_display(self):
+        return GeslachtsaanduidingChoices.values[self.geslachtsaanduiding]

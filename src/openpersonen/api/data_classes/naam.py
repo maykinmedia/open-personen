@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from openpersonen.api.enum import AanduidingNaamgebruikChoices
 from .in_onderzoek import NaamInOnderzoek
 
 
@@ -18,3 +19,6 @@ class IngeschrevenPersoonNaam(Naam):
     aanschrijfwijze: str
     gebruikInLopendeTekst: str
     aanduidingNaamgebruik: str
+
+    def get_aanduidingNaamgebruik_display(self):
+        return AanduidingNaamgebruikChoices.values[self.aanduidingNaamgebruik]
