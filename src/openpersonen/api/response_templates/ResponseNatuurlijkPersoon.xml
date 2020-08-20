@@ -36,7 +36,7 @@
          <ns:melding>?</ns:melding>
          <ns:antwoord>
             <ns:object StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?">
-               <ns:inp.bsn StUF:noValue="?" StUF:exact="true">?</ns:inp.bsn>
+               <ns:inp.bsn StUF:noValue="?" StUF:exact="true">123456789</ns:inp.bsn>
                <ns:geslachtsnaam StUF:noValue="?" StUF:exact="true">?</ns:geslachtsnaam>
                <ns:voorvoegselGeslachtsnaam StUF:noValue="?" StUF:exact="true">?</ns:voorvoegselGeslachtsnaam>
                <ns:voorletters StUF:noValue="?" StUF:exact="true">?</ns:voorletters>
@@ -66,7 +66,7 @@
                   <ns:gor.openbareRuimteNaam StUF:noValue="?" StUF:exact="true">?</ns:gor.openbareRuimteNaam>
                   <ns:gor.straatnaam StUF:noValue="?" StUF:exact="true">?</ns:gor.straatnaam>
                   <ns:aoa.postcode StUF:noValue="?" StUF:exact="true">?</ns:aoa.postcode>
-                  <ns:aoa.huisnummer StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummer>
+                  <ns:aoa.huisnummer StUF:noValue="?" StUF:exact="true">117</ns:aoa.huisnummer>
                   <ns:aoa.huisletter StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisletter>
                   <ns:aoa.huisnummertoevoeging StUF:noValue="?" StUF:exact="true">?</ns:aoa.huisnummertoevoeging>
                   <ns:inp.locatiebeschrijving StUF:noValue="?" StUF:exact="true">?</ns:inp.locatiebeschrijving>
