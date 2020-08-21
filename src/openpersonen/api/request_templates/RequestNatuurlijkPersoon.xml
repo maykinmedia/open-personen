@@ -7,27 +7,27 @@
             <!--Optional:-->
             <StUF:zender>
                <!--Optional:-->
-               <StUF:organisatie>?</StUF:organisatie>
-               <StUF:applicatie>?</StUF:applicatie>
+               <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+               <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
                <!--Optional:-->
-               <StUF:administratie>?</StUF:administratie>
+               <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
                <!--Optional:-->
-               <StUF:gebruiker>?</StUF:gebruiker>
+               <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
             </StUF:zender>
             <!--Optional:-->
             <StUF:ontvanger>
                <!--Optional:-->
-               <StUF:organisatie>?</StUF:organisatie>
-               <StUF:applicatie>?</StUF:applicatie>
+               <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+               <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
                <!--Optional:-->
-               <StUF:administratie>?</StUF:administratie>
+               <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
                <!--Optional:-->
-               <StUF:gebruiker>?</StUF:gebruiker>
+               <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
             </StUF:ontvanger>
             <!--Optional:-->
-            <StUF:referentienummer>?</StUF:referentienummer>
+            <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
             <!--Optional:-->
-            <StUF:tijdstipBericht>?</StUF:tijdstipBericht>
+            <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
             <StUF:entiteittype>?</StUF:entiteittype>
          </ns:stuurgegevens>
          <ns:parameters>
