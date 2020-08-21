@@ -1,5 +1,3 @@
-import uuid
-
 import requests
 from django.conf import settings
 from django.template import loader
@@ -12,26 +10,15 @@ class Client:
         return {
             'zender_organisatie': settings.STUF_BG_ZENDER['organisatie'],
             'zender_applicatie': settings.STUF_BG_ZENDER['applicatie'],
-            'zender_administratie': settings.STUF_BG_ZENDER['administratie'],
-            'zender_gebruiker': settings.STUF_BG_ZENDER['gebruiker'],
-            'ontvanger_organisatie': settings.STUF_BG_ONTVANGER['organisatie'],
-            'ontvanger_applicatie': settings.STUF_BG_ONTVANGER['applicatie'],
-            'ontvanger_administratie': settings.STUF_BG_ONTVANGER['administratie'],
-            'ontvanger_gebruiker': settings.STUF_BG_ONTVANGER['gebruiker'],
-            'referentienummer': str(uuid.uuid4()),
-            'tijdstip_bericht': dateformat.format(timezone.now(), 'YmdHis')
         }
 
     def _get_response_base_context(self):
         return {
             'zender_organisatie': settings.STUF_BG_ONTVANGER['organisatie'],
             'zender_applicatie': settings.STUF_BG_ONTVANGER['applicatie'],
-            'zender_administratie': settings.STUF_BG_ONTVANGER['administratie'],
-            'zender_gebruiker': settings.STUF_BG_ONTVANGER['gebruiker'],
             'ontvanger_organisatie': settings.STUF_BG_ZENDER['organisatie'],
             'ontvanger_applicatie': settings.STUF_BG_ZENDER['applicatie'],
-            'ontvanger_administratie': settings.STUF_BG_ZENDER['administratie'],
-            'ontvanger_gebruiker': settings.STUF_BG_ZENDER['gebruiker'],
+            'tijdstip_bericht': dateformat.format(timezone.now(), 'YmdHis'),
         }
 
     def get_gezinssituatie_op_adres_aanvrager(self, bsn):
@@ -39,15 +26,14 @@ class Client:
         request_context.update({'bsn': bsn})
 
         response = requests.post(settings.STUF_BG_URL,
-                                 data=loader.render_to_string('RequestGezinssituatieOpAdresAanvrager.xml',
+                                 data=loader.render_to_string('RequestNatuurlijkPersoonSoapUIWithVariables.xml',
                                                               request_context),
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context['referentienummer'] = request_context['referentienummer']
-        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
+        response_context.update({'bsn': bsn})
 
-        response._content = bytes(loader.render_to_string('ResponseGezinssituatieOpAdresAanvrager.xml',
+        response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml',
                                                           response_context),
                                   encoding='utf-8')
 
@@ -58,15 +44,15 @@ class Client:
         request_context.update({'bsn': bsn})
 
         response = requests.post(settings.STUF_BG_URL,
-                                 data=loader.render_to_string('RequestKinderenVanAanvrager.xml', request_context),
+                                 data=loader.render_to_string('RequestNatuurlijkPersoonSoapUIWithVariables.xml',
+                                                              request_context),
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context['referentienummer'] = request_context['referentienummer']
-        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
+        response_context.update({'bsn': bsn})
 
-        response._content = bytes(loader.render_to_string('ResponseKinderenVanAanvrager.xml',
-                                                          response_context),
+        response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml',
+                                                          request_context),
                                   encoding='utf-8')
 
         return response
@@ -76,14 +62,14 @@ class Client:
         request_context.update({'bsn': bsn})
 
         response = requests.post(settings.STUF_BG_URL,
-                                 data=loader.render_to_string('RequestNatuurlijkPersoon.xml', request_context),
+                                 data=loader.render_to_string('RequestNatuurlijkPersoonSoapUIWithVariables.xml',
+                                                              request_context),
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context['referentienummer'] = request_context['referentienummer']
-        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
+        response_context.update({'bsn': bsn})
 
-        response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoon.xml',
+        response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml',
                                                           response_context),
                                   encoding='utf-8')
 
@@ -94,12 +80,12 @@ class Client:
         request_context.update({'vestigings_nummer': vestigings_nummer})
 
         response = requests.post(settings.STUF_BG_URL,
-                                 data=loader.render_to_string('RequestVestiging.xml', request_context),
+                                 data=loader.render_to_string('RequestVestiging.xml',
+                                                              request_context),
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context['referentienummer'] = request_context['referentienummer']
-        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
+        response_context.update({'vestigings_nummer': vestigings_nummer})
 
         response._content = bytes(loader.render_to_string('ResponseVestiging.xml',
                                                           response_context),
