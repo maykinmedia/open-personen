@@ -6,6 +6,7 @@ import xmltodict
 
 from openpersonen.api.client import client
 from openpersonen.api.enum import GeslachtsaanduidingChoices
+from openpersonen.api.utils import convert_empty_instances
 from .naam import IngeschrevenPersoonNaam
 from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
@@ -199,7 +200,7 @@ class IngeschrevenPersoon(Persoon):
             },
             "verblijfplaats": {
                 "functieAdres": "woonadres",
-                "huisletter": "string",
+                "huisletter": antwoord_dict_object['BG:verblijfsadres']['BG:aoa.huisletter'],
                 "huisnummer": antwoord_dict_object['BG:verblijfsadres']['BG:aoa.huisnummer'],
                 "huisnummertoevoeging": "string",
                 "aanduidingBijHuisnummer": "tegenover",
@@ -329,6 +330,8 @@ class IngeschrevenPersoon(Persoon):
                 "string"
             ]
         }
+
+        convert_empty_instances(ingeschreven_persoon_dict)
 
         return ingeschreven_persoon_dict
 
