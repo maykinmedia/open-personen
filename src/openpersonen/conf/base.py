@@ -368,19 +368,19 @@ REST_FRAMEWORK = {
 
 # StUF-BG Variables
 
-STUF_BG_URL = 'https://httpbin.org/post'
-STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
+STUF_BG_URL = os.getenv('STUF_BG_URL', 'https://httpbin.org/post')
+STUF_BG_HEADERS = os.getenv('STUF_BG_HEADERS', {'Content-Type': 'application/soap+xml'})
 
 STUF_BG_ZENDER = {
-    'organisatie': 'Open Personen',
-    'applicatie': 'Open Personen',
-    'administratie': 'Open Personen',
-    'gebruiker': 'Open Personen',
+    'organisatie': os.getenv('ZENDER_ORGANISATIE', 'Open Personen'),
+    'applicatie': os.getenv('ZENDER_APPLICATE', 'Open Personen'),
+    'administratie': os.getenv('ZENDER_ADMINISTRATIE', 'Open Personen'),
+    'gebruiker': os.getenv('ZENDER_GEBRUIKER', 'Open Personen'),
 }
 
 STUF_BG_ONTVANGER = {
-    'organisatie': 'BG-mock',
-    'applicatie': 'BG-mock',
-    'administratie': 'BG-mock',
-    'gebruiker': 'BG-mock',
+    'organisatie': os.getenv('ONTVANGER_ORGANISATIE', 'BG-mock'),
+    'applicatie': os.getenv('ONTVANGER_APPLICATIE', 'BG-mock'),
+    'administratie': os.getenv('ONTVANGER_ADMINISTRATIE', 'BG-mock'),
+    'gebruiker': os.getenv('ONTVANGER_GEBRUIKER', 'BG-mock'),
 }
