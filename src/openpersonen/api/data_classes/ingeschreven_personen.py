@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 import xmltodict
 
@@ -94,7 +96,8 @@ class IngeschrevenPersoon(Persoon):
                 }
             },
             "geslachtsaanduiding": antwoord_dict_object['BG:geslachtsaanduiding'],
-            "leeftijd": 0,  # TODO Calculate this
+            "leeftijd": relativedelta(datetime.now(),
+                                      datetime.strptime(antwoord_dict_object['BG:geboortedatum'], '%Y%m%d')).years,
             "datumEersteInschrijvingGBA": {
                 "dag": antwoord_dict_object['BG:inp.datumInschrijving'][6:8],
                 "datum": antwoord_dict_object['BG:inp.datumInschrijving'],
