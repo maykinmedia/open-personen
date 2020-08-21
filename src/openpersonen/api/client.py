@@ -1,3 +1,4 @@
+import uuid
 import requests
 from django.conf import settings
 from django.template import loader
@@ -10,15 +11,26 @@ class Client:
         return {
             'zender_organisatie': settings.STUF_BG_ZENDER['organisatie'],
             'zender_applicatie': settings.STUF_BG_ZENDER['applicatie'],
+            'zender_administratie': settings.STUF_BG_ZENDER['administratie'],
+            'zender_gebruiker': settings.STUF_BG_ZENDER['gebruiker'],
+            'ontvanger_organisatie': settings.STUF_BG_ONTVANGER['organisatie'],
+            'ontvanger_applicatie': settings.STUF_BG_ONTVANGER['applicatie'],
+            'ontvanger_administratie': settings.STUF_BG_ONTVANGER['administratie'],
+            'ontvanger_gebruiker': settings.STUF_BG_ONTVANGER['gebruiker'],
+            'referentienummer': str(uuid.uuid4()),
+            'tijdstip_bericht': dateformat.format(timezone.now(), 'YmdHis')
         }
 
     def _get_response_base_context(self):
         return {
             'zender_organisatie': settings.STUF_BG_ONTVANGER['organisatie'],
             'zender_applicatie': settings.STUF_BG_ONTVANGER['applicatie'],
+            'zender_administratie': settings.STUF_BG_ONTVANGER['administratie'],
+            'zender_gebruiker': settings.STUF_BG_ONTVANGER['gebruiker'],
             'ontvanger_organisatie': settings.STUF_BG_ZENDER['organisatie'],
             'ontvanger_applicatie': settings.STUF_BG_ZENDER['applicatie'],
-            'tijdstip_bericht': dateformat.format(timezone.now(), 'YmdHis'),
+            'ontvanger_administratie': settings.STUF_BG_ZENDER['administratie'],
+            'ontvanger_gebruiker': settings.STUF_BG_ZENDER['gebruiker'],
         }
 
     def get_gezinssituatie_op_adres_aanvrager(self, bsn):
@@ -31,7 +43,9 @@ class Client:
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context.update({'bsn': bsn})
+        request_context.update({'bsn': bsn})
+        response_context['referentienummer'] = request_context['referentienummer']
+        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml',
                                                           response_context),
@@ -49,7 +63,9 @@ class Client:
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context.update({'bsn': bsn})
+        request_context.update({'bsn': bsn})
+        response_context['referentienummer'] = request_context['referentienummer']
+        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml',
                                                           request_context),
@@ -67,7 +83,9 @@ class Client:
                                  headers=settings.STUF_BG_HEADERS)
 
         response_context = self._get_response_base_context()
-        response_context.update({'bsn': bsn})
+        request_context.update({'bsn': bsn})
+        response_context['referentienummer'] = request_context['referentienummer']
+        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml',
                                                           response_context),
@@ -86,6 +104,8 @@ class Client:
 
         response_context = self._get_response_base_context()
         response_context.update({'vestigings_nummer': vestigings_nummer})
+        response_context['referentienummer'] = request_context['referentienummer']
+        response_context['tijdstip_bericht'] = request_context['tijdstip_bericht']
 
         response._content = bytes(loader.render_to_string('ResponseVestiging.xml',
                                                           response_context),

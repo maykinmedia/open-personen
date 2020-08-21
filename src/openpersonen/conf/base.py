@@ -432,9 +432,13 @@ STUF_BG_HEADERS = {'Content-Type': 'application/soap+xml'}
 STUF_BG_ZENDER = {
     'organisatie': 'Maykin Media',
     'applicatie': 'Open Personen',
+    'administratie': 'Open Personen',
+    'gebruiker': 'Open Personen',
 }
 
 STUF_BG_ONTVANGER = {
     'organisatie': '0392',
     'applicatie': 'ESB',
+    'administratie': 'BG-mock',
+    'gebruiker': 'BG-mock',
 }
