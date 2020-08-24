@@ -6,13 +6,12 @@
 #
 -e git+git://github.com/maykinmedia/djangorestframework-hal.git@f6692d2489645cfd71ebbd59cd2fdb53a311356b#egg=djangorestframework_hal  # via -r requirements/ci.txt
 alabaster==0.7.12         # via sphinx
-appdirs==1.4.4            # via -r requirements/ci.txt, black, zeep
-attrs==19.3.0             # via -r requirements/ci.txt, black, zeep
+appdirs==1.4.4            # via black
+attrs==19.3.0             # via black
 babel==2.8.0              # via sphinx
 beautifulsoup4==4.9.1     # via -r requirements/ci.txt, webtest
 black==19.10b0            # via -r requirements/dev.in
 bump2version==1.0.0       # via -r requirements/dev.in
-cached-property==1.5.1    # via -r requirements/ci.txt, zeep
 certifi==2020.6.20        # via -r requirements/ci.txt, elastic-apm, requests, sentry-sdk
 chardet==3.0.4            # via -r requirements/ci.txt, requests
 click==7.1.2              # via black, pip-tools
@@ -21,7 +20,6 @@ coreschema==0.0.4         # via -r requirements/ci.txt, coreapi, drf-yasg
 coverage==4.5.4           # via -r requirements/ci.txt
 cssselect==1.1.0          # via -r requirements/ci.txt, pyquery
 ddt-api-calls==0.2.0      # via -r requirements/dev.in
-defusedxml==0.6.0         # via -r requirements/ci.txt, zeep
 django-admin-index==1.4.0  # via -r requirements/ci.txt
 django-appconf==1.0.4     # via -r requirements/ci.txt, django-axes
 django-axes==5.4.2        # via -r requirements/ci.txt
@@ -58,11 +56,11 @@ imagesize==1.2.0          # via sphinx
 importlib-metadata==1.7.0  # via flake8
 inflection==0.5.0         # via -r requirements/ci.txt, drf-yasg
 iso-639==0.4.5            # via -r requirements/ci.txt, vng-api-common
-isodate==0.6.0            # via -r requirements/ci.txt, vng-api-common, zeep
+isodate==0.6.0            # via -r requirements/ci.txt, vng-api-common
 isort==5.2.2              # via -r requirements/dev.in
 itypes==1.2.0             # via -r requirements/ci.txt, coreapi
 jinja2==2.11.2            # via -r requirements/ci.txt, coreschema, sphinx
-lxml==4.5.2               # via -r requirements/ci.txt, pyquery, zeep
+lxml==4.5.2               # via -r requirements/ci.txt, pyquery
 markupsafe==1.1.1         # via -r requirements/ci.txt, jinja2
 mccabe==0.6.1             # via flake8
 mock==4.0.2               # via -r requirements/ci.txt
@@ -83,17 +81,16 @@ pyquery==1.4.1            # via -r requirements/ci.txt
 python-dateutil==2.8.1    # via -r requirements/ci.txt, faker, freezegun
 python-decouple==3.3      # via -r requirements/ci.txt
 python-dotenv==0.14.0     # via -r requirements/ci.txt
-pytz==2020.1              # via -r requirements/ci.txt, babel, django, zeep
+pytz==2020.1              # via -r requirements/ci.txt, babel, django
 pyyaml==5.3.1             # via -r requirements/ci.txt, gemma-zds-client, oyaml, vng-api-common
 redis==3.5.3              # via -r requirements/ci.txt, django-redis
 regex==2020.7.14          # via black
 requests-mock==1.8.0      # via -r requirements/ci.txt, ddt-api-calls
-requests-toolbelt==0.9.1  # via -r requirements/ci.txt, zeep
-requests==2.24.0          # via -r requirements/ci.txt, coreapi, ddt-api-calls, django-rosetta, gemma-zds-client, requests-mock, requests-toolbelt, sphinx, vng-api-common, zeep
+requests==2.24.0          # via -r requirements/ci.txt, coreapi, ddt-api-calls, django-rosetta, gemma-zds-client, requests-mock, sphinx, vng-api-common
 ruamel.yaml.clib==0.2.0   # via -r requirements/ci.txt, ruamel.yaml
 ruamel.yaml==0.16.10      # via -r requirements/ci.txt, drf-yasg
 sentry-sdk==0.16.3        # via -r requirements/ci.txt
-six==1.15.0               # via -r requirements/ci.txt, django-choices, django-compat, django-extensions, django-rosetta, drf-yasg, freezegun, isodate, packaging, pip-tools, python-dateutil, requests-mock, webtest, zeep
+six==1.15.0               # via -r requirements/ci.txt, django-choices, django-compat, django-extensions, django-rosetta, drf-yasg, freezegun, isodate, packaging, pip-tools, python-dateutil, requests-mock, webtest
 snowballstemmer==2.0.0    # via sphinx
 soupsieve==2.0.1          # via -r requirements/ci.txt, beautifulsoup4
 sphinx-rtd-theme==0.5.0   # via -r requirements/dev.in
@@ -118,7 +115,6 @@ waitress==1.4.4           # via -r requirements/ci.txt, webtest
 webob==1.8.6              # via -r requirements/ci.txt, webtest
 webtest==2.0.35           # via -r requirements/ci.txt, django-webtest
 xmltodict==0.12.0         # via -r requirements/ci.txt
-zeep==3.4.0               # via -r requirements/ci.txt
 zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
