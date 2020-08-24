@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.test_data import ingeschreven_persoon_data
+from openpersonen.api.tests.test_data import ingeschreven_persoon_retrieve_data
 
 
 class TestIngeschrevenPersoon(APITestCase):
@@ -37,4 +37,4 @@ class TestIngeschrevenPersoon(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), ingeschreven_persoon_data)
+        self.assertEqual(response.json(), ingeschreven_persoon_retrieve_data)
