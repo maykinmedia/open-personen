@@ -19,20 +19,20 @@ class Kind(Persoon):
     def get_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
-        antwoord_dict_object = dict_object['env:Envelope']['env:Body']['npsLa01']['BG:antwoord']['object']
+        antwoord_dict_object = dict_object['soapenv:Envelope']['soapenv:Body']['ns:npsLa01']['ns:antwoord']['ns:object']['ns:inp.heeftAlsKinderen']['ns:gerelateerde']
 
         kind_dict = {
-            "burgerservicenummer": antwoord_dict_object['BG:inp.bsn'],
+            "burgerservicenummer": antwoord_dict_object['ns:inp.bsn'],
             "geheimhoudingPersoonsgegevens": True,
             "naam": {
-                "geslachtsnaam": antwoord_dict_object['BG:geslachtsnaam'],
-                "voorletters": antwoord_dict_object['BG:voorletters'],
-                "voornamen": antwoord_dict_object['BG:voornamen'],
-                "voorvoegsel": antwoord_dict_object['BG:voorvoegselGeslachtsnaam'],
+                "geslachtsnaam": antwoord_dict_object['ns:geslachtsnaam'],
+                "voorletters": antwoord_dict_object['ns:voorletters'],
+                "voornamen": antwoord_dict_object['ns:voornamen'],
+                "voorvoegsel": antwoord_dict_object['ns:voorvoegselGeslachtsnaam'],
                 "inOnderzoek": {
-                    "geslachtsnaam": bool(antwoord_dict_object['BG:geslachtsnaam']),
-                    "voornamen": bool(antwoord_dict_object['BG:voornamen']),
-                    "voorvoegsel": bool(antwoord_dict_object['BG:voorvoegselGeslachtsnaam']),
+                    "geslachtsnaam": bool(antwoord_dict_object['ns:geslachtsnaam']),
+                    "voornamen": bool(antwoord_dict_object['ns:voornamen']),
+                    "voorvoegsel": bool(antwoord_dict_object['ns:voorvoegselGeslachtsnaam']),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -43,18 +43,18 @@ class Kind(Persoon):
             },
             "geboorte": {
                 "datum": {
-                    "dag": antwoord_dict_object['BG:geboortedatum'][6:8],
-                    "datum": antwoord_dict_object['BG:geboortedatum'],
-                    "jaar": antwoord_dict_object['BG:geboortedatum'][0:4],
-                    "maand": antwoord_dict_object['BG:geboortedatum'][4:6]
+                    "dag": antwoord_dict_object['ns:geboortedatum'][6:8],
+                    "datum": antwoord_dict_object['ns:geboortedatum'],
+                    "jaar": antwoord_dict_object['ns:geboortedatum'][0:4],
+                    "maand": antwoord_dict_object['ns:geboortedatum'][4:6]
                 },
                 "land": {
                     "code": "string",
-                    "omschrijving": antwoord_dict_object['BG:inp.geboorteLand']
+                    "omschrijving": antwoord_dict_object['ns:inp.geboorteLand']
                 },
                 "plaats": {
                     "code": "string",
-                    "omschrijving": antwoord_dict_object['BG:inp.geboorteplaats']
+                    "omschrijving": antwoord_dict_object['ns:inp.geboorteplaats']
                 },
                 "inOnderzoek": {
                     "datum": True,
@@ -69,9 +69,9 @@ class Kind(Persoon):
                 }
             },
             "leeftijd": relativedelta(datetime.now(),
-                                      datetime.strptime(antwoord_dict_object['BG:geboortedatum'], '%Y%m%d')).years,
+                                      datetime.strptime(antwoord_dict_object['ns:geboortedatum'], '%Y%m%d')).years,
             "inOnderzoek": {
-                "burgerservicenummer": True,
+                "burgerservicenummer": bool(antwoord_dict_object['ns:inp.bsn']),
                 "datumIngangOnderzoek": {
                     "dag": 0,
                     "datum": "string",
@@ -87,6 +87,6 @@ class Kind(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
-        response = client.get_kinderen_van_aanvrager(bsn)
+        response = client.get_kind(bsn)
         instance_dict = cls.get_instance_dict(response)
         return cls(**instance_dict)

@@ -1,4 +1,4 @@
-ingeschreven_persoon_data = {
+ingeschreven_persoon_retrieve_data = {
     "burgerservicenummer": "123456789",
     "geheimhoudingPersoonsgegevens": True,
     "naam": {

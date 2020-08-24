@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 
-from openpersonen.api.tests.test_data import kind_data
+from openpersonen.api.tests.test_data import kind_retrieve_data
 from openpersonen.accounts.models import User
 
 
@@ -32,7 +32,7 @@ class TestKind(APITestCase):
     def test_retrieve_kind(self, post_mock):
         post_mock.post(
             settings.STUF_BG_URL,
-            content=bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml'),
+            content=bytes(loader.render_to_string('ResponseKind.xml'),
                           encoding='utf-8')
         )
 
@@ -46,4 +46,4 @@ class TestKind(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), kind_data)
+        self.assertEqual(response.json(), kind_retrieve_data)

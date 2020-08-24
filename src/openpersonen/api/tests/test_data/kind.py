@@ -1,10 +1,10 @@
-kind_data = {
-    "burgerservicenummer": "123456780",
+kind_retrieve_data = {
+    "burgerservicenummer": "456789123",
     "geheimhoudingPersoonsgegevens": True,
     "naam": {
-        "geslachtsnaam": "Vliet",
-        "voorletters": "I.",
-        "voornamen": "Isaak",
+        "geslachtsnaam": "Maykin Kind",
+        "voorletters": "K",
+        "voornamen": "Media Kind",
         "voorvoegsel": "van",
         "inOnderzoek": {
             "geslachtsnaam": True,
@@ -21,13 +21,13 @@ kind_data = {
     "geboorte": {
         "datum": {
             "dag": 15,
-            "datum": "19800915",
-            "jaar": 1980,
-            "maand": 9
+            "datum": "19990615",
+            "jaar": 1999,
+            "maand": 6
         },
         "land": {
             "code": "string",
-            "omschrijving": "6030"
+            "omschrijving": "Nederland"
         },
         "plaats": {
             "code": "string",
@@ -45,7 +45,7 @@ kind_data = {
             }
         }
     },
-    "leeftijd": 39,
+    "leeftijd": 21,
     "inOnderzoek": {
         "burgerservicenummer": True,
         "datumIngangOnderzoek": {
