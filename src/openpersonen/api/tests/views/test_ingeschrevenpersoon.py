@@ -26,7 +26,7 @@ class TestIngeschrevenPersoon(APITestCase):
 
         post_mock.post(
             settings.STUF_BG_URL,
-            content=bytes(loader.render_to_string('ResponseNatuurlijkPersoonSoapUIWithVariables.xml'),
+            content=bytes(loader.render_to_string('ResponseIngeschrevenPersoon.xml'),
                           encoding='utf-8')
         )
 

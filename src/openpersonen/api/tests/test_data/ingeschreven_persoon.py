@@ -1,10 +1,10 @@
 ingeschreven_persoon_data = {
-    "burgerservicenummer": "123456780",
+    "burgerservicenummer": "123456789",
     "geheimhoudingPersoonsgegevens": True,
     "naam": {
-        "geslachtsnaam": "Vliet",
-        "voorletters": "I.",
-        "voornamen": "Isaak",
+        "geslachtsnaam": "Maykin",
+        "voorletters": "M.",
+        "voornamen": "Media",
         "voorvoegsel": "van",
         "inOnderzoek": {
             "geslachtsnaam": True,
@@ -17,7 +17,7 @@ ingeschreven_persoon_data = {
                 "maand": 0
             }
         },
-        "aanhef": "string",
+        "aanhef": "Media",
         "aanschrijfwijze": "string",
         "gebruikInLopendeTekst": "string",
         "aanduidingNaamgebruik": "E"
@@ -31,7 +31,7 @@ ingeschreven_persoon_data = {
         },
         "land": {
             "code": "string",
-            "omschrijving": "6030"
+            "omschrijving": "Nederland"
         },
         "plaats": {
             "code": "string",
@@ -61,16 +61,16 @@ ingeschreven_persoon_data = {
         "europeesKiesrecht": True,
         "uitgeslotenVanKiesrecht": True,
         "einddatumUitsluitingEuropeesKiesrecht": {
-            "dag": 0,
-            "datum": "string",
-            "jaar": 0,
-            "maand": 0
+            "dag": 24,
+            "datum": "20200924",
+            "jaar": 2020,
+            "maand": 9
         },
         "einddatumUitsluitingKiesrecht": {
-            "dag": 0,
-            "datum": "string",
-            "jaar": 0,
-            "maand": 0
+            "dag": 24,
+            "datum": "20200924",
+            "jaar": 2020,
+            "maand": 9
         }
     },
     "inOnderzoek": {
@@ -132,11 +132,11 @@ ingeschreven_persoon_data = {
         },
         "land": {
             "code": "string",
-            "omschrijving": "string"
+            "omschrijving": None
         },
         "plaats": {
             "code": "string",
-            "omschrijving": "string"
+            "omschrijving": None
         },
         "inOnderzoek": {
             "datum": True,
@@ -152,18 +152,18 @@ ingeschreven_persoon_data = {
     },
     "verblijfplaats": {
         "functieAdres": "woonadres",
-        "huisletter": None,
-        "huisnummer": 2,
-        "huisnummertoevoeging": "string",
+        "huisletter": "A",
+        "huisnummer": 117,
+        "huisnummertoevoeging": "B",
         "aanduidingBijHuisnummer": "tegenover",
         "identificatiecodeNummeraanduiding": "string",
         "naamOpenbareRuimte": "string",
-        "postcode": "2011RD",
-        "woonplaatsnaam": "Haarlem",
+        "postcode": "2525AB",
+        "woonplaatsnaam": "Amsterdam",
         "identificatiecodeAdresseerbaarObject": "string",
         "indicatieVestigingVanuitBuitenland": True,
         "locatiebeschrijving": "string",
-        "straatnaam": "Grote Markt",
+        "straatnaam": "Straat",
         "vanuitVertrokkenOnbekendWaarheen": True,
         "datumAanvangAdreshouding": {
             "dag": 0,

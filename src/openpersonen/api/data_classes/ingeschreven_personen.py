@@ -43,20 +43,20 @@ class IngeschrevenPersoon(Persoon):
     def get_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
-        antwoord_dict_object = dict_object['env:Envelope']['env:Body']['npsLa01']['BG:antwoord']['object']
+        antwoord_dict_object = dict_object['soapenv:Envelope']['soapenv:Body']['ns:npsLa01']['ns:antwoord']['ns:object']
 
         ingeschreven_persoon_dict = {
-            "burgerservicenummer": antwoord_dict_object['BG:inp.bsn'],
+            "burgerservicenummer": antwoord_dict_object['ns:inp.bsn'],
             "geheimhoudingPersoonsgegevens": True,
             "naam": {
-                "geslachtsnaam": antwoord_dict_object['BG:geslachtsnaam'],
-                "voorletters": antwoord_dict_object['BG:voorletters'],
-                "voornamen": antwoord_dict_object['BG:voornamen'],
-                "voorvoegsel": antwoord_dict_object['BG:voorvoegselGeslachtsnaam'],
+                "geslachtsnaam": antwoord_dict_object['ns:geslachtsnaam'],
+                "voorletters": antwoord_dict_object['ns:voorletters'],
+                "voornamen": antwoord_dict_object['ns:voornamen'],
+                "voorvoegsel": antwoord_dict_object['ns:voorvoegselGeslachtsnaam'],
                 "inOnderzoek": {
-                    "geslachtsnaam": bool(antwoord_dict_object['BG:geslachtsnaam']),
-                    "voornamen": bool(antwoord_dict_object['BG:voornamen']),
-                    "voorvoegsel": bool(antwoord_dict_object['BG:voorvoegselGeslachtsnaam']),
+                    "geslachtsnaam": bool(antwoord_dict_object['ns:geslachtsnaam']),
+                    "voornamen": bool(antwoord_dict_object['ns:voornamen']),
+                    "voorvoegsel": bool(antwoord_dict_object['ns:voorvoegselGeslachtsnaam']),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -64,25 +64,25 @@ class IngeschrevenPersoon(Persoon):
                         "maand": 0
                     }
                 },
-                "aanhef": "string",
+                "aanhef": antwoord_dict_object['ns:voornamen'],
                 "aanschrijfwijze": "string",
                 "gebruikInLopendeTekst": "string",
-                "aanduidingNaamgebruik": antwoord_dict_object['BG:aanduidingNaamgebruik']
+                "aanduidingNaamgebruik": antwoord_dict_object['ns:aanduidingNaamgebruik']
             },
             "geboorte": {
                 "datum": {
-                    "dag": antwoord_dict_object['BG:geboortedatum'][6:8],
-                    "datum": antwoord_dict_object['BG:geboortedatum'],
-                    "jaar": antwoord_dict_object['BG:geboortedatum'][0:4],
-                    "maand": antwoord_dict_object['BG:geboortedatum'][4:6]
+                    "dag": antwoord_dict_object['ns:geboortedatum'][6:8],
+                    "datum": antwoord_dict_object['ns:geboortedatum'],
+                    "jaar": antwoord_dict_object['ns:geboortedatum'][0:4],
+                    "maand": antwoord_dict_object['ns:geboortedatum'][4:6]
                 },
                 "land": {
                     "code": "string",
-                    "omschrijving": antwoord_dict_object['BG:inp.geboorteLand']
+                    "omschrijving": antwoord_dict_object['ns:inp.geboorteLand']
                 },
                 "plaats": {
                     "code": "string",
-                    "omschrijving": antwoord_dict_object['BG:inp.geboorteplaats']
+                    "omschrijving": antwoord_dict_object['ns:inp.geboorteplaats']
                 },
                 "inOnderzoek": {
                     "datum": True,
@@ -96,34 +96,34 @@ class IngeschrevenPersoon(Persoon):
                     }
                 }
             },
-            "geslachtsaanduiding": antwoord_dict_object['BG:geslachtsaanduiding'],
+            "geslachtsaanduiding": antwoord_dict_object['ns:geslachtsaanduiding'],
             "leeftijd": relativedelta(datetime.now(),
-                                      datetime.strptime(antwoord_dict_object['BG:geboortedatum'], '%Y%m%d')).years,
+                                      datetime.strptime(antwoord_dict_object['ns:geboortedatum'], '%Y%m%d')).years,
             "datumEersteInschrijvingGBA": {
-                "dag": antwoord_dict_object['BG:inp.datumInschrijving'][6:8],
-                "datum": antwoord_dict_object['BG:inp.datumInschrijving'],
-                "jaar": antwoord_dict_object['BG:inp.datumInschrijving'][0:4],
-                "maand": antwoord_dict_object['BG:inp.datumInschrijving'][4:6]
+                "dag": antwoord_dict_object['ns:inp.datumInschrijving'][6:8],
+                "datum": antwoord_dict_object['ns:inp.datumInschrijving'],
+                "jaar": antwoord_dict_object['ns:inp.datumInschrijving'][0:4],
+                "maand": antwoord_dict_object['ns:inp.datumInschrijving'][4:6]
             },
             "kiesrecht": {
-                "europeesKiesrecht": True,
-                "uitgeslotenVanKiesrecht": True,
+                "europeesKiesrecht": bool(antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht']),
+                "uitgeslotenVanKiesrecht": bool(antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht']),
                 "einddatumUitsluitingEuropeesKiesrecht": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0
+                    "dag": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][6:8],
+                    "datum": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'],
+                    "jaar": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][0:4],
+                    "maand": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][4:6]
                 },
                 "einddatumUitsluitingKiesrecht": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0
+                    "dag": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][6:8],
+                    "datum": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'],
+                    "jaar": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][0:4],
+                    "maand": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][4:6]
                 }
             },
             "inOnderzoek": {
-                "burgerservicenummer": bool(antwoord_dict_object['BG:inp.bsn']),
-                "geslachtsaanduiding": bool(antwoord_dict_object['BG:geslachtsaanduiding']),
+                "burgerservicenummer": bool(antwoord_dict_object['ns:inp.bsn']),
+                "geslachtsaanduiding": bool(antwoord_dict_object['ns:geslachtsaanduiding']),
                 "datumIngangOnderzoek": {
                     "dag": 0,
                     "datum": "string",
@@ -133,7 +133,7 @@ class IngeschrevenPersoon(Persoon):
             },
             "nationaliteit": [
                 {
-                    "aanduidingBijzonderNederlanderschap": "behandeld_als_nederlander",
+                    "aanduidingBijzonderNederlanderschap": antwoord_dict_object['ns:inp.aanduidingBijzonderNederlanderschap'],
                     "datumIngangGeldigheid": {
                         "dag": 0,
                         "datum": "string",
@@ -149,7 +149,7 @@ class IngeschrevenPersoon(Persoon):
                         "omschrijving": "string"
                     },
                     "inOnderzoek": {
-                        "aanduidingBijzonderNederlanderschap": True,
+                        "aanduidingBijzonderNederlanderschap": bool(antwoord_dict_object['ns:inp.aanduidingBijzonderNederlanderschap']),
                         "nationaliteit": True,
                         "redenOpname": True,
                         "datumIngangOnderzoek": {
@@ -180,16 +180,16 @@ class IngeschrevenPersoon(Persoon):
                 },
                 "land": {
                     "code": "string",
-                    "omschrijving": "string"
+                    "omschrijving": antwoord_dict_object['ns:inp.overlijdenLand']
                 },
                 "plaats": {
                     "code": "string",
-                    "omschrijving": "string"
+                    "omschrijving": antwoord_dict_object['ns:inp.overlijdenplaats']
                 },
                 "inOnderzoek": {
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": bool(antwoord_dict_object['ns:overlijdensdatum']),
+                    "land": bool(antwoord_dict_object['ns:inp.overlijdenLand']),
+                    "plaats": bool(antwoord_dict_object['ns:inp.overlijdenplaats']),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -200,18 +200,18 @@ class IngeschrevenPersoon(Persoon):
             },
             "verblijfplaats": {
                 "functieAdres": "woonadres",
-                "huisletter": antwoord_dict_object['BG:verblijfsadres']['BG:aoa.huisletter'],
-                "huisnummer": antwoord_dict_object['BG:verblijfsadres']['BG:aoa.huisnummer'],
-                "huisnummertoevoeging": "string",
+                "huisletter": antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.huisletter'],
+                "huisnummer": antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.huisnummer'],
+                "huisnummertoevoeging": antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.huisnummertoevoeging'],
                 "aanduidingBijHuisnummer": "tegenover",
                 "identificatiecodeNummeraanduiding": "string",
                 "naamOpenbareRuimte": "string",
-                "postcode": antwoord_dict_object['BG:verblijfsadres']['BG:aoa.postcode'],
-                "woonplaatsnaam": antwoord_dict_object['BG:verblijfsadres']['BG:wpl.woonplaatsNaam'],
+                "postcode": antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.postcode'],
+                "woonplaatsnaam": antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:wpl.woonplaatsNaam'],
                 "identificatiecodeAdresseerbaarObject": "string",
                 "indicatieVestigingVanuitBuitenland": True,
                 "locatiebeschrijving": "string",
-                "straatnaam": antwoord_dict_object['BG:verblijfsadres']['BG:gor.straatnaam'],
+                "straatnaam": antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:gor.straatnaam'],
                 "vanuitVertrokkenOnbekendWaarheen": True,
                 "datumAanvangAdreshouding": {
                     "dag": 0,
@@ -263,18 +263,18 @@ class IngeschrevenPersoon(Persoon):
                     "datumVestigingInNederland": True,
                     "functieAdres": True,
                     "gemeenteVanInschrijving": True,
-                    "huisletter": True,
-                    "huisnummer": bool(antwoord_dict_object['BG:verblijfsadres']['BG:aoa.huisnummer']),
-                    "huisnummertoevoeging": True,
+                    "huisletter": bool(antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.huisletter']),
+                    "huisnummer": bool(antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.huisnummer']),
+                    "huisnummertoevoeging": bool(antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.huisnummertoevoeging']),
                     "identificatiecodeNummeraanduiding": True,
                     "identificatiecodeAdresseerbaarObject": True,
                     "landVanwaarIngeschreven": True,
                     "locatiebeschrijving": True,
                     "naamOpenbareRuimte": True,
-                    "postcode": bool(antwoord_dict_object['BG:verblijfsadres']['BG:aoa.postcode']),
-                    "straatnaam": bool(antwoord_dict_object['BG:verblijfsadres']['BG:gor.straatnaam']),
+                    "postcode": bool(antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:aoa.postcode']),
+                    "straatnaam": bool(antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:gor.straatnaam']),
                     "verblijfBuitenland": True,
-                    "woonplaatsnaam": bool(antwoord_dict_object['BG:verblijfsadres']['BG:wpl.woonplaatsNaam']),
+                    "woonplaatsnaam": bool(antwoord_dict_object['ns:inp.verblijftIn']['ns:gerelateerde']['ns:adresAanduidingGrp']['ns:wpl.woonplaatsNaam']),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -337,6 +337,6 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
-        response = client.get_natuurlijk_persoon(bsn)
+        response = client.get_ingeschreven_persoon(bsn)
         instance_dict = cls.get_instance_dict(response)
         return cls(**instance_dict)
