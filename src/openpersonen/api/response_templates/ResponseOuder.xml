@@ -44,27 +44,34 @@
          <!--Optional:-->
          <ns:antwoord>
             <!--1 or more repetitions:-->
-            <ns:object StUF:entiteittype="NPS">
-               <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND">
-                  <ns:gerelateerde StUF:entiteittype="NPS">
+            <ns:object StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
+                <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?" StUF:aantalVoorkomens="?" StUF:aardAantal="?">
+                  <ns:gerelateerde StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
+                    <!--You have a CHOICE of the next 2 items at this level-->
                      <!--Optional:-->
-                     <ns:inp.bsn>456789123</ns:inp.bsn>
+                     <ns:inp.bsn>789123456</ns:inp.bsn>
                      <!--Optional:-->
-                     <ns:geslachtsnaam>Maykin Kind</ns:geslachtsnaam>
+                     <ns:geslachtsaanduiding>man</ns:geslachtsaanduiding>
                      <!--Optional:-->
-                     <ns:voorvoegselGeslachtsnaam>van</ns:voorvoegselGeslachtsnaam>
+                     <ns:ouderAanduiding>ouder1</ns:ouderAanduiding>
                      <!--Optional:-->
-                     <ns:voorletters>K</ns:voorletters>
+                     <ns:datumIngangFamilierechtelijkeBetrekking>19700604</ns:datumIngangFamilierechtelijkeBetrekking>
                      <!--Optional:-->
-                      <ns:voornamen>Media Kind</ns:voornamen>
+                     <ns:geslachtsnaam>Maykin Ouder</ns:geslachtsnaam>
                      <!--Optional:-->
-                     <ns:geboortedatum>19990615</ns:geboortedatum>
+                     <ns:voorletters>O</ns:voorletters>
+                     <!--Optional:-->
+                     <ns:voornamen>Media Ouder</ns:voornamen>
+                     <!--Optional:-->
+                     <ns:voorvoegselGeslachtsnaam>de</ns:voorvoegselGeslachtsnaam>
+                     <!--Optional:-->
+                     <ns:geboortedatum>19690507</ns:geboortedatum>
                      <!--Optional:-->
                      <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                      <!--Optional:-->
                      <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
                   </ns:gerelateerde>
-               </ns:inp.heeftAlsKinderen>
+               </ns:inp.heeftAlsOuders>
             </ns:object>
          </ns:antwoord>
       </ns:npsLa01>
