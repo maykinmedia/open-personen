@@ -83,9 +83,9 @@ class Ouder(Persoon):
                     "omschrijving": antwoord_dict_object['ns:inp.geboorteplaats']
                 },
                 "inOnderzoek": {
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": bool(antwoord_dict_object['ns:geboortedatum']),
+                    "land": bool(antwoord_dict_object['ns:inp.geboorteLand']),
+                    "plaats": bool(antwoord_dict_object['ns:inp.geboorteplaats']),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",

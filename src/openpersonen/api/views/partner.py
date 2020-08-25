@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
 
+from openpersonen.api.data_classes import Partner
 from openpersonen.api.serializers import PartnerSerializer
 
 
@@ -35,4 +36,11 @@ class PartnerViewSet(ViewSet):
         return Response(data=[], status=HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
-        return Response(data={}, status=HTTP_200_OK)
+        burgerservicenummer = kwargs['ingeschrevenpersonen_burgerservicenummer']
+        id = kwargs['id']
+
+        instance = Partner.retrieve(burgerservicenummer)
+
+        serializer = self.serializer_class(instance)
+
+        return Response(data=serializer.data, status=HTTP_200_OK)
