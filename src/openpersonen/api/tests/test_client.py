@@ -1,3 +1,5 @@
+import requests_mock
+from django.template import loader
 from mock import patch
 
 from django.conf import settings
@@ -20,7 +22,13 @@ class TestClient(TestCase):
         uuid_mock.return_value = test_uuid
         dateformat_mock.return_value = test_dateformat
 
-        response = self.client.get_ingeschreven_persoon(test_bsn)
+        with requests_mock.Mocker() as m:
+            m.post(settings.STUF_BG_URL,
+                   content=bytes(loader.render_to_string('ResponseIngeschrevenPersoon.xml'),
+                                 encoding='utf-8')
+                   )
+            response = self.client.get_ingeschreven_persoon(test_bsn)
+            self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
@@ -52,7 +60,14 @@ class TestClient(TestCase):
         uuid_mock.return_value = test_uuid
         dateformat_mock.return_value = test_dateformat
 
-        response = self.client.get_kind(test_bsn)
+        with requests_mock.Mocker() as m:
+            m.post(settings.STUF_BG_URL,
+                   content=bytes(loader.render_to_string('ResponseKind.xml'),
+                                 encoding='utf-8')
+
+                   )
+            response = self.client.get_kind(test_bsn)
+            self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
@@ -84,7 +99,14 @@ class TestClient(TestCase):
         uuid_mock.return_value = test_uuid
         dateformat_mock.return_value = test_dateformat
 
-        response = self.client.get_ouder(test_bsn)
+        with requests_mock.Mocker() as m:
+            m.post(settings.STUF_BG_URL,
+                   content=bytes(loader.render_to_string('ResponseOuder.xml'),
+                                 encoding='utf-8')
+
+                   )
+            response = self.client.get_ouder(test_bsn)
+            self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
@@ -116,7 +138,14 @@ class TestClient(TestCase):
         uuid_mock.return_value = test_uuid
         dateformat_mock.return_value = test_dateformat
 
-        response = self.client.get_partner(test_bsn)
+        with requests_mock.Mocker() as m:
+            m.post(settings.STUF_BG_URL,
+                   content=bytes(loader.render_to_string('ResponsePartner.xml'),
+                                 encoding='utf-8')
+
+                   )
+            response = self.client.get_partner(test_bsn)
+            self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
