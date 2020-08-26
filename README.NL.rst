@@ -49,7 +49,7 @@ Copyright © Maykin Media B.V., 2020
 Licensed under the `Business Source License`_ (BSL) 1.1
 
 
-.. _`(English version)`: README.rst
+.. _`English version`: README.rst
 
 .. _`Maykin Media B.V.`: https://www.maykinmedia.nl
 

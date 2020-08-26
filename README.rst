@@ -10,7 +10,7 @@ Open Personen
 |build-status| |docs| |coverage| |black| |docker|
 
 A modern Basisregistratie Personen (BRP) API to retrieve personal data.
-(`English version`_)
+(`Nederlandse versie`_)
 
 Developed by `Maykin Media B.V.`_.
 
@@ -48,7 +48,7 @@ Copyright © Maykin Media B.V., 2020
 Licensed under the `Business Source License`_ (BSL) 1.1
 
 
-.. _`(Nederlandse versie)`: README.NL.rst
+.. _`Nederlandse versie`: README.NL.rst
 
 .. _`Maykin Media B.V.`: https://www.maykinmedia.nl
 
