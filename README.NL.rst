@@ -38,7 +38,7 @@ Links
 
 * `Issues <https://github.com/maykinmedia/open-personen/issues>`_
 * `Code <https://github.com/maykinmedia/open-personen>`_
-* `Community <https://commonground.nl/groups/view/54477963/objecten-en-objecttypen-api>`_
+* `Community <https://commonground.nl/groups/view/54477955/open-personen>`_
 
 
 Licentie
