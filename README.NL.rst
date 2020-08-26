@@ -53,7 +53,7 @@ Licensed under the `Business Source License`_ (BSL) 1.1
 
 .. _`Maykin Media B.V.`: https://www.maykinmedia.nl
 
-.. _`Business Source License`: LICENCE.md
+.. _`Business Source License`: LICENSE.md
 
 .. |build-status| image:: https://travis-ci.org/maykinmedia/open-personen.svg?branch=master
     :alt: Build status
