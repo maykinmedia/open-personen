@@ -1,0 +1,20 @@
+The Open Personen project was initiated by Maykin Media to allow other API's
+in the Common Ground domain to easily retrieve personal data via a modern API
+and reference persons at the source rather than copying personal data to their
+own storage.
+
+Here is an inevitably incomplete list of MUCH-APPRECIATED CONTRIBUTORS --
+people who laid the groundwork, have submitted patches, reported bugs, added
+translations, helped answer questions, and generally made Open Personen that 
+much better:
+
+    Joeri Bekker <joeri@maykinmedia.nl>
+    Shea Meyers <shea@maykinmedia.nl>
+    Steven Bal <steven@maykinmedia.nl>
+
+A big THANK YOU goes to:
+
+    The Haal Centraal project team for creating a modern API specification for
+    retrieving personal data.
+
+    All people behind Common Ground for their enthusiasm and vision.

@@ -9,46 +9,47 @@ Open Personen
 
 |build-status| |docs| |coverage| |black| |docker|
 
-A modern Basisregistratie Personen (BRP) API to retrieve personal data.
-(`English version`_)
+Een moderne Basisregistratie Personen (BRP) API voor het bevragen van 
+persoonsgegevens. (`English version`_)
 
-Developed by `Maykin Media B.V.`_.
+Ontwikkeld door `Maykin Media B.V.`_.
 
 
-Introduction
-============
+Introductie
+===========
 
-An implementation of the `Haal Centraal BRP bevragen API specification`_ using
-a `StUF-BG`_ connection to access locally stored personal data via mondern REST
-API.
+Een implementatie van de `Haal Centraal BRP bevragen API specificatie`_ met 
+`StUF-BG`_ koppeling voor het ontsluiten van lokale persoonsgegevens via een 
+moderne REST API.
 
-Open Personen meets the need for several other components to request personal 
-data and to link persons (e.g. to a zaak in the `Open Zaak`_). A so-called 
-Profile API is also available where additional, non-authentic, personal data 
-can be stored such as phone number and email address.
+Open Personen voorziet in de behoefte van verschillende andere componenten om 
+persoonsgegevens op te vragen en personen te koppelen (bijv. aan een zaak in 
+de `Open Zaak`_). Tevens is een zogenoemde Profiel API beschikbaar waar 
+additionele, niet-authentieke, persoonsgegevens in kunnen worden opgeslagen 
+zoals telefoonnummer en e-mailadres.
 
-.. _`Haal Centraal BRP bevragen API specification`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
+.. _`Haal Centraal BRP bevragen API specificatie`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
 .. _`StUF-BG`: https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG
 .. _`Open Zaak`: https://open-zaak.readthedocs.io/
 
 
-References
-==========
+Links
+=====
 
 * `Issues <https://github.com/maykinmedia/open-personen/issues>`_
 * `Code <https://github.com/maykinmedia/open-personen>`_
 * `Community <https://commonground.nl/groups/view/54477963/objecten-en-objecttypen-api>`_
 
 
-Licence
-=======
+Licentie
+========
 
 Copyright © Maykin Media B.V., 2020
 
 Licensed under the `Business Source License`_ (BSL) 1.1
 
 
-.. _`(Nederlandse versie)`: README.NL.rst
+.. _`(English version)`: README.rst
 
 .. _`Maykin Media B.V.`: https://www.maykinmedia.nl
 
