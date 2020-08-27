@@ -34,9 +34,12 @@ class Client:
             "ontvanger_gebruiker": settings.STUF_BG_ZENDER["gebruiker"],
         }
 
-    def get_ingeschreven_persoon(self, bsn):
+    def get_ingeschreven_persoon(self, bsn=None, filters=None):
         request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
+        if bsn:
+            request_context.update({"bsn": bsn})
+        if filters:
+            request_context.update(filters)
 
         response = requests.post(
             settings.STUF_BG_URL,
@@ -47,7 +50,6 @@ class Client:
         )
 
         response_context = self._get_response_base_context()
-        request_context.update({"bsn": bsn})
         response_context["referentienummer"] = request_context["referentienummer"]
         response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
 

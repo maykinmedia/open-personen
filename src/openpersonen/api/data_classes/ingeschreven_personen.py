@@ -405,7 +405,7 @@ class IngeschrevenPersoon(Persoon):
         return ingeschreven_persoon_dict
 
     @classmethod
-    def retrieve(cls, bsn):
-        response = client.get_ingeschreven_persoon(bsn)
+    def retrieve(cls, bsn=None, filters=None):
+        response = client.get_ingeschreven_persoon(bsn=bsn, filters=filters)
         instance_dict = cls.get_instance_dict(response)
         return cls(**instance_dict)

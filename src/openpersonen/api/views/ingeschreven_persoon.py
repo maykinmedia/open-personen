@@ -34,8 +34,22 @@ class IngeschrevenPersoonViewSet(ViewSet):
         kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
 
+    def get_filters_with_values(self):
+        filters_with_values = dict()
+        filter_keys = self.filter_class.get_filters().keys()
+        for key in filter_keys:
+            if self.request.GET.get(key):
+                filters_with_values[key] = self.request.GET[key]
+
+        return filters_with_values
+
     def list(self, request, *args, **kwargs):
-        return Response(data=[], status=HTTP_200_OK)
+
+        instances = IngeschrevenPersoon.retrieve(filters=self.get_filters_with_values())
+
+        serializer = self.serializer_class(instances, many=True)
+
+        return Response(data=serializer.data, status=HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
 
