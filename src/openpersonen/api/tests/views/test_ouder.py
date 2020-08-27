@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.test_data.ouder import ouder_retrieve_data
+from openpersonen.api.tests.test_data import ouder_retrieve_data
 
 
 class TestOuder(APITestCase):

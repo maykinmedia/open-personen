@@ -27,8 +27,7 @@ class Partner(Persoon):
     def get_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
-        antwoord_dict_object = \
-        dict_object['soapenv:Envelope']['soapenv:Body']['ns:npsLa01']['ns:antwoord']['ns:object']['ns:inp.heeftAlsEchtgenootPartner']['ns:gerelateerde']
+        antwoord_dict_object = dict_object['soapenv:Envelope']['soapenv:Body']['ns:npsLa01']['ns:antwoord']['ns:object']['ns:inp.heeftAlsEchtgenootPartner']['ns:gerelateerde']
 
         partner_dict = {
             "burgerservicenummer": antwoord_dict_object['ns:inp.bsn'],
