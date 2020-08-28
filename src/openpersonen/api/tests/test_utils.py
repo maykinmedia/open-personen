@@ -17,7 +17,7 @@ class TestConvertEmptyInstances(TestCase):
             "key": None,
             "nested_dict": {
                 "nested_key": None,
-            }
+            },
         }
 
         convert_empty_instances(original_dict)
