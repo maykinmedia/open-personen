@@ -28,7 +28,7 @@ class TestPartner(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()
-    def test_retrieve_partner(self, post_mock):
+    def test_detail_partner(self, post_mock):
         post_mock.post(
             settings.STUF_BG_URL,
             content=bytes(loader.render_to_string('ResponsePartner.xml'),
@@ -37,10 +37,11 @@ class TestPartner(APITestCase):
 
         user = User.objects.create(username='test')
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('partners-list',
+        response = self.client.get(reverse('partners-detail',
                                            kwargs={
-                                               'ingeschrevenpersonen_burgerservicenummer': 000000000
-                                           }) + '/1',
+                                               'ingeschrevenpersonen_burgerservicenummer': 000000000,
+                                               'id': 1
+                                           }),
                                    HTTP_AUTHORIZATION=f'Token {token.key}')
 
         self.assertEqual(response.status_code, 200)
