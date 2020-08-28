@@ -17,13 +17,18 @@ class TestIngeschrevenPersoon(APITestCase):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
 
-    def test_ingeschreven_persoon_with_token(self):
-        user = User.objects.create(username="test")
+    def test_ingeschreven_persoon_without_proper_query_params(self):
+        user = User.objects.create(username='test')
         token = Token.objects.create(user=user)
-        response = self.client.get(
-            reverse("ingeschrevenpersonen-list"),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
-        )
+        response = self.client.get(reverse('ingeschrevenpersonen-list'), HTTP_AUTHORIZATION=f'Token {token.key}')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()['detail'], 'Incorrect combination of filters')
+
+    def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
+        user = User.objects.create(username='test')
+        token = Token.objects.create(user=user)
+        response = self.client.get(reverse('ingeschrevenpersonen-list') + '?burgerservicenummer=123456789',
+                                   HTTP_AUTHORIZATION=f'Token {token.key}')
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()
