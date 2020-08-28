@@ -109,7 +109,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
         except ValueError as e:
             return Response(data={'detail': str(e)}, status=HTTP_400_BAD_REQUEST)
 
-        instances = IngeschrevenPersoon.retrieve(filters=filters)
+        instances = IngeschrevenPersoon.list(filters)
 
         serializer = self.serializer_class(instances, many=True)
 
