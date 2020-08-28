@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 import xmltodict
+from django.conf import settings
 
 from openpersonen.api.client import client
 from openpersonen.api.enum import GeslachtsaanduidingChoices
@@ -71,10 +72,10 @@ class IngeschrevenPersoon(Persoon):
             },
             "geboorte": {
                 "datum": {
-                    "dag": antwoord_dict_object['ns:geboortedatum'][6:8],
+                    "dag": int(antwoord_dict_object['ns:geboortedatum'][settings.DAY_START: settings.DAY_END]),
                     "datum": antwoord_dict_object['ns:geboortedatum'],
-                    "jaar": antwoord_dict_object['ns:geboortedatum'][0:4],
-                    "maand": antwoord_dict_object['ns:geboortedatum'][4:6]
+                    "jaar": int(antwoord_dict_object['ns:geboortedatum'][settings.YEAR_START: settings.YEAR_END]),
+                    "maand": int(antwoord_dict_object['ns:geboortedatum'][settings.MONTH_START: settings.MONTH_END]),
                 },
                 "land": {
                     "code": "string",
@@ -100,25 +101,25 @@ class IngeschrevenPersoon(Persoon):
             "leeftijd": relativedelta(datetime.now(),
                                       datetime.strptime(antwoord_dict_object['ns:geboortedatum'], '%Y%m%d')).years,
             "datumEersteInschrijvingGBA": {
-                "dag": antwoord_dict_object['ns:inp.datumInschrijving'][6:8],
+                "dag": int(antwoord_dict_object['ns:inp.datumInschrijving'][settings.DAY_START: settings.DAY_END]),
                 "datum": antwoord_dict_object['ns:inp.datumInschrijving'],
-                "jaar": antwoord_dict_object['ns:inp.datumInschrijving'][0:4],
-                "maand": antwoord_dict_object['ns:inp.datumInschrijving'][4:6]
+                "jaar": int(antwoord_dict_object['ns:inp.datumInschrijving'][settings.YEAR_START: settings.YEAR_END]),
+                "maand": int(antwoord_dict_object['ns:inp.datumInschrijving'][settings.MONTH_START: settings.MONTH_END]),
             },
             "kiesrecht": {
                 "europeesKiesrecht": bool(antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht']),
                 "uitgeslotenVanKiesrecht": bool(antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht']),
                 "einddatumUitsluitingEuropeesKiesrecht": {
-                    "dag": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][6:8],
+                    "dag": int(antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][settings.DAY_START: settings.DAY_END]),
                     "datum": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'],
-                    "jaar": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][0:4],
-                    "maand": antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][4:6]
+                    "jaar": int(antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][settings.YEAR_START: settings.YEAR_END]),
+                    "maand": int(antwoord_dict_object['ns:ing.aanduidingEuropeesKiesrecht'][settings.MONTH_START: settings.MONTH_END]),
                 },
                 "einddatumUitsluitingKiesrecht": {
-                    "dag": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][6:8],
+                    "dag": int(antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][settings.DAY_START: settings.DAY_END]),
                     "datum": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'],
-                    "jaar": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][0:4],
-                    "maand": antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][4:6]
+                    "jaar": int(antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][settings.YEAR_START: settings.YEAR_END]),
+                    "maand": int(antwoord_dict_object['ns:ing.aanduidingUitgeslotenKiesrecht'][settings.MONTH_START: settings.MONTH_END]),
                 }
             },
             "inOnderzoek": {

@@ -385,3 +385,12 @@ STUF_BG_ONTVANGER = {
     'administratie': os.getenv('ONTVANGER_ADMINISTRATIE', 'BG-mock'),
     'gebruiker': os.getenv('ONTVANGER_GEBRUIKER', 'BG-mock'),
 }
+
+# Based on STUF-BG date formats
+
+YEAR_START = 0
+YEAR_END = 4
+MONTH_START = 4
+MONTH_END = 6
+DAY_START = 6
+DAY_END = 8
