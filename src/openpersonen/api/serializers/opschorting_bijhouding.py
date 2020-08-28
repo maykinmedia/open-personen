@@ -6,5 +6,7 @@ from .datum import DatumSerializer
 
 
 class OpschortingBijhoudingSerializer(serializers.Serializer):
-    reden = serializers.ChoiceField(RedenOpschortingBijhoudingChoices.choices, required=False)
+    reden = serializers.ChoiceField(
+        RedenOpschortingBijhoudingChoices.choices, required=False
+    )
     datum = DatumSerializer(required=False)

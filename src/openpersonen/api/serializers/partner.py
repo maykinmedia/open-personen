@@ -8,7 +8,11 @@ from .persoon import PersoonSerializer
 
 
 class PartnerSerializer(PersoonSerializer):
-    geslachtsaanduiding = serializers.ChoiceField(choices=GeslachtsaanduidingChoices.choices, required=False)
-    soortVerbintenis = serializers.ChoiceField(choices=SoortVerbintenis.choices, required=False)
+    geslachtsaanduiding = serializers.ChoiceField(
+        choices=GeslachtsaanduidingChoices.choices, required=False
+    )
+    soortVerbintenis = serializers.ChoiceField(
+        choices=SoortVerbintenis.choices, required=False
+    )
     inOnderzoek = PartnerInOnderzoekSerializer(required=False)
     aangaanHuwelijkPartnerschap = AangaanHuwelijkPartnerschapSerializer(required=False)

@@ -11,15 +11,17 @@ from openpersonen.api.tests.test_data import ingeschreven_persoon_retrieve_data
 
 
 class TestIngeschrevenPersoon(APITestCase):
-
     def test_ingeschreven_persoon_without_token(self):
-        response = self.client.get(reverse('ingeschrevenpersonen-list'))
+        response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
 
     def test_ingeschreven_persoon_with_token(self):
-        user = User.objects.create(username='test')
+        user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('ingeschrevenpersonen-list'), HTTP_AUTHORIZATION=f'Token {token.key}')
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list"),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()
@@ -27,15 +29,21 @@ class TestIngeschrevenPersoon(APITestCase):
 
         post_mock.post(
             settings.STUF_BG_URL,
-            content=bytes(loader.render_to_string('ResponseIngeschrevenPersoon.xml'),
-                          encoding='utf-8')
+            content=bytes(
+                loader.render_to_string("ResponseIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
         )
 
-        user = User.objects.create(username='test')
+        user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('ingeschrevenpersonen-detail',
-                                           kwargs={"burgerservicenummer": "123456789"}),
-                                   HTTP_AUTHORIZATION=f'Token {token.key}')
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail",
+                kwargs={"burgerservicenummer": "123456789"},
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)

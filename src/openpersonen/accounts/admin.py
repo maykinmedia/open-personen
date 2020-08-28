@@ -12,4 +12,4 @@ class _UserAdmin(UserAdmin, HijackUserAdminMixin):
     list_display = UserAdmin.list_display + ("hijack_field",)
 
 
-TokenAdmin.raw_id_fields = ['user']
+TokenAdmin.raw_id_fields = ["user"]

@@ -233,11 +233,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "openpersonen": {
-            "handlers": ["project"],
-            "level": "INFO",
-            "propagate": True,
-        },
+        "openpersonen": {"handlers": ["project"], "level": "INFO", "propagate": True,},
         "django.request": {
             "handlers": ["django"],
             "level": "ERROR",
@@ -354,36 +350,30 @@ ELASTIC_APM = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ],
-
-    'DEFAULT_RENDERER_CLASSES': (
-        'djangorestframework_hal.renderers.HalJSONRenderer',
-    ),
-
-    'DEFAULT_PARSER_CLASSES': (
-        'djangorestframework_hal.parsers.HalJSONParser',
-    ),
+    "DEFAULT_RENDERER_CLASSES": ("djangorestframework_hal.renderers.HalJSONRenderer",),
+    "DEFAULT_PARSER_CLASSES": ("djangorestframework_hal.parsers.HalJSONParser",),
 }
 
 # StUF-BG Variables
 
-STUF_BG_URL = os.getenv('STUF_BG_URL', 'https://httpbin.org/post')
-STUF_BG_HEADERS = os.getenv('STUF_BG_HEADERS', {'Content-Type': 'application/soap+xml'})
+STUF_BG_URL = os.getenv("STUF_BG_URL", "https://httpbin.org/post")
+STUF_BG_HEADERS = os.getenv("STUF_BG_HEADERS", {"Content-Type": "application/soap+xml"})
 
 STUF_BG_ZENDER = {
-    'organisatie': os.getenv('ZENDER_ORGANISATIE', 'Open Personen'),
-    'applicatie': os.getenv('ZENDER_APPLICATE', 'Open Personen'),
-    'administratie': os.getenv('ZENDER_ADMINISTRATIE', 'Open Personen'),
-    'gebruiker': os.getenv('ZENDER_GEBRUIKER', 'Open Personen'),
+    "organisatie": os.getenv("ZENDER_ORGANISATIE", "Open Personen"),
+    "applicatie": os.getenv("ZENDER_APPLICATE", "Open Personen"),
+    "administratie": os.getenv("ZENDER_ADMINISTRATIE", "Open Personen"),
+    "gebruiker": os.getenv("ZENDER_GEBRUIKER", "Open Personen"),
 }
 
 STUF_BG_ONTVANGER = {
-    'organisatie': os.getenv('ONTVANGER_ORGANISATIE', 'BG-mock'),
-    'applicatie': os.getenv('ONTVANGER_APPLICATIE', 'BG-mock'),
-    'administratie': os.getenv('ONTVANGER_ADMINISTRATIE', 'BG-mock'),
-    'gebruiker': os.getenv('ONTVANGER_GEBRUIKER', 'BG-mock'),
+    "organisatie": os.getenv("ONTVANGER_ORGANISATIE", "BG-mock"),
+    "applicatie": os.getenv("ONTVANGER_APPLICATIE", "BG-mock"),
+    "administratie": os.getenv("ONTVANGER_ADMINISTRATIE", "BG-mock"),
+    "gebruiker": os.getenv("ONTVANGER_GEBRUIKER", "BG-mock"),
 }
 
 # Based on STUF-BG date formats

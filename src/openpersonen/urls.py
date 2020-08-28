@@ -37,7 +37,6 @@ urlpatterns = [
     ),
     # Simply show the master template.
     path("", TemplateView.as_view(template_name="master.html")),
-
     # App urls
     path("openpersonen/api/", include("openpersonen.api.urls")),
 ]

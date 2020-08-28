@@ -16,27 +16,14 @@ router = routers.DefaultRouter()
 
 
 router.register(
-    'ingeschrevenpersonen',
+    "ingeschrevenpersonen",
     IngeschrevenPersoonViewSet,
-    base_name='ingeschrevenpersonen',
+    base_name="ingeschrevenpersonen",
     nested=[
-        routers.nested(
-            'kinderen',
-            KindViewSet,
-            base_name='kinderen',
-        ),
-        routers.nested(
-            'ouders',
-            OuderViewSet,
-            base_name='ouders',
-        ),
-        routers.nested(
-            'partners',
-            PartnerViewSet,
-            base_name='partners',
-        ),
-    ]
-
+        routers.nested("kinderen", KindViewSet, base_name="kinderen",),
+        routers.nested("ouders", OuderViewSet, base_name="ouders",),
+        routers.nested("partners", PartnerViewSet, base_name="partners",),
+    ],
 )
 
 
@@ -53,7 +40,6 @@ urlpatterns = [
         ),
         name="schema-redoc-ingeschreven-persoon",
     ),
-
     # actual API
-    path('', include(router.urls))
+    path("", include(router.urls)),
 ]

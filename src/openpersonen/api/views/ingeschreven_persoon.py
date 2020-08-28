@@ -15,17 +15,15 @@ class IngeschrevenPersoonViewSet(ViewSet):
     serializer_class = IngeschrevenPersoonSerializer
     permission_classes = [IsAuthenticated]
     filter_class = IngeschrevenPersoonFilter
-    filter_backends = [Backend, ]
+    filter_backends = [
+        Backend,
+    ]
 
     def get_serializer_context(self):
         """
         Extra context provided to the serializer class.
         """
-        return {
-            'request': self.request,
-            'format': self.format_kwarg,
-            'view': self
-        }
+        return {"request": self.request, "format": self.format_kwarg, "view": self}
 
     def get_serializer(self, *args, **kwargs):
         """
@@ -33,7 +31,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
         deserializing input, and for serializing output.
         """
         serializer_class = self.serializer_class
-        kwargs['context'] = self.get_serializer_context()
+        kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
 
     def list(self, request, *args, **kwargs):
@@ -41,7 +39,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
     def retrieve(self, request, *args, **kwargs):
 
-        burgerservicenummer = kwargs['burgerservicenummer']
+        burgerservicenummer = kwargs["burgerservicenummer"]
 
         instance = IngeschrevenPersoon.retrieve(burgerservicenummer)
 

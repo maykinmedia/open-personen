@@ -8,8 +8,9 @@ from .waarde import WaardeSerializer
 
 
 class NationaliteitSerializer(serializers.Serializer):
-    aanduidingBijzonderNederlanderschap = serializers.ChoiceField(AanduidingBijzonderNederlanderschapChoices.choices,
-                                                                  required=False)
+    aanduidingBijzonderNederlanderschap = serializers.ChoiceField(
+        AanduidingBijzonderNederlanderschapChoices.choices, required=False
+    )
     datumIngangGeldigheid = DatumSerializer(required=False)
     nationaliteit = WaardeSerializer(required=False)
     redenOpname = WaardeSerializer(required=False)

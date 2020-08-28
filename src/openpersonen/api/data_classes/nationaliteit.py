@@ -16,4 +16,6 @@ class Nationaliteit:
     inOnderzoek: NationaliteitInOnderzoek
 
     def get_aanduidingBijzonderNederlanderschap_display(self):
-        return AanduidingBijzonderNederlanderschapChoices.values[self.aanduidingBijzonderNederlanderschap]
+        return AanduidingBijzonderNederlanderschapChoices.values[
+            self.aanduidingBijzonderNederlanderschap
+        ]

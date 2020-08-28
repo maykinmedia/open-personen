@@ -30,81 +30,90 @@ class Partner(Persoon):
     def get_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
-        antwoord_dict_object = dict_object['soapenv:Envelope']['soapenv:Body']['ns:npsLa01']['ns:antwoord']['ns:object']['ns:inp.heeftAlsEchtgenootPartner']['ns:gerelateerde']
+        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
+            "ns:npsLa01"
+        ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsEchtgenootPartner"][
+            "ns:gerelateerde"
+        ]
 
         partner_dict = {
-            "burgerservicenummer": antwoord_dict_object['ns:inp.bsn'],
-            "geslachtsaanduiding": antwoord_dict_object['ns:geslachtsaanduiding'],
-            "soortVerbintenis": antwoord_dict_object['ns:soortVerbintenis'],
+            "burgerservicenummer": antwoord_dict_object["ns:inp.bsn"],
+            "geslachtsaanduiding": antwoord_dict_object["ns:geslachtsaanduiding"],
+            "soortVerbintenis": antwoord_dict_object["ns:soortVerbintenis"],
             "naam": {
-                "geslachtsnaam": antwoord_dict_object['ns:geslachtsnaam'],
-                "voorletters": antwoord_dict_object['ns:voorletters'],
-                "voornamen": antwoord_dict_object['ns:voornamen'],
-                "voorvoegsel": antwoord_dict_object['ns:voorvoegselGeslachtsnaam'],
+                "geslachtsnaam": antwoord_dict_object["ns:geslachtsnaam"],
+                "voorletters": antwoord_dict_object["ns:voorletters"],
+                "voornamen": antwoord_dict_object["ns:voornamen"],
+                "voorvoegsel": antwoord_dict_object["ns:voorvoegselGeslachtsnaam"],
                 "inOnderzoek": {
-                    "geslachtsnaam": bool(antwoord_dict_object['ns:geslachtsnaam']),
-                    "voornamen": bool(antwoord_dict_object['ns:voornamen']),
-                    "voorvoegsel": bool(antwoord_dict_object['ns:voorvoegselGeslachtsnaam']),
+                    "geslachtsnaam": bool(antwoord_dict_object["ns:geslachtsnaam"]),
+                    "voornamen": bool(antwoord_dict_object["ns:voornamen"]),
+                    "voorvoegsel": bool(
+                        antwoord_dict_object["ns:voorvoegselGeslachtsnaam"]
+                    ),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
                         "jaar": 0,
-                        "maand": 0
-                    }
-                }
+                        "maand": 0,
+                    },
+                },
             },
             "geboorte": {
                 "datum": {
-                    "dag": int(antwoord_dict_object['ns:geboortedatum'][settings.DAY_START: settings.DAY_END]),
-                    "datum": antwoord_dict_object['ns:geboortedatum'],
-                    "jaar": int(antwoord_dict_object['ns:geboortedatum'][settings.YEAR_START: settings.YEAR_END]),
-                    "maand": int(antwoord_dict_object['ns:geboortedatum'][settings.MONTH_START: settings.MONTH_END]),
+                    "dag": int(
+                        antwoord_dict_object["ns:geboortedatum"][
+                            settings.DAY_START : settings.DAY_END
+                        ]
+                    ),
+                    "datum": antwoord_dict_object["ns:geboortedatum"],
+                    "jaar": int(
+                        antwoord_dict_object["ns:geboortedatum"][
+                            settings.YEAR_START : settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        antwoord_dict_object["ns:geboortedatum"][
+                            settings.MONTH_START : settings.MONTH_END
+                        ]
+                    ),
                 },
                 "land": {
                     "code": "0000",
-                    "omschrijving": antwoord_dict_object['ns:inp.geboorteLand']
+                    "omschrijving": antwoord_dict_object["ns:inp.geboorteLand"],
                 },
                 "plaats": {
                     "code": "0000",
-                    "omschrijving": antwoord_dict_object['ns:inp.geboorteplaats']
+                    "omschrijving": antwoord_dict_object["ns:inp.geboorteplaats"],
                 },
                 "inOnderzoek": {
-                    "datum": bool(antwoord_dict_object['ns:geboortedatum']),
-                    "land": bool(antwoord_dict_object['ns:inp.geboorteLand']),
-                    "plaats": bool(antwoord_dict_object['ns:inp.geboorteplaats']),
+                    "datum": bool(antwoord_dict_object["ns:geboortedatum"]),
+                    "land": bool(antwoord_dict_object["ns:inp.geboorteLand"]),
+                    "plaats": bool(antwoord_dict_object["ns:inp.geboorteplaats"]),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
                         "jaar": 0,
-                        "maand": 0
-                    }
-                }
+                        "maand": 0,
+                    },
+                },
             },
             "inOnderzoek": {
-                "burgerservicenummer": bool(antwoord_dict_object['ns:inp.bsn']),
-                "geslachtsaanduiding": bool(antwoord_dict_object['ns:geslachtsaanduiding']),
+                "burgerservicenummer": bool(antwoord_dict_object["ns:inp.bsn"]),
+                "geslachtsaanduiding": bool(
+                    antwoord_dict_object["ns:geslachtsaanduiding"]
+                ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
                     "datum": "string",
                     "jaar": 0,
-                    "maand": 0
-                }
+                    "maand": 0,
+                },
             },
             "aangaanHuwelijkPartnerschap": {
-                "datum": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0
-                },
-                "land": {
-                    "code": "0000",
-                    "omschrijving": "string"
-                },
-                "plaats": {
-                    "code": "0000",
-                    "omschrijving": "string"
-                },
+                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "land": {"code": "0000", "omschrijving": "string"},
+                "plaats": {"code": "0000", "omschrijving": "string"},
                 "inOnderzoek": {
                     "datum": True,
                     "land": True,
@@ -113,9 +122,9 @@ class Partner(Persoon):
                         "dag": 0,
                         "datum": "string",
                         "jaar": 0,
-                        "maand": 0
-                    }
-                }
+                        "maand": 0,
+                    },
+                },
             },
             "geheimhoudingPersoonsgegevens": True,
         }

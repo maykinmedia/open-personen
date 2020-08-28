@@ -17,5 +17,6 @@ class IngeschrevenPersoonNaamSerializer(NaamSerializer):
     aanhef = serializers.CharField(required=False)
     aanschrijfwijze = serializers.CharField(required=False)
     gebruikInLopendeTekst = serializers.CharField(required=False)
-    aanduidingNaamgebruik = serializers.ChoiceField(choices=AanduidingNaamgebruikChoices.choices,
-                                                    required=False)
+    aanduidingNaamgebruik = serializers.ChoiceField(
+        choices=AanduidingNaamgebruikChoices.choices, required=False
+    )

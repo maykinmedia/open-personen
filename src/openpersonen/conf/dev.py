@@ -1,7 +1,9 @@
 import os
 import warnings
 
-os.environ.setdefault("SECRET_KEY", "%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#")
+os.environ.setdefault(
+    "SECRET_KEY", "%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#"
+)
 
 # uses postgresql by default, see base.py
 os.environ.setdefault("DB_NAME", "openpersonen"),
@@ -30,11 +32,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 LOGGING["loggers"].update(
     {
-        "openpersonen": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": True,
-        },
+        "openpersonen": {"handlers": ["console"], "level": "DEBUG", "propagate": True,},
         "django": {"handlers": ["console"], "level": "DEBUG", "propagate": True,},
         "django.db.backends": {
             "handlers": ["django"],

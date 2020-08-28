@@ -17,11 +17,7 @@ class KindViewSet(ViewSet):
         """
         Extra context provided to the serializer class.
         """
-        return {
-            'request': self.request,
-            'format': self.format_kwarg,
-            'view': self
-        }
+        return {"request": self.request, "format": self.format_kwarg, "view": self}
 
     def get_serializer(self, *args, **kwargs):
         """
@@ -29,15 +25,15 @@ class KindViewSet(ViewSet):
         deserializing input, and for serializing output.
         """
         serializer_class = self.serializer_class
-        kwargs['context'] = self.get_serializer_context()
+        kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
 
     def list(self, request, *args, **kwargs):
         return Response(data=[], status=HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
-        burgerservicenummer = kwargs['ingeschrevenpersonen_burgerservicenummer']
-        id = kwargs['id']
+        burgerservicenummer = kwargs["ingeschrevenpersonen_burgerservicenummer"]
+        id = kwargs["id"]
 
         instance = Kind.retrieve(burgerservicenummer)
 
