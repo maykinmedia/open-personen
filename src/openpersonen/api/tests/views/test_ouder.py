@@ -28,7 +28,7 @@ class TestOuder(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()
-    def test_retrieve_ouder(self, post_mock):
+    def test_detail_ouder(self, post_mock):
         post_mock.post(
             settings.STUF_BG_URL,
             content=bytes(loader.render_to_string('ResponseOuder.xml'),
@@ -37,10 +37,11 @@ class TestOuder(APITestCase):
 
         user = User.objects.create(username='test')
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('ouders-list',
+        response = self.client.get(reverse('ouders-detail',
                                            kwargs={
-                                               'ingeschrevenpersonen_burgerservicenummer': 000000000
-                                           }) + '/1',
+                                               'ingeschrevenpersonen_burgerservicenummer': 000000000,
+                                               'id': 1
+                                           }),
                                    HTTP_AUTHORIZATION=f'Token {token.key}')
 
         self.assertEqual(response.status_code, 200)
