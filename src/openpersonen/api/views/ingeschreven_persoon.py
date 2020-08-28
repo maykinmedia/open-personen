@@ -1,3 +1,4 @@
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
@@ -95,10 +96,12 @@ class IngeschrevenPersoonViewSet(ViewSet):
                 filters_with_values[key] = self.request.GET[key]
 
         # When retrieving a collection of people, at least one of the six following combinations must be included
+        # See combinations here
+        #   https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/specificatie/openapi.yaml#/ingeschrevenpersonen/ingeschrevenNatuurlijkPersonen
         if not any([self.combination_1(filters_with_values), self.combination_2(filters_with_values),
                     self.combination_3(filters_with_values), self.combination_4(filters_with_values),
                     self.combination_5(filters_with_values), self.combination_6(filters_with_values)]):
-            raise ValueError('Incorrect combination of filters')
+            raise ValidationError('Incorrect combination of filters')
 
         return filters_with_values
 
@@ -106,7 +109,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         try:
             filters = self.get_filters_with_values()
-        except ValueError as e:
+        except ValidationError as e:
             return Response(data={'detail': str(e)}, status=HTTP_400_BAD_REQUEST)
 
         instances = IngeschrevenPersoon.list(filters)
