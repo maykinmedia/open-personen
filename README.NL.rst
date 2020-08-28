@@ -39,6 +39,7 @@ Links
 * `Issues <https://github.com/maykinmedia/open-personen/issues>`_
 * `Code <https://github.com/maykinmedia/open-personen>`_
 * `Community <https://commonground.nl/groups/view/54477955/open-personen>`_
+* `Documentatie <https://open-personen.readthedocs.io/>`_
 
 
 Licentie
@@ -48,6 +49,9 @@ Copyright © Maykin Media B.V., 2020
 
 Licensed under the `Business Source License`_ (BSL) 1.1
 
+* `Waarom deze licentie?`_ :bulb: 
+
+.. _`Waarom deze licentie?`: https://open-personen.readthedocs.io/en/latest/introduction/source-code/why-bsl.html
 
 .. _`English version`: README.rst
 
