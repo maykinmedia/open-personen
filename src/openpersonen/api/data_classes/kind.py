@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 import xmltodict
+from django.conf import settings
 
 from openpersonen.api.client import client
 from openpersonen.api.utils import convert_empty_instances
@@ -43,10 +44,10 @@ class Kind(Persoon):
             },
             "geboorte": {
                 "datum": {
-                    "dag": antwoord_dict_object['ns:geboortedatum'][6:8],
+                    "dag": int(antwoord_dict_object['ns:geboortedatum'][settings.DAY_START: settings.DAY_END]),
                     "datum": antwoord_dict_object['ns:geboortedatum'],
-                    "jaar": antwoord_dict_object['ns:geboortedatum'][0:4],
-                    "maand": antwoord_dict_object['ns:geboortedatum'][4:6]
+                    "jaar": int(antwoord_dict_object['ns:geboortedatum'][settings.YEAR_START: settings.YEAR_END]),
+                    "maand": int(antwoord_dict_object['ns:geboortedatum'][settings.MONTH_START: settings.MONTH_END]),
                 },
                 "land": {
                     "code": "string",
