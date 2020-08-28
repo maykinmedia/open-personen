@@ -34,7 +34,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
         kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
 
-    def rule_1(self, filters_values_dict):
+    def combination_1(self, filters_values_dict):
         if filters_values_dict.get('geboorte__datum') and filters_values_dict.get('naam__geslachtsnaam'):
             return True
 
@@ -43,7 +43,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def rule_2(self, filters_values_dict):
+    def combination_2(self, filters_values_dict):
         if filters_values_dict.get('verblijfplaats__gemeentevaninschrijving') and \
             filters_values_dict.get('naam__geslachtsnaam'):
             return True
@@ -53,10 +53,10 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def rule_3(self, filters_values_dict):
+    def combination_3(self, filters_values_dict):
         return bool(filters_values_dict.get('burgerservicenummer'))
 
-    def rule_4(self, filters_values_dict):
+    def combination_4(self, filters_values_dict):
         if filters_values_dict.get('verblijfplaats__postcode') and \
             filters_values_dict.get('verblijfplaats__huisnummer'):
             return True
@@ -66,7 +66,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def rule_5(self, filters_values_dict):
+    def combination_5(self, filters_values_dict):
         if filters_values_dict.get('verblijfplaats__naamopenbareruimte') and \
             filters_values_dict.get('verblijfplaats__gemeentevaninschrijving') and \
             filters_values_dict.get('verblijfplaats__huisnummer'):
@@ -78,7 +78,7 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def rule_6(self, filters_values_dict):
+    def combination_6(self, filters_values_dict):
         return bool(filters_values_dict.get('verblijfplaats__identificatiecodenummeraanduiding'))
 
     def get_filters_with_values(self):
@@ -88,9 +88,10 @@ class IngeschrevenPersoonViewSet(ViewSet):
             if self.request.GET.get(key):
                 filters_with_values[key] = self.request.GET[key]
 
-        if not any([self.rule_1(filters_with_values), self.rule_2(filters_with_values),
-                    self.rule_3(filters_with_values), self.rule_4(filters_with_values),
-                    self.rule_5(filters_with_values), self.rule_6(filters_with_values)]):
+        # When retrieving a collection of people, at least one of the six following combinations must be included
+        if not any([self.combination_1(filters_with_values), self.combination_2(filters_with_values),
+                    self.combination_3(filters_with_values), self.combination_4(filters_with_values),
+                    self.combination_5(filters_with_values), self.combination_6(filters_with_values)]):
             raise ValueError('Incorrect combination of filters')
 
         return filters_with_values
