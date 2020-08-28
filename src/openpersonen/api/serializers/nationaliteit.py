@@ -1,9 +1,10 @@
 from rest_framework import serializers
 
-from .waarde import WaardeSerializer
+from openpersonen.api.enum import AanduidingBijzonderNederlanderschapChoices
+
 from .datum import DatumSerializer
 from .in_onderzoek import NationaliteitInOnderzoekSerializer
-from openpersonen.api.enum import AanduidingBijzonderNederlanderschapChoices
+from .waarde import WaardeSerializer
 
 
 class NationaliteitSerializer(serializers.Serializer):

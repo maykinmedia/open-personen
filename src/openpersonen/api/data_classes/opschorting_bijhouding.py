@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from openpersonen.api.enum import RedenOpschortingBijhoudingChoices
+
 from .datum import Datum
 
 

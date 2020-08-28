@@ -1,6 +1,5 @@
 from drf_yasg import openapi
 
-
 description = """
 API voor het ontsluiten van gegevens van ingeschreven personen en aanverwante gegevens uit de GBA en RNI.
 Met deze API worden de actuele gegevens van ingeschreven personen, hun kinderen, partners en ouders ontsloten.

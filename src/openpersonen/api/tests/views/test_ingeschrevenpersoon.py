@@ -1,9 +1,10 @@
-import requests_mock
 from django.conf import settings
-from django.urls import reverse
 from django.template import loader
-from rest_framework.test import APITestCase
+from django.urls import reverse
+
+import requests_mock
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import ingeschreven_persoon_retrieve_data

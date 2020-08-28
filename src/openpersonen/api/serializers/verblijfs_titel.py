@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from .waarde import WaardeSerializer
 from .datum import DatumSerializer
 from .in_onderzoek import VerblijfsTitelInOnderzoekSerializer
+from .waarde import WaardeSerializer
 
 
 class VerblijfsTitelSerializer(serializers.Serializer):

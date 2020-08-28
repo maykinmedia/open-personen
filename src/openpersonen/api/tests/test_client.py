@@ -1,9 +1,9 @@
-import requests_mock
-from django.template import loader
-from mock import patch
-
 from django.conf import settings
+from django.template import loader
 from django.test import TestCase
+
+import requests_mock
+from mock import patch
 
 from openpersonen.api.client import Client
 

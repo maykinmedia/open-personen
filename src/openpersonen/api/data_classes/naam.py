@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from openpersonen.api.enum import AanduidingNaamgebruikChoices
+
 from .in_onderzoek import NaamInOnderzoek
 
 
