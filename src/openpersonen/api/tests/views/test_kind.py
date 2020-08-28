@@ -1,12 +1,13 @@
-import requests_mock
 from django.conf import settings
 from django.template import loader
 from django.urls import reverse
-from rest_framework.test import APITestCase
-from rest_framework.authtoken.models import Token
 
-from openpersonen.api.tests.test_data import kind_retrieve_data
+import requests_mock
+from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
+
 from openpersonen.accounts.models import User
+from openpersonen.api.tests.test_data import kind_retrieve_data
 
 
 class TestKind(APITestCase):

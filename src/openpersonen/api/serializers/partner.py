@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
+
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschapSerializer
 from .in_onderzoek import PartnerInOnderzoekSerializer
 from .persoon import PersoonSerializer

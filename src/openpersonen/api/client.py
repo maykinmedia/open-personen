@@ -1,8 +1,10 @@
 import uuid
-import requests
+
 from django.conf import settings
 from django.template import loader
-from django.utils import timezone, dateformat
+from django.utils import dateformat, timezone
+
+import requests
 
 
 class Client:

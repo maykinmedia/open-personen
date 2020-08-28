@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from .in_onderzoek import NaamInOnderzoekSerializer
 from openpersonen.api.enum import AanduidingNaamgebruikChoices
+
+from .in_onderzoek import NaamInOnderzoekSerializer
 
 
 class NaamSerializer(serializers.Serializer):

@@ -4,9 +4,13 @@ from django.urls import include, path
 from vng_api_common import routers
 from vng_api_common.schema import SchemaView as _SchemaView
 
-from openpersonen.api.views import IngeschrevenPersoonViewSet, KindViewSet, OuderViewSet, PartnerViewSet
 from openpersonen.api.schema import info
-
+from openpersonen.api.views import (
+    IngeschrevenPersoonViewSet,
+    KindViewSet,
+    OuderViewSet,
+    PartnerViewSet,
+)
 
 router = routers.DefaultRouter()
 

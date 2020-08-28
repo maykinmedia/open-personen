@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 
-from openpersonen.api.enum import FunctieAdresChoices, AanduidginBijHuisnummerChoices
-from .waarde import Waarde
+from openpersonen.api.enum import AanduidginBijHuisnummerChoices, FunctieAdresChoices
+
 from .datum import Datum
 from .in_onderzoek import VerblijfPlaatsInOnderzoek
 from .verblijf_buitenland import VerblijfBuitenland
+from .waarde import Waarde
 
 
 @dataclass

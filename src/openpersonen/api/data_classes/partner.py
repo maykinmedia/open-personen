@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 
-import xmltodict
 from django.conf import settings
+
+import xmltodict
 
 from openpersonen.api.client import client
 from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
 from openpersonen.api.utils import convert_empty_instances
+
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschap
 from .in_onderzoek import PartnerInOnderzoek
 from .persoon import Persoon

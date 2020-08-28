@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 
 from openpersonen.api.enum import AanduidingBijzonderNederlanderschapChoices
-from .waarde import Waarde
+
 from .datum import Datum
 from .in_onderzoek import NationaliteitInOnderzoek
+from .waarde import Waarde
 
 
 @dataclass

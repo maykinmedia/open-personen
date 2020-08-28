@@ -1,11 +1,12 @@
 from rest_framework import serializers
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
-from .naam import IngeschrevenPersoonNaamSerializer
+
 from .datum import DatumSerializer
 from .gezags_verhouding import GezagsVerhoudingSerializer
 from .in_onderzoek import IngeschrevenPersoonInOnderzoekSerializer
 from .kiesrecht import KiesrechtSerializer
+from .naam import IngeschrevenPersoonNaamSerializer
 from .nationaliteit import NationaliteitSerializer
 from .opschorting_bijhouding import OpschortingBijhoudingSerializer
 from .overlijden import OverlijdenSerializer

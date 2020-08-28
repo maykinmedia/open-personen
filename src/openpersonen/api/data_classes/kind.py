@@ -1,12 +1,14 @@
 from dataclasses import dataclass
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
+
+from django.conf import settings
 
 import xmltodict
-from django.conf import settings
+from dateutil.relativedelta import relativedelta
 
 from openpersonen.api.client import client
 from openpersonen.api.utils import convert_empty_instances
+
 from .in_onderzoek import KindInOnderzoek
 from .persoon import Persoon
 

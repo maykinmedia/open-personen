@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
-from .waarde import WaardeSerializer
+from openpersonen.api.enum import AanduidginBijHuisnummerChoices, FunctieAdresChoices
+
 from .datum import DatumSerializer
 from .in_onderzoek import VerblijfPlaatsInOnderzoekSerializer
 from .verblijf_buitenland import VerblijfBuitenlandSerializer
-from openpersonen.api.enum import FunctieAdresChoices, AanduidginBijHuisnummerChoices
+from .waarde import WaardeSerializer
 
 
 class VerblijfPlaatsSerializer(serializers.Serializer):
