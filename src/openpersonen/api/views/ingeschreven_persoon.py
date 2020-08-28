@@ -34,7 +34,8 @@ class IngeschrevenPersoonViewSet(ViewSet):
         kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
 
-    def combination_1(self, filters_values_dict):
+    @staticmethod
+    def combination_1(filters_values_dict):
         if filters_values_dict.get('geboorte__datum') and filters_values_dict.get('naam__geslachtsnaam'):
             return True
 
@@ -43,7 +44,8 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def combination_2(self, filters_values_dict):
+    @staticmethod
+    def combination_2(filters_values_dict):
         if filters_values_dict.get('verblijfplaats__gemeentevaninschrijving') and \
             filters_values_dict.get('naam__geslachtsnaam'):
             return True
@@ -53,10 +55,12 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def combination_3(self, filters_values_dict):
+    @staticmethod
+    def combination_3(filters_values_dict):
         return bool(filters_values_dict.get('burgerservicenummer'))
 
-    def combination_4(self, filters_values_dict):
+    @staticmethod
+    def combination_4(filters_values_dict):
         if filters_values_dict.get('verblijfplaats__postcode') and \
             filters_values_dict.get('verblijfplaats__huisnummer'):
             return True
@@ -66,7 +70,8 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def combination_5(self, filters_values_dict):
+    @staticmethod
+    def combination_5(filters_values_dict):
         if filters_values_dict.get('verblijfplaats__naamopenbareruimte') and \
             filters_values_dict.get('verblijfplaats__gemeentevaninschrijving') and \
             filters_values_dict.get('verblijfplaats__huisnummer'):
@@ -78,7 +83,8 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
         return False
 
-    def combination_6(self, filters_values_dict):
+    @staticmethod
+    def combination_6(filters_values_dict):
         return bool(filters_values_dict.get('verblijfplaats__identificatiecodenummeraanduiding'))
 
     def get_filters_with_values(self):
