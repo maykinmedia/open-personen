@@ -8,7 +8,11 @@ from .persoon import PersoonSerializer
 
 
 class OuderSerializer(PersoonSerializer):
-    geslachtsaanduiding = serializers.ChoiceField(choices=GeslachtsaanduidingChoices.choices, required=False)
-    ouderAanduiding = serializers.ChoiceField(choices=OuderAanduiding.choices, required=False)
+    geslachtsaanduiding = serializers.ChoiceField(
+        choices=GeslachtsaanduidingChoices.choices, required=False
+    )
+    ouderAanduiding = serializers.ChoiceField(
+        choices=OuderAanduiding.choices, required=False
+    )
     datumIngangFamilierechtelijkeBetrekking = DatumSerializer(required=False)
     inOnderzoek = OuderInOnderzoekSerializer(required=False)

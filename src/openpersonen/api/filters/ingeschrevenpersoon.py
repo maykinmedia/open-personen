@@ -18,4 +18,3 @@ class IngeschrevenPersoonFilter(FilterSet):
     verblijfplaats__naamopenbareruimte = filters.CharFilter()
     verblijfplaats__postcode = filters.CharFilter()
     naam__voorvoegsel = filters.CharFilter()
-
