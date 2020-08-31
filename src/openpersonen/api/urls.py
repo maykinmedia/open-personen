@@ -10,6 +10,7 @@ from openpersonen.api.views import (
     KindViewSet,
     OuderViewSet,
     PartnerViewSet,
+    PartnerHistorieViewSet,
     VerblijfPlaatsHistorieViewSet
 )
 
@@ -40,6 +41,11 @@ router.register(
             "verblijfplaatshistorie",
             VerblijfPlaatsHistorieViewSet,
             base_name="verblijfplaatshistorie",
+        ),
+        routers.nested(
+            "partnerhistorie",
+            PartnerHistorieViewSet,
+            base_name="partnerhistorie",
         ),
     ],
 )

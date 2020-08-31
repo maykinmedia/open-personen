@@ -7,25 +7,25 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.test_data import verblijf_plaats_historie_data
+from openpersonen.api.tests.test_data import partner_historie_data
 
 
-class TestVerblijfPlaatsHistorie(APITestCase):
-    def test_verblijf_plaats_historie_without_token(self):
+class TestPartnerHistorie(APITestCase):
+    def test_partner_historie_without_token(self):
         response = self.client.get(
             reverse(
-                "verblijfplaatshistorie-list",
+                "partnerhistorie-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
             )
         )
         self.assertEqual(response.status_code, 401)
 
     @requests_mock.Mocker()
-    def test_verblijf_plaats_historie(self, post_mock):
+    def test_partner_historie(self, post_mock):
         post_mock.post(
             settings.STUF_BG_URL,
             content=bytes(
-                loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"), encoding="utf-8"
+                loader.render_to_string("ResponsePartnerHistorie.xml"), encoding="utf-8"
             ),
         )
 
@@ -33,7 +33,7 @@ class TestVerblijfPlaatsHistorie(APITestCase):
         token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
-                "verblijfplaatshistorie-list",
+                "partnerhistorie-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
@@ -41,4 +41,4 @@ class TestVerblijfPlaatsHistorie(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), verblijf_plaats_historie_data)
+        self.assertEqual(response.json(), partner_historie_data)
