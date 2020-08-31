@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.template import loader
+from django.test import TestCase
 from django.urls import reverse
 
 import requests_mock
-from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
@@ -18,26 +18,37 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_ingeschreven_persoon_with_no_proper_query_params(self):
-        user = User.objects.create(username='test')
+        user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('ingeschrevenpersonen-list'), HTTP_AUTHORIZATION=f'Token {token.key}')
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list"),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), 'Exactly one combination of filters must be supplied')
+        self.assertEqual(
+            response.json(), "Exactly one combination of filters must be supplied"
+        )
 
     def test_ingeschreven_persoon_without_proper_query_params(self):
-        user = User.objects.create(username='test')
+        user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('ingeschrevenpersonen-list') +
-                                   '?burgerservicenummer=123456789&naam__geslachtsnaam==Maykin',
-                                   HTTP_AUTHORIZATION=f'Token {token.key}')
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?burgerservicenummer=123456789&naam__geslachtsnaam==Maykin",
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), 'Exactly one combination of filters must be supplied')
+        self.assertEqual(
+            response.json(), "Exactly one combination of filters must be supplied"
+        )
 
     def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
-        user = User.objects.create(username='test')
+        user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
-        response = self.client.get(reverse('ingeschrevenpersonen-list') + '?burgerservicenummer=123456789',
-                                   HTTP_AUTHORIZATION=f'Token {token.key}')
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=123456789",
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()

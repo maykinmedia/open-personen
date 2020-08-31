@@ -128,15 +128,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
 
@@ -200,19 +194,14 @@ LOGGING = {
             "format": "%(asctime)s %(process)d | %(thread)d | %(message)s",
         },
     },
-    "filters": {
-        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
-    },
+    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},},
     "handlers": {
         "mail_admins": {
             "level": "ERROR",
             "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
         },
-        "null": {
-            "level": "DEBUG",
-            "class": "logging.NullHandler",
-        },
+        "null": {"level": "DEBUG", "class": "logging.NullHandler",},
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
@@ -244,11 +233,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "openpersonen": {
-            "handlers": ["project"],
-            "level": "INFO",
-            "propagate": True,
-        },
+        "openpersonen": {"handlers": ["project"], "level": "INFO", "propagate": True,},
         "django.request": {
             "handlers": ["django"],
             "level": "ERROR",

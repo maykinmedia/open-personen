@@ -20,21 +20,9 @@ router.register(
     IngeschrevenPersoonViewSet,
     base_name="ingeschrevenpersonen",
     nested=[
-        routers.nested(
-            "kinderen",
-            KindViewSet,
-            base_name="kinderen",
-        ),
-        routers.nested(
-            "ouders",
-            OuderViewSet,
-            base_name="ouders",
-        ),
-        routers.nested(
-            "partners",
-            PartnerViewSet,
-            base_name="partners",
-        ),
+        routers.nested("kinderen", KindViewSet, base_name="kinderen",),
+        routers.nested("ouders", OuderViewSet, base_name="ouders",),
+        routers.nested("partners", PartnerViewSet, base_name="partners",),
     ],
 )
 
