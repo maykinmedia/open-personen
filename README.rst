@@ -38,7 +38,7 @@ References
 * `Issues <https://github.com/maykinmedia/open-personen/issues>`_
 * `Code <https://github.com/maykinmedia/open-personen>`_
 * `Community <https://commonground.nl/groups/view/54477955/open-personen>`_
-
+* `Documentation <https://open-personen.readthedocs.io/>`_
 
 Licence
 =======
@@ -47,6 +47,9 @@ Copyright © Maykin Media B.V., 2020
 
 Licensed under the `Business Source License`_ (BSL) 1.1
 
+* `Why this license?`_ :bulb: 
+
+.. _`Why this license?`: https://open-personen.readthedocs.io/en/latest/introduction/source-code/why-bsl.html
 
 .. _`Nederlandse versie`: README.NL.rst
 
