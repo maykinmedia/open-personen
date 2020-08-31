@@ -1,0 +1,62 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:npsLv01>
+         <ns:stuurgegevens>
+            <StUF:berichtcode>?</StUF:berichtcode>
+            <!--Optional:-->
+            <StUF:zender>
+               <!--Optional:-->
+               <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+               <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
+               <!--Optional:-->
+               <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
+               <!--Optional:-->
+               <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
+            </StUF:zender>
+            <!--Optional:-->
+            <StUF:ontvanger>
+               <!--Optional:-->
+               <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+               <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
+               <!--Optional:-->
+               <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
+               <!--Optional:-->
+               <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
+            </StUF:ontvanger>
+            <!--Optional:-->
+            <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
+            <!--Optional:-->
+            <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
+            <StUF:entiteittype>?</StUF:entiteittype>
+         </ns:stuurgegevens>
+         <ns:parameters>
+            <StUF:sortering>?</StUF:sortering>
+            <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+            <!--Optional:-->
+            <StUF:maximumAantal>15</StUF:maximumAantal>
+            <!--Optional:-->
+            <StUF:indicatorAfnemerIndicatie>false</StUF:indicatorAfnemerIndicatie>
+            <!--Optional:-->
+            <StUF:indicatorAantal>false</StUF:indicatorAantal>
+         </ns:parameters>
+         <!--Optional:-->
+         <ns:gelijk StUF:entiteittype="NPS">
+            <ns:inp.bsn StUF:exact="true">{{ bsn }}</ns:inp.bsn>
+         </ns:gelijk>
+         <ns:scope>
+            <ns:object StUF:entiteittype="NPS">
+                <ns:historieMaterieel>
+                   <!--Optional:-->
+                   <ns:vbt.aanduidingVerblijfstitel/>
+                   <!--Optional:-->
+                   <StUF:tijdvakGeldigheid>
+                      <StUF:beginGeldigheid/>
+                      <StUF:eindGeldigheid/>
+                   </StUF:tijdvakGeldigheid>
+                </ns:historieMaterieel>
+            </ns:object>
+         </ns:scope>
+      </ns:npsLv01>
+   </soapenv:Body>
+</soapenv:Envelope>
