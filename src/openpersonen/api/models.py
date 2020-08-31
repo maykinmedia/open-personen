@@ -159,3 +159,24 @@ class StufBGClient(SingletonModel):
         )
 
         return response
+
+    def get_verblijf_plaats_historie(self, bsn):
+        request_context = self._get_request_base_context()
+        request_context.update({"bsn": bsn})
+
+        response = requests.post(
+            settings.STUF_BG_URL,
+            data=loader.render_to_string("RequestVerblijfPlaatsHistorie.xml", request_context),
+            headers=settings.STUF_BG_HEADERS,
+        )
+
+        response_context = self._get_response_base_context()
+        response_context["referentienummer"] = request_context["referentienummer"]
+        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
+
+        response._content = bytes(
+            loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml", response_context),
+            encoding="utf-8",
+        )
+
+        return response

@@ -15,5 +15,6 @@ from .partner import *  # noqa
 from .persoon import *  # noqa
 from .verblijf_buitenland import *  # noqa
 from .verblijf_plaats import *  # noqa
+from .verblijf_plaats_historie import *  # noqa
 from .verblijfs_titel import *  # noqa
 from .waarde import *  # noqa
