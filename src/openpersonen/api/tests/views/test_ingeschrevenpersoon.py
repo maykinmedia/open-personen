@@ -17,12 +17,21 @@ class TestIngeschrevenPersoon(APITestCase):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
 
-    def test_ingeschreven_persoon_without_proper_query_params(self):
+    def test_ingeschreven_persoon_with_no_proper_query_params(self):
         user = User.objects.create(username='test')
         token = Token.objects.create(user=user)
         response = self.client.get(reverse('ingeschrevenpersonen-list'), HTTP_AUTHORIZATION=f'Token {token.key}')
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['detail'], 'Incorrect combination of filters')
+        self.assertEqual(response.json(), 'Exactly one combination of filters must be supplied')
+
+    def test_ingeschreven_persoon_without_proper_query_params(self):
+        user = User.objects.create(username='test')
+        token = Token.objects.create(user=user)
+        response = self.client.get(reverse('ingeschrevenpersonen-list') +
+                                   '?burgerservicenummer=123456789&naam__geslachtsnaam==Maykin',
+                                   HTTP_AUTHORIZATION=f'Token {token.key}')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), 'Exactly one combination of filters must be supplied')
 
     def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
         user = User.objects.create(username='test')
@@ -55,179 +64,3 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), ingeschreven_persoon_retrieve_data)
-
-
-class TestCombinations(TestCase):
-
-    def test_combination_1_returns_true(self):
-        test_dict = {
-            'geboorte__datum': '20010119',
-            'naam__geslachtsnaam': 'Maykin'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_1(test_dict)
-
-        self.assertTrue(result)
-
-    def test_combination_1_returns_when_geboorte__datum_missing(self):
-        test_dict = {
-            'naam__geslachtsnaam': 'Maykin'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_1(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('naam__geslachtsnaam'))
-
-    def test_combination_1_returns_when_naam__geslachtsnaam_missing(self):
-        test_dict = {
-            'geboorte__datum': '20010119'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_1(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('geboorte__datum'))
-
-    def test_combination_2_returns_true(self):
-        test_dict = {
-            'verblijfplaats__gemeentevaninschrijving': 'Amsterdam',
-            'naam__geslachtsnaam': 'Maykin'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_2(test_dict)
-
-        self.assertTrue(result)
-
-    def test_combination_2_returns_when_verblijfplaats__gemeentevaninschrijving_missing(self):
-        test_dict = {
-            'naam__geslachtsnaam': 'Maykin'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_2(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('naam__geslachtsnaam'))
-
-    def test_combination_2_returns_when_naam__geslachtsnaam_missing(self):
-        test_dict = {
-            'verblijfplaats__gemeentevaninschrijving': 'Amsterdam'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_2(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('verblijfplaats__gemeentevaninschrijving'))
-
-    def test_combination_3_returns_true(self):
-        test_dict = {
-            'burgerservicenummer': '123456789'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_3(test_dict)
-
-        self.assertTrue(result)
-
-    def test_combination_3_returns_false(self):
-        test_dict = {
-            'not_burgerservicenummer': 'abcd'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_3(test_dict)
-
-        self.assertFalse(result)
-
-    def test_combination_4_returns_true(self):
-        test_dict = {
-            'verblijfplaats__postcode': '9VGM3H',
-            'verblijfplaats__huisnummer': 117
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_4(test_dict)
-
-        self.assertTrue(result)
-
-    def test_combination_4_returns_when_verblijfplaats__huisnummer_missing(self):
-        test_dict = {
-            'verblijfplaats__postcode': '9VGM3H'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_4(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('verblijfplaats__postcode'))
-
-    def test_combination_4_returns_when_verblijfplaats__postcode_missing(self):
-        test_dict = {
-            'verblijfplaats__huisnummer': 117
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_4(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('verblijfplaats__huisnummer'))
-
-    def test_combination_5_returns_true(self):
-        test_dict = {
-            'verblijfplaats__naamopenbareruimte': 'Jordaan',
-            'verblijfplaats__gemeentevaninschrijving': 'Amsterdam',
-            'verblijfplaats__huisnummer': 117
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_5(test_dict)
-
-        self.assertTrue(result)
-
-    def test_combination_5_returns_when_verblijfplaats__huisnummer_missing(self):
-        test_dict = {
-            'verblijfplaats__naamopenbareruimte': 'Jordaan',
-            'verblijfplaats__gemeentevaninschrijving': 'Amsterdam'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_5(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('verblijfplaats__naamopenbareruimte'))
-        self.assertIsNone(test_dict.get('verblijfplaats__gemeentevaninschrijving'))
-
-    def test_combination_5_returns_when_verblijfplaats__gemeentevaninschrijving_missing(self):
-        test_dict = {
-            'verblijfplaats__naamopenbareruimte': 'Jordaan',
-            'verblijfplaats__huisnummer': 117
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_5(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('verblijfplaats__naamopenbareruimte'))
-        self.assertIsNone(test_dict.get('verblijfplaats__huisnummer'))
-
-    def test_combination_5_returns_when_verblijfplaats__naamopenbareruimte_missing(self):
-        test_dict = {
-            'verblijfplaats__gemeentevaninschrijving': 'Amsterdam',
-            'verblijfplaats__huisnummer': 117
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_5(test_dict)
-
-        self.assertFalse(result)
-        self.assertIsNone(test_dict.get('verblijfplaats__gemeentevaninschrijving'))
-        self.assertIsNone(test_dict.get('verblijfplaats__huisnummer'))
-
-    def test_combination_6_returns_true(self):
-        test_dict = {
-            'verblijfplaats__identificatiecodenummeraanduiding': 'AB'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_6(test_dict)
-
-        self.assertTrue(result)
-
-    def test_combination_6_returns_false(self):
-        test_dict = {
-            'not_verblijfplaats__identificatiecodenummeraanduiding': 'AB'
-        }
-
-        result = IngeschrevenPersoonViewSet.combination_6(test_dict)
-
-        self.assertFalse(result)
