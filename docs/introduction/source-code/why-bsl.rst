@@ -1,7 +1,10 @@
 .. _introduction_source-code_why-bsl:
 
-What is BSL and why did we choose it?
-=====================================
+Why this license?
+=================
+
+Open Personen is released under the `Business Source License`_ (BSL) 1.1. To
+answer questions about why we choose this license, please continue reading.
 
 What is BSL?
 ------------
@@ -79,7 +82,7 @@ What are alternative licenses?
 ------------------------------
 
 For information about licensing arrangements for production usage of the 
-Software, please contact `Maykin Media`_
+Software, please contact `Maykin Media`_.
 
 Paid licenses will help the development of this project and will speed up the
 release under the `EUPL`_.
