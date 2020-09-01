@@ -4,11 +4,13 @@ from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
 
 from openpersonen.api.data_classes import PartnerHistorie
+from openpersonen.api.filters import HistorieFilter
 from openpersonen.api.serializers import PartnerHistorieSerializer
 
 
 class PartnerHistorieViewSet(ViewSet):
 
+    filter_class = HistorieFilter
     serializer_class = PartnerHistorieSerializer
     permission_classes = [IsAuthenticated]
 
@@ -29,8 +31,9 @@ class PartnerHistorieViewSet(ViewSet):
 
     def list(self, request, *args, **kwargs):
         burgerservicenummer = kwargs["ingeschrevenpersonen_burgerservicenummer"]
+        filters = self.filter_class.get_filters_with_values(request)
 
-        instance = PartnerHistorie.list(burgerservicenummer)
+        instance = PartnerHistorie.list(burgerservicenummer, filters)
 
         serializer = self.serializer_class(instance, many=True)
 
