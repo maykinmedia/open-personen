@@ -117,7 +117,7 @@ class VerblijfPlaatsHistorie(VerblijfPlaats):
         return verblijf_plaats_dict
 
     @classmethod
-    def list(cls, bsn):
-        response = client.get_verblijf_plaats_historie(bsn)
+    def list(cls, bsn, filters):
+        response = client.get_verblijf_plaats_historie(bsn, filters)
         instance_dict = cls.get_instance_dict(response)
         return [cls(**instance_dict)]
