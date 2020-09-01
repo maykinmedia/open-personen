@@ -7,45 +7,42 @@ verblijf_plaats_historie_data = {
                         "dag": 3,
                         "datum": "1989-05-03",
                         "jaar": 1989,
-                        "maand": 5
+                        "maand": 5,
                     },
                     "datumIngangGeldigheid": {
                         "dag": 3,
                         "datum": "1989-05-03",
                         "jaar": 1989,
-                        "maand": 5
+                        "maand": 5,
                     },
                     "datumInschrijvingInGemeente": {
                         "dag": 3,
                         "datum": "1989-05-03",
                         "jaar": 1989,
-                        "maand": 5
+                        "maand": 5,
                     },
                     "datumVestigingInNederland": {
                         "dag": 3,
                         "datum": "1989-05-03",
                         "jaar": 1989,
-                        "maand": 5
+                        "maand": 5,
                     },
                     "gemeenteVanInschrijving": {
                         "code": "6030",
-                        "omschrijving": "Nederland"
+                        "omschrijving": "Nederland",
                     },
                     "landVanwaarIngeschreven": {
                         "code": "6030",
-                        "omschrijving": "Nederland"
+                        "omschrijving": "Nederland",
                     },
                     "verblijfBuitenland": {
                         "_embedded": {
-                            "land": {
-                                "code": "6030",
-                                "omschrijving": "Nederland"
-                            }
+                            "land": {"code": "6030", "omschrijving": "Nederland"}
                         },
                         "adresRegel1": "string",
                         "adresRegel2": "string",
                         "adresRegel3": "string",
-                        "vertrokkenOnbekendWaarheen": True
+                        "vertrokkenOnbekendWaarheen": True,
                     },
                     "inOnderzoek": {
                         "_embedded": {
@@ -53,7 +50,7 @@ verblijf_plaats_historie_data = {
                                 "dag": 3,
                                 "datum": "1989-05-03",
                                 "jaar": 1989,
-                                "maand": 5
+                                "maand": 5,
                             }
                         },
                         "aanduidingBijHuisnummer": True,
@@ -74,14 +71,14 @@ verblijf_plaats_historie_data = {
                         "postcode": True,
                         "straatnaam": True,
                         "verblijfBuitenland": True,
-                        "woonplaatsnaam": True
+                        "woonplaatsnaam": True,
                     },
                     "datumTot": {
                         "dag": 3,
                         "datum": "1989-05-03",
                         "jaar": 1989,
-                        "maand": 5
-                    }
+                        "maand": 5,
+                    },
                 },
                 "functieAdres": "woonadres",
                 "huisletter": "B",
@@ -97,9 +94,9 @@ verblijf_plaats_historie_data = {
                 "locatiebeschrijving": "Naast de derde brug",
                 "straatnaam": "string",
                 "vanuitVertrokkenOnbekendWaarheen": True,
-                "geheimhoudingPersoonsgegevens": True
+                "geheimhoudingPersoonsgegevens": True,
             }
         ]
     },
-    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/0/verblijfplaatshistorie"
+    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/0/verblijfplaatshistorie",
 }

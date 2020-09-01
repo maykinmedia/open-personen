@@ -8,12 +8,12 @@ from openpersonen.api.schema import info
 from openpersonen.api.views import (
     IngeschrevenPersoonViewSet,
     KindViewSet,
+    NationaliteitHistorieViewSet,
     OuderViewSet,
-    PartnerViewSet,
     PartnerHistorieViewSet,
+    PartnerViewSet,
     VerblijfPlaatsHistorieViewSet,
     VerblijfsTitelHistorieViewSet,
-    NationaliteitHistorieViewSet
 )
 
 router = routers.DefaultRouter()

@@ -8,5 +8,5 @@ from .waarde import WaardeSerializer
 class NationaliteitHistorieSerializer(NationaliteitSerializer):
     geheimhoudingPersoonsgegevens = serializers.BooleanField(required=False)
     datumEindeGeldigheid = DatumSerializer(required=False)
-    redenBeeindigen= WaardeSerializer(required=False)
+    redenBeeindigen = WaardeSerializer(required=False)
     indicatieNationaliteitBeeindigd = serializers.BooleanField(required=False)

@@ -166,7 +166,8 @@ class TestClient(TestCase):
             m.post(
                 settings.STUF_BG_URL,
                 content=bytes(
-                    loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"), encoding="utf-8"
+                    loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_verblijf_plaats_historie(test_bsn)
@@ -210,7 +211,8 @@ class TestClient(TestCase):
             m.post(
                 settings.STUF_BG_URL,
                 content=bytes(
-                    loader.render_to_string("ResponseVerblijfsTitelHistorie.xml"), encoding="utf-8"
+                    loader.render_to_string("ResponseVerblijfsTitelHistorie.xml"),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_verblijfs_titel_historie(test_bsn)
@@ -254,7 +256,8 @@ class TestClient(TestCase):
             m.post(
                 settings.STUF_BG_URL,
                 content=bytes(
-                    loader.render_to_string("ResponsePartnerHistorie.xml"), encoding="utf-8"
+                    loader.render_to_string("ResponsePartnerHistorie.xml"),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_partner_historie(test_bsn)
@@ -298,7 +301,8 @@ class TestClient(TestCase):
             m.post(
                 settings.STUF_BG_URL,
                 content=bytes(
-                    loader.render_to_string("ResponseNationaliteitHistorie.xml"), encoding="utf-8"
+                    loader.render_to_string("ResponseNationaliteitHistorie.xml"),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_nationaliteit_historie(test_bsn)

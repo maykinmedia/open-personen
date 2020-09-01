@@ -9,10 +9,10 @@ from .kind import *  # noqa
 from .naam import *  # noqa
 from .nationaliteit import *  # noqa
 from .nationaliteit_historie import *  # noqa
+from .ontbinding_huwelijk_partnerschap import *  # noqa
 from .opschorting_bijhouding import *  # noqa
 from .ouder import *  # noqa
 from .overlijden import *  # noqa
-from .ontbinding_huwelijk_partnerschap import *  # noqa
 from .partner import *  # noqa
 from .partner_historie import *  # noqa
 from .persoon import *  # noqa

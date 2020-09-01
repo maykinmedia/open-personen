@@ -11,18 +11,18 @@ partner_historie_data = {
                                         "dag": 0,
                                         "datum": "string",
                                         "jaar": 0,
-                                        "maand": 0
+                                        "maand": 0,
                                     }
                                 },
                                 "geslachtsnaam": True,
                                 "voornamen": True,
-                                "voorvoegsel": True
+                                "voorvoegsel": True,
                             }
                         },
                         "geslachtsnaam": "Maykin Partner",
                         "voorletters": "P",
                         "voornamen": "Media Partner",
-                        "voorvoegsel": "de"
+                        "voorvoegsel": "de",
                     },
                     "geboorte": {
                         "_embedded": {
@@ -30,29 +30,23 @@ partner_historie_data = {
                                 "dag": 7,
                                 "datum": "19690507",
                                 "jaar": 1969,
-                                "maand": 5
+                                "maand": 5,
                             },
-                            "land": {
-                                "code": "0000",
-                                "omschrijving": "Nederland"
-                            },
-                            "plaats": {
-                                "code": "0000",
-                                "omschrijving": "Amsterdam"
-                            },
+                            "land": {"code": "0000", "omschrijving": "Nederland"},
+                            "plaats": {"code": "0000", "omschrijving": "Amsterdam"},
                             "inOnderzoek": {
                                 "_embedded": {
                                     "datumIngangOnderzoek": {
                                         "dag": 0,
                                         "datum": "string",
                                         "jaar": 0,
-                                        "maand": 0
+                                        "maand": 0,
                                     }
                                 },
                                 "datum": True,
                                 "land": True,
-                                "plaats": True
-                            }
+                                "plaats": True,
+                            },
                         }
                     },
                     "inOnderzoek": {
@@ -61,11 +55,11 @@ partner_historie_data = {
                                 "dag": 0,
                                 "datum": "string",
                                 "jaar": 0,
-                                "maand": 0
+                                "maand": 0,
                             }
                         },
                         "burgerservicenummer": True,
-                        "geslachtsaanduiding": True
+                        "geslachtsaanduiding": True,
                     },
                     "aangaanHuwelijkPartnerschap": {
                         "_embedded": {
@@ -73,29 +67,23 @@ partner_historie_data = {
                                 "dag": 0,
                                 "datum": "string",
                                 "jaar": 0,
-                                "maand": 0
+                                "maand": 0,
                             },
-                            "land": {
-                                "code": "0000",
-                                "omschrijving": "string"
-                            },
-                            "plaats": {
-                                "code": "0000",
-                                "omschrijving": "string"
-                            },
+                            "land": {"code": "0000", "omschrijving": "string"},
+                            "plaats": {"code": "0000", "omschrijving": "string"},
                             "inOnderzoek": {
                                 "_embedded": {
                                     "datumIngangOnderzoek": {
                                         "dag": 0,
                                         "datum": "string",
                                         "jaar": 0,
-                                        "maand": 0
+                                        "maand": 0,
                                     }
                                 },
                                 "datum": True,
                                 "land": True,
-                                "plaats": True
-                            }
+                                "plaats": True,
+                            },
                         }
                     },
                     "ontbindingHuwelijkPartnerschap": {
@@ -104,43 +92,34 @@ partner_historie_data = {
                                 "dag": 0,
                                 "datum": "string",
                                 "jaar": 0,
-                                "maand": 0
+                                "maand": 0,
                             },
-                            "land": {
-                                "code": "string",
-                                "omschrijving": "string"
-                            },
-                            "plaats": {
-                                "code": "string",
-                                "omschrijving": "string"
-                            },
-                            "reden": {
-                                "code": "string",
-                                "omschrijving": "string"
-                            },
+                            "land": {"code": "string", "omschrijving": "string"},
+                            "plaats": {"code": "string", "omschrijving": "string"},
+                            "reden": {"code": "string", "omschrijving": "string"},
                             "inOnderzoek": {
                                 "_embedded": {
                                     "datumIngangOnderzoek": {
                                         "dag": 0,
                                         "datum": "string",
                                         "jaar": 0,
-                                        "maand": 0
+                                        "maand": 0,
                                     }
                                 },
                                 "datum": True,
                                 "land": True,
-                                "plaats": True
-                            }
+                                "plaats": True,
+                            },
                         },
-                        "indicatieHuwelijkPartnerschapBeeindigd": True
-                    }
+                        "indicatieHuwelijkPartnerschapBeeindigd": True,
+                    },
                 },
                 "burgerservicenummer": "987654321",
                 "geheimhoudingPersoonsgegevens": True,
                 "geslachtsaanduiding": "man",
-                "soortVerbintenis": "huwelijk"
+                "soortVerbintenis": "huwelijk",
             }
         ]
     },
-    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/0/partnerhistorie"
+    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/0/partnerhistorie",
 }
