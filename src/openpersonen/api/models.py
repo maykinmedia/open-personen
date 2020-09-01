@@ -66,12 +66,10 @@ class StufBGClient(SingletonModel):
             "ontvanger_gebruiker": self.zender_gebruiker,
         }
 
-    def get_ingeschreven_persoon(self, bsn=None, filters=None):
+    def _make_request(self, request_file, response_file, additional_context=None):
         request_context = self._get_request_base_context()
-        if bsn:
-            request_context.update({"bsn": bsn})
-        if filters:
-            request_context.update(filters)
+        if additional_context:
+            request_context.update(additional_context)
 
         response = requests.post(
             self.url,
@@ -86,160 +84,43 @@ class StufBGClient(SingletonModel):
         response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
 
         response._content = bytes(
-            loader.render_to_string(
-                "ResponseIngeschrevenPersoon.xml", response_context
-            ),
+            loader.render_to_string(response_file, response_context),
             encoding="utf-8",
         )
 
         return response
+
+    def get_ingeschreven_persoon(self, bsn=None, filters=None):
+        additional_context = dict()
+        if bsn:
+            additional_context.update({"bsn": bsn})
+        if filters:
+            additional_context.update(filters)
+
+        return self._make_request("RequestIngeschrevenPersoon.xml", "ResponseIngeschrevenPersoon.xml",
+                                  additional_context=additional_context)
 
     def get_kind(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            self.url,
-            data=loader.render_to_string("RequestKind.xml", request_context),
-            headers=self._get_headers(),
-        )
-
-        response_context = self._get_response_base_context()
-        request_context.update({"bsn": bsn})
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponseKind.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestKind.xml", "ResponseKind.xml", additional_context={"bsn": bsn})
 
     def get_ouder(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            self.url,
-            data=loader.render_to_string("RequestOuder.xml", request_context),
-            headers=self._get_headers(),
-        )
-
-        response_context = self._get_response_base_context()
-        request_context.update({"bsn": bsn})
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponseOuder.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestOuder.xml", "ResponseOuder.xml", additional_context={"bsn": bsn})
 
     def get_partner(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            self.url,
-            data=loader.render_to_string("RequestPartner.xml", request_context),
-            headers=self._get_headers(),
-        )
-
-        response_context = self._get_response_base_context()
-        request_context.update({"bsn": bsn})
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponsePartner.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestPartner.xml", "ResponsePartner.xml", additional_context={"bsn": bsn})
 
     def get_verblijf_plaats_historie(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            settings.STUF_BG_URL,
-            data=loader.render_to_string("RequestVerblijfPlaatsHistorie.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
-        )
-
-        response_context = self._get_response_base_context()
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestVerblijfPlaatsHistorie.xml", "ResponseVerblijfPlaatsHistorie.xml",
+                                  additional_context={"bsn": bsn})
 
     def get_partner_historie(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            settings.STUF_BG_URL,
-            data=loader.render_to_string("RequestPartnerHistorie.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
-        )
-
-        response_context = self._get_response_base_context()
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponsePartnerHistorie.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestPartnerHistorie.xml", "ResponsePartnerHistorie.xml",
+                                  additional_context={"bsn": bsn})
 
     def get_verblijfs_titel_historie(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            settings.STUF_BG_URL,
-            data=loader.render_to_string("RequestVerblijfsTitelHistorie.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
-        )
-
-        response_context = self._get_response_base_context()
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponseVerblijfsTitelHistorie.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestVerblijfsTitelHistorie.xml", "ResponseVerblijfsTitelHistorie.xml",
+                                  additional_context={"bsn": bsn})
 
     def get_nationaliteit_historie(self, bsn):
-        request_context = self._get_request_base_context()
-        request_context.update({"bsn": bsn})
-
-        response = requests.post(
-            settings.STUF_BG_URL,
-            data=loader.render_to_string("RequestNationaliteitHistorie.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
-        )
-
-        response_context = self._get_response_base_context()
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string("ResponseNationaliteitHistorie.xml", response_context),
-            encoding="utf-8",
-        )
-
-        return response
+        return self._make_request("RequestNationaliteitHistorie.xml", "ResponseNationaliteitHistorie.xml",
+                                  additional_context={"bsn": bsn})
