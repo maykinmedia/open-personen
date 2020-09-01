@@ -2,6 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
+from vng_api_common.filters import Backend
 
 from openpersonen.api.data_classes import PartnerHistorie
 from openpersonen.api.filters import HistorieFilter
@@ -11,6 +12,9 @@ from openpersonen.api.serializers import PartnerHistorieSerializer
 class PartnerHistorieViewSet(ViewSet):
 
     filter_class = HistorieFilter
+    filter_backends = [
+        Backend,
+    ]
     serializer_class = PartnerHistorieSerializer
     permission_classes = [IsAuthenticated]
 
