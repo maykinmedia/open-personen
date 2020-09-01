@@ -7,9 +7,8 @@ import xmltodict
 from openpersonen.api.client import client
 from openpersonen.api.utils import convert_empty_instances
 
-
-from .partner import Partner
 from .ontbinding_huwelijk_partnerschap import OntbindingHuwelijkPartnerschap
+from .partner import Partner
 
 
 @dataclass
@@ -20,9 +19,13 @@ class PartnerHistorie(Partner):
     def get_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
-        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"]\
-            ["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsEchtgenootPartner"]["ns:historieFormeelRelatie"]\
-            ["ns:gerelateerde"]
+        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
+            "ns:npsLa01"
+        ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsEchtgenootPartner"][
+            "ns:historieFormeelRelatie"
+        ][
+            "ns:gerelateerde"
+        ]
 
         partner_dict = {
             "burgerservicenummer": antwoord_dict_object["ns:inp.bsn"],
@@ -51,18 +54,18 @@ class PartnerHistorie(Partner):
                 "datum": {
                     "dag": int(
                         antwoord_dict_object["ns:geboortedatum"][
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": antwoord_dict_object["ns:geboortedatum"],
                     "jaar": int(
                         antwoord_dict_object["ns:geboortedatum"][
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         antwoord_dict_object["ns:geboortedatum"][
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -117,24 +120,10 @@ class PartnerHistorie(Partner):
             "geheimhoudingPersoonsgegevens": True,
             "ontbindingHuwelijkPartnerschap": {
                 "indicatieHuwelijkPartnerschapBeeindigd": True,
-                "datum": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0
-                },
-                "land": {
-                    "code": "string",
-                    "omschrijving": "string"
-                },
-                "plaats": {
-                    "code": "string",
-                    "omschrijving": "string"
-                },
-                "reden": {
-                    "code": "string",
-                    "omschrijving": "string"
-                },
+                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "land": {"code": "string", "omschrijving": "string"},
+                "plaats": {"code": "string", "omschrijving": "string"},
+                "reden": {"code": "string", "omschrijving": "string"},
                 "inOnderzoek": {
                     "datum": True,
                     "land": True,
@@ -143,10 +132,10 @@ class PartnerHistorie(Partner):
                         "dag": 0,
                         "datum": "string",
                         "jaar": 0,
-                        "maand": 0
-                    }
-                }
-            }
+                        "maand": 0,
+                    },
+                },
+            },
         }
 
         convert_empty_instances(partner_dict)

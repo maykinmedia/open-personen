@@ -97,38 +97,59 @@ class StufBGClient(SingletonModel):
         if filters:
             additional_context.update(filters)
 
-        return self._make_request("RequestIngeschrevenPersoon.xml", "ResponseIngeschrevenPersoon.xml",
-                                  additional_context=additional_context)
+        return self._make_request(
+            "RequestIngeschrevenPersoon.xml",
+            "ResponseIngeschrevenPersoon.xml",
+            additional_context=additional_context,
+        )
 
     def get_kind(self, bsn):
-        return self._make_request("RequestKind.xml", "ResponseKind.xml", additional_context={"bsn": bsn})
+        return self._make_request(
+            "RequestKind.xml", "ResponseKind.xml", additional_context={"bsn": bsn}
+        )
 
     def get_ouder(self, bsn):
-        return self._make_request("RequestOuder.xml", "ResponseOuder.xml", additional_context={"bsn": bsn})
+        return self._make_request(
+            "RequestOuder.xml", "ResponseOuder.xml", additional_context={"bsn": bsn}
+        )
 
     def get_partner(self, bsn):
-        return self._make_request("RequestPartner.xml", "ResponsePartner.xml", additional_context={"bsn": bsn})
+        return self._make_request(
+            "RequestPartner.xml", "ResponsePartner.xml", additional_context={"bsn": bsn}
+        )
 
     def get_verblijf_plaats_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
-        return self._make_request("RequestVerblijfPlaatsHistorie.xml", "ResponseVerblijfPlaatsHistorie.xml",
-                                  additional_context=additional_context)
+        return self._make_request(
+            "RequestVerblijfPlaatsHistorie.xml",
+            "ResponseVerblijfPlaatsHistorie.xml",
+            additional_context=additional_context,
+        )
 
     def get_partner_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
-        return self._make_request("RequestPartnerHistorie.xml", "ResponsePartnerHistorie.xml",
-                                  additional_context=additional_context)
+        return self._make_request(
+            "RequestPartnerHistorie.xml",
+            "ResponsePartnerHistorie.xml",
+            additional_context=additional_context,
+        )
 
     def get_verblijfs_titel_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
-        return self._make_request("RequestVerblijfsTitelHistorie.xml", "ResponseVerblijfsTitelHistorie.xml",
-                                  additional_context=additional_context)
+        return self._make_request(
+            "RequestVerblijfsTitelHistorie.xml",
+            "ResponseVerblijfsTitelHistorie.xml",
+            additional_context=additional_context,
+        )
 
     def get_nationaliteit_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
-        return self._make_request("RequestNationaliteitHistorie.xml", "ResponseNationaliteitHistorie.xml",
-                                  additional_context=additional_context)
+        return self._make_request(
+            "RequestNationaliteitHistorie.xml",
+            "ResponseNationaliteitHistorie.xml",
+            additional_context=additional_context,
+        )

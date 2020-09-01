@@ -3,4 +3,6 @@ from .partner import PartnerSerializer
 
 
 class PartnerHistorieSerializer(PartnerSerializer):
-    ontbindingHuwelijkPartnerschap = OntbindingHuwelijkPartnerschapSerializer(required=False)
+    ontbindingHuwelijkPartnerschap = OntbindingHuwelijkPartnerschapSerializer(
+        required=False
+    )

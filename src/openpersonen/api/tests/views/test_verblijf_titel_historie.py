@@ -25,7 +25,8 @@ class TestVerblijfsTitelHistorie(APITestCase):
         post_mock.post(
             settings.STUF_BG_URL,
             content=bytes(
-                loader.render_to_string("ResponseVerblijfsTitelHistorie.xml"), encoding="utf-8"
+                loader.render_to_string("ResponseVerblijfsTitelHistorie.xml"),
+                encoding="utf-8",
             ),
         )
 
