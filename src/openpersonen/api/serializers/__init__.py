@@ -8,6 +8,7 @@ from .kiesrecht import *  # noqa
 from .kind import *  # noqa
 from .naam import *  # noqa
 from .nationaliteit import *  # noqa
+from .nationaliteit_historie import *  # noqa
 from .opschorting_bijhouding import *  # noqa
 from .ouder import *  # noqa
 from .overlijden import *  # noqa

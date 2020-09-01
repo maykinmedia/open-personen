@@ -5,3 +5,4 @@ from .partner import PartnerViewSet
 from .partner_historie import PartnerHistorieViewSet
 from .verblijf_plaats_historie import VerblijfPlaatsHistorieViewSet
 from .verblijfs_titel_historie import VerblijfsTitelHistorieViewSet
+from .nationaliteit_historie import NationaliteitHistorieViewSet
