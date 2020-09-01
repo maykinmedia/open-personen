@@ -6,15 +6,15 @@ Why this license?
 Open Personen is released under the `Business Source License`_ (BSL) 1.1. To
 answer questions about why we choose this license, please continue reading.
 
-What is BSL?
-------------
+What is the BSL?
+----------------
 
-The `Business Source License`_ (BSL) is license like any other that states 
+The `Business Source License`_ (BSL) is a license like any other that states 
 certain permissions, meaning what you can and cannot do with the product.
 
-The BSL basically allows you to do everything except to use it in production. 
-You can still use it in production but you are required to purchase it from us 
-under a different license.
+The BSL basically allows you, or your organization, to do everything except to 
+use it in production. You can still use it in production but you are required 
+to purchase it from us under a different license.
 
 The BSL also states that after a certain amount of time or when development
 costs are covered (either by paid licenses or otherwise), the product is
@@ -52,13 +52,14 @@ Can I use Open Personen?
 ------------------------
 
 Yes! You personally, or your organization can use this project for demo and 
-test purposes. If you want to use it in production, contact us for an 
-appropriate license.
+test purposes or in pilot projects. If you want to use it in production, 
+`contact us`_ for an appropriate license.
 
 Can I use Open Personen in production?
 --------------------------------------
 
-Yes! Contact us for an appropriate license.
+Yes, just not with the BSL. You can `contact us`_ for an appropriate license to
+use it in production.
 
 Why did we choose BSL specifically?
 -----------------------------------
@@ -73,10 +74,13 @@ this case the `EUPL`_. This explicit promise is very important to us.
 Can I contribute to Open Personen?
 ----------------------------------
 
-Ofcourse! We understand though, that contributing to a project that is not
-completely open source and free to use in production is less attractive. We
-really hope that we can release the project under the `EUPL`_ as soon as 
-possible.
+Ofcourse! Within the `Common Ground community`_ there are many pilot projects
+that require a product offering the Haal Centraal BRP API. These projects can
+benefit from your contributions.
+
+We understand though, that contributing to a project that is not completely 
+open source and free to use in production is less attractive. We really hope 
+that we can release the project under the `EUPL`_ as soon as possible.
 
 What are alternative licenses?
 ------------------------------
