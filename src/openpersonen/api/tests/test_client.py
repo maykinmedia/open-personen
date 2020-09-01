@@ -170,7 +170,7 @@ class TestClient(TestCase):
                     encoding="utf-8",
                 ),
             )
-            response = self.client.get_verblijf_plaats_historie(test_bsn)
+            response = self.client.get_verblijf_plaats_historie(test_bsn, {})
             self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
@@ -215,7 +215,7 @@ class TestClient(TestCase):
                     encoding="utf-8",
                 ),
             )
-            response = self.client.get_verblijfs_titel_historie(test_bsn)
+            response = self.client.get_verblijfs_titel_historie(test_bsn, {})
             self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
@@ -260,7 +260,7 @@ class TestClient(TestCase):
                     encoding="utf-8",
                 ),
             )
-            response = self.client.get_partner_historie(test_bsn)
+            response = self.client.get_partner_historie(test_bsn, {})
             self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
@@ -305,7 +305,7 @@ class TestClient(TestCase):
                     encoding="utf-8",
                 ),
             )
-            response = self.client.get_nationaliteit_historie(test_bsn)
+            response = self.client.get_nationaliteit_historie(test_bsn, {})
             self.assertTrue(m.called)
 
         self.assertEqual(response.status_code, 200)
