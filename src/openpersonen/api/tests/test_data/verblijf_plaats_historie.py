@@ -4,40 +4,40 @@ verblijf_plaats_historie_data = {
             {
                 "_embedded": {
                     "datumAanvangAdreshouding": {
-                        "dag": 3,
-                        "datum": "1989-05-03",
-                        "jaar": 1989,
-                        "maand": 5,
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
                     },
                     "datumIngangGeldigheid": {
-                        "dag": 3,
-                        "datum": "1989-05-03",
-                        "jaar": 1989,
-                        "maand": 5,
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
                     },
                     "datumInschrijvingInGemeente": {
-                        "dag": 3,
-                        "datum": "1989-05-03",
-                        "jaar": 1989,
-                        "maand": 5,
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
                     },
                     "datumVestigingInNederland": {
-                        "dag": 3,
-                        "datum": "1989-05-03",
-                        "jaar": 1989,
-                        "maand": 5,
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
                     },
                     "gemeenteVanInschrijving": {
-                        "code": "6030",
+                        "code": "0000",
                         "omschrijving": "Nederland",
                     },
                     "landVanwaarIngeschreven": {
-                        "code": "6030",
+                        "code": "0000",
                         "omschrijving": "Nederland",
                     },
                     "verblijfBuitenland": {
                         "_embedded": {
-                            "land": {"code": "6030", "omschrijving": "Nederland"}
+                            "land": {"code": "0000", "omschrijving": "Nederland"}
                         },
                         "adresRegel1": "string",
                         "adresRegel2": "string",
@@ -47,10 +47,10 @@ verblijf_plaats_historie_data = {
                     "inOnderzoek": {
                         "_embedded": {
                             "datumIngangOnderzoek": {
-                                "dag": 3,
-                                "datum": "1989-05-03",
-                                "jaar": 1989,
-                                "maand": 5,
+                                "dag": 0,
+                                "datum": "string",
+                                "jaar": 0,
+                                "maand": 0,
                             }
                         },
                         "aanduidingBijHuisnummer": True,
@@ -74,10 +74,10 @@ verblijf_plaats_historie_data = {
                         "woonplaatsnaam": True,
                     },
                     "datumTot": {
-                        "dag": 3,
-                        "datum": "1989-05-03",
-                        "jaar": 1989,
-                        "maand": 5,
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
                     },
                 },
                 "functieAdres": "woonadres",
