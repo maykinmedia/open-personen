@@ -42,4 +42,5 @@ class TestVerblijfPlaatsHistorie(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), verblijf_plaats_historie_data)

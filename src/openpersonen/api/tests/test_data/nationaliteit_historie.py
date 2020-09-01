@@ -10,7 +10,7 @@ nationaliteit_historie_data = {
                         "maand": 5,
                     },
                     "nationaliteit": {"code": "0000", "omschrijving": "Nederland"},
-                    "redenOpname": {"code": "6030", "omschrijving": "Nederland"},
+                    "redenOpname": {"code": "0000", "omschrijving": "Nederland"},
                     "inOnderzoek": {
                         "_embedded": {
                             "datumIngangOnderzoek": {
@@ -30,7 +30,7 @@ nationaliteit_historie_data = {
                         "jaar": 2017,
                         "maand": 6,
                     },
-                    "redenBeeindigen": {"code": "6030", "omschrijving": "Nederland"},
+                    "redenBeeindigen": {"code": "0000", "omschrijving": "Nederland"},
                 },
                 "aanduidingBijzonderNederlanderschap": "nederlander_behandeld",
                 "geheimhoudingPersoonsgegevens": True,

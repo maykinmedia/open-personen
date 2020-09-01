@@ -53,7 +53,7 @@ class NationaliteitHistorie(Nationaliteit):
             },
             "nationaliteit": {"code": "0000", "omschrijving": "Nederland"},
             "redenOpname": {
-                "code": "6030",
+                "code": "0000",
                 "omschrijving": antwoord_dict_object["ns:historieFormeelRelatie"][
                     "ns:inp.redenVerkrijging"
                 ],
@@ -99,7 +99,7 @@ class NationaliteitHistorie(Nationaliteit):
                 ),
             },
             "redenBeeindigen": {
-                "code": "6030",
+                "code": "0000",
                 "omschrijving": antwoord_dict_object["ns:historieFormeelRelatie"][
                     "ns:inp.redenVerlies"
                 ],
