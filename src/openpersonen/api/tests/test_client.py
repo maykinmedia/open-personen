@@ -4,14 +4,13 @@ from django.test import TestCase
 import requests_mock
 from mock import patch
 
-from openpersonen.api.client import Client
-from openpersonen.config.models import StufBGConfig
+from openpersonen.api.client import client
 
 
 class TestClient(TestCase):
     def setUp(self):
-        self.client = Client()
-        config = StufBGConfig.get_solo()
+        self.client = client
+        config = client
         self.url = config.url
         self.url = config.url
         self.zender_organisatie = config.zender_organisatie

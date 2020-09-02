@@ -9,14 +9,13 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import ingeschreven_persoon_retrieve_data
-from openpersonen.config.models import StufBGConfig
+from openpersonen.api.client import client
 
 
 class TestIngeschrevenPersoon(APITestCase):
 
     def setUp(self):
-        config = StufBGConfig.get_solo()
-        self.url = config.url
+        self.url = client.url
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))

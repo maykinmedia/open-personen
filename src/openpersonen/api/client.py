@@ -1,27 +1,37 @@
 import uuid
 
-from django.conf import settings
-from django.template import loader
-from django.utils import dateformat, timezone
-
 import requests
 
-from openpersonen.config.models import StufBGConfig
+from django.db import models
+from django.template import loader
+from django.utils import dateformat, timezone
+from django.utils.translation import ugettext_lazy as _
+from solo.models import SingletonModel
 
 
-class Client:
+class StufBGClient(SingletonModel):
 
-    def __init__(self):
-        config = StufBGConfig.get_solo()
-        self.url = config.url
-        self.zender_organisatie = config.zender_organisatie
-        self.zender_applicatie = config.zender_applicatie
-        self.zender_administratie = config.zender_administratie
-        self.zender_gebruiker = config.zender_gebruiker
-        self.ontvanger_organisatie = config.ontvanger_organisatie
-        self.ontvanger_applicatie = config.ontvanger_applicatie
-        self.ontvanger_administratie = config.ontvanger_administratie
-        self.ontvanger_gebruiker = config.ontvanger_gebruiker
+    ontvanger_organisatie = models.CharField(max_length=200)
+    ontvanger_administratie = models.CharField(max_length=200)
+    ontvanger_applicatie = models.CharField(max_length=200)
+    ontvanger_gebruiker = models.CharField(max_length=200)
+    zender_organisatie = models.CharField(max_length=200)
+    zender_administratie = models.CharField(max_length=200)
+    zender_applicatie = models.CharField(max_length=200)
+    zender_gebruiker = models.CharField(max_length=200)
+    url = models.URLField(
+        default="http://fieldlab.westeurope.cloudapp.azure.com:8081/brp/",
+        help_text="URL to access Stuf-BG"
+    )
+    user = models.CharField(
+        max_length=200, default="admin", help_text="Username for accessing Stuf-BG"
+    )
+    password = models.CharField(
+        max_length=200, default="admin", help_text="Password for accessing Stuf-BG"
+    )
+
+    class Meta:
+        verbose_name = _("Stuf BG Config")
 
     def _get_request_base_context(self):
         return {
@@ -139,4 +149,4 @@ class Client:
         return response
 
 
-client = Client()
+client = StufBGClient.get_solo()
