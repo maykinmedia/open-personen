@@ -6,32 +6,46 @@ from django.utils import dateformat, timezone
 
 import requests
 
+from openpersonen.config.models import StufBGConfig
+
 
 class Client:
+
+    def __init__(self):
+        config = StufBGConfig.objects.get()
+        self.zender_organisatie = config.zender_organisatie
+        self.zender_applicatie = config.zender_applicatie
+        self.zender_administratie = config.zender_administratie
+        self.zender_gebruiker = config.zender_gebruiker
+        self.ontvanger_organisatie = config.ontvanger_organisatie
+        self.ontvanger_applicatie = config.ontvanger_applicatie
+        self.ontvanger_administratie = config.ontvanger_administratie
+        self.ontvanger_gebruiker = config.ontvanger_gebruiker
+
     def _get_request_base_context(self):
         return {
-            "zender_organisatie": settings.STUF_BG_ZENDER["organisatie"],
-            "zender_applicatie": settings.STUF_BG_ZENDER["applicatie"],
-            "zender_administratie": settings.STUF_BG_ZENDER["administratie"],
-            "zender_gebruiker": settings.STUF_BG_ZENDER["gebruiker"],
-            "ontvanger_organisatie": settings.STUF_BG_ONTVANGER["organisatie"],
-            "ontvanger_applicatie": settings.STUF_BG_ONTVANGER["applicatie"],
-            "ontvanger_administratie": settings.STUF_BG_ONTVANGER["administratie"],
-            "ontvanger_gebruiker": settings.STUF_BG_ONTVANGER["gebruiker"],
+            "zender_organisatie": self.zender_organisatie,
+            "zender_applicatie": self.zender_applicatie,
+            "zender_administratie": self.zender_administratie,
+            "zender_gebruiker": self.zender_gebruiker,
+            "ontvanger_organisatie": self.ontvanger_organisatie,
+            "ontvanger_applicatie": self.ontvanger_applicatie,
+            "ontvanger_administratie": self.ontvanger_administratie,
+            "ontvanger_gebruiker": self.ontvanger_gebruiker,
             "referentienummer": str(uuid.uuid4()),
             "tijdstip_bericht": dateformat.format(timezone.now(), "YmdHis"),
         }
 
     def _get_response_base_context(self):
         return {
-            "zender_organisatie": settings.STUF_BG_ONTVANGER["organisatie"],
-            "zender_applicatie": settings.STUF_BG_ONTVANGER["applicatie"],
-            "zender_administratie": settings.STUF_BG_ONTVANGER["administratie"],
-            "zender_gebruiker": settings.STUF_BG_ONTVANGER["gebruiker"],
-            "ontvanger_organisatie": settings.STUF_BG_ZENDER["organisatie"],
-            "ontvanger_applicatie": settings.STUF_BG_ZENDER["applicatie"],
-            "ontvanger_administratie": settings.STUF_BG_ZENDER["administratie"],
-            "ontvanger_gebruiker": settings.STUF_BG_ZENDER["gebruiker"],
+            "zender_organisatie": self.ontvanger_organisatie,
+            "zender_applicatie": self.ontvanger_applicatie,
+            "zender_administratie": self.ontvanger_administratie,
+            "zender_gebruiker": self.ontvanger_gebruiker,
+            "ontvanger_organisatie": self.zender_organisatie,
+            "ontvanger_applicatie": self.zender_applicatie,
+            "ontvanger_administratie": self.zender_administratie,
+            "ontvanger_gebruiker": self.zender_gebruiker,
         }
 
     def get_ingeschreven_persoon(self, bsn=None, filters=None):
