@@ -8,7 +8,7 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import kind_retrieve_data
-from openpersonen.api.client import client
+from openpersonen.api.models import client
 
 
 class TestKind(APITestCase):

@@ -6,7 +6,7 @@ from django.conf import settings
 import xmltodict
 from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.client import client
+from openpersonen.api.models import client
 from openpersonen.api.utils import convert_empty_instances
 
 from .in_onderzoek import KindInOnderzoek

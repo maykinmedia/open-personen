@@ -4,7 +4,7 @@ from django.test import TestCase
 import requests_mock
 from mock import patch
 
-from openpersonen.api.client import client
+from openpersonen.api.models import client
 
 
 class TestClient(TestCase):
