@@ -12,7 +12,8 @@ from openpersonen.config.models import StufBGConfig
 class Client:
 
     def __init__(self):
-        config = StufBGConfig.objects.get()
+        config = StufBGConfig.get_solo()
+        self.url = config.url
         self.zender_organisatie = config.zender_organisatie
         self.zender_applicatie = config.zender_applicatie
         self.zender_administratie = config.zender_administratie
@@ -56,11 +57,10 @@ class Client:
             request_context.update(filters)
 
         response = requests.post(
-            settings.STUF_BG_URL,
+            self.url,
             data=loader.render_to_string(
                 "RequestIngeschrevenPersoon.xml", request_context
             ),
-            headers=settings.STUF_BG_HEADERS,
         )
 
         response_context = self._get_response_base_context()
@@ -81,9 +81,8 @@ class Client:
         request_context.update({"bsn": bsn})
 
         response = requests.post(
-            settings.STUF_BG_URL,
+            self.url,
             data=loader.render_to_string("RequestKind.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
         )
 
         response_context = self._get_response_base_context()
@@ -103,9 +102,7 @@ class Client:
         request_context.update({"bsn": bsn})
 
         response = requests.post(
-            settings.STUF_BG_URL,
-            data=loader.render_to_string("RequestOuder.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
+            self.url, data=loader.render_to_string("RequestOuder.xml", request_context),
         )
 
         response_context = self._get_response_base_context()
@@ -125,9 +122,8 @@ class Client:
         request_context.update({"bsn": bsn})
 
         response = requests.post(
-            settings.STUF_BG_URL,
+            self.url,
             data=loader.render_to_string("RequestPartner.xml", request_context),
-            headers=settings.STUF_BG_HEADERS,
         )
 
         response_context = self._get_response_base_context()
