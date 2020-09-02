@@ -8,9 +8,15 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import partner_retrieve_data
+from openpersonen.config.models import StufBGConfig
 
 
 class TestPartner(APITestCase):
+
+    def setUp(self):
+        config = StufBGConfig.get_solo()
+        self.url = config.url
+
     def test_partner_without_token(self):
         response = self.client.get(
             reverse(
@@ -35,7 +41,7 @@ class TestPartner(APITestCase):
     @requests_mock.Mocker()
     def test_detail_partner(self, post_mock):
         post_mock.post(
-            settings.STUF_BG_URL,
+            self.url,
             content=bytes(
                 loader.render_to_string("ResponsePartner.xml"), encoding="utf-8"
             ),

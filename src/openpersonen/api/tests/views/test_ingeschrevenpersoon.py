@@ -9,10 +9,15 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import ingeschreven_persoon_retrieve_data
-from openpersonen.api.views import IngeschrevenPersoonViewSet
+from openpersonen.config.models import StufBGConfig
 
 
 class TestIngeschrevenPersoon(APITestCase):
+
+    def setUp(self):
+        config = StufBGConfig.get_solo()
+        self.url = config.url
+
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
@@ -55,7 +60,7 @@ class TestIngeschrevenPersoon(APITestCase):
     def test_detail_ingeschreven_persoon(self, post_mock):
 
         post_mock.post(
-            settings.STUF_BG_URL,
+            self.url,
             content=bytes(
                 loader.render_to_string("ResponseIngeschrevenPersoon.xml"),
                 encoding="utf-8",
