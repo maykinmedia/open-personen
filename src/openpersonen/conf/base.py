@@ -68,8 +68,10 @@ INSTALLED_APPS = [
     "hijack",
     "compat",  # Part of hijack
     "hijack_admin",
+    "solo",
     # Project applications.
     "openpersonen.accounts",
+    "openpersonen.config",
     "openpersonen.utils",
 ]
 
