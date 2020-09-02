@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     "solo",
     # Project applications.
     "openpersonen.accounts",
-    "openpersonen.config",
+    "openpersonen.api",
     "openpersonen.utils",
 ]
 
