@@ -4,7 +4,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.client import client
+from openpersonen.api.models import client
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.api.utils import convert_empty_instances
 
