@@ -4,8 +4,8 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.models import StufBGClient
 from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
 
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschap
