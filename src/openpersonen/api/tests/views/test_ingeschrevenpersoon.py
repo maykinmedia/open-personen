@@ -45,9 +45,19 @@ class TestIngeschrevenPersoon(APITestCase):
             response.json(), "Exactly one combination of filters must be supplied"
         )
 
-    def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
+    @requests_mock.Mocker()
+    def test_ingeschreven_persoon_with_token_and_proper_query_params(self, post_mock):
         user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
+
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=123456789",
             HTTP_AUTHORIZATION=f"Token {token.key}",
