@@ -40,6 +40,20 @@ DATABASES = {
     }
 }
 
+# in memory cache and django-axes don't get along.
+# https://django-axes.readthedocs.io/en/latest/configuration.html#known-configuration-problems
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    },
+    # https://github.com/jazzband/django-axes/blob/master/docs/configuration.rst#cache-problems
+    "axes_cache": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+    },
+}
+
+SOLO_CACHE = 'default'
+
 # Application definition
 
 INSTALLED_APPS = [

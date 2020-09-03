@@ -8,13 +8,13 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import ouder_retrieve_data
-from openpersonen.api.models import client
+from openpersonen.api.models import StufBGClient
 
 
 class TestOuder(APITestCase):
 
     def setUp(self):
-        self.url = client.url
+        self.url = StufBGClient.get_solo().url
 
     def test_ouder_without_token(self):
         response = self.client.get(

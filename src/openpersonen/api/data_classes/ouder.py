@@ -4,7 +4,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.models import client
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.api.utils import convert_empty_instances
 
@@ -140,6 +140,6 @@ class Ouder(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
-        response = client.get_ouder(bsn)
+        response = StufBGClient.get_solo().get_ouder(bsn)
         instance_dict = cls.get_instance_dict(response)
         return cls(**instance_dict)
