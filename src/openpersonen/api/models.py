@@ -147,6 +147,3 @@ class StufBGClient(SingletonModel):
         )
 
         return response
-
-
-client = StufBGClient.get_solo()

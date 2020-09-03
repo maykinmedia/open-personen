@@ -4,23 +4,21 @@ from django.test import TestCase
 import requests_mock
 from mock import patch
 
-from openpersonen.api.models import client
+from openpersonen.api.models import StufBGClient
 
 
 class TestClient(TestCase):
     def setUp(self):
-        self.client = client
-        config = client
-        self.url = config.url
-        self.url = config.url
-        self.zender_organisatie = config.zender_organisatie
-        self.zender_applicatie = config.zender_applicatie
-        self.zender_administratie = config.zender_administratie
-        self.zender_gebruiker = config.zender_gebruiker
-        self.ontvanger_organisatie = config.ontvanger_organisatie
-        self.ontvanger_applicatie = config.ontvanger_applicatie
-        self.ontvanger_administratie = config.ontvanger_administratie
-        self.ontvanger_gebruiker = config.ontvanger_gebruiker
+        self.client = StufBGClient.get_solo()
+        self.url = self.client.url
+        self.zender_organisatie = self.client.zender_organisatie
+        self.zender_applicatie = self.client.zender_applicatie
+        self.zender_administratie = self.client.zender_administratie
+        self.zender_gebruiker = self.client.zender_gebruiker
+        self.ontvanger_organisatie = self.client.ontvanger_organisatie
+        self.ontvanger_applicatie = self.client.ontvanger_applicatie
+        self.ontvanger_administratie = self.client.ontvanger_administratie
+        self.ontvanger_gebruiker = self.client.ontvanger_gebruiker
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")

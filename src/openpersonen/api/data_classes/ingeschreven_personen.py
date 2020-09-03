@@ -6,7 +6,7 @@ from django.conf import settings
 import xmltodict
 from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.models import client
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.enum import GeslachtsaanduidingChoices
 from openpersonen.api.utils import convert_empty_instances
 
@@ -406,12 +406,12 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def list(cls, filters):
-        response = client.get_ingeschreven_persoon(filters=filters)
+        response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
         instance_dict = cls.get_instance_dict(response)
         return [cls(**instance_dict)]
 
     @classmethod
     def retrieve(cls, bsn=None):
-        response = client.get_ingeschreven_persoon(bsn=bsn)
+        response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
         instance_dict = cls.get_instance_dict(response)
         return cls(**instance_dict)

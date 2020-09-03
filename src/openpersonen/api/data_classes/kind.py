@@ -6,7 +6,7 @@ from django.conf import settings
 import xmltodict
 from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.models import client
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
 
 from .in_onderzoek import KindInOnderzoek
@@ -108,6 +108,6 @@ class Kind(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
-        response = client.get_kind(bsn)
+        response = StufBGClient.get_solo().get_kind(bsn)
         instance_dict = cls.get_instance_dict(response)
         return cls(**instance_dict)
