@@ -1,11 +1,11 @@
 import uuid
 
-import requests
-
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
 from django.utils.translation import ugettext_lazy as _
+
+import requests
 from solo.models import SingletonModel
 
 
@@ -21,7 +21,7 @@ class StufBGClient(SingletonModel):
     zender_gebruiker = models.CharField(max_length=200)
     url = models.URLField(
         default="http://fieldlab.westeurope.cloudapp.azure.com:8081/brp/",
-        help_text="URL to access Stuf-BG"
+        help_text="URL to access Stuf-BG",
     )
     user = models.CharField(
         max_length=200, default="admin", help_text="Username for accessing Stuf-BG"
@@ -112,7 +112,8 @@ class StufBGClient(SingletonModel):
         request_context.update({"bsn": bsn})
 
         response = requests.post(
-            self.url, data=loader.render_to_string("RequestOuder.xml", request_context),
+            self.url,
+            data=loader.render_to_string("RequestOuder.xml", request_context),
         )
 
         response_context = self._get_response_base_context()

@@ -52,7 +52,7 @@ CACHES = {
     },
 }
 
-SOLO_CACHE = 'default'
+SOLO_CACHE = "default"
 
 # Application definition
 

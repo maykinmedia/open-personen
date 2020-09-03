@@ -6,8 +6,8 @@ from django.conf import settings
 import xmltodict
 from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.models import StufBGClient
 from openpersonen.api.enum import GeslachtsaanduidingChoices
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
 
 from .datum import Datum
