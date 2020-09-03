@@ -4,7 +4,6 @@ from openpersonen.api.models import StufBGClient
 
 
 class DiscoverRunner(_DiscoverRunner):
-
     def setup_databases(self, **kwargs):
         result = super(DiscoverRunner, self).setup_databases(**kwargs)
 
