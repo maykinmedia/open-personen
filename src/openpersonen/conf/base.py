@@ -282,7 +282,7 @@ LOGGING = {
 # Additional Django settings
 #
 
-TEST_RUNNER = 'openpersonen.api.tests.setup_test_runner.TestRunner'
+TEST_RUNNER = 'openpersonen.api.tests.runner.DiscoverRunner'
 
 # Custom user model
 AUTH_USER_MODEL = "accounts.User"
