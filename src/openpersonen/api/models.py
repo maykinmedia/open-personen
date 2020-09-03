@@ -1,4 +1,5 @@
 import uuid
+from datetime import timedelta
 
 from django.db import models
 from django.template import loader
@@ -27,6 +28,10 @@ class StufBGClient(SingletonModel):
 
     def _get_request_base_context(self):
         return {
+            "created": timezone.now(),
+            "expired":  timezone.now() + timedelta(minutes=5),
+            "username": self.user,
+            "password": self.password,
             "zender_organisatie": self.zender_organisatie,
             "zender_applicatie": self.zender_applicatie,
             "zender_administratie": self.zender_administratie,
