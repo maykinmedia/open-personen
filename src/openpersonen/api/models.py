@@ -3,7 +3,6 @@ import uuid
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
-from django.utils.translation import ugettext_lazy as _
 
 import requests
 from solo.models import SingletonModel
@@ -19,19 +18,12 @@ class StufBGClient(SingletonModel):
     zender_administratie = models.CharField(max_length=200)
     zender_applicatie = models.CharField(max_length=200)
     zender_gebruiker = models.CharField(max_length=200)
-    url = models.URLField(
-        default="http://fieldlab.westeurope.cloudapp.azure.com:8081/brp/",
-        help_text="URL to access Stuf-BG",
-    )
-    user = models.CharField(
-        max_length=200, default="admin", help_text="Username for accessing Stuf-BG"
-    )
-    password = models.CharField(
-        max_length=200, default="admin", help_text="Password for accessing Stuf-BG"
-    )
+    url = models.URLField()
+    user = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
 
     class Meta:
-        verbose_name = _("Stuf BG Config")
+        verbose_name = "Stuf BG Client"
 
     def _get_request_base_context(self):
         return {
