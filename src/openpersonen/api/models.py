@@ -5,6 +5,7 @@ from datetime import timedelta
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
+from django.utils.translation import ugettext_lazy as _
 
 import requests
 from solo.models import SingletonModel
@@ -12,20 +13,20 @@ from solo.models import SingletonModel
 
 class StufBGClient(SingletonModel):
 
-    ontvanger_organisatie = models.CharField(max_length=200)
-    ontvanger_administratie = models.CharField(max_length=200)
-    ontvanger_applicatie = models.CharField(max_length=200)
-    ontvanger_gebruiker = models.CharField(max_length=200)
-    zender_organisatie = models.CharField(max_length=200)
-    zender_administratie = models.CharField(max_length=200)
-    zender_applicatie = models.CharField(max_length=200)
-    zender_gebruiker = models.CharField(max_length=200)
-    url = models.URLField()
-    user = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+    ontvanger_organisatie = models.CharField(_("organisatie"), max_length=200)
+    ontvanger_administratie = models.CharField(_("administratie"), max_length=200)
+    ontvanger_applicatie = models.CharField(_("applicatie"), max_length=200)
+    ontvanger_gebruiker = models.CharField(_("gebruiker"), max_length=200)
+    zender_organisatie = models.CharField(_("organisatie"), max_length=200)
+    zender_administratie = models.CharField(_("administratie"), max_length=200)
+    zender_applicatie = models.CharField(_("applicatie"), max_length=200)
+    zender_gebruiker = models.CharField(_("gebruiker"), max_length=200)
+    url = models.URLField(_("url"))
+    user = models.CharField(_("user"), max_length=200)
+    password = models.CharField(_("password"), max_length=200)
 
     class Meta:
-        verbose_name = "Stuf BG Client"
+        verbose_name = _("Stuf BG Client")
 
     def _get_headers(self):
         credentials = (self.user + ":" + self.password).encode("utf-8")
