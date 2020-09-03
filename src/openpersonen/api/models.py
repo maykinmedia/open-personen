@@ -1,3 +1,4 @@
+import base64
 import uuid
 from datetime import timedelta
 
@@ -25,6 +26,14 @@ class StufBGClient(SingletonModel):
 
     class Meta:
         verbose_name = "Stuf BG Client"
+
+    def _get_headers(self):
+        credentials = (self.user + ':' + self.password).encode('utf-8')
+        encoded_credentials = base64.b64encode(credentials).decode('utf-8')
+        return {
+            'Authorization': 'Basic ' + encoded_credentials,
+            'Content-Type': 'application/soap+xml'
+        }
 
     def _get_request_base_context(self):
         return {
@@ -65,9 +74,8 @@ class StufBGClient(SingletonModel):
 
         response = requests.post(
             self.url,
-            data=loader.render_to_string(
-                "RequestIngeschrevenPersoon.xml", request_context
-            ),
+            data=loader.render_to_string("RequestIngeschrevenPersoon.xml", request_context),
+            headers=self._get_headers()
         )
 
         response_context = self._get_response_base_context()
@@ -90,6 +98,7 @@ class StufBGClient(SingletonModel):
         response = requests.post(
             self.url,
             data=loader.render_to_string("RequestKind.xml", request_context),
+            headers=self._get_headers()
         )
 
         response_context = self._get_response_base_context()
@@ -111,6 +120,7 @@ class StufBGClient(SingletonModel):
         response = requests.post(
             self.url,
             data=loader.render_to_string("RequestOuder.xml", request_context),
+            headers=self._get_headers()
         )
 
         response_context = self._get_response_base_context()
@@ -132,6 +142,7 @@ class StufBGClient(SingletonModel):
         response = requests.post(
             self.url,
             data=loader.render_to_string("RequestPartner.xml", request_context),
+            headers=self._get_headers()
         )
 
         response_context = self._get_response_base_context()
