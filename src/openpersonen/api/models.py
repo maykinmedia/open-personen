@@ -29,7 +29,7 @@ class StufBGClient(SingletonModel):
         verbose_name = _("Stuf BG Client")
 
     def _get_headers(self):
-        credentials = (self.user + ":" + self.password).encode("utf-8")
+        credentials = f"{self.user}:{self.password}".encode("utf-8")
         encoded_credentials = base64.b64encode(credentials).decode("utf-8")
         return {
             "Authorization": "Basic " + encoded_credentials,
