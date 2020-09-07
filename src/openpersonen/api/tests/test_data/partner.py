@@ -1,4 +1,4 @@
-partner_retrieve_data = {
+PARTNER_RETRIEVE_DATA = {
     "_embedded": {
         "naam": {
             "_embedded": {

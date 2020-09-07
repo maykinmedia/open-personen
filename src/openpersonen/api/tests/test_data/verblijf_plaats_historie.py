@@ -1,4 +1,4 @@
-verblijf_plaats_historie_data = {
+VERBLIJF_PLAATS_HISTORIE_DATA = {
     "_embedded": {
         "verblijfplaatshistorie": [
             {

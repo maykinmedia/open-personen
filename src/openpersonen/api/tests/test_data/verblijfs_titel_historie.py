@@ -1,4 +1,4 @@
-verblijfs_titel_historie = {
+VERBLIJFS_TITEL_HISTORIE = {
     "_embedded": {
         "verblijfstitelhistorie": [
             {

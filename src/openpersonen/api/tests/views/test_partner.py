@@ -8,7 +8,7 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.tests.test_data import partner_retrieve_data
+from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
 
 
 class TestPartner(APITestCase):
@@ -57,4 +57,4 @@ class TestPartner(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), partner_retrieve_data)
+        self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)

@@ -1,4 +1,4 @@
-nationaliteit_historie_data = {
+NATIONALITEIT_HISTORIE_DATA = {
     "_embedded": {
         "nationaliteithistorie": [
             {

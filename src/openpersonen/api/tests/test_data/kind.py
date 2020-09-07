@@ -1,4 +1,4 @@
-kind_retrieve_data = {
+KIND_RETRIEVE_DATA = {
     "_embedded": {
         "naam": {
             "_embedded": {

@@ -1,4 +1,4 @@
-ingeschreven_persoon_retrieve_data = {
+INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
     "_embedded": {
         "naam": {
             "_embedded": {

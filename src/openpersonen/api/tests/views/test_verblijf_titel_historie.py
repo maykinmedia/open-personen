@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.test_data import verblijfs_titel_historie
+from openpersonen.api.tests.test_data import VERBLIJFS_TITEL_HISTORIE
 
 
 class TestVerblijfsTitelHistorie(APITestCase):
@@ -42,4 +42,4 @@ class TestVerblijfsTitelHistorie(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), verblijfs_titel_historie)
+        self.assertEqual(response.json(), VERBLIJFS_TITEL_HISTORIE)
