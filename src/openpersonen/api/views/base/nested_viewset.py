@@ -5,7 +5,6 @@ from openpersonen.api.views.base import BaseViewSet
 
 
 class NestedViewSet(BaseViewSet):
-
     def list(self, request, *args, **kwargs):
         return Response(data=[], status=HTTP_200_OK)
 
