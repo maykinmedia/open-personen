@@ -1,4 +1,4 @@
-partner_historie_data = {
+PARTNER_HISTORIE_DATA = {
     "_embedded": {
         "partnerhistorie": [
             {

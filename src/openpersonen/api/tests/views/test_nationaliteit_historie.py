@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.test_data import nationaliteit_historie_data
+from openpersonen.api.tests.test_data import NATIONALITEIT_HISTORIE_DATA
 
 
 class TestNationaliteitHistorie(APITestCase):
@@ -43,4 +43,4 @@ class TestNationaliteitHistorie(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.maxDiff = None
-        self.assertEqual(response.json(), nationaliteit_historie_data)
+        self.assertEqual(response.json(), NATIONALITEIT_HISTORIE_DATA)
