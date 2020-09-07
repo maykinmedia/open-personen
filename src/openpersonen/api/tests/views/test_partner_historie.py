@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.template import loader
 from django.urls import reverse
 
@@ -8,9 +7,13 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import PARTNER_HISTORIE_DATA
-
+from openpersonen.api.models import StufBGClient
 
 class TestPartnerHistorie(APITestCase):
+
+    def setUp(self):
+        self.url = StufBGClient.get_solo().url
+
     def test_partner_historie_without_token(self):
         response = self.client.get(
             reverse(
@@ -23,7 +26,7 @@ class TestPartnerHistorie(APITestCase):
     @requests_mock.Mocker()
     def test_partner_historie(self, post_mock):
         post_mock.post(
-            settings.STUF_BG_URL,
+            self.url,
             content=bytes(
                 loader.render_to_string("ResponsePartnerHistorie.xml"), encoding="utf-8"
             ),

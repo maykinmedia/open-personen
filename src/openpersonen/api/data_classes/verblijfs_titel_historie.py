@@ -4,7 +4,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.client import client
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
 
 from .verblijfs_titel import VerblijfsTitel
@@ -96,6 +96,6 @@ class VerblijfsTitelHistorie(VerblijfsTitel):
 
     @classmethod
     def list(cls, bsn, filters):
-        response = client.get_verblijfs_titel_historie(bsn, filters)
+        response = StufBGClient.get_solo().get_verblijfs_titel_historie(bsn, filters)
         instance_dict = cls.get_instance_dict(response)
         return [cls(**instance_dict)]
