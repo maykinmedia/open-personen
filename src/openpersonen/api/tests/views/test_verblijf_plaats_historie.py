@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.template import loader
 from django.urls import reverse
 
@@ -8,9 +7,14 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.tests.test_data import VERBLIJF_PLAATS_HISTORIE_DATA
+from openpersonen.api.models import StufBGClient
 
 
 class TestVerblijfPlaatsHistorie(APITestCase):
+
+    def setUp(self):
+        self.url = StufBGClient.get_solo().url
+
     def test_verblijf_plaats_historie_without_token(self):
         response = self.client.get(
             reverse(
@@ -23,7 +27,7 @@ class TestVerblijfPlaatsHistorie(APITestCase):
     @requests_mock.Mocker()
     def test_verblijf_plaats_historie(self, post_mock):
         post_mock.post(
-            settings.STUF_BG_URL,
+            self.url,
             content=bytes(
                 loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"),
                 encoding="utf-8",
@@ -42,5 +46,4 @@ class TestVerblijfPlaatsHistorie(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.maxDiff = None
         self.assertEqual(response.json(), VERBLIJF_PLAATS_HISTORIE_DATA)

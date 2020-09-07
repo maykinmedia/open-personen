@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import xmltodict
 
-from openpersonen.api.client import client
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
 
 from .datum import Datum
@@ -117,6 +117,6 @@ class VerblijfPlaatsHistorie(VerblijfPlaats):
 
     @classmethod
     def list(cls, bsn, filters):
-        response = client.get_verblijf_plaats_historie(bsn, filters)
+        response = StufBGClient.get_solo().get_verblijf_plaats_historie(bsn, filters)
         instance_dict = cls.get_instance_dict(response)
         return [cls(**instance_dict)]

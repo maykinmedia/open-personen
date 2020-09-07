@@ -4,7 +4,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.client import client
+from openpersonen.api.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
 
 from .ontbinding_huwelijk_partnerschap import OntbindingHuwelijkPartnerschap
@@ -144,6 +144,6 @@ class PartnerHistorie(Partner):
 
     @classmethod
     def list(cls, bsn, filters):
-        response = client.get_partner_historie(bsn, filters)
+        response = StufBGClient.get_solo().get_partner_historie(bsn, filters)
         instance_dict = cls.get_instance_dict(response)
         return [cls(**instance_dict)]

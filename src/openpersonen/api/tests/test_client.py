@@ -164,7 +164,7 @@ class TestClient(TestCase):
 
         with requests_mock.Mocker() as m:
             m.post(
-                settings.STUF_BG_URL,
+                self.url,
                 content=bytes(
                     loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"),
                     encoding="utf-8",
@@ -176,27 +176,16 @@ class TestClient(TestCase):
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
         self.assertIn("antwoord", response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["gebruiker"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["gebruiker"], response_content)
+        self.assertIn(self.zender_organisatie, response_content)
+        self.assertIn(self.zender_applicatie, response_content)
+        self.assertIn(self.zender_administratie, response_content)
+        self.assertIn(self.zender_gebruiker, response_content)
+        self.assertIn(self.ontvanger_organisatie, response_content)
+        self.assertIn(self.ontvanger_applicatie, response_content)
+        self.assertIn(self.ontvanger_administratie, response_content)
+        self.assertIn(self.ontvanger_gebruiker, response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
-        # Assert contents at proper places
-        self.assertTrue(
-            response_content.find("<StUF:zender>")
-            < response_content.find(settings.STUF_BG_ZENDER["organisatie"])
-            < response_content.find("</StUF:zender>")
-        )
-        self.assertTrue(
-            response_content.find("<StUF:ontvanger>")
-            < response_content.find(settings.STUF_BG_ONTVANGER["organisatie"])
-            < response_content.find("</StUF:ontvanger>")
-        )
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
@@ -209,7 +198,7 @@ class TestClient(TestCase):
 
         with requests_mock.Mocker() as m:
             m.post(
-                settings.STUF_BG_URL,
+                self.url,
                 content=bytes(
                     loader.render_to_string("ResponseVerblijfsTitelHistorie.xml"),
                     encoding="utf-8",
@@ -221,27 +210,16 @@ class TestClient(TestCase):
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
         self.assertIn("antwoord", response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["gebruiker"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["gebruiker"], response_content)
+        self.assertIn(self.zender_organisatie, response_content)
+        self.assertIn(self.zender_applicatie, response_content)
+        self.assertIn(self.zender_administratie, response_content)
+        self.assertIn(self.zender_gebruiker, response_content)
+        self.assertIn(self.ontvanger_organisatie, response_content)
+        self.assertIn(self.ontvanger_applicatie, response_content)
+        self.assertIn(self.ontvanger_administratie, response_content)
+        self.assertIn(self.ontvanger_gebruiker, response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
-        # Assert contents at proper places
-        self.assertTrue(
-            response_content.find("<StUF:zender>")
-            < response_content.find(settings.STUF_BG_ZENDER["organisatie"])
-            < response_content.find("</StUF:zender>")
-        )
-        self.assertTrue(
-            response_content.find("<StUF:ontvanger>")
-            < response_content.find(settings.STUF_BG_ONTVANGER["organisatie"])
-            < response_content.find("</StUF:ontvanger>")
-        )
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
@@ -254,7 +232,7 @@ class TestClient(TestCase):
 
         with requests_mock.Mocker() as m:
             m.post(
-                settings.STUF_BG_URL,
+                self.url,
                 content=bytes(
                     loader.render_to_string("ResponsePartnerHistorie.xml"),
                     encoding="utf-8",
@@ -266,27 +244,16 @@ class TestClient(TestCase):
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
         self.assertIn("antwoord", response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["gebruiker"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["gebruiker"], response_content)
+        self.assertIn(self.zender_organisatie, response_content)
+        self.assertIn(self.zender_applicatie, response_content)
+        self.assertIn(self.zender_administratie, response_content)
+        self.assertIn(self.zender_gebruiker, response_content)
+        self.assertIn(self.ontvanger_organisatie, response_content)
+        self.assertIn(self.ontvanger_applicatie, response_content)
+        self.assertIn(self.ontvanger_administratie, response_content)
+        self.assertIn(self.ontvanger_gebruiker, response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
-        # Assert contents at proper places
-        self.assertTrue(
-            response_content.find("<StUF:zender>")
-            < response_content.find(settings.STUF_BG_ZENDER["organisatie"])
-            < response_content.find("</StUF:zender>")
-        )
-        self.assertTrue(
-            response_content.find("<StUF:ontvanger>")
-            < response_content.find(settings.STUF_BG_ONTVANGER["organisatie"])
-            < response_content.find("</StUF:ontvanger>")
-        )
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
@@ -299,7 +266,7 @@ class TestClient(TestCase):
 
         with requests_mock.Mocker() as m:
             m.post(
-                settings.STUF_BG_URL,
+                self.url,
                 content=bytes(
                     loader.render_to_string("ResponseNationaliteitHistorie.xml"),
                     encoding="utf-8",
@@ -311,24 +278,13 @@ class TestClient(TestCase):
         self.assertEqual(response.status_code, 200)
         response_content = str(response.content)
         self.assertIn("antwoord", response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ONTVANGER["gebruiker"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["organisatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["applicatie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["administratie"], response_content)
-        self.assertIn(settings.STUF_BG_ZENDER["gebruiker"], response_content)
+        self.assertIn(self.zender_organisatie, response_content)
+        self.assertIn(self.zender_applicatie, response_content)
+        self.assertIn(self.zender_administratie, response_content)
+        self.assertIn(self.zender_gebruiker, response_content)
+        self.assertIn(self.ontvanger_organisatie, response_content)
+        self.assertIn(self.ontvanger_applicatie, response_content)
+        self.assertIn(self.ontvanger_administratie, response_content)
+        self.assertIn(self.ontvanger_gebruiker, response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
-        # Assert contents at proper places
-        self.assertTrue(
-            response_content.find("<StUF:zender>")
-            < response_content.find(settings.STUF_BG_ZENDER["organisatie"])
-            < response_content.find("</StUF:zender>")
-        )
-        self.assertTrue(
-            response_content.find("<StUF:ontvanger>")
-            < response_content.find(settings.STUF_BG_ONTVANGER["organisatie"])
-            < response_content.find("</StUF:ontvanger>")
-        )
