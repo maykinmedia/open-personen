@@ -6,12 +6,11 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.test_data import VERBLIJFS_TITEL_HISTORIE
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.tests.test_data import VERBLIJFS_TITEL_HISTORIE
 
 
 class TestVerblijfsTitelHistorie(APITestCase):
-
     def setUp(self):
         self.url = StufBGClient.get_solo().url
 
