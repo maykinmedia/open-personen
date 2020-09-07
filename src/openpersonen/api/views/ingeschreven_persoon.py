@@ -1,39 +1,22 @@
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from rest_framework.viewsets import ViewSet
 from vng_api_common.filters import Backend
 
 from openpersonen.api.data_classes import IngeschrevenPersoon
 from openpersonen.api.filters import IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
+from openpersonen.api.views.base import BaseViewSet
 
 
-class IngeschrevenPersoonViewSet(ViewSet):
+class IngeschrevenPersoonViewSet(BaseViewSet):
 
     lookup_field = "burgerservicenummer"
     serializer_class = IngeschrevenPersoonSerializer
-    permission_classes = [IsAuthenticated]
     filter_class = IngeschrevenPersoonFilter
     filter_backends = [
         Backend,
     ]
-
-    def get_serializer_context(self):
-        """
-        Extra context provided to the serializer class.
-        """
-        return {"request": self.request, "format": self.format_kwarg, "view": self}
-
-    def get_serializer(self, *args, **kwargs):
-        """
-        Return the serializer instance that should be used for validating and
-        deserializing input, and for serializing output.
-        """
-        serializer_class = self.serializer_class
-        kwargs["context"] = self.get_serializer_context()
-        return serializer_class(*args, **kwargs)
 
     @staticmethod
     def combination_1(filters_values_dict):
