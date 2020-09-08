@@ -196,8 +196,6 @@ class Kind(Persoon):
             for instance in instances:
                 instance_dict = cls.get_model_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
-        else:
-            pass
         return class_instances
 
     @classmethod

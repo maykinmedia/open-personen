@@ -27,7 +27,7 @@ class Partner(Persoon):
         return SoortVerbintenis.values[self.soortVerbintenis]
 
     @staticmethod
-    def get_instance_dict(response):
+    def get_client_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
         antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
@@ -129,12 +129,124 @@ class Partner(Persoon):
             "geheimhoudingPersoonsgegevens": True,
         }
 
+        return partner_dict
+
+    @staticmethod
+    def get_model_instance_dict(partner):
+
+        partner_dict = {
+            "burgerservicenummer": partner.burgerservicenummer_echtgenoot_geregistreerd_partner,
+            "geslachtsaanduiding": partner.geslachtsaanduiding_echtgenoot_geregistreerd_partner,
+            "soortVerbintenis": partner.soort_verbintenis,
+            "naam": {
+                "geslachtsnaam": partner.geslachtsnaam_echtgenoot_geregistreerd_partner,
+                "voorletters": "string",
+                "voornamen": partner.voornamen_echtgenoot_geregistreerd_partner,
+                "voorvoegsel": partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner,
+                "inOnderzoek": {
+                    "geslachtsnaam": bool(partner.geslachtsnaam_echtgenoot_geregistreerd_partner),
+                    "voornamen": bool(partner.voornamen_echtgenoot_geregistreerd_partner),
+                    "voorvoegsel": bool(
+                        partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner,
+                    ),
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "geboorte": {
+                "datum": {
+                    "dag": int(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": partner.geboortedatum_echtgenoot_geregistreerd_partner,
+                    "jaar": int(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "land": {
+                    "code": "0000",
+                    "omschrijving": partner.geboorteland_echtgenoot_geregistreerd_partner,
+                },
+                "plaats": {
+                    "code": "0000",
+                    "omschrijving": partner.geboorteplaats_echtgenoot_geregistreerd_partner,
+                },
+                "inOnderzoek": {
+                    "datum": bool(partner.geboortedatum_echtgenoot_geregistreerd_partner),
+                    "land": bool(partner.geboorteland_echtgenoot_geregistreerd_partner),
+                    "plaats": bool(partner.geboorteplaats_echtgenoot_geregistreerd_partner),
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "inOnderzoek": {
+                "burgerservicenummer": bool(partner.burgerservicenummer_echtgenoot_geregistreerd_partner),
+                "geslachtsaanduiding": bool(
+                    partner.geslachtsaanduiding_echtgenoot_geregistreerd_partner
+                ),
+                "datumIngangOnderzoek": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0,
+                },
+            },
+            "aangaanHuwelijkPartnerschap": {
+                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "land": {"code": "0000", "omschrijving": "string"},
+                "plaats": {"code": "0000", "omschrijving": "string"},
+                "inOnderzoek": {
+                    "datum": True,
+                    "land": True,
+                    "plaats": True,
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "geheimhoudingPersoonsgegevens": True,
+        }
+
         convert_empty_instances(partner_dict)
 
         return partner_dict
 
     @classmethod
-    def retrieve(cls, bsn):
-        response = StufBGClient.get_solo().get_partner(bsn)
-        instance_dict = cls.get_instance_dict(response)
+    def list(cls, bsn):
+        class_instances = []
+        if settings.USE_STUF_BG_DATABASE:
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).partnerschap_set.all()
+            for instance in instances:
+                instance_dict = cls.get_model_instance_dict(instance)
+                class_instances.append(cls(**instance_dict))
+        return class_instances
+
+    @classmethod
+    def retrieve(cls, bsn, id):
+        if settings.USE_STUF_BG_DATABASE:
+            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn).partnerschap_set.get(burgerservicenummer_kind=id)
+            instance_dict = cls.get_model_instance_dict(instance)
+        else:
+            response = StufBGClient.get_solo().get_partner(bsn)
+            instance_dict = cls.get_client_instance_dict(response)
         return cls(**instance_dict)

@@ -27,7 +27,7 @@ class Ouder(Persoon):
         return OuderAanduiding.values[self.ouderAanduiding]
 
     @staticmethod
-    def get_instance_dict(response):
+    def get_client_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
         antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
@@ -138,8 +138,125 @@ class Ouder(Persoon):
 
         return ouder_dict
 
+    @staticmethod
+    def get_model_instance_dict(ouder):
+
+        ouder_dict = {
+            "burgerservicenummer": ouder.burgerservicenummer_ouder,
+            "geslachtsaanduiding": ouder.geslachtsaanduiding_ouder,
+            "ouderAanduiding": ouder.geslachtsaanduiding_ouder,
+            "datumIngangFamilierechtelijkeBetrekking": {
+                "dag": int(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder[
+                    settings.DAY_START: settings.DAY_END
+                    ]
+                ),
+                "datum": ouder.datum_ingang_familierechtelijke_betrekking_ouder,
+                "jaar": int(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder[
+                    settings.YEAR_START: settings.YEAR_END
+                    ]
+                ),
+                "maand": int(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder[
+                    settings.MONTH_START: settings.MONTH_END
+                    ]
+                ),
+            },
+            "naam": {
+                "geslachtsnaam": ouder.geslachtsnaam_ouder,
+                "voorletters": "string",
+                "voornamen": ouder.voornamen_ouder,
+                "voorvoegsel": ouder.voorvoegsel_geslachtsnaam_ouder,
+                "inOnderzoek": {
+                    "geslachtsnaam": bool(ouder.geslachtsnaam_ouder),
+                    "voornamen": bool(ouder.voornamen_ouder),
+                    "voorvoegsel": bool(
+                        ouder.voorvoegsel_geslachtsnaam_ouder
+                    ),
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "inOnderzoek": {
+                "burgerservicenummer": bool(ouder.burgerservicenummer_ouder),
+                "datumIngangFamilierechtelijkeBetrekking": bool(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                ),
+                "geslachtsaanduiding": bool(
+                    ouder.geslachtsaanduiding_ouder
+                ),
+                "datumIngangOnderzoek": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0,
+                },
+            },
+            "geboorte": {
+                "datum": {
+                    "dag": int(
+                        ouder.geboortedatum_ouder[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": ouder.geboortedatum_ouder,
+                    "jaar": int(
+                        ouder.geboortedatum_ouder[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        ouder.geboortedatum_ouder[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "land": {
+                    "code": "0000",
+                    "omschrijving": ouder.geboorteland_ouder,
+                },
+                "plaats": {
+                    "code": "0000",
+                    "omschrijving": ouder.geboorteplaats_ouder,
+                },
+                "inOnderzoek": {
+                    "datum": bool(ouder.geboortedatum_ouder),
+                    "land": bool(ouder.geboorteland_ouder),
+                    "plaats": bool(ouder.geboorteplaats_ouder),
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "geheimhoudingPersoonsgegevens": True,
+        }
+
+        return ouder_dict
+
     @classmethod
-    def retrieve(cls, bsn):
-        response = StufBGClient.get_solo().get_ouder(bsn)
-        instance_dict = cls.get_instance_dict(response)
+    def list(cls, bsn):
+        class_instances = []
+        if settings.USE_STUF_BG_DATABASE:
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.all()
+            for instance in instances:
+                instance_dict = cls.get_model_instance_dict(instance)
+                class_instances.append(cls(**instance_dict))
+        return class_instances
+
+    @classmethod
+    def retrieve(cls, bsn, id):
+        if settings.USE_STUF_BG_DATABASE:
+            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.get(burgerservicenummer_kind=id)
+            instance_dict = cls.get_model_instance_dict(instance)
+        else:
+            response = StufBGClient.get_solo().get_ouder(bsn)
+            instance_dict = cls.get_client_instance_dict(response)
         return cls(**instance_dict)
