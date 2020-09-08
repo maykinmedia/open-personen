@@ -9,10 +9,10 @@ class NestedViewSet(BaseViewSet):
         return Response(data=[], status=HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
-        burgerservicenummer = kwargs["ingeschrevenpersonen_burgerservicenummer"]
+        bsn = kwargs["ingeschrevenpersonen_burgerservicenummer"]
         id = kwargs["id"]
 
-        instance = self.instance_class.retrieve(burgerservicenummer)
+        instance = self.instance_class.retrieve(bsn, id)
 
         serializer = self.serializer_class(instance)
 
