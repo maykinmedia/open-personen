@@ -189,6 +189,18 @@ class Kind(Persoon):
         return kind_dict
 
     @classmethod
+    def list(cls, bsn):
+        class_instances = []
+        if settings.USE_STUF_BG_DATABASE:
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.all()
+            for instance in instances:
+                instance_dict = cls.get_model_instance_dict(instance)
+                class_instances.append(cls(**instance_dict))
+        else:
+            pass
+        return class_instances
+
+    @classmethod
     def retrieve(cls, bsn, id):
         if settings.USE_STUF_BG_DATABASE:
             instance = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.get(burgerservicenummer_kind=id)
