@@ -43,7 +43,7 @@ class IngeschrevenPersoon(Persoon):
         return GeslachtsaanduidingChoices.values[self.geslachtsaanduiding]
 
     @staticmethod
-    def get_instance_dict(response):
+    def get_client_instance_dict(response):
         dict_object = xmltodict.parse(response.content)
 
         antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
@@ -404,14 +404,461 @@ class IngeschrevenPersoon(Persoon):
 
         return ingeschreven_persoon_dict
 
+    @staticmethod
+    def get_model_instance_dict(persoon):
+
+        kiesrecht = persoon.kiesrecht_set.first()
+        overlijden = persoon.overlijden_set.first()
+        verblijfplaats = persoon.verblijfplaats_set.first()
+
+        ingeschreven_persoon_dict = {
+            "burgerservicenummer": persoon.burgerservicenummer_persoon,
+            "geheimhoudingPersoonsgegevens": True,
+            "naam": {
+                "geslachtsnaam": persoon.geslachtsnaam_persoon,
+                "voorletters": "string",
+                "voornamen": persoon.voornamen_persoon,
+                "voorvoegsel": persoon.voorvoegsel_geslachtsnaam_persoon,
+                "inOnderzoek": {
+                    "geslachtsnaam": bool(persoon.geslachtsnaam_persoon),
+                    "voornamen": bool(persoon.voornamen_persoon),
+                    "voorvoegsel": bool(
+                        persoon.voorvoegsel_geslachtsnaam_persoon
+                    ),
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+                "aanhef": "string",
+                "aanschrijfwijze": "string",
+                "gebruikInLopendeTekst": "string",
+                "aanduidingNaamgebruik": persoon.aanduiding_naamgebruik,
+            },
+            "geboorte": {
+                "datum": {
+                    "dag": int(
+                        persoon.geboortedatum_persoon[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": persoon.geboortedatum_persoon,
+                    "jaar": int(
+                        persoon.geboortedatum_persoon[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        persoon.geboortedatum_persoon[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "land": {
+                    "code": "string",
+                    "omschrijving": persoon.geboorteland_persoon,
+                },
+                "plaats": {
+                    "code": "string",
+                    "omschrijving": persoon.geboorteplaats_persoon,
+                },
+                "inOnderzoek": {
+                    "datum": True,
+                    "land": True,
+                    "plaats": True,
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "geslachtsaanduiding": persoon.geslachtsaanduiding,
+            "leeftijd": relativedelta(
+                datetime.now(),
+                datetime.strptime(persoon.geboortedatum_persoon, "%Y%m%d"),
+            ).years,
+            "datumEersteInschrijvingGBA": {
+                "dag": int(
+                    persoon.datum_ingang_onderzoek[
+                    settings.DAY_START: settings.DAY_END
+                    ]
+                ),
+                "datum": persoon.datum_ingang_onderzoek,
+                "jaar": int(
+                    persoon.datum_ingang_onderzoek[
+                    settings.YEAR_START: settings.YEAR_END
+                    ]
+                ),
+                "maand": int(
+                    persoon.datum_ingang_onderzoek[
+                    settings.MONTH_START: settings.MONTH_END
+                    ]
+                ),
+            },
+            "kiesrecht": {
+                "europeesKiesrecht": bool(
+                    kiesrecht.aanduiding_europees_kiesrecht
+                ),
+                "uitgeslotenVanKiesrecht": bool(
+                    kiesrecht.aanduiding_uitgesloten_kiesrecht
+                ),
+                "einddatumUitsluitingEuropeesKiesrecht": {
+                    "dag": int(
+                        kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": kiesrecht.einddatum_uitsluiting_europees_kiesrecht,
+                    "jaar": int(
+                        kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "einddatumUitsluitingKiesrecht": {
+                    "dag": int(
+                        kiesrecht.einddatum_uitsluiting_kiesrecht[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": kiesrecht.einddatum_uitsluiting_kiesrecht,
+                    "jaar": int(
+                        kiesrecht.einddatum_uitsluiting_kiesrecht[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        kiesrecht.einddatum_uitsluiting_kiesrecht[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+            },
+            "inOnderzoek": {
+                "burgerservicenummer": bool(persoon.burgerservicenummer_persoon),
+                "geslachtsaanduiding": bool(
+                    persoon.geslachtsaanduiding
+                ),
+                "datumIngangOnderzoek": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0,
+                },
+            },
+            "opschortingBijhouding": {
+                "reden": "overlijden",
+                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+            },
+            "overlijden": {
+                "indicatieOverleden": True,
+                "datum": {
+                    "dag": int(
+                        overlijden.datum_overlijden[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": overlijden.datum_overlijden,
+                    "jaar": int(
+                        overlijden.datum_overlijden[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        overlijden.datum_overlijden[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "land": {
+                    "code": "string",
+                    "omschrijving": overlijden.land_overlijden,
+                },
+                "plaats": {
+                    "code": "string",
+                    "omschrijving": overlijden.plaats_overlijden,
+                },
+                "inOnderzoek": {
+                    "datum": bool(overlijden.datum_overlijden),
+                    "land": bool(overlijden.land_overlijden),
+                    "plaats": bool(overlijden.plaats_overlijden),
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "verblijfplaats": {
+                "functieAdres": "woonadres",
+                "huisletter": verblijfplaats.huisletter,
+                "huisnummer": verblijfplaats.huisnummer,
+                "huisnummertoevoeging": verblijfplaats.huisnummertoevoeging,
+                "aanduidingBijHuisnummer": verblijfplaats.aanduiding_bij_huisnummer,
+                "identificatiecodeNummeraanduiding": verblijfplaats.identificatiecode_nummeraanduiding,
+                "naamOpenbareRuimte": "string",
+                "postcode": verblijfplaats.postcode,
+                "woonplaatsnaam": verblijfplaats.woonplaatsnaam,
+                "identificatiecodeAdresseerbaarObject": "string",
+                "indicatieVestigingVanuitBuitenland": True,
+                "locatiebeschrijving": verblijfplaats.locatiebeschrijving,
+                "straatnaam": verblijfplaats.straatnaam,
+                "vanuitVertrokkenOnbekendWaarheen": True,
+                "datumAanvangAdreshouding": {
+                    "dag": int(
+                        verblijfplaats.datum_aanvang_adres_buitenland[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": verblijfplaats.datum_aanvang_adres_buitenland,
+                    "jaar": int(
+                        verblijfplaats.datum_aanvang_adres_buitenland[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        verblijfplaats.datum_aanvang_adres_buitenland[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "datumIngangGeldigheid": {
+                    "dag": int(
+                        verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": verblijfplaats.ingangsdatum_geldigheid_met_betrekking,
+                    "jaar": int(
+                        verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "datumInschrijvingInGemeente": {
+                    "dag": int(
+                        verblijfplaats.datum_inschrijving_in_de_gemeente[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": verblijfplaats.datum_inschrijving_in_de_gemeente,
+                    "jaar": int(
+                        verblijfplaats.datum_inschrijving_in_de_gemeente[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        verblijfplaats.datum_inschrijving_in_de_gemeente[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "datumVestigingInNederland": {
+                    "dag": int(
+                        verblijfplaats.datum_vestiging_in_nederland[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": verblijfplaats.datum_vestiging_in_nederland,
+                    "jaar": int(
+                        verblijfplaats.datum_vestiging_in_nederland[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        verblijfplaats.datum_vestiging_in_nederland[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "gemeenteVanInschrijving": {"code": "string", "omschrijving": "string"},
+                "landVanwaarIngeschreven": {"code": "string", "omschrijving": "string"},
+                "verblijfBuitenland": {
+                    "adresRegel1": "string",
+                    "adresRegel2": "string",
+                    "adresRegel3": "string",
+                    "vertrokkenOnbekendWaarheen": True,
+                    "land": {"code": "string", "omschrijving": "string"},
+                },
+                "inOnderzoek": {
+                    "aanduidingBijHuisnummer": True,
+                    "datumAanvangAdreshouding": True,
+                    "datumIngangGeldigheid": True,
+                    "datumInschrijvingInGemeente": True,
+                    "datumVestigingInNederland": True,
+                    "functieAdres": True,
+                    "gemeenteVanInschrijving": True,
+                    "huisletter": bool(
+                        verblijfplaats.huisletter
+                    ),
+                    "huisnummer": bool(
+                        verblijfplaats.huisnummer
+                    ),
+                    "huisnummertoevoeging": bool(
+                        verblijfplaats.huisnummertoevoeging
+                    ),
+                    "identificatiecodeNummeraanduiding": True,
+                    "identificatiecodeAdresseerbaarObject": True,
+                    "landVanwaarIngeschreven": True,
+                    "locatiebeschrijving": True,
+                    "naamOpenbareRuimte": True,
+                    "postcode": bool(
+                        verblijfplaats.postcode
+                    ),
+                    "straatnaam": bool(
+                        verblijfplaats.straatnaam
+                    ),
+                    "verblijfBuitenland": True,
+                    "woonplaatsnaam": bool(
+                        verblijfplaats.woonplaatsnaam
+                    ),
+                    "datumIngangOnderzoek": {
+                        "dag": int(
+                            verblijfplaats.datum_ingang_onderzoek[
+                            settings.DAY_START: settings.DAY_END
+                            ]
+                        ),
+                        "datum": verblijfplaats.datum_ingang_onderzoek,
+                        "jaar": int(
+                            verblijfplaats.datum_ingang_onderzoek[
+                            settings.YEAR_START: settings.YEAR_END
+                            ]
+                        ),
+                        "maand": int(
+                            verblijfplaats.datum_ingang_onderzoek[
+                            settings.MONTH_START: settings.MONTH_END
+                            ]
+                        ),
+                    },
+                },
+            },
+            "gezagsverhouding": {
+                "indicatieCurateleRegister": True,
+                "indicatieGezagMinderjarige": "ouder1",
+                "inOnderzoek": {
+                    "indicatieCurateleRegister": True,
+                    "indicatieGezagMinderjarige": True,
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "verblijfstitel": {
+                "aanduiding": {"code": "string", "omschrijving": "string"},
+                "datumEinde": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "datumIngang": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "inOnderzoek": {
+                    "aanduiding": True,
+                    "datumEinde": True,
+                    "datumIngang": True,
+                    "datumIngangOnderzoek": {
+                        "dag": 0,
+                        "datum": "string",
+                        "jaar": 0,
+                        "maand": 0,
+                    },
+                },
+            },
+            "reisdocumenten": ["string"],
+        }
+
+        ingeschreven_persoon_dict['nationaliteit'] = []
+
+        nationaliteiten = persoon.nationaliteit_set.all()
+
+        for nationaliteit in nationaliteiten:
+            ingeschreven_persoon_dict['nationaliteit'].append(
+                {
+                    "aanduidingBijzonderNederlanderschap": nationaliteit.aanduiding_bijzonder_nederlanderschap,
+                    "datumIngangGeldigheid": {
+                        "dag": int(
+                            kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
+                            settings.DAY_START: settings.DAY_END
+                            ]
+                        ),
+                        "datum": kiesrecht.datum_van_ingang_geldigheid_met_betrekking,
+                        "jaar": int(
+                            kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
+                            settings.YEAR_START: settings.YEAR_END
+                            ]
+                        ),
+                        "maand": int(
+                            kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
+                            settings.MONTH_START: settings.MONTH_END
+                            ]
+                        ),
+                    },
+                    "nationaliteit": {
+                        "code": "string",
+                        "omschrijving": nationaliteit.nationaliteit
+                    },
+                    "redenOpname": {
+                        "code": "string",
+                        "omschrijving": nationaliteit.reden_opname_nationaliteit
+                    },
+                    "inOnderzoek": {
+                        "aanduidingBijzonderNederlanderschap": bool(
+                            nationaliteit.aanduiding_bijzonder_nederlanderschap
+                        ),
+                        "nationaliteit": bool(nationaliteit.nationaliteit),
+                        "redenOpname": bool(nationaliteit.reden_opname_nationaliteit),
+                        "datumIngangOnderzoek": {
+                            "dag": int(
+                                kiesrecht.datum_ingang_onderzoek[
+                                settings.DAY_START: settings.DAY_END
+                                ]
+                            ),
+                            "datum": kiesrecht.datum_ingang_onderzoek,
+                            "jaar": int(
+                                kiesrecht.datum_ingang_onderzoek[
+                                settings.YEAR_START: settings.YEAR_END
+                                ]
+                            ),
+                            "maand": int(
+                                kiesrecht.datum_ingang_onderzoek[
+                                settings.MONTH_START: settings.MONTH_END
+                                ]
+                            ),
+                        },
+                    },
+                }
+            )
+
+        return ingeschreven_persoon_dict
+
     @classmethod
     def list(cls, filters):
-        response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
-        instance_dict = cls.get_instance_dict(response)
+        if settings.USE_STUF_BG_DATABASE:
+            pass
+        else:
+            response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
+            instance_dict = cls.get_client_instance_dict(response)
         return [cls(**instance_dict)]
 
     @classmethod
     def retrieve(cls, bsn=None):
-        response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
-        instance_dict = cls.get_instance_dict(response)
+        if settings.USE_STUF_BG_DATABASE:
+            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn)
+            instance_dict = cls.get_model_instance_dict(instance)
+        else:
+            response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
+            instance_dict = cls.get_client_instance_dict(response)
         return cls(**instance_dict)
