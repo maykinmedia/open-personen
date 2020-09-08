@@ -129,3 +129,6 @@ try:
     from .local import *  # noqa
 except ImportError:
     pass
+
+
+USE_STUF_BG_DATA = os.getenv('USE_STUF_BG_DATA', True)
