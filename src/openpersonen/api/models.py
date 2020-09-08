@@ -2,6 +2,7 @@ import base64
 import uuid
 from datetime import timedelta
 
+from django.conf import settings
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
@@ -9,6 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 
 import requests
 from solo.models import SingletonModel
+
+
+if getattr(settings, 'USE_STUF_BG_DATA', False):
+    from .testing_models import *
 
 
 class StufBGClient(SingletonModel):
