@@ -82,18 +82,18 @@ class IngeschrevenPersoon(Persoon):
                 "datum": {
                     "dag": int(
                         antwoord_dict_object["ns:geboortedatum"][
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": antwoord_dict_object["ns:geboortedatum"],
                     "jaar": int(
                         antwoord_dict_object["ns:geboortedatum"][
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         antwoord_dict_object["ns:geboortedatum"][
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -125,18 +125,18 @@ class IngeschrevenPersoon(Persoon):
             "datumEersteInschrijvingGBA": {
                 "dag": int(
                     antwoord_dict_object["ns:inp.datumInschrijving"][
-                    settings.DAY_START: settings.DAY_END
+                        settings.DAY_START : settings.DAY_END
                     ]
                 ),
                 "datum": antwoord_dict_object["ns:inp.datumInschrijving"],
                 "jaar": int(
                     antwoord_dict_object["ns:inp.datumInschrijving"][
-                    settings.YEAR_START: settings.YEAR_END
+                        settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
                     antwoord_dict_object["ns:inp.datumInschrijving"][
-                    settings.MONTH_START: settings.MONTH_END
+                        settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
@@ -150,25 +150,25 @@ class IngeschrevenPersoon(Persoon):
                 "einddatumUitsluitingEuropeesKiesrecht": {
                     "dag": int(
                         antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"][
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"],
                     "jaar": int(
                         antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"][
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"][
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "einddatumUitsluitingKiesrecht": {
                     "dag": int(
                         antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"][
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": antwoord_dict_object[
@@ -176,12 +176,12 @@ class IngeschrevenPersoon(Persoon):
                     ],
                     "jaar": int(
                         antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"][
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"][
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -424,24 +424,22 @@ class IngeschrevenPersoon(Persoon):
                 "inOnderzoek": {
                     "geslachtsnaam": bool(persoon.geslachtsnaam_persoon),
                     "voornamen": bool(persoon.voornamen_persoon),
-                    "voorvoegsel": bool(
-                        persoon.voorvoegsel_geslachtsnaam_persoon
-                    ),
+                    "voorvoegsel": bool(persoon.voorvoegsel_geslachtsnaam_persoon),
                     "datumIngangOnderzoek": {
                         "dag": int(
                             persoon.datum_ingang_onderzoek[
-                            settings.DAY_START: settings.DAY_END
+                                settings.DAY_START : settings.DAY_END
                             ]
                         ),
                         "datum": persoon.datum_ingang_onderzoek,
                         "jaar": int(
                             persoon.datum_ingang_onderzoek[
-                            settings.YEAR_START: settings.YEAR_END
+                                settings.YEAR_START : settings.YEAR_END
                             ]
                         ),
                         "maand": int(
                             persoon.datum_ingang_onderzoek[
-                            settings.MONTH_START: settings.MONTH_END
+                                settings.MONTH_START : settings.MONTH_END
                             ]
                         ),
                     },
@@ -455,18 +453,18 @@ class IngeschrevenPersoon(Persoon):
                 "datum": {
                     "dag": int(
                         persoon.geboortedatum_persoon[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": persoon.geboortedatum_persoon,
                     "jaar": int(
                         persoon.geboortedatum_persoon[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         persoon.geboortedatum_persoon[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -503,9 +501,7 @@ class IngeschrevenPersoon(Persoon):
             },
             "inOnderzoek": {
                 "burgerservicenummer": bool(persoon.burgerservicenummer_persoon),
-                "geslachtsaanduiding": bool(
-                    persoon.geslachtsaanduiding
-                ),
+                "geslachtsaanduiding": bool(persoon.geslachtsaanduiding),
                 "datumIngangOnderzoek": {
                     "dag": 0,
                     "datum": "string",
@@ -521,69 +517,67 @@ class IngeschrevenPersoon(Persoon):
         }
 
         if kiesrecht:
-            ingeschreven_persoon_dict['kiesrecht'] = {
-                "europeesKiesrecht": bool(
-                    kiesrecht.aanduiding_europees_kiesrecht
-                ),
+            ingeschreven_persoon_dict["kiesrecht"] = {
+                "europeesKiesrecht": bool(kiesrecht.aanduiding_europees_kiesrecht),
                 "uitgeslotenVanKiesrecht": bool(
                     kiesrecht.aanduiding_uitgesloten_kiesrecht
                 ),
                 "einddatumUitsluitingEuropeesKiesrecht": {
                     "dag": int(
                         kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": kiesrecht.einddatum_uitsluiting_europees_kiesrecht,
                     "jaar": int(
                         kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "einddatumUitsluitingKiesrecht": {
                     "dag": int(
                         kiesrecht.einddatum_uitsluiting_kiesrecht[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": kiesrecht.einddatum_uitsluiting_kiesrecht,
                     "jaar": int(
                         kiesrecht.einddatum_uitsluiting_kiesrecht[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         kiesrecht.einddatum_uitsluiting_kiesrecht[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
             }
 
         if overlijden:
-            ingeschreven_persoon_dict['overlijden'] = {
+            ingeschreven_persoon_dict["overlijden"] = {
                 "indicatieOverleden": True,
                 "datum": {
                     "dag": int(
                         overlijden.datum_overlijden[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": overlijden.datum_overlijden,
                     "jaar": int(
                         overlijden.datum_overlijden[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         overlijden.datum_overlijden[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -609,7 +603,7 @@ class IngeschrevenPersoon(Persoon):
             }
 
         if verblijfplaats:
-            ingeschreven_persoon_dict['verblijfplaats'] = {
+            ingeschreven_persoon_dict["verblijfplaats"] = {
                 "functieAdres": verblijfplaats.functie_adres,
                 "huisletter": verblijfplaats.huisletter,
                 "huisnummer": verblijfplaats.huisnummer,
@@ -627,82 +621,82 @@ class IngeschrevenPersoon(Persoon):
                 "datumAanvangAdreshouding": {
                     "dag": int(
                         verblijfplaats.datum_aanvang_adres_buitenland[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": verblijfplaats.datum_aanvang_adres_buitenland,
                     "jaar": int(
                         verblijfplaats.datum_aanvang_adres_buitenland[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         verblijfplaats.datum_aanvang_adres_buitenland[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "datumIngangGeldigheid": {
                     "dag": int(
                         verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": verblijfplaats.ingangsdatum_geldigheid_met_betrekking,
                     "jaar": int(
                         verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "datumInschrijvingInGemeente": {
                     "dag": int(
                         verblijfplaats.datum_inschrijving_in_de_gemeente[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": verblijfplaats.datum_inschrijving_in_de_gemeente,
                     "jaar": int(
                         verblijfplaats.datum_inschrijving_in_de_gemeente[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         verblijfplaats.datum_inschrijving_in_de_gemeente[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "datumVestigingInNederland": {
                     "dag": int(
                         verblijfplaats.datum_vestiging_in_nederland[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": verblijfplaats.datum_vestiging_in_nederland,
                     "jaar": int(
                         verblijfplaats.datum_vestiging_in_nederland[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         verblijfplaats.datum_vestiging_in_nederland[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "gemeenteVanInschrijving": {
                     "code": "string",
-                    "omschrijving": verblijfplaats.gemeente_van_inschrijving
+                    "omschrijving": verblijfplaats.gemeente_van_inschrijving,
                 },
                 "landVanwaarIngeschreven": {
                     "code": "string",
-                    "omschrijving": verblijfplaats.land_vanwaar_ingeschreven
+                    "omschrijving": verblijfplaats.land_vanwaar_ingeschreven,
                 },
                 "verblijfBuitenland": {
                     "adresRegel1": verblijfplaats.regel_1_adres_buitenland,
@@ -712,52 +706,54 @@ class IngeschrevenPersoon(Persoon):
                     "land": {"code": "string", "omschrijving": "string"},
                 },
                 "inOnderzoek": {
-                    "aanduidingBijHuisnummer": bool(verblijfplaats.aanduiding_bij_huisnummer),
-                    "datumAanvangAdreshouding": bool(verblijfplaats.datum_aanvang_adreshouding),
+                    "aanduidingBijHuisnummer": bool(
+                        verblijfplaats.aanduiding_bij_huisnummer
+                    ),
+                    "datumAanvangAdreshouding": bool(
+                        verblijfplaats.datum_aanvang_adreshouding
+                    ),
                     "datumIngangGeldigheid": True,
-                    "datumInschrijvingInGemeente": bool(verblijfplaats.datum_inschrijving_in_de_gemeente),
-                    "datumVestigingInNederland": bool(verblijfplaats.datum_vestiging_in_nederland),
+                    "datumInschrijvingInGemeente": bool(
+                        verblijfplaats.datum_inschrijving_in_de_gemeente
+                    ),
+                    "datumVestigingInNederland": bool(
+                        verblijfplaats.datum_vestiging_in_nederland
+                    ),
                     "functieAdres": True,
-                    "gemeenteVanInschrijving": bool(verblijfplaats.gemeente_van_inschrijving),
-                    "huisletter": bool(
-                        verblijfplaats.huisletter
+                    "gemeenteVanInschrijving": bool(
+                        verblijfplaats.gemeente_van_inschrijving
                     ),
-                    "huisnummer": bool(
-                        verblijfplaats.huisnummer
+                    "huisletter": bool(verblijfplaats.huisletter),
+                    "huisnummer": bool(verblijfplaats.huisnummer),
+                    "huisnummertoevoeging": bool(verblijfplaats.huisnummertoevoeging),
+                    "identificatiecodeNummeraanduiding": bool(
+                        verblijfplaats.identificatiecode_nummeraanduiding
                     ),
-                    "huisnummertoevoeging": bool(
-                        verblijfplaats.huisnummertoevoeging
-                    ),
-                    "identificatiecodeNummeraanduiding": bool(verblijfplaats.identificatiecode_nummeraanduiding),
                     "identificatiecodeAdresseerbaarObject": True,
-                    "landVanwaarIngeschreven": bool(verblijfplaats.land_vanwaar_ingeschreven),
+                    "landVanwaarIngeschreven": bool(
+                        verblijfplaats.land_vanwaar_ingeschreven
+                    ),
                     "locatiebeschrijving": bool(verblijfplaats.locatiebeschrijving),
                     "naamOpenbareRuimte": bool(verblijfplaats.naam_openbare_ruimte),
-                    "postcode": bool(
-                        verblijfplaats.postcode
-                    ),
-                    "straatnaam": bool(
-                        verblijfplaats.straatnaam
-                    ),
+                    "postcode": bool(verblijfplaats.postcode),
+                    "straatnaam": bool(verblijfplaats.straatnaam),
                     "verblijfBuitenland": True,
-                    "woonplaatsnaam": bool(
-                        verblijfplaats.woonplaatsnaam
-                    ),
+                    "woonplaatsnaam": bool(verblijfplaats.woonplaatsnaam),
                     "datumIngangOnderzoek": {
                         "dag": int(
                             verblijfplaats.datum_ingang_onderzoek[
-                            settings.DAY_START: settings.DAY_END
+                                settings.DAY_START : settings.DAY_END
                             ]
                         ),
                         "datum": verblijfplaats.datum_ingang_onderzoek,
                         "jaar": int(
                             verblijfplaats.datum_ingang_onderzoek[
-                            settings.YEAR_START: settings.YEAR_END
+                                settings.YEAR_START : settings.YEAR_END
                             ]
                         ),
                         "maand": int(
                             verblijfplaats.datum_ingang_onderzoek[
-                            settings.MONTH_START: settings.MONTH_END
+                                settings.MONTH_START : settings.MONTH_END
                             ]
                         ),
                     },
@@ -765,27 +761,31 @@ class IngeschrevenPersoon(Persoon):
             }
 
         if gezagsverhouding:
-            ingeschreven_persoon_dict['gezagsverhouding'] = {
+            ingeschreven_persoon_dict["gezagsverhouding"] = {
                 "indicatieCurateleRegister": gezagsverhouding.indicatie_curateleregister,
                 "indicatieGezagMinderjarige": gezagsverhouding.indicatie_gezag_minderjarige,
                 "inOnderzoek": {
-                    "indicatieCurateleRegister": bool(gezagsverhouding.indicatie_curateleregister),
-                    "indicatieGezagMinderjarige": bool(gezagsverhouding.indicatie_gezag_minderjarige),
+                    "indicatieCurateleRegister": bool(
+                        gezagsverhouding.indicatie_curateleregister
+                    ),
+                    "indicatieGezagMinderjarige": bool(
+                        gezagsverhouding.indicatie_gezag_minderjarige
+                    ),
                     "datumIngangOnderzoek": {
                         "dag": int(
                             gezagsverhouding.datum_ingang_onderzoek[
-                            settings.DAY_START: settings.DAY_END
+                                settings.DAY_START : settings.DAY_END
                             ]
                         ),
                         "datum": gezagsverhouding.datum_ingang_onderzoek,
                         "jaar": int(
                             gezagsverhouding.datum_ingang_onderzoek[
-                            settings.YEAR_START: settings.YEAR_END
+                                settings.YEAR_START : settings.YEAR_END
                             ]
                         ),
                         "maand": int(
                             gezagsverhouding.datum_ingang_onderzoek[
-                            settings.MONTH_START: settings.MONTH_END
+                                settings.MONTH_START : settings.MONTH_END
                             ]
                         ),
                     },
@@ -793,44 +793,44 @@ class IngeschrevenPersoon(Persoon):
             }
 
         if verblijfstitel:
-            ingeschreven_persoon_dict['verblijfstitel'] = {
+            ingeschreven_persoon_dict["verblijfstitel"] = {
                 "aanduiding": {
                     "code": "string",
-                    "omschrijving": verblijfstitel.aanduiding_verblijfstitel
+                    "omschrijving": verblijfstitel.aanduiding_verblijfstitel,
                 },
                 "datumEinde": {
                     "dag": int(
                         verblijfstitel.datum_einde_verblijfstitel[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": verblijfstitel.datum_einde_verblijfstitel,
                     "jaar": int(
                         verblijfstitel.datum_einde_verblijfstitel[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         verblijfstitel.datum_einde_verblijfstitel[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "datumIngang": {
                     "dag": int(
                         verblijfstitel.ingangsdatum_verblijfstitel[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": verblijfstitel.ingangsdatum_verblijfstitel,
                     "jaar": int(
                         verblijfstitel.ingangsdatum_verblijfstitel[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         verblijfstitel.ingangsdatum_verblijfstitel[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -841,57 +841,57 @@ class IngeschrevenPersoon(Persoon):
                     "datumIngangOnderzoek": {
                         "dag": int(
                             verblijfstitel.datum_ingang_onderzoek[
-                            settings.DAY_START: settings.DAY_END
+                                settings.DAY_START : settings.DAY_END
                             ]
                         ),
                         "datum": verblijfstitel.datum_ingang_onderzoek,
                         "jaar": int(
                             verblijfstitel.datum_ingang_onderzoek[
-                            settings.YEAR_START: settings.YEAR_END
+                                settings.YEAR_START : settings.YEAR_END
                             ]
                         ),
                         "maand": int(
                             verblijfstitel.datum_ingang_onderzoek[
-                            settings.MONTH_START: settings.MONTH_END
+                                settings.MONTH_START : settings.MONTH_END
                             ]
                         ),
                     },
                 },
             }
 
-        ingeschreven_persoon_dict['nationaliteit'] = []
+        ingeschreven_persoon_dict["nationaliteit"] = []
 
         nationaliteiten = persoon.nationaliteit_set.all()
 
         for nationaliteit in nationaliteiten:
-            ingeschreven_persoon_dict['nationaliteit'].append(
+            ingeschreven_persoon_dict["nationaliteit"].append(
                 {
                     "aanduidingBijzonderNederlanderschap": nationaliteit.aanduiding_bijzonder_nederlanderschap,
                     "datumIngangGeldigheid": {
                         "dag": int(
                             kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
-                            settings.DAY_START: settings.DAY_END
+                                settings.DAY_START : settings.DAY_END
                             ]
                         ),
                         "datum": kiesrecht.datum_van_ingang_geldigheid_met_betrekking,
                         "jaar": int(
                             kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
-                            settings.YEAR_START: settings.YEAR_END
+                                settings.YEAR_START : settings.YEAR_END
                             ]
                         ),
                         "maand": int(
                             kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
-                            settings.MONTH_START: settings.MONTH_END
+                                settings.MONTH_START : settings.MONTH_END
                             ]
                         ),
                     },
                     "nationaliteit": {
                         "code": "string",
-                        "omschrijving": nationaliteit.nationaliteit
+                        "omschrijving": nationaliteit.nationaliteit,
                     },
                     "redenOpname": {
                         "code": "string",
-                        "omschrijving": nationaliteit.reden_opname_nationaliteit
+                        "omschrijving": nationaliteit.reden_opname_nationaliteit,
                     },
                     "inOnderzoek": {
                         "aanduidingBijzonderNederlanderschap": bool(
@@ -902,18 +902,18 @@ class IngeschrevenPersoon(Persoon):
                         "datumIngangOnderzoek": {
                             "dag": int(
                                 kiesrecht.datum_ingang_onderzoek[
-                                settings.DAY_START: settings.DAY_END
+                                    settings.DAY_START : settings.DAY_END
                                 ]
                             ),
                             "datum": kiesrecht.datum_ingang_onderzoek,
                             "jaar": int(
                                 kiesrecht.datum_ingang_onderzoek[
-                                settings.YEAR_START: settings.YEAR_END
+                                    settings.YEAR_START : settings.YEAR_END
                                 ]
                             ),
                             "maand": int(
                                 kiesrecht.datum_ingang_onderzoek[
-                                settings.MONTH_START: settings.MONTH_END
+                                    settings.MONTH_START : settings.MONTH_END
                                 ]
                             ),
                         },
@@ -925,7 +925,7 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def list(cls, filters):
-        if settings.USE_STUF_BG_DATABASE:
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
             pass
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
@@ -934,7 +934,7 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def retrieve(cls, bsn=None):
-        if settings.USE_STUF_BG_DATABASE:
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
             instance = Persoon.objects.get(burgerservicenummer_persoon=bsn)
             instance_dict = cls.get_model_instance_dict(instance)
         else:

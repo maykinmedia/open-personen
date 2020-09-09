@@ -7,7 +7,7 @@ import xmltodict
 from dateutil.relativedelta import relativedelta
 
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.testing_models import Persoon, Kind
+from openpersonen.api.testing_models import Kind, Persoon
 from openpersonen.api.utils import convert_empty_instances
 
 from .in_onderzoek import KindInOnderzoek
@@ -121,9 +121,7 @@ class Kind(Persoon):
                 "inOnderzoek": {
                     "geslachtsnaam": bool(kind.geslachtsnaam_kind),
                     "voornamen": bool(kind.voornamen_kind),
-                    "voorvoegsel": bool(
-                        kind.voorvoegsel_geslachtsnaam_kind
-                    ),
+                    "voorvoegsel": bool(kind.voorvoegsel_geslachtsnaam_kind),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -135,19 +133,15 @@ class Kind(Persoon):
             "geboorte": {
                 "datum": {
                     "dag": int(
-                        kind.geboortedatum_kind[
-                        settings.DAY_START: settings.DAY_END
-                        ]
+                        kind.geboortedatum_kind[settings.DAY_START : settings.DAY_END]
                     ),
                     "datum": kind.geboortedatum_kind,
                     "jaar": int(
-                        kind.geboortedatum_kind[
-                        settings.YEAR_START: settings.YEAR_END
-                        ]
+                        kind.geboortedatum_kind[settings.YEAR_START : settings.YEAR_END]
                     ),
                     "maand": int(
                         kind.geboortedatum_kind[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -203,8 +197,10 @@ class Kind(Persoon):
     @classmethod
     def list(cls, bsn):
         class_instances = []
-        if settings.USE_STUF_BG_DATABASE:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.all()
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).kind_set.all()
             for instance in instances:
                 instance_dict = cls.get_model_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -212,8 +208,10 @@ class Kind(Persoon):
 
     @classmethod
     def retrieve(cls, bsn, id):
-        if settings.USE_STUF_BG_DATABASE:
-            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.get(burgerservicenummer_kind=id)
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+            instance = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).kind_set.get(burgerservicenummer_kind=id)
             instance_dict = cls.get_model_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_kind(bsn)

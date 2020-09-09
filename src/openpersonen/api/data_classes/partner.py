@@ -144,8 +144,12 @@ class Partner(Persoon):
                 "voornamen": partner.voornamen_echtgenoot_geregistreerd_partner,
                 "voorvoegsel": partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner,
                 "inOnderzoek": {
-                    "geslachtsnaam": bool(partner.geslachtsnaam_echtgenoot_geregistreerd_partner),
-                    "voornamen": bool(partner.voornamen_echtgenoot_geregistreerd_partner),
+                    "geslachtsnaam": bool(
+                        partner.geslachtsnaam_echtgenoot_geregistreerd_partner
+                    ),
+                    "voornamen": bool(
+                        partner.voornamen_echtgenoot_geregistreerd_partner
+                    ),
                     "voorvoegsel": bool(
                         partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner,
                     ),
@@ -161,18 +165,18 @@ class Partner(Persoon):
                 "datum": {
                     "dag": int(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": partner.geboortedatum_echtgenoot_geregistreerd_partner,
                     "jaar": int(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -185,9 +189,13 @@ class Partner(Persoon):
                     "omschrijving": partner.geboorteplaats_echtgenoot_geregistreerd_partner,
                 },
                 "inOnderzoek": {
-                    "datum": bool(partner.geboortedatum_echtgenoot_geregistreerd_partner),
+                    "datum": bool(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner
+                    ),
                     "land": bool(partner.geboorteland_echtgenoot_geregistreerd_partner),
-                    "plaats": bool(partner.geboorteplaats_echtgenoot_geregistreerd_partner),
+                    "plaats": bool(
+                        partner.geboorteplaats_echtgenoot_geregistreerd_partner
+                    ),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -197,25 +205,27 @@ class Partner(Persoon):
                 },
             },
             "inOnderzoek": {
-                "burgerservicenummer": bool(partner.burgerservicenummer_echtgenoot_geregistreerd_partner),
+                "burgerservicenummer": bool(
+                    partner.burgerservicenummer_echtgenoot_geregistreerd_partner
+                ),
                 "geslachtsaanduiding": bool(
                     partner.geslachtsaanduiding_echtgenoot_geregistreerd_partner
                 ),
                 "datumIngangOnderzoek": {
                     "dag": int(
                         partner.datum_ingang_onderzoek[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": partner.datum_ingang_onderzoek,
                     "jaar": int(
                         partner.datum_ingang_onderzoek[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         partner.datum_ingang_onderzoek[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -224,33 +234,39 @@ class Partner(Persoon):
                 "datum": {
                     "dag": int(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
                     "jaar": int(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
                 "land": {
                     "code": "0000",
-                    "omschrijving": partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    "omschrijving": partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
                 },
                 "plaats": {
                     "code": "0000",
-                    "omschrijving": partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    "omschrijving": partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
                 },
                 "inOnderzoek": {
-                    "datum": bool(partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
-                    "land": bool(partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
-                    "plaats": bool(partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+                    "datum": bool(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    ),
+                    "land": bool(
+                        partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    ),
+                    "plaats": bool(
+                        partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    ),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -267,8 +283,10 @@ class Partner(Persoon):
     @classmethod
     def list(cls, bsn):
         class_instances = []
-        if settings.USE_STUF_BG_DATABASE:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).partnerschap_set.all()
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).partnerschap_set.all()
             for instance in instances:
                 instance_dict = cls.get_model_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -276,8 +294,10 @@ class Partner(Persoon):
 
     @classmethod
     def retrieve(cls, bsn, id):
-        if settings.USE_STUF_BG_DATABASE:
-            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn).partnerschap_set.get(burgerservicenummer_kind=id)
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+            instance = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).partnerschap_set.get(burgerservicenummer_kind=id)
             instance_dict = cls.get_model_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_partner(bsn)
