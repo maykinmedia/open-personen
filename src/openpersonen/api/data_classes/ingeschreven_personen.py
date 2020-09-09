@@ -410,6 +410,8 @@ class IngeschrevenPersoon(Persoon):
         kiesrecht = persoon.kiesrecht_set.first()
         overlijden = persoon.overlijden_set.first()
         verblijfplaats = persoon.verblijfplaats_set.first()
+        gezagsverhouding = persoon.gezagsverhouding_set.first()
+        verblijfstitel = persoon.verblijfstitel_set.first()
 
         ingeschreven_persoon_dict = {
             "burgerservicenummer": persoon.burgerservicenummer_persoon,
@@ -426,10 +428,22 @@ class IngeschrevenPersoon(Persoon):
                         persoon.voorvoegsel_geslachtsnaam_persoon
                     ),
                     "datumIngangOnderzoek": {
-                        "dag": 0,
-                        "datum": "string",
-                        "jaar": 0,
-                        "maand": 0,
+                        "dag": int(
+                            persoon.datum_ingang_onderzoek[
+                            settings.DAY_START: settings.DAY_END
+                            ]
+                        ),
+                        "datum": persoon.datum_ingang_onderzoek,
+                        "jaar": int(
+                            persoon.datum_ingang_onderzoek[
+                            settings.YEAR_START: settings.YEAR_END
+                            ]
+                        ),
+                        "maand": int(
+                            persoon.datum_ingang_onderzoek[
+                            settings.MONTH_START: settings.MONTH_END
+                            ]
+                        ),
                     },
                 },
                 "aanhef": "string",
@@ -482,22 +496,10 @@ class IngeschrevenPersoon(Persoon):
                 datetime.strptime(persoon.geboortedatum_persoon, "%Y%m%d"),
             ).years,
             "datumEersteInschrijvingGBA": {
-                "dag": int(
-                    persoon.datum_ingang_onderzoek[
-                    settings.DAY_START: settings.DAY_END
-                    ]
-                ),
-                "datum": persoon.datum_ingang_onderzoek,
-                "jaar": int(
-                    persoon.datum_ingang_onderzoek[
-                    settings.YEAR_START: settings.YEAR_END
-                    ]
-                ),
-                "maand": int(
-                    persoon.datum_ingang_onderzoek[
-                    settings.MONTH_START: settings.MONTH_END
-                    ]
-                ),
+                "dag": 0,
+                "datum": "string",
+                "jaar": 0,
+                "maand": 0,
             },
             "kiesrecht": {
                 "europeesKiesrecht": bool(
@@ -600,13 +602,13 @@ class IngeschrevenPersoon(Persoon):
                 },
             },
             "verblijfplaats": {
-                "functieAdres": "woonadres",
+                "functieAdres": verblijfplaats.functie_adres,
                 "huisletter": verblijfplaats.huisletter,
                 "huisnummer": verblijfplaats.huisnummer,
                 "huisnummertoevoeging": verblijfplaats.huisnummertoevoeging,
                 "aanduidingBijHuisnummer": verblijfplaats.aanduiding_bij_huisnummer,
                 "identificatiecodeNummeraanduiding": verblijfplaats.identificatiecode_nummeraanduiding,
-                "naamOpenbareRuimte": "string",
+                "naamOpenbareRuimte": verblijfplaats.naam_openbare_ruimte,
                 "postcode": verblijfplaats.postcode,
                 "woonplaatsnaam": verblijfplaats.woonplaatsnaam,
                 "identificatiecodeAdresseerbaarObject": "string",
@@ -686,23 +688,29 @@ class IngeschrevenPersoon(Persoon):
                         ]
                     ),
                 },
-                "gemeenteVanInschrijving": {"code": "string", "omschrijving": "string"},
-                "landVanwaarIngeschreven": {"code": "string", "omschrijving": "string"},
+                "gemeenteVanInschrijving": {
+                    "code": "string",
+                    "omschrijving": verblijfplaats.gemeente_van_inschrijving
+                },
+                "landVanwaarIngeschreven": {
+                    "code": "string",
+                    "omschrijving": verblijfplaats.land_vanwaar_ingeschreven
+                },
                 "verblijfBuitenland": {
-                    "adresRegel1": "string",
-                    "adresRegel2": "string",
-                    "adresRegel3": "string",
+                    "adresRegel1": verblijfplaats.regel_1_adres_buitenland,
+                    "adresRegel2": verblijfplaats.regel_2_adres_buitenland,
+                    "adresRegel3": verblijfplaats.regel_3_adres_buitenland,
                     "vertrokkenOnbekendWaarheen": True,
                     "land": {"code": "string", "omschrijving": "string"},
                 },
                 "inOnderzoek": {
-                    "aanduidingBijHuisnummer": True,
-                    "datumAanvangAdreshouding": True,
+                    "aanduidingBijHuisnummer": bool(verblijfplaats.aanduiding_bij_huisnummer),
+                    "datumAanvangAdreshouding": bool(verblijfplaats.datum_aanvang_adreshouding),
                     "datumIngangGeldigheid": True,
-                    "datumInschrijvingInGemeente": True,
-                    "datumVestigingInNederland": True,
+                    "datumInschrijvingInGemeente": bool(verblijfplaats.datum_inschrijving_in_de_gemeente),
+                    "datumVestigingInNederland": bool(verblijfplaats.datum_vestiging_in_nederland),
                     "functieAdres": True,
-                    "gemeenteVanInschrijving": True,
+                    "gemeenteVanInschrijving": bool(verblijfplaats.gemeente_van_inschrijving),
                     "huisletter": bool(
                         verblijfplaats.huisletter
                     ),
@@ -712,11 +720,11 @@ class IngeschrevenPersoon(Persoon):
                     "huisnummertoevoeging": bool(
                         verblijfplaats.huisnummertoevoeging
                     ),
-                    "identificatiecodeNummeraanduiding": True,
+                    "identificatiecodeNummeraanduiding": bool(verblijfplaats.identificatiecode_nummeraanduiding),
                     "identificatiecodeAdresseerbaarObject": True,
-                    "landVanwaarIngeschreven": True,
-                    "locatiebeschrijving": True,
-                    "naamOpenbareRuimte": True,
+                    "landVanwaarIngeschreven": bool(verblijfplaats.land_vanwaar_ingeschreven),
+                    "locatiebeschrijving": bool(verblijfplaats.locatiebeschrijving),
+                    "naamOpenbareRuimte": bool(verblijfplaats.naam_openbare_ruimte),
                     "postcode": bool(
                         verblijfplaats.postcode
                     ),
@@ -748,32 +756,93 @@ class IngeschrevenPersoon(Persoon):
                 },
             },
             "gezagsverhouding": {
-                "indicatieCurateleRegister": True,
-                "indicatieGezagMinderjarige": "ouder1",
+                "indicatieCurateleRegister": gezagsverhouding.indicatie_curateleregister,
+                "indicatieGezagMinderjarige": gezagsverhouding.indicatie_gezag_minderjarige,
                 "inOnderzoek": {
-                    "indicatieCurateleRegister": True,
-                    "indicatieGezagMinderjarige": True,
+                    "indicatieCurateleRegister": bool(gezagsverhouding.indicatie_curateleregister),
+                    "indicatieGezagMinderjarige": bool(gezagsverhouding.indicatie_gezag_minderjarige),
                     "datumIngangOnderzoek": {
-                        "dag": 0,
-                        "datum": "string",
-                        "jaar": 0,
-                        "maand": 0,
+                        "dag": int(
+                            gezagsverhouding.datum_ingang_onderzoek[
+                            settings.DAY_START: settings.DAY_END
+                            ]
+                        ),
+                        "datum": gezagsverhouding.datum_ingang_onderzoek,
+                        "jaar": int(
+                            gezagsverhouding.datum_ingang_onderzoek[
+                            settings.YEAR_START: settings.YEAR_END
+                            ]
+                        ),
+                        "maand": int(
+                            gezagsverhouding.datum_ingang_onderzoek[
+                            settings.MONTH_START: settings.MONTH_END
+                            ]
+                        ),
                     },
                 },
             },
             "verblijfstitel": {
-                "aanduiding": {"code": "string", "omschrijving": "string"},
-                "datumEinde": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
-                "datumIngang": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "aanduiding": {
+                    "code": "string",
+                    "omschrijving": verblijfstitel.aanduiding_verblijfstitel
+                },
+                "datumEinde": {
+                    "dag": int(
+                        verblijfstitel.datum_einde_verblijfstitel[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": verblijfstitel.datum_einde_verblijfstitel,
+                    "jaar": int(
+                        verblijfstitel.datum_einde_verblijfstitel[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        verblijfstitel.datum_einde_verblijfstitel[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "datumIngang": {
+                    "dag": int(
+                        verblijfstitel.ingangsdatum_verblijfstitel[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": verblijfstitel.ingangsdatum_verblijfstitel,
+                    "jaar": int(
+                        verblijfstitel.ingangsdatum_verblijfstitel[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        verblijfstitel.ingangsdatum_verblijfstitel[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
                 "inOnderzoek": {
-                    "aanduiding": True,
-                    "datumEinde": True,
-                    "datumIngang": True,
+                    "aanduiding": bool(verblijfstitel.aanduiding_verblijfstitel),
+                    "datumEinde": bool(verblijfstitel.datum_einde_verblijfstitel),
+                    "datumIngang": bool(verblijfstitel.ingangsdatum_verblijfstitel),
                     "datumIngangOnderzoek": {
-                        "dag": 0,
-                        "datum": "string",
-                        "jaar": 0,
-                        "maand": 0,
+                        "dag": int(
+                            verblijfstitel.datum_ingang_onderzoek[
+                            settings.DAY_START: settings.DAY_END
+                            ]
+                        ),
+                        "datum": verblijfstitel.datum_ingang_onderzoek,
+                        "jaar": int(
+                            verblijfstitel.datum_ingang_onderzoek[
+                            settings.YEAR_START: settings.YEAR_END
+                            ]
+                        ),
+                        "maand": int(
+                            verblijfstitel.datum_ingang_onderzoek[
+                            settings.MONTH_START: settings.MONTH_END
+                            ]
+                        ),
                     },
                 },
             },

@@ -178,10 +178,22 @@ class Kind(Persoon):
             "inOnderzoek": {
                 "burgerservicenummer": bool(kind.burgerservicenummer_kind),
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": int(
+                        kind.datum_ingang_onderzoek[
+                            settings.DAY_START : settings.DAY_END
+                        ]
+                    ),
+                    "datum": kind.datum_ingang_onderzoek,
+                    "jaar": int(
+                        kind.datum_ingang_onderzoek[
+                            settings.YEAR_START : settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        kind.datum_ingang_onderzoek[
+                            settings.MONTH_START : settings.MONTH_END
+                        ]
+                    ),
                 },
             },
         }

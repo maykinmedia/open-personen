@@ -8,106 +8,106 @@ from openpersonen.api.testing_models import *
 """
 Row index   |    Field name
 
-0   |   A-nummer persoon
-1   |   Burgerservicenummer persoon
-2   |   Voornamen persoon
-3   |   Adellijke titel/predikaat persoon
-4   |   Voorvoegsel geslachtsnaam persoon
-5   |   Geslachtsnaam persoon
-6   |   Geboortedatum persoon
-7   |   Geboorteplaats persoon
-8   |   Geboorteland persoon
-9   |   Geslachtsaanduiding
-10   |   Vorig A-nummer
-11   |   Volgend A-nummer
-12   |   Aanduiding naamgebruik
-13   |   Registergemeente akte waaraan gegevens over persoon ontleend zijn
-14   |   Aktenummer van de akte waaraan gegevens over persoon ontleend zijn
-15   |   Gemeente waar de gegevens over persoon aan het document ontleend zijn
-16   |   Datum van de ontlening van de gegevens over persoon
-17   |   Beschrijving van het document waaraan de gegevens over persoon ontleend zijn
-18   |   Aanduiding gegevens in onderzoek
-19   |   Datum ingang onderzoek
-20   |   Datum einde onderzoek
-21   |   Indicatie onjuist dan wel strijdigheid met de openbare orde
-22   |   Ingangsdatum geldigheid met betrekking tot de elementen van de categorie Persoon
-23   |   Datum van opneming met betrekking tot de elementen van de categorie Persoon
-24   |   RNI-deelnemer
-25   |   Omschrijving verdrag
-26   |
-27   |   A-nummer ouder1
-28   |   Burgerservicenummer ouder1
-29   |   Voornamen ouder1
-30   |   Adellijke titel/predikaat ouder1
-31   |   Voorvoegsel geslachtsnaam ouder1
-32   |   Geslachtsnaam ouder1
-33   |   Geboortedatum ouder1
-34   |   Geboorteplaats ouder1
-35   |   Geboorteland ouder1
-36   |   Geslachtsaanduiding ouder1
-37   |   Datum ingang familierechtelijke betrekking ouder1
-38   |   Registergemeente akte waaraan gegevens over ouder1 ontleend zijn
-39   |   Aktenummer van de akte waaraan gegevens over ouder1 ontleend zijn
-40   |   Gemeente waar de gegevens over ouder1 aan het document ontleend zijn
-41   |   Datum van de ontlening van de gegevens over ouder1
-42   |   Beschrijving van het document waaraan de gegevens over ouder1 ontleend zijn
-43   |   Aanduiding gegevens in onderzoek
-44   |   Datum ingang onderzoek
-45   |   Datum einde onderzoek
-46   |   Indicatie onjuist dan wel strijdigheid met de openbare orde
-47   |   Ingangsdatum geldigheid met betrekking tot de elementen van de categorie Ouder1
-48   |   Datum van opneming met betrekking tot de elementen van de categorie Ouder1
-49   |
-50   |   A-nummer ouder2
-51   |   Burgerservicenummer ouder2
-52   |   Voornamen ouder2
-53   |   Adellijke titel/predikaat ouder2
-54   |   Voorvoegsel geslachtsnaam ouder2
-55   |   Geslachtsnaam ouder2
-56   |   Geboortedatum ouder2
-57   |   Geboorteplaats ouder2
-58   |   Geboorteland ouder2
-59   |   Geslachtsaanduiding ouder2
-60   |   Datum ingang familierechtelijke betrekking ouder2
-61   |   Registergemeente akte waaraan gegevens over ouder2 ontleend zijn
-62   |   Aktenummer van de akte waaraan gegevens over ouder2 ontleend zijn
-63   |   Gemeente waar de gegevens over ouder2 aan het document ontleend zijn
-64   |   Datum van de ontlening van de gegevens over ouder2
-65   |   Beschrijving van het document waaraan de gegevens over ouder2 ontleend zijn
-66   |   Aanduiding gegevens in onderzoek
-67   |   Datum ingang onderzoek
-68   |   Datum einde onderzoek
-69   |   Indicatie onjuist dan wel strijdigheid met de openbare orde
-70   |   Ingangsdatum geldigheid met betrekking tot de elementen van de categorie Ouder2
-71   |   Datum van opneming met betrekking tot de elementen van de categorie Ouder2
-72   |
-73   |   Nationaliteit
-74   |   Reden opname nationaliteit
-75   |   Reden beëindigen nationaliteit
-76   |   Aanduiding bijzonder Nederlanderschap
-77   |   EU-persoonsummer
-78   |   Gemeente waar de gegevens over nationaliteit aan het document ontleend dan wel afgeleid zijn
-79   |   Datum van de ontlening dan wel afleiding van de gegevens over nationaliteit
-80   |   Beschrijving van het document waaraan de gegevens over nationaliteit ontleend dan wel afgeleid zijn
-81   |   Aanduiding gegevens in onderzoek
-82   |   Datum ingang onderzoek
-83   |   Datum einde onderzoek
-84   |   Indicatie onjuist
-85   |   Datum van ingang geldigheid met betrekking tot de elementen van de categorie Nationaliteit
-86   |   Datum van opneming met betrekking tot de elementen van de categorie Nationaliteit
-87   |   RNI-deelnemer
-88   |   Omschrijving verdrag
-89   |
-90   |   A-nummer echtgenoot/geregistreerd partner
-91   |   Burgerservicenummer echtgenoot/geregistreerd partner
-92   |   Voornamen echtgenoot/geregistreerd partner
-93   |   Adellijke titel/predikaat echtgenoot/geregistreerd partner
-94   |   Voorvoegsel geslachtsnaam echtgenoot/geregistreerd partner
-95   |   Geslachtsnaam echtgenoot/geregistreerd partner
-96   |   Geboortedatum echtgenoot/geregistreerd partner
-97   |   Geboorteplaats echtgenoot/geregistreerd partner
-98   |   Geboorteland echtgenoot/geregistreerd partner
-99   |   Geslachtsaanduiding echtgenoot/geregistreerd partner
+0     |   A-nummer persoon
+1     |   Burgerservicenummer persoon
+2     |   Voornamen persoon
+3     |   Adellijke titel/predikaat persoon
+4     |   Voorvoegsel geslachtsnaam persoon
+5     |   Geslachtsnaam persoon
+6     |   Geboortedatum persoon
+7     |   Geboorteplaats persoon
+8     |   Geboorteland persoon
+9     |   Geslachtsaanduiding
+10    |   Vorig A-nummer
+11    |   Volgend A-nummer
+12    |   Aanduiding naamgebruik
+13    |   Registergemeente akte waaraan gegevens over persoon ontleend zijn
+14    |   Aktenummer van de akte waaraan gegevens over persoon ontleend zijn
+15    |   Gemeente waar de gegevens over persoon aan het document ontleend zijn
+16    |   Datum van de ontlening van de gegevens over persoon
+17    |   Beschrijving van het document waaraan de gegevens over persoon ontleend zijn
+18    |   Aanduiding gegevens in onderzoek
+19    |   Datum ingang onderzoek
+20    |   Datum einde onderzoek
+21    |   Indicatie onjuist dan wel strijdigheid met de openbare orde
+22    |   Ingangsdatum geldigheid met betrekking tot de elementen van de categorie Persoon
+23    |   Datum van opneming met betrekking tot de elementen van de categorie Persoon
+24    |   RNI-deelnemer
+25    |   Omschrijving verdrag
+26    |
+27    |   A-nummer ouder1
+28    |   Burgerservicenummer ouder1
+29    |   Voornamen ouder1
+30    |   Adellijke titel/predikaat ouder1
+31    |   Voorvoegsel geslachtsnaam ouder1
+32    |   Geslachtsnaam ouder1
+33    |   Geboortedatum ouder1
+34    |   Geboorteplaats ouder1
+35    |   Geboorteland ouder1
+36    |   Geslachtsaanduiding ouder1
+37    |   Datum ingang familierechtelijke betrekking ouder1
+38    |   Registergemeente akte waaraan gegevens over ouder1 ontleend zijn
+39    |   Aktenummer van de akte waaraan gegevens over ouder1 ontleend zijn
+40    |   Gemeente waar de gegevens over ouder1 aan het document ontleend zijn
+41    |   Datum van de ontlening van de gegevens over ouder1
+42    |   Beschrijving van het document waaraan de gegevens over ouder1 ontleend zijn
+43    |   Aanduiding gegevens in onderzoek
+44    |   Datum ingang onderzoek
+45    |   Datum einde onderzoek
+46    |   Indicatie onjuist dan wel strijdigheid met de openbare orde
+47    |   Ingangsdatum geldigheid met betrekking tot de elementen van de categorie Ouder1
+48    |   Datum van opneming met betrekking tot de elementen van de categorie Ouder1
+49    |
+50    |   A-nummer ouder2
+51    |   Burgerservicenummer ouder2
+52    |   Voornamen ouder2
+53    |   Adellijke titel/predikaat ouder2
+54    |   Voorvoegsel geslachtsnaam ouder2
+55    |   Geslachtsnaam ouder2
+56    |   Geboortedatum ouder2
+57    |   Geboorteplaats ouder2
+58    |   Geboorteland ouder2
+59    |   Geslachtsaanduiding ouder2
+60    |   Datum ingang familierechtelijke betrekking ouder2
+61    |   Registergemeente akte waaraan gegevens over ouder2 ontleend zijn
+62    |   Aktenummer van de akte waaraan gegevens over ouder2 ontleend zijn
+63    |   Gemeente waar de gegevens over ouder2 aan het document ontleend zijn
+64    |   Datum van de ontlening van de gegevens over ouder2
+65    |   Beschrijving van het document waaraan de gegevens over ouder2 ontleend zijn
+66    |   Aanduiding gegevens in onderzoek
+67    |   Datum ingang onderzoek
+68    |   Datum einde onderzoek
+69    |   Indicatie onjuist dan wel strijdigheid met de openbare orde
+70    |   Ingangsdatum geldigheid met betrekking tot de elementen van de categorie Ouder2
+71    |   Datum van opneming met betrekking tot de elementen van de categorie Ouder2
+72    |
+73    |   Nationaliteit
+74    |   Reden opname nationaliteit
+75    |   Reden beëindigen nationaliteit
+76    |   Aanduiding bijzonder Nederlanderschap
+77    |   EU-persoonsummer
+78    |   Gemeente waar de gegevens over nationaliteit aan het document ontleend dan wel afgeleid zijn
+79    |   Datum van de ontlening dan wel afleiding van de gegevens over nationaliteit
+80    |   Beschrijving van het document waaraan de gegevens over nationaliteit ontleend dan wel afgeleid zijn
+81    |   Aanduiding gegevens in onderzoek
+82    |   Datum ingang onderzoek
+83    |   Datum einde onderzoek
+84    |   Indicatie onjuist
+85    |   Datum van ingang geldigheid met betrekking tot de elementen van de categorie Nationaliteit
+86    |   Datum van opneming met betrekking tot de elementen van de categorie Nationaliteit
+87    |   RNI-deelnemer
+88    |   Omschrijving verdrag
+89    |
+90    |   A-nummer echtgenoot/geregistreerd partner
+91    |   Burgerservicenummer echtgenoot/geregistreerd partner
+92    |   Voornamen echtgenoot/geregistreerd partner
+93    |   Adellijke titel/predikaat echtgenoot/geregistreerd partner
+94    |   Voorvoegsel geslachtsnaam echtgenoot/geregistreerd partner
+95    |   Geslachtsnaam echtgenoot/geregistreerd partner
+96    |   Geboortedatum echtgenoot/geregistreerd partner
+97    |   Geboorteplaats echtgenoot/geregistreerd partner
+98    |   Geboorteland echtgenoot/geregistreerd partner
+99    |   Geslachtsaanduiding echtgenoot/geregistreerd partner
 100   |   Datum huwelijkssluiting/aangaan geregistreerd partnerschap
 101   |   Plaats huwelijkssluiting/aangaan geregistreerd partnerschap
 102   |   Land huwelijkssluiting/aangaan geregistreerd partnerschap

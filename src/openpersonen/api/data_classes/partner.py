@@ -202,20 +202,55 @@ class Partner(Persoon):
                     partner.geslachtsaanduiding_echtgenoot_geregistreerd_partner
                 ),
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": int(
+                        partner.datum_ingang_onderzoek[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": partner.datum_ingang_onderzoek,
+                    "jaar": int(
+                        partner.datum_ingang_onderzoek[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        partner.datum_ingang_onderzoek[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
                 },
             },
             "aangaanHuwelijkPartnerschap": {
-                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
-                "land": {"code": "0000", "omschrijving": "string"},
-                "plaats": {"code": "0000", "omschrijving": "string"},
+                "datum": {
+                    "dag": int(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
+                    "jaar": int(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
+                },
+                "land": {
+                    "code": "0000",
+                    "omschrijving": partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                },
+                "plaats": {
+                    "code": "0000",
+                    "omschrijving": partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                },
                 "inOnderzoek": {
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": bool(partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+                    "land": bool(partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+                    "plaats": bool(partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -226,8 +261,6 @@ class Partner(Persoon):
             },
             "geheimhoudingPersoonsgegevens": True,
         }
-
-        convert_empty_instances(partner_dict)
 
         return partner_dict
 
