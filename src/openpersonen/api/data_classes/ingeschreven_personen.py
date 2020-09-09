@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.testing_models import Persoon as PersoonModel
 from openpersonen.api.utils import convert_empty_instances
 
 from .datum import Datum
@@ -926,7 +927,7 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def list(cls, filters):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            pass
+            instance_dict = {}
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
             instance_dict = cls.get_client_instance_dict(response)
@@ -935,7 +936,7 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def retrieve(cls, bsn=None):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn)
+            instance = PersoonModel.objects.get(burgerservicenummer_persoon=bsn)
             instance_dict = cls.get_model_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
