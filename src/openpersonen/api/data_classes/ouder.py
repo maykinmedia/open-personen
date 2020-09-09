@@ -148,18 +148,18 @@ class Ouder(Persoon):
             "datumIngangFamilierechtelijkeBetrekking": {
                 "dag": int(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder[
-                    settings.DAY_START: settings.DAY_END
+                        settings.DAY_START : settings.DAY_END
                     ]
                 ),
                 "datum": ouder.datum_ingang_familierechtelijke_betrekking_ouder,
                 "jaar": int(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder[
-                    settings.YEAR_START: settings.YEAR_END
+                        settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder[
-                    settings.MONTH_START: settings.MONTH_END
+                        settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
@@ -171,9 +171,7 @@ class Ouder(Persoon):
                 "inOnderzoek": {
                     "geslachtsnaam": bool(ouder.geslachtsnaam_ouder),
                     "voornamen": bool(ouder.voornamen_ouder),
-                    "voorvoegsel": bool(
-                        ouder.voorvoegsel_geslachtsnaam_ouder
-                    ),
+                    "voorvoegsel": bool(ouder.voorvoegsel_geslachtsnaam_ouder),
                     "datumIngangOnderzoek": {
                         "dag": 0,
                         "datum": "string",
@@ -187,24 +185,22 @@ class Ouder(Persoon):
                 "datumIngangFamilierechtelijkeBetrekking": bool(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder
                 ),
-                "geslachtsaanduiding": bool(
-                    ouder.geslachtsaanduiding_ouder
-                ),
+                "geslachtsaanduiding": bool(ouder.geslachtsaanduiding_ouder),
                 "datumIngangOnderzoek": {
                     "dag": int(
                         ouder.datum_ingang_onderzoek[
-                        settings.DAY_START: settings.DAY_END
+                            settings.DAY_START : settings.DAY_END
                         ]
                     ),
                     "datum": ouder.datum_ingang_onderzoek,
                     "jaar": int(
                         ouder.datum_ingang_onderzoek[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         ouder.datum_ingang_onderzoek[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -212,19 +208,17 @@ class Ouder(Persoon):
             "geboorte": {
                 "datum": {
                     "dag": int(
-                        ouder.geboortedatum_ouder[
-                        settings.DAY_START: settings.DAY_END
-                        ]
+                        ouder.geboortedatum_ouder[settings.DAY_START : settings.DAY_END]
                     ),
                     "datum": ouder.geboortedatum_ouder,
                     "jaar": int(
                         ouder.geboortedatum_ouder[
-                        settings.YEAR_START: settings.YEAR_END
+                            settings.YEAR_START : settings.YEAR_END
                         ]
                     ),
                     "maand": int(
                         ouder.geboortedatum_ouder[
-                        settings.MONTH_START: settings.MONTH_END
+                            settings.MONTH_START : settings.MONTH_END
                         ]
                     ),
                 },
@@ -256,8 +250,10 @@ class Ouder(Persoon):
     @classmethod
     def list(cls, bsn):
         class_instances = []
-        if settings.USE_STUF_BG_DATABASE:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.all()
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).ouder_set.all()
             for instance in instances:
                 instance_dict = cls.get_model_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -265,8 +261,10 @@ class Ouder(Persoon):
 
     @classmethod
     def retrieve(cls, bsn, id):
-        if settings.USE_STUF_BG_DATABASE:
-            instance = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.get(burgerservicenummer_kind=id)
+        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+            instance = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).ouder_set.get(burgerservicenummer_kind=id)
             instance_dict = cls.get_model_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ouder(bsn)

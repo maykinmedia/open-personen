@@ -11,8 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 import requests
 from solo.models import SingletonModel
 
-
-if getattr(settings, 'USE_STUF_BG_DATABASE', False):
+if getattr(settings, "USE_STUF_BG_DATABASE", False):
     from .testing_models import *
 
 

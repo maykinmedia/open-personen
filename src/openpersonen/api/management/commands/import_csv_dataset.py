@@ -272,15 +272,16 @@ Row index   |    Field name
 
 
 class Command(BaseCommand):
-    help = 'Read in an csv file and populate models to use for test data'
+    help = "Read in an csv file and populate models to use for test data"
 
     def add_arguments(self, parser):
-        parser.add_argument('infile', help='The csv file containing the data to import.')
+        parser.add_argument(
+            "infile", help="The csv file containing the data to import."
+        )
 
     def handle(self, **options):
-        # with open(options['infile'], newline='') as csvfile:
-        with open('test.csv', newline='') as csvfile:
-            rows = csv.reader(csvfile, delimiter=';', quotechar='|')
+        with open(options["infile"], newline="") as csvfile:
+            rows = csv.reader(csvfile, delimiter=";", quotechar="|")
 
             for row in list(rows)[3:]:
                 if any(row[1:24]):
@@ -306,7 +307,9 @@ class Command(BaseCommand):
                         aanduiding_gegevens_in_onderzoek=row[18],
                         datum_ingang_onderzoek=row[19],
                         datum_einde_onderzoek=row[20],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[21],
+                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                            21
+                        ],
                         ingangsdatum_geldigheid_met_betrekking=row[22],
                         datum_van_opneming_met_betrekking=row[23],
                         rni_deelnemer=row[24],
@@ -326,7 +329,9 @@ class Command(BaseCommand):
                         geboorteland_ouder=row[35],
                         geslachtsaanduiding_ouder=row[36],
                         datum_ingang_familierechtelijke_betrekking_ouder=row[37],
-                        registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[38],
+                        registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[
+                            38
+                        ],
                         aktenummer_van_de_akte_waaraan_gegevens=row[39],
                         gemeente_waar_de_gegevens_over_ouder=row[40],
                         datum_van_de_ontlening_van_de_gegevens_over_ouder=row[41],
@@ -334,7 +339,9 @@ class Command(BaseCommand):
                         aanduiding_gegevens_in_onderzoek=row[43],
                         datum_ingang_onderzoek=row[44],
                         datum_einde_onderzoek=row[45],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[46],
+                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                            46
+                        ],
                         ingangsdatum_geldigheid_met_betrekking=row[47],
                         datum_van_opneming_met_betrekking=row[48],
                     )
@@ -353,7 +360,9 @@ class Command(BaseCommand):
                         geboorteland_ouder=row[58],
                         geslachtsaanduiding_ouder=row[59],
                         datum_ingang_familierechtelijke_betrekking_ouder=row[60],
-                        registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[61],
+                        registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[
+                            61
+                        ],
                         aktenummer_van_de_akte_waaraan_gegevens=row[62],
                         gemeente_waar_de_gegevens_over_ouder=row[63],
                         datum_van_de_ontlening_van_de_gegevens_over_ouder=row[64],
@@ -361,7 +370,9 @@ class Command(BaseCommand):
                         aanduiding_gegevens_in_onderzoek=row[66],
                         datum_ingang_onderzoek=row[67],
                         datum_einde_onderzoek=row[68],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[69],
+                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                            69
+                        ],
                         ingangsdatum_geldigheid_met_betrekking=row[70],
                         datum_van_opneming_met_betrekking=row[71],
                     )
@@ -393,16 +404,26 @@ class Command(BaseCommand):
                         a_nummer_echtgenoot_geregistreerd_partner=row[90],
                         burgerservicenummer_echtgenoot_geregistreerd_partner=row[91],
                         voornamen_echtgenoot_geregistreerd_partner=row[92],
-                        adellijke_titel_predikaat_echtgenoot_geregistreerd_partner=row[93],
-                        voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner=row[94],
+                        adellijke_titel_predikaat_echtgenoot_geregistreerd_partner=row[
+                            93
+                        ],
+                        voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner=row[
+                            94
+                        ],
                         geslachtsnaam_echtgenoot_geregistreerd_partner=row[95],
                         geboortedatum_echtgenoot_geregistreerd_partner=row[96],
                         geboorteplaats_echtgenoot_geregistreerd_partner=row[97],
                         geboorteland_echtgenoot_geregistreerd_partner=row[98],
                         geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[99],
-                        datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[100],
-                        plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[101],
-                        land_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[102],
+                        datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
+                            100
+                        ],
+                        plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
+                            101
+                        ],
+                        land_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
+                            102
+                        ],
                         datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[103],
                         plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[104],
                         land_ontbinding_huwelijk_geregistreerd_partnerschap=row[105],
@@ -416,7 +437,9 @@ class Command(BaseCommand):
                         aanduiding_gegevens_in_onderzoek=row[113],
                         datum_ingang_onderzoek=row[114],
                         datum_einde_onderzoek=row[115],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[116],
+                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                            116
+                        ],
                         ingangsdatum_geldigheid_met_betrekking=row[117],
                         datum_van_opneming_met_betrekking=row[118],
                     )
@@ -435,7 +458,9 @@ class Command(BaseCommand):
                         aanduiding_gegevens_in_onderzoek=row[128],
                         datum_ingang_onderzoek=row[129],
                         datum_einde_onderzoek=row[130],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[131],
+                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                            131
+                        ],
                         ingangsdatum_geldigheid_met_betrekking=row[132],
                         datum_van_opneming_met_betrekking=row[133],
                         rni_deelnemer=row[134],
@@ -509,15 +534,21 @@ class Command(BaseCommand):
                         geboortedatum_kind=row[191],
                         geboorteplaats_kind=row[192],
                         geboorteland_kind=row[193],
-                        registergemeente_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[194],
-                        aktenummer_van_de_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[195],
+                        registergemeente_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[
+                            194
+                        ],
+                        aktenummer_van_de_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[
+                            195
+                        ],
                         gemeente_waar_de_gegevens_over_kind=row[196],
                         datum_van_de_ontlening_van_de_gegevens_over_kind=row[197],
                         beschrijving_van_het_document=row[198],
                         aanduiding_gegevens_in_onderzoek=row[199],
                         datum_ingang_onderzoek=row[200],
                         datum_einde_onderzoek=row[201],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[202],
+                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                            202
+                        ],
                         ingangsdatum_geldigheid_met_betrekking=row[203],
                         datum_van_opneming_met_betrekking=row[204],
                         registratie_betrekking=row[205],
@@ -543,7 +574,9 @@ class Command(BaseCommand):
                         indicatie_gezag_minderjarige=row[217],
                         indicatie_curateleregister=row[218],
                         gemeente_waar_de_gegevens_over_gezagsverhouding=row[219],
-                        datum_van_de_ontlening_van_de_gegevens_over_gezagsverhouding=row[220],
+                        datum_van_de_ontlening_van_de_gegevens_over_gezagsverhouding=row[
+                            220
+                        ],
                         beschrijving_van_het_document=row[221],
                         aanduiding_gegevens_in_onderzoek=row[222],
                         datum_ingang_onderzoek=row[223],
@@ -561,8 +594,12 @@ class Command(BaseCommand):
                         datum_uitgifte_nederlands_reisdocument=row[231],
                         autoriteit_van_afgifte_nederlands_reisdocument=row[232],
                         datum_einde_geldigheid_nederlands_reisdocument=row[233],
-                        datum_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[234],
-                        aanduiding_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[235],
+                        datum_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[
+                            234
+                        ],
+                        aanduiding_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[
+                            235
+                        ],
                         signalering_met_betrekking=row[236],
                         gemeente_waar_het_paspoortdossier_zich_bevindt=row[237],
                         datum_van_opname_in_het_paspoortdossier=row[238],

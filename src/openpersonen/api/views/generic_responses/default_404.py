@@ -4,5 +4,5 @@ response_data_404 = {
     "status": 404,
     "detail": "The server has not found anything matching the Request-URI.",
     "instance": "https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde",
-    "code": "notFound"
+    "code": "notFound",
 }

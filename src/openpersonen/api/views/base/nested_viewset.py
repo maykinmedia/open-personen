@@ -1,9 +1,10 @@
 from django.core.exceptions import ObjectDoesNotExist
+
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
-from openpersonen.api.views.generic_responses import response_data_404
 from openpersonen.api.views.base import BaseViewSet
+from openpersonen.api.views.generic_responses import response_data_404
 
 
 class NestedViewSet(BaseViewSet):
