@@ -1,6 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
+from openpersonen.api.views.generic_responses import response_data_404
 from openpersonen.api.views.base import BaseViewSet
 
 
@@ -8,7 +10,10 @@ class NestedViewSet(BaseViewSet):
     def list(self, request, *args, **kwargs):
         bsn = kwargs["ingeschrevenpersonen_burgerservicenummer"]
 
-        instances = self.instance_class.list(bsn)
+        try:
+            instances = self.instance_class.list(bsn)
+        except ObjectDoesNotExist:
+            return Response(data=response_data_404, status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(instances, many=True)
 
@@ -18,7 +23,10 @@ class NestedViewSet(BaseViewSet):
         bsn = kwargs["ingeschrevenpersonen_burgerservicenummer"]
         id = kwargs["id"]
 
-        instance = self.instance_class.retrieve(bsn, id)
+        try:
+            instance = self.instance_class.retrieve(bsn, id)
+        except ObjectDoesNotExist:
+            return Response(data=response_data_404, status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(instance)
 
