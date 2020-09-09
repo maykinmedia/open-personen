@@ -191,10 +191,22 @@ class Ouder(Persoon):
                     ouder.geslachtsaanduiding_ouder
                 ),
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": int(
+                        ouder.datum_ingang_onderzoek[
+                        settings.DAY_START: settings.DAY_END
+                        ]
+                    ),
+                    "datum": ouder.datum_ingang_onderzoek,
+                    "jaar": int(
+                        ouder.datum_ingang_onderzoek[
+                        settings.YEAR_START: settings.YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        ouder.datum_ingang_onderzoek[
+                        settings.MONTH_START: settings.MONTH_END
+                        ]
+                    ),
                 },
             },
             "geboorte": {
