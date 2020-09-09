@@ -7,7 +7,7 @@ import xmltodict
 from dateutil.relativedelta import relativedelta
 
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.testing_models import Kind, Persoon
+from openpersonen.api.testing_models import Persoon as PersoonModel
 from openpersonen.api.utils import convert_empty_instances
 
 from .in_onderzoek import KindInOnderzoek
@@ -198,7 +198,7 @@ class Kind(Persoon):
     def list(cls, bsn):
         class_instances = []
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instances = Persoon.objects.get(
+            instances = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).kind_set.all()
             for instance in instances:
@@ -209,7 +209,7 @@ class Kind(Persoon):
     @classmethod
     def retrieve(cls, bsn, id):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instance = Persoon.objects.get(
+            instance = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).kind_set.get(burgerservicenummer_kind=id)
             instance_dict = cls.get_model_instance_dict(instance)

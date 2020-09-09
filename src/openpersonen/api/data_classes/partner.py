@@ -6,6 +6,7 @@ import xmltodict
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.testing_models import Persoon as PersoonModel
 from openpersonen.api.utils import convert_empty_instances
 
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschap
@@ -128,6 +129,8 @@ class Partner(Persoon):
             },
             "geheimhoudingPersoonsgegevens": True,
         }
+
+        convert_empty_instances(partner_dict)
 
         return partner_dict
 
@@ -284,7 +287,7 @@ class Partner(Persoon):
     def list(cls, bsn):
         class_instances = []
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instances = Persoon.objects.get(
+            instances = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.all()
             for instance in instances:
@@ -295,7 +298,7 @@ class Partner(Persoon):
     @classmethod
     def retrieve(cls, bsn, id):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instance = Persoon.objects.get(
+            instance = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.get(burgerservicenummer_kind=id)
             instance_dict = cls.get_model_instance_dict(instance)

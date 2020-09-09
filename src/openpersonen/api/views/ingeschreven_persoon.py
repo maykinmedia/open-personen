@@ -1,12 +1,15 @@
+from django.core.exceptions import ObjectDoesNotExist
+
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
 from vng_api_common.filters import Backend
 
 from openpersonen.api.data_classes import IngeschrevenPersoon
 from openpersonen.api.filters import IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 from openpersonen.api.views.base import BaseViewSet
+from openpersonen.api.views.generic_responses import response_data_404
 
 
 class IngeschrevenPersoonViewSet(BaseViewSet):
@@ -108,7 +111,10 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         burgerservicenummer = kwargs["burgerservicenummer"]
 
-        instance = IngeschrevenPersoon.retrieve(burgerservicenummer)
+        try:
+            instance = IngeschrevenPersoon.retrieve(burgerservicenummer)
+        except ObjectDoesNotExist:
+            return Response(data=response_data_404, status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(instance)
 

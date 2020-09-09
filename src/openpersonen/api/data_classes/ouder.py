@@ -6,6 +6,7 @@ import xmltodict
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.testing_models import Persoon as PersoonModel
 from openpersonen.api.utils import convert_empty_instances
 
 from .datum import Datum
@@ -251,7 +252,7 @@ class Ouder(Persoon):
     def list(cls, bsn):
         class_instances = []
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instances = Persoon.objects.get(
+            instances = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).ouder_set.all()
             for instance in instances:
@@ -262,7 +263,7 @@ class Ouder(Persoon):
     @classmethod
     def retrieve(cls, bsn, id):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            instance = Persoon.objects.get(
+            instance = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).ouder_set.get(burgerservicenummer_kind=id)
             instance_dict = cls.get_model_instance_dict(instance)
