@@ -410,12 +410,6 @@ class IngeschrevenPersoon(Persoon):
     @staticmethod
     def get_model_instance_dict(persoon):
 
-        kiesrecht = persoon.kiesrecht_set.first()
-        overlijden = persoon.overlijden_set.first()
-        verblijfplaats = persoon.verblijfplaats_set.first()
-        gezagsverhouding = persoon.gezagsverhouding_set.first()
-        verblijfstitel = persoon.verblijfstitel_set.first()
-
         ingeschreven_persoon_dict = {
             "burgerservicenummer": persoon.burgerservicenummer_persoon,
             "geheimhoudingPersoonsgegevens": True,
@@ -533,6 +527,7 @@ class IngeschrevenPersoon(Persoon):
         }
 
         ingeschreven_persoon_dict["kiesrecht"] = dict()
+        kiesrecht = persoon.kiesrecht_set.first()
         if kiesrecht:
             ingeschreven_persoon_dict["kiesrecht"] = {
                 "europeesKiesrecht": bool(kiesrecht.aanduiding_europees_kiesrecht),
@@ -590,6 +585,7 @@ class IngeschrevenPersoon(Persoon):
             }
 
         ingeschreven_persoon_dict["overlijden"] = dict()
+        overlijden = persoon.overlijden_set.first()
         if overlijden:
             ingeschreven_persoon_dict["overlijden"] = {
                 "indicatieOverleden": True,
@@ -639,6 +635,7 @@ class IngeschrevenPersoon(Persoon):
             }
 
         ingeschreven_persoon_dict["verblijfplaats"] = dict()
+        verblijfplaats = persoon.verblijfplaats_set.first()
         if verblijfplaats:
             ingeschreven_persoon_dict["verblijfplaats"] = {
                 "functieAdres": verblijfplaats.functie_adres,
@@ -828,6 +825,7 @@ class IngeschrevenPersoon(Persoon):
             }
 
         ingeschreven_persoon_dict["gezagsverhouding"] = dict()
+        gezagsverhouding = persoon.gezagsverhouding_set.first()
         if gezagsverhouding:
             ingeschreven_persoon_dict["gezagsverhouding"] = {
                 "indicatieCurateleRegister": gezagsverhouding.indicatie_curateleregister,
@@ -867,6 +865,7 @@ class IngeschrevenPersoon(Persoon):
             }
 
         ingeschreven_persoon_dict["verblijfstitel"] = dict()
+        verblijfstitel = persoon.verblijfstitel_set.first()
         if verblijfstitel:
             ingeschreven_persoon_dict["verblijfstitel"] = {
                 "aanduiding": {
@@ -1038,8 +1037,7 @@ class IngeschrevenPersoon(Persoon):
         return ingeschreven_persoon_dict
 
     @staticmethod
-    def get_model_filters(filters):
-        model_filters = dict()
+    def update_filters_to_fit_model(filters):
         query_param_to_model_field_mapping = {
             "geboorte__datum": "geboortedatum_persoon",
             "verblijfplaats__gemeentevaninschrijving": "verblijfplaats__gemeente_van_inschrijving",
@@ -1054,16 +1052,14 @@ class IngeschrevenPersoon(Persoon):
             model_field_key,
         ) in query_param_to_model_field_mapping.items():
             if query_param_key in filters:
-                model_filters[model_field_key] = filters[query_param_key]
-
-        return model_filters
+                filters[model_field_key] = filters.pop(query_param_key)
 
     @classmethod
     def list(cls, filters):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
             class_instances = []
-            model_filters = cls.get_model_filters(filters)
-            instances = PersoonModel.objects.filter(**model_filters)
+            cls.update_filters_to_fit_model(filters)
+            instances = PersoonModel.objects.filter(**filters)
             for instance in instances:
                 instance_dict = cls.get_model_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
