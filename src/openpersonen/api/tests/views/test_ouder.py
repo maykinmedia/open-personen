@@ -11,6 +11,7 @@ from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.testing_models import Ouder, Persoon
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
+from openpersonen.api.views.generic_responses import response_data_404
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
@@ -126,3 +127,18 @@ class TestOuderWithTestingModels(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["burgerservicenummer"], "1")
+
+    def test_detail_ouder_404(self):
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "ouders-detail",
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 2},
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.json(), response_data_404)
