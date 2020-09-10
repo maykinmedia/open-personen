@@ -103,6 +103,28 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
 
+    def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=0",
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['_embedded']['ingeschrevenpersonen'][0]['burgerservicenummer'], '0')
+
+    def test_ingeschreven_persoon_with_token_and_incorrect_proper_query_params(self):
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=1",
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['_embedded']['ingeschrevenpersonen'], [])
+
     def test_detail_ingeschreven_persoon(self):
 
         user = User.objects.create(username="test")
