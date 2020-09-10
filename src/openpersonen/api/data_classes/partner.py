@@ -169,18 +169,24 @@ class Partner(Persoon):
                     "dag": int(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner[
                             settings.DAY_START : settings.DAY_END
-                        ] if partner.geboortedatum_echtgenoot_geregistreerd_partner else 0
+                        ]
+                        if partner.geboortedatum_echtgenoot_geregistreerd_partner
+                        else 0
                     ),
                     "datum": partner.geboortedatum_echtgenoot_geregistreerd_partner,
                     "jaar": int(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner[
                             settings.YEAR_START : settings.YEAR_END
-                        ] if partner.geboortedatum_echtgenoot_geregistreerd_partner else 0
+                        ]
+                        if partner.geboortedatum_echtgenoot_geregistreerd_partner
+                        else 0
                     ),
                     "maand": int(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner[
                             settings.MONTH_START : settings.MONTH_END
-                        ] if partner.geboortedatum_echtgenoot_geregistreerd_partner else 0
+                        ]
+                        if partner.geboortedatum_echtgenoot_geregistreerd_partner
+                        else 0
                     ),
                 },
                 "land": {
@@ -218,18 +224,24 @@ class Partner(Persoon):
                     "dag": int(
                         partner.datum_ingang_onderzoek[
                             settings.DAY_START : settings.DAY_END
-                        ] if partner.datum_ingang_onderzoek else 0
+                        ]
+                        if partner.datum_ingang_onderzoek
+                        else 0
                     ),
                     "datum": partner.datum_ingang_onderzoek,
                     "jaar": int(
                         partner.datum_ingang_onderzoek[
                             settings.YEAR_START : settings.YEAR_END
-                        ] if partner.datum_ingang_onderzoek else 0
+                        ]
+                        if partner.datum_ingang_onderzoek
+                        else 0
                     ),
                     "maand": int(
                         partner.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
-                        ] if partner.datum_ingang_onderzoek else 0
+                        ]
+                        if partner.datum_ingang_onderzoek
+                        else 0
                     ),
                 },
             },
@@ -238,18 +250,24 @@ class Partner(Persoon):
                     "dag": int(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
                             settings.DAY_START : settings.DAY_END
-                        ] if partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap else 0
+                        ]
+                        if partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                        else 0
                     ),
                     "datum": partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
                     "jaar": int(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
                             settings.YEAR_START : settings.YEAR_END
-                        ] if partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap else 0
+                        ]
+                        if partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                        else 0
                     ),
                     "maand": int(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
                             settings.MONTH_START : settings.MONTH_END
-                        ] if partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap else 0
+                        ]
+                        if partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                        else 0
                     ),
                 },
                 "land": {
@@ -300,7 +318,9 @@ class Partner(Persoon):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
             instance = PersoonModel.objects.get(
                 burgerservicenummer_persoon=bsn
-            ).partnerschap_set.get(burgerservicenummer_echtgenoot_geregistreerd_partner=id)
+            ).partnerschap_set.get(
+                burgerservicenummer_echtgenoot_geregistreerd_partner=id
+            )
             instance_dict = cls.get_model_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_partner(bsn)
