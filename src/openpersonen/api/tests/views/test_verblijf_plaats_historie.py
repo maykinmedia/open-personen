@@ -12,6 +12,7 @@ from openpersonen.api.tests.test_data import VERBLIJF_PLAATS_HISTORIE_DATA
 
 class TestVerblijfPlaatsHistorie(APITestCase):
     def setUp(self):
+        super().setUp()
         self.url = StufBGClient.get_solo().url
 
     def test_verblijf_plaats_historie_without_token(self):

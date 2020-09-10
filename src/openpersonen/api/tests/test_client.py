@@ -9,6 +9,7 @@ from openpersonen.api.models import StufBGClient
 
 class TestClient(TestCase):
     def setUp(self):
+        super().setUp()
         self.client = StufBGClient.get_solo()
         self.url = self.client.url
         self.zender_organisatie = self.client.zender_organisatie

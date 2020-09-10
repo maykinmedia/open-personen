@@ -12,6 +12,7 @@ from openpersonen.api.tests.test_data import PARTNER_HISTORIE_DATA
 
 class TestPartnerHistorie(APITestCase):
     def setUp(self):
+        super().setUp()
         self.url = StufBGClient.get_solo().url
 
     def test_partner_historie_without_token(self):
