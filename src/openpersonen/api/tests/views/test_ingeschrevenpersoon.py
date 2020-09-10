@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.template import loader
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 import requests_mock
@@ -10,10 +10,13 @@ from rest_framework.test import APITestCase
 from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
+from openpersonen.api.testing_models import Persoon
 
 
+@override_settings(USE_STUF_BG_DATABASE=False)
 class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
+        super().setUp()
         self.url = StufBGClient.get_solo().url
 
     def test_ingeschreven_persoon_without_token(self):
@@ -88,3 +91,30 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
+
+
+@override_settings(USE_STUF_BG_DATABASE=True)
+class TestIngeschrevenPersoonWithTestingModels(APITestCase):
+
+    def setUp(self):
+        super().setUp()
+        Persoon.objects.create(burgerservicenummer_persoon=000000000)
+
+    def test_ingeschreven_persoon_without_token(self):
+        response = self.client.get(reverse("ingeschrevenpersonen-list"))
+        self.assertEqual(response.status_code, 401)
+
+    def test_detail_ingeschreven_persoon(self):
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail",
+                kwargs={"burgerservicenummer": 000000000},
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['burgerservicenummer'], '0')
