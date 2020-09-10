@@ -530,7 +530,6 @@ class IngeschrevenPersoon(Persoon):
                 "reden": "overlijden",
                 "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
             },
-            "reisdocumenten": ["string"],
         }
 
         ingeschreven_persoon_dict["kiesrecht"] = dict()
@@ -1025,6 +1024,15 @@ class IngeschrevenPersoon(Persoon):
                         },
                     },
                 }
+            )
+
+        ingeschreven_persoon_dict["reisdocumenten"] = []
+
+        reisdocumenten = persoon.reisdocument_set.all()
+
+        for reisdocument in reisdocumenten:
+            ingeschreven_persoon_dict["reisdocumenten"].append(
+                reisdocument.nummer_nederlands_reisdocument
             )
 
         return ingeschreven_persoon_dict
