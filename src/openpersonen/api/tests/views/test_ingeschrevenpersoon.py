@@ -9,8 +9,8 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 from openpersonen.api.testing_models import Persoon
+from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
@@ -95,7 +95,6 @@ class TestIngeschrevenPersoon(APITestCase):
 
 @override_settings(USE_STUF_BG_DATABASE=True)
 class TestIngeschrevenPersoonWithTestingModels(APITestCase):
-
     def setUp(self):
         super().setUp()
         Persoon.objects.create(burgerservicenummer_persoon=000000000)
@@ -117,4 +116,4 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['burgerservicenummer'], '0')
+        self.assertEqual(response.json()["burgerservicenummer"], "0")

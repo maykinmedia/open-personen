@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.template import loader
-from django.urls import reverse
 from django.test import override_settings
+from django.urls import reverse
 
 import requests_mock
 from rest_framework.authtoken.models import Token
@@ -9,8 +9,8 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.testing_models import Ouder, Persoon
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
-from openpersonen.api.testing_models import Persoon, Ouder
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
@@ -66,12 +66,12 @@ class TestOuder(APITestCase):
 
 @override_settings(USE_STUF_BG_DATABASE=True)
 class TestOuderWithTestingModels(APITestCase):
-
     def setUp(self):
         super().setUp()
         self.persoon = Persoon.objects.create(burgerservicenummer_persoon=000000000)
-        self.partnerschap = Ouder.objects.create(persoon=self.persoon,
-                                                 burgerservicenummer_ouder=1)
+        self.partnerschap = Ouder.objects.create(
+            persoon=self.persoon, burgerservicenummer_ouder=1
+        )
 
     def test_ouder_without_token(self):
         response = self.client.get(
@@ -107,8 +107,10 @@ class TestOuderWithTestingModels(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(isinstance(response.json()['_embedded']['ouders'], list))
-        self.assertEqual(response.json()['_embedded']['ouders'][0]['burgerservicenummer'], '1')
+        self.assertTrue(isinstance(response.json()["_embedded"]["ouders"], list))
+        self.assertEqual(
+            response.json()["_embedded"]["ouders"][0]["burgerservicenummer"], "1"
+        )
 
     def test_detail_ouder(self):
 
@@ -123,4 +125,4 @@ class TestOuderWithTestingModels(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['burgerservicenummer'], '1')
+        self.assertEqual(response.json()["burgerservicenummer"], "1")

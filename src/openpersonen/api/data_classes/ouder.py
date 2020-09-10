@@ -150,18 +150,24 @@ class Ouder(Persoon):
                 "dag": int(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                         settings.DAY_START : settings.DAY_END
-                    ] if ouder.datum_ingang_familierechtelijke_betrekking_ouder else 0
+                    ]
+                    if ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                    else 0
                 ),
                 "datum": ouder.datum_ingang_familierechtelijke_betrekking_ouder,
                 "jaar": int(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                         settings.YEAR_START : settings.YEAR_END
-                    ] if ouder.datum_ingang_familierechtelijke_betrekking_ouder else 0
+                    ]
+                    if ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                    else 0
                 ),
                 "maand": int(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                         settings.MONTH_START : settings.MONTH_END
-                    ] if ouder.datum_ingang_familierechtelijke_betrekking_ouder else 0
+                    ]
+                    if ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                    else 0
                 ),
             },
             "naam": {
@@ -191,18 +197,24 @@ class Ouder(Persoon):
                     "dag": int(
                         ouder.datum_ingang_onderzoek[
                             settings.DAY_START : settings.DAY_END
-                        ] if ouder.datum_ingang_onderzoek else 0
+                        ]
+                        if ouder.datum_ingang_onderzoek
+                        else 0
                     ),
                     "datum": ouder.datum_ingang_onderzoek,
                     "jaar": int(
                         ouder.datum_ingang_onderzoek[
                             settings.YEAR_START : settings.YEAR_END
-                        ] if ouder.datum_ingang_onderzoek else 0
+                        ]
+                        if ouder.datum_ingang_onderzoek
+                        else 0
                     ),
                     "maand": int(
                         ouder.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
-                        ] if ouder.datum_ingang_onderzoek else 0
+                        ]
+                        if ouder.datum_ingang_onderzoek
+                        else 0
                     ),
                 },
             },
@@ -210,18 +222,24 @@ class Ouder(Persoon):
                 "datum": {
                     "dag": int(
                         ouder.geboortedatum_ouder[settings.DAY_START : settings.DAY_END]
-                    ) if ouder.geboortedatum_ouder else 0,
+                    )
+                    if ouder.geboortedatum_ouder
+                    else 0,
                     "datum": ouder.geboortedatum_ouder,
                     "jaar": int(
                         ouder.geboortedatum_ouder[
                             settings.YEAR_START : settings.YEAR_END
                         ]
-                    ) if ouder.geboortedatum_ouder else 0,
+                    )
+                    if ouder.geboortedatum_ouder
+                    else 0,
                     "maand": int(
                         ouder.geboortedatum_ouder[
                             settings.MONTH_START : settings.MONTH_END
                         ]
-                    ) if ouder.geboortedatum_ouder else 0,
+                    )
+                    if ouder.geboortedatum_ouder
+                    else 0,
                 },
                 "land": {
                     "code": "0000",

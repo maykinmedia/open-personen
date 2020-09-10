@@ -134,16 +134,22 @@ class Kind(Persoon):
                 "datum": {
                     "dag": int(
                         kind.geboortedatum_kind[settings.DAY_START : settings.DAY_END]
-                    ) if kind.geboortedatum_kind else 0,
+                    )
+                    if kind.geboortedatum_kind
+                    else 0,
                     "datum": kind.geboortedatum_kind,
                     "jaar": int(
                         kind.geboortedatum_kind[settings.YEAR_START : settings.YEAR_END]
-                    ) if kind.geboortedatum_kind else 0,
+                    )
+                    if kind.geboortedatum_kind
+                    else 0,
                     "maand": int(
                         kind.geboortedatum_kind[
                             settings.MONTH_START : settings.MONTH_END
                         ]
-                    ) if kind.geboortedatum_kind else 0,
+                    )
+                    if kind.geboortedatum_kind
+                    else 0,
                 },
                 "land": {
                     "code": "string",
@@ -168,7 +174,9 @@ class Kind(Persoon):
             "leeftijd": relativedelta(
                 datetime.now(),
                 datetime.strptime(kind.geboortedatum_kind, "%Y%m%d"),
-            ).years if kind.geboortedatum_kind else 0,
+            ).years
+            if kind.geboortedatum_kind
+            else 0,
             "inOnderzoek": {
                 "burgerservicenummer": bool(kind.burgerservicenummer_kind),
                 "datumIngangOnderzoek": {
@@ -176,18 +184,24 @@ class Kind(Persoon):
                         kind.datum_ingang_onderzoek[
                             settings.DAY_START : settings.DAY_END
                         ]
-                    ) if kind.datum_ingang_onderzoek else 0,
+                    )
+                    if kind.datum_ingang_onderzoek
+                    else 0,
                     "datum": kind.datum_ingang_onderzoek,
                     "jaar": int(
                         kind.datum_ingang_onderzoek[
                             settings.YEAR_START : settings.YEAR_END
                         ]
-                    ) if kind.datum_ingang_onderzoek else 0,
+                    )
+                    if kind.datum_ingang_onderzoek
+                    else 0,
                     "maand": int(
                         kind.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
                         ]
-                    ) if kind.datum_ingang_onderzoek else 0,
+                    )
+                    if kind.datum_ingang_onderzoek
+                    else 0,
                 },
             },
         }
