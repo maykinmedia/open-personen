@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.template import loader
 from django.test import override_settings
 from django.urls import reverse
@@ -11,6 +10,7 @@ from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.testing_models import Kind, Persoon
 from openpersonen.api.tests.test_data import KIND_RETRIEVE_DATA
+from openpersonen.api.views.generic_responses import response_data_404
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
@@ -126,3 +126,18 @@ class TestKindWithTestingModels(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["burgerservicenummer"], "1")
+
+    def test_detail_kind_404(self):
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "kinderen-detail",
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 2},
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.json(), response_data_404)
