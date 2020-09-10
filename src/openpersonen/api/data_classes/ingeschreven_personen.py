@@ -1031,7 +1031,7 @@ class IngeschrevenPersoon(Persoon):
 
     @staticmethod
     def get_model_filters(filters):
-        model_filters = copy.deepcopy(filters)
+        model_filters = dict()
         query_param_to_model_field_mapping = {
             "geboorte__datum": "geboortedatum_persoon",
             "verblijfplaats__gemeentevaninschrijving": "verblijfplaats__gemeente_van_inschrijving",
@@ -1046,7 +1046,7 @@ class IngeschrevenPersoon(Persoon):
             model_field_key,
         ) in query_param_to_model_field_mapping.items():
             if query_param_key in filters:
-                model_filters[model_field_key] = filters.pop(query_param_key)
+                model_filters[model_field_key] = filters[query_param_key]
 
         return model_filters
 
