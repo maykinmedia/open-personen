@@ -10,7 +10,7 @@ from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.testing_models import Persoon
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
-from openpersonen.api.views.generic_responses import response_data_404
+from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
@@ -158,4 +158,4 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json(), response_data_404)
+        self.assertEqual(response.json(), RESPONSE_DATA_404)
