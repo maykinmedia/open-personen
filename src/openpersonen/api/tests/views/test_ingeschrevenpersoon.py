@@ -97,7 +97,8 @@ class TestIngeschrevenPersoon(APITestCase):
 class TestIngeschrevenPersoonWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        Persoon.objects.create(burgerservicenummer_persoon=000000000)
+        self.bsn = 000000000
+        Persoon.objects.create(burgerservicenummer_persoon=self.bsn)
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -108,7 +109,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         token = Token.objects.create(user=user)
 
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=0",
+            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
         self.assertEqual(response.status_code, 200)
@@ -116,7 +117,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
             response.json()["_embedded"]["ingeschrevenpersonen"][0][
                 "burgerservicenummer"
             ],
-            "0",
+            str(self.bsn),
         )
 
     def test_ingeschreven_persoon_with_token_and_incorrect_proper_query_params(self):
@@ -137,13 +138,13 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
-                kwargs={"burgerservicenummer": 000000000},
+                kwargs={"burgerservicenummer": self.bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], "0")
+        self.assertEqual(response.json()["burgerservicenummer"], str(self.bsn))
 
     def test_not_found_detail_ingeschreven_persoon(self):
 
