@@ -10,20 +10,21 @@ from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.testing_models import Kind, Persoon
 from openpersonen.api.tests.test_data import KIND_RETRIEVE_DATA
-from openpersonen.api.views.generic_responses import response_data_404
+from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
 class TestKind(APITestCase):
     def setUp(self):
         super().setUp()
+        self.persoon_bsn = 000000000
         self.url = StufBGClient.get_solo().url
 
     def test_kind_without_token(self):
         response = self.client.get(
             reverse(
                 "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -34,7 +35,7 @@ class TestKind(APITestCase):
         response = self.client.get(
             reverse(
                 "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -54,7 +55,10 @@ class TestKind(APITestCase):
         response = self.client.get(
             reverse(
                 "kinderen-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 1},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 1,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -68,16 +72,20 @@ class TestKind(APITestCase):
 class TestKindWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        self.persoon = Persoon.objects.create(burgerservicenummer_persoon=000000000)
-        self.partnerschap = Kind.objects.create(
-            persoon=self.persoon, burgerservicenummer_kind=1
+        self.persoon_bsn = 000000000
+        self.partner_id = 111111111
+        self.persoon = Persoon.objects.create(
+            burgerservicenummer_persoon=self.persoon_bsn
+        )
+        self.kind = Kind.objects.create(
+            persoon=self.persoon, burgerservicenummer_kind=self.partner_id
         )
 
     def test_kind_without_token(self):
         response = self.client.get(
             reverse(
                 "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -88,7 +96,7 @@ class TestKindWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -101,7 +109,7 @@ class TestKindWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -109,7 +117,8 @@ class TestKindWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(response.json()["_embedded"]["kinderen"], list))
         self.assertEqual(
-            response.json()["_embedded"]["kinderen"][0]["burgerservicenummer"], "1"
+            response.json()["_embedded"]["kinderen"][0]["burgerservicenummer"],
+            str(self.partner_id),
         )
 
     def test_detail_kind(self):
@@ -119,13 +128,16 @@ class TestKindWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "kinderen-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 1},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": self.partner_id,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], "1")
+        self.assertEqual(response.json()["burgerservicenummer"], str(self.partner_id))
 
     def test_detail_kind_404(self):
 
@@ -134,10 +146,13 @@ class TestKindWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "kinderen-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 2},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 222222222,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json(), response_data_404)
+        self.assertEqual(response.json(), RESPONSE_DATA_404)

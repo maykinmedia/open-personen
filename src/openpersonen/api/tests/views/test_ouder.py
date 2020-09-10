@@ -11,20 +11,21 @@ from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.testing_models import Ouder, Persoon
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
-from openpersonen.api.views.generic_responses import response_data_404
+from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
 class TestOuder(APITestCase):
     def setUp(self):
         super().setUp()
+        self.persoon_bsn = 000000000
         self.url = StufBGClient.get_solo().url
 
     def test_ouder_without_token(self):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -35,7 +36,7 @@ class TestOuder(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -55,7 +56,10 @@ class TestOuder(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 1},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 1,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -69,16 +73,20 @@ class TestOuder(APITestCase):
 class TestOuderWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        self.persoon = Persoon.objects.create(burgerservicenummer_persoon=000000000)
+        self.persoon_bsn = 000000000
+        self.ouder_bsn = 111111111
+        self.persoon = Persoon.objects.create(
+            burgerservicenummer_persoon=self.persoon_bsn
+        )
         self.partnerschap = Ouder.objects.create(
-            persoon=self.persoon, burgerservicenummer_ouder=1
+            persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn
         )
 
     def test_ouder_without_token(self):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -89,7 +97,7 @@ class TestOuderWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -102,7 +110,7 @@ class TestOuderWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -110,7 +118,8 @@ class TestOuderWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(response.json()["_embedded"]["ouders"], list))
         self.assertEqual(
-            response.json()["_embedded"]["ouders"][0]["burgerservicenummer"], "1"
+            response.json()["_embedded"]["ouders"][0]["burgerservicenummer"],
+            str(self.ouder_bsn),
         )
 
     def test_detail_ouder(self):
@@ -120,13 +129,16 @@ class TestOuderWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 1},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": self.ouder_bsn,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], "1")
+        self.assertEqual(response.json()["burgerservicenummer"], str(self.ouder_bsn))
 
     def test_detail_ouder_404(self):
 
@@ -135,10 +147,13 @@ class TestOuderWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 2},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 222222222,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json(), response_data_404)
+        self.assertEqual(response.json(), RESPONSE_DATA_404)

@@ -10,7 +10,7 @@ from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.testing_models import Partnerschap, Persoon
 from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
-from openpersonen.api.views.generic_responses import response_data_404
+from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
 @override_settings(USE_STUF_BG_DATABASE=False)
@@ -18,12 +18,13 @@ class TestPartner(APITestCase):
     def setUp(self):
         super().setUp()
         self.url = StufBGClient.get_solo().url
+        self.bsn = 000000000
 
     def test_partner_without_token(self):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -34,7 +35,7 @@ class TestPartner(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -54,7 +55,7 @@ class TestPartner(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 1},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.bsn, "id": 1},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -68,16 +69,21 @@ class TestPartner(APITestCase):
 class TestPartnerWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        self.persoon = Persoon.objects.create(burgerservicenummer_persoon=000000000)
+        self.persoon_bsn = 000000000
+        self.partner_id = 111111111
+        self.persoon = Persoon.objects.create(
+            burgerservicenummer_persoon=self.persoon_bsn
+        )
         self.partnerschap = Partnerschap.objects.create(
-            persoon=self.persoon, burgerservicenummer_echtgenoot_geregistreerd_partner=1
+            persoon=self.persoon,
+            burgerservicenummer_echtgenoot_geregistreerd_partner=self.partner_id,
         )
 
     def test_partner_without_token(self):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -88,7 +94,7 @@ class TestPartnerWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -101,7 +107,7 @@ class TestPartnerWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -109,7 +115,8 @@ class TestPartnerWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(response.json()["_embedded"]["partners"], list))
         self.assertEqual(
-            response.json()["_embedded"]["partners"][0]["burgerservicenummer"], "1"
+            response.json()["_embedded"]["partners"][0]["burgerservicenummer"],
+            str(self.partner_id),
         )
 
     def test_detail_partner(self):
@@ -119,13 +126,16 @@ class TestPartnerWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 1},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": self.partner_id,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], "1")
+        self.assertEqual(response.json()["burgerservicenummer"], str(self.partner_id))
 
     def test_detail_partner_404(self):
 
@@ -134,10 +144,13 @@ class TestPartnerWithTestingModels(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000, "id": 2},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 222222222,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json(), response_data_404)
+        self.assertEqual(response.json(), RESPONSE_DATA_404)
