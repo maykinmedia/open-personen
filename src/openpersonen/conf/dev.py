@@ -131,4 +131,4 @@ except ImportError:
     pass
 
 
-USE_STUF_BG_DATABASE = os.getenv("USE_STUF_BG_DATABASE", True)
+USE_STUF_BG_DATABASE = os.getenv("USE_STUF_BG_DATABASE", False)
