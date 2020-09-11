@@ -8,8 +8,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
+from openpersonen.api.demo_models import Ouder, Persoon
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.testing_models import Ouder, Persoon
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
