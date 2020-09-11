@@ -5,7 +5,10 @@ from django.conf import settings
 from openpersonen.api.demo_models import Persoon as PersoonDemoModel
 from openpersonen.api.models import StufBGClient
 
-from .converters.kind import get_client_instance_dict, get_model_instance_dict
+from .converters.kind import (
+    convert_client_response_to_instance_dict,
+    convert_model_instance_to_instance_dict,
+)
 from .in_onderzoek import KindInOnderzoek
 from .persoon import Persoon
 
@@ -23,7 +26,7 @@ class Kind(Persoon):
                 burgerservicenummer_persoon=bsn
             ).kind_set.all()
             for instance in instances:
-                instance_dict = get_model_instance_dict(instance)
+                instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         return class_instances
 
@@ -33,8 +36,8 @@ class Kind(Persoon):
             instance = PersoonDemoModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).kind_set.get(burgerservicenummer_kind=id)
-            instance_dict = get_model_instance_dict(instance)
+            instance_dict = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_kind(bsn)
-            instance_dict = get_client_instance_dict(response)
+            instance_dict = convert_client_response_to_instance_dict(response)
         return cls(**instance_dict)

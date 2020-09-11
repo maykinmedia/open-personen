@@ -8,8 +8,8 @@ from openpersonen.api.enum import GeslachtsaanduidingChoices
 from openpersonen.api.models import StufBGClient
 
 from .converters.ingeschreven_persoon import (
-    get_client_instance_dict,
-    get_model_instance_dict,
+    convert_client_response_to_instance_dict,
+    convert_model_instance_to_instance_dict,
 )
 from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
@@ -68,20 +68,20 @@ class IngeschrevenPersoon(Persoon):
             cls.update_filters_to_fit_model(filters)
             instances = PersoonDemoModel.objects.filter(**filters)
             for instance in instances:
-                instance_dict = get_model_instance_dict(instance)
+                instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
             return class_instances
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
-            instance_dict = get_client_instance_dict(response)
+            instance_dict = convert_client_response_to_instance_dict(response)
             return [cls(**instance_dict)]
 
     @classmethod
     def retrieve(cls, bsn=None):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
             instance = PersoonDemoModel.objects.get(burgerservicenummer_persoon=bsn)
-            instance_dict = get_model_instance_dict(instance)
+            instance_dict = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
-            instance_dict = get_client_instance_dict(response)
+            instance_dict = convert_client_response_to_instance_dict(response)
         return cls(**instance_dict)

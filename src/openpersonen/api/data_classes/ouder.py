@@ -8,7 +8,10 @@ from openpersonen.api.demo_models import Persoon as PersoonDemoModel
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.api.models import StufBGClient
 
-from .converters.ouder import get_client_instance_dict, get_model_instance_dict
+from .converters.ouder import (
+    convert_client_response_to_instance_dict,
+    convert_model_instance_to_instance_dict,
+)
 from .datum import Datum
 from .in_onderzoek import OuderInOnderzoek
 from .persoon import Persoon
@@ -35,7 +38,7 @@ class Ouder(Persoon):
                 burgerservicenummer_persoon=bsn
             ).ouder_set.all()
             for instance in instances:
-                instance_dict = get_model_instance_dict(instance)
+                instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         return class_instances
 
@@ -45,8 +48,8 @@ class Ouder(Persoon):
             instance = PersoonDemoModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).ouder_set.get(burgerservicenummer_ouder=id)
-            instance_dict = get_model_instance_dict(instance)
+            instance_dict = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ouder(bsn)
-            instance_dict = get_client_instance_dict(response)
+            instance_dict = convert_client_response_to_instance_dict(response)
         return cls(**instance_dict)

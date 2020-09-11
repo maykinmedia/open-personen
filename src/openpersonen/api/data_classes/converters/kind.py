@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 from openpersonen.api.utils import convert_empty_instances
 
 
-def get_client_instance_dict(response):
+def convert_client_response_to_instance_dict(response):
     dict_object = xmltodict.parse(response.content)
 
     antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
@@ -96,7 +96,7 @@ def get_client_instance_dict(response):
     return kind_dict
 
 
-def get_model_instance_dict(kind):
+def convert_model_instance_to_instance_dict(kind):
 
     kind_dict = {
         "burgerservicenummer": kind.burgerservicenummer_kind,
