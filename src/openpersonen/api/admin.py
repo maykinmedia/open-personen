@@ -47,6 +47,7 @@ class StufBGClientAdmin(SingletonModelAdmin):
             {
                 "fields": (
                     "certificate",
+                    "certificate_key",
                 )
             },
         ),
