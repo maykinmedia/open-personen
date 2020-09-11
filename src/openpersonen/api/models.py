@@ -24,9 +24,9 @@ class StufBGClient(SingletonModel):
     url = models.URLField(_("url"))
     user = models.CharField(_("user"), max_length=200)
     password = models.CharField(_("password"), max_length=200)
-    certificate = models.FileField(upload_to="certificate/", null=True)
+    certificate = models.FileField(upload_to="certificate/")
     certificate_key = models.FileField(
-        upload_to="certificate/", null=True, help_text="Private key for the certificate"
+        upload_to="certificate/", help_text="Private key for the certificate"
     )
 
     class Meta:
