@@ -7,7 +7,10 @@ from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
 from openpersonen.api.models import StufBGClient
 
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschap
-from .converters.partner import get_client_instance_dict, get_model_instance_dict
+from .converters.partner import (
+    convert_client_response_to_instance_dict,
+    convert_model_instance_to_instance_dict,
+)
 from .in_onderzoek import PartnerInOnderzoek
 from .persoon import Persoon
 
@@ -33,7 +36,7 @@ class Partner(Persoon):
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.all()
             for instance in instances:
-                instance_dict = get_model_instance_dict(instance)
+                instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         return class_instances
 
@@ -45,8 +48,8 @@ class Partner(Persoon):
             ).partnerschap_set.get(
                 burgerservicenummer_echtgenoot_geregistreerd_partner=id
             )
-            instance_dict = get_model_instance_dict(instance)
+            instance_dict = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_partner(bsn)
-            instance_dict = get_client_instance_dict(response)
+            instance_dict = convert_client_response_to_instance_dict(response)
         return cls(**instance_dict)
