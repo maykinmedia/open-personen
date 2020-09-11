@@ -1,9 +1,8 @@
 import csv
-import os
 
 from django.core.management import BaseCommand
 
-from openpersonen.api.testing_models import *
+from openpersonen.api.demo_models import *
 
 """
 Row index   |    Field name
@@ -272,6 +271,10 @@ Row index   |    Field name
 
 
 class Command(BaseCommand):
+    """
+    Run using python src/manage.py import_csv_dataset ~/path/to/file.csv
+    """
+
     help = "Read in an csv file and populate models to use for test data"
 
     def add_arguments(self, parser):
