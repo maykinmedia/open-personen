@@ -275,7 +275,7 @@ class Command(BaseCommand):
     Run using python src/manage.py import_csv_dataset ~/path/to/file.csv
     """
 
-    help = "Read in an csv file and populate models to use for test data"
+    help = "Read in an csv file and populate models to use for demo data"
 
     def add_arguments(self, parser):
         parser.add_argument(
