@@ -42,7 +42,7 @@
          </ns:parameters>
          <!--Optional:-->
          <ns:gelijk StUF:entiteittype="NPS">
-            <ns:inp.bsn StUF:noValue="?" StUF:exact="true">{{ bsn }}</ns:inp.bsn>
+            <ns:inp.bsn StUF:noValue="?" StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
          </ns:gelijk>
          <!--Optional:-->
          <ns:scope>
