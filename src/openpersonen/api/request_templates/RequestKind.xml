@@ -53,7 +53,7 @@
          </ns:parameters>
          <!--Optional:-->
          <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
-            <ns:inp.bsn>{{ bsn }}</ns:inp.bsn>
+            <ns:inp.bsn>{{ bsn|escape }}</ns:inp.bsn>
          </ns:gelijk>
          <!--Optional:-->
          <ns:scope>
