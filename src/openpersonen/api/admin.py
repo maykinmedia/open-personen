@@ -42,4 +42,12 @@ class StufBGClientAdmin(SingletonModelAdmin):
                 )
             },
         ),
+        (
+            _("Certificate"),
+            {
+                "fields": (
+                    "certificate",
+                )
+            },
+        ),
     )
