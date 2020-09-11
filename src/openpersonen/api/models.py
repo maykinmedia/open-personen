@@ -79,7 +79,7 @@ class StufBGClient(SingletonModel):
             self.url,
             data=loader.render_to_string(request_file, request_context),
             headers=self._get_headers(),
-            cert=(self.certificate.path, self.certificate_key.path)
+            cert=(self.certificate.path, self.certificate_key.path),
         )
 
         response_context = self._get_response_base_context()
