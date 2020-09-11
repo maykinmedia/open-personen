@@ -2,12 +2,14 @@ import base64
 import uuid
 from datetime import timedelta
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
 from django.utils.translation import ugettext_lazy as _
 
 import requests
+from lxml import etree
 from solo.models import SingletonModel
 
 
@@ -71,11 +73,16 @@ class StufBGClient(SingletonModel):
         if additional_context:
             request_context.update(additional_context)
 
+        request_data = loader.render_to_string(request_file, request_context)
+
+        try:
+            etree.fromstring(request_data, etree.XMLParser(dtd_validation=True))
+        except etree.XMLSyntaxError:
+            raise ValidationError('XML syntax incorrect,  likely received improper request_context')
+
         response = requests.post(
             self.url,
-            data=loader.render_to_string(
-                "RequestIngeschrevenPersoon.xml", request_context
-            ),
+            data=request_data,
             headers=self._get_headers(),
         )
 
