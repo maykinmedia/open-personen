@@ -2,14 +2,12 @@ import base64
 import uuid
 from datetime import timedelta
 
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
 from django.utils.translation import ugettext_lazy as _
 
 import requests
-from lxml import etree
 from solo.models import SingletonModel
 
 
@@ -73,11 +71,9 @@ class StufBGClient(SingletonModel):
         if additional_context:
             request_context.update(additional_context)
 
-        request_data = loader.render_to_string(request_file, request_context)
-
         response = requests.post(
             self.url,
-            data=request_data,
+            data=loader.render_to_string(request_file, request_context),
             headers=self._get_headers(),
         )
 
