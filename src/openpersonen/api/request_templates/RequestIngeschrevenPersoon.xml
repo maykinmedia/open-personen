@@ -58,6 +58,10 @@
                   <!--Optional:-->
                   <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
               {% endif %}
+                {% if burgerservicenummer %}
+                  <!--Optional:-->
+                  <ns:inp.bsn StUF:exact="true">{{ burgerservicenummer|escape }}</ns:inp.bsn>
+              {% endif %}
               {% if geboorte__datum %}
                   <!--Optional:-->
                   <ns:geboortedatum StUF:exact="true" StUF:indOnvolledigeDatum="V">
