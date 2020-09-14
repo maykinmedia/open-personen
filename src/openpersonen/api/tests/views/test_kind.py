@@ -1,6 +1,6 @@
 from django.template import loader
 from django.test import override_settings
-from django.urls import reverse
+from django.urls import NoReverseMatch, reverse
 
 import requests_mock
 from rest_framework.authtoken.models import Token
@@ -17,7 +17,7 @@ from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 class TestKind(APITestCase):
     def setUp(self):
         super().setUp()
-        self.persoon_bsn = 000000000
+        self.persoon_bsn = 123456789
         self.url = StufBGClient.get_solo().url
 
     def test_kind_without_token(self):
@@ -57,7 +57,7 @@ class TestKind(APITestCase):
                 "kinderen-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 1,
+                    "id": 987654321,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
@@ -67,12 +67,28 @@ class TestKind(APITestCase):
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
+    def test_detail_kind_with_bad_id(self):
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        with self.assertRaises(NoReverseMatch):
+            self.client.get(
+                reverse(
+                    "kinderen-detail",
+                    kwargs={
+                        "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                        "id": "badid",
+                    },
+                ),
+                HTTP_AUTHORIZATION=f"Token {token.key}",
+            )
+
 
 @override_settings(USE_STUF_BG_DATABASE=True)
 class TestKindWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        self.persoon_bsn = 000000000
+        self.persoon_bsn = 123456789
         self.partner_id = 111111111
         self.persoon = Persoon.objects.create(
             burgerservicenummer_persoon=self.persoon_bsn

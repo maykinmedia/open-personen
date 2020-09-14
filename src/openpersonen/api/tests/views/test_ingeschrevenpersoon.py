@@ -1,6 +1,6 @@
 from django.template import loader
 from django.test import override_settings
-from django.urls import reverse
+from django.urls import NoReverseMatch, reverse
 
 import requests_mock
 from rest_framework.authtoken.models import Token
@@ -83,7 +83,7 @@ class TestIngeschrevenPersoon(APITestCase):
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
-                kwargs={"burgerservicenummer": "123456789"},
+                kwargs={"burgerservicenummer": 123456789},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -92,12 +92,25 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
+    def test_detail_ingeschreven_persoon_with_bad_burgerservicenummer(self):
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        with self.assertRaises(NoReverseMatch):
+            self.client.get(
+                reverse(
+                    "ingeschrevenpersonen-detail",
+                    kwargs={"burgerservicenummer": "badbsn"},
+                ),
+                HTTP_AUTHORIZATION=f"Token {token.key}",
+            )
+
 
 @override_settings(USE_STUF_BG_DATABASE=True)
 class TestIngeschrevenPersoonWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        self.bsn = 000000000
+        self.bsn = 123456789
         Persoon.objects.create(burgerservicenummer_persoon=self.bsn)
 
     def test_ingeschreven_persoon_without_token(self):
