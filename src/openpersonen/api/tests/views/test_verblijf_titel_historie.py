@@ -19,7 +19,7 @@ class TestVerblijfsTitelHistorie(APITestCase):
         response = self.client.get(
             reverse(
                 "verblijfstitelhistorie-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 123456789},
             )
         )
         self.assertEqual(response.status_code, 401)
@@ -39,7 +39,7 @@ class TestVerblijfsTitelHistorie(APITestCase):
         response = self.client.get(
             reverse(
                 "verblijfstitelhistorie-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": 000000000},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 123456789},
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )

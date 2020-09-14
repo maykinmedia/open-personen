@@ -1,6 +1,6 @@
 from django.template import loader
 from django.test import override_settings
-from django.urls import reverse
+from django.urls import NoReverseMatch, reverse
 
 import requests_mock
 from rest_framework.authtoken.models import Token
@@ -18,7 +18,7 @@ class TestPartner(APITestCase):
     def setUp(self):
         super().setUp()
         self.url = StufBGClient.get_solo().url
-        self.bsn = 000000000
+        self.bsn = 123456789
 
     def test_partner_without_token(self):
         response = self.client.get(
@@ -55,7 +55,10 @@ class TestPartner(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-detail",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.bsn, "id": 1},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.bsn,
+                    "id": 987654321,
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
@@ -64,12 +67,28 @@ class TestPartner(APITestCase):
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
+    def test_detail_partner_with_bad_id(self):
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        with self.assertRaises(NoReverseMatch):
+            self.client.get(
+                reverse(
+                    "partners-detail",
+                    kwargs={
+                        "ingeschrevenpersonen_burgerservicenummer": self.bsn,
+                        "id": "badid",
+                    },
+                ),
+                HTTP_AUTHORIZATION=f"Token {token.key}",
+            )
+
 
 @override_settings(USE_STUF_BG_DATABASE=True)
 class TestPartnerWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
-        self.persoon_bsn = 000000000
+        self.persoon_bsn = 123456789
         self.partner_id = 111111111
         self.persoon = Persoon.objects.create(
             burgerservicenummer_persoon=self.persoon_bsn

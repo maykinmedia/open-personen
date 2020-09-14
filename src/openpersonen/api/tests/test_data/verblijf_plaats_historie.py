@@ -98,5 +98,5 @@ VERBLIJF_PLAATS_HISTORIE_DATA = {
             }
         ]
     },
-    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/0/verblijfplaatshistorie",
+    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/123456789/verblijfplaatshistorie",
 }

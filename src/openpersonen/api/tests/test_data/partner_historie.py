@@ -121,5 +121,5 @@ PARTNER_HISTORIE_DATA = {
             }
         ]
     },
-    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/0/partnerhistorie",
+    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/123456789/partnerhistorie",
 }
