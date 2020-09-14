@@ -5,6 +5,5 @@ from openpersonen.api.views.base import NestedViewSet
 
 class OuderViewSet(NestedViewSet):
 
-    lookup_field = "id"
     serializer_class = OuderSerializer
     instance_class = Ouder
