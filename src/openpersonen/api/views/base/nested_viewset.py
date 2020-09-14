@@ -8,6 +8,10 @@ from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
 class NestedViewSet(BaseViewSet):
+
+    lookup_field = "id"
+    lookup_value_regex = "[0-9]{9}"
+
     def list(self, request, *args, **kwargs):
         bsn = kwargs["ingeschrevenpersonen_burgerservicenummer"]
 
