@@ -75,11 +75,6 @@ class StufBGClient(SingletonModel):
 
         request_data = loader.render_to_string(request_file, request_context)
 
-        try:
-            etree.fromstring(request_data, etree.XMLParser(dtd_validation=True))
-        except etree.XMLSyntaxError:
-            raise ValidationError('XML syntax incorrect,  likely received improper request_context')
-
         response = requests.post(
             self.url,
             data=request_data,
