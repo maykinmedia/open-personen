@@ -75,4 +75,4 @@ Licensed under the `Business Source License`_ (BSL) 1.1
     :target: https://github.com/psf/black
 
 .. |docker| image:: https://images.microbadger.com/badges/image/maykinmedia/open-personen.svg
-    :target: https://microbadger.com/images/maykinmedia/open-personen
+    :target: https://hub.docker.com/r/maykinmedia/open-personen

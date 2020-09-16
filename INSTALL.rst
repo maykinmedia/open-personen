@@ -44,8 +44,8 @@ development machine.
 
    .. code-block:: bash
 
-       $ git clone git@bitbucket.org:maykinmedia/openpersonen.git
-       $ cd openpersonen
+       $ git clone git@bitbucket.org:maykinmedia/open-personen.git
+       $ cd open-personen
 
 3. Install all required libraries.
 
@@ -91,7 +91,7 @@ development machine.
 
 
 **Note:** If you are making local, machine specific, changes, add them to
-``src/openpersonen/conf/local.py``. You can base this file on the
+``src/open-personen/conf/local.py``. You can base this file on the
 example file included in the same directory.
 
 **Note:** You can run watch-tasks to compile `Sass`_ to CSS and `ECMA`_ to JS
@@ -111,7 +111,7 @@ When updating an existing installation:
 
    .. code-block:: bash
 
-       $ cd openpersonen
+       $ cd open-personen
        $ source env/bin/activate
 
 2. Update the code and libraries:
@@ -165,15 +165,15 @@ Docker
 The easiest way to get the project started is by using `Docker Compose`_.
 
 1. Clone or download the code from `Github`_ in a folder like
-   ``openpersonen``:
+   ``open-personen``:
 
    .. code-block:: bash
 
-       $ git clone git@bitbucket.org:maykinmedia/openpersonen.git
-       Cloning into 'openpersonen'...
+       $ git clone git@bitbucket.org:maykinmedia/open-personen.git
+       Cloning into 'open-personen'...
        ...
 
-       $ cd openpersonen
+       $ cd open-personen
 
 2. Start the database and web services:
 
@@ -223,7 +223,7 @@ The easiest way to get the project started is by using `Docker Compose`_.
    system you can run ``docker system prune``.
 
 .. _Docker Compose: https://docs.docker.com/compose/install/
-.. _Github: https://github.com/maykinmedia/openpersonen/
+.. _Github: https://github.com/maykinmedia/open-personen/
 
 
 More Docker
