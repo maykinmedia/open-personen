@@ -55,7 +55,7 @@ polib==1.1.0              # via -r requirements/base.txt, django-rosetta
 psycopg2==2.8.5           # via -r requirements/base.txt
 pyjwt==1.7.1              # via -r requirements/base.txt, gemma-zds-client, vng-api-common
 pyquery==1.4.1            # via -r requirements/test-tools.in
-python-dateutil==2.8.1    # via faker, freezegun
+python-dateutil==2.8.1    # via -r requirements/base.txt, faker, freezegun
 python-decouple==3.3      # via -r requirements/base.txt
 python-dotenv==0.14.0     # via -r requirements/base.txt
 pytz==2020.1              # via -r requirements/base.txt, django
