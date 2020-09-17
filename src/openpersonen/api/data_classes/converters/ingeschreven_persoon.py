@@ -909,26 +909,26 @@ def convert_model_instance_to_instance_dict(persoon):
                 "aanduidingBijzonderNederlanderschap": nationaliteit.aanduiding_bijzonder_nederlanderschap,
                 "datumIngangGeldigheid": {
                     "dag": int(
-                        kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
+                        nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
                             settings.DAY_START : settings.DAY_END
                         ]
                     )
-                    if kiesrecht.datum_van_ingang_geldigheid_met_betrekking
+                    if nationaliteit.datum_van_ingang_geldigheid_met_betrekking
                     else 0,
-                    "datum": kiesrecht.datum_van_ingang_geldigheid_met_betrekking,
+                    "datum": nationaliteit.datum_van_ingang_geldigheid_met_betrekking,
                     "jaar": int(
-                        kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
+                        nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
                             settings.YEAR_START : settings.YEAR_END
                         ]
                     )
-                    if kiesrecht.datum_van_ingang_geldigheid_met_betrekking
+                    if nationaliteit.datum_van_ingang_geldigheid_met_betrekking
                     else 0,
                     "maand": int(
-                        kiesrecht.datum_van_ingang_geldigheid_met_betrekking[
+                        nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
                             settings.MONTH_START : settings.MONTH_END
                         ]
                     )
-                    if kiesrecht.datum_van_ingang_geldigheid_met_betrekking
+                    if nationaliteit.datum_van_ingang_geldigheid_met_betrekking
                     else 0,
                 },
                 "nationaliteit": {
@@ -947,26 +947,26 @@ def convert_model_instance_to_instance_dict(persoon):
                     "redenOpname": bool(nationaliteit.reden_opname_nationaliteit),
                     "datumIngangOnderzoek": {
                         "dag": int(
-                            kiesrecht.datum_ingang_onderzoek[
+                            nationaliteit.datum_ingang_onderzoek[
                                 settings.DAY_START : settings.DAY_END
                             ]
                         )
-                        if kiesrecht.datum_ingang_onderzoek
+                        if nationaliteit.datum_ingang_onderzoek
                         else 0,
-                        "datum": kiesrecht.datum_ingang_onderzoek,
+                        "datum": nationaliteit.datum_ingang_onderzoek,
                         "jaar": int(
-                            kiesrecht.datum_ingang_onderzoek[
+                            nationaliteit.datum_ingang_onderzoek[
                                 settings.YEAR_START : settings.YEAR_END
                             ]
                         )
-                        if kiesrecht.datum_ingang_onderzoek
+                        if nationaliteit.datum_ingang_onderzoek
                         else 0,
                         "maand": int(
-                            kiesrecht.datum_ingang_onderzoek[
+                            nationaliteit.datum_ingang_onderzoek[
                                 settings.MONTH_START : settings.MONTH_END
                             ]
                         )
-                        if kiesrecht.datum_ingang_onderzoek
+                        if nationaliteit.datum_ingang_onderzoek
                         else 0,
                     },
                 },
