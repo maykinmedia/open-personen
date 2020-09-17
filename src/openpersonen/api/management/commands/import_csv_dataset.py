@@ -285,8 +285,8 @@ class Command(BaseCommand):
     def handle(self, **options):
         with open(options["infile"], newline="") as csvfile:
             rows = csv.reader(csvfile, delimiter=";", quotechar="|")
-
-            for row in list(rows)[3:]:
+            print('Importing dataset')
+            for index, row in enumerate(list(rows)[3:]):
                 if any(row[1:24]):
                     persoon = Persoon.objects.create(
                         a_nummer_persoon=row[0],
@@ -626,3 +626,5 @@ class Command(BaseCommand):
                         datum_van_de_ontlening_van_de_gegevens_over_kiesrecht=row[252],
                         beschrijving_van_het_document=row[253],
                     )
+
+            print('Done!')
