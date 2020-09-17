@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.template import loader
 from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
@@ -8,8 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.demo_models import Ouder, Persoon
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.tests.factory_models import OuderFactory, PersoonFactory
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -91,10 +90,10 @@ class TestOuderWithTestingModels(APITestCase):
         super().setUp()
         self.persoon_bsn = 123456789
         self.ouder_bsn = 111111111
-        self.persoon = Persoon.objects.create(
+        self.persoon = PersoonFactory.create(
             burgerservicenummer_persoon=self.persoon_bsn
         )
-        self.partnerschap = Ouder.objects.create(
+        self.ouder = OuderFactory(
             persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn
         )
 
@@ -133,9 +132,31 @@ class TestOuderWithTestingModels(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(response.json()["_embedded"]["ouders"], list))
+        data = response.json()["_embedded"]["ouders"][0]
         self.assertEqual(
-            response.json()["_embedded"]["ouders"][0]["burgerservicenummer"],
+            data["burgerservicenummer"],
             str(self.ouder_bsn),
+        )
+        self.assertEqual(
+            data["_embedded"]["naam"]["voornamen"], self.ouder.voornamen_ouder
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.ouder.geboortedatum_ouder),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
+            str(self.ouder.geboorteland_ouder),
+        )
+        self.assertEqual(
+            data["_embedded"]["datumIngangFamilierechtelijkeBetrekking"]["datum"],
+            str(self.ouder.datum_ingang_familierechtelijke_betrekking_ouder),
+        )
+        self.assertEqual(
+            data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
+                "datum"
+            ],
+            str(self.ouder.datum_ingang_onderzoek),
         )
 
     def test_detail_ouder(self):
@@ -154,7 +175,32 @@ class TestOuderWithTestingModels(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], str(self.ouder_bsn))
+        data = response.json()
+        self.assertEqual(
+            data["burgerservicenummer"],
+            str(self.ouder_bsn),
+        )
+        self.assertEqual(
+            data["_embedded"]["naam"]["voornamen"], self.ouder.voornamen_ouder
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.ouder.geboortedatum_ouder),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
+            str(self.ouder.geboorteland_ouder),
+        )
+        self.assertEqual(
+            data["_embedded"]["datumIngangFamilierechtelijkeBetrekking"]["datum"],
+            str(self.ouder.datum_ingang_familierechtelijke_betrekking_ouder),
+        )
+        self.assertEqual(
+            data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
+                "datum"
+            ],
+            str(self.ouder.datum_ingang_onderzoek),
+        )
 
     def test_detail_ouder_404(self):
 

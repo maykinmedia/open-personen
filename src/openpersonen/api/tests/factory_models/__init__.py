@@ -1,4 +1,3 @@
-from .persoon import *  # noqa
 from .gezagsverhouding import *  # noqa
 from .inschrijving import *  # noqa
 from .kiesrecht import *  # noqa
@@ -7,6 +6,7 @@ from .nationaliteit import *  # noqa
 from .ouder import *  # noqa
 from .overlijden import *  # noqa
 from .partnerschap import *  # noqa
+from .persoon import *  # noqa
 from .reisdocument import *  # noqa
 from .verblijfplaats import *  # noqa
 from .verblijfstitel import *  # noqa

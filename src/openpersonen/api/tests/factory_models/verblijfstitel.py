@@ -1,6 +1,7 @@
 import factory
 
 from openpersonen.api.demo_models import Verblijfstitel
+
 from .persoon import PersoonFactory
 
 
@@ -13,7 +14,7 @@ class VerblijfstitelFactory(factory.django.DjangoModelFactory):
     aanduiding_gegevens_in_onderzoek = 100000
     datum_ingang_onderzoek = 19951205
     datum_einde_onderzoek = 19951207
-    indicatie_onjuist = 'O'
+    indicatie_onjuist = "O"
     ingangsdatum_geldigheid_met_betrekking = 20110130
     datum_van_opneming_met_betrekking = 20110131
 

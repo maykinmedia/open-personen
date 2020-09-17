@@ -8,7 +8,20 @@ from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.tests.factory_models import PersoonFactory
+from openpersonen.api.tests.factory_models import (
+    GezagsVerhoudingFactory,
+    InschrijvingFactory,
+    KiesrechtFactory,
+    KindFactory,
+    NationaliteitFactory,
+    OuderFactory,
+    OverlijdenFactory,
+    PartnerschapFactory,
+    PersoonFactory,
+    ReisdocumentFactory,
+    VerblijfplaatsFactory,
+    VerblijfstitelFactory,
+)
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -112,6 +125,17 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         super().setUp()
         self.bsn = 123456789
         self.persoon = PersoonFactory.create(burgerservicenummer_persoon=self.bsn)
+        self.gezagsverhouding = GezagsVerhoudingFactory(persoon=self.persoon)
+        self.inschrijving = InschrijvingFactory(persoon=self.persoon)
+        self.kiesrecht = KiesrechtFactory(persoon=self.persoon)
+        self.kind = KindFactory(persoon=self.persoon)
+        self.nationaliteit = NationaliteitFactory(persoon=self.persoon)
+        self.ouder = OuderFactory(persoon=self.persoon)
+        self.overlijden = OverlijdenFactory(persoon=self.persoon)
+        self.partnerschap = PartnerschapFactory(persoon=self.persoon)
+        self.reisdocument = ReisdocumentFactory(persoon=self.persoon)
+        self.verblijfplaats = VerblijfplaatsFactory(persoon=self.persoon)
+        self.verblijfstitel = VerblijfstitelFactory(persoon=self.persoon)
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -126,11 +150,111 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
         self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(data["burgerservicenummer"], str(self.bsn))
         self.assertEqual(
-            response.json()["_embedded"]["ingeschrevenpersonen"][0][
-                "burgerservicenummer"
+            data["_embedded"]["naam"]["geslachtsnaam"],
+            self.persoon.geslachtsnaam_persoon,
+        )
+        self.assertEqual(
+            data["_embedded"]["naam"]["_embedded"]["inOnderzoek"]["_embedded"][
+                "datumIngangOnderzoek"
+            ]["datum"],
+            str(self.persoon.datum_ingang_onderzoek),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.persoon.geboortedatum_persoon),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
+            str(self.persoon.geboorteland_persoon),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
+            str(self.persoon.geboorteplaats_persoon),
+        )
+        self.assertEqual(
+            data["_embedded"]["kiesrecht"]["_embedded"][
+                "einddatumUitsluitingEuropeesKiesrecht"
+            ]["datum"],
+            str(self.kiesrecht.einddatum_uitsluiting_europees_kiesrecht),
+        )
+        self.assertEqual(
+            data["_embedded"]["kiesrecht"]["_embedded"][
+                "einddatumUitsluitingKiesrecht"
+            ]["datum"],
+            str(self.kiesrecht.einddatum_uitsluiting_kiesrecht),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["datumIngangGeldigheid"][
+                "datum"
             ],
-            str(self.bsn),
+            str(self.nationaliteit.datum_van_ingang_geldigheid_met_betrekking),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["nationaliteit"][
+                "omschrijving"
+            ],
+            str(self.nationaliteit.nationaliteit),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["redenOpname"][
+                "omschrijving"
+            ],
+            str(self.nationaliteit.reden_opname_nationaliteit),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["inOnderzoek"][
+                "_embedded"
+            ]["datumIngangOnderzoek"]["datum"],
+            str(self.nationaliteit.datum_ingang_onderzoek),
+        )
+        self.assertEqual(
+            data["_embedded"]["overlijden"]["_embedded"]["datum"]["datum"],
+            str(self.overlijden.datum_overlijden),
+        )
+        self.assertEqual(
+            data["_embedded"]["overlijden"]["_embedded"]["land"]["omschrijving"],
+            str(self.overlijden.land_overlijden),
+        )
+        self.assertEqual(
+            data["_embedded"]["overlijden"]["_embedded"]["plaats"]["omschrijving"],
+            str(self.overlijden.plaats_overlijden),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfplaats"]["identificatiecodeNummeraanduiding"],
+            self.verblijfplaats.identificatiecode_nummeraanduiding,
+        )
+        self.assertEqual(
+            data["_embedded"]["gezagsverhouding"]["_embedded"]["inOnderzoek"][
+                "_embedded"
+            ]["datumIngangOnderzoek"]["datum"],
+            str(self.gezagsverhouding.datum_ingang_onderzoek),
+        )
+        self.assertEqual(
+            data["_embedded"]["reisdocumenten"][0],
+            self.reisdocument.nummer_nederlands_reisdocument,
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["aanduiding"][
+                "omschrijving"
+            ],
+            str(self.verblijfstitel.aanduiding_verblijfstitel),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["datumEinde"]["datum"],
+            str(self.verblijfstitel.datum_einde_verblijfstitel),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["datumIngang"]["datum"],
+            str(self.verblijfstitel.ingangsdatum_verblijfstitel),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["inOnderzoek"][
+                "_embedded"
+            ]["datumIngangOnderzoek"]["datum"],
+            str(self.verblijfstitel.datum_ingang_onderzoek),
         )
 
     def test_ingeschreven_persoon_with_token_and_incorrect_proper_query_params(self):
@@ -157,7 +281,112 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], str(self.bsn))
+        data = response.json()
+        self.assertEqual(data["burgerservicenummer"], str(self.bsn))
+        self.assertEqual(
+            data["_embedded"]["naam"]["geslachtsnaam"],
+            self.persoon.geslachtsnaam_persoon,
+        )
+        self.assertEqual(
+            data["_embedded"]["naam"]["_embedded"]["inOnderzoek"]["_embedded"][
+                "datumIngangOnderzoek"
+            ]["datum"],
+            str(self.persoon.datum_ingang_onderzoek),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.persoon.geboortedatum_persoon),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
+            str(self.persoon.geboorteland_persoon),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
+            str(self.persoon.geboorteplaats_persoon),
+        )
+        self.assertEqual(
+            data["_embedded"]["kiesrecht"]["_embedded"][
+                "einddatumUitsluitingEuropeesKiesrecht"
+            ]["datum"],
+            str(self.kiesrecht.einddatum_uitsluiting_europees_kiesrecht),
+        )
+        self.assertEqual(
+            data["_embedded"]["kiesrecht"]["_embedded"][
+                "einddatumUitsluitingKiesrecht"
+            ]["datum"],
+            str(self.kiesrecht.einddatum_uitsluiting_kiesrecht),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["datumIngangGeldigheid"][
+                "datum"
+            ],
+            str(self.nationaliteit.datum_van_ingang_geldigheid_met_betrekking),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["nationaliteit"][
+                "omschrijving"
+            ],
+            str(self.nationaliteit.nationaliteit),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["redenOpname"][
+                "omschrijving"
+            ],
+            str(self.nationaliteit.reden_opname_nationaliteit),
+        )
+        self.assertEqual(
+            data["_embedded"]["nationaliteit"][0]["_embedded"]["inOnderzoek"][
+                "_embedded"
+            ]["datumIngangOnderzoek"]["datum"],
+            str(self.nationaliteit.datum_ingang_onderzoek),
+        )
+        self.assertEqual(
+            data["_embedded"]["overlijden"]["_embedded"]["datum"]["datum"],
+            str(self.overlijden.datum_overlijden),
+        )
+        self.assertEqual(
+            data["_embedded"]["overlijden"]["_embedded"]["land"]["omschrijving"],
+            str(self.overlijden.land_overlijden),
+        )
+        self.assertEqual(
+            data["_embedded"]["overlijden"]["_embedded"]["plaats"]["omschrijving"],
+            str(self.overlijden.plaats_overlijden),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfplaats"]["identificatiecodeNummeraanduiding"],
+            self.verblijfplaats.identificatiecode_nummeraanduiding,
+        )
+        self.assertEqual(
+            data["_embedded"]["gezagsverhouding"]["_embedded"]["inOnderzoek"][
+                "_embedded"
+            ]["datumIngangOnderzoek"]["datum"],
+            str(self.gezagsverhouding.datum_ingang_onderzoek),
+        )
+        self.assertEqual(
+            data["_embedded"]["reisdocumenten"][0],
+            self.reisdocument.nummer_nederlands_reisdocument,
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["aanduiding"][
+                "omschrijving"
+            ],
+            str(self.verblijfstitel.aanduiding_verblijfstitel),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["datumEinde"]["datum"],
+            str(self.verblijfstitel.datum_einde_verblijfstitel),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["datumIngang"]["datum"],
+            str(self.verblijfstitel.ingangsdatum_verblijfstitel),
+        )
+        self.assertEqual(
+            data["_embedded"]["verblijfstitel"]["_embedded"]["inOnderzoek"][
+                "_embedded"
+            ]["datumIngangOnderzoek"]["datum"],
+            str(self.verblijfstitel.datum_ingang_onderzoek),
+        )
 
     def test_not_found_detail_ingeschreven_persoon(self):
 
