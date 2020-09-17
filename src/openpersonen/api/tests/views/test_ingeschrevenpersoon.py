@@ -7,8 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.demo_models import Persoon
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.tests.factory_models import PersoonFactory
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -111,7 +111,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
         self.bsn = 123456789
-        Persoon.objects.create(burgerservicenummer_persoon=self.bsn)
+        self.persoon = PersoonFactory.create(burgerservicenummer_persoon=self.bsn)
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
