@@ -7,8 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.demo_models import Kind, Persoon
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.tests.factory_models import KindFactory, PersoonFactory
 from openpersonen.api.tests.test_data import KIND_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -89,12 +89,12 @@ class TestKindWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
         self.persoon_bsn = 123456789
-        self.partner_id = 111111111
-        self.persoon = Persoon.objects.create(
+        self.kind_bsn = 111111111
+        self.persoon = PersoonFactory.create(
             burgerservicenummer_persoon=self.persoon_bsn
         )
-        self.kind = Kind.objects.create(
-            persoon=self.persoon, burgerservicenummer_kind=self.partner_id
+        self.kind = KindFactory(
+            persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn
         )
 
     def test_kind_without_token(self):
@@ -132,9 +132,31 @@ class TestKindWithTestingModels(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(response.json()["_embedded"]["kinderen"], list))
+        data = response.json()["_embedded"]["kinderen"][0]
         self.assertEqual(
-            response.json()["_embedded"]["kinderen"][0]["burgerservicenummer"],
-            str(self.partner_id),
+            data["burgerservicenummer"],
+            str(self.kind_bsn),
+        )
+        self.assertEqual(
+            data["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.kind.geboortedatum_kind),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
+            str(self.kind.geboorteland_kind),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
+            str(self.kind.geboorteplaats_kind),
+        )
+        self.assertEqual(
+            data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
+                "datum"
+            ],
+            str(self.kind.datum_ingang_onderzoek),
         )
 
     def test_detail_kind(self):
@@ -146,14 +168,39 @@ class TestKindWithTestingModels(APITestCase):
                 "kinderen-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": self.partner_id,
+                    "id": self.kind_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["burgerservicenummer"], str(self.partner_id))
+        data = response.json()
+        self.assertEqual(
+            data["burgerservicenummer"],
+            str(self.kind_bsn),
+        )
+        self.assertEqual(
+            data["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.kind.geboortedatum_kind),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
+            str(self.kind.geboorteland_kind),
+        )
+        self.assertEqual(
+            data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
+            str(self.kind.geboorteplaats_kind),
+        )
+        self.assertEqual(
+            data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
+                "datum"
+            ],
+            str(self.kind.datum_ingang_onderzoek),
+        )
 
     def test_detail_kind_404(self):
 
