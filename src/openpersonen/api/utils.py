@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from datetime import datetime
 
 
 def convert_empty_instances(dictionary):
@@ -7,3 +8,11 @@ def convert_empty_instances(dictionary):
             dictionary[key] = None
         elif isinstance(dictionary[key], dict):
             convert_empty_instances(dictionary[key])
+
+
+def is_expected_date_format(value):
+    try:
+        datetime.strptime(value, "%Y%m%d")
+        return True
+    except ValueError:
+        return False

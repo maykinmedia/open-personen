@@ -5,7 +5,7 @@ from django.conf import settings
 import xmltodict
 from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.utils import convert_empty_instances
+from openpersonen.api.utils import convert_empty_instances, is_expected_date_format
 
 
 def convert_client_response_to_instance_dict(response):
@@ -456,7 +456,7 @@ def convert_model_instance_to_instance_dict(persoon):
             datetime.now(),
             datetime.strptime(persoon.geboortedatum_persoon, "%Y%m%d"),
         ).years
-        if persoon.geboortedatum_persoon
+        if is_expected_date_format(persoon.geboortedatum_persoon)
         else 0,
         "datumEersteInschrijvingGBA": {
             "dag": 0,
@@ -516,7 +516,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_kiesrecht
+                if is_expected_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
                 "datum": kiesrecht.einddatum_uitsluiting_kiesrecht,
                 "jaar": int(
@@ -524,14 +524,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_kiesrecht
+                if is_expected_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
                 "maand": int(
                     kiesrecht.einddatum_uitsluiting_kiesrecht[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_kiesrecht
+                if is_expected_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
             },
         }
@@ -545,20 +545,20 @@ def convert_model_instance_to_instance_dict(persoon):
                 "dag": int(
                     overlijden.datum_overlijden[settings.DAY_START : settings.DAY_END]
                 )
-                if overlijden.datum_overlijden
+                if is_expected_date_format(overlijden.datum_overlijden)
                 else 0,
                 "datum": overlijden.datum_overlijden,
                 "jaar": int(
                     overlijden.datum_overlijden[settings.YEAR_START : settings.YEAR_END]
                 )
-                if overlijden.datum_overlijden
+                if is_expected_date_format(overlijden.datum_overlijden)
                 else 0,
                 "maand": int(
                     overlijden.datum_overlijden[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if overlijden.datum_overlijden
+                if is_expected_date_format(overlijden.datum_overlijden)
                 else 0,
             },
             "land": {
@@ -654,7 +654,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfplaats.datum_inschrijving_in_de_gemeente
+                if is_expected_date_format(verblijfplaats.datum_inschrijving_in_de_gemeente)
                 else 0,
                 "datum": verblijfplaats.datum_inschrijving_in_de_gemeente,
                 "jaar": int(
@@ -662,14 +662,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfplaats.datum_inschrijving_in_de_gemeente
+                if is_expected_date_format(verblijfplaats.datum_inschrijving_in_de_gemeente)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_inschrijving_in_de_gemeente[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfplaats.datum_inschrijving_in_de_gemeente
+                if is_expected_date_format(verblijfplaats.datum_inschrijving_in_de_gemeente)
                 else 0,
             },
             "datumVestigingInNederland": {
@@ -678,7 +678,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfplaats.datum_vestiging_in_nederland
+                if is_expected_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
                 "datum": verblijfplaats.datum_vestiging_in_nederland,
                 "jaar": int(
@@ -686,14 +686,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfplaats.datum_vestiging_in_nederland
+                if is_expected_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_vestiging_in_nederland[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfplaats.datum_vestiging_in_nederland
+                if is_expected_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
             },
             "gemeenteVanInschrijving": {
@@ -826,7 +826,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfstitel.datum_einde_verblijfstitel
+                if is_expected_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
                 "datum": verblijfstitel.datum_einde_verblijfstitel,
                 "jaar": int(
@@ -834,14 +834,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfstitel.datum_einde_verblijfstitel
+                if is_expected_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
                 "maand": int(
                     verblijfstitel.datum_einde_verblijfstitel[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfstitel.datum_einde_verblijfstitel
+                if is_expected_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
             },
             "datumIngang": {
