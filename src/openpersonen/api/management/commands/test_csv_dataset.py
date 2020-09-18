@@ -17,7 +17,7 @@ class Command(BaseCommand):
     Run using python src/manage.py test_csv_dataset
     """
 
-    help = "Test APIs using demo data in database"
+    help = "Test APIs using demo data in database.  Note: Must have server running at http://localhost:8000"
 
     def make_request(self, viewname, viewname_kwargs):
 
