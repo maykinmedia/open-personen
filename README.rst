@@ -94,6 +94,18 @@ You can also specify your own csv file by using
 
   python src/manage.py import_csv_data ~/path/to/file.csv
 
+After importing the data you can run a test script to check the API will not error
+when called.  You will need a localhost server running since it calls to http://localhost:8000
+To test this run the following
+
+.. code-block:: bash
+
+  python src/manage.py test_csv_dataset
+
+This loops through all the potential API calls that could be done to get the data that was imported
+and ensures a 200 status code is returned.  If a 200 status code is not returned and error message
+will be printed to the console.
+
 
 Testing
 =======
