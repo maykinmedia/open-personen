@@ -66,6 +66,52 @@ Or with Docker run
   docker-compose up
 
 
+Running in Demo Mode
+====================
+
+This project comes with a way to run in a "demo mode".
+When running in demo mode the project uses Django models to retrieve
+information rather than making a SOAP call to an external client.
+
+To use demo mode pass an environment variable *USE_STUF_BG_DATABASE=True* or change the
+default value of this in conf/base.py
+
+
+Testing
+=======
+
+To run the unit tests in the project run the following
+
+.. code-block:: bash
+
+  python src/manage.py test openpersonen
+
+
+Creating a Superuser
+====================
+
+To access the admin screen you will need to create a
+super user.  To do this run the following command
+
+.. code-block:: bash
+
+  python src/manage.py createsuperuser
+
+
+Admin Screen
+============
+
+To access the admin screen go to http://localhost:8000/admin/ and
+log in with the super user you created above.
+
+
+Configuring the StUF-BG Client
+==============================
+
+In the admin screen you will see a section *Stuf BG Client*.
+Here you can configure the client.
+
+
 References
 ==========
 
