@@ -5,7 +5,7 @@ from django.conf import settings
 import xmltodict
 from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.utils import convert_empty_instances
+from openpersonen.api.utils import convert_empty_instances, is_expected_date_format
 
 
 def convert_client_response_to_instance_dict(response):
@@ -123,18 +123,18 @@ def convert_model_instance_to_instance_dict(kind):
                 "dag": int(
                     kind.geboortedatum_kind[settings.DAY_START : settings.DAY_END]
                 )
-                if kind.geboortedatum_kind
+                if is_expected_date_format(kind.geboortedatum_kind)
                 else 0,
                 "datum": kind.geboortedatum_kind,
                 "jaar": int(
                     kind.geboortedatum_kind[settings.YEAR_START : settings.YEAR_END]
                 )
-                if kind.geboortedatum_kind
+                if is_expected_date_format(kind.geboortedatum_kind)
                 else 0,
                 "maand": int(
                     kind.geboortedatum_kind[settings.MONTH_START : settings.MONTH_END]
                 )
-                if kind.geboortedatum_kind
+                if is_expected_date_format(kind.geboortedatum_kind)
                 else 0,
             },
             "land": {
@@ -161,7 +161,7 @@ def convert_model_instance_to_instance_dict(kind):
             datetime.now(),
             datetime.strptime(kind.geboortedatum_kind, "%Y%m%d"),
         ).years
-        if kind.geboortedatum_kind
+        if is_expected_date_format(kind.geboortedatum_kind)
         else 0,
         "inOnderzoek": {
             "burgerservicenummer": bool(kind.burgerservicenummer_kind),
@@ -169,20 +169,20 @@ def convert_model_instance_to_instance_dict(kind):
                 "dag": int(
                     kind.datum_ingang_onderzoek[settings.DAY_START : settings.DAY_END]
                 )
-                if kind.datum_ingang_onderzoek
+                if is_expected_date_format(kind.datum_ingang_onderzoek)
                 else 0,
                 "datum": kind.datum_ingang_onderzoek,
                 "jaar": int(
                     kind.datum_ingang_onderzoek[settings.YEAR_START : settings.YEAR_END]
                 )
-                if kind.datum_ingang_onderzoek
+                if is_expected_date_format(kind.datum_ingang_onderzoek)
                 else 0,
                 "maand": int(
                     kind.datum_ingang_onderzoek[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if kind.datum_ingang_onderzoek
+                if is_expected_date_format(kind.datum_ingang_onderzoek)
                 else 0,
             },
         },
