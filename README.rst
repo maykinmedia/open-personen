@@ -22,14 +22,48 @@ An implementation of the `Haal Centraal BRP bevragen API specification`_ using
 a `StUF-BG`_ connection to access locally stored personal data via mondern REST
 API.
 
-Open Personen meets the need for several other components to request personal 
-data and to link persons (e.g. to a zaak in the `Open Zaak`_). A so-called 
-Profile API is also available where additional, non-authentic, personal data 
+Open Personen meets the need for several other components to request personal
+data and to link persons (e.g. to a zaak in the `Open Zaak`_). A so-called
+Profile API is also available where additional, non-authentic, personal data
 can be stored such as phone number and email address.
 
 .. _`Haal Centraal BRP bevragen API specification`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
 .. _`StUF-BG`: https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG
 .. _`Open Zaak`: https://open-zaak.readthedocs.io/
+
+
+Installation and Setup
+======================
+
+Setting up a virtual environment
+
+.. code-block:: bash
+
+  virtualenv env
+  source env/bin/activate
+  pip install -r requirements/dev.txt
+
+Or with Docker use
+
+.. code-block:: bash
+
+  docker-compose build
+
+
+Running the Project
+===================
+
+Within the virtual environment run
+
+.. code-block:: bash
+
+  python src/manage.py runserver
+
+Or with Docker run
+
+.. code-block:: bash
+
+  docker-compose up
 
 
 References
@@ -47,7 +81,7 @@ Copyright © Maykin Media B.V., 2020
 
 Licensed under the `Business Source License`_ (BSL) 1.1
 
-* `Why this license?`_ :bulb: 
+* `Why this license?`_ :bulb:
 
 .. _`Why this license?`: https://open-personen.readthedocs.io/en/latest/introduction/source-code/why-bsl.html
 
