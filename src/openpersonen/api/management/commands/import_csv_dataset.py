@@ -272,8 +272,15 @@ Row index   |    Field name
 
 class Command(BaseCommand):
     """
-    Run using python src/manage.py import_csv_dataset or
+    Run using
+        python src/manage.py import_csv_dataset
+    or
         python src/manage.py import_csv_dataset --file-path=~/path/to/file.csv
+    Using docker run
+        docker-compose run web python src/manage.py import_csv_dataset
+    or
+        python src/manage.py import_csv_dataset
+    from inside the docker container
     """
 
     help = "Read in an csv file and populate models to use for demo data"
@@ -285,7 +292,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, **options):
-        file_path = options.get('file-path') or 'src/openpersonen/api/management/commands/test_data.csv'
+        file_path = options.get('file-path') or 'src/openpersonen/api/management/commands/data/test_data.csv'
         with open(file_path, newline="") as csvfile:
             rows = csv.reader(csvfile, delimiter=";", quotechar="|")
             print("Importing dataset")
