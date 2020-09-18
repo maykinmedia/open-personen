@@ -272,20 +272,24 @@ Row index   |    Field name
 
 class Command(BaseCommand):
     """
-    Run using python src/manage.py import_csv_dataset ~/path/to/file.csv
+    Run using python src/manage.py import_csv_dataset or
+        python src/manage.py import_csv_dataset --file-path=~/path/to/file.csv
     """
 
     help = "Read in an csv file and populate models to use for demo data"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "infile", help="The csv file containing the data to import."
+            "--file-path",
+            help="The csv file containing the data to import."
         )
 
     def handle(self, **options):
-        with open(options["infile"], newline="") as csvfile:
+        file_path = options.get('file-path') or 'src/openpersonen/api/management/commands/test_data.csv'
+        with open(file_path, newline="") as csvfile:
             rows = csv.reader(csvfile, delimiter=";", quotechar="|")
             print("Importing dataset")
+            persoon = None
             for index, row in enumerate(list(rows)[3:]):
                 if any(row[1:24]):
                     if not Persoon.objects.filter(
@@ -651,5 +655,9 @@ class Command(BaseCommand):
                         datum_van_de_ontlening_van_de_gegevens_over_kiesrecht=row[252],
                         beschrijving_van_het_document=row[253],
                     )
+
+            for model in [Persoon, Ouder, Nationaliteit, Partnerschap, Overlijden, Inschrijving, Verblijfplaats, Kind,
+                          Verblijfstitel, Gezagsverhouding, Reisdocument, Kiesrecht]:
+                print(f'Installed {model.objects.count()} {model.__name__} instances')
 
             print("Done!")
