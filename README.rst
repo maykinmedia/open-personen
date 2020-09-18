@@ -77,6 +77,24 @@ To use demo mode pass an environment variable *USE_STUF_BG_DATABASE=True* or cha
 default value of this in conf/base.py
 
 
+Importing Data in Demo Mode
+===========================
+
+There is a command to import data from a csv and create model instances from it.
+It is located in src/openpersonen/api/management/commands/import_csv_dataset.py
+and can be run using
+
+.. code-block:: bash
+
+  python src/manage.py import_csv_data
+
+You can also specify your own csv file by using
+
+.. code-block:: bash
+
+  python src/manage.py import_csv_data ~/path/to/file.csv
+
+
 Testing
 =======
 
