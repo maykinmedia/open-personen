@@ -8,6 +8,9 @@ from rest_framework.authtoken.models import Token
 from openpersonen.accounts.models import User
 from openpersonen.api.demo_models import *
 
+user, _ = User.objects.get_or_create(username="test")
+token, _ = Token.objects.get_or_create(user=user)
+
 
 class Command(BaseCommand):
     """
@@ -16,83 +19,57 @@ class Command(BaseCommand):
 
     help = "Test APIs using demo data in database"
 
-    def handle(self, **options):
+    def make_request(self, viewname, viewname_kwargs):
 
-        user, _ = User.objects.get_or_create(username="test")
-        token, _ = Token.objects.get_or_create(user=user)
+        url = reverse(
+            viewname,
+            kwargs=viewname_kwargs,
+        )
+
+        response = requests.get(
+            f"http://localhost:8000{url}",
+            headers={"Authorization": f"Token {token}"},
+        )
+
+        if response.status_code != 200:
+            print(
+                f"{url} gave a response code of {response.status_code}.  Expected 200"
+            )
+
+    def handle(self, **options):
 
         print(
             "Note: No output will be given when successful (the call returns a 200 response)"
         )
-        print("Beginning testing persoon endpoints (this may take a while)")
+        print("Testing persoon endpoints (this may take a while)")
 
         for persoon in Persoon.objects.exclude(burgerservicenummer_persoon=""):
 
-            url = reverse(
+            self.make_request(
                 "ingeschrevenpersonen-detail",
-                kwargs={"burgerservicenummer": persoon.burgerservicenummer_persoon},
+                {"burgerservicenummer": persoon.burgerservicenummer_persoon},
             )
 
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
-
-            url = reverse(
+            self.make_request(
                 "kinderen-list",
-                kwargs={
+                {
                     "ingeschrevenpersonen_burgerservicenummer": persoon.burgerservicenummer_persoon
                 },
             )
 
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
-
-            url = reverse(
+            self.make_request(
                 "ouders-list",
-                kwargs={
+                {
                     "ingeschrevenpersonen_burgerservicenummer": persoon.burgerservicenummer_persoon
                 },
             )
 
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
-
-            url = reverse(
+            self.make_request(
                 "partners-list",
-                kwargs={
+                {
                     "ingeschrevenpersonen_burgerservicenummer": persoon.burgerservicenummer_persoon
                 },
             )
-
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
 
         print("Testing Partnerschap endpoints")
 
@@ -103,23 +80,13 @@ class Command(BaseCommand):
             )
         ):
 
-            url = reverse(
+            self.make_request(
                 "partners-detail",
-                kwargs={
+                {
                     "ingeschrevenpersonen_burgerservicenummer": partnerschap.persoon.burgerservicenummer_persoon,
                     "id": partnerschap.burgerservicenummer_echtgenoot_geregistreerd_partner,
                 },
             )
-
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
 
         print("Testing Kind endpoints")
 
@@ -127,23 +94,13 @@ class Command(BaseCommand):
             Q(burgerservicenummer_kind="", persoon__isnull=False)
         ):
 
-            url = reverse(
+            self.make_request(
                 "kinderen-detail",
-                kwargs={
+                {
                     "ingeschrevenpersonen_burgerservicenummer": kind.persoon.burgerservicenummer_persoon,
                     "id": kind.burgerservicenummer_kind,
                 },
             )
-
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
 
         print("Testing Ouder endpoints")
 
@@ -151,22 +108,12 @@ class Command(BaseCommand):
             Q(burgerservicenummer_ouder="", persoon__isnull=False)
         ):
 
-            url = reverse(
+            self.make_request(
                 "ouders-detail",
-                kwargs={
+                {
                     "ingeschrevenpersonen_burgerservicenummer": ouder.persoon.burgerservicenummer_persoon,
                     "id": ouder.burgerservicenummer_ouder,
                 },
             )
-
-            response = requests.get(
-                f"http://localhost:8000{url}",
-                headers={"Authorization": f"Token {token}"},
-            )
-
-            if response.status_code != 200:
-                print(
-                    f"{url} gave a response code of {response.status_code}.  Expected 200"
-                )
 
         print("Done Testing!")
