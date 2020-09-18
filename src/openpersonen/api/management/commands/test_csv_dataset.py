@@ -21,7 +21,9 @@ class Command(BaseCommand):
         user, _ = User.objects.get_or_create(username="test")
         token, _ = Token.objects.get_or_create(user=user)
 
-        print("Note: No output will be given when successful (the call returns a 200 response)")
+        print(
+            "Note: No output will be given when successful (the call returns a 200 response)"
+        )
         print("Beginning testing persoon endpoints (this may take a while)")
 
         for persoon in Persoon.objects.exclude(burgerservicenummer_persoon=""):

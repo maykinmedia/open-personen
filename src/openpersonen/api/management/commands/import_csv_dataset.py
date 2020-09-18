@@ -287,12 +287,14 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--file-path",
-            help="The csv file containing the data to import."
+            "--file-path", help="The csv file containing the data to import."
         )
 
     def handle(self, **options):
-        file_path = options.get('file-path') or 'src/openpersonen/api/management/commands/data/test_data.csv'
+        file_path = (
+            options.get("file-path")
+            or "src/openpersonen/api/management/commands/data/test_data.csv"
+        )
         with open(file_path, newline="") as csvfile:
             rows = csv.reader(csvfile, delimiter=";", quotechar="|")
             print("Importing dataset")
@@ -663,8 +665,20 @@ class Command(BaseCommand):
                         beschrijving_van_het_document=row[253],
                     )
 
-            for model in [Persoon, Ouder, Nationaliteit, Partnerschap, Overlijden, Inschrijving, Verblijfplaats, Kind,
-                          Verblijfstitel, Gezagsverhouding, Reisdocument, Kiesrecht]:
-                print(f'Installed {model.objects.count()} {model.__name__} instances')
+            for model in [
+                Persoon,
+                Ouder,
+                Nationaliteit,
+                Partnerschap,
+                Overlijden,
+                Inschrijving,
+                Verblijfplaats,
+                Kind,
+                Verblijfstitel,
+                Gezagsverhouding,
+                Reisdocument,
+                Kiesrecht,
+            ]:
+                print(f"Installed {model.objects.count()} {model.__name__} instances")
 
             print("Done!")
