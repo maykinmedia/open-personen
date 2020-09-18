@@ -74,7 +74,7 @@ When running in demo mode the project uses Django models to retrieve
 information rather than making a SOAP call to an external client.
 
 To use demo mode pass an environment variable *USE_STUF_BG_DATABASE=True* or change the
-default value of this in conf/base.py
+default value of this in src/openpersonen/conf/base.py
 
 
 Importing Data in Demo Mode
@@ -100,7 +100,7 @@ To test this run the following
 
 .. code-block:: bash
 
-  python src/manage.py test_csv_dataset
+  python src/manage.py perform_csv_dataset_test
 
 This loops through all the potential API calls that could be done to get the data that was imported
 and ensures a 200 status code is returned.  If a 200 status code is not returned and error message
