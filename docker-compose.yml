@@ -14,6 +14,7 @@ services:
       - SECRET_KEY=${SECRET_KEY:-%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#}
       - DB_USER=${DB_USER:-openpersonen}
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
+      - USE_STUF_BG_DATABASE=False
 #   Uncomment below and update path on left side to use test data from file system
 #     when importing csv test data
 #    volumes:
