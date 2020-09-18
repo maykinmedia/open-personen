@@ -285,10 +285,12 @@ class Command(BaseCommand):
     def handle(self, **options):
         with open(options["infile"], newline="") as csvfile:
             rows = csv.reader(csvfile, delimiter=";", quotechar="|")
-            print('Importing dataset')
+            print("Importing dataset")
             for index, row in enumerate(list(rows)[3:]):
                 if any(row[1:24]):
-                    if not Persoon.objects.filter(burgerservicenummer_persoon=row[1]).exists():
+                    if not Persoon.objects.filter(
+                        burgerservicenummer_persoon=row[1]
+                    ).exists():
                         persoon = Persoon.objects.create(
                             a_nummer_persoon=row[0],
                             burgerservicenummer_persoon=row[1],
@@ -352,7 +354,9 @@ class Command(BaseCommand):
                         )
 
                 if any(row[50:71]):
-                    if not Ouder.objects.filter(burgerservicenummer_ouder=row[51]).exists():
+                    if not Ouder.objects.filter(
+                        burgerservicenummer_ouder=row[51]
+                    ).exists():
                         Ouder.objects.create(
                             persoon=persoon,
                             a_nummer_ouder=row[50],
@@ -405,11 +409,15 @@ class Command(BaseCommand):
                     )
 
                 if any(row[90:118]):
-                    if not Partnerschap.objects.filter(burgerservicenummer_echtgenoot_geregistreerd_partner=row[91]).exists():
+                    if not Partnerschap.objects.filter(
+                        burgerservicenummer_echtgenoot_geregistreerd_partner=row[91]
+                    ).exists():
                         Partnerschap.objects.create(
                             persoon=persoon,
                             a_nummer_echtgenoot_geregistreerd_partner=row[90],
-                            burgerservicenummer_echtgenoot_geregistreerd_partner=row[91],
+                            burgerservicenummer_echtgenoot_geregistreerd_partner=row[
+                                91
+                            ],
                             voornamen_echtgenoot_geregistreerd_partner=row[92],
                             adellijke_titel_predikaat_echtgenoot_geregistreerd_partner=row[
                                 93
@@ -421,7 +429,9 @@ class Command(BaseCommand):
                             geboortedatum_echtgenoot_geregistreerd_partner=row[96],
                             geboorteplaats_echtgenoot_geregistreerd_partner=row[97],
                             geboorteland_echtgenoot_geregistreerd_partner=row[98],
-                            geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[99],
+                            geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[
+                                99
+                            ],
                             datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
                                 100
                             ],
@@ -431,10 +441,18 @@ class Command(BaseCommand):
                             land_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
                                 102
                             ],
-                            datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[103],
-                            plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[104],
-                            land_ontbinding_huwelijk_geregistreerd_partnerschap=row[105],
-                            reden_ontbinding_huwelijk_geregistreerd_partnerschap=row[106],
+                            datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                103
+                            ],
+                            plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                104
+                            ],
+                            land_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                105
+                            ],
+                            reden_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                106
+                            ],
                             soort_verbintenis=row[107],
                             registergemeente_akte_waaraan_gegevens=row[108],
                             aktenummer_van_de_akte_waaraan_gegevens=row[109],
@@ -530,7 +548,9 @@ class Command(BaseCommand):
                     )
 
                 if any(row[185:205]):
-                    if not Kind.objects.filter(burgerservicenummer_kind=row[186]).exists():
+                    if not Kind.objects.filter(
+                        burgerservicenummer_kind=row[186]
+                    ).exists():
                         Kind.objects.create(
                             persoon=persoon,
                             a_nummer_kind=row[185],
@@ -632,4 +652,4 @@ class Command(BaseCommand):
                         beschrijving_van_het_document=row[253],
                     )
 
-            print('Done!')
+            print("Done!")

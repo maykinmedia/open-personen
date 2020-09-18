@@ -203,7 +203,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             },
             "functieAdres": "woonadres",
             "huisletter": "A",
-            "huisnummer": '117',
+            "huisnummer": "117",
             "huisnummertoevoeging": "B",
             "aanduidingBijHuisnummer": "tegenover",
             "identificatiecodeNummeraanduiding": "string",

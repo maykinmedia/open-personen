@@ -123,7 +123,9 @@ def convert_model_instance_to_instance_dict(ouder):
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                     settings.DAY_START : settings.DAY_END
                 ]
-                if is_expected_date_format(ouder.datum_ingang_familierechtelijke_betrekking_ouder)
+                if is_expected_date_format(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                )
                 else 0
             ),
             "datum": ouder.datum_ingang_familierechtelijke_betrekking_ouder,
@@ -131,14 +133,18 @@ def convert_model_instance_to_instance_dict(ouder):
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                     settings.YEAR_START : settings.YEAR_END
                 ]
-                if is_expected_date_format(ouder.datum_ingang_familierechtelijke_betrekking_ouder)
+                if is_expected_date_format(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                )
                 else 0
             ),
             "maand": int(
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                     settings.MONTH_START : settings.MONTH_END
                 ]
-                if is_expected_date_format(ouder.datum_ingang_familierechtelijke_betrekking_ouder)
+                if is_expected_date_format(
+                    ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                )
                 else 0
             ),
         },

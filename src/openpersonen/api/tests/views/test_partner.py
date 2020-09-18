@@ -7,8 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from openpersonen.accounts.models import User
-from openpersonen.api.tests.factory_models import PartnerschapFactory, PersoonFactory
 from openpersonen.api.models import StufBGClient
+from openpersonen.api.tests.factory_models import PartnerschapFactory, PersoonFactory
 from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -94,7 +94,8 @@ class TestPartnerWithTestingModels(APITestCase):
             burgerservicenummer_persoon=self.persoon_bsn
         )
         self.partnerschap = PartnerschapFactory(
-            persoon=self.persoon, burgerservicenummer_echtgenoot_geregistreerd_partner=self.partner_bsn
+            persoon=self.persoon,
+            burgerservicenummer_echtgenoot_geregistreerd_partner=self.partner_bsn,
         )
 
     def test_partner_without_token(self):
@@ -138,7 +139,8 @@ class TestPartnerWithTestingModels(APITestCase):
             str(self.partner_bsn),
         )
         self.assertEqual(
-            data["_embedded"]["naam"]["voornamen"], self.partnerschap.voornamen_echtgenoot_geregistreerd_partner
+            data["_embedded"]["naam"]["voornamen"],
+            self.partnerschap.voornamen_echtgenoot_geregistreerd_partner,
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
@@ -155,16 +157,26 @@ class TestPartnerWithTestingModels(APITestCase):
             str(self.partnerschap.datum_ingang_onderzoek),
         )
         self.assertEqual(
-            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["datum"]["datum"],
-            str(self.partnerschap.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["datum"][
+                "datum"
+            ],
+            str(
+                self.partnerschap.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+            ),
         )
         self.assertEqual(
-            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"]["omschrijving"],
+            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"][
+                "omschrijving"
+            ],
             str(self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap),
         )
         self.assertEqual(
-            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.partnerschap.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"][
+                "omschrijving"
+            ],
+            str(
+                self.partnerschap.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+            ),
         )
 
     def test_detail_partner(self):
@@ -189,7 +201,8 @@ class TestPartnerWithTestingModels(APITestCase):
             str(self.partner_bsn),
         )
         self.assertEqual(
-            data["_embedded"]["naam"]["voornamen"], self.partnerschap.voornamen_echtgenoot_geregistreerd_partner
+            data["_embedded"]["naam"]["voornamen"],
+            self.partnerschap.voornamen_echtgenoot_geregistreerd_partner,
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
@@ -206,16 +219,26 @@ class TestPartnerWithTestingModels(APITestCase):
             str(self.partnerschap.datum_ingang_onderzoek),
         )
         self.assertEqual(
-            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["datum"]["datum"],
-            str(self.partnerschap.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["datum"][
+                "datum"
+            ],
+            str(
+                self.partnerschap.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+            ),
         )
         self.assertEqual(
-            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"]["omschrijving"],
+            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"][
+                "omschrijving"
+            ],
             str(self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap),
         )
         self.assertEqual(
-            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.partnerschap.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap),
+            data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"][
+                "omschrijving"
+            ],
+            str(
+                self.partnerschap.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+            ),
         )
 
     def test_detail_partner_404(self):
