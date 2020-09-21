@@ -1,11 +1,8 @@
-from datetime import datetime
-
 from django.conf import settings
 
 import xmltodict
-from dateutil.relativedelta import relativedelta
 
-from openpersonen.api.utils import convert_empty_instances
+from openpersonen.api.utils import convert_empty_instances, calculate_age
 
 
 def convert_client_response_to_instance_dict(response):
@@ -81,10 +78,7 @@ def convert_client_response_to_instance_dict(response):
             },
         },
         "geslachtsaanduiding": antwoord_dict_object["ns:geslachtsaanduiding"],
-        "leeftijd": relativedelta(
-            datetime.now(),
-            datetime.strptime(antwoord_dict_object["ns:geboortedatum"], "%Y%m%d"),
-        ).years,
+        "leeftijd": calculate_age(antwoord_dict_object["ns:geboortedatum"]),
         "datumEersteInschrijvingGBA": {
             "dag": int(
                 antwoord_dict_object["ns:inp.datumInschrijving"][
@@ -452,12 +446,7 @@ def convert_model_instance_to_instance_dict(persoon):
             },
         },
         "geslachtsaanduiding": persoon.geslachtsaanduiding,
-        "leeftijd": relativedelta(
-            datetime.now(),
-            datetime.strptime(persoon.geboortedatum_persoon, "%Y%m%d"),
-        ).years
-        if persoon.geboortedatum_persoon
-        else 0,
+        "leeftijd": calculate_age(persoon.geboortedatum_persoon),
         "datumEersteInschrijvingGBA": {
             "dag": 0,
             "datum": "string",

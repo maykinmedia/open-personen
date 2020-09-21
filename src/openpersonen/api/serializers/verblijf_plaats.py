@@ -13,7 +13,7 @@ class VerblijfPlaatsSerializer(serializers.Serializer):
         choices=FunctieAdresChoices.choices, required=False
     )
     huisletter = serializers.RegexField("^[A-Z,a-z]$", max_length=1, required=False)
-    huisnummer = serializers.IntegerField(max_value=99999, required=False)
+    huisnummer = serializers.CharField(max_length=200, required=False)
     huisnummertoevoeging = serializers.RegexField(
         "^[a-zA-Z0-9]{1,4}$", max_length=4, required=False
     )
