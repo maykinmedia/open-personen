@@ -2,7 +2,11 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.utils import convert_empty_instances, calculate_age, is_valid_date_format
+from openpersonen.api.utils import (
+    calculate_age,
+    convert_empty_instances,
+    is_valid_date_format,
+)
 
 
 def convert_client_response_to_instance_dict(response):
