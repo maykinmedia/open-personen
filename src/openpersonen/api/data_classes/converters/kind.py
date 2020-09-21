@@ -12,23 +12,40 @@ from openpersonen.api.utils import (
 def convert_client_response_to_instance_dict(response):
     dict_object = xmltodict.parse(response.content)
 
-    antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-        "ns:npsLa01"
-    ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsKinderen"]["ns:gerelateerde"]
+    try:
+        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
+            "ns:npsLa01"
+        ]["ns:antwoord"]["ns:object"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["BG:object"]["BG:inp.heeftAlsKinderen"]["BG:gerelateerde"]
+        prefix = "BG"
 
     kind_dict = {
-        "burgerservicenummer": antwoord_dict_object["ns:inp.bsn"],
+        "burgerservicenummer": antwoord_dict_object.get(f"{prefix}:inp.bsn", "string"),
         "geheimhoudingPersoonsgegevens": True,
         "naam": {
-            "geslachtsnaam": antwoord_dict_object["ns:geslachtsnaam"],
-            "voorletters": antwoord_dict_object["ns:voorletters"],
-            "voornamen": antwoord_dict_object["ns:voornamen"],
-            "voorvoegsel": antwoord_dict_object["ns:voorvoegselGeslachtsnaam"],
+            "geslachtsnaam": antwoord_dict_object.get(
+                f"{prefix}:geslachtsnaam", "string"
+            ),
+            "voorletters": antwoord_dict_object.get(f"{prefix}:voorletters", "string"),
+            "voornamen": antwoord_dict_object.get(f"{prefix}:voornamen", "string"),
+            "voorvoegsel": antwoord_dict_object.get(
+                f"{prefix}:voorvoegselGeslachtsnaam", "string"
+            ),
             "inOnderzoek": {
-                "geslachtsnaam": bool(antwoord_dict_object["ns:geslachtsnaam"]),
-                "voornamen": bool(antwoord_dict_object["ns:voornamen"]),
+                "geslachtsnaam": bool(
+                    antwoord_dict_object.get(f"{prefix}:geslachtsnaam", "string")
+                ),
+                "voornamen": bool(
+                    antwoord_dict_object.get(f"{prefix}:voornamen", "string")
+                ),
                 "voorvoegsel": bool(
-                    antwoord_dict_object["ns:voorvoegselGeslachtsnaam"]
+                    antwoord_dict_object.get(
+                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
+                    )
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -41,29 +58,33 @@ def convert_client_response_to_instance_dict(response):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.DAY_START : settings.DAY_END
                     ]
                 ),
-                "datum": antwoord_dict_object["ns:geboortedatum"],
+                "datum": antwoord_dict_object.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
             "land": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteLand"],
+                "omschrijving": antwoord_dict_object.get(
+                    f"{prefix}:inp.geboorteLand", "string"
+                ),
             },
             "plaats": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteplaats"],
+                "omschrijving": antwoord_dict_object.get(
+                    f"{prefix}:inp.geboorteplaats", "string"
+                ),
             },
             "inOnderzoek": {
                 "datum": True,
@@ -77,9 +98,11 @@ def convert_client_response_to_instance_dict(response):
                 },
             },
         },
-        "leeftijd": calculate_age(antwoord_dict_object["ns:geboortedatum"]),
+        "leeftijd": calculate_age(antwoord_dict_object.get(f"{prefix}:geboortedatum", "string")),
         "inOnderzoek": {
-            "burgerservicenummer": bool(antwoord_dict_object["ns:inp.bsn"]),
+            "burgerservicenummer": bool(
+                antwoord_dict_object.get(f"{prefix}:inp.bsn", "string")
+            ),
             "datumIngangOnderzoek": {
                 "dag": 0,
                 "datum": "string",

@@ -12,27 +12,40 @@ from openpersonen.api.utils import (
 def convert_client_response_to_instance_dict(response):
     dict_object = xmltodict.parse(response.content)
 
-    antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-        "ns:npsLa01"
-    ]["ns:antwoord"]["ns:object"]
+    try:
+        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
+            "ns:npsLa01"
+        ]["ns:antwoord"]["ns:object"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["BG:object"]
+        prefix = "BG"
 
     ingeschreven_persoon_dict = {
-        "burgerservicenummer": antwoord_dict_object.get("ns:inp.bsn", "string"),
+        "burgerservicenummer": antwoord_dict_object.get(f"{prefix}:inp.bsn", "string"),
         "geheimhoudingPersoonsgegevens": True,
         "naam": {
-            "geslachtsnaam": antwoord_dict_object.get("ns:geslachtsnaam", "string"),
-            "voorletters": antwoord_dict_object.get("ns:voorletters", "string"),
-            "voornamen": antwoord_dict_object.get("ns:voornamen", "string"),
+            "geslachtsnaam": antwoord_dict_object.get(
+                f"{prefix}:geslachtsnaam", "string"
+            ),
+            "voorletters": antwoord_dict_object.get(f"{prefix}:voorletters", "string"),
+            "voornamen": antwoord_dict_object.get(f"{prefix}:voornamen", "string"),
             "voorvoegsel": antwoord_dict_object.get(
-                "ns:voorvoegselGeslachtsnaam", "string"
+                f"{prefix}:voorvoegselGeslachtsnaam", "string"
             ),
             "inOnderzoek": {
                 "geslachtsnaam": bool(
-                    antwoord_dict_object.get("ns:geslachtsnaam", "string")
+                    antwoord_dict_object.get(f"{prefix}:geslachtsnaam", "string")
                 ),
-                "voornamen": bool(antwoord_dict_object.get("ns:voornamen", "string")),
+                "voornamen": bool(
+                    antwoord_dict_object.get(f"{prefix}:voornamen", "string")
+                ),
                 "voorvoegsel": bool(
-                    antwoord_dict_object.get("ns:voorvoegselGeslachtsnaam", "string")
+                    antwoord_dict_object.get(
+                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
+                    )
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -41,28 +54,28 @@ def convert_client_response_to_instance_dict(response):
                     "maand": 0,
                 },
             },
-            "aanhef": antwoord_dict_object.get("ns:voornamen", "string"),
+            "aanhef": antwoord_dict_object.get(f"{prefix}:voornamen", "string"),
             "aanschrijfwijze": "string",
             "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": antwoord_dict_object.get(
-                "ns:aanduidingNaamgebruik", "string"
+                f"{prefix}:aanduidingNaamgebruik", "string"
             ),
         },
         "geboorte": {
             "datum": {
                 "dag": int(
-                    antwoord_dict_object.get("ns:geboortedatum", "00000000")[
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.DAY_START : settings.DAY_END
                     ]
                 ),
-                "datum": antwoord_dict_object.get("ns:geboortedatum", "string"),
+                "datum": antwoord_dict_object.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    antwoord_dict_object.get("ns:geboortedatum", "00000000")[
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
-                    antwoord_dict_object.get("ns:geboortedatum", "00000000")[
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
@@ -70,13 +83,13 @@ def convert_client_response_to_instance_dict(response):
             "land": {
                 "code": "string",
                 "omschrijving": antwoord_dict_object.get(
-                    "ns:inp.geboorteLand", "string"
+                    f"{prefix}:inp.geboorteLand", "string"
                 ),
             },
             "plaats": {
                 "code": "string",
                 "omschrijving": antwoord_dict_object.get(
-                    "ns:inp.geboorteplaats", "string"
+                    f"{prefix}:inp.geboorteplaats", "string"
                 ),
             },
             "inOnderzoek": {
@@ -92,83 +105,87 @@ def convert_client_response_to_instance_dict(response):
             },
         },
         "geslachtsaanduiding": antwoord_dict_object.get(
-            "ns:geslachtsaanduiding", "string"
+            f"{prefix}:geslachtsaanduiding", "string"
         ),
-        "leeftijd": calculate_age(antwoord_dict_object["ns:geboortedatum"]),
+        "leeftijd": calculate_age(antwoord_dict_object.get(f"{prefix}:geboortedatum", "string")),
         "datumEersteInschrijvingGBA": {
             "dag": int(
-                antwoord_dict_object.get("ns:inp.datumInschrijving", "00000000")[
+                antwoord_dict_object.get(f"{prefix}:inp.datumInschrijving", "00000000")[
                     settings.DAY_START : settings.DAY_END
                 ]
             ),
-            "datum": antwoord_dict_object.get("ns:inp.datumInschrijving", "00000000"),
+            "datum": antwoord_dict_object.get(
+                f"{prefix}:inp.datumInschrijving", "00000000"
+            ),
             "jaar": int(
-                antwoord_dict_object.get("ns:inp.datumInschrijving", "string")[
+                antwoord_dict_object.get(f"{prefix}:inp.datumInschrijving", "string")[
                     settings.YEAR_START : settings.YEAR_END
                 ]
             ),
             "maand": int(
-                antwoord_dict_object.get("ns:inp.datumInschrijving", "00000000")[
+                antwoord_dict_object.get(f"{prefix}:inp.datumInschrijving", "00000000")[
                     settings.MONTH_START : settings.MONTH_END
                 ]
             ),
         },
         "kiesrecht": {
             "europeesKiesrecht": bool(
-                antwoord_dict_object.get("ns:ing.aanduidingEuropeesKiesrecht", "string")
+                antwoord_dict_object.get(
+                    f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
+                )
             ),
             "uitgeslotenVanKiesrecht": bool(
                 antwoord_dict_object.get(
-                    "ns:ing.aanduidingUitgeslotenKiesrecht", "string"
+                    f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
                 )
             ),
             "einddatumUitsluitingEuropeesKiesrecht": {
                 "dag": int(
                     antwoord_dict_object.get(
-                        "ns:ing.aanduidingEuropeesKiesrecht", "00000000"
+                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
                     )[settings.DAY_START : settings.DAY_END]
                 ),
                 "datum": antwoord_dict_object.get(
-                    "ns:ing.aanduidingEuropeesKiesrecht", "string"
+                    f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
                 ),
                 "jaar": int(
                     antwoord_dict_object.get(
-                        "ns:ing.aanduidingEuropeesKiesrecht", "00000000"
+                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
                     )[settings.YEAR_START : settings.YEAR_END]
                 ),
                 "maand": int(
                     antwoord_dict_object.get(
-                        "ns:ing.aanduidingEuropeesKiesrecht", "00000000"
+                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
                     )[settings.MONTH_START : settings.MONTH_END]
                 ),
             },
             "einddatumUitsluitingKiesrecht": {
                 "dag": int(
                     antwoord_dict_object.get(
-                        "ns:ing.aanduidingUitgeslotenKiesrecht", "00000000"
+                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
                     )[settings.DAY_START : settings.DAY_END]
                 ),
                 "datum": antwoord_dict_object.get(
-                    "ns:ing.aanduidingUitgeslotenKiesrecht", "string"
+                    f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
                 ),
                 "jaar": int(
                     antwoord_dict_object.get(
-                        "ns:ing.aanduidingUitgeslotenKiesrecht", "00000000"
+                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
                     )[settings.YEAR_START : settings.YEAR_END]
                 ),
                 "maand": int(
                     antwoord_dict_object.get(
-                        "ns:ing.aanduidingUitgeslotenKiesrecht", "00000000"
+                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
                     )[settings.MONTH_START : settings.MONTH_END]
                 ),
             },
         },
         "inOnderzoek": {
             "burgerservicenummer": bool(
-                antwoord_dict_object.get("ns:inp.bsn", "string")
+                antwoord_dict_object.get(f"{prefix}:inp.bsn", "string")
             ),
             "geslachtsaanduiding": bool(
-                antwoord_dict_object.get("ns:geslachtsaanduiding", "string")
+                antwoord_dict_object.get(f"{prefix}:geslachtsaanduiding", "string")
             ),
             "datumIngangOnderzoek": {
                 "dag": 0,
@@ -180,7 +197,7 @@ def convert_client_response_to_instance_dict(response):
         "nationaliteit": [
             {
                 "aanduidingBijzonderNederlanderschap": antwoord_dict_object.get(
-                    "ns:inp.aanduidingBijzonderNederlanderschap", "string"
+                    f"{prefix}:inp.aanduidingBijzonderNederlanderschap", "string"
                 ),
                 "datumIngangGeldigheid": {
                     "dag": 0,
@@ -193,7 +210,8 @@ def convert_client_response_to_instance_dict(response):
                 "inOnderzoek": {
                     "aanduidingBijzonderNederlanderschap": bool(
                         antwoord_dict_object.get(
-                            "ns:inp.aanduidingBijzonderNederlanderschap", "string"
+                            f"{prefix}:inp.aanduidingBijzonderNederlanderschap",
+                            "string",
                         )
                     ),
                     "nationaliteit": True,
@@ -217,24 +235,24 @@ def convert_client_response_to_instance_dict(response):
             "land": {
                 "code": "string",
                 "omschrijving": antwoord_dict_object.get(
-                    "ns:inp.overlijdenLand", "string"
+                    f"{prefix}:inp.overlijdenLand", "string"
                 ),
             },
             "plaats": {
                 "code": "string",
                 "omschrijving": antwoord_dict_object.get(
-                    "ns:inp.overlijdenplaats", "string"
+                    f"{prefix}:inp.overlijdenplaats", "string"
                 ),
             },
             "inOnderzoek": {
                 "datum": bool(
-                    antwoord_dict_object.get("ns:overlijdensdatum", "string")
+                    antwoord_dict_object.get(f"{prefix}:overlijdensdatum", "string")
                 ),
                 "land": bool(
-                    antwoord_dict_object.get("ns:inp.overlijdenLand", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.overlijdenLand", "string")
                 ),
                 "plaats": bool(
-                    antwoord_dict_object.get("ns:inp.overlijdenplaats", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.overlijdenplaats", "string")
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -246,36 +264,38 @@ def convert_client_response_to_instance_dict(response):
         },
         "verblijfplaats": {
             "functieAdres": "woonadres",
-            "huisletter": antwoord_dict_object.get("ns:inp.verblijftIn", {})
-            .get("ns:gerelateerde", {})
-            .get("ns:adresAanduidingGrp", {})
-            .get("ns:aoa.huisletter", "string"),
-            "huisnummer": antwoord_dict_object.get("ns:inp.verblijftIn", {})
-            .get("ns:gerelateerde", {})
-            .get("ns:adresAanduidingGrp", {})
-            .get("ns:aoa.huisnummer", "string"),
-            "huisnummertoevoeging": antwoord_dict_object.get("ns:inp.verblijftIn", {})
-            .get("ns:gerelateerde", {})
-            .get("ns:adresAanduidingGrp", {})
-            .get("ns:aoa.huisnummertoevoeging", "string"),
+            "huisletter": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+            .get(f"{prefix}:gerelateerde", {})
+            .get(f"{prefix}:adresAanduidingGrp", {})
+            .get(f"{prefix}:aoa.huisletter", "string"),
+            "huisnummer": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+            .get(f"{prefix}:gerelateerde", {})
+            .get(f"{prefix}:adresAanduidingGrp", {})
+            .get(f"{prefix}:aoa.huisnummer", "string"),
+            "huisnummertoevoeging": antwoord_dict_object.get(
+                f"{prefix}:inp.verblijftIn", {}
+            )
+            .get(f"{prefix}:gerelateerde", {})
+            .get(f"{prefix}:adresAanduidingGrp", {})
+            .get(f"{prefix}:aoa.huisnummertoevoeging", "string"),
             "aanduidingBijHuisnummer": "tegenover",
             "identificatiecodeNummeraanduiding": "string",
             "naamOpenbareRuimte": "string",
-            "postcode": antwoord_dict_object.get("ns:inp.verblijftIn", {})
-            .get("ns:gerelateerde", {})
-            .get("ns:adresAanduidingGrp", {})
-            .get("ns:aoa.postcode", "string"),
-            "woonplaatsnaam": antwoord_dict_object.get("ns:inp.verblijftIn", {})
-            .get("ns:gerelateerde", {})
-            .get("ns:adresAanduidingGrp", {})
-            .get("ns:wpl.woonplaatsNaam", "string"),
+            "postcode": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+            .get(f"{prefix}:gerelateerde", {})
+            .get(f"{prefix}:adresAanduidingGrp", {})
+            .get(f"{prefix}:aoa.postcode", "string"),
+            "woonplaatsnaam": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+            .get(f"{prefix}:gerelateerde", {})
+            .get(f"{prefix}:adresAanduidingGrp", {})
+            .get(f"{prefix}:wpl.woonplaatsNaam", "string"),
             "identificatiecodeAdresseerbaarObject": "string",
             "indicatieVestigingVanuitBuitenland": True,
             "locatiebeschrijving": "string",
-            "straatnaam": antwoord_dict_object.get("ns:inp.verblijftIn", {})
-            .get("ns:gerelateerde", {})
-            .get("ns:adresAanduidingGrp", {})
-            .get("ns:gor.straatnaam", "string"),
+            "straatnaam": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+            .get(f"{prefix}:gerelateerde", {})
+            .get(f"{prefix}:adresAanduidingGrp", {})
+            .get(f"{prefix}:gor.straatnaam", "string"),
             "vanuitVertrokkenOnbekendWaarheen": True,
             "datumAanvangAdreshouding": {
                 "dag": 0,
@@ -319,22 +339,22 @@ def convert_client_response_to_instance_dict(response):
                 "functieAdres": True,
                 "gemeenteVanInschrijving": True,
                 "huisletter": bool(
-                    antwoord_dict_object.get("ns:inp.verblijftIn", {})
-                    .get("ns:gerelateerde", {})
-                    .get("ns:adresAanduidingGrp", {})
-                    .get("ns:aoa.huisletter", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+                    .get(f"{prefix}:gerelateerde", {})
+                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    .get(f"{prefix}:aoa.huisletter", "string")
                 ),
                 "huisnummer": bool(
-                    antwoord_dict_object.get("ns:inp.verblijftIn", {})
-                    .get("ns:gerelateerde", {})
-                    .get("ns:adresAanduidingGrp", {})
-                    .get("ns:aoa.huisnummer", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+                    .get(f"{prefix}:gerelateerde", {})
+                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    .get(f"{prefix}:aoa.huisnummer", "string")
                 ),
                 "huisnummertoevoeging": bool(
-                    antwoord_dict_object.get("ns:inp.verblijftIn", {})
-                    .get("ns:gerelateerde", {})
-                    .get("ns:adresAanduidingGrp", {})
-                    .get("ns:aoa.huisnummertoevoeging", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+                    .get(f"{prefix}:gerelateerde", {})
+                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    .get(f"{prefix}:aoa.huisnummertoevoeging", "string")
                 ),
                 "identificatiecodeNummeraanduiding": True,
                 "identificatiecodeAdresseerbaarObject": True,
@@ -342,23 +362,23 @@ def convert_client_response_to_instance_dict(response):
                 "locatiebeschrijving": True,
                 "naamOpenbareRuimte": True,
                 "postcode": bool(
-                    antwoord_dict_object.get("ns:inp.verblijftIn", {})
-                    .get("ns:gerelateerde", {})
-                    .get("ns:adresAanduidingGrp", {})
-                    .get("ns:aoa.postcode", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+                    .get(f"{prefix}:gerelateerde", {})
+                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    .get(f"{prefix}:aoa.postcode", "string")
                 ),
                 "straatnaam": bool(
-                    antwoord_dict_object.get("ns:inp.verblijftIn", {})
-                    .get("ns:gerelateerde", {})
-                    .get("ns:adresAanduidingGrp", {})
-                    .get("ns:gor.straatnaam", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+                    .get(f"{prefix}:gerelateerde", {})
+                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    .get(f"{prefix}:gor.straatnaam", "string")
                 ),
                 "verblijfBuitenland": True,
                 "woonplaatsnaam": bool(
-                    antwoord_dict_object.get("ns:inp.verblijftIn", {})
-                    .get("ns:gerelateerde", {})
-                    .get("ns:adresAanduidingGrp", {})
-                    .get("ns:wpl.woonplaatsNaam", "string")
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
+                    .get(f"{prefix}:gerelateerde", {})
+                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    .get(f"{prefix}:wpl.woonplaatsNaam", "string")
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,

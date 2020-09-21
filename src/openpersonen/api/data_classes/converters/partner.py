@@ -8,24 +8,47 @@ from openpersonen.api.utils import convert_empty_instances, is_valid_date_format
 def convert_client_response_to_instance_dict(response):
     dict_object = xmltodict.parse(response.content)
 
-    antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-        "ns:npsLa01"
-    ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsEchtgenootPartner"]["ns:gerelateerde"]
+    try:
+        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
+            "ns:npsLa01"
+        ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsEchtgenootPartner"][
+            "ns:gerelateerde"
+        ]
+        prefix = "ns"
+    except KeyError:
+        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["BG:object"]["BG:inp.heeftAlsEchtgenootPartner"]["BG:gerelateerde"]
+        prefix = "BG"
 
     partner_dict = {
-        "burgerservicenummer": antwoord_dict_object["ns:inp.bsn"],
-        "geslachtsaanduiding": antwoord_dict_object["ns:geslachtsaanduiding"],
-        "soortVerbintenis": antwoord_dict_object["ns:soortVerbintenis"],
+        "burgerservicenummer": antwoord_dict_object.get(f"{prefix}:inp.bsn", "string"),
+        "geslachtsaanduiding": antwoord_dict_object.get(
+            f"{prefix}:geslachtsaanduiding", "string"
+        ),
+        "soortVerbintenis": antwoord_dict_object.get(
+            f"{prefix}:soortVerbintenis", "string"
+        ),
         "naam": {
-            "geslachtsnaam": antwoord_dict_object["ns:geslachtsnaam"],
-            "voorletters": antwoord_dict_object["ns:voorletters"],
-            "voornamen": antwoord_dict_object["ns:voornamen"],
-            "voorvoegsel": antwoord_dict_object["ns:voorvoegselGeslachtsnaam"],
+            "geslachtsnaam": antwoord_dict_object.get(
+                f"{prefix}:geslachtsnaam", "string"
+            ),
+            "voorletters": antwoord_dict_object.get(f"{prefix}:voorletters", "string"),
+            "voornamen": antwoord_dict_object.get(f"{prefix}:voornamen", "string"),
+            "voorvoegsel": antwoord_dict_object.get(
+                f"{prefix}:voorvoegselGeslachtsnaam", "string"
+            ),
             "inOnderzoek": {
-                "geslachtsnaam": bool(antwoord_dict_object["ns:geslachtsnaam"]),
-                "voornamen": bool(antwoord_dict_object["ns:voornamen"]),
+                "geslachtsnaam": bool(
+                    antwoord_dict_object.get(f"{prefix}:geslachtsnaam", "string")
+                ),
+                "voornamen": bool(
+                    antwoord_dict_object.get(f"{prefix}:voornamen", "string")
+                ),
                 "voorvoegsel": bool(
-                    antwoord_dict_object["ns:voorvoegselGeslachtsnaam"]
+                    antwoord_dict_object.get(
+                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
+                    )
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -38,34 +61,44 @@ def convert_client_response_to_instance_dict(response):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.DAY_START : settings.DAY_END
                     ]
                 ),
-                "datum": antwoord_dict_object["ns:geboortedatum"],
+                "datum": antwoord_dict_object.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
             "land": {
                 "code": "0000",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteLand"],
+                "omschrijving": antwoord_dict_object.get(
+                    f"{prefix}:inp.geboorteLand", "string"
+                ),
             },
             "plaats": {
                 "code": "0000",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteplaats"],
+                "omschrijving": antwoord_dict_object.get(
+                    f"{prefix}:inp.geboorteplaats", "string"
+                ),
             },
             "inOnderzoek": {
-                "datum": bool(antwoord_dict_object["ns:geboortedatum"]),
-                "land": bool(antwoord_dict_object["ns:inp.geboorteLand"]),
-                "plaats": bool(antwoord_dict_object["ns:inp.geboorteplaats"]),
+                "datum": bool(
+                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "string")
+                ),
+                "land": bool(
+                    antwoord_dict_object.get(f"{prefix}:inp.geboorteLand", "string")
+                ),
+                "plaats": bool(
+                    antwoord_dict_object.get(f"{prefix}:inp.geboorteplaats", "string")
+                ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
                     "datum": "string",
@@ -75,8 +108,12 @@ def convert_client_response_to_instance_dict(response):
             },
         },
         "inOnderzoek": {
-            "burgerservicenummer": bool(antwoord_dict_object["ns:inp.bsn"]),
-            "geslachtsaanduiding": bool(antwoord_dict_object["ns:geslachtsaanduiding"]),
+            "burgerservicenummer": bool(
+                antwoord_dict_object.get(f"{prefix}:inp.bsn", "string")
+            ),
+            "geslachtsaanduiding": bool(
+                antwoord_dict_object.get(f"{prefix}:geslachtsaanduiding", "string")
+            ),
             "datumIngangOnderzoek": {
                 "dag": 0,
                 "datum": "string",
