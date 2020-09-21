@@ -52,13 +52,13 @@
             <StUF:indicatorAantal>false</StUF:indicatorAantal>
          </ns:parameters>
          <!--Optional:-->
-         <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
+         <ns:gelijk StUF:entiteittype="NPS">
             <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
          </ns:gelijk>
          <ns:scope>
-            <ns:object StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
-               <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSHUW" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
-                  <ns:gerelateerde StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
+            <ns:object StUF:entiteittype="NPS">
+               <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSHUW">
+                  <ns:gerelateerde StUF:entiteittype="NPS">
                      <!--You have a CHOICE of the next 2 items at this level-->
                      <!--Optional:-->
                      <ns:inp.bsn/>
@@ -80,6 +80,7 @@
                      <ns:inp.geboorteplaats />
                      <!--Optional:-->
                      <ns:inp.geboorteLand />
+                  </ns:gerelateerde>
                </ns:inp.heeftAlsEchtgenootPartner>
             </ns:object>
          </ns:scope>

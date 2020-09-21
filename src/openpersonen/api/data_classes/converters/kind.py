@@ -20,7 +20,7 @@ def convert_client_response_to_instance_dict(response):
     except KeyError:
         antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
             "BG:antwoord"
-        ]["BG:object"]["BG:inp.heeftAlsKinderen"]["BG:gerelateerde"]
+        ]["object"]["BG:inp.heeftAlsKinderen"]["BG:gerelateerde"]
         prefix = "BG"
 
     kind_dict = {
