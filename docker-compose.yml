@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres:11-alpine
+    image: postgres:12-alpine
     environment:
       - POSTGRES_USER=${DB_USER:-openpersonen}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-openpersonen}
@@ -14,6 +14,11 @@ services:
       - SECRET_KEY=${SECRET_KEY:-%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#}
       - DB_USER=${DB_USER:-openpersonen}
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
+      - USE_STUF_BG_DATABASE=False
+    #   Uncomment below and update path on left side to use test data from file system
+    #     when importing csv test data
+#    volumes:
+#      - /path/to/files:/app/src/openpersonen/api/management/commands/data
     ports:
       - 8000:8000
     depends_on:
