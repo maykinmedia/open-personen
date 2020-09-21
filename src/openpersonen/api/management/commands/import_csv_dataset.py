@@ -272,113 +272,133 @@ Row index   |    Field name
 
 class Command(BaseCommand):
     """
-    Run using python src/manage.py import_csv_dataset ~/path/to/file.csv
+    Run using
+        python src/manage.py import_csv_dataset
+    or
+        python src/manage.py import_csv_dataset --file-path=~/path/to/file.csv
+    Using docker run
+        docker-compose run web python src/manage.py import_csv_dataset
+    or
+        python src/manage.py import_csv_dataset
+    from inside the docker container
     """
 
     help = "Read in an csv file and populate models to use for demo data"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "infile", help="The csv file containing the data to import."
+            "--file-path", help="The csv file containing the data to import."
         )
 
     def handle(self, **options):
-        with open(options["infile"], newline="") as csvfile:
+        file_path = (
+            options.get("file-path")
+            or "src/openpersonen/api/management/commands/data/test_data.csv"
+        )
+        with open(file_path, newline="") as csvfile:
             rows = csv.reader(csvfile, delimiter=";", quotechar="|")
-
-            for row in list(rows)[3:]:
+            print("Importing dataset")
+            persoon = None
+            for index, row in enumerate(list(rows)[3:]):
                 if any(row[1:24]):
-                    persoon = Persoon.objects.create(
-                        a_nummer_persoon=row[0],
-                        burgerservicenummer_persoon=row[1],
-                        voornamen_persoon=row[2],
-                        adellijke_titel_predikaat_persoon=row[3],
-                        voorvoegsel_geslachtsnaam_persoon=row[4],
-                        geslachtsnaam_persoon=row[5],
-                        geboortedatum_persoon=row[6],
-                        geboorteplaats_persoon=row[7],
-                        geboorteland_persoon=row[8],
-                        geslachtsaanduiding=row[9],
-                        vorig_a_nummer=row[10],
-                        volgend_a_nummer=row[11],
-                        aanduiding_naamgebruik=row[12],
-                        registergemeente_akte_waaraan_gegevens=row[13],
-                        aktenummer_van_de_akte=row[14],
-                        gemeente_waar_de_gegevens_over_persoon=row[15],
-                        datum_van_de_ontlening_van_de_gegevens_over_persoon=row[16],
-                        beschrijving_van_het_document=row[17],
-                        aanduiding_gegevens_in_onderzoek=row[18],
-                        datum_ingang_onderzoek=row[19],
-                        datum_einde_onderzoek=row[20],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
-                            21
-                        ],
-                        ingangsdatum_geldigheid_met_betrekking=row[22],
-                        datum_van_opneming_met_betrekking=row[23],
-                        rni_deelnemer=row[24],
-                    )
+                    if not Persoon.objects.filter(
+                        burgerservicenummer_persoon=row[1]
+                    ).exists():
+                        persoon = Persoon.objects.create(
+                            a_nummer_persoon=row[0],
+                            burgerservicenummer_persoon=row[1],
+                            voornamen_persoon=row[2],
+                            adellijke_titel_predikaat_persoon=row[3],
+                            voorvoegsel_geslachtsnaam_persoon=row[4],
+                            geslachtsnaam_persoon=row[5],
+                            geboortedatum_persoon=row[6],
+                            geboorteplaats_persoon=row[7],
+                            geboorteland_persoon=row[8],
+                            geslachtsaanduiding=row[9],
+                            vorig_a_nummer=row[10],
+                            volgend_a_nummer=row[11],
+                            aanduiding_naamgebruik=row[12],
+                            registergemeente_akte_waaraan_gegevens=row[13],
+                            aktenummer_van_de_akte=row[14],
+                            gemeente_waar_de_gegevens_over_persoon=row[15],
+                            datum_van_de_ontlening_van_de_gegevens_over_persoon=row[16],
+                            beschrijving_van_het_document=row[17],
+                            aanduiding_gegevens_in_onderzoek=row[18],
+                            datum_ingang_onderzoek=row[19],
+                            datum_einde_onderzoek=row[20],
+                            indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                                21
+                            ],
+                            ingangsdatum_geldigheid_met_betrekking=row[22],
+                            datum_van_opneming_met_betrekking=row[23],
+                            rni_deelnemer=row[24],
+                        )
 
                 if any(row[27:48]):
-                    Ouder.objects.create(
-                        persoon=persoon,
-                        a_nummer_ouder=row[27],
-                        burgerservicenummer_ouder=row[28],
-                        voornamen_ouder=row[29],
-                        adellijke_titel_predikaat_ouder=row[30],
-                        voorvoegsel_geslachtsnaam_ouder=row[31],
-                        geslachtsnaam_ouder=row[32],
-                        geboortedatum_ouder=row[33],
-                        geboorteplaats_ouder=row[34],
-                        geboorteland_ouder=row[35],
-                        geslachtsaanduiding_ouder=row[36],
-                        datum_ingang_familierechtelijke_betrekking_ouder=row[37],
-                        registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[
-                            38
-                        ],
-                        aktenummer_van_de_akte_waaraan_gegevens=row[39],
-                        gemeente_waar_de_gegevens_over_ouder=row[40],
-                        datum_van_de_ontlening_van_de_gegevens_over_ouder=row[41],
-                        beschrijving_van_het_document_waaraan_de_gegevens=row[42],
-                        aanduiding_gegevens_in_onderzoek=row[43],
-                        datum_ingang_onderzoek=row[44],
-                        datum_einde_onderzoek=row[45],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
-                            46
-                        ],
-                        ingangsdatum_geldigheid_met_betrekking=row[47],
-                        datum_van_opneming_met_betrekking=row[48],
-                    )
+                    if not Ouder.objects.filter(a_nummer_ouder=row[27]).exists():
+                        Ouder.objects.create(
+                            persoon=persoon,
+                            a_nummer_ouder=row[27],
+                            burgerservicenummer_ouder=row[28],
+                            voornamen_ouder=row[29],
+                            adellijke_titel_predikaat_ouder=row[30],
+                            voorvoegsel_geslachtsnaam_ouder=row[31],
+                            geslachtsnaam_ouder=row[32],
+                            geboortedatum_ouder=row[33],
+                            geboorteplaats_ouder=row[34],
+                            geboorteland_ouder=row[35],
+                            geslachtsaanduiding_ouder=row[36],
+                            datum_ingang_familierechtelijke_betrekking_ouder=row[37],
+                            registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[
+                                38
+                            ],
+                            aktenummer_van_de_akte_waaraan_gegevens=row[39],
+                            gemeente_waar_de_gegevens_over_ouder=row[40],
+                            datum_van_de_ontlening_van_de_gegevens_over_ouder=row[41],
+                            beschrijving_van_het_document_waaraan_de_gegevens=row[42],
+                            aanduiding_gegevens_in_onderzoek=row[43],
+                            datum_ingang_onderzoek=row[44],
+                            datum_einde_onderzoek=row[45],
+                            indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                                46
+                            ],
+                            ingangsdatum_geldigheid_met_betrekking=row[47],
+                            datum_van_opneming_met_betrekking=row[48],
+                        )
 
                 if any(row[50:71]):
-                    Ouder.objects.create(
-                        persoon=persoon,
-                        a_nummer_ouder=row[50],
-                        burgerservicenummer_ouder=row[51],
-                        voornamen_ouder=row[52],
-                        adellijke_titel_predikaat_ouder=row[53],
-                        voorvoegsel_geslachtsnaam_ouder=row[54],
-                        geslachtsnaam_ouder=row[55],
-                        geboortedatum_ouder=row[56],
-                        geboorteplaats_ouder=row[57],
-                        geboorteland_ouder=row[58],
-                        geslachtsaanduiding_ouder=row[59],
-                        datum_ingang_familierechtelijke_betrekking_ouder=row[60],
-                        registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[
-                            61
-                        ],
-                        aktenummer_van_de_akte_waaraan_gegevens=row[62],
-                        gemeente_waar_de_gegevens_over_ouder=row[63],
-                        datum_van_de_ontlening_van_de_gegevens_over_ouder=row[64],
-                        beschrijving_van_het_document_waaraan_de_gegevens=row[65],
-                        aanduiding_gegevens_in_onderzoek=row[66],
-                        datum_ingang_onderzoek=row[67],
-                        datum_einde_onderzoek=row[68],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
-                            69
-                        ],
-                        ingangsdatum_geldigheid_met_betrekking=row[70],
-                        datum_van_opneming_met_betrekking=row[71],
-                    )
+                    if not Ouder.objects.filter(
+                        burgerservicenummer_ouder=row[51]
+                    ).exists():
+                        Ouder.objects.create(
+                            persoon=persoon,
+                            a_nummer_ouder=row[50],
+                            burgerservicenummer_ouder=row[51],
+                            voornamen_ouder=row[52],
+                            adellijke_titel_predikaat_ouder=row[53],
+                            voorvoegsel_geslachtsnaam_ouder=row[54],
+                            geslachtsnaam_ouder=row[55],
+                            geboortedatum_ouder=row[56],
+                            geboorteplaats_ouder=row[57],
+                            geboorteland_ouder=row[58],
+                            geslachtsaanduiding_ouder=row[59],
+                            datum_ingang_familierechtelijke_betrekking_ouder=row[60],
+                            registergemeente_akte_waaraan_gegevens_over_ouder_ontleend_zijn=row[
+                                61
+                            ],
+                            aktenummer_van_de_akte_waaraan_gegevens=row[62],
+                            gemeente_waar_de_gegevens_over_ouder=row[63],
+                            datum_van_de_ontlening_van_de_gegevens_over_ouder=row[64],
+                            beschrijving_van_het_document_waaraan_de_gegevens=row[65],
+                            aanduiding_gegevens_in_onderzoek=row[66],
+                            datum_ingang_onderzoek=row[67],
+                            datum_einde_onderzoek=row[68],
+                            indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                                69
+                            ],
+                            ingangsdatum_geldigheid_met_betrekking=row[70],
+                            datum_van_opneming_met_betrekking=row[71],
+                        )
 
                 if any(row[50:71]):
                     Nationaliteit.objects.create(
@@ -402,50 +422,65 @@ class Command(BaseCommand):
                     )
 
                 if any(row[90:118]):
-                    Partnerschap.objects.create(
-                        persoon=persoon,
-                        a_nummer_echtgenoot_geregistreerd_partner=row[90],
-                        burgerservicenummer_echtgenoot_geregistreerd_partner=row[91],
-                        voornamen_echtgenoot_geregistreerd_partner=row[92],
-                        adellijke_titel_predikaat_echtgenoot_geregistreerd_partner=row[
-                            93
-                        ],
-                        voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner=row[
-                            94
-                        ],
-                        geslachtsnaam_echtgenoot_geregistreerd_partner=row[95],
-                        geboortedatum_echtgenoot_geregistreerd_partner=row[96],
-                        geboorteplaats_echtgenoot_geregistreerd_partner=row[97],
-                        geboorteland_echtgenoot_geregistreerd_partner=row[98],
-                        geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[99],
-                        datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
-                            100
-                        ],
-                        plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
-                            101
-                        ],
-                        land_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
-                            102
-                        ],
-                        datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[103],
-                        plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[104],
-                        land_ontbinding_huwelijk_geregistreerd_partnerschap=row[105],
-                        reden_ontbinding_huwelijk_geregistreerd_partnerschap=row[106],
-                        soort_verbintenis=row[107],
-                        registergemeente_akte_waaraan_gegevens=row[108],
-                        aktenummer_van_de_akte_waaraan_gegevens=row[109],
-                        gemeente_waar_de_gegevens_over_huwelijk=row[110],
-                        datum_van_de_ontlening_van_de_gegevens=row[111],
-                        beschrijving_van_het_document_waaraan_de_gegevens=row[112],
-                        aanduiding_gegevens_in_onderzoek=row[113],
-                        datum_ingang_onderzoek=row[114],
-                        datum_einde_onderzoek=row[115],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
-                            116
-                        ],
-                        ingangsdatum_geldigheid_met_betrekking=row[117],
-                        datum_van_opneming_met_betrekking=row[118],
-                    )
+                    if not Partnerschap.objects.filter(
+                        burgerservicenummer_echtgenoot_geregistreerd_partner=row[91]
+                    ).exists():
+                        Partnerschap.objects.create(
+                            persoon=persoon,
+                            a_nummer_echtgenoot_geregistreerd_partner=row[90],
+                            burgerservicenummer_echtgenoot_geregistreerd_partner=row[
+                                91
+                            ],
+                            voornamen_echtgenoot_geregistreerd_partner=row[92],
+                            adellijke_titel_predikaat_echtgenoot_geregistreerd_partner=row[
+                                93
+                            ],
+                            voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner=row[
+                                94
+                            ],
+                            geslachtsnaam_echtgenoot_geregistreerd_partner=row[95],
+                            geboortedatum_echtgenoot_geregistreerd_partner=row[96],
+                            geboorteplaats_echtgenoot_geregistreerd_partner=row[97],
+                            geboorteland_echtgenoot_geregistreerd_partner=row[98],
+                            geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[
+                                99
+                            ],
+                            datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
+                                100
+                            ],
+                            plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
+                                101
+                            ],
+                            land_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
+                                102
+                            ],
+                            datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                103
+                            ],
+                            plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                104
+                            ],
+                            land_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                105
+                            ],
+                            reden_ontbinding_huwelijk_geregistreerd_partnerschap=row[
+                                106
+                            ],
+                            soort_verbintenis=row[107],
+                            registergemeente_akte_waaraan_gegevens=row[108],
+                            aktenummer_van_de_akte_waaraan_gegevens=row[109],
+                            gemeente_waar_de_gegevens_over_huwelijk=row[110],
+                            datum_van_de_ontlening_van_de_gegevens=row[111],
+                            beschrijving_van_het_document_waaraan_de_gegevens=row[112],
+                            aanduiding_gegevens_in_onderzoek=row[113],
+                            datum_ingang_onderzoek=row[114],
+                            datum_einde_onderzoek=row[115],
+                            indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                                116
+                            ],
+                            ingangsdatum_geldigheid_met_betrekking=row[117],
+                            datum_van_opneming_met_betrekking=row[118],
+                        )
 
                 if any(row[120:134]):
                     Overlijden.objects.create(
@@ -526,36 +561,39 @@ class Command(BaseCommand):
                     )
 
                 if any(row[185:205]):
-                    Kind.objects.create(
-                        persoon=persoon,
-                        a_nummer_kind=row[185],
-                        burgerservicenummer_kind=row[186],
-                        voornamen_kind=row[187],
-                        adellijke_titel_predikaat_kind=row[188],
-                        voorvoegsel_geslachtsnaam_kind=row[189],
-                        geslachtsnaam_kind=row[190],
-                        geboortedatum_kind=row[191],
-                        geboorteplaats_kind=row[192],
-                        geboorteland_kind=row[193],
-                        registergemeente_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[
-                            194
-                        ],
-                        aktenummer_van_de_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[
-                            195
-                        ],
-                        gemeente_waar_de_gegevens_over_kind=row[196],
-                        datum_van_de_ontlening_van_de_gegevens_over_kind=row[197],
-                        beschrijving_van_het_document=row[198],
-                        aanduiding_gegevens_in_onderzoek=row[199],
-                        datum_ingang_onderzoek=row[200],
-                        datum_einde_onderzoek=row[201],
-                        indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
-                            202
-                        ],
-                        ingangsdatum_geldigheid_met_betrekking=row[203],
-                        datum_van_opneming_met_betrekking=row[204],
-                        registratie_betrekking=row[205],
-                    )
+                    if not Kind.objects.filter(
+                        burgerservicenummer_kind=row[186]
+                    ).exists():
+                        Kind.objects.create(
+                            persoon=persoon,
+                            a_nummer_kind=row[185],
+                            burgerservicenummer_kind=row[186],
+                            voornamen_kind=row[187],
+                            adellijke_titel_predikaat_kind=row[188],
+                            voorvoegsel_geslachtsnaam_kind=row[189],
+                            geslachtsnaam_kind=row[190],
+                            geboortedatum_kind=row[191],
+                            geboorteplaats_kind=row[192],
+                            geboorteland_kind=row[193],
+                            registergemeente_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[
+                                194
+                            ],
+                            aktenummer_van_de_akte_waaraan_gegevens_over_kind_ontleend_zijn=row[
+                                195
+                            ],
+                            gemeente_waar_de_gegevens_over_kind=row[196],
+                            datum_van_de_ontlening_van_de_gegevens_over_kind=row[197],
+                            beschrijving_van_het_document=row[198],
+                            aanduiding_gegevens_in_onderzoek=row[199],
+                            datum_ingang_onderzoek=row[200],
+                            datum_einde_onderzoek=row[201],
+                            indicatie_onjuist_dan_wel_strijdigheid_met_de_openbare_orde=row[
+                                202
+                            ],
+                            ingangsdatum_geldigheid_met_betrekking=row[203],
+                            datum_van_opneming_met_betrekking=row[204],
+                            registratie_betrekking=row[205],
+                        )
 
                 if any(row[207:215]):
                     Verblijfstitel.objects.create(
@@ -626,3 +664,21 @@ class Command(BaseCommand):
                         datum_van_de_ontlening_van_de_gegevens_over_kiesrecht=row[252],
                         beschrijving_van_het_document=row[253],
                     )
+
+            for model in [
+                Persoon,
+                Ouder,
+                Nationaliteit,
+                Partnerschap,
+                Overlijden,
+                Inschrijving,
+                Verblijfplaats,
+                Kind,
+                Verblijfstitel,
+                Gezagsverhouding,
+                Reisdocument,
+                Kiesrecht,
+            ]:
+                print(f"Installed {model.objects.count()} {model.__name__} instances")
+
+            print("Done!")
