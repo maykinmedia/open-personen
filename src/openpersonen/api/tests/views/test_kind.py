@@ -3,6 +3,7 @@ from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
 
 import requests_mock
+from freezegun import freeze_time
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
@@ -41,6 +42,7 @@ class TestKind(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
 
+    @freeze_time("2020-09-12")
     @requests_mock.Mocker()
     def test_detail_kind(self, post_mock):
         post_mock.post(
