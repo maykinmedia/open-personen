@@ -103,7 +103,6 @@ class TestIngeschrevenPersoon(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.maxDiff = None
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     def test_detail_ingeschreven_persoon_with_bad_burgerservicenummer(self):
