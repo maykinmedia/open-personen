@@ -176,6 +176,12 @@
                </ns:inp.verblijftIn>
                <!--Optional:-->
                <ns:inp.datumInschrijving/>
+               <!--Optional:-->
+               <ns:ing.aanduidingEuropeesKiesrecht/>
+               <!--Optional:-->
+               <ns:ing.aanduidingUitgeslotenKiesrecht/>
+               <!--Optional:-->
+               <ns:inp.aanduidingBijzonderNederlanderschap/>
             </ns:object>
          </ns:scope>
       </ns:npsLv01>
