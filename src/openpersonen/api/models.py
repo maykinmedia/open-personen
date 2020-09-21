@@ -58,19 +58,7 @@ class StufBGClient(SingletonModel):
             "tijdstip_bericht": dateformat.format(timezone.now(), "YmdHis"),
         }
 
-    def _get_response_base_context(self):
-        return {
-            "zender_organisatie": self.ontvanger_organisatie,
-            "zender_applicatie": self.ontvanger_applicatie,
-            "zender_administratie": self.ontvanger_administratie,
-            "zender_gebruiker": self.ontvanger_gebruiker,
-            "ontvanger_organisatie": self.zender_organisatie,
-            "ontvanger_applicatie": self.zender_applicatie,
-            "ontvanger_administratie": self.zender_administratie,
-            "ontvanger_gebruiker": self.zender_gebruiker,
-        }
-
-    def _make_request(self, request_file, response_file, additional_context=None):
+    def _make_request(self, request_file, additional_context=None):
         request_context = self._get_request_base_context()
         if additional_context:
             request_context.update(additional_context)
@@ -80,15 +68,6 @@ class StufBGClient(SingletonModel):
             data=loader.render_to_string(request_file, request_context),
             headers=self._get_headers(),
             cert=(self.certificate.path, self.certificate_key.path),
-        )
-
-        response_context = self._get_response_base_context()
-        response_context["referentienummer"] = request_context["referentienummer"]
-        response_context["tijdstip_bericht"] = request_context["tijdstip_bericht"]
-
-        response._content = bytes(
-            loader.render_to_string(response_file, response_context),
-            encoding="utf-8",
         )
 
         return response
@@ -102,23 +81,22 @@ class StufBGClient(SingletonModel):
 
         return self._make_request(
             "RequestIngeschrevenPersoon.xml",
-            "ResponseIngeschrevenPersoon.xml",
             additional_context=additional_context,
         )
 
     def get_kind(self, bsn):
         return self._make_request(
-            "RequestKind.xml", "ResponseKind.xml", additional_context={"bsn": bsn}
+            "RequestKind.xml", additional_context={"bsn": bsn}
         )
 
     def get_ouder(self, bsn):
         return self._make_request(
-            "RequestOuder.xml", "ResponseOuder.xml", additional_context={"bsn": bsn}
+            "RequestOuder.xml", additional_context={"bsn": bsn}
         )
 
     def get_partner(self, bsn):
         return self._make_request(
-            "RequestPartner.xml", "ResponsePartner.xml", additional_context={"bsn": bsn}
+            "RequestPartner.xml", additional_context={"bsn": bsn}
         )
 
     def get_verblijf_plaats_historie(self, bsn, filters):
@@ -126,7 +104,6 @@ class StufBGClient(SingletonModel):
         additional_context.update(filters)
         return self._make_request(
             "RequestVerblijfPlaatsHistorie.xml",
-            "ResponseVerblijfPlaatsHistorie.xml",
             additional_context=additional_context,
         )
 
@@ -135,7 +112,6 @@ class StufBGClient(SingletonModel):
         additional_context.update(filters)
         return self._make_request(
             "RequestPartnerHistorie.xml",
-            "ResponsePartnerHistorie.xml",
             additional_context=additional_context,
         )
 
@@ -144,7 +120,6 @@ class StufBGClient(SingletonModel):
         additional_context.update(filters)
         return self._make_request(
             "RequestVerblijfsTitelHistorie.xml",
-            "ResponseVerblijfsTitelHistorie.xml",
             additional_context=additional_context,
         )
 
@@ -153,6 +128,5 @@ class StufBGClient(SingletonModel):
         additional_context.update(filters)
         return self._make_request(
             "RequestNationaliteitHistorie.xml",
-            "ResponseNationaliteitHistorie.xml",
             additional_context=additional_context,
         )
