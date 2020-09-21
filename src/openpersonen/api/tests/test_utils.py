@@ -45,6 +45,12 @@ class TestCalculateAge(TestCase):
         self.assertEqual(result, 59)
 
     @freeze_time("2020-09-12")
+    def test_calculate_age_with_bad_data(self):
+        birth_date = "b@d"
+        result = calculate_age(birth_date)
+        self.assertEqual(result, 0)
+
+    @freeze_time("2020-09-12")
     def test_calculate_age_with_no_data(self):
         birth_date = ""
         result = calculate_age(birth_date)
