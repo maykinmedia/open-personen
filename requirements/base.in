@@ -37,3 +37,4 @@ xmltodict  # Parse Soap XML to Python dict
 # Testing libraries
 requests-mock
 mock
+freezegun
