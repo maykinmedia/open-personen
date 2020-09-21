@@ -259,5 +259,5 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
     "burgerservicenummer": "123456789",
     "geheimhoudingPersoonsgegevens": True,
     "geslachtsaanduiding": "M",
-    "leeftijd": 40,
+    "leeftijd": 39,
 }
