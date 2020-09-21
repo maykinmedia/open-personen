@@ -4,7 +4,7 @@ from freezegun import freeze_time
 
 from django.test import TestCase
 
-from openpersonen.api.utils import convert_empty_instances, calculate_age
+from openpersonen.api.utils import convert_empty_instances, calculate_age, is_valid_date_format
 
 
 class TestConvertEmptyInstances(TestCase):
@@ -46,3 +46,21 @@ class TestCalculateAge(TestCase):
         birth_date = ''
         result = calculate_age(birth_date)
         self.assertEqual(result, 0)
+
+
+class TestIsValidDateFormat(TestCase):
+
+    def test_is_valid_date_format_returns_true(self):
+        date = '19750816'
+        result = is_valid_date_format(date)
+        self.assertTrue(result)
+
+    def test_is_valid_date_format_returns_false_when_too_short(self):
+        date = '1975'
+        result = is_valid_date_format(date)
+        self.assertFalse(result)
+
+    def test_is_valid_date_format_returns_false_when_not_a_number(self):
+        date = 'A'
+        result = is_valid_date_format(date)
+        self.assertFalse(result)
