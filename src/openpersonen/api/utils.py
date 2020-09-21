@@ -36,8 +36,4 @@ def is_valid_date_format(date):
     if len(date) != 8:
         return False
 
-    try:
-        int(date)
-        return True
-    except ValueError:
-        return False
+    return date.isdigit()
