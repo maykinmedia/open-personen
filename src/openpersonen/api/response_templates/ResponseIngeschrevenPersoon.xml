@@ -85,20 +85,23 @@
                             <!--Optional:-->
                             <ns:adresAanduidingGrp>
                                 <!--Optional:-->
-                                <ns:wpl.woonplaatsNaam>Amsterdam</ns:wpl.woonplaatsNaam>
-                                <!--Optional:-->
-                                <ns:gor.straatnaam>Straat</ns:gor.straatnaam>
-                                <!--Optional:-->
-                                <ns:aoa.postcode>2525AB</ns:aoa.postcode>
-                                <!--Optional:-->
-                                <ns:aoa.huisnummer>117</ns:aoa.huisnummer>
-                                <!--Optional:-->
-                                <ns:aoa.huisletter>A</ns:aoa.huisletter>
-                                <!--Optional:-->
-                                <ns:aoa.huisnummertoevoeging>B</ns:aoa.huisnummertoevoeging>
+
                             </ns:adresAanduidingGrp>
                         </ns:gerelateerde>
                     </ns:inp.verblijftIn>
+                    <ns:verblijfsadres>
+                        <ns:wpl.woonplaatsNaam>Amsterdam</ns:wpl.woonplaatsNaam>
+                        <!--Optional:-->
+                        <ns:gor.straatnaam>Straat</ns:gor.straatnaam>
+                        <!--Optional:-->
+                        <ns:aoa.postcode>2525AB</ns:aoa.postcode>
+                        <!--Optional:-->
+                        <ns:aoa.huisnummer>117</ns:aoa.huisnummer>
+                        <!--Optional:-->
+                        <ns:aoa.huisletter>A</ns:aoa.huisletter>
+                        <!--Optional:-->
+                        <ns:aoa.huisnummertoevoeging>B</ns:aoa.huisnummertoevoeging>
+                    </ns:verblijfsadres>
                     <!--Optional:-->
                     <ns:inp.datumInschrijving>20051216</ns:inp.datumInschrijving>
                     <!--Optional:-->

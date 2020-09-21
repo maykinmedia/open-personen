@@ -264,38 +264,30 @@ def convert_client_response_to_instance_dict(response):
         },
         "verblijfplaats": {
             "functieAdres": "woonadres",
-            "huisletter": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-            .get(f"{prefix}:gerelateerde", {})
-            .get(f"{prefix}:adresAanduidingGrp", {})
-            .get(f"{prefix}:aoa.huisletter", "string"),
-            "huisnummer": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-            .get(f"{prefix}:gerelateerde", {})
-            .get(f"{prefix}:adresAanduidingGrp", {})
-            .get(f"{prefix}:aoa.huisnummer", "string"),
+            "huisletter": antwoord_dict_object.get(
+                f"{prefix}:inp.verblijfsadres", {}
+            ).get(f"{prefix}:aoa.huisletter", "string"),
+            "huisnummer": antwoord_dict_object.get(
+                f"{prefix}:inp.verblijfsadres", {}
+            ).get(f"{prefix}:aoa.huisnummer", "string"),
             "huisnummertoevoeging": antwoord_dict_object.get(
-                f"{prefix}:inp.verblijftIn", {}
-            )
-            .get(f"{prefix}:gerelateerde", {})
-            .get(f"{prefix}:adresAanduidingGrp", {})
-            .get(f"{prefix}:aoa.huisnummertoevoeging", "string"),
+                f"{prefix}:inp.verblijfsadres", {}
+            ).get(f"{prefix}:aoa.huisnummertoevoeging", "string"),
             "aanduidingBijHuisnummer": "tegenover",
             "identificatiecodeNummeraanduiding": "string",
             "naamOpenbareRuimte": "string",
-            "postcode": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-            .get(f"{prefix}:gerelateerde", {})
-            .get(f"{prefix}:adresAanduidingGrp", {})
-            .get(f"{prefix}:aoa.postcode", "string"),
-            "woonplaatsnaam": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-            .get(f"{prefix}:gerelateerde", {})
-            .get(f"{prefix}:adresAanduidingGrp", {})
-            .get(f"{prefix}:wpl.woonplaatsNaam", "string"),
+            "postcode": antwoord_dict_object.get(
+                f"{prefix}:inp.verblijfsadres", {}
+            ).get(f"{prefix}:aoa.postcode", "string"),
+            "woonplaatsnaam": antwoord_dict_object.get(
+                f"{prefix}:inp.verblijfsadres", {}
+            ).get(f"{prefix}:wpl.woonplaatsNaam", "string"),
             "identificatiecodeAdresseerbaarObject": "string",
             "indicatieVestigingVanuitBuitenland": True,
             "locatiebeschrijving": "string",
-            "straatnaam": antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-            .get(f"{prefix}:gerelateerde", {})
-            .get(f"{prefix}:adresAanduidingGrp", {})
-            .get(f"{prefix}:gor.straatnaam", "string"),
+            "straatnaam": antwoord_dict_object.get(
+                f"{prefix}:inp.verblijfsadres", {}
+            ).get(f"{prefix}:gor.straatnaam", "string"),
             "vanuitVertrokkenOnbekendWaarheen": True,
             "datumAanvangAdreshouding": {
                 "dag": 0,
@@ -339,21 +331,15 @@ def convert_client_response_to_instance_dict(response):
                 "functieAdres": True,
                 "gemeenteVanInschrijving": True,
                 "huisletter": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-                    .get(f"{prefix}:gerelateerde", {})
-                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijfsadres", {})
                     .get(f"{prefix}:aoa.huisletter", "string")
                 ),
                 "huisnummer": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-                    .get(f"{prefix}:gerelateerde", {})
-                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijfsadres", {})
                     .get(f"{prefix}:aoa.huisnummer", "string")
                 ),
                 "huisnummertoevoeging": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-                    .get(f"{prefix}:gerelateerde", {})
-                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijfsadres", {})
                     .get(f"{prefix}:aoa.huisnummertoevoeging", "string")
                 ),
                 "identificatiecodeNummeraanduiding": True,
@@ -362,22 +348,16 @@ def convert_client_response_to_instance_dict(response):
                 "locatiebeschrijving": True,
                 "naamOpenbareRuimte": True,
                 "postcode": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-                    .get(f"{prefix}:gerelateerde", {})
-                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijfsadres", {})
                     .get(f"{prefix}:aoa.postcode", "string")
                 ),
                 "straatnaam": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-                    .get(f"{prefix}:gerelateerde", {})
-                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijfsadres", {})
                     .get(f"{prefix}:gor.straatnaam", "string")
                 ),
                 "verblijfBuitenland": True,
                 "woonplaatsnaam": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.verblijftIn", {})
-                    .get(f"{prefix}:gerelateerde", {})
-                    .get(f"{prefix}:adresAanduidingGrp", {})
+                    antwoord_dict_object.get(f"{prefix}:inp.verblijfsadres", {})
                     .get(f"{prefix}:wpl.woonplaatsNaam", "string")
                 ),
                 "datumIngangOnderzoek": {
