@@ -31,9 +31,11 @@ class Command(BaseCommand):
             headers={"Authorization": f"Token {token}"},
         )
 
-        if response.status_code != 200:
-            print(
-                f"{url} gave a response code of {response.status_code}.  Expected 200"
+        if response.status_code != 201:
+            self.stdout.write(
+                self.style.ERROR(
+                    f"{url} gave a response code of {response.status_code}.  Expected 200"
+                )
             )
 
     def handle(self, **options):
