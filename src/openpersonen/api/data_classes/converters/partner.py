@@ -141,7 +141,9 @@ def convert_model_instance_to_instance_dict(partner):
                     partner.geboortedatum_echtgenoot_geregistreerd_partner[
                         settings.DAY_START : settings.DAY_END
                     ]
-                    if is_valid_date_format(partner.geboortedatum_echtgenoot_geregistreerd_partner)
+                    if is_valid_date_format(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner
+                    )
                     else 0
                 ),
                 "datum": partner.geboortedatum_echtgenoot_geregistreerd_partner,
@@ -149,14 +151,18 @@ def convert_model_instance_to_instance_dict(partner):
                     partner.geboortedatum_echtgenoot_geregistreerd_partner[
                         settings.YEAR_START : settings.YEAR_END
                     ]
-                    if is_valid_date_format(partner.geboortedatum_echtgenoot_geregistreerd_partner)
+                    if is_valid_date_format(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner
+                    )
                     else 0
                 ),
                 "maand": int(
                     partner.geboortedatum_echtgenoot_geregistreerd_partner[
                         settings.MONTH_START : settings.MONTH_END
                     ]
-                    if is_valid_date_format(partner.geboortedatum_echtgenoot_geregistreerd_partner)
+                    if is_valid_date_format(
+                        partner.geboortedatum_echtgenoot_geregistreerd_partner
+                    )
                     else 0
                 ),
             },
@@ -218,7 +224,9 @@ def convert_model_instance_to_instance_dict(partner):
                     partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
                         settings.DAY_START : settings.DAY_END
                     ]
-                    if is_valid_date_format(partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap)
+                    if is_valid_date_format(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    )
                     else 0
                 ),
                 "datum": partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
@@ -226,14 +234,18 @@ def convert_model_instance_to_instance_dict(partner):
                     partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
                         settings.YEAR_START : settings.YEAR_END
                     ]
-                    if is_valid_date_format(partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap)
+                    if is_valid_date_format(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    )
                     else 0
                 ),
                 "maand": int(
                     partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
                         settings.MONTH_START : settings.MONTH_END
                     ]
-                    if is_valid_date_format(partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap)
+                    if is_valid_date_format(
+                        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                    )
                     else 0
                 ),
             },
