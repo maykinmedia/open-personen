@@ -2,7 +2,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.utils import convert_empty_instances, calculate_age
+from openpersonen.api.utils import convert_empty_instances, calculate_age, is_valid_date_format
 
 
 def convert_client_response_to_instance_dict(response):
@@ -378,7 +378,7 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.DAY_START : settings.DAY_END
                         ]
                     )
-                    if persoon.datum_ingang_onderzoek
+                    if is_valid_date_format(persoon.datum_ingang_onderzoek)
                     else 0,
                     "datum": persoon.datum_ingang_onderzoek,
                     "jaar": int(
@@ -386,14 +386,14 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.YEAR_START : settings.YEAR_END
                         ]
                     )
-                    if persoon.datum_ingang_onderzoek
+                    if is_valid_date_format(persoon.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         persoon.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
                         ]
                     )
-                    if persoon.datum_ingang_onderzoek
+                    if is_valid_date_format(persoon.datum_ingang_onderzoek)
                     else 0,
                 },
             },
@@ -407,7 +407,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "dag": int(
                     persoon.geboortedatum_persoon[settings.DAY_START : settings.DAY_END]
                 )
-                if persoon.geboortedatum_persoon
+                if is_valid_date_format(persoon.geboortedatum_persoon)
                 else 0,
                 "datum": persoon.geboortedatum_persoon,
                 "jaar": int(
@@ -415,14 +415,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if persoon.geboortedatum_persoon
+                if is_valid_date_format(persoon.geboortedatum_persoon)
                 else 0,
                 "maand": int(
                     persoon.geboortedatum_persoon[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if persoon.geboortedatum_persoon
+                if is_valid_date_format(persoon.geboortedatum_persoon)
                 else 0,
             },
             "land": {
@@ -481,7 +481,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_europees_kiesrecht
+                if is_valid_date_format(kiesrecht.einddatum_uitsluiting_europees_kiesrecht)
                 else 0,
                 "datum": kiesrecht.einddatum_uitsluiting_europees_kiesrecht,
                 "jaar": int(
@@ -489,14 +489,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_europees_kiesrecht
+                if is_valid_date_format(kiesrecht.einddatum_uitsluiting_europees_kiesrecht)
                 else 0,
                 "maand": int(
                     kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_europees_kiesrecht
+                if is_valid_date_format(kiesrecht.einddatum_uitsluiting_europees_kiesrecht)
                 else 0,
             },
             "einddatumUitsluitingKiesrecht": {
@@ -505,7 +505,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_kiesrecht
+                if is_valid_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
                 "datum": kiesrecht.einddatum_uitsluiting_kiesrecht,
                 "jaar": int(
@@ -513,14 +513,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_kiesrecht
+                if is_valid_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
                 "maand": int(
                     kiesrecht.einddatum_uitsluiting_kiesrecht[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if kiesrecht.einddatum_uitsluiting_kiesrecht
+                if is_valid_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
             },
         }
@@ -534,20 +534,20 @@ def convert_model_instance_to_instance_dict(persoon):
                 "dag": int(
                     overlijden.datum_overlijden[settings.DAY_START : settings.DAY_END]
                 )
-                if overlijden.datum_overlijden
+                if is_valid_date_format(overlijden.datum_overlijden)
                 else 0,
                 "datum": overlijden.datum_overlijden,
                 "jaar": int(
                     overlijden.datum_overlijden[settings.YEAR_START : settings.YEAR_END]
                 )
-                if overlijden.datum_overlijden
+                if is_valid_date_format(overlijden.datum_overlijden)
                 else 0,
                 "maand": int(
                     overlijden.datum_overlijden[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if overlijden.datum_overlijden
+                if is_valid_date_format(overlijden.datum_overlijden)
                 else 0,
             },
             "land": {
@@ -595,7 +595,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfplaats.datum_aanvang_adres_buitenland
+                if is_valid_date_format(verblijfplaats.datum_aanvang_adres_buitenland)
                 else 0,
                 "datum": verblijfplaats.datum_aanvang_adres_buitenland,
                 "jaar": int(
@@ -603,14 +603,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfplaats.datum_aanvang_adres_buitenland
+                if is_valid_date_format(verblijfplaats.datum_aanvang_adres_buitenland)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_aanvang_adres_buitenland[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfplaats.datum_aanvang_adres_buitenland
+                if is_valid_date_format(verblijfplaats.datum_aanvang_adres_buitenland)
                 else 0,
             },
             "datumIngangGeldigheid": {
@@ -619,7 +619,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfplaats.ingangsdatum_geldigheid_met_betrekking
+                if is_valid_date_format(verblijfplaats.ingangsdatum_geldigheid_met_betrekking)
                 else 0,
                 "datum": verblijfplaats.ingangsdatum_geldigheid_met_betrekking,
                 "jaar": int(
@@ -627,14 +627,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfplaats.ingangsdatum_geldigheid_met_betrekking
+                if is_valid_date_format(verblijfplaats.ingangsdatum_geldigheid_met_betrekking)
                 else 0,
                 "maand": int(
                     verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfplaats.ingangsdatum_geldigheid_met_betrekking
+                if is_valid_date_format(verblijfplaats.ingangsdatum_geldigheid_met_betrekking)
                 else 0,
             },
             "datumInschrijvingInGemeente": {
@@ -643,7 +643,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfplaats.datum_inschrijving_in_de_gemeente
+                if is_valid_date_format(verblijfplaats.datum_inschrijving_in_de_gemeente)
                 else 0,
                 "datum": verblijfplaats.datum_inschrijving_in_de_gemeente,
                 "jaar": int(
@@ -651,14 +651,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfplaats.datum_inschrijving_in_de_gemeente
+                if is_valid_date_format(verblijfplaats.datum_inschrijving_in_de_gemeente)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_inschrijving_in_de_gemeente[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfplaats.datum_inschrijving_in_de_gemeente
+                if is_valid_date_format(verblijfplaats.datum_inschrijving_in_de_gemeente)
                 else 0,
             },
             "datumVestigingInNederland": {
@@ -667,7 +667,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfplaats.datum_vestiging_in_nederland
+                if is_valid_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
                 "datum": verblijfplaats.datum_vestiging_in_nederland,
                 "jaar": int(
@@ -675,14 +675,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfplaats.datum_vestiging_in_nederland
+                if is_valid_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_vestiging_in_nederland[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfplaats.datum_vestiging_in_nederland
+                if is_valid_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
             },
             "gemeenteVanInschrijving": {
@@ -740,7 +740,7 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.DAY_START : settings.DAY_END
                         ]
                     )
-                    if verblijfplaats.datum_ingang_onderzoek
+                    if is_valid_date_format(verblijfplaats.datum_ingang_onderzoek)
                     else 0,
                     "datum": verblijfplaats.datum_ingang_onderzoek,
                     "jaar": int(
@@ -748,14 +748,14 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.YEAR_START : settings.YEAR_END
                         ]
                     )
-                    if verblijfplaats.datum_ingang_onderzoek
+                    if is_valid_date_format(verblijfplaats.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         verblijfplaats.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
                         ]
                     )
-                    if verblijfplaats.datum_ingang_onderzoek
+                    if is_valid_date_format(verblijfplaats.datum_ingang_onderzoek)
                     else 0,
                 },
             },
@@ -780,7 +780,7 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.DAY_START : settings.DAY_END
                         ]
                     )
-                    if gezagsverhouding.datum_ingang_onderzoek
+                    if is_valid_date_format(gezagsverhouding.datum_ingang_onderzoek)
                     else 0,
                     "datum": gezagsverhouding.datum_ingang_onderzoek,
                     "jaar": int(
@@ -788,14 +788,14 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.YEAR_START : settings.YEAR_END
                         ]
                     )
-                    if gezagsverhouding.datum_ingang_onderzoek
+                    if is_valid_date_format(gezagsverhouding.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         gezagsverhouding.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
                         ]
                     )
-                    if gezagsverhouding.datum_ingang_onderzoek
+                    if is_valid_date_format(gezagsverhouding.datum_ingang_onderzoek)
                     else 0,
                 },
             },
@@ -815,7 +815,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfstitel.datum_einde_verblijfstitel
+                if is_valid_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
                 "datum": verblijfstitel.datum_einde_verblijfstitel,
                 "jaar": int(
@@ -823,14 +823,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfstitel.datum_einde_verblijfstitel
+                if is_valid_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
                 "maand": int(
                     verblijfstitel.datum_einde_verblijfstitel[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfstitel.datum_einde_verblijfstitel
+                if is_valid_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
             },
             "datumIngang": {
@@ -839,7 +839,7 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.DAY_START : settings.DAY_END
                     ]
                 )
-                if verblijfstitel.ingangsdatum_verblijfstitel
+                if is_valid_date_format(verblijfstitel.ingangsdatum_verblijfstitel)
                 else 0,
                 "datum": verblijfstitel.ingangsdatum_verblijfstitel,
                 "jaar": int(
@@ -847,14 +847,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 )
-                if verblijfstitel.ingangsdatum_verblijfstitel
+                if is_valid_date_format(verblijfstitel.ingangsdatum_verblijfstitel)
                 else 0,
                 "maand": int(
                     verblijfstitel.ingangsdatum_verblijfstitel[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 )
-                if verblijfstitel.ingangsdatum_verblijfstitel
+                if is_valid_date_format(verblijfstitel.ingangsdatum_verblijfstitel)
                 else 0,
             },
             "inOnderzoek": {
@@ -867,7 +867,7 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.DAY_START : settings.DAY_END
                         ]
                     )
-                    if verblijfstitel.datum_ingang_onderzoek
+                    if is_valid_date_format(verblijfstitel.datum_ingang_onderzoek)
                     else 0,
                     "datum": verblijfstitel.datum_ingang_onderzoek,
                     "jaar": int(
@@ -875,14 +875,14 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.YEAR_START : settings.YEAR_END
                         ]
                     )
-                    if verblijfstitel.datum_ingang_onderzoek
+                    if is_valid_date_format(verblijfstitel.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         verblijfstitel.datum_ingang_onderzoek[
                             settings.MONTH_START : settings.MONTH_END
                         ]
                     )
-                    if verblijfstitel.datum_ingang_onderzoek
+                    if is_valid_date_format(verblijfstitel.datum_ingang_onderzoek)
                     else 0,
                 },
             },
@@ -902,7 +902,7 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.DAY_START : settings.DAY_END
                         ]
                     )
-                    if nationaliteit.datum_van_ingang_geldigheid_met_betrekking
+                    if is_valid_date_format(nationaliteit.datum_van_ingang_geldigheid_met_betrekking)
                     else 0,
                     "datum": nationaliteit.datum_van_ingang_geldigheid_met_betrekking,
                     "jaar": int(
@@ -910,14 +910,14 @@ def convert_model_instance_to_instance_dict(persoon):
                             settings.YEAR_START : settings.YEAR_END
                         ]
                     )
-                    if nationaliteit.datum_van_ingang_geldigheid_met_betrekking
+                    if is_valid_date_format(nationaliteit.datum_van_ingang_geldigheid_met_betrekking)
                     else 0,
                     "maand": int(
                         nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
                             settings.MONTH_START : settings.MONTH_END
                         ]
                     )
-                    if nationaliteit.datum_van_ingang_geldigheid_met_betrekking
+                    if is_valid_date_format(nationaliteit.datum_van_ingang_geldigheid_met_betrekking)
                     else 0,
                 },
                 "nationaliteit": {
@@ -940,7 +940,7 @@ def convert_model_instance_to_instance_dict(persoon):
                                 settings.DAY_START : settings.DAY_END
                             ]
                         )
-                        if nationaliteit.datum_ingang_onderzoek
+                        if is_valid_date_format(nationaliteit.datum_ingang_onderzoek)
                         else 0,
                         "datum": nationaliteit.datum_ingang_onderzoek,
                         "jaar": int(
@@ -948,14 +948,14 @@ def convert_model_instance_to_instance_dict(persoon):
                                 settings.YEAR_START : settings.YEAR_END
                             ]
                         )
-                        if nationaliteit.datum_ingang_onderzoek
+                        if is_valid_date_format(nationaliteit.datum_ingang_onderzoek)
                         else 0,
                         "maand": int(
                             nationaliteit.datum_ingang_onderzoek[
                                 settings.MONTH_START : settings.MONTH_END
                             ]
                         )
-                        if nationaliteit.datum_ingang_onderzoek
+                        if is_valid_date_format(nationaliteit.datum_ingang_onderzoek)
                         else 0,
                     },
                 },

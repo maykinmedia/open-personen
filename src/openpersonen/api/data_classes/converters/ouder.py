@@ -2,7 +2,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.utils import convert_empty_instances
+from openpersonen.api.utils import convert_empty_instances, is_valid_date_format
 
 
 def convert_client_response_to_instance_dict(response):
@@ -123,7 +123,7 @@ def convert_model_instance_to_instance_dict(ouder):
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                     settings.DAY_START : settings.DAY_END
                 ]
-                if ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                if is_valid_date_format(ouder.datum_ingang_familierechtelijke_betrekking_ouder)
                 else 0
             ),
             "datum": ouder.datum_ingang_familierechtelijke_betrekking_ouder,
@@ -131,14 +131,14 @@ def convert_model_instance_to_instance_dict(ouder):
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                     settings.YEAR_START : settings.YEAR_END
                 ]
-                if ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                if is_valid_date_format(ouder.datum_ingang_familierechtelijke_betrekking_ouder)
                 else 0
             ),
             "maand": int(
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
                     settings.MONTH_START : settings.MONTH_END
                 ]
-                if ouder.datum_ingang_familierechtelijke_betrekking_ouder
+                if is_valid_date_format(ouder.datum_ingang_familierechtelijke_betrekking_ouder)
                 else 0
             ),
         },
@@ -168,7 +168,7 @@ def convert_model_instance_to_instance_dict(ouder):
             "datumIngangOnderzoek": {
                 "dag": int(
                     ouder.datum_ingang_onderzoek[settings.DAY_START : settings.DAY_END]
-                    if ouder.datum_ingang_onderzoek
+                    if is_valid_date_format(ouder.datum_ingang_onderzoek)
                     else 0
                 ),
                 "datum": ouder.datum_ingang_onderzoek,
@@ -176,14 +176,14 @@ def convert_model_instance_to_instance_dict(ouder):
                     ouder.datum_ingang_onderzoek[
                         settings.YEAR_START : settings.YEAR_END
                     ]
-                    if ouder.datum_ingang_onderzoek
+                    if is_valid_date_format(ouder.datum_ingang_onderzoek)
                     else 0
                 ),
                 "maand": int(
                     ouder.datum_ingang_onderzoek[
                         settings.MONTH_START : settings.MONTH_END
                     ]
-                    if ouder.datum_ingang_onderzoek
+                    if is_valid_date_format(ouder.datum_ingang_onderzoek)
                     else 0
                 ),
             },
@@ -193,18 +193,18 @@ def convert_model_instance_to_instance_dict(ouder):
                 "dag": int(
                     ouder.geboortedatum_ouder[settings.DAY_START : settings.DAY_END]
                 )
-                if ouder.geboortedatum_ouder
+                if is_valid_date_format(ouder.geboortedatum_ouder)
                 else 0,
                 "datum": ouder.geboortedatum_ouder,
                 "jaar": int(
                     ouder.geboortedatum_ouder[settings.YEAR_START : settings.YEAR_END]
                 )
-                if ouder.geboortedatum_ouder
+                if is_valid_date_format(ouder.geboortedatum_ouder)
                 else 0,
                 "maand": int(
                     ouder.geboortedatum_ouder[settings.MONTH_START : settings.MONTH_END]
                 )
-                if ouder.geboortedatum_ouder
+                if is_valid_date_format(ouder.geboortedatum_ouder)
                 else 0,
             },
             "land": {

@@ -82,7 +82,7 @@ VERBLIJF_PLAATS_HISTORIE_DATA = {
                 },
                 "functieAdres": "woonadres",
                 "huisletter": "B",
-                "huisnummer": 117,
+                "huisnummer": "117",
                 "huisnummertoevoeging": "IV",
                 "aanduidingBijHuisnummer": "tegenover",
                 "identificatiecodeNummeraanduiding": "0518200000366054",
