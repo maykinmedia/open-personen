@@ -85,19 +85,13 @@ class StufBGClient(SingletonModel):
         )
 
     def get_kind(self, bsn):
-        return self._make_request(
-            "RequestKind.xml", additional_context={"bsn": bsn}
-        )
+        return self._make_request("RequestKind.xml", additional_context={"bsn": bsn})
 
     def get_ouder(self, bsn):
-        return self._make_request(
-            "RequestOuder.xml", additional_context={"bsn": bsn}
-        )
+        return self._make_request("RequestOuder.xml", additional_context={"bsn": bsn})
 
     def get_partner(self, bsn):
-        return self._make_request(
-            "RequestPartner.xml", additional_context={"bsn": bsn}
-        )
+        return self._make_request("RequestPartner.xml", additional_context={"bsn": bsn})
 
     def get_verblijf_plaats_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
