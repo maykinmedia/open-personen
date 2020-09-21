@@ -34,7 +34,13 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponseIngeschrevenPersoon.xml"),
+                    loader.render_to_string(
+                        "ResponseIngeschrevenPersoon.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
                     encoding="utf-8",
                 ),
             )
@@ -68,7 +74,14 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponseKind.xml"), encoding="utf-8"
+                    loader.render_to_string(
+                        "ResponseKind.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_kind(test_bsn)
@@ -101,7 +114,14 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponseOuder.xml"), encoding="utf-8"
+                    loader.render_to_string(
+                        "ResponseOuder.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_ouder(test_bsn)
@@ -134,7 +154,14 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponsePartner.xml"), encoding="utf-8"
+                    loader.render_to_string(
+                        "ResponsePartner.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
+                    encoding="utf-8",
                 ),
             )
             response = self.client.get_partner(test_bsn)
@@ -167,7 +194,13 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"),
+                    loader.render_to_string(
+                        "ResponseVerblijfPlaatsHistorie.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
                     encoding="utf-8",
                 ),
             )
@@ -201,7 +234,13 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponseVerblijfsTitelHistorie.xml"),
+                    loader.render_to_string(
+                        "ResponseVerblijfsTitelHistorie.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
                     encoding="utf-8",
                 ),
             )
@@ -235,7 +274,13 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponsePartnerHistorie.xml"),
+                    loader.render_to_string(
+                        "ResponsePartnerHistorie.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
                     encoding="utf-8",
                 ),
             )
@@ -269,7 +314,13 @@ class TestClient(TestCase):
             m.post(
                 self.url,
                 content=bytes(
-                    loader.render_to_string("ResponseNationaliteitHistorie.xml"),
+                    loader.render_to_string(
+                        "ResponseNationaliteitHistorie.xml",
+                        context={
+                            "referentienummer": test_uuid,
+                            "tijdstip_bericht": test_dateformat,
+                        },
+                    ),
                     encoding="utf-8",
                 ),
             )
