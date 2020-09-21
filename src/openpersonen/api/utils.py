@@ -15,6 +15,8 @@ def convert_empty_instances(dictionary):
 
 
 def calculate_age(person_birth_date):
+    if not person_birth_date:
+        return 0
 
     try:
         return relativedelta(
