@@ -14,7 +14,7 @@ token, _ = Token.objects.get_or_create(user=user)
 
 class Command(BaseCommand):
     """
-    Run using python src/manage.py perform_csv_dataset_test
+    Run using python src/manage.py perform_dataset_test
     """
 
     help = "Test APIs using demo data in database.  Note: Must have server running at http://localhost:8000"

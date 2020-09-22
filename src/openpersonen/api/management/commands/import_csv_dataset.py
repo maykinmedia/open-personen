@@ -275,7 +275,7 @@ class Command(BaseCommand):
     Run using
         python src/manage.py import_csv_dataset
     or
-        python src/manage.py import_csv_dataset --file-path=~/path/to/file.csv
+        python src/manage.py import_csv_dataset --file=~/path/to/file.csv
     Using docker run
         docker-compose run web python src/manage.py import_csv_dataset
     or
@@ -287,12 +287,12 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--file-path", help="The csv file containing the data to import."
+            "--file", help="The csv file containing the data to import."
         )
 
     def handle(self, **options):
         file_path = (
-            options.get("file-path")
+            options.get("file")
             or "src/openpersonen/api/management/commands/data/test_data.csv"
         )
         with open(file_path, newline="") as csvfile:
