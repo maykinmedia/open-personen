@@ -115,7 +115,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseOuder.xml",
+                        "ResponseOneOuder.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
