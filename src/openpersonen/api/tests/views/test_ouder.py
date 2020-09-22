@@ -29,24 +29,70 @@ class TestOuder(APITestCase):
         )
         self.assertEqual(response.status_code, 401)
 
-    def test_ouder_with_token(self):
+    @requests_mock.Mocker()
+    def test_list_ouder(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoOuders.xml"), encoding="utf-8"
+            ),
+        )
+
         user = User.objects.create(username="test")
         token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
+                },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
         )
+
         self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        # self.assertEqual(response.json(), OUDER_RETRIEVE_DATA)
+        data = response.json()['_embedded']['ouders']
+        self.assertEqual(len(data), 2)
+        first_bsn = data[0]['burgerservicenummer']
+        second_bsn = data[1]['burgerservicenummer']
+        self.assertTrue(first_bsn == '456123789' or second_bsn == '456123789')
+        self.assertTrue(first_bsn == '789123456' or second_bsn == '789123456')
+
+    @requests_mock.Mocker()
+    def test_list_ouder_with_one_ouder(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOneOuder.xml"), encoding="utf-8"
+            ),
+        )
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "ouders-list",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()['_embedded']['ouders']
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]['burgerservicenummer'], '789123456')
 
     @requests_mock.Mocker()
     def test_detail_ouder(self, post_mock):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOuder.xml"), encoding="utf-8"
+                loader.render_to_string("ResponseOneOuder.xml"), encoding="utf-8"
             ),
         )
 
@@ -57,7 +103,7 @@ class TestOuder(APITestCase):
                 "ouders-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 987654321,
+                    "id": 789123456,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {token.key}",
@@ -66,6 +112,84 @@ class TestOuder(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), OUDER_RETRIEVE_DATA)
+
+    @requests_mock.Mocker()
+    def test_detail_ouder_when_id_does_not_match(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOneOuder.xml"), encoding="utf-8"
+            ),
+        )
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "ouders-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 111111111,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), dict())
+
+    @requests_mock.Mocker()
+    def test_detail_ouder_with_two_ouders(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoOuders.xml"), encoding="utf-8"
+            ),
+        )
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "ouders-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 789123456,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), OUDER_RETRIEVE_DATA)
+
+    @requests_mock.Mocker()
+    def test_detail_ouder_when_id_does_not_match_with_two_ouders(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoOuders.xml"), encoding="utf-8"
+            ),
+        )
+
+        user = User.objects.create(username="test")
+        token = Token.objects.create(user=user)
+        response = self.client.get(
+            reverse(
+                "ouders-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 111111111,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), dict())
 
     def test_detail_ouder_with_bad_id(self):
 

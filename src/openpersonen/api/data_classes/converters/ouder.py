@@ -5,66 +5,53 @@ import xmltodict
 from openpersonen.api.utils import convert_empty_instances, is_valid_date_format
 
 
-def convert_client_response_to_instance_dict(response):
-    dict_object = xmltodict.parse(response.content)
-
-    try:
-        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-            "ns:npsLa01"
-        ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsOuders"]["ns:gerelateerde"]
-        prefix = "ns"
-    except KeyError:
-        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
-            "BG:antwoord"
-        ]["BG:object"]["BG:inp.heeftAlsOuders"]["BG:gerelateerde"]
-        prefix = "BG"
-
+def _get_client_instance_dict(instance_xml_dict, prefix):
     ouder_dict = {
-        "burgerservicenummer": antwoord_dict_object.get(f"{prefix}:inp.bsn", "string"),
-        "geslachtsaanduiding": antwoord_dict_object.get(
+        "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
+        "geslachtsaanduiding": instance_xml_dict.get(
             f"{prefix}:geslachtsaanduiding", "string"
         ),
-        "ouderAanduiding": antwoord_dict_object.get(
+        "ouderAanduiding": instance_xml_dict.get(
             f"{prefix}:ouderAanduiding", "string"
         ),
         "datumIngangFamilierechtelijkeBetrekking": {
             "dag": int(
-                antwoord_dict_object.get(
+                instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.DAY_START : settings.DAY_END]
+                )[settings.DAY_START: settings.DAY_END]
             ),
-            "datum": antwoord_dict_object.get(
+            "datum": instance_xml_dict.get(
                 f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "string"
             ),
             "jaar": int(
-                antwoord_dict_object.get(
+                instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.YEAR_START : settings.YEAR_END]
+                )[settings.YEAR_START: settings.YEAR_END]
             ),
             "maand": int(
-                antwoord_dict_object.get(
+                instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.MONTH_START : settings.MONTH_END]
+                )[settings.MONTH_START: settings.MONTH_END]
             ),
         },
         "naam": {
-            "geslachtsnaam": antwoord_dict_object.get(
+            "geslachtsnaam": instance_xml_dict.get(
                 f"{prefix}:geslachtsnaam", "string"
             ),
-            "voorletters": antwoord_dict_object.get(f"{prefix}:voorletters", "string"),
-            "voornamen": antwoord_dict_object.get(f"{prefix}:voornamen", "string"),
-            "voorvoegsel": antwoord_dict_object.get(
+            "voorletters": instance_xml_dict.get(f"{prefix}:voorletters", "string"),
+            "voornamen": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
+            "voorvoegsel": instance_xml_dict.get(
                 f"{prefix}:voorvoegselGeslachtsnaam", "string"
             ),
             "inOnderzoek": {
                 "geslachtsnaam": bool(
-                    antwoord_dict_object.get(f"{prefix}:geslachtsnaam", "string")
+                    instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string")
                 ),
                 "voornamen": bool(
-                    antwoord_dict_object.get(f"{prefix}:voornamen", "string")
+                    instance_xml_dict.get(f"{prefix}:voornamen", "string")
                 ),
                 "voorvoegsel": bool(
-                    antwoord_dict_object.get(
+                    instance_xml_dict.get(
                         f"{prefix}:voorvoegselGeslachtsnaam", "string"
                     )
                 ),
@@ -78,15 +65,15 @@ def convert_client_response_to_instance_dict(response):
         },
         "inOnderzoek": {
             "burgerservicenummer": bool(
-                antwoord_dict_object.get(f"{prefix}:inp.bsn", "string")
+                instance_xml_dict.get(f"{prefix}:inp.bsn", "string")
             ),
             "datumIngangFamilierechtelijkeBetrekking": bool(
-                antwoord_dict_object.get(
+                instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "string"
                 )
             ),
             "geslachtsaanduiding": bool(
-                antwoord_dict_object.get(f"{prefix}:geslachtsaanduiding", "string")
+                instance_xml_dict.get(f"{prefix}:geslachtsaanduiding", "string")
             ),
             "datumIngangOnderzoek": {
                 "dag": 0,
@@ -98,43 +85,43 @@ def convert_client_response_to_instance_dict(response):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.DAY_START : settings.DAY_END
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    settings.DAY_START: settings.DAY_END
                     ]
                 ),
-                "datum": antwoord_dict_object.get(f"{prefix}:geboortedatum", "string"),
+                "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.YEAR_START : settings.YEAR_END
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    settings.YEAR_START: settings.YEAR_END
                     ]
                 ),
                 "maand": int(
-                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.MONTH_START : settings.MONTH_END
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    settings.MONTH_START: settings.MONTH_END
                     ]
                 ),
             },
             "land": {
                 "code": "0000",
-                "omschrijving": antwoord_dict_object.get(
+                "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.geboorteLand", "string"
                 ),
             },
             "plaats": {
                 "code": "0000",
-                "omschrijving": antwoord_dict_object.get(
+                "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.geboorteplaats", "string"
                 ),
             },
             "inOnderzoek": {
                 "datum": bool(
-                    antwoord_dict_object.get(f"{prefix}:geboortedatum", "string")
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "string")
                 ),
                 "land": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.geboorteLand", "string")
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string")
                 ),
                 "plaats": bool(
-                    antwoord_dict_object.get(f"{prefix}:inp.geboorteplaats", "string")
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string")
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -150,6 +137,42 @@ def convert_client_response_to_instance_dict(response):
     convert_empty_instances(ouder_dict)
 
     return ouder_dict
+
+
+def convert_client_response_to_instance_dict(response, id=None):
+    dict_object = xmltodict.parse(response.content)
+
+    try:
+        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
+            "ns:npsLa01"
+        ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsOuders"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["BG:object"]["BG:inp.heeftAlsOuders"]
+        prefix = "BG"
+
+    if isinstance(antwoord_dict_object, list):
+        result = []
+        for antwood_dict in antwoord_dict_object:
+            if id:
+                result_dict = _get_client_instance_dict(antwood_dict[f"{prefix}:gerelateerde"], prefix)
+                if result_dict['burgerservicenummer'] == id:
+                    result.append(result_dict)
+            else:
+                result.append(_get_client_instance_dict(antwood_dict[f"{prefix}:gerelateerde"], prefix))
+    else:
+        if id:
+            result_dict = _get_client_instance_dict(antwoord_dict_object[f"{prefix}:gerelateerde"], prefix)
+            if result_dict['burgerservicenummer'] == id:
+                result = result_dict
+            else:
+                result = None
+        else:
+            result = _get_client_instance_dict(antwoord_dict_object[f"{prefix}:gerelateerde"], prefix)
+
+    return result
 
 
 def convert_model_instance_to_instance_dict(ouder):
