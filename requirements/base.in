@@ -38,3 +38,4 @@ xmltodict  # Parse Soap XML to Python dict
 requests-mock
 mock
 freezegun
+factory-boy
