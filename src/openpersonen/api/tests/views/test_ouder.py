@@ -52,7 +52,6 @@ class TestOuder(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        # self.assertEqual(response.json(), OUDER_RETRIEVE_DATA)
         data = response.json()['_embedded']['ouders']
         self.assertEqual(len(data), 2)
         first_bsn = data[0]['burgerservicenummer']

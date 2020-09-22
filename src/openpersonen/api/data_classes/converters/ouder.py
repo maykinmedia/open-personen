@@ -139,7 +139,7 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
     return ouder_dict
 
 
-def convert_client_response_to_instance_dict(response, id=None):
+def convert_client_response(response, id=None):
     dict_object = xmltodict.parse(response.content)
 
     try:
@@ -156,21 +156,13 @@ def convert_client_response_to_instance_dict(response, id=None):
     if isinstance(antwoord_dict_object, list):
         result = []
         for antwood_dict in antwoord_dict_object:
-            if id:
-                result_dict = _get_client_instance_dict(antwood_dict[f"{prefix}:gerelateerde"], prefix)
-                if result_dict['burgerservicenummer'] == id:
-                    result.append(result_dict)
-            else:
-                result.append(_get_client_instance_dict(antwood_dict[f"{prefix}:gerelateerde"], prefix))
+            result_dict = _get_client_instance_dict(antwood_dict[f"{prefix}:gerelateerde"], prefix)
+            if not id or id == result_dict['burgerservicenummer']:
+                result.append(result_dict)
     else:
-        if id:
-            result_dict = _get_client_instance_dict(antwoord_dict_object[f"{prefix}:gerelateerde"], prefix)
-            if result_dict['burgerservicenummer'] == id:
-                result = result_dict
-            else:
-                result = None
-        else:
-            result = _get_client_instance_dict(antwoord_dict_object[f"{prefix}:gerelateerde"], prefix)
+        result = _get_client_instance_dict(antwoord_dict_object[f"{prefix}:gerelateerde"], prefix)
+        if id and result['burgerservicenummer'] != id:
+            result = {}
 
     return result
 
