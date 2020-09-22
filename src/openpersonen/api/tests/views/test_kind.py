@@ -20,6 +20,8 @@ class TestKind(APITestCase):
         super().setUp()
         self.persoon_bsn = 123456789
         self.url = StufBGClient.get_solo().url
+        self.user = User.objects.create(username="test")
+        self.token = Token.objects.create(user=self.user)
 
     def test_kind_without_token(self):
         response = self.client.get(
@@ -30,17 +32,58 @@ class TestKind(APITestCase):
         )
         self.assertEqual(response.status_code, 401)
 
-    def test_kind_with_token(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
+    @requests_mock.Mocker()
+    def test_list_kind(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoKinderen.xml"), encoding="utf-8"
+            ),
+        )
+
         response = self.client.get(
             reverse(
                 "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
+                },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
+
         self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()['_embedded']['kinderen']
+        self.assertEqual(len(data), 2)
+        first_bsn = data[0]['burgerservicenummer']
+        second_bsn = data[1]['burgerservicenummer']
+        self.assertTrue(first_bsn == '789123456' or first_bsn == '456789123')
+        self.assertTrue(second_bsn == '789123456' or second_bsn == '456789123')
+
+    @requests_mock.Mocker()
+    def test_list_kind_with_one_kind(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOneKind.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "kinderen-list",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()['_embedded']['kinderen']
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]['burgerservicenummer'], '456789123')
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
@@ -48,31 +91,99 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseKind.xml"), encoding="utf-8"
+                loader.render_to_string("ResponseOneKind.xml"), encoding="utf-8"
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "kinderen-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 987654321,
+                    "id": 456789123,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
+    @requests_mock.Mocker()
+    def test_detail_kind_when_id_does_not_match(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOneKind.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "kinderen-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 111111111,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), dict())
+
+    @requests_mock.Mocker()
+    def test_detail_kind_with_two_kinderen(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoKinderen.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "kinderen-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 456789123,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
+
+    @requests_mock.Mocker()
+    def test_detail_kind_when_id_does_not_match_with_two_kinderen(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoKinderen.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "kinderen-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 111111111,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), dict())
+
     def test_detail_kind_with_bad_id(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         with self.assertRaises(NoReverseMatch):
             self.client.get(
                 reverse(
@@ -82,7 +193,7 @@ class TestKind(APITestCase):
                         "id": "badid",
                     },
                 ),
-                HTTP_AUTHORIZATION=f"Token {token.key}",
+                HTTP_AUTHORIZATION=f"Token {self.token.key}",
             )
 
 

@@ -19,6 +19,8 @@ class TestOuder(APITestCase):
         super().setUp()
         self.persoon_bsn = 123456789
         self.url = StufBGClient.get_solo().url
+        self.user = User.objects.create(username="test")
+        self.token = Token.objects.create(user=self.user)
 
     def test_ouder_without_token(self):
         response = self.client.get(
@@ -38,8 +40,6 @@ class TestOuder(APITestCase):
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-list",
@@ -47,7 +47,7 @@ class TestOuder(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -68,8 +68,6 @@ class TestOuder(APITestCase):
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-list",
@@ -77,7 +75,7 @@ class TestOuder(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -95,8 +93,6 @@ class TestOuder(APITestCase):
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-detail",
@@ -105,7 +101,7 @@ class TestOuder(APITestCase):
                     "id": 789123456,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -121,8 +117,6 @@ class TestOuder(APITestCase):
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-detail",
@@ -131,7 +125,7 @@ class TestOuder(APITestCase):
                     "id": 111111111,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -147,8 +141,6 @@ class TestOuder(APITestCase):
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-detail",
@@ -157,7 +149,7 @@ class TestOuder(APITestCase):
                     "id": 789123456,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -173,8 +165,6 @@ class TestOuder(APITestCase):
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-detail",
@@ -183,7 +173,7 @@ class TestOuder(APITestCase):
                     "id": 111111111,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -192,8 +182,6 @@ class TestOuder(APITestCase):
 
     def test_detail_ouder_with_bad_id(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         with self.assertRaises(NoReverseMatch):
             self.client.get(
                 reverse(
@@ -203,7 +191,7 @@ class TestOuder(APITestCase):
                         "id": "badid",
                     },
                 ),
-                HTTP_AUTHORIZATION=f"Token {token.key}",
+                HTTP_AUTHORIZATION=f"Token {self.token.key}",
             )
 
 
