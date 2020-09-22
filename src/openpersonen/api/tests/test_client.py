@@ -155,7 +155,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponsePartner.xml",
+                        "ResponseOnePartner.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,

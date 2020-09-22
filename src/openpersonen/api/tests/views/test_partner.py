@@ -18,69 +18,180 @@ class TestPartner(APITestCase):
     def setUp(self):
         super().setUp()
         self.url = StufBGClient.get_solo().url
-        self.bsn = 123456789
+        self.persoon_bsn = 123456789
+        self.user = User.objects.create(username="test")
+        self.token = Token.objects.create(user=self.user)
 
     def test_partner_without_token(self):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.bsn},
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
         )
         self.assertEqual(response.status_code, 401)
 
-    def test_partner_with_token(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
+    @requests_mock.Mocker()
+    def test_list_partner(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoPartners.xml"), encoding="utf-8"
+            ),
+        )
+
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.bsn},
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
+                },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
+
         self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()['_embedded']['partners']
+        self.assertEqual(len(data), 2)
+        first_bsn = data[0]['burgerservicenummer']
+        second_bsn = data[1]['burgerservicenummer']
+        self.assertTrue(first_bsn == '987654321' or first_bsn == '123456789')
+        self.assertTrue(second_bsn == '987654321' or second_bsn == '123456789')
+
+    @requests_mock.Mocker()
+    def test_list_partner_with_one_partner(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOnePartner.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "partners-list",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()['_embedded']['partners']
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]['burgerservicenummer'], '987654321')
 
     @requests_mock.Mocker()
     def test_detail_partner(self, post_mock):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponsePartner.xml"), encoding="utf-8"
+                loader.render_to_string("ResponseOnePartner.xml"), encoding="utf-8"
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "partners-detail",
                 kwargs={
-                    "ingeschrevenpersonen_burgerservicenummer": self.bsn,
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": 987654321,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
+    @requests_mock.Mocker()
+    def test_detail_partner_when_id_does_not_match(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOnePartner.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "partners-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 111111111,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), dict())
+
+    @requests_mock.Mocker()
+    def test_detail_partner_with_two_partners(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoPartners.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "partners-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 987654321,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
+
+    @requests_mock.Mocker()
+    def test_detail_partner_when_id_does_not_match_with_two_partners(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoPartners.xml"), encoding="utf-8"
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "partners-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                    "id": 111111111,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), dict())
+
     def test_detail_partner_with_bad_id(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         with self.assertRaises(NoReverseMatch):
             self.client.get(
                 reverse(
                     "partners-detail",
                     kwargs={
-                        "ingeschrevenpersonen_burgerservicenummer": self.bsn,
+                        "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                         "id": "badid",
                     },
                 ),
-                HTTP_AUTHORIZATION=f"Token {token.key}",
+                HTTP_AUTHORIZATION=f"Token {self.token.key}",
             )
 
 
