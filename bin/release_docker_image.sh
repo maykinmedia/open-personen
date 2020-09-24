@@ -45,16 +45,6 @@ push_image() {
     fi
 }
 
-write_deploy_params() {
-    # if on jenkins AND it's a tagged release -> prepare deployment
-    if [[ -n "$JENKINS_URL" && -n "$git_tag" ]]; then
-        echo "
-VERSION=${git_tag}
-" > deployment-parameters
-    fi
-}
-
-
 if [[ -n "$git_tag" ]]; then
     echo "Building image for git tag $git_tag"
 fi

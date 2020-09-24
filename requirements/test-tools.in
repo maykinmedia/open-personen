@@ -1,6 +1,5 @@
 # Dependencies only relevant for (unit) testing
 coverage < 5.0
-django-jenkins
 django-webtest
 freezegun
 pyquery  # integrates with webtest
