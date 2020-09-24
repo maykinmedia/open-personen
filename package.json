@@ -20,7 +20,8 @@
   "license": "UNLICENSED",
   "homepage": "https://maykinmedia.nl",
   "dependencies": {
-    "microscope-sass": "^0.3.2"
+    "microscope-sass": "^0.3.2",
+    "openapi-diff": "^0.23.3"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",

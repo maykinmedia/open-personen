@@ -3,10 +3,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
-from vng_api_common.filters import Backend
 
 from openpersonen.api.data_classes import IngeschrevenPersoon
-from openpersonen.api.filters import IngeschrevenPersoonFilter
+from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 from openpersonen.api.views.base import BaseViewSet
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
@@ -17,10 +16,13 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
     lookup_field = "burgerservicenummer"
     lookup_value_regex = "[0-9]{9}"
     serializer_class = IngeschrevenPersoonSerializer
-    # filter_class = IngeschrevenPersoonFilter
+    filter_class = IngeschrevenPersoonFilter
     filter_backends = [
         Backend,
     ]
+
+    def get_filter_parameters(self):
+        return []
 
     @staticmethod
     def combination_1(filters_values_dict):

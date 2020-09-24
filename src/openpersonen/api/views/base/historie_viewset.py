@@ -1,13 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
-from vng_api_common.filters import Backend
 
-from openpersonen.api.filters import HistorieFilter
+from openpersonen.api.filters import Backend, HistorieFilter
 from openpersonen.api.views.base import BaseViewSet
 
 
 class HistorieViewSet(BaseViewSet):
-    # filter_class = HistorieFilter
+    filter_class = HistorieFilter
     filter_backends = [
         Backend,
     ]

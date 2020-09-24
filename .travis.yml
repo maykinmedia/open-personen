@@ -49,10 +49,12 @@ jobs:
       script: black --check src --diff
 
     - name: "Open API Check"
+      before_install: skip
       install:
-        - npm install openapi-diff
+        - npm install -g openapi-diff
+      before_script: skip
       script:
-        - generate_schema
+        - env/bin/generate_schema
         - openapi-diff src/brp_openapi.yaml src/openapi.yaml
 
     - stage: "Docker image"

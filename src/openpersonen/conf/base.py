@@ -1,10 +1,10 @@
 import os
-from vng_api_common.conf.api import *  # noqa - imports white-listed
 
 # Django-hijack (and Django-hijack-admin)
 from django.urls import reverse_lazy
 
 from sentry_sdk.integrations import DidNotEnable, django, redis
+from vng_api_common.conf.api import *  # noqa - imports white-listed
 
 try:
     from sentry_sdk.integrations import celery
@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.sessions",
     # Note: If enabled, at least one Site object is required
-    'django.contrib.sites',
+    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # django-admin-index

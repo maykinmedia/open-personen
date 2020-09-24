@@ -80,10 +80,9 @@ urlpatterns = [
                     ),
                     name="schema-redoc-ingeschreven-persoon",
                 ),
-
                 # actual API
-                path('', include(router.urls))
+                path("", include(router.urls)),
             ]
-        )
+        ),
     ),
 ]
