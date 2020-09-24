@@ -56,7 +56,9 @@ class TestPartner(APITestCase):
         first_bsn = data[0]["burgerservicenummer"]
         second_bsn = data[1]["burgerservicenummer"]
         self.assertTrue(first_bsn == str(self.partner_bsn) or first_bsn == "123456789")
-        self.assertTrue(second_bsn == str(self.partner_bsn) or second_bsn == "123456789")
+        self.assertTrue(
+            second_bsn == str(self.partner_bsn) or second_bsn == "123456789"
+        )
 
     @requests_mock.Mocker()
     def test_list_partner_with_one_partner(self, post_mock):

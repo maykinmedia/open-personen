@@ -56,7 +56,9 @@ class TestOuder(APITestCase):
         first_bsn = data[0]["burgerservicenummer"]
         second_bsn = data[1]["burgerservicenummer"]
         self.assertTrue(first_bsn == "456123789" or second_bsn == "456123789")
-        self.assertTrue(first_bsn == str(self.ouder_bsn) or second_bsn == str(self.ouder_bsn))
+        self.assertTrue(
+            first_bsn == str(self.ouder_bsn) or second_bsn == str(self.ouder_bsn)
+        )
 
     @requests_mock.Mocker()
     def test_list_ouder_with_one_ouder(self, post_mock):
