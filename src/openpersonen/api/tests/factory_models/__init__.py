@@ -8,5 +8,7 @@ from .overlijden import *  # noqa
 from .partnerschap import *  # noqa
 from .persoon import *  # noqa
 from .reisdocument import *  # noqa
+from .token import *  # noqa
+from .user import *  # noqa
 from .verblijfplaats import *  # noqa
 from .verblijfstitel import *  # noqa

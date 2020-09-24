@@ -4,12 +4,14 @@ from django.urls import NoReverseMatch, reverse
 
 import requests_mock
 from freezegun import freeze_time
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.tests.factory_models import KindFactory, PersoonFactory
+from openpersonen.api.tests.factory_models import (
+    KindFactory,
+    PersoonFactory,
+    TokenFactory,
+)
 from openpersonen.api.tests.test_data import KIND_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -21,8 +23,7 @@ class TestKind(APITestCase):
         self.persoon_bsn = 123456789
         self.kind_bsn = 456789123
         self.url = StufBGClient.get_solo().url
-        self.user = User.objects.create(username="test")
-        self.token = Token.objects.create(user=self.user)
+        self.token = TokenFactory.create()
 
     def test_kind_without_token(self):
         response = self.client.get(
@@ -234,6 +235,7 @@ class TestKindWithTestingModels(APITestCase):
         self.kind = KindFactory(
             persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn
         )
+        self.token = TokenFactory.create()
 
     def test_kind_without_token(self):
         response = self.client.get(
@@ -245,27 +247,23 @@ class TestKindWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_kind_with_token(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "kinderen-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
 
     def test_list_kind(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "kinderen-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -299,8 +297,6 @@ class TestKindWithTestingModels(APITestCase):
 
     def test_detail_kind(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "kinderen-detail",
@@ -309,7 +305,7 @@ class TestKindWithTestingModels(APITestCase):
                     "id": self.kind_bsn,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -342,8 +338,6 @@ class TestKindWithTestingModels(APITestCase):
 
     def test_detail_kind_404(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "kinderen-detail",
@@ -352,7 +346,7 @@ class TestKindWithTestingModels(APITestCase):
                     "id": 222222222,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 404)

@@ -3,12 +3,14 @@ from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
 
 import requests_mock
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.tests.factory_models import OuderFactory, PersoonFactory
+from openpersonen.api.tests.factory_models import (
+    OuderFactory,
+    PersoonFactory,
+    TokenFactory,
+)
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -20,8 +22,7 @@ class TestOuder(APITestCase):
         self.persoon_bsn = 123456789
         self.ouder_bsn = 789123456
         self.url = StufBGClient.get_solo().url
-        self.user = User.objects.create(username="test")
-        self.token = Token.objects.create(user=self.user)
+        self.token = TokenFactory.create()
 
     def test_ouder_without_token(self):
         response = self.client.get(
@@ -234,6 +235,7 @@ class TestOuderWithTestingModels(APITestCase):
         self.ouder = OuderFactory(
             persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn
         )
+        self.token = TokenFactory.create()
 
     def test_ouder_without_token(self):
         response = self.client.get(
@@ -245,27 +247,23 @@ class TestOuderWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_ouder_with_token(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
 
     def test_list_ouder(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -299,8 +297,6 @@ class TestOuderWithTestingModels(APITestCase):
 
     def test_detail_ouder(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-detail",
@@ -309,7 +305,7 @@ class TestOuderWithTestingModels(APITestCase):
                     "id": self.ouder_bsn,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -342,8 +338,6 @@ class TestOuderWithTestingModels(APITestCase):
 
     def test_detail_ouder_404(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ouders-detail",
@@ -352,7 +346,7 @@ class TestOuderWithTestingModels(APITestCase):
                     "id": 222222222,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 404)

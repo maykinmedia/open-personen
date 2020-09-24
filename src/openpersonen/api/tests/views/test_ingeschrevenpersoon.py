@@ -4,10 +4,8 @@ from django.urls import NoReverseMatch, reverse
 
 import requests_mock
 from freezegun import freeze_time
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
 from openpersonen.api.tests.factory_models import (
     GezagsVerhoudingFactory,
@@ -20,6 +18,7 @@ from openpersonen.api.tests.factory_models import (
     PartnerschapFactory,
     PersoonFactory,
     ReisdocumentFactory,
+    TokenFactory,
     VerblijfplaatsFactory,
     VerblijfstitelFactory,
 )
@@ -32,8 +31,7 @@ class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
         super().setUp()
         self.url = StufBGClient.get_solo().url
-        self.user = User.objects.create(username="test")
-        self.token = Token.objects.create(user=self.user)
+        self.token = TokenFactory.create()
         self.bsn = 123456789
 
     def test_ingeschreven_persoon_without_token(self):
@@ -197,18 +195,17 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.reisdocument = ReisdocumentFactory(persoon=self.persoon)
         self.verblijfplaats = VerblijfplaatsFactory(persoon=self.persoon)
         self.verblijfstitel = VerblijfstitelFactory(persoon=self.persoon)
+        self.token = TokenFactory.create()
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
 
     def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -319,26 +316,22 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
 
     def test_ingeschreven_persoon_with_token_and_incorrect_proper_query_params(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=1",
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["_embedded"]["ingeschrevenpersonen"], [])
 
     def test_detail_ingeschreven_persoon(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
                 kwargs={"burgerservicenummer": self.bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -451,14 +444,12 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
 
     def test_not_found_detail_ingeschreven_persoon(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
                 kwargs={"burgerservicenummer": 111111111},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 404)

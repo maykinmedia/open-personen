@@ -3,12 +3,14 @@ from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
 
 import requests_mock
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-from openpersonen.accounts.models import User
 from openpersonen.api.models import StufBGClient
-from openpersonen.api.tests.factory_models import PartnerschapFactory, PersoonFactory
+from openpersonen.api.tests.factory_models import (
+    PartnerschapFactory,
+    PersoonFactory,
+    TokenFactory,
+)
 from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -20,8 +22,7 @@ class TestPartner(APITestCase):
         self.url = StufBGClient.get_solo().url
         self.persoon_bsn = 123456789
         self.partner_bsn = 987654321
-        self.user = User.objects.create(username="test")
-        self.token = Token.objects.create(user=self.user)
+        self.token = TokenFactory.create()
 
     def test_partner_without_token(self):
         response = self.client.get(
@@ -235,6 +236,7 @@ class TestPartnerWithTestingModels(APITestCase):
             persoon=self.persoon,
             burgerservicenummer_echtgenoot_geregistreerd_partner=self.partner_bsn,
         )
+        self.token = TokenFactory.create()
 
     def test_partner_without_token(self):
         response = self.client.get(
@@ -246,27 +248,23 @@ class TestPartnerWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_partner_with_token(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "partners-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
 
     def test_list_partner(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "partners-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -319,8 +317,6 @@ class TestPartnerWithTestingModels(APITestCase):
 
     def test_detail_partner(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "partners-detail",
@@ -329,7 +325,7 @@ class TestPartnerWithTestingModels(APITestCase):
                     "id": self.partner_bsn,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -381,8 +377,6 @@ class TestPartnerWithTestingModels(APITestCase):
 
     def test_detail_partner_404(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "partners-detail",
@@ -391,7 +385,7 @@ class TestPartnerWithTestingModels(APITestCase):
                     "id": 222222222,
                 },
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 404)
