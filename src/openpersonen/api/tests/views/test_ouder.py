@@ -43,21 +43,19 @@ class TestOuder(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={
-                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
-                },
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        data = response.json()['_embedded']['ouders']
+        data = response.json()["_embedded"]["ouders"]
         self.assertEqual(len(data), 2)
-        first_bsn = data[0]['burgerservicenummer']
-        second_bsn = data[1]['burgerservicenummer']
-        self.assertTrue(first_bsn == '456123789' or second_bsn == '456123789')
-        self.assertTrue(first_bsn == '789123456' or second_bsn == '789123456')
+        first_bsn = data[0]["burgerservicenummer"]
+        second_bsn = data[1]["burgerservicenummer"]
+        self.assertTrue(first_bsn == "456123789" or second_bsn == "456123789")
+        self.assertTrue(first_bsn == "789123456" or second_bsn == "789123456")
 
     @requests_mock.Mocker()
     def test_list_ouder_with_one_ouder(self, post_mock):
@@ -71,18 +69,16 @@ class TestOuder(APITestCase):
         response = self.client.get(
             reverse(
                 "ouders-list",
-                kwargs={
-                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
-                },
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        data = response.json()['_embedded']['ouders']
+        data = response.json()["_embedded"]["ouders"]
         self.assertEqual(len(data), 1)
-        self.assertEqual(data[0]['burgerservicenummer'], '789123456')
+        self.assertEqual(data[0]["burgerservicenummer"], "789123456")
 
     @requests_mock.Mocker()
     def test_detail_ouder(self, post_mock):

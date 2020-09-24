@@ -32,17 +32,17 @@ class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
         super().setUp()
         self.url = StufBGClient.get_solo().url
+        self.user = User.objects.create(username="test")
+        self.token = Token.objects.create(user=self.user)
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
         self.assertEqual(response.status_code, 401)
 
     def test_ingeschreven_persoon_with_no_proper_query_params(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse("ingeschrevenpersonen-list"),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -50,12 +50,10 @@ class TestIngeschrevenPersoon(APITestCase):
         )
 
     def test_ingeschreven_persoon_without_proper_query_params(self):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + "?burgerservicenummer=123456789&naam__geslachtsnaam==Maykin",
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -64,22 +62,61 @@ class TestIngeschrevenPersoon(APITestCase):
 
     @requests_mock.Mocker()
     def test_ingeschreven_persoon_with_token_and_proper_query_params(self, post_mock):
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
-
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseIngeschrevenPersoon.xml"),
+                loader.render_to_string("ResponseOneIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=123456789",
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
+
+    @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseTwoIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?verblijfplaats__identificatiecodenummeraanduiding=A",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"]
+        self.assertEqual(len(data), 2)
+
+    @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon_with_ingeschreven_persoon(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseOneIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?verblijfplaats__identificatiecodenummeraanduiding=A",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"]
+        self.assertEqual(len(data), 1)
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
@@ -88,36 +125,33 @@ class TestIngeschrevenPersoon(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseIngeschrevenPersoon.xml"),
+                loader.render_to_string("ResponseOneIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
                 kwargs={"burgerservicenummer": 123456789},
             ),
-            HTTP_AUTHORIZATION=f"Token {token.key}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     def test_detail_ingeschreven_persoon_with_bad_burgerservicenummer(self):
 
-        user = User.objects.create(username="test")
-        token = Token.objects.create(user=user)
         with self.assertRaises(NoReverseMatch):
             self.client.get(
                 reverse(
                     "ingeschrevenpersonen-detail",
                     kwargs={"burgerservicenummer": "badbsn"},
                 ),
-                HTTP_AUTHORIZATION=f"Token {token.key}",
+                HTTP_AUTHORIZATION=f"Token {self.token.key}",
             )
 
 

@@ -43,21 +43,19 @@ class TestPartner(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={
-                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
-                },
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        data = response.json()['_embedded']['partners']
+        data = response.json()["_embedded"]["partners"]
         self.assertEqual(len(data), 2)
-        first_bsn = data[0]['burgerservicenummer']
-        second_bsn = data[1]['burgerservicenummer']
-        self.assertTrue(first_bsn == '987654321' or first_bsn == '123456789')
-        self.assertTrue(second_bsn == '987654321' or second_bsn == '123456789')
+        first_bsn = data[0]["burgerservicenummer"]
+        second_bsn = data[1]["burgerservicenummer"]
+        self.assertTrue(first_bsn == "987654321" or first_bsn == "123456789")
+        self.assertTrue(second_bsn == "987654321" or second_bsn == "123456789")
 
     @requests_mock.Mocker()
     def test_list_partner_with_one_partner(self, post_mock):
@@ -71,18 +69,16 @@ class TestPartner(APITestCase):
         response = self.client.get(
             reverse(
                 "partners-list",
-                kwargs={
-                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn
-                },
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        data = response.json()['_embedded']['partners']
+        data = response.json()["_embedded"]["partners"]
         self.assertEqual(len(data), 1)
-        self.assertEqual(data[0]['burgerservicenummer'], '987654321')
+        self.assertEqual(data[0]["burgerservicenummer"], "987654321")
 
     @requests_mock.Mocker()
     def test_detail_partner(self, post_mock):

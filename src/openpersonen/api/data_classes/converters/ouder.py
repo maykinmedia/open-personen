@@ -11,14 +11,12 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
         "geslachtsaanduiding": instance_xml_dict.get(
             f"{prefix}:geslachtsaanduiding", "string"
         ),
-        "ouderAanduiding": instance_xml_dict.get(
-            f"{prefix}:ouderAanduiding", "string"
-        ),
+        "ouderAanduiding": instance_xml_dict.get(f"{prefix}:ouderAanduiding", "string"),
         "datumIngangFamilierechtelijkeBetrekking": {
             "dag": int(
                 instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.DAY_START: settings.DAY_END]
+                )[settings.DAY_START : settings.DAY_END]
             ),
             "datum": instance_xml_dict.get(
                 f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "string"
@@ -26,18 +24,16 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "jaar": int(
                 instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.YEAR_START: settings.YEAR_END]
+                )[settings.YEAR_START : settings.YEAR_END]
             ),
             "maand": int(
                 instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.MONTH_START: settings.MONTH_END]
+                )[settings.MONTH_START : settings.MONTH_END]
             ),
         },
         "naam": {
-            "geslachtsnaam": instance_xml_dict.get(
-                f"{prefix}:geslachtsnaam", "string"
-            ),
+            "geslachtsnaam": instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string"),
             "voorletters": instance_xml_dict.get(f"{prefix}:voorletters", "string"),
             "voornamen": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
             "voorvoegsel": instance_xml_dict.get(
@@ -86,18 +82,18 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "datum": {
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                    settings.DAY_START: settings.DAY_END
+                        settings.DAY_START : settings.DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                    settings.YEAR_START: settings.YEAR_END
+                        settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                    settings.MONTH_START: settings.MONTH_END
+                        settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
@@ -156,12 +152,16 @@ def convert_client_response(response, id=None):
     if isinstance(antwoord_dict_object, list):
         result = []
         for antwood_dict in antwoord_dict_object:
-            result_dict = _get_client_instance_dict(antwood_dict[f"{prefix}:gerelateerde"], prefix)
-            if not id or id == result_dict['burgerservicenummer']:
+            result_dict = _get_client_instance_dict(
+                antwood_dict[f"{prefix}:gerelateerde"], prefix
+            )
+            if not id or id == result_dict["burgerservicenummer"]:
                 result.append(result_dict)
     else:
-        result = _get_client_instance_dict(antwoord_dict_object[f"{prefix}:gerelateerde"], prefix)
-        if id and result['burgerservicenummer'] != id:
+        result = _get_client_instance_dict(
+            antwoord_dict_object[f"{prefix}:gerelateerde"], prefix
+        )
+        if id and result["burgerservicenummer"] != id:
             result = {}
 
     return result
