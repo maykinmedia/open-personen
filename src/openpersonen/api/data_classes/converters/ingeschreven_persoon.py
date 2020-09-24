@@ -251,28 +251,28 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
         },
         "verblijfplaats": {
             "functieAdres": "woonadres",
-            "huisletter": instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+            "huisletter": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:aoa.huisletter", "string"
             ),
-            "huisnummer": instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+            "huisnummer": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:aoa.huisnummer", "string"
             ),
             "huisnummertoevoeging": instance_xml_dict.get(
-                f"{prefix}:inp.verblijfsadres", {}
+                f"{prefix}:verblijfsadres", {}
             ).get(f"{prefix}:aoa.huisnummertoevoeging", "string"),
             "aanduidingBijHuisnummer": "tegenover",
             "identificatiecodeNummeraanduiding": "string",
             "naamOpenbareRuimte": "string",
-            "postcode": instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+            "postcode": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:aoa.postcode", "string"
             ),
-            "woonplaatsnaam": instance_xml_dict.get(
-                f"{prefix}:inp.verblijfsadres", {}
-            ).get(f"{prefix}:wpl.woonplaatsNaam", "string"),
+            "woonplaatsnaam": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                f"{prefix}:wpl.woonplaatsNaam", "string"
+            ),
             "identificatiecodeAdresseerbaarObject": "string",
             "indicatieVestigingVanuitBuitenland": True,
             "locatiebeschrijving": "string",
-            "straatnaam": instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+            "straatnaam": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:gor.straatnaam", "string"
             ),
             "vanuitVertrokkenOnbekendWaarheen": True,
@@ -318,17 +318,17 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
                 "functieAdres": True,
                 "gemeenteVanInschrijving": True,
                 "huisletter": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                         f"{prefix}:aoa.huisletter", "string"
                     )
                 ),
                 "huisnummer": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                         f"{prefix}:aoa.huisnummer", "string"
                     )
                 ),
                 "huisnummertoevoeging": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                         f"{prefix}:aoa.huisnummertoevoeging", "string"
                     )
                 ),
@@ -338,18 +338,18 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
                 "locatiebeschrijving": True,
                 "naamOpenbareRuimte": True,
                 "postcode": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                         f"{prefix}:aoa.postcode", "string"
                     )
                 ),
                 "straatnaam": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                         f"{prefix}:gor.straatnaam", "string"
                     )
                 ),
                 "verblijfBuitenland": True,
                 "woonplaatsnaam": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.verblijfsadres", {}).get(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                         f"{prefix}:wpl.woonplaatsNaam", "string"
                     )
                 ),
@@ -403,23 +403,23 @@ def convert_client_response(response):
     dict_object = xmltodict.parse(response.content)
 
     try:
-        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-            "ns:npsLa01"
-        ]["ns:antwoord"]["ns:object"]
+        antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
+            "ns:antwoord"
+        ]["ns:object"]
         prefix = "ns"
     except KeyError:
-        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+        antwoord_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
             "BG:antwoord"
         ]["object"]
         prefix = "BG"
 
-    if isinstance(antwoord_dict_object, list):
+    if isinstance(antwoord_object, list):
         result = []
-        for antwood_dict in antwoord_dict_object:
+        for antwood_dict in antwoord_object:
             result_dict = _get_client_instance_dict(antwood_dict, prefix)
             result.append(result_dict)
     else:
-        result = _get_client_instance_dict(antwoord_dict_object, prefix)
+        result = _get_client_instance_dict(antwoord_object, prefix)
 
     return result
 

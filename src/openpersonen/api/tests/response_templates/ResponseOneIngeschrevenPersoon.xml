@@ -79,16 +79,6 @@
                     <!--Optional:-->
                     <ns:inp.overlijdenLand StUF:noValue="geenWaarde" xsi:nil="true"
                                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                    <!--Zero or more repetitions:-->
-                    <ns:inp.verblijftIn StUF:entiteittype="NPSTGO">
-                        <ns:gerelateerde StUF:entiteittype="TGO">
-                            <!--Optional:-->
-                            <ns:adresAanduidingGrp>
-                                <!--Optional:-->
-
-                            </ns:adresAanduidingGrp>
-                        </ns:gerelateerde>
-                    </ns:inp.verblijftIn>
                     <ns:verblijfsadres>
                         <ns:wpl.woonplaatsNaam>Amsterdam</ns:wpl.woonplaatsNaam>
                         <!--Optional:-->

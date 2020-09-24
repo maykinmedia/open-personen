@@ -108,19 +108,19 @@ def convert_client_response(response, id=None):
     dict_object = xmltodict.parse(response.content)
 
     try:
-        antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-            "ns:npsLa01"
-        ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsKinderen"]
+        antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
+            "ns:antwoord"
+        ]["ns:object"]["ns:inp.heeftAlsKinderen"]
         prefix = "ns"
     except KeyError:
-        antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+        antwoord_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
             "BG:antwoord"
         ]["object"]["BG:inp.heeftAlsKinderen"]
         prefix = "BG"
 
-    if isinstance(antwoord_dict_object, list):
+    if isinstance(antwoord_object, list):
         result = []
-        for antwood_dict in antwoord_dict_object:
+        for antwood_dict in antwoord_object:
             result_dict = _get_client_instance_dict(
                 antwood_dict[f"{prefix}:gerelateerde"], prefix
             )
@@ -128,7 +128,7 @@ def convert_client_response(response, id=None):
                 result.append(result_dict)
     else:
         result = _get_client_instance_dict(
-            antwoord_dict_object[f"{prefix}:gerelateerde"], prefix
+            antwoord_object[f"{prefix}:gerelateerde"], prefix
         )
         if id and result["burgerservicenummer"] != id:
             result = {}
