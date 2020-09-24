@@ -155,27 +155,27 @@
                <!--Optional:-->
                <ns:inp.overlijdenLand/>
                <!--Optional:-->
-               <ns:inp.verblijftIn StUF:entiteittype="NPSTGO">
-                  <ns:gerelateerde StUF:entiteittype="TGO">
-                     <!--Optional:-->
-                     <ns:adresAanduidingGrp>
-                        <!--Optional:-->
-                        <ns:wpl.woonplaatsNaam/>
-                        <!--Optional:-->
-                        <ns:gor.straatnaam/>
-                        <!--Optional:-->
-                        <ns:aoa.postcode/>
-                        <!--Optional:-->
-                        <ns:aoa.huisnummer/>
-                        <!--Optional:-->
-                        <ns:aoa.huisletter/>
-                        <!--Optional:-->
-                        <ns:aoa.huisnummertoevoeging/>
-                     </ns:adresAanduidingGrp>
-                  </ns:gerelateerde>
-               </ns:inp.verblijftIn>
+               <ns:verblijfsadres>
+                    <ns:wpl.woonplaatsNaam/>
+                    <!--Optional:-->
+                    <ns:gor.straatnaam/>
+                    <!--Optional:-->
+                    <ns:aoa.postcode/>
+                    <!--Optional:-->
+                    <ns:aoa.huisnummer/>
+                    <!--Optional:-->
+                    <ns:aoa.huisletter/>
+                    <!--Optional:-->
+                    <ns:aoa.huisnummertoevoeging/>
+                </ns:verblijfsadres>
                <!--Optional:-->
                <ns:inp.datumInschrijving/>
+               <!--Optional:-->
+               <ns:ing.aanduidingEuropeesKiesrecht/>
+               <!--Optional:-->
+               <ns:ing.aanduidingUitgeslotenKiesrecht/>
+               <!--Optional:-->
+               <ns:inp.aanduidingBijzonderNederlanderschap/>
             </ns:object>
          </ns:scope>
       </ns:npsLv01>

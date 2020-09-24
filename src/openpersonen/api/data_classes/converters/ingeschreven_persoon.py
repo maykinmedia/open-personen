@@ -9,26 +9,28 @@ from openpersonen.api.utils import (
 )
 
 
-def convert_client_response_to_instance_dict(response):
-    dict_object = xmltodict.parse(response.content)
-
-    antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-        "ns:npsLa01"
-    ]["ns:antwoord"]["ns:object"]
-
+def _get_client_instance_dict(instance_xml_dict, prefix):
     ingeschreven_persoon_dict = {
-        "burgerservicenummer": antwoord_dict_object["ns:inp.bsn"],
+        "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
         "geheimhoudingPersoonsgegevens": True,
         "naam": {
-            "geslachtsnaam": antwoord_dict_object["ns:geslachtsnaam"],
-            "voorletters": antwoord_dict_object["ns:voorletters"],
-            "voornamen": antwoord_dict_object["ns:voornamen"],
-            "voorvoegsel": antwoord_dict_object["ns:voorvoegselGeslachtsnaam"],
+            "geslachtsnaam": instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string"),
+            "voorletters": instance_xml_dict.get(f"{prefix}:voorletters", "string"),
+            "voornamen": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
+            "voorvoegsel": instance_xml_dict.get(
+                f"{prefix}:voorvoegselGeslachtsnaam", "string"
+            ),
             "inOnderzoek": {
-                "geslachtsnaam": bool(antwoord_dict_object["ns:geslachtsnaam"]),
-                "voornamen": bool(antwoord_dict_object["ns:voornamen"]),
+                "geslachtsnaam": bool(
+                    instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string")
+                ),
+                "voornamen": bool(
+                    instance_xml_dict.get(f"{prefix}:voornamen", "string")
+                ),
                 "voorvoegsel": bool(
-                    antwoord_dict_object["ns:voorvoegselGeslachtsnaam"]
+                    instance_xml_dict.get(
+                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
+                    )
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -37,37 +39,43 @@ def convert_client_response_to_instance_dict(response):
                     "maand": 0,
                 },
             },
-            "aanhef": antwoord_dict_object["ns:voornamen"],
+            "aanhef": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
             "aanschrijfwijze": "string",
             "gebruikInLopendeTekst": "string",
-            "aanduidingNaamgebruik": antwoord_dict_object["ns:aanduidingNaamgebruik"],
+            "aanduidingNaamgebruik": instance_xml_dict.get(
+                f"{prefix}:aanduidingNaamgebruik", "string"
+            ),
         },
         "geboorte": {
             "datum": {
                 "dag": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.DAY_START : settings.DAY_END
                     ]
                 ),
-                "datum": antwoord_dict_object["ns:geboortedatum"],
+                "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
             "land": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteLand"],
+                "omschrijving": instance_xml_dict.get(
+                    f"{prefix}:inp.geboorteLand", "string"
+                ),
             },
             "plaats": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteplaats"],
+                "omschrijving": instance_xml_dict.get(
+                    f"{prefix}:inp.geboorteplaats", "string"
+                ),
             },
             "inOnderzoek": {
                 "datum": True,
@@ -81,73 +89,91 @@ def convert_client_response_to_instance_dict(response):
                 },
             },
         },
-        "geslachtsaanduiding": antwoord_dict_object["ns:geslachtsaanduiding"],
-        "leeftijd": calculate_age(antwoord_dict_object["ns:geboortedatum"]),
+        "geslachtsaanduiding": instance_xml_dict.get(
+            f"{prefix}:geslachtsaanduiding", "string"
+        ),
+        "leeftijd": calculate_age(
+            instance_xml_dict.get(f"{prefix}:geboortedatum", "string")
+        ),
         "datumEersteInschrijvingGBA": {
             "dag": int(
-                antwoord_dict_object["ns:inp.datumInschrijving"][
+                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "00000000")[
                     settings.DAY_START : settings.DAY_END
                 ]
             ),
-            "datum": antwoord_dict_object["ns:inp.datumInschrijving"],
+            "datum": instance_xml_dict.get(
+                f"{prefix}:inp.datumInschrijving", "00000000"
+            ),
             "jaar": int(
-                antwoord_dict_object["ns:inp.datumInschrijving"][
+                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "string")[
                     settings.YEAR_START : settings.YEAR_END
                 ]
             ),
             "maand": int(
-                antwoord_dict_object["ns:inp.datumInschrijving"][
+                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "00000000")[
                     settings.MONTH_START : settings.MONTH_END
                 ]
             ),
         },
         "kiesrecht": {
             "europeesKiesrecht": bool(
-                antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"]
+                instance_xml_dict.get(
+                    f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
+                )
             ),
             "uitgeslotenVanKiesrecht": bool(
-                antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"]
+                instance_xml_dict.get(
+                    f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
+                )
             ),
             "einddatumUitsluitingEuropeesKiesrecht": {
                 "dag": int(
-                    antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"][
-                        settings.DAY_START : settings.DAY_END
-                    ]
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
+                    )[settings.DAY_START : settings.DAY_END]
                 ),
-                "datum": antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"],
+                "datum": instance_xml_dict.get(
+                    f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
+                ),
                 "jaar": int(
-                    antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"][
-                        settings.YEAR_START : settings.YEAR_END
-                    ]
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
+                    )[settings.YEAR_START : settings.YEAR_END]
                 ),
                 "maand": int(
-                    antwoord_dict_object["ns:ing.aanduidingEuropeesKiesrecht"][
-                        settings.MONTH_START : settings.MONTH_END
-                    ]
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
+                    )[settings.MONTH_START : settings.MONTH_END]
                 ),
             },
             "einddatumUitsluitingKiesrecht": {
                 "dag": int(
-                    antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"][
-                        settings.DAY_START : settings.DAY_END
-                    ]
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
+                    )[settings.DAY_START : settings.DAY_END]
                 ),
-                "datum": antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"],
+                "datum": instance_xml_dict.get(
+                    f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
+                ),
                 "jaar": int(
-                    antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"][
-                        settings.YEAR_START : settings.YEAR_END
-                    ]
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
+                    )[settings.YEAR_START : settings.YEAR_END]
                 ),
                 "maand": int(
-                    antwoord_dict_object["ns:ing.aanduidingUitgeslotenKiesrecht"][
-                        settings.MONTH_START : settings.MONTH_END
-                    ]
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
+                    )[settings.MONTH_START : settings.MONTH_END]
                 ),
             },
         },
         "inOnderzoek": {
-            "burgerservicenummer": bool(antwoord_dict_object["ns:inp.bsn"]),
-            "geslachtsaanduiding": bool(antwoord_dict_object["ns:geslachtsaanduiding"]),
+            "burgerservicenummer": bool(
+                instance_xml_dict.get(f"{prefix}:inp.bsn", "string")
+            ),
+            "geslachtsaanduiding": bool(
+                instance_xml_dict.get(f"{prefix}:geslachtsaanduiding", "string")
+            ),
             "datumIngangOnderzoek": {
                 "dag": 0,
                 "datum": "string",
@@ -157,9 +183,9 @@ def convert_client_response_to_instance_dict(response):
         },
         "nationaliteit": [
             {
-                "aanduidingBijzonderNederlanderschap": antwoord_dict_object[
-                    "ns:inp.aanduidingBijzonderNederlanderschap"
-                ],
+                "aanduidingBijzonderNederlanderschap": instance_xml_dict.get(
+                    f"{prefix}:inp.aanduidingBijzonderNederlanderschap", "string"
+                ),
                 "datumIngangGeldigheid": {
                     "dag": 0,
                     "datum": "string",
@@ -170,9 +196,10 @@ def convert_client_response_to_instance_dict(response):
                 "redenOpname": {"code": "string", "omschrijving": "string"},
                 "inOnderzoek": {
                     "aanduidingBijzonderNederlanderschap": bool(
-                        antwoord_dict_object[
-                            "ns:inp.aanduidingBijzonderNederlanderschap"
-                        ]
+                        instance_xml_dict.get(
+                            f"{prefix}:inp.aanduidingBijzonderNederlanderschap",
+                            "string",
+                        )
                     ),
                     "nationaliteit": True,
                     "redenOpname": True,
@@ -194,16 +221,26 @@ def convert_client_response_to_instance_dict(response):
             "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
             "land": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.overlijdenLand"],
+                "omschrijving": instance_xml_dict.get(
+                    f"{prefix}:inp.overlijdenLand", "string"
+                ),
             },
             "plaats": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.overlijdenplaats"],
+                "omschrijving": instance_xml_dict.get(
+                    f"{prefix}:inp.overlijdenplaats", "string"
+                ),
             },
             "inOnderzoek": {
-                "datum": bool(antwoord_dict_object["ns:overlijdensdatum"]),
-                "land": bool(antwoord_dict_object["ns:inp.overlijdenLand"]),
-                "plaats": bool(antwoord_dict_object["ns:inp.overlijdenplaats"]),
+                "datum": bool(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "string")
+                ),
+                "land": bool(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenLand", "string")
+                ),
+                "plaats": bool(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats", "string")
+                ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
                     "datum": "string",
@@ -214,30 +251,30 @@ def convert_client_response_to_instance_dict(response):
         },
         "verblijfplaats": {
             "functieAdres": "woonadres",
-            "huisletter": antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                "ns:adresAanduidingGrp"
-            ]["ns:aoa.huisletter"],
-            "huisnummer": antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                "ns:adresAanduidingGrp"
-            ]["ns:aoa.huisnummer"],
-            "huisnummertoevoeging": antwoord_dict_object["ns:inp.verblijftIn"][
-                "ns:gerelateerde"
-            ]["ns:adresAanduidingGrp"]["ns:aoa.huisnummertoevoeging"],
+            "huisletter": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                f"{prefix}:aoa.huisletter", "string"
+            ),
+            "huisnummer": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                f"{prefix}:aoa.huisnummer", "string"
+            ),
+            "huisnummertoevoeging": instance_xml_dict.get(
+                f"{prefix}:verblijfsadres", {}
+            ).get(f"{prefix}:aoa.huisnummertoevoeging", "string"),
             "aanduidingBijHuisnummer": "tegenover",
             "identificatiecodeNummeraanduiding": "string",
             "naamOpenbareRuimte": "string",
-            "postcode": antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                "ns:adresAanduidingGrp"
-            ]["ns:aoa.postcode"],
-            "woonplaatsnaam": antwoord_dict_object["ns:inp.verblijftIn"][
-                "ns:gerelateerde"
-            ]["ns:adresAanduidingGrp"]["ns:wpl.woonplaatsNaam"],
+            "postcode": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                f"{prefix}:aoa.postcode", "string"
+            ),
+            "woonplaatsnaam": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                f"{prefix}:wpl.woonplaatsNaam", "string"
+            ),
             "identificatiecodeAdresseerbaarObject": "string",
             "indicatieVestigingVanuitBuitenland": True,
             "locatiebeschrijving": "string",
-            "straatnaam": antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                "ns:adresAanduidingGrp"
-            ]["ns:gor.straatnaam"],
+            "straatnaam": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                f"{prefix}:gor.straatnaam", "string"
+            ),
             "vanuitVertrokkenOnbekendWaarheen": True,
             "datumAanvangAdreshouding": {
                 "dag": 0,
@@ -281,19 +318,19 @@ def convert_client_response_to_instance_dict(response):
                 "functieAdres": True,
                 "gemeenteVanInschrijving": True,
                 "huisletter": bool(
-                    antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                        "ns:adresAanduidingGrp"
-                    ]["ns:aoa.huisletter"]
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        f"{prefix}:aoa.huisletter", "string"
+                    )
                 ),
                 "huisnummer": bool(
-                    antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                        "ns:adresAanduidingGrp"
-                    ]["ns:aoa.huisnummer"]
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        f"{prefix}:aoa.huisnummer", "string"
+                    )
                 ),
                 "huisnummertoevoeging": bool(
-                    antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                        "ns:adresAanduidingGrp"
-                    ]["ns:aoa.huisnummertoevoeging"]
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        f"{prefix}:aoa.huisnummertoevoeging", "string"
+                    )
                 ),
                 "identificatiecodeNummeraanduiding": True,
                 "identificatiecodeAdresseerbaarObject": True,
@@ -301,20 +338,20 @@ def convert_client_response_to_instance_dict(response):
                 "locatiebeschrijving": True,
                 "naamOpenbareRuimte": True,
                 "postcode": bool(
-                    antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                        "ns:adresAanduidingGrp"
-                    ]["ns:aoa.postcode"]
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        f"{prefix}:aoa.postcode", "string"
+                    )
                 ),
                 "straatnaam": bool(
-                    antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                        "ns:adresAanduidingGrp"
-                    ]["ns:gor.straatnaam"]
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        f"{prefix}:gor.straatnaam", "string"
+                    )
                 ),
                 "verblijfBuitenland": True,
                 "woonplaatsnaam": bool(
-                    antwoord_dict_object["ns:inp.verblijftIn"]["ns:gerelateerde"][
-                        "ns:adresAanduidingGrp"
-                    ]["ns:wpl.woonplaatsNaam"]
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        f"{prefix}:wpl.woonplaatsNaam", "string"
+                    )
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -360,6 +397,31 @@ def convert_client_response_to_instance_dict(response):
     convert_empty_instances(ingeschreven_persoon_dict)
 
     return ingeschreven_persoon_dict
+
+
+def convert_client_response(response):
+    dict_object = xmltodict.parse(response.content)
+
+    try:
+        antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
+            "ns:antwoord"
+        ]["ns:object"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["object"]
+        prefix = "BG"
+
+    if isinstance(antwoord_object, list):
+        result = []
+        for antwood_dict in antwoord_object:
+            result_dict = _get_client_instance_dict(antwood_dict, prefix)
+            result.append(result_dict)
+    else:
+        result = _get_client_instance_dict(antwoord_object, prefix)
+
+    return result
 
 
 def convert_model_instance_to_instance_dict(persoon):

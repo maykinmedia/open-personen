@@ -8,7 +8,7 @@ from openpersonen.api.enum import GeslachtsaanduidingChoices
 from openpersonen.api.models import StufBGClient
 
 from .converters.ingeschreven_persoon import (
-    convert_client_response_to_instance_dict,
+    convert_client_response,
     convert_model_instance_to_instance_dict,
 )
 from .datum import Datum
@@ -63,25 +63,35 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def list(cls, filters):
+        class_instances = []
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
-            class_instances = []
+
             cls.update_filters_to_fit_model(filters)
             instances = PersoonDemoModel.objects.filter(**filters)
             for instance in instances:
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
-            return class_instances
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
-            instance_dict = convert_client_response_to_instance_dict(response)
-            return [cls(**instance_dict)]
+            result = convert_client_response(response)
+            if isinstance(result, dict):
+                result = [result]
+            class_instances = [cls(**instance_dict) for instance_dict in result]
+        return class_instances
 
     @classmethod
-    def retrieve(cls, bsn=None):
+    def retrieve(cls, bsn):
         if getattr(settings, "USE_STUF_BG_DATABASE", False):
             instance = PersoonDemoModel.objects.get(burgerservicenummer_persoon=bsn)
-            instance_dict = convert_model_instance_to_instance_dict(instance)
+            result = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
-            instance_dict = convert_client_response_to_instance_dict(response)
-        return cls(**instance_dict)
+            result = convert_client_response(response)
+
+            if not result:
+                return dict()
+
+            if isinstance(result, list) and len(result) > 0:
+                result = result[0]
+
+        return cls(**result)

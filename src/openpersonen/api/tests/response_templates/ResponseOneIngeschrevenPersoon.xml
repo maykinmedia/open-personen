@@ -1,0 +1,107 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:ns="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns:npsLa01>
+            <ns:stuurgegevens>
+                <StUF:berichtcode>?</StUF:berichtcode>
+                <!--Optional:-->
+                <StUF:zender>
+                    <!--Optional:-->
+                    <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+                    <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
+                    <!--Optional:-->
+                    <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
+                    <!--Optional:-->
+                    <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
+                </StUF:zender>
+                <!--Optional:-->
+                <StUF:ontvanger>
+                    <!--Optional:-->
+                    <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+                    <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
+                    <!--Optional:-->
+                    <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
+                    <!--Optional:-->
+                    <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
+                </StUF:ontvanger>
+                <!--Optional:-->
+                <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
+                <!--Optional:-->
+                <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
+                <!--Optional:-->
+                <StUF:crossRefnummer>?</StUF:crossRefnummer>
+                <StUF:entiteittype>?</StUF:entiteittype>
+            </ns:stuurgegevens>
+            <ns:parameters>
+                <StUF:indicatorVervolgvraag>?</StUF:indicatorVervolgvraag>
+                <!--Optional:-->
+                <StUF:indicatorAfnemerIndicatie>false</StUF:indicatorAfnemerIndicatie>
+                <!--Optional:-->
+                <StUF:aantalVoorkomens>?</StUF:aantalVoorkomens>
+            </ns:parameters>
+            <!--Zero or more repetitions:-->
+            <ns:melding>?</ns:melding>
+            <!--Optional:-->
+            <ns:antwoord>
+                <!--1 or more repetitions:-->
+                <ns:object StUF:entiteittype="NPS">
+                    <!--You have a CHOICE of the next 2 items at this level-->
+                    <!--Optional:-->
+                    <ns:inp.bsn>123456789</ns:inp.bsn>
+                    <!--Optional:-->
+                    <ns:geslachtsnaam>Maykin</ns:geslachtsnaam>
+                    <!--Optional:-->
+                    <ns:voorvoegselGeslachtsnaam>van</ns:voorvoegselGeslachtsnaam>
+                    <!--Optional:-->
+                    <ns:voorletters>M.</ns:voorletters>
+                    <!--Optional:-->
+                    <ns:voornamen>Media</ns:voornamen>
+                    <!--Optional:-->
+                    <ns:aanduidingNaamgebruik>E</ns:aanduidingNaamgebruik>
+                    <!--Optional:-->
+                    <ns:aanhefAanschrijving>Maykin</ns:aanhefAanschrijving>
+                    <!--Optional:-->
+                    <ns:geslachtsaanduiding>M</ns:geslachtsaanduiding>
+                    <!--Optional:-->
+                    <ns:geboortedatum>19800915</ns:geboortedatum>
+                    <!--Optional:-->
+                    <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
+                    <!--Optional:-->
+                    <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                    <!--Optional:-->
+                    <ns:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true"
+                                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <!--Optional:-->
+                    <ns:inp.overlijdenplaats StUF:noValue="geenWaarde" xsi:nil="true"
+                                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <!--Optional:-->
+                    <ns:inp.overlijdenLand StUF:noValue="geenWaarde" xsi:nil="true"
+                                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <ns:verblijfsadres>
+                        <ns:wpl.woonplaatsNaam>Amsterdam</ns:wpl.woonplaatsNaam>
+                        <!--Optional:-->
+                        <ns:gor.straatnaam>Straat</ns:gor.straatnaam>
+                        <!--Optional:-->
+                        <ns:aoa.postcode>2525AB</ns:aoa.postcode>
+                        <!--Optional:-->
+                        <ns:aoa.huisnummer>117</ns:aoa.huisnummer>
+                        <!--Optional:-->
+                        <ns:aoa.huisletter>A</ns:aoa.huisletter>
+                        <!--Optional:-->
+                        <ns:aoa.huisnummertoevoeging>B</ns:aoa.huisnummertoevoeging>
+                    </ns:verblijfsadres>
+                    <!--Optional:-->
+                    <ns:inp.datumInschrijving>20051216</ns:inp.datumInschrijving>
+                    <!--Optional:-->
+                    <ns:ing.aanduidingEuropeesKiesrecht>20200924</ns:ing.aanduidingEuropeesKiesrecht>
+                    <!--Optional:-->
+                    <ns:ing.aanduidingUitgeslotenKiesrecht>20200924</ns:ing.aanduidingUitgeslotenKiesrecht>
+                    <!--Optional:-->
+                    <ns:inp.aanduidingBijzonderNederlanderschap>behandeld_als_nederlander</ns:inp.aanduidingBijzonderNederlanderschap>
+                </ns:object>
+            </ns:antwoord>
+        </ns:npsLa01>
+    </soapenv:Body>
+</soapenv:Envelope>

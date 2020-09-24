@@ -9,26 +9,28 @@ from openpersonen.api.utils import (
 )
 
 
-def convert_client_response_to_instance_dict(response):
-    dict_object = xmltodict.parse(response.content)
-
-    antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
-        "ns:npsLa01"
-    ]["ns:antwoord"]["ns:object"]["ns:inp.heeftAlsKinderen"]["ns:gerelateerde"]
-
+def _get_client_instance_dict(instance_xml_dict, prefix):
     kind_dict = {
-        "burgerservicenummer": antwoord_dict_object["ns:inp.bsn"],
+        "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
         "geheimhoudingPersoonsgegevens": True,
         "naam": {
-            "geslachtsnaam": antwoord_dict_object["ns:geslachtsnaam"],
-            "voorletters": antwoord_dict_object["ns:voorletters"],
-            "voornamen": antwoord_dict_object["ns:voornamen"],
-            "voorvoegsel": antwoord_dict_object["ns:voorvoegselGeslachtsnaam"],
+            "geslachtsnaam": instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string"),
+            "voorletters": instance_xml_dict.get(f"{prefix}:voorletters", "string"),
+            "voornamen": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
+            "voorvoegsel": instance_xml_dict.get(
+                f"{prefix}:voorvoegselGeslachtsnaam", "string"
+            ),
             "inOnderzoek": {
-                "geslachtsnaam": bool(antwoord_dict_object["ns:geslachtsnaam"]),
-                "voornamen": bool(antwoord_dict_object["ns:voornamen"]),
+                "geslachtsnaam": bool(
+                    instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string")
+                ),
+                "voornamen": bool(
+                    instance_xml_dict.get(f"{prefix}:voornamen", "string")
+                ),
                 "voorvoegsel": bool(
-                    antwoord_dict_object["ns:voorvoegselGeslachtsnaam"]
+                    instance_xml_dict.get(
+                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
+                    )
                 ),
                 "datumIngangOnderzoek": {
                     "dag": 0,
@@ -41,29 +43,33 @@ def convert_client_response_to_instance_dict(response):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.DAY_START : settings.DAY_END
                     ]
                 ),
-                "datum": antwoord_dict_object["ns:geboortedatum"],
+                "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.YEAR_START : settings.YEAR_END
                     ]
                 ),
                 "maand": int(
-                    antwoord_dict_object["ns:geboortedatum"][
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
                         settings.MONTH_START : settings.MONTH_END
                     ]
                 ),
             },
             "land": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteLand"],
+                "omschrijving": instance_xml_dict.get(
+                    f"{prefix}:inp.geboorteLand", "string"
+                ),
             },
             "plaats": {
                 "code": "string",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteplaats"],
+                "omschrijving": instance_xml_dict.get(
+                    f"{prefix}:inp.geboorteplaats", "string"
+                ),
             },
             "inOnderzoek": {
                 "datum": True,
@@ -77,9 +83,13 @@ def convert_client_response_to_instance_dict(response):
                 },
             },
         },
-        "leeftijd": calculate_age(antwoord_dict_object["ns:geboortedatum"]),
+        "leeftijd": calculate_age(
+            instance_xml_dict.get(f"{prefix}:geboortedatum", "string")
+        ),
         "inOnderzoek": {
-            "burgerservicenummer": bool(antwoord_dict_object["ns:inp.bsn"]),
+            "burgerservicenummer": bool(
+                instance_xml_dict.get(f"{prefix}:inp.bsn", "string")
+            ),
             "datumIngangOnderzoek": {
                 "dag": 0,
                 "datum": "string",
@@ -92,6 +102,38 @@ def convert_client_response_to_instance_dict(response):
     convert_empty_instances(kind_dict)
 
     return kind_dict
+
+
+def convert_client_response(response, id=None):
+    dict_object = xmltodict.parse(response.content)
+
+    try:
+        antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
+            "ns:antwoord"
+        ]["ns:object"]["ns:inp.heeftAlsKinderen"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["object"]["BG:inp.heeftAlsKinderen"]
+        prefix = "BG"
+
+    if isinstance(antwoord_object, list):
+        result = []
+        for antwood_dict in antwoord_object:
+            result_dict = _get_client_instance_dict(
+                antwood_dict[f"{prefix}:gerelateerde"], prefix
+            )
+            if not id or id == result_dict["burgerservicenummer"]:
+                result.append(result_dict)
+    else:
+        result = _get_client_instance_dict(
+            antwoord_object[f"{prefix}:gerelateerde"], prefix
+        )
+        if id and result["burgerservicenummer"] != id:
+            result = {}
+
+    return result
 
 
 def convert_model_instance_to_instance_dict(kind):

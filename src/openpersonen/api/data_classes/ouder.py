@@ -2,14 +2,12 @@ from dataclasses import dataclass
 
 from django.conf import settings
 
-import xmltodict
-
 from openpersonen.api.demo_models import Persoon as PersoonDemoModel
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.api.models import StufBGClient
 
 from .converters.ouder import (
-    convert_client_response_to_instance_dict,
+    convert_client_response,
     convert_model_instance_to_instance_dict,
 )
 from .datum import Datum
@@ -40,6 +38,12 @@ class Ouder(Persoon):
             for instance in instances:
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
+        else:
+            response = StufBGClient.get_solo().get_ouder(bsn)
+            result = convert_client_response(response)
+            if isinstance(result, dict):
+                result = [result]
+            class_instances = [cls(**instance_dict) for instance_dict in result]
         return class_instances
 
     @classmethod
@@ -48,8 +52,15 @@ class Ouder(Persoon):
             instance = PersoonDemoModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).ouder_set.get(burgerservicenummer_ouder=id)
-            instance_dict = convert_model_instance_to_instance_dict(instance)
+            result = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ouder(bsn)
-            instance_dict = convert_client_response_to_instance_dict(response)
-        return cls(**instance_dict)
+            result = convert_client_response(response, id)
+
+            if not result:
+                return dict()
+
+            if isinstance(result, list) and len(result) > 0:
+                result = result[0]
+
+        return cls(**result)
