@@ -146,7 +146,7 @@ def convert_client_response(response, id=None):
     except KeyError:
         antwoord_dict_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
             "BG:antwoord"
-        ]["BG:object"]["BG:inp.heeftAlsOuders"]
+        ]["object"]["BG:inp.heeftAlsOuders"]
         prefix = "BG"
 
     if isinstance(antwoord_dict_object, list):
