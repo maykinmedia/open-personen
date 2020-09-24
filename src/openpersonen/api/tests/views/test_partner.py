@@ -108,6 +108,34 @@ class TestPartner(APITestCase):
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
+    def test_detail_partner_BG_response(self, post_mock):
+        fake_bsn = 123456780
+        fake_partner_bsn = 123456789
+
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseBG.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "partners-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": fake_bsn,
+                    "id": fake_partner_bsn,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json()["burgerservicenummer"], str(fake_partner_bsn))
+
+    @requests_mock.Mocker()
     def test_detail_partner_when_id_does_not_match(self, post_mock):
         post_mock.post(
             self.url,

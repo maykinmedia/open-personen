@@ -143,6 +143,31 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
+    @freeze_time("2020-09-12")
+    @requests_mock.Mocker()
+    def test_detail_ingeschreven_persoon_BG_response(self, post_mock):
+        fake_bsn = 123456780
+
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseBG.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail",
+                kwargs={"burgerservicenummer": fake_bsn},
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json()["burgerservicenummer"], str(fake_bsn))
+
     def test_detail_ingeschreven_persoon_with_bad_burgerservicenummer(self):
 
         with self.assertRaises(NoReverseMatch):

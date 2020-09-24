@@ -108,6 +108,34 @@ class TestKind(APITestCase):
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
+    def test_detail_kind_BG_response(self, post_mock):
+        fake_bsn = 123456780
+        fake_kind_bsn = 123456781
+
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("ResponseBG.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "kinderen-detail",
+                kwargs={
+                    "ingeschrevenpersonen_burgerservicenummer": fake_bsn,
+                    "id": fake_kind_bsn,
+                },
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json()["burgerservicenummer"], str(fake_kind_bsn))
+
+    @requests_mock.Mocker()
     def test_detail_kind_when_id_does_not_match(self, post_mock):
         post_mock.post(
             self.url,
