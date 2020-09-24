@@ -34,6 +34,7 @@ class TestIngeschrevenPersoon(APITestCase):
         self.url = StufBGClient.get_solo().url
         self.user = User.objects.create(username="test")
         self.token = Token.objects.create(user=self.user)
+        self.bsn = 123456789
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -52,7 +53,7 @@ class TestIngeschrevenPersoon(APITestCase):
     def test_ingeschreven_persoon_without_proper_query_params(self):
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + "?burgerservicenummer=123456789&naam__geslachtsnaam==Maykin",
+            + f"?burgerservicenummer={self.bsn}&naam__geslachtsnaam==Maykin",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
@@ -71,7 +72,7 @@ class TestIngeschrevenPersoon(APITestCase):
         )
 
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=123456789",
+            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
@@ -133,7 +134,7 @@ class TestIngeschrevenPersoon(APITestCase):
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
-                kwargs={"burgerservicenummer": 123456789},
+                kwargs={"burgerservicenummer": self.bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )

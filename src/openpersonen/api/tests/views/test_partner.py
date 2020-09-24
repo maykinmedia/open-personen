@@ -19,6 +19,7 @@ class TestPartner(APITestCase):
         super().setUp()
         self.url = StufBGClient.get_solo().url
         self.persoon_bsn = 123456789
+        self.partner_bsn = 987654321
         self.user = User.objects.create(username="test")
         self.token = Token.objects.create(user=self.user)
 
@@ -54,8 +55,8 @@ class TestPartner(APITestCase):
         self.assertEqual(len(data), 2)
         first_bsn = data[0]["burgerservicenummer"]
         second_bsn = data[1]["burgerservicenummer"]
-        self.assertTrue(first_bsn == "987654321" or first_bsn == "123456789")
-        self.assertTrue(second_bsn == "987654321" or second_bsn == "123456789")
+        self.assertTrue(first_bsn == str(self.partner_bsn) or first_bsn == "123456789")
+        self.assertTrue(second_bsn == str(self.partner_bsn) or second_bsn == "123456789")
 
     @requests_mock.Mocker()
     def test_list_partner_with_one_partner(self, post_mock):
@@ -78,7 +79,7 @@ class TestPartner(APITestCase):
         self.assertTrue(post_mock.called)
         data = response.json()["_embedded"]["partners"]
         self.assertEqual(len(data), 1)
-        self.assertEqual(data[0]["burgerservicenummer"], "987654321")
+        self.assertEqual(data[0]["burgerservicenummer"], str(self.partner_bsn))
 
     @requests_mock.Mocker()
     def test_detail_partner(self, post_mock):
@@ -94,7 +95,7 @@ class TestPartner(APITestCase):
                 "partners-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 987654321,
+                    "id": self.partner_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
@@ -142,7 +143,7 @@ class TestPartner(APITestCase):
                 "partners-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 987654321,
+                    "id": self.partner_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",

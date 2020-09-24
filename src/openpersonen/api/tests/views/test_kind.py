@@ -19,6 +19,7 @@ class TestKind(APITestCase):
     def setUp(self):
         super().setUp()
         self.persoon_bsn = 123456789
+        self.kind_bsn = 456789123
         self.url = StufBGClient.get_solo().url
         self.user = User.objects.create(username="test")
         self.token = Token.objects.create(user=self.user)
@@ -55,8 +56,8 @@ class TestKind(APITestCase):
         self.assertEqual(len(data), 2)
         first_bsn = data[0]["burgerservicenummer"]
         second_bsn = data[1]["burgerservicenummer"]
-        self.assertTrue(first_bsn == "789123456" or first_bsn == "456789123")
-        self.assertTrue(second_bsn == "789123456" or second_bsn == "456789123")
+        self.assertTrue(first_bsn == "789123456" or first_bsn == str(self.kind_bsn))
+        self.assertTrue(second_bsn == "789123456" or second_bsn == str(self.kind_bsn))
 
     @requests_mock.Mocker()
     def test_list_kind_with_one_kind(self, post_mock):
@@ -79,7 +80,7 @@ class TestKind(APITestCase):
         self.assertTrue(post_mock.called)
         data = response.json()["_embedded"]["kinderen"]
         self.assertEqual(len(data), 1)
-        self.assertEqual(data[0]["burgerservicenummer"], "456789123")
+        self.assertEqual(data[0]["burgerservicenummer"], str(self.kind_bsn))
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
@@ -96,7 +97,7 @@ class TestKind(APITestCase):
                 "kinderen-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 456789123,
+                    "id": self.kind_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
@@ -144,7 +145,7 @@ class TestKind(APITestCase):
                 "kinderen-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 456789123,
+                    "id": self.kind_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",

@@ -18,6 +18,7 @@ class TestOuder(APITestCase):
     def setUp(self):
         super().setUp()
         self.persoon_bsn = 123456789
+        self.ouder_bsn = 789123456
         self.url = StufBGClient.get_solo().url
         self.user = User.objects.create(username="test")
         self.token = Token.objects.create(user=self.user)
@@ -55,7 +56,7 @@ class TestOuder(APITestCase):
         first_bsn = data[0]["burgerservicenummer"]
         second_bsn = data[1]["burgerservicenummer"]
         self.assertTrue(first_bsn == "456123789" or second_bsn == "456123789")
-        self.assertTrue(first_bsn == "789123456" or second_bsn == "789123456")
+        self.assertTrue(first_bsn == str(self.ouder_bsn) or second_bsn == str(self.ouder_bsn))
 
     @requests_mock.Mocker()
     def test_list_ouder_with_one_ouder(self, post_mock):
@@ -78,7 +79,7 @@ class TestOuder(APITestCase):
         self.assertTrue(post_mock.called)
         data = response.json()["_embedded"]["ouders"]
         self.assertEqual(len(data), 1)
-        self.assertEqual(data[0]["burgerservicenummer"], "789123456")
+        self.assertEqual(data[0]["burgerservicenummer"], str(self.ouder_bsn))
 
     @requests_mock.Mocker()
     def test_detail_ouder(self, post_mock):
@@ -94,7 +95,7 @@ class TestOuder(APITestCase):
                 "ouders-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 789123456,
+                    "id": self.ouder_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
@@ -142,7 +143,7 @@ class TestOuder(APITestCase):
                 "ouders-detail",
                 kwargs={
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 789123456,
+                    "id": self.ouder_bsn,
                 },
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
