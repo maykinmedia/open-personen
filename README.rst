@@ -19,8 +19,7 @@ Introduction
 ============
 
 An implementation of the `Haal Centraal BRP bevragen API specification`_ using
-a `StUF-BG`_ connection to access locally stored personal data via mondern REST
-API.
+a `StUF-BG`_ connection to access personal data via a modern REST API.
 
 Open Personen meets the need for several other components to request personal 
 data and to link persons (e.g. to a zaak in the `Open Zaak`_). A so-called 
