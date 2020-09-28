@@ -54,7 +54,7 @@ jobs:
         - npm install -g openapi-diff
       before_script: skip
       script:
-        - env/bin/generate_schema
+        - usr/local/bin/generate_schema
         - openapi-diff src/brp_openapi.yaml src/openapi.yaml
 
     - stage: "Docker image"

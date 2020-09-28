@@ -13,7 +13,7 @@
         },
         "version": "1.0.0-rc1"
     },
-    "basePath": "/openpersonen",
+    "basePath": "/",
     "consumes": [
         "application/hal+json"
     ],
@@ -31,9 +31,9 @@
         }
     ],
     "paths": {
-        "/api/v{version}/ingeschrevenpersonen": {
+        "/ingeschrevenpersonen": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_list",
+                "operationId": "ingeschrevenpersonen_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -168,21 +168,14 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
-            "parameters": [
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
-                }
-            ]
+            "parameters": []
         },
-        "/api/v{version}/ingeschrevenpersonen/{burgerservicenummer}": {
+        "/ingeschrevenpersonen/{burgerservicenummer}": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_read",
+                "operationId": "ingeschrevenpersonen_read",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -328,7 +321,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -338,18 +331,12 @@
                     "required": true,
                     "type": "string",
                     "pattern": "[0-9]{9}"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_kinderen_list",
+                "operationId": "ingeschrevenpersonen_kinderen_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -484,7 +471,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -493,18 +480,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen/{id}": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen/{id}": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_kinderen_read",
+                "operationId": "ingeschrevenpersonen_kinderen_read",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -650,7 +631,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -666,18 +647,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/nationaliteithistorie": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/nationaliteithistorie": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_nationaliteithistorie_list",
+                "operationId": "ingeschrevenpersonen_nationaliteithistorie_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -812,7 +787,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -821,18 +796,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_ouders_list",
+                "operationId": "ingeschrevenpersonen_ouders_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -967,7 +936,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -976,18 +945,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders/{id}": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders/{id}": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_ouders_read",
+                "operationId": "ingeschrevenpersonen_ouders_read",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1133,7 +1096,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -1149,18 +1112,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partnerhistorie": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partnerhistorie": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_partnerhistorie_list",
+                "operationId": "ingeschrevenpersonen_partnerhistorie_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1295,7 +1252,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -1304,18 +1261,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_partners_list",
+                "operationId": "ingeschrevenpersonen_partners_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1450,7 +1401,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -1459,18 +1410,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners/{id}": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners/{id}": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_partners_read",
+                "operationId": "ingeschrevenpersonen_partners_read",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1616,7 +1561,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -1632,18 +1577,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfplaatshistorie": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfplaatshistorie": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_verblijfplaatshistorie_list",
+                "operationId": "ingeschrevenpersonen_verblijfplaatshistorie_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1778,7 +1717,7 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
@@ -1787,18 +1726,12 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
-                },
-                {
-                    "name": "version",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
                 }
             ]
         },
-        "/api/v{version}/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfstitelhistorie": {
+        "/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/verblijfstitelhistorie": {
             "get": {
-                "operationId": "api_ingeschrevenpersonen_verblijfstitelhistorie_list",
+                "operationId": "ingeschrevenpersonen_verblijfstitelhistorie_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1933,18 +1866,12 @@
                     }
                 },
                 "tags": [
-                    "api"
+                    "ingeschrevenpersonen"
                 ]
             },
             "parameters": [
                 {
                     "name": "ingeschrevenpersonen_burgerservicenummer",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "version",
                     "in": "path",
                     "required": true,
                     "type": "string"
@@ -3155,5 +3082,10 @@
             }
         }
     },
-    "tags": []
+    "tags": [
+        {
+            "name": "ingeschrevenpersonen",
+            "description": ""
+        }
+    ]
 }

@@ -70,19 +70,12 @@ class SchemaView(_SchemaView):
 
 urlpatterns = [
     url(
-        r"^v(?P<version>\d+)/",
-        include(
-            [
-                url(
-                    r"^schema/$",
-                    SchemaView.with_ui(
-                        # "redoc"
-                    ),
-                    name="schema-redoc-ingeschreven-persoon",
-                ),
-                # actual API
-                path("", include(router.urls)),
-            ]
+        r"^schema/$",
+        SchemaView.with_ui(
+            # "redoc"
         ),
+        name="schema-redoc-ingeschreven-persoon",
     ),
+    # actual API
+    path("", include(router.urls)),
 ]
