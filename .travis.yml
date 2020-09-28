@@ -51,10 +51,14 @@ jobs:
     - name: "Open API Check"
       before_install: skip
       install:
-        - npm install -g openapi-diff
+        - pip install -r requirements/ci.txt
+        - npm install -g swagger2openapi@5.2.5
+        - npm install -g openapi-diff@0.23.3
       before_script: skip
       script:
-        - usr/local/bin/generate_schema
+        - ls -sla ~/virtualenv/python3.8/bin/
+        - export | grep PATH
+        - generate_schema
         - openapi-diff src/brp_openapi.yaml src/openapi.yaml
 
     - stage: "Docker image"
