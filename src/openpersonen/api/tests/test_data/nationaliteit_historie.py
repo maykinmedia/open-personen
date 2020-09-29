@@ -38,5 +38,5 @@ NATIONALITEIT_HISTORIE_DATA = {
             }
         ]
     },
-    "url": "http://testserver/openpersonen/api/ingeschrevenpersonen/123456789/nationaliteithistorie",
+    "url": "http://testserver/ingeschrevenpersonen/123456789/nationaliteithistorie",
 }
