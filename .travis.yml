@@ -56,8 +56,6 @@ jobs:
         - npm install -g openapi-diff@0.23.3
       before_script: skip
       script:
-        - ls -sla ~/virtualenv/python3.8/bin/
-        - export | grep PATH
         - generate_schema
         - openapi-diff src/brp_openapi.yaml src/openapi.yaml
 
