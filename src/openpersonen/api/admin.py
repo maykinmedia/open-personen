@@ -3,8 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from solo.admin import SingletonModelAdmin
 
+from .demo_models import Kind, Ouder, Persoon
 from .models import StufBGClient
-from .demo_models import Persoon, Kind, Ouder
 
 
 @admin.register(StufBGClient)
@@ -59,10 +59,10 @@ class KindInline(admin.TabularInline):
     model = Kind
     extra = 0
     fields = (
-        'burgerservicenummer_kind',
-        'voornamen_kind',
-        'geslachtsnaam_kind',
-        'geboortedatum_kind'
+        "burgerservicenummer_kind",
+        "voornamen_kind",
+        "geslachtsnaam_kind",
+        "geboortedatum_kind",
     )
 
 
@@ -70,10 +70,10 @@ class OuderInline(admin.TabularInline):
     model = Ouder
     extra = 0
     fields = (
-        'burgerservicenummer_ouder',
-        'voornamen_ouder',
-        'geslachtsnaam_ouder',
-        'geboortedatum_ouder'
+        "burgerservicenummer_ouder",
+        "voornamen_ouder",
+        "geslachtsnaam_ouder",
+        "geboortedatum_ouder",
     )
 
 
@@ -85,10 +85,7 @@ class PersoonAdmin(admin.ModelAdmin):
         "geslachtsnaam_persoon",
     )
 
-    inlines = [
-        KindInline,
-        OuderInline
-    ]
+    inlines = [KindInline, OuderInline]
 
     fieldsets = (
         (
@@ -133,8 +130,12 @@ class PersoonAdmin(admin.ModelAdmin):
                 )
                 if is_new:
                     persoon_instance.voornamen_persoon = instance.voornamen_ouder
-                    persoon_instance.geslachtsnaam_persoon = instance.geslachtsnaam_ouder
-                    persoon_instance.geboortedatum_persoon = instance.geboortedatum_ouder
+                    persoon_instance.geslachtsnaam_persoon = (
+                        instance.geslachtsnaam_ouder
+                    )
+                    persoon_instance.geboortedatum_persoon = (
+                        instance.geboortedatum_ouder
+                    )
                     persoon_instance.save()
 
                 Kind.objects.create(
