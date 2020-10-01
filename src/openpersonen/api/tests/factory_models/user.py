@@ -13,21 +13,3 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = get_user_model()
-
-    @factory.post_generation
-    def groups(self, create, extracted, **kwargs):
-        if not create:
-            return
-
-        if extracted:
-            for group in extracted:
-                self.groups.add(group)
-
-    @factory.post_generation
-    def user_permissions(self, create, extracted, **kwargs):
-        if not create:
-            return
-
-        if extracted:
-            for permission in extracted:
-                self.user_permissions.add(permission)
