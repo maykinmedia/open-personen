@@ -1,3 +1,6 @@
+import os
+
+from django.conf import settings
 from django.conf.urls import url
 from django.urls import include, path
 
@@ -65,7 +68,15 @@ router.register(
 
 # set the path to schema file
 class SchemaView(_SchemaView):
+    schema_path = os.path.join(settings.BASE_DIR, "src", "openapi.yaml")
     info = info
+
+    def get(self, request, version="", *args, **kwargs):
+        if "format" in request.GET:
+            #  The schema expects the format query param to be in the kwargs
+            self.kwargs["format"] = request.GET["format"]
+
+        return super().get(request, version=version, *args, **kwargs)
 
 
 urlpatterns = [
@@ -74,7 +85,7 @@ urlpatterns = [
         SchemaView.with_ui(
             # "redoc"
         ),
-        name="schema-redoc-ingeschreven-persoon",
+        name="schema-ingeschreven-persoon",
     ),
     # actual API
     path("", include(router.urls)),
