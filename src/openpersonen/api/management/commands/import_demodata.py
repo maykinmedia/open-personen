@@ -1,4 +1,3 @@
-import csv
 from io import BytesIO
 
 from django.core.management import BaseCommand
@@ -276,18 +275,12 @@ Row index   |    Field name
 
 class Command(BaseCommand):
     """
-    Run using
-        python src/manage.py import_csv_dataset
-    or
-        python src/manage.py import_csv_dataset --file=~/path/to/file.csv
-    Using docker run
-        docker-compose run web python src/manage.py import_csv_dataset
-    or
-        python src/manage.py import_csv_dataset
-    from inside the docker container
+    Run using python src/manage import_demodata --url=https://www.example.com/file.ods
+    or using docker
+    docker-compose run web python src/manage.py import_demodata --url=https://www.example.com/file.ods
     """
 
-    help = "Read in an csv file and populate models to use for demo data"
+    help = "Read in an ods file from a url and populate models to use for demo data"
 
     def add_arguments(self, parser):
         parser.add_argument("--url", help="Url to ODS file")
@@ -298,9 +291,9 @@ class Command(BaseCommand):
 
         response = requests.get(options["url"])
 
-        file = BytesIO(response.content)
+        buffer = BytesIO(response.content)
 
-        data = get_data(file)
+        data = get_data(buffer)
 
         blank_list = []
         for i in range(0, 253):
