@@ -1,12 +1,10 @@
 import csv
-
-import requests
-
-from pyexcel_odsr import get_data
-
 from io import BytesIO
 
 from django.core.management import BaseCommand
+
+import requests
+from pyexcel_odsr import get_data
 
 from openpersonen.api.demo_models import *
 
@@ -292,15 +290,13 @@ class Command(BaseCommand):
     help = "Read in an csv file and populate models to use for demo data"
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            "--url", help="Url to ODS file"
-        )
+        parser.add_argument("--url", help="Url to ODS file")
 
     def handle(self, **options):
 
         print("Importing dataset")
 
-        response = requests.get(options['url'])
+        response = requests.get(options["url"])
 
         file = BytesIO(response.content)
 
@@ -308,7 +304,7 @@ class Command(BaseCommand):
 
         blank_list = []
         for i in range(0, 253):
-            blank_list.append('')
+            blank_list.append("")
 
         persoon = None
         for index, row in enumerate(data["Overzicht_test-PL'en"][1:]):
@@ -383,9 +379,7 @@ class Command(BaseCommand):
                     )
 
             if any(row[50:71]):
-                if not Ouder.objects.filter(
-                    burgerservicenummer_ouder=row[51]
-                ).exists():
+                if not Ouder.objects.filter(burgerservicenummer_ouder=row[51]).exists():
                     Ouder.objects.create(
                         persoon=persoon,
                         a_nummer_ouder=row[50],
@@ -444,9 +438,7 @@ class Command(BaseCommand):
                     Partnerschap.objects.create(
                         persoon=persoon,
                         a_nummer_echtgenoot_geregistreerd_partner=row[90],
-                        burgerservicenummer_echtgenoot_geregistreerd_partner=row[
-                            91
-                        ],
+                        burgerservicenummer_echtgenoot_geregistreerd_partner=row[91],
                         voornamen_echtgenoot_geregistreerd_partner=row[92],
                         adellijke_titel_predikaat_echtgenoot_geregistreerd_partner=row[
                             93
@@ -458,9 +450,7 @@ class Command(BaseCommand):
                         geboortedatum_echtgenoot_geregistreerd_partner=row[96],
                         geboorteplaats_echtgenoot_geregistreerd_partner=row[97],
                         geboorteland_echtgenoot_geregistreerd_partner=row[98],
-                        geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[
-                            99
-                        ],
+                        geslachtsaanduiding_echtgenoot_geregistreerd_partner=row[99],
                         datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
                             100
                         ],
@@ -470,18 +460,10 @@ class Command(BaseCommand):
                         land_huwelijkssluiting_aangaan_geregistreerd_partnerschap=row[
                             102
                         ],
-                        datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[
-                            103
-                        ],
-                        plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[
-                            104
-                        ],
-                        land_ontbinding_huwelijk_geregistreerd_partnerschap=row[
-                            105
-                        ],
-                        reden_ontbinding_huwelijk_geregistreerd_partnerschap=row[
-                            106
-                        ],
+                        datum_ontbinding_huwelijk_geregistreerd_partnerschap=row[103],
+                        plaats_ontbinding_huwelijk_geregistreerd_partnerschap=row[104],
+                        land_ontbinding_huwelijk_geregistreerd_partnerschap=row[105],
+                        reden_ontbinding_huwelijk_geregistreerd_partnerschap=row[106],
                         soort_verbintenis=row[107],
                         registergemeente_akte_waaraan_gegevens=row[108],
                         aktenummer_van_de_akte_waaraan_gegevens=row[109],
@@ -577,9 +559,7 @@ class Command(BaseCommand):
                 )
 
             if any(row[185:205]):
-                if not Kind.objects.filter(
-                    burgerservicenummer_kind=row[186]
-                ).exists():
+                if not Kind.objects.filter(burgerservicenummer_kind=row[186]).exists():
                     Kind.objects.create(
                         persoon=persoon,
                         a_nummer_kind=row[185],
@@ -651,9 +631,7 @@ class Command(BaseCommand):
                     datum_uitgifte_nederlands_reisdocument=row[231],
                     autoriteit_van_afgifte_nederlands_reisdocument=row[232],
                     datum_einde_geldigheid_nederlands_reisdocument=row[233],
-                    datum_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[
-                        234
-                    ],
+                    datum_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[234],
                     aanduiding_inhouding_dan_wel_vermissing_nederlands_reisdocument=row[
                         235
                     ],
