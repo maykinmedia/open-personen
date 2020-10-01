@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 
 from drf_yasg import openapi
 from vng_api_common.inspectors.view import HTTP_STATUS_CODE_TITLES, AutoSchema
-from vng_api_common.serializers import ValidatieFoutSerializer, FoutSerializer
+from vng_api_common.serializers import FoutSerializer, ValidatieFoutSerializer
 
 
 class OpenPersonenAutoSchema(AutoSchema):

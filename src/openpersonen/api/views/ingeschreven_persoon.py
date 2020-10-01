@@ -8,9 +8,9 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NO
 from openpersonen.api.data_classes import IngeschrevenPersoon
 from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
+from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 from openpersonen.api.views.base import BaseViewSet
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
-from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 
 
 class IngeschrevenPersoonViewSet(BaseViewSet):
