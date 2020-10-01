@@ -235,7 +235,6 @@ class TestOuderWithTestingModels(APITestCase):
         self.ouder = OuderFactory(
             persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn
         )
-        self.token = TokenFactory.create()
 
     def test_ouder_without_token(self):
         response = self.client.get(
@@ -243,16 +242,6 @@ class TestOuderWithTestingModels(APITestCase):
                 "ouders-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
-        )
-        self.assertEqual(response.status_code, 401)
-
-    def test_ouder_with_token(self):
-        response = self.client.get(
-            reverse(
-                "ouders-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
 
@@ -262,8 +251,7 @@ class TestOuderWithTestingModels(APITestCase):
             reverse(
                 "ouders-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -304,8 +292,7 @@ class TestOuderWithTestingModels(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": self.ouder_bsn,
                 },
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -345,8 +332,7 @@ class TestOuderWithTestingModels(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": 222222222,
                 },
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 404)

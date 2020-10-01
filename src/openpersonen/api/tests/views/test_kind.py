@@ -235,7 +235,6 @@ class TestKindWithTestingModels(APITestCase):
         self.kind = KindFactory(
             persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn
         )
-        self.token = TokenFactory.create()
 
     def test_kind_without_token(self):
         response = self.client.get(
@@ -243,16 +242,6 @@ class TestKindWithTestingModels(APITestCase):
                 "kinderen-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
-        )
-        self.assertEqual(response.status_code, 401)
-
-    def test_kind_with_token(self):
-        response = self.client.get(
-            reverse(
-                "kinderen-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
 
@@ -262,8 +251,7 @@ class TestKindWithTestingModels(APITestCase):
             reverse(
                 "kinderen-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -304,8 +292,7 @@ class TestKindWithTestingModels(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": self.kind_bsn,
                 },
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -345,8 +332,7 @@ class TestKindWithTestingModels(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": 222222222,
                 },
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 404)

@@ -200,17 +200,11 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.reisdocument = ReisdocumentFactory(persoon=self.persoon)
         self.verblijfplaats = VerblijfplaatsFactory(persoon=self.persoon)
         self.verblijfstitel = VerblijfstitelFactory(persoon=self.persoon)
-        self.token = TokenFactory.create()
-
-    def test_ingeschreven_persoon_without_token(self):
-        response = self.client.get(reverse("ingeschrevenpersonen-list"))
-        self.assertEqual(response.status_code, 401)
 
     def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
 
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}"
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -323,8 +317,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
     def test_ingeschreven_persoon_with_token_and_incorrect_proper_query_params(self):
 
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=1",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=1"
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["_embedded"]["ingeschrevenpersonen"], [])
@@ -335,8 +328,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail",
                 kwargs={"burgerservicenummer": self.bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -453,8 +445,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail",
                 kwargs={"burgerservicenummer": 111111111},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 404)

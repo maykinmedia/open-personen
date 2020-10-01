@@ -236,7 +236,6 @@ class TestPartnerWithTestingModels(APITestCase):
             persoon=self.persoon,
             burgerservicenummer_echtgenoot_geregistreerd_partner=self.partner_bsn,
         )
-        self.token = TokenFactory.create()
 
     def test_partner_without_token(self):
         response = self.client.get(
@@ -244,16 +243,6 @@ class TestPartnerWithTestingModels(APITestCase):
                 "partners-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
             )
-        )
-        self.assertEqual(response.status_code, 401)
-
-    def test_partner_with_token(self):
-        response = self.client.get(
-            reverse(
-                "partners-list",
-                kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
 
@@ -263,8 +252,7 @@ class TestPartnerWithTestingModels(APITestCase):
             reverse(
                 "partners-list",
                 kwargs={"ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn},
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -324,8 +312,7 @@ class TestPartnerWithTestingModels(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": self.partner_bsn,
                 },
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 200)
@@ -384,8 +371,7 @@ class TestPartnerWithTestingModels(APITestCase):
                     "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
                     "id": 222222222,
                 },
-            ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            )
         )
 
         self.assertEqual(response.status_code, 404)
