@@ -1,17 +1,33 @@
-import factory
+from django.contrib.auth import get_user_model
 
-from openpersonen.accounts.models import User
+import factory
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+
+    username = factory.Sequence(lambda n: "user-{0}".format(n))
+    first_name = "Test"
+    last_name = "User"
+    email = factory.Sequence(lambda n: "user-{0}@maykinmedia.nl".format(n))
+    password = factory.PostGenerationMethodCall("set_password", "secret")
+
     class Meta:
-        model = User
+        model = get_user_model()
 
-    @classmethod
-    def _create(cls, model_class, *args, **kwargs):
-        instance = super()._create(model_class, *args, **kwargs)
+    @factory.post_generation
+    def groups(self, create, extracted, **kwargs):
+        if not create:
+            return
 
-        instance.set_password(kwargs.get("password", "secret"))
-        instance.save()
+        if extracted:
+            for group in extracted:
+                self.groups.add(group)
 
-        return instance
+    @factory.post_generation
+    def user_permissions(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for permission in extracted:
+                self.user_permissions.add(permission)
