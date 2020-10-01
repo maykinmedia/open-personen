@@ -1,14 +1,15 @@
-from django.http import HttpRequest
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
+from django_webtest import WebTest
+from webtest import Text
 
 from openpersonen.api.demo_models import Kind, Ouder, Persoon
 from openpersonen.api.tests.factory_models import PersoonFactory, UserFactory
 
 
-class TestPersoonAdmin(APITestCase):
+class TestPersoonAdmin(WebTest):
     def setUp(self):
+        super().setUp()
         self.persoon = PersoonFactory.create(
             burgerservicenummer_persoon=123456789,
             voornamen_persoon="persoon_voornamen",
@@ -19,56 +20,51 @@ class TestPersoonAdmin(APITestCase):
         self.url = reverse(
             "admin:api_persoon_change", kwargs={"object_id": self.persoon.pk}
         )
-        self.user = UserFactory(is_staff=True, is_superuser=True)
-        self.client.login(
-            request=HttpRequest(), username=self.user.username, password="secret"
-        )
+        self.user = UserFactory(is_superuser=True, is_staff=True, is_active=True)
+        self.app.set_user(self.user)
 
     def test_adding_kind(self):
-
         kind_burgerservicenummer = 987654321
-        kind_voornamen = "kind_voornamen"
-        kind_geslachtsnaam = "kind_geslachtsnaam"
-        kind_geboortedatum = 20201031
 
-        test_data = {
-            "burgerservicenummer_persoon": self.persoon.burgerservicenummer_persoon,
-            "voornamen_persoon": self.persoon.voornamen_persoon,
-            "geslachtsnaam_persoon": self.persoon.geslachtsnaam_persoon,
-            "geboortedatum_persoon": self.persoon.geboortedatum_persoon,
-            "geslachtsaanduiding": self.persoon.geslachtsaanduiding,
-            "kind_set-TOTAL_FORMS": "1",
-            "kind_set-INITIAL_FORMS": "0",
-            "kind_set-MIN_NUM_FORMS": "0",
-            "kind_set-MAX_NUM_FORMS": "1000",
-            "kind_set-0-id": "",
-            "kind_set-0-persoon": self.persoon.id,
-            "kind_set-0-burgerservicenummer_kind": kind_burgerservicenummer,
-            "kind_set-0-voornamen_kind": kind_voornamen,
-            "kind_set-0-geslachtsnaam_kind": kind_geslachtsnaam,
-            "kind_set-0-geboortedatum_kind": kind_geboortedatum,
-            "kind_set-__prefix__-id": "",
-            "kind_set-__prefix__-persoon": self.persoon.id,
-            "kind_set-__prefix__-burgerservicenummer_kind": "",
-            "kind_set-__prefix__-voornamen_kind": "",
-            "kind_set-__prefix__-geslachtsnaam_kind": "",
-            "kind_set-__prefix__-geboortedatum_kind": "",
-            "ouder_set-TOTAL_FORMS": "0",
-            "ouder_set-INITIAL_FORMS": "0",
-            "ouder_set-MIN_NUM_FORMS": "0",
-            "ouder_set-MAX_NUM_FORMS": "1000",
-            "ouder_set-__prefix__-id": "",
-            "ouder_set-__prefix__-persoon": self.persoon.id,
-            "ouder_set-__prefix__-burgerservicenummer_ouder": "",
-            "ouder_set-__prefix__-voornamen_ouder": "",
-            "ouder_set-__prefix__-geslachtsnaam_ouder": "",
-            "ouder_set-__prefix__-geboortedatum_ouder": "",
-            "_save": "Opslaan",
-        }
+        response = self.app.get(self.url)
 
-        response = self.client.post(self.url, data=test_data, follow=True)
+        form = response.forms["persoon_form"]
 
-        self.assertEqual(response.status_code, 200)
+        form["kind_set-TOTAL_FORMS"] = 1
+        form["kind_set-INITIAL_FORMS"] = 0
+        form["kind_set-MIN_NUM_FORMS"] = 0
+        form["kind_set-MAX_NUM_FORMS"] = 1000
+        form["burgerservicenummer_persoon"] = self.persoon.burgerservicenummer_persoon
+        form["voornamen_persoon"] = self.persoon.voornamen_persoon
+        form["geslachtsnaam_persoon"] = self.persoon.geslachtsnaam_persoon
+        form["geboortedatum_persoon"] = self.persoon.geboortedatum_persoon
+        form["geslachtsaanduiding"] = self.persoon.geslachtsaanduiding
+
+        text = Text(
+            form,
+            "input",
+            "kind_set-0-persoon",
+            1,
+            value=self.persoon.id,
+            id="kind_set-0-persoon",
+        )
+        form.field_order.append(("kind_set-0-persoon", text))
+        form.fields["kind_set-0-persoon"] = text
+
+        text = Text(
+            form,
+            "input",
+            "kind_set-0-burgerservicenummer_kind",
+            1,
+            value=kind_burgerservicenummer,
+            id="kind_set-0-burgerservicenummer_kind",
+        )
+        form.field_order.append(("kind_set-0-burgerservicenummer_kind", text))
+        form.fields["kind_set-0-burgerservicenummer_kind"] = text
+
+        response = form.submit()
+
+        self.assertTrue(response.status_code, 200)
         self.assertTrue(
             Kind.objects.filter(
                 burgerservicenummer_kind=kind_burgerservicenummer
@@ -87,48 +83,46 @@ class TestPersoonAdmin(APITestCase):
 
     def test_adding_ouder(self):
         ouder_burgerservicenummer = 987654321
-        ouder_voornamen = "ouder_voornamen"
-        ouder_geslachtsnaam = "ouder_geslachtsnaam"
-        ouder_geboortedatum = 20101123
 
-        test_data = {
-            "burgerservicenummer_persoon": self.persoon.burgerservicenummer_persoon,
-            "voornamen_persoon": self.persoon.voornamen_persoon,
-            "geslachtsnaam_persoon": self.persoon.geslachtsnaam_persoon,
-            "geboortedatum_persoon": self.persoon.geboortedatum_persoon,
-            "geslachtsaanduiding": self.persoon.geslachtsaanduiding,
-            "kind_set-TOTAL_FORMS": "0",
-            "kind_set-INITIAL_FORMS": "0",
-            "kind_set-MIN_NUM_FORMS": "0",
-            "kind_set-MAX_NUM_FORMS": "1000",
-            "kind_set-__prefix__-id": "",
-            "kind_set-__prefix__-persoon": self.persoon.id,
-            "kind_set-__prefix__-burgerservicenummer_kind": "",
-            "kind_set-__prefix__-voornamen_kind": "",
-            "kind_set-__prefix__-geslachtsnaam_kind": "",
-            "kind_set-__prefix__-geboortedatum_kind": "",
-            "ouder_set-TOTAL_FORMS": "1",
-            "ouder_set-INITIAL_FORMS": "0",
-            "ouder_set-MIN_NUM_FORMS": "0",
-            "ouder_set-MAX_NUM_FORMS": "1000",
-            "ouder_set-0-id": "",
-            "ouder_set-0-persoon": self.persoon.id,
-            "ouder_set-0-burgerservicenummer_ouder": ouder_burgerservicenummer,
-            "ouder_set-0-voornamen_ouder": ouder_voornamen,
-            "ouder_set-0-geslachtsnaam_ouder": ouder_geslachtsnaam,
-            "ouder_set-0-geboortedatum_ouder": ouder_geboortedatum,
-            "ouder_set-__prefix__-id": "",
-            "ouder_set-__prefix__-persoon": self.persoon.id,
-            "ouder_set-__prefix__-burgerservicenummer_ouder": "",
-            "ouder_set-__prefix__-voornamen_ouder": "",
-            "ouder_set-__prefix__-geslachtsnaam_ouder": "",
-            "ouder_set-__prefix__-geboortedatum_ouder": "",
-            "_save": "Opslaan",
-        }
+        response = self.app.get(self.url)
 
-        response = self.client.post(self.url, data=test_data, follow=True)
+        form = response.forms["persoon_form"]
 
-        self.assertEqual(response.status_code, 200)
+        form["ouder_set-TOTAL_FORMS"] = 1
+        form["ouder_set-INITIAL_FORMS"] = 0
+        form["ouder_set-MIN_NUM_FORMS"] = 0
+        form["ouder_set-MAX_NUM_FORMS"] = 1000
+        form["burgerservicenummer_persoon"] = self.persoon.burgerservicenummer_persoon
+        form["voornamen_persoon"] = self.persoon.voornamen_persoon
+        form["geslachtsnaam_persoon"] = self.persoon.geslachtsnaam_persoon
+        form["geboortedatum_persoon"] = self.persoon.geboortedatum_persoon
+        form["geslachtsaanduiding"] = self.persoon.geslachtsaanduiding
+
+        text = Text(
+            form,
+            "input",
+            "ouder_set-0-persoon",
+            1,
+            value=self.persoon.id,
+            id="ouder_set-0-persoon",
+        )
+        form.field_order.append(("ouder_set-0-persoon", text))
+        form.fields["ouder_set-0-persoon"] = text
+
+        text = Text(
+            form,
+            "input",
+            "ouder_set-0-burgerservicenummer_ouder",
+            1,
+            value=ouder_burgerservicenummer,
+            id="ouder_set-0-burgerservicenummer_ouder",
+        )
+        form.field_order.append(("ouder_set-0-burgerservicenummer_ouder", text))
+        form.fields["ouder_set-0-burgerservicenummer_ouder"] = text
+
+        response = form.submit()
+
+        self.assertTrue(response.status_code, 200)
         self.assertTrue(
             Ouder.objects.filter(
                 burgerservicenummer_ouder=ouder_burgerservicenummer
