@@ -39,3 +39,10 @@ requests-mock
 mock
 freezegun
 factory-boy
+
+# Install django-webtest through github since an acceptable version is not yet available through pypi.
+#   See https://github.com/django-webtest/django-webtest/pull/110
+#   This change was required to work alongside django-axes.
+# Once a new version of django-webtest is made (likely 1.9.8 or higher) we can start using that
+# django-webtest==1.9.7
+-e git+git://github.com/django-webtest/django-webtest.git@e969cbc1b966785aa1a075c22a0678167f379713#egg=django-webtest
