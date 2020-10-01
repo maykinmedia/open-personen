@@ -8,3 +8,7 @@ env/
 local.py
 media/
 private_media/
+
+# Auto generated files
+src/openpersonen/resources.md
+src/openpersonen/swagger2.0.json

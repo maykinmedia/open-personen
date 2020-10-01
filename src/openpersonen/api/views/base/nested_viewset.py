@@ -6,7 +6,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 from openpersonen.api.views.base import BaseViewSet
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
-from openpersonen.api.views.schema.auto_schema import OpenPersonenAutoSchema
+from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 
 
 class NestedViewSet(BaseViewSet):

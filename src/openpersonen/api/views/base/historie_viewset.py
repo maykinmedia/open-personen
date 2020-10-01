@@ -4,7 +4,7 @@ from rest_framework.status import HTTP_200_OK
 
 from openpersonen.api.filters import Backend, HistorieFilter
 from openpersonen.api.views.base import BaseViewSet
-from openpersonen.api.views.schema.auto_schema import OpenPersonenAutoSchema
+from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 
 
 class HistorieViewSet(BaseViewSet):
