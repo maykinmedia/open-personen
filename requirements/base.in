@@ -34,6 +34,8 @@ elastic-apm  # Elastic APM integration
 
 xmltodict  # Parse Soap XML to Python dict
 
+pyexcel_odsr
+
 # Testing libraries
 requests-mock
 mock

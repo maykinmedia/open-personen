@@ -42,12 +42,16 @@ iso-639==0.4.5            # via vng-api-common
 isodate==0.6.0            # via vng-api-common
 itypes==1.2.0             # via coreapi
 jinja2==2.11.2            # via coreschema
+lml==0.0.9                # via pyexcel-io
+lxml==4.5.2               # via pyexcel-odsr
 markupsafe==1.1.1         # via jinja2
 mock==4.0.2               # via -r requirements/base.in
 oyaml==0.9                # via vng-api-common
 pillow==7.2.0             # via -r requirements/base.in
 polib==1.1.0              # via django-rosetta
 psycopg2==2.8.5           # via -r requirements/base.in
+pyexcel-io==0.5.20        # via pyexcel-odsr
+pyexcel-odsr==0.5.2       # via -r requirements/base.in
 pyjwt==1.7.1              # via gemma-zds-client, vng-api-common
 python-dateutil==2.8.1    # via -r requirements/base.in, faker, freezegun
 python-decouple==3.3      # via -r requirements/base.in
