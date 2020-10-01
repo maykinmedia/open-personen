@@ -23,6 +23,7 @@ from openpersonen.api.tests.factory_models import (
     VerblijfstitelFactory,
 )
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
+from openpersonen.api.views import IngeschrevenPersoonViewSet
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
@@ -176,6 +177,10 @@ class TestIngeschrevenPersoon(APITestCase):
                 ),
                 HTTP_AUTHORIZATION=f"Token {self.token.key}",
             )
+
+    def test_get_filter_parameters(self):
+        view = IngeschrevenPersoonViewSet()
+        self.assertEqual(view.get_filter_parameters(), [])
 
 
 @override_settings(USE_STUF_BG_DATABASE=True)

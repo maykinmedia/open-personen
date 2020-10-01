@@ -5,9 +5,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
-from django.views.generic.base import TemplateView
 
-handler500 = "openpersonen.utils.views.server_error"
 admin.site.site_header = "openpersonen admin"
 admin.site.site_title = "openpersonen admin"
 admin.site.index_title = "Welcome to the openpersonen admin"
@@ -35,10 +33,8 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
-    # Simply show the master template.
-    path("", TemplateView.as_view(template_name="master.html")),
     # App urls
-    path("openpersonen/api/", include("openpersonen.api.urls")),
+    path("", include("openpersonen.api.urls")),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static

@@ -1,13 +1,14 @@
 from django.core.exceptions import ObjectDoesNotExist
 
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
-from vng_api_common.filters import Backend
 
 from openpersonen.api.data_classes import IngeschrevenPersoon
-from openpersonen.api.filters import IngeschrevenPersoonFilter
+from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
+from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 from openpersonen.api.views.base import BaseViewSet
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
@@ -21,6 +22,9 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
     filter_backends = [
         Backend,
     ]
+
+    def get_filter_parameters(self):
+        return []
 
     @staticmethod
     def combination_1(filters_values_dict):
@@ -95,6 +99,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         return filters_with_values
 
+    @swagger_auto_schema(auto_schema=OpenPersonenAutoSchema)
     def list(self, request, *args, **kwargs):
 
         try:
@@ -108,6 +113,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         return Response(data=serializer.data, status=HTTP_200_OK)
 
+    @swagger_auto_schema(auto_schema=OpenPersonenAutoSchema)
     def retrieve(self, request, *args, **kwargs):
 
         burgerservicenummer = kwargs["burgerservicenummer"]

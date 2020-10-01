@@ -36,3 +36,7 @@ src/openpersonen/static/css/**/*.css.map
 
 src/openpersonen/static/fonts/
 src/openpersonen/static/js/
+
+# Auto generated files
+src/resources.md
+src/swagger2.0.json
