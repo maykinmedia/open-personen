@@ -47,7 +47,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -59,7 +59,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -71,7 +71,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -83,7 +83,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -95,7 +95,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -107,7 +107,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -119,7 +119,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -131,7 +131,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -143,7 +143,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -155,7 +155,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -167,7 +167,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -179,7 +179,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -191,7 +191,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters: []
@@ -223,7 +223,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -235,7 +235,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -247,7 +247,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -259,7 +259,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -271,7 +271,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -283,7 +283,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -295,7 +295,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -307,7 +307,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -319,7 +319,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -331,7 +331,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -343,7 +343,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -355,7 +355,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -367,7 +367,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -407,7 +407,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -419,7 +419,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -431,7 +431,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -443,7 +443,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -455,7 +455,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -467,7 +467,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -479,7 +479,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -491,7 +491,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -503,7 +503,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -515,7 +515,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -527,7 +527,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -539,7 +539,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -551,7 +551,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -588,7 +588,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -600,7 +600,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -612,7 +612,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -624,7 +624,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -636,7 +636,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -648,7 +648,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -660,7 +660,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -672,7 +672,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -684,7 +684,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -696,7 +696,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -708,7 +708,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -720,7 +720,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -732,7 +732,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -777,7 +777,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -789,7 +789,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -801,7 +801,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -813,7 +813,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -825,7 +825,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -837,7 +837,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -849,7 +849,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -861,7 +861,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -873,7 +873,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -885,7 +885,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -897,7 +897,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -909,7 +909,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -921,7 +921,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -960,7 +960,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -972,7 +972,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -984,7 +984,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -996,7 +996,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -1008,7 +1008,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -1020,7 +1020,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -1032,7 +1032,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -1044,7 +1044,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -1056,7 +1056,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -1068,7 +1068,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -1080,7 +1080,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -1092,7 +1092,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -1104,7 +1104,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -1141,7 +1141,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -1153,7 +1153,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -1165,7 +1165,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -1177,7 +1177,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -1189,7 +1189,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -1201,7 +1201,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -1213,7 +1213,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -1225,7 +1225,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -1237,7 +1237,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -1249,7 +1249,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -1261,7 +1261,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -1273,7 +1273,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -1285,7 +1285,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -1330,7 +1330,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -1342,7 +1342,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -1354,7 +1354,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -1366,7 +1366,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -1378,7 +1378,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -1390,7 +1390,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -1402,7 +1402,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -1414,7 +1414,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -1426,7 +1426,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -1438,7 +1438,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -1450,7 +1450,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -1462,7 +1462,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -1474,7 +1474,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -1513,7 +1513,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -1525,7 +1525,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -1537,7 +1537,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -1549,7 +1549,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -1561,7 +1561,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -1573,7 +1573,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -1585,7 +1585,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -1597,7 +1597,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -1609,7 +1609,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -1621,7 +1621,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -1633,7 +1633,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -1645,7 +1645,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -1657,7 +1657,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -1694,7 +1694,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -1706,7 +1706,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -1718,7 +1718,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -1730,7 +1730,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -1742,7 +1742,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -1754,7 +1754,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -1766,7 +1766,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -1778,7 +1778,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -1790,7 +1790,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -1802,7 +1802,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -1814,7 +1814,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -1826,7 +1826,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -1838,7 +1838,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -1883,7 +1883,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -1895,7 +1895,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -1907,7 +1907,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -1919,7 +1919,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -1931,7 +1931,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -1943,7 +1943,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -1955,7 +1955,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -1967,7 +1967,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -1979,7 +1979,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -1991,7 +1991,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -2003,7 +2003,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -2015,7 +2015,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -2027,7 +2027,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -2066,7 +2066,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaValidatieFout'
+                $ref: '#/components/schemas/ValidatieFout'
         '401':
           description: Unauthorized
           headers:
@@ -2078,7 +2078,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '403':
           description: Forbidden
           headers:
@@ -2090,7 +2090,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '404':
           description: Not found
           headers:
@@ -2102,7 +2102,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '406':
           description: Not acceptable
           headers:
@@ -2114,7 +2114,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '409':
           description: Conflict
           headers:
@@ -2126,7 +2126,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '410':
           description: Gone
           headers:
@@ -2138,7 +2138,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '415':
           description: Unsupported media type
           headers:
@@ -2150,7 +2150,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '429':
           description: Too many requests
           headers:
@@ -2162,7 +2162,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '500':
           description: Internal server error
           headers:
@@ -2174,7 +2174,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '501':
           description: Not implemented
           headers:
@@ -2186,7 +2186,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         '503':
           description: Service unavailable
           headers:
@@ -2198,7 +2198,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
         default:
           description: Er is een onverwachte fout opgetreden
           headers:
@@ -2210,7 +2210,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SchemaFout'
+                $ref: '#/components/schemas/Fout'
       tags:
       - ingeschrevenpersonen
     parameters:
@@ -2766,7 +2766,11 @@ components:
             Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
           type: string
           minLength: 1
-    SchemaFieldValidationError:
+    FieldValidationError:
+      required:
+      - name
+      - code
+      - reason
       type: object
       properties:
         name:
@@ -2784,7 +2788,14 @@ components:
           description: Uitleg wat er precies fout is met de gegevens
           type: string
           minLength: 1
-    SchemaValidatieFout:
+    ValidatieFout:
+      required:
+      - code
+      - title
+      - status
+      - detail
+      - instance
+      - invalid_params
       type: object
       properties:
         type:
@@ -2819,39 +2830,7 @@ components:
         invalid_params:
           type: array
           items:
-            $ref: '#/components/schemas/SchemaFieldValidationError'
-    SchemaFout:
-      type: object
-      properties:
-        type:
-          title: Type
-          description: URI referentie naar het type fout, bedoeld voor developers
-          type: string
-        code:
-          title: Code
-          description: Systeemcode die het type fout aangeeft
-          type: string
-          minLength: 1
-        title:
-          title: Title
-          description: Generieke titel voor het type fout
-          type: string
-          minLength: 1
-        status:
-          title: Status
-          description: De HTTP status code
-          type: integer
-        detail:
-          title: Detail
-          description: Extra informatie bij de fout, indien beschikbaar
-          type: string
-          minLength: 1
-        instance:
-          title: Instance
-          description: URI met referentie naar dit specifiek voorkomen van de fout.
-            Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          type: string
-          minLength: 1
+            $ref: '#/components/schemas/FieldValidationError'
     Naam:
       title: Naam
       type: object
