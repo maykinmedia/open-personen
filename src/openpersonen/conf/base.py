@@ -418,4 +418,4 @@ if os.getenv("USE_AUTHENTICATION"):
     USE_AUTHENTICATION = os.getenv("USE_AUTHENTICATION") == "True"
 
 if not USE_AUTHENTICATION and not USE_STUF_BG_DATABASE:
-    raise ImproperlyConfigured('Must use authentication when not using local database')
+    raise ImproperlyConfigured("Must use authentication when not using local database")
