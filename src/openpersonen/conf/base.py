@@ -1,7 +1,6 @@
 import os
 
 # Django-hijack (and Django-hijack-admin)
-from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse_lazy
 
 from sentry_sdk.integrations import DidNotEnable, django, redis
@@ -416,6 +415,3 @@ USE_AUTHENTICATION = not USE_STUF_BG_DATABASE
 
 if os.getenv("USE_AUTHENTICATION"):
     USE_AUTHENTICATION = os.getenv("USE_AUTHENTICATION") == "True"
-
-if not USE_AUTHENTICATION and not USE_STUF_BG_DATABASE:
-    raise ImproperlyConfigured("Must use authentication when not using local database")
