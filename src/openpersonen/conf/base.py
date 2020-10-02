@@ -19,6 +19,11 @@ BASE_DIR = os.path.abspath(
     os.path.join(DJANGO_PROJECT_DIR, os.path.pardir, os.path.pardir)
 )
 
+#
+# Core Django settings
+#
+SITE_ID = os.getenv("SITE_ID", default=1)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
