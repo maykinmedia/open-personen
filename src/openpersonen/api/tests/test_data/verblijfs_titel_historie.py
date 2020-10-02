@@ -34,5 +34,5 @@ VERBLIJFS_TITEL_HISTORIE = {
             }
         ]
     },
-    "url": "http://testserver/ingeschrevenpersonen/123456789/verblijfstitelhistorie",
+    "url": "http://testserver/api/ingeschrevenpersonen/123456789/verblijfstitelhistorie",
 }
