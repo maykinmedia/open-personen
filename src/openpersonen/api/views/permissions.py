@@ -1,15 +1,12 @@
 from django.conf import settings
 
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import IsAuthenticated as _IsAuthenticated
 
 
-class IsAuthenticated(BasePermission):
-    """
-    Allows access only to authenticated users.
-    """
+class IsAuthenticated(_IsAuthenticated):
 
     def has_permission(self, request, view):
         if settings.USE_AUTHENTICATION:
-            return bool(request.user and request.user.is_authenticated)
+            return super().has_permission(request, view)
         else:
             return True
