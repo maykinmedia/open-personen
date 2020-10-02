@@ -1,5 +1,6 @@
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ViewSet
+
+from openpersonen.api.views.permissions import IsAuthenticated
 
 
 class BaseViewSet(ViewSet):

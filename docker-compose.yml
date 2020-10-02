@@ -15,6 +15,7 @@ services:
       - DB_USER=${DB_USER:-openpersonen}
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
       - USE_STUF_BG_DATABASE=${USE_STUF_BG_DATABASE:-False}
+      - USE_AUTHENTICATION=${USE_AUTHENTICATION:-True}
     #   Uncomment below and update path on left side to use test data from file system
     #     when importing csv test data
 #    volumes:
