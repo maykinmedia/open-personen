@@ -34,7 +34,7 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     # App urls
-    path("", include("openpersonen.api.urls")),
+    path("api/", include("openpersonen.api.urls")),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static
