@@ -284,20 +284,31 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("--url", help="Url to ODS file")
+        parser.add_argument(
+            "--file", help="The csv file containing the data to import."
+        )
 
     def handle(self, **options):
 
-        print("Importing dataset")
+        self.stdout.write("Importing dataset")
 
-        response = requests.get(options["url"])
+        if options.get('url') and options.get('file'):
+            self.stderr.write('Please specify a url or file, not both')
+            return exit(1)
+        if not options.get('url') and not options.get('file'):
+            self.stderr.write('Must give a url or file')
+            return exit(1)
 
-        buffer = BytesIO(response.content)
+        if options.get('url'):
+            response = requests.get(options["url"])
 
-        data = get_data(buffer)
+            buffer = BytesIO(response.content)
 
-        blank_list = []
-        for i in range(0, 253):
-            blank_list.append("")
+            data = get_data(buffer)
+        else:
+            data = get_data(options['file'])
+
+        blank_list = [""] * 253
 
         persoon = None
         for index, row in enumerate(data["Overzicht_test-PL'en"][1:]):
@@ -666,6 +677,6 @@ class Command(BaseCommand):
             Reisdocument,
             Kiesrecht,
         ]:
-            print(f"Installed {model.objects.count()} {model.__name__} instances")
+            self.stdout.write(f"Installed {model.objects.count()} {model.__name__} instances")
 
-        print("Done!")
+        self.stdout.write("Done!")
