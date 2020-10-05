@@ -1,13 +1,16 @@
+import os
 import base64
 import uuid
 from datetime import timedelta
 
+from django.conf import settings
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
 from django.utils.translation import ugettext_lazy as _
 
 import requests
+from lxml import etree
 from solo.models import SingletonModel
 
 
@@ -62,6 +65,15 @@ class StufBGClient(SingletonModel):
         request_context = self._get_request_base_context()
         if additional_context:
             request_context.update(additional_context)
+
+        file = os.path.join(settings.BASE_DIR, "src", "openpersonen", "XSDs", "bg0310", "bg0310_msg_totaal.xsd")
+        with open(file, 'r') as f:
+            xmlschema_doc = etree.parse(f)
+            xmlschema = etree.XMLSchema(xmlschema_doc)
+
+        doc = etree.parse(request_context)
+        if not xmlschema.validate(doc):
+            raise ValueError('XML is not correct')
 
         response = requests.post(
             self.url,
