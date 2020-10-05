@@ -5,7 +5,6 @@ from django.urls import NoReverseMatch, reverse
 import requests_mock
 from rest_framework.test import APITestCase
 
-from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.api.tests.factory_models import (
     PartnerschapFactory,
     PersoonFactory,
@@ -13,6 +12,7 @@ from openpersonen.api.tests.factory_models import (
 )
 from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 
 @override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
