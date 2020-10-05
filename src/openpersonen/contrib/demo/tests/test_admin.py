@@ -18,7 +18,7 @@ class TestPersoonAdmin(WebTest):
             geslachtsaanduiding="M",
         )
         self.url = reverse(
-            "admin:api_persoon_change", kwargs={"object_id": self.persoon.pk}
+            "admin:demo_persoon_change", kwargs={"object_id": self.persoon.pk}
         )
         self.user = UserFactory(is_superuser=True, is_staff=True, is_active=True)
         self.app.set_user(self.user)
