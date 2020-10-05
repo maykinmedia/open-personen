@@ -2,8 +2,8 @@ from dataclasses import dataclass
 
 import xmltodict
 
-from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 from .datum import Datum
 from .verblijf_plaats import VerblijfPlaats

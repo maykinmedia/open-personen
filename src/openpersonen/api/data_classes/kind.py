@@ -12,7 +12,6 @@ from .converters.kind import (
 from .in_onderzoek import KindInOnderzoek
 from .persoon import Persoon
 
-
 # backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 

@@ -4,8 +4,8 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.api.utils import convert_empty_instances
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 from .ontbinding_huwelijk_partnerschap import OntbindingHuwelijkPartnerschap
 from .partner import Partner

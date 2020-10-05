@@ -4,9 +4,9 @@ from django.urls import reverse
 import requests_mock
 from rest_framework.test import APITestCase
 
-from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.api.tests.factory_models import TokenFactory
 from openpersonen.api.tests.test_data import VERBLIJF_PLAATS_HISTORIE_DATA
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 
 class TestVerblijfPlaatsHistorie(APITestCase):

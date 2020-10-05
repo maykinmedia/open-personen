@@ -6,7 +6,6 @@ import requests_mock
 from freezegun import freeze_time
 from rest_framework.test import APITestCase
 
-from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.api.tests.factory_models import (
     GezagsVerhoudingFactory,
     InschrijvingFactory,
@@ -25,6 +24,7 @@ from openpersonen.api.tests.factory_models import (
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 from openpersonen.api.views import IngeschrevenPersoonViewSet
 from openpersonen.api.views.generic_responses import get_404_response
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 
 @override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
