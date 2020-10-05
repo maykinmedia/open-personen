@@ -3,7 +3,7 @@ import os
 from django.conf import settings
 from django.test.runner import DiscoverRunner as _DiscoverRunner
 
-from openpersonen.api.models import StufBGClient
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 
 class DiscoverRunner(_DiscoverRunner):

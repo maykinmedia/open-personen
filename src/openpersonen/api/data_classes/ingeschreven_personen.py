@@ -3,9 +3,9 @@ from typing import Optional
 
 from django.conf import settings
 
-from openpersonen.api.demo_models import Persoon as PersoonDemoModel
+from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
 from openpersonen.api.enum import GeslachtsaanduidingChoices
-from openpersonen.api.models import StufBGClient
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 from .converters.ingeschreven_persoon import (
     convert_client_response,
@@ -22,6 +22,9 @@ from .overlijden import Overlijden
 from .persoon import Persoon
 from .verblijf_plaats import VerblijfPlaats
 from .verblijfs_titel import VerblijfsTitel
+
+
+# backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 
 @dataclass

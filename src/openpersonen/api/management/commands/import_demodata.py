@@ -5,7 +5,7 @@ from django.core.management import BaseCommand
 import requests
 from pyexcel_odsr import get_data
 
-from openpersonen.api.demo_models import *
+from openpersonen.contrib.demo.models import *
 
 """
 Row index   |    Field name

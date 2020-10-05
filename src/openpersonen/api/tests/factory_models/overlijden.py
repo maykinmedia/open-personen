@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Overlijden
+from openpersonen.contrib.demo.models import Overlijden
 
 from .persoon import PersoonFactory
 

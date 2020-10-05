@@ -92,6 +92,8 @@ INSTALLED_APPS = [
     "solo",
     # Project applications.
     "openpersonen.accounts",
+    "openpersonen.contrib.demo",
+    "openpersonen.contrib.stufbg",
     "openpersonen.api",
     "openpersonen.utils",
 ]
@@ -122,7 +124,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(DJANGO_PROJECT_DIR, "templates"),
-            os.path.join(DJANGO_PROJECT_DIR, "api/request_templates"),
+            os.path.join(DJANGO_PROJECT_DIR, "api/../contrib/stufbg/request_templates"),
             os.path.join(DJANGO_PROJECT_DIR, "api/tests/response_templates"),
         ],
         "APP_DIRS": False,  # conflicts with explicity specifying the loaders
@@ -414,8 +416,8 @@ OPENPERSONEN_MONTH_END = 6
 OPENPERSONEN_DAY_START = 6
 OPENPERSONEN_DAY_END = 8
 
-OPENPERSONEN_USE_LOCAL_DATABASE = os.getenv("OPENPERSONEN_USE_LOCAL_DATABASE") == "True"
-OPENPERSONEN_USE_AUTHENTICATION = not OPENPERSONEN_USE_LOCAL_DATABASE
+OPENPERSONEN_BACKEND = os.getenv("OPENPERSONEN_BACKEND", "openpersonen.contrib.demo.backend")
+OPENPERSONEN_USE_AUTHENTICATION = OPENPERSONEN_BACKEND == "openpersonen.contrib.demo.backend"
 
 if os.getenv("OPENPERSONEN_USE_AUTHENTICATION"):
     OPENPERSONEN_USE_AUTHENTICATION = (

@@ -3,7 +3,7 @@ from django.urls import reverse
 from django_webtest import WebTest
 from webtest import Text
 
-from openpersonen.api.demo_models import Kind, Ouder, Persoon
+from openpersonen.contrib.demo.models import Kind, Ouder, Persoon
 from openpersonen.api.tests.factory_models import PersoonFactory, UserFactory
 
 

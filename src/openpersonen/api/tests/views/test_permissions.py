@@ -6,7 +6,7 @@ from django.urls import reverse
 import requests_mock
 from rest_framework.test import APITestCase
 
-from openpersonen.api.models import StufBGClient
+from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.api.tests.factory_models import TokenFactory
 
 

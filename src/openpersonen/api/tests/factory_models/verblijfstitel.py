@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Verblijfstitel
+from openpersonen.contrib.demo.models import Verblijfstitel
 
 from .persoon import PersoonFactory
 
