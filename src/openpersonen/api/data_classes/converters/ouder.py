@@ -16,7 +16,7 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "dag": int(
                 instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.DAY_START : settings.DAY_END]
+                )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
             ),
             "datum": instance_xml_dict.get(
                 f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "string"
@@ -24,12 +24,12 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "jaar": int(
                 instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.YEAR_START : settings.YEAR_END]
+                )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
             ),
             "maand": int(
                 instance_xml_dict.get(
                     f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
-                )[settings.MONTH_START : settings.MONTH_END]
+                )[settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END]
             ),
         },
         "naam": {
@@ -82,18 +82,18 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "datum": {
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
             },
@@ -175,7 +175,7 @@ def convert_model_instance_to_instance_dict(ouder):
         "datumIngangFamilierechtelijkeBetrekking": {
             "dag": int(
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
-                    settings.DAY_START : settings.DAY_END
+                    settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                 ]
                 if is_valid_date_format(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder
@@ -185,7 +185,7 @@ def convert_model_instance_to_instance_dict(ouder):
             "datum": ouder.datum_ingang_familierechtelijke_betrekking_ouder,
             "jaar": int(
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
-                    settings.YEAR_START : settings.YEAR_END
+                    settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                 ]
                 if is_valid_date_format(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder
@@ -194,7 +194,7 @@ def convert_model_instance_to_instance_dict(ouder):
             ),
             "maand": int(
                 ouder.datum_ingang_familierechtelijke_betrekking_ouder[
-                    settings.MONTH_START : settings.MONTH_END
+                    settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                 ]
                 if is_valid_date_format(
                     ouder.datum_ingang_familierechtelijke_betrekking_ouder
@@ -227,21 +227,23 @@ def convert_model_instance_to_instance_dict(ouder):
             "geslachtsaanduiding": bool(ouder.geslachtsaanduiding_ouder),
             "datumIngangOnderzoek": {
                 "dag": int(
-                    ouder.datum_ingang_onderzoek[settings.DAY_START : settings.DAY_END]
+                    ouder.datum_ingang_onderzoek[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                     if is_valid_date_format(ouder.datum_ingang_onderzoek)
                     else 0
                 ),
                 "datum": ouder.datum_ingang_onderzoek,
                 "jaar": int(
                     ouder.datum_ingang_onderzoek[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                     if is_valid_date_format(ouder.datum_ingang_onderzoek)
                     else 0
                 ),
                 "maand": int(
                     ouder.datum_ingang_onderzoek[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                     if is_valid_date_format(ouder.datum_ingang_onderzoek)
                     else 0
@@ -251,18 +253,24 @@ def convert_model_instance_to_instance_dict(ouder):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    ouder.geboortedatum_ouder[settings.DAY_START : settings.DAY_END]
+                    ouder.geboortedatum_ouder[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 )
                 if is_valid_date_format(ouder.geboortedatum_ouder)
                 else 0,
                 "datum": ouder.geboortedatum_ouder,
                 "jaar": int(
-                    ouder.geboortedatum_ouder[settings.YEAR_START : settings.YEAR_END]
+                    ouder.geboortedatum_ouder[
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
                 )
                 if is_valid_date_format(ouder.geboortedatum_ouder)
                 else 0,
                 "maand": int(
-                    ouder.geboortedatum_ouder[settings.MONTH_START : settings.MONTH_END]
+                    ouder.geboortedatum_ouder[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 )
                 if is_valid_date_format(ouder.geboortedatum_ouder)
                 else 0,

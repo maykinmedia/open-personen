@@ -50,18 +50,18 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "datum": {
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
             },
@@ -98,7 +98,7 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
         "datumEersteInschrijvingGBA": {
             "dag": int(
                 instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "00000000")[
-                    settings.DAY_START : settings.DAY_END
+                    settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                 ]
             ),
             "datum": instance_xml_dict.get(
@@ -106,12 +106,12 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             ),
             "jaar": int(
                 instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "string")[
-                    settings.YEAR_START : settings.YEAR_END
+                    settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                 ]
             ),
             "maand": int(
                 instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "00000000")[
-                    settings.MONTH_START : settings.MONTH_END
+                    settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                 ]
             ),
         },
@@ -130,7 +130,7 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
                 "dag": int(
                     instance_xml_dict.get(
                         f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
-                    )[settings.DAY_START : settings.DAY_END]
+                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": instance_xml_dict.get(
                     f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
@@ -138,19 +138,21 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
                 "jaar": int(
                     instance_xml_dict.get(
                         f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
-                    )[settings.YEAR_START : settings.YEAR_END]
+                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     instance_xml_dict.get(
                         f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
-                    )[settings.MONTH_START : settings.MONTH_END]
+                    )[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 ),
             },
             "einddatumUitsluitingKiesrecht": {
                 "dag": int(
                     instance_xml_dict.get(
                         f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
-                    )[settings.DAY_START : settings.DAY_END]
+                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": instance_xml_dict.get(
                     f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
@@ -158,12 +160,14 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
                 "jaar": int(
                     instance_xml_dict.get(
                         f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
-                    )[settings.YEAR_START : settings.YEAR_END]
+                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     instance_xml_dict.get(
                         f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
-                    )[settings.MONTH_START : settings.MONTH_END]
+                    )[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 ),
             },
         },
@@ -441,7 +445,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datumIngangOnderzoek": {
                     "dag": int(
                         persoon.datum_ingang_onderzoek[
-                            settings.DAY_START : settings.DAY_END
+                            settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
                     )
                     if is_valid_date_format(persoon.datum_ingang_onderzoek)
@@ -449,14 +453,14 @@ def convert_model_instance_to_instance_dict(persoon):
                     "datum": persoon.datum_ingang_onderzoek,
                     "jaar": int(
                         persoon.datum_ingang_onderzoek[
-                            settings.YEAR_START : settings.YEAR_END
+                            settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                         ]
                     )
                     if is_valid_date_format(persoon.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         persoon.datum_ingang_onderzoek[
-                            settings.MONTH_START : settings.MONTH_END
+                            settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                         ]
                     )
                     if is_valid_date_format(persoon.datum_ingang_onderzoek)
@@ -471,21 +475,23 @@ def convert_model_instance_to_instance_dict(persoon):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    persoon.geboortedatum_persoon[settings.DAY_START : settings.DAY_END]
+                    persoon.geboortedatum_persoon[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 )
                 if is_valid_date_format(persoon.geboortedatum_persoon)
                 else 0,
                 "datum": persoon.geboortedatum_persoon,
                 "jaar": int(
                     persoon.geboortedatum_persoon[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(persoon.geboortedatum_persoon)
                 else 0,
                 "maand": int(
                     persoon.geboortedatum_persoon[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(persoon.geboortedatum_persoon)
@@ -544,7 +550,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "einddatumUitsluitingEuropeesKiesrecht": {
                 "dag": int(
                     kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(
@@ -554,7 +560,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": kiesrecht.einddatum_uitsluiting_europees_kiesrecht,
                 "jaar": int(
                     kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(
@@ -563,7 +569,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 else 0,
                 "maand": int(
                     kiesrecht.einddatum_uitsluiting_europees_kiesrecht[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(
@@ -574,7 +580,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "einddatumUitsluitingKiesrecht": {
                 "dag": int(
                     kiesrecht.einddatum_uitsluiting_kiesrecht[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
@@ -582,14 +588,14 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": kiesrecht.einddatum_uitsluiting_kiesrecht,
                 "jaar": int(
                     kiesrecht.einddatum_uitsluiting_kiesrecht[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
                 else 0,
                 "maand": int(
                     kiesrecht.einddatum_uitsluiting_kiesrecht[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(kiesrecht.einddatum_uitsluiting_kiesrecht)
@@ -604,19 +610,23 @@ def convert_model_instance_to_instance_dict(persoon):
             "indicatieOverleden": True,
             "datum": {
                 "dag": int(
-                    overlijden.datum_overlijden[settings.DAY_START : settings.DAY_END]
+                    overlijden.datum_overlijden[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 )
                 if is_valid_date_format(overlijden.datum_overlijden)
                 else 0,
                 "datum": overlijden.datum_overlijden,
                 "jaar": int(
-                    overlijden.datum_overlijden[settings.YEAR_START : settings.YEAR_END]
+                    overlijden.datum_overlijden[
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
                 )
                 if is_valid_date_format(overlijden.datum_overlijden)
                 else 0,
                 "maand": int(
                     overlijden.datum_overlijden[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(overlijden.datum_overlijden)
@@ -664,7 +674,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "datumAanvangAdreshouding": {
                 "dag": int(
                     verblijfplaats.datum_aanvang_adres_buitenland[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(verblijfplaats.datum_aanvang_adres_buitenland)
@@ -672,14 +682,14 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": verblijfplaats.datum_aanvang_adres_buitenland,
                 "jaar": int(
                     verblijfplaats.datum_aanvang_adres_buitenland[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(verblijfplaats.datum_aanvang_adres_buitenland)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_aanvang_adres_buitenland[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(verblijfplaats.datum_aanvang_adres_buitenland)
@@ -688,7 +698,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "datumIngangGeldigheid": {
                 "dag": int(
                     verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(
@@ -698,7 +708,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": verblijfplaats.ingangsdatum_geldigheid_met_betrekking,
                 "jaar": int(
                     verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(
@@ -707,7 +717,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 else 0,
                 "maand": int(
                     verblijfplaats.ingangsdatum_geldigheid_met_betrekking[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(
@@ -718,7 +728,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "datumInschrijvingInGemeente": {
                 "dag": int(
                     verblijfplaats.datum_inschrijving_in_de_gemeente[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(
@@ -728,7 +738,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": verblijfplaats.datum_inschrijving_in_de_gemeente,
                 "jaar": int(
                     verblijfplaats.datum_inschrijving_in_de_gemeente[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(
@@ -737,7 +747,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_inschrijving_in_de_gemeente[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(
@@ -748,7 +758,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "datumVestigingInNederland": {
                 "dag": int(
                     verblijfplaats.datum_vestiging_in_nederland[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(verblijfplaats.datum_vestiging_in_nederland)
@@ -756,14 +766,14 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": verblijfplaats.datum_vestiging_in_nederland,
                 "jaar": int(
                     verblijfplaats.datum_vestiging_in_nederland[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(verblijfplaats.datum_vestiging_in_nederland)
                 else 0,
                 "maand": int(
                     verblijfplaats.datum_vestiging_in_nederland[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(verblijfplaats.datum_vestiging_in_nederland)
@@ -821,7 +831,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datumIngangOnderzoek": {
                     "dag": int(
                         verblijfplaats.datum_ingang_onderzoek[
-                            settings.DAY_START : settings.DAY_END
+                            settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
                     )
                     if is_valid_date_format(verblijfplaats.datum_ingang_onderzoek)
@@ -829,14 +839,14 @@ def convert_model_instance_to_instance_dict(persoon):
                     "datum": verblijfplaats.datum_ingang_onderzoek,
                     "jaar": int(
                         verblijfplaats.datum_ingang_onderzoek[
-                            settings.YEAR_START : settings.YEAR_END
+                            settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                         ]
                     )
                     if is_valid_date_format(verblijfplaats.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         verblijfplaats.datum_ingang_onderzoek[
-                            settings.MONTH_START : settings.MONTH_END
+                            settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                         ]
                     )
                     if is_valid_date_format(verblijfplaats.datum_ingang_onderzoek)
@@ -861,7 +871,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datumIngangOnderzoek": {
                     "dag": int(
                         gezagsverhouding.datum_ingang_onderzoek[
-                            settings.DAY_START : settings.DAY_END
+                            settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
                     )
                     if is_valid_date_format(gezagsverhouding.datum_ingang_onderzoek)
@@ -869,14 +879,14 @@ def convert_model_instance_to_instance_dict(persoon):
                     "datum": gezagsverhouding.datum_ingang_onderzoek,
                     "jaar": int(
                         gezagsverhouding.datum_ingang_onderzoek[
-                            settings.YEAR_START : settings.YEAR_END
+                            settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                         ]
                     )
                     if is_valid_date_format(gezagsverhouding.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         gezagsverhouding.datum_ingang_onderzoek[
-                            settings.MONTH_START : settings.MONTH_END
+                            settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                         ]
                     )
                     if is_valid_date_format(gezagsverhouding.datum_ingang_onderzoek)
@@ -896,7 +906,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "datumEinde": {
                 "dag": int(
                     verblijfstitel.datum_einde_verblijfstitel[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(verblijfstitel.datum_einde_verblijfstitel)
@@ -904,14 +914,14 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": verblijfstitel.datum_einde_verblijfstitel,
                 "jaar": int(
                     verblijfstitel.datum_einde_verblijfstitel[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(verblijfstitel.datum_einde_verblijfstitel)
                 else 0,
                 "maand": int(
                     verblijfstitel.datum_einde_verblijfstitel[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(verblijfstitel.datum_einde_verblijfstitel)
@@ -920,7 +930,7 @@ def convert_model_instance_to_instance_dict(persoon):
             "datumIngang": {
                 "dag": int(
                     verblijfstitel.ingangsdatum_verblijfstitel[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 )
                 if is_valid_date_format(verblijfstitel.ingangsdatum_verblijfstitel)
@@ -928,14 +938,14 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datum": verblijfstitel.ingangsdatum_verblijfstitel,
                 "jaar": int(
                     verblijfstitel.ingangsdatum_verblijfstitel[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 )
                 if is_valid_date_format(verblijfstitel.ingangsdatum_verblijfstitel)
                 else 0,
                 "maand": int(
                     verblijfstitel.ingangsdatum_verblijfstitel[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(verblijfstitel.ingangsdatum_verblijfstitel)
@@ -948,7 +958,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datumIngangOnderzoek": {
                     "dag": int(
                         verblijfstitel.datum_ingang_onderzoek[
-                            settings.DAY_START : settings.DAY_END
+                            settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
                     )
                     if is_valid_date_format(verblijfstitel.datum_ingang_onderzoek)
@@ -956,14 +966,14 @@ def convert_model_instance_to_instance_dict(persoon):
                     "datum": verblijfstitel.datum_ingang_onderzoek,
                     "jaar": int(
                         verblijfstitel.datum_ingang_onderzoek[
-                            settings.YEAR_START : settings.YEAR_END
+                            settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                         ]
                     )
                     if is_valid_date_format(verblijfstitel.datum_ingang_onderzoek)
                     else 0,
                     "maand": int(
                         verblijfstitel.datum_ingang_onderzoek[
-                            settings.MONTH_START : settings.MONTH_END
+                            settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                         ]
                     )
                     if is_valid_date_format(verblijfstitel.datum_ingang_onderzoek)
@@ -983,7 +993,7 @@ def convert_model_instance_to_instance_dict(persoon):
                 "datumIngangGeldigheid": {
                     "dag": int(
                         nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
-                            settings.DAY_START : settings.DAY_END
+                            settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
                     )
                     if is_valid_date_format(
@@ -993,7 +1003,7 @@ def convert_model_instance_to_instance_dict(persoon):
                     "datum": nationaliteit.datum_van_ingang_geldigheid_met_betrekking,
                     "jaar": int(
                         nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
-                            settings.YEAR_START : settings.YEAR_END
+                            settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                         ]
                     )
                     if is_valid_date_format(
@@ -1002,7 +1012,7 @@ def convert_model_instance_to_instance_dict(persoon):
                     else 0,
                     "maand": int(
                         nationaliteit.datum_van_ingang_geldigheid_met_betrekking[
-                            settings.MONTH_START : settings.MONTH_END
+                            settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                         ]
                     )
                     if is_valid_date_format(
@@ -1027,7 +1037,7 @@ def convert_model_instance_to_instance_dict(persoon):
                     "datumIngangOnderzoek": {
                         "dag": int(
                             nationaliteit.datum_ingang_onderzoek[
-                                settings.DAY_START : settings.DAY_END
+                                settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                             ]
                         )
                         if is_valid_date_format(nationaliteit.datum_ingang_onderzoek)
@@ -1035,14 +1045,14 @@ def convert_model_instance_to_instance_dict(persoon):
                         "datum": nationaliteit.datum_ingang_onderzoek,
                         "jaar": int(
                             nationaliteit.datum_ingang_onderzoek[
-                                settings.YEAR_START : settings.YEAR_END
+                                settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                             ]
                         )
                         if is_valid_date_format(nationaliteit.datum_ingang_onderzoek)
                         else 0,
                         "maand": int(
                             nationaliteit.datum_ingang_onderzoek[
-                                settings.MONTH_START : settings.MONTH_END
+                                settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                             ]
                         )
                         if is_valid_date_format(nationaliteit.datum_ingang_onderzoek)

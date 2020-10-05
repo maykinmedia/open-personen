@@ -35,7 +35,9 @@ class NationaliteitHistorie(Nationaliteit):
                 "dag": int(
                     antwoord_dict_object["ns:historieMaterieel"][
                         "StUF:tijdvakGeldigheid"
-                    ]["StUF:beginGeldigheid"][settings.DAY_START : settings.DAY_END]
+                    ]["StUF:beginGeldigheid"][
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 ),
                 "datum": antwoord_dict_object["ns:historieMaterieel"][
                     "StUF:tijdvakGeldigheid"
@@ -43,12 +45,16 @@ class NationaliteitHistorie(Nationaliteit):
                 "jaar": int(
                     antwoord_dict_object["ns:historieMaterieel"][
                         "StUF:tijdvakGeldigheid"
-                    ]["StUF:beginGeldigheid"][settings.YEAR_START : settings.YEAR_END]
+                    ]["StUF:beginGeldigheid"][
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
                 ),
                 "maand": int(
                     antwoord_dict_object["ns:historieMaterieel"][
                         "StUF:tijdvakGeldigheid"
-                    ]["StUF:beginGeldigheid"][settings.MONTH_START : settings.MONTH_END]
+                    ]["StUF:beginGeldigheid"][
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 ),
             },
             "nationaliteit": {"code": "0000", "omschrijving": "Nederland"},
@@ -82,7 +88,9 @@ class NationaliteitHistorie(Nationaliteit):
                 "dag": int(
                     antwoord_dict_object["ns:historieMaterieel"][
                         "StUF:tijdvakGeldigheid"
-                    ]["StUF:eindGeldigheid"][settings.DAY_START : settings.DAY_END]
+                    ]["StUF:eindGeldigheid"][
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 ),
                 "datum": antwoord_dict_object["ns:historieMaterieel"][
                     "StUF:tijdvakGeldigheid"
@@ -90,12 +98,16 @@ class NationaliteitHistorie(Nationaliteit):
                 "jaar": int(
                     antwoord_dict_object["ns:historieMaterieel"][
                         "StUF:tijdvakGeldigheid"
-                    ]["StUF:eindGeldigheid"][settings.YEAR_START : settings.YEAR_END]
+                    ]["StUF:eindGeldigheid"][
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
                 ),
                 "maand": int(
                     antwoord_dict_object["ns:historieMaterieel"][
                         "StUF:tijdvakGeldigheid"
-                    ]["StUF:eindGeldigheid"][settings.MONTH_START : settings.MONTH_END]
+                    ]["StUF:eindGeldigheid"][
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 ),
             },
             "redenBeeindigen": {

@@ -14,8 +14,8 @@ services:
       - SECRET_KEY=${SECRET_KEY:-%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#}
       - DB_USER=${DB_USER:-openpersonen}
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
-      - USE_STUF_BG_DATABASE=${USE_STUF_BG_DATABASE:-True}
-      - USE_AUTHENTICATION=${USE_AUTHENTICATION:-False}
+      - OPENPERSONEN_USE_LOCAL_DATABASE=${OPENPERSONEN_USE_LOCAL_DATABASE:-True}
+      - OPENPERSONEN_USE_AUTHENTICATION=${OPENPERSONEN_USE_AUTHENTICATION:-False}
     ports:
       - 8000:8000
     depends_on:

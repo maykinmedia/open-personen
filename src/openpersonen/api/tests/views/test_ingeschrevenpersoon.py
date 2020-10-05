@@ -27,7 +27,7 @@ from openpersonen.api.views import IngeschrevenPersoonViewSet
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
-@override_settings(USE_STUF_BG_DATABASE=False)
+@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
 class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
         super().setUp()
@@ -183,7 +183,7 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(view.get_filter_parameters(), [])
 
 
-@override_settings(USE_STUF_BG_DATABASE=True)
+@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=True)
 class TestIngeschrevenPersoonWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
