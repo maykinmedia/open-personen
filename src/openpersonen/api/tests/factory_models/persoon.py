@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Persoon
+from openpersonen.contrib.demo.models import Persoon
 from openpersonen.api.tests.utils import get_a_nummer, get_bsn
 
 a_nummer_generator = get_a_nummer()

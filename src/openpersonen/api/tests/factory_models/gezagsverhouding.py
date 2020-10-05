@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Gezagsverhouding
+from openpersonen.contrib.demo.models import Gezagsverhouding
 
 from .persoon import PersoonFactory
 

@@ -2,9 +2,9 @@ from dataclasses import dataclass
 
 from django.conf import settings
 
-from openpersonen.api.demo_models import Persoon as PersoonDemoModel
+from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
 from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
-from openpersonen.api.models import StufBGClient
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschap
 from .converters.partner import (
@@ -13,6 +13,9 @@ from .converters.partner import (
 )
 from .in_onderzoek import PartnerInOnderzoek
 from .persoon import Persoon
+
+
+# backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 
 @dataclass

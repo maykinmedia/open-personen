@@ -4,7 +4,7 @@ from django.test import TestCase
 import requests_mock
 from mock import patch
 
-from openpersonen.api.models import StufBGClient
+from openpersonen.contrib.stufbg.models import StufBGClient
 
 
 class TestClient(TestCase):

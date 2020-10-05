@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Nationaliteit
+from openpersonen.contrib.demo.models import Nationaliteit
 
 from .persoon import PersoonFactory
 

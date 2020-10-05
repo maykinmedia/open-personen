@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Verblijfplaats
+from openpersonen.contrib.demo.models import Verblijfplaats
 
 from .persoon import PersoonFactory
 

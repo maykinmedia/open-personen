@@ -6,7 +6,7 @@ import requests
 from rest_framework.authtoken.models import Token
 
 from openpersonen.accounts.models import User
-from openpersonen.api.demo_models import *
+from openpersonen.contrib.demo.models import *
 
 user, _ = User.objects.get_or_create(username="test")
 token, _ = Token.objects.get_or_create(user=user)

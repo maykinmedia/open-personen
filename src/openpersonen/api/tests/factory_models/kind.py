@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Kind
+from openpersonen.contrib.demo.models import Kind
 from openpersonen.api.tests.utils import get_a_nummer, get_bsn
 
 from .persoon import PersoonFactory

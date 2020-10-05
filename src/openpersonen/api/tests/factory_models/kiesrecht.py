@@ -1,6 +1,6 @@
 import factory
 
-from openpersonen.api.demo_models import Kiesrecht
+from openpersonen.contrib.demo.models import Kiesrecht
 
 from .persoon import PersoonFactory
 
