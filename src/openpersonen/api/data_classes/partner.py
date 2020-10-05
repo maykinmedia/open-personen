@@ -31,7 +31,7 @@ class Partner(Persoon):
     @classmethod
     def list(cls, bsn):
         class_instances = []
-        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+        if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
             instances = PersoonDemoModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.all()
@@ -48,7 +48,7 @@ class Partner(Persoon):
 
     @classmethod
     def retrieve(cls, bsn, id):
-        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+        if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
             instance = PersoonDemoModel.objects.get(
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.get(

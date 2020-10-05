@@ -45,18 +45,18 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "datum": {
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
             },
@@ -191,7 +191,7 @@ def convert_model_instance_to_instance_dict(partner):
             "datum": {
                 "dag": int(
                     partner.geboortedatum_echtgenoot_geregistreerd_partner[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                     if is_valid_date_format(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner
@@ -201,7 +201,7 @@ def convert_model_instance_to_instance_dict(partner):
                 "datum": partner.geboortedatum_echtgenoot_geregistreerd_partner,
                 "jaar": int(
                     partner.geboortedatum_echtgenoot_geregistreerd_partner[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                     if is_valid_date_format(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner
@@ -210,7 +210,7 @@ def convert_model_instance_to_instance_dict(partner):
                 ),
                 "maand": int(
                     partner.geboortedatum_echtgenoot_geregistreerd_partner[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                     if is_valid_date_format(
                         partner.geboortedatum_echtgenoot_geregistreerd_partner
@@ -248,7 +248,7 @@ def convert_model_instance_to_instance_dict(partner):
             "datumIngangOnderzoek": {
                 "dag": int(
                     partner.datum_ingang_onderzoek[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                     if is_valid_date_format(partner.datum_ingang_onderzoek)
                     else 0
@@ -256,14 +256,14 @@ def convert_model_instance_to_instance_dict(partner):
                 "datum": partner.datum_ingang_onderzoek,
                 "jaar": int(
                     partner.datum_ingang_onderzoek[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                     if is_valid_date_format(partner.datum_ingang_onderzoek)
                     else 0
                 ),
                 "maand": int(
                     partner.datum_ingang_onderzoek[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                     if is_valid_date_format(partner.datum_ingang_onderzoek)
                     else 0
@@ -274,7 +274,7 @@ def convert_model_instance_to_instance_dict(partner):
             "datum": {
                 "dag": int(
                     partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                     if is_valid_date_format(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
@@ -284,7 +284,7 @@ def convert_model_instance_to_instance_dict(partner):
                 "datum": partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
                 "jaar": int(
                     partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                     if is_valid_date_format(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
@@ -293,7 +293,7 @@ def convert_model_instance_to_instance_dict(partner):
                 ),
                 "maand": int(
                     partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                     if is_valid_date_format(
                         partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap

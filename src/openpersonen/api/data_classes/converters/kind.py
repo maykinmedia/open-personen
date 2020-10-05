@@ -44,18 +44,18 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
             "datum": {
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.DAY_START : settings.DAY_END
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.YEAR_START : settings.YEAR_END
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
             },
@@ -161,18 +161,24 @@ def convert_model_instance_to_instance_dict(kind):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    kind.geboortedatum_kind[settings.DAY_START : settings.DAY_END]
+                    kind.geboortedatum_kind[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 )
                 if is_valid_date_format(kind.geboortedatum_kind)
                 else 0,
                 "datum": kind.geboortedatum_kind,
                 "jaar": int(
-                    kind.geboortedatum_kind[settings.YEAR_START : settings.YEAR_END]
+                    kind.geboortedatum_kind[
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
                 )
                 if is_valid_date_format(kind.geboortedatum_kind)
                 else 0,
                 "maand": int(
-                    kind.geboortedatum_kind[settings.MONTH_START : settings.MONTH_END]
+                    kind.geboortedatum_kind[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 )
                 if is_valid_date_format(kind.geboortedatum_kind)
                 else 0,
@@ -202,19 +208,23 @@ def convert_model_instance_to_instance_dict(kind):
             "burgerservicenummer": bool(kind.burgerservicenummer_kind),
             "datumIngangOnderzoek": {
                 "dag": int(
-                    kind.datum_ingang_onderzoek[settings.DAY_START : settings.DAY_END]
+                    kind.datum_ingang_onderzoek[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
                 )
                 if is_valid_date_format(kind.datum_ingang_onderzoek)
                 else 0,
                 "datum": kind.datum_ingang_onderzoek,
                 "jaar": int(
-                    kind.datum_ingang_onderzoek[settings.YEAR_START : settings.YEAR_END]
+                    kind.datum_ingang_onderzoek[
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
                 )
                 if is_valid_date_format(kind.datum_ingang_onderzoek)
                 else 0,
                 "maand": int(
                     kind.datum_ingang_onderzoek[
-                        settings.MONTH_START : settings.MONTH_END
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 )
                 if is_valid_date_format(kind.datum_ingang_onderzoek)

@@ -26,7 +26,9 @@ def calculate_age(person_birth_date):
     except ValueError:
         try:
             return datetime.now().year - int(
-                person_birth_date[settings.YEAR_START : settings.YEAR_END]
+                person_birth_date[
+                    settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                ]
             )
         except ValueError:
             return 0

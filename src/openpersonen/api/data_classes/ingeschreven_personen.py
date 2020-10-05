@@ -64,7 +64,7 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def list(cls, filters):
         class_instances = []
-        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+        if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
 
             cls.update_filters_to_fit_model(filters)
             instances = PersoonDemoModel.objects.filter(**filters)
@@ -81,7 +81,7 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
-        if getattr(settings, "USE_STUF_BG_DATABASE", False):
+        if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
             instance = PersoonDemoModel.objects.get(burgerservicenummer_persoon=bsn)
             result = convert_model_instance_to_instance_dict(instance)
         else:

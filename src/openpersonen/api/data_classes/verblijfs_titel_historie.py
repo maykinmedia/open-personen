@@ -31,7 +31,7 @@ class VerblijfsTitelHistorie(VerblijfsTitel):
                 "dag": int(
                     antwoord_dict_object["StUF:tijdvakGeldigheid"][
                         "StUF:beginGeldigheid"
-                    ][settings.DAY_START : settings.DAY_END]
+                    ][settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": antwoord_dict_object["StUF:tijdvakGeldigheid"][
                     "StUF:beginGeldigheid"
@@ -39,19 +39,21 @@ class VerblijfsTitelHistorie(VerblijfsTitel):
                 "jaar": int(
                     antwoord_dict_object["StUF:tijdvakGeldigheid"][
                         "StUF:beginGeldigheid"
-                    ][settings.YEAR_START : settings.YEAR_END]
+                    ][settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     antwoord_dict_object["StUF:tijdvakGeldigheid"][
                         "StUF:beginGeldigheid"
-                    ][settings.MONTH_START : settings.MONTH_END]
+                    ][
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 ),
             },
             "datumIngang": {
                 "dag": int(
                     antwoord_dict_object["StUF:tijdvakGeldigheid"][
                         "StUF:eindGeldigheid"
-                    ][settings.DAY_START : settings.DAY_END]
+                    ][settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": antwoord_dict_object["StUF:tijdvakGeldigheid"][
                     "StUF:eindGeldigheid"
@@ -59,12 +61,14 @@ class VerblijfsTitelHistorie(VerblijfsTitel):
                 "jaar": int(
                     antwoord_dict_object["StUF:tijdvakGeldigheid"][
                         "StUF:eindGeldigheid"
-                    ][settings.YEAR_START : settings.YEAR_END]
+                    ][settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     antwoord_dict_object["StUF:tijdvakGeldigheid"][
                         "StUF:eindGeldigheid"
-                    ][settings.MONTH_START : settings.MONTH_END]
+                    ][
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
                 ),
             },
             "inOnderzoek": {

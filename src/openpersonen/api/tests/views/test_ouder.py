@@ -15,7 +15,7 @@ from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
 
 
-@override_settings(USE_STUF_BG_DATABASE=False)
+@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
 class TestOuder(APITestCase):
     def setUp(self):
         super().setUp()
@@ -223,7 +223,7 @@ class TestOuder(APITestCase):
             )
 
 
-@override_settings(USE_STUF_BG_DATABASE=True)
+@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=True)
 class TestOuderWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
