@@ -15,7 +15,6 @@ from .converters.partner import (
 from .in_onderzoek import PartnerInOnderzoek
 from .persoon import Persoon
 
-
 backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 
@@ -36,9 +35,7 @@ class Partner(Persoon):
     def list(cls, bsn):
         class_instances = []
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instances = PersoonDemoModel.objects.get(
-                burgerservicenummer_persoon=bsn
-            ).partnerschap_set.all()
+            instances = backend.get_partner(bsn)
             for instance in instances:
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -53,11 +50,7 @@ class Partner(Persoon):
     @classmethod
     def retrieve(cls, bsn, id):
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instance = PersoonDemoModel.objects.get(
-                burgerservicenummer_persoon=bsn
-            ).partnerschap_set.get(
-                burgerservicenummer_echtgenoot_geregistreerd_partner=id
-            )
+            instance = backend.get_partner(bsn, partner_bsn=id)
             result = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_partner(bsn)

@@ -26,8 +26,6 @@ from .verblijfs_titel import VerblijfsTitel
 
 backend = import_string(settings.OPENPERSONEN_BACKEND)
 
-backend.print_hello()
-
 
 @dataclass
 class IngeschrevenPersoon(Persoon):
@@ -71,8 +69,7 @@ class IngeschrevenPersoon(Persoon):
         class_instances = []
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
 
-            cls.update_filters_to_fit_model(filters)
-            instances = PersoonDemoModel.objects.filter(**filters)
+            instances = backend.get_person(filters=filters)
             for instance in instances:
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -87,7 +84,7 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def retrieve(cls, bsn):
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instance = PersoonDemoModel.objects.get(burgerservicenummer_persoon=bsn)
+            instance = backend.get_person(bsn=bsn)
             result = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)

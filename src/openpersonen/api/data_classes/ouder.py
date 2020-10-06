@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from django.conf import settings
 from django.utils.module_loading import import_string
 
-
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
 from openpersonen.contrib.stufbg.models import StufBGClient
@@ -36,9 +35,7 @@ class Ouder(Persoon):
     def list(cls, bsn):
         class_instances = []
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instances = PersoonDemoModel.objects.get(
-                burgerservicenummer_persoon=bsn
-            ).ouder_set.all()
+            instances = backend.get_ouder(bsn)
             for instance in instances:
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -53,9 +50,7 @@ class Ouder(Persoon):
     @classmethod
     def retrieve(cls, bsn, id):
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instance = PersoonDemoModel.objects.get(
-                burgerservicenummer_persoon=bsn
-            ).ouder_set.get(burgerservicenummer_ouder=id)
+            instance = backend.get_ouder(bsn, ouder_bsn=id)
             result = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_ouder(bsn)
