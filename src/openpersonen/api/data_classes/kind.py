@@ -13,7 +13,6 @@ from .converters.kind import (
 from .in_onderzoek import KindInOnderzoek
 from .persoon import Persoon
 
-
 backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 
@@ -26,9 +25,7 @@ class Kind(Persoon):
     def list(cls, bsn):
         class_instances = []
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instances = PersoonDemoModel.objects.get(
-                burgerservicenummer_persoon=bsn
-            ).kind_set.all()
+            instances = backend.get_kind(bsn)
             for instance in instances:
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
@@ -43,9 +40,7 @@ class Kind(Persoon):
     @classmethod
     def retrieve(cls, bsn, id):
         if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instance = PersoonDemoModel.objects.get(
-                burgerservicenummer_persoon=bsn
-            ).kind_set.get(burgerservicenummer_kind=id)
+            instance = backend.get_kind(bsn, kind_bsn=id)
             result = convert_model_instance_to_instance_dict(instance)
         else:
             response = StufBGClient.get_solo().get_kind(bsn)
