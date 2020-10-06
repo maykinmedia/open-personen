@@ -19,14 +19,17 @@ class BackEnd:
 
         return convert_response_to_persoon_dicts(response)
 
-    def get_kind(self, bsn, **kwargs):
+    def get_kind(self, bsn, kind_bsn=None):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
-        return StufBGClient.get_solo().get_kind(bsn)
+        response = StufBGClient.get_solo().get_kind(bsn)
+        return convert_response_to_kind_dict(response, id=kind_bsn)
 
-    def get_ouder(self, bsn, **kwargs):
+    def get_ouder(self, bsn, ouder_bsn=None):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
-        return StufBGClient.get_solo().get_ouder(bsn)
+        response = StufBGClient.get_solo().get_ouder(bsn)
+        return convert_response_to_ouder_dict(response, id=ouder_bsn)
 
-    def get_partner(self, bsn, **kwargs):
+    def get_partner(self, bsn, partner_bsn=None):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
-        return StufBGClient.get_solo().get_partner(bsn)
+        response = StufBGClient.get_solo().get_partner(bsn)
+        return convert_response_to_partner_dict(response, id=partner_bsn)

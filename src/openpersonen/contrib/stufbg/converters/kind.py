@@ -117,8 +117,8 @@ def convert_response_to_kind_dict(response, id=None):
         ]["object"]["BG:inp.heeftAlsKinderen"]
         prefix = "BG"
 
+    result = []
     if isinstance(antwoord_object, list):
-        result = []
         for antwood_dict in antwoord_object:
             result_dict = _get_client_instance_dict(
                 antwood_dict[f"{prefix}:gerelateerde"], prefix
@@ -126,10 +126,10 @@ def convert_response_to_kind_dict(response, id=None):
             if not id or id == result_dict["burgerservicenummer"]:
                 result.append(result_dict)
     else:
-        result = _get_client_instance_dict(
+        result.append(_get_client_instance_dict(
             antwoord_object[f"{prefix}:gerelateerde"], prefix
-        )
-        if id and result["burgerservicenummer"] != id:
-            result = {}
+        ))
+        if id and result[0]["burgerservicenummer"] != id:
+            result = []
 
     return result

@@ -1,6 +1,6 @@
 from django.apps import apps
 
-from openpersonen.contrib.demo.converters import convert_persoon_to_instance_dict
+from openpersonen.contrib.demo.converters import *
 
 
 class BackEnd:
@@ -47,32 +47,50 @@ class BackEnd:
         Persoon = apps.get_model("demo", "Persoon")
 
         if kind_bsn:
-            return Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.get(
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.filter(
                 burgerservicenummer_kind=kind_bsn
             )
         else:
-            return Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.all()
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.all()
+
+        instance_dicts = []
+        for instance in instances:
+            instance_dicts.append(convert_kind_to_instance_dict(instance))
+
+        return instance_dicts
 
     def get_ouder(self, bsn, ouder_bsn=None):
         Persoon = apps.get_model("demo", "Persoon")
 
         if ouder_bsn:
-            return Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.get(
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.filter(
                 burgerservicenummer_ouder=ouder_bsn
             )
         else:
-            return Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.all()
+            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.all()
+
+        instance_dicts = []
+        for instance in instances:
+            instance_dicts.append(convert_ouder_instance_to_dict(instance))
+
+        return instance_dicts
 
     def get_partner(self, bsn, partner_bsn=None):
         Persoon = apps.get_model("demo", "Persoon")
 
         if partner_bsn:
-            return Persoon.objects.get(
+            instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
-            ).partnerschap_set.get(
+            ).partnerschap_set.filter(
                 burgerservicenummer_echtgenoot_geregistreerd_partner=partner_bsn
             )
         else:
-            return Persoon.objects.get(
+            instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.all()
+
+        instance_dicts = []
+        for instance in instances:
+            instance_dicts.append(convert_partner_instance_to_dict(instance))
+
+        return instance_dicts
