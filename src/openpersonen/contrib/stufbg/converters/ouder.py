@@ -158,9 +158,9 @@ def convert_response_to_ouder_dict(response, id=None):
             if not id or id == result_dict["burgerservicenummer"]:
                 result.append(result_dict)
     else:
-        result.append(_get_client_instance_dict(
-            antwoord_object[f"{prefix}:gerelateerde"], prefix
-        ))
+        result.append(
+            _get_client_instance_dict(antwoord_object[f"{prefix}:gerelateerde"], prefix)
+        )
         if id and result[0]["burgerservicenummer"] != id:
             result = []
 

@@ -9,8 +9,6 @@ from .datum import Datum
 from .in_onderzoek import OuderInOnderzoek
 from .persoon import Persoon
 
-backend = import_string(settings.OPENPERSONEN_BACKEND)
-
 
 @dataclass
 class Ouder(Persoon):
@@ -28,6 +26,7 @@ class Ouder(Persoon):
     @classmethod
     def list(cls, bsn):
         class_instances = []
+        backend = import_string(settings.OPENPERSONEN_BACKEND)
         instance_dicts = backend.get_ouder(bsn)
         for instance_dict in instance_dicts:
             class_instances.append(cls(**instance_dict))
@@ -35,5 +34,6 @@ class Ouder(Persoon):
 
     @classmethod
     def retrieve(cls, bsn, id):
+        backend = import_string(settings.OPENPERSONEN_BACKEND)
         instance_dicts = backend.get_ouder(bsn, ouder_bsn=id)
         return cls(**instance_dicts[0])

@@ -156,9 +156,8 @@ class TestOuder(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), dict())
 
     @requests_mock.Mocker()
     def test_detail_ouder_with_two_ouders(self, post_mock):
@@ -204,9 +203,8 @@ class TestOuder(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
         self.assertTrue(post_mock.called)
-        self.assertEqual(response.json(), dict())
 
     def test_detail_ouder_with_bad_id(self):
 
