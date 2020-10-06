@@ -40,7 +40,7 @@ class Ouder(Persoon):
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         else:
-            response = StufBGClient.get_solo().get_ouder(bsn)
+            response = backend.get_ouder(bsn)
             result = convert_client_response(response)
             if isinstance(result, dict):
                 result = [result]
@@ -53,7 +53,7 @@ class Ouder(Persoon):
             instance = backend.get_ouder(bsn, ouder_bsn=id)
             result = convert_model_instance_to_instance_dict(instance)
         else:
-            response = StufBGClient.get_solo().get_ouder(bsn)
+            response = backend.get_ouder(bsn)
             result = convert_client_response(response, id)
 
             if not result:

@@ -74,7 +74,7 @@ class IngeschrevenPersoon(Persoon):
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         else:
-            response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
+            response = backend.get_person(filters=filters)
             result = convert_client_response(response)
             if isinstance(result, dict):
                 result = [result]
@@ -87,7 +87,7 @@ class IngeschrevenPersoon(Persoon):
             instance = backend.get_person(bsn=bsn)
             result = convert_model_instance_to_instance_dict(instance)
         else:
-            response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
+            response = backend.get_person(bsn=bsn)
             result = convert_client_response(response)
 
             if not result:
