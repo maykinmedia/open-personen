@@ -2,10 +2,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.utils import (
-    calculate_age,
-    convert_empty_instances
-)
+from openpersonen.api.utils import calculate_age, convert_empty_instances
 
 
 def _get_client_instance_dict(instance_xml_dict, prefix):

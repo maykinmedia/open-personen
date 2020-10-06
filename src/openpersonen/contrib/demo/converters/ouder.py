@@ -1,6 +1,5 @@
 from django.conf import settings
 
-
 from openpersonen.api.utils import is_valid_date_format
 
 

@@ -47,11 +47,13 @@ class BackEnd:
         Persoon = apps.get_model("demo", "Persoon")
 
         if kind_bsn:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.filter(
-                burgerservicenummer_kind=kind_bsn
-            )
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).kind_set.filter(burgerservicenummer_kind=kind_bsn)
         else:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).kind_set.all()
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).kind_set.all()
 
         instance_dicts = []
         for instance in instances:
@@ -63,11 +65,13 @@ class BackEnd:
         Persoon = apps.get_model("demo", "Persoon")
 
         if ouder_bsn:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.filter(
-                burgerservicenummer_ouder=ouder_bsn
-            )
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).ouder_set.filter(burgerservicenummer_ouder=ouder_bsn)
         else:
-            instances = Persoon.objects.get(burgerservicenummer_persoon=bsn).ouder_set.all()
+            instances = Persoon.objects.get(
+                burgerservicenummer_persoon=bsn
+            ).ouder_set.all()
 
         instance_dicts = []
         for instance in instances:

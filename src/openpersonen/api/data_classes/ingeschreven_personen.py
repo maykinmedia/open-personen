@@ -18,8 +18,6 @@ from .persoon import Persoon
 from .verblijf_plaats import VerblijfPlaats
 from .verblijfs_titel import VerblijfsTitel
 
-backend = import_string(settings.OPENPERSONEN_BACKEND)
-
 
 @dataclass
 class IngeschrevenPersoon(Persoon):
@@ -61,6 +59,7 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def list(cls, filters):
         class_instances = []
+        backend = import_string(settings.OPENPERSONEN_BACKEND)
         instance_dicts = backend.get_person(filters=filters)
         for instance_dict in instance_dicts:
             class_instances.append(cls(**instance_dict))
@@ -68,5 +67,6 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
+        backend = import_string(settings.OPENPERSONEN_BACKEND)
         instance_dicts = backend.get_person(bsn=bsn)
         return cls(**instance_dicts[0])

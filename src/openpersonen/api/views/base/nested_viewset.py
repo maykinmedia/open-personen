@@ -37,7 +37,7 @@ class NestedViewSet(BaseViewSet):
 
         try:
             instance = self.instance_class.retrieve(bsn, id)
-        except ObjectDoesNotExist:
+        except IndexError:
             return Response(
                 data=get_404_response(request.get_full_path()),
                 status=HTTP_404_NOT_FOUND,
