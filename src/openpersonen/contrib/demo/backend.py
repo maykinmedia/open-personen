@@ -42,14 +42,14 @@ class BackEnd:
 
         return instance_dicts
 
-    def get_kind(self, bsn, kind_bsn=None):
+    def get_kind(self, bsn, id=None):
 
         Persoon = apps.get_model("demo", "Persoon")
 
-        if kind_bsn:
+        if id:
             instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
-            ).kind_set.filter(burgerservicenummer_kind=kind_bsn)
+            ).kind_set.filter(burgerservicenummer_kind=id)
         else:
             instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
@@ -61,13 +61,13 @@ class BackEnd:
 
         return instance_dicts
 
-    def get_ouder(self, bsn, ouder_bsn=None):
+    def get_ouder(self, bsn, id=None):
         Persoon = apps.get_model("demo", "Persoon")
 
-        if ouder_bsn:
+        if id:
             instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
-            ).ouder_set.filter(burgerservicenummer_ouder=ouder_bsn)
+            ).ouder_set.filter(burgerservicenummer_ouder=id)
         else:
             instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
@@ -79,14 +79,14 @@ class BackEnd:
 
         return instance_dicts
 
-    def get_partner(self, bsn, partner_bsn=None):
+    def get_partner(self, bsn, id=None):
         Persoon = apps.get_model("demo", "Persoon")
 
-        if partner_bsn:
+        if id:
             instances = Persoon.objects.get(
                 burgerservicenummer_persoon=bsn
             ).partnerschap_set.filter(
-                burgerservicenummer_echtgenoot_geregistreerd_partner=partner_bsn
+                burgerservicenummer_echtgenoot_geregistreerd_partner=id
             )
         else:
             instances = Persoon.objects.get(
