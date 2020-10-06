@@ -1,7 +1,11 @@
 from django.apps import apps
 
+from openpersonen.contrib.stufbg.converters import *
+
 
 class BackEnd:
+    # Note: All methods must return a list of dicts
+
     def get_person(self, bsn=None, filters=None):
         if not bsn and not filters:
             raise ValueError("Either bsn or filters must be supplied")
@@ -9,9 +13,11 @@ class BackEnd:
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
 
         if bsn:
-            return StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
+            response = StufBGClient.get_solo().get_ingeschreven_persoon(bsn=bsn)
         else:
-            return StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
+            response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
+
+        return convert_response_to_persoon_dicts(response)
 
     def get_kind(self, bsn, **kwargs):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")

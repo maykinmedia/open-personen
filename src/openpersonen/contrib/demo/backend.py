@@ -1,7 +1,11 @@
 from django.apps import apps
 
+from openpersonen.contrib.demo.converters import convert_persoon_to_instance_dict
+
 
 class BackEnd:
+    # Note: All methods must return a list of dicts
+
     @staticmethod
     def _update_filters_to_fit_model(filters):
         query_param_to_model_field_mapping = {
@@ -28,9 +32,15 @@ class BackEnd:
 
         if filters:
             self._update_filters_to_fit_model(filters)
-            return Persoon.objects.filter(**filters)
+            instances = Persoon.objects.filter(**filters)
         else:
-            return Persoon.objects.get(burgerservicenummer_persoon=bsn)
+            instances = Persoon.objects.filter(burgerservicenummer_persoon=bsn)
+
+        instance_dicts = []
+        for instance in instances:
+            instance_dicts.append(convert_persoon_to_instance_dict(instance))
+
+        return instance_dicts
 
     def get_kind(self, bsn, kind_bsn=None):
 
