@@ -17,23 +17,10 @@ class Partner(Persoon):
     inOnderzoek: PartnerInOnderzoek
     aangaanHuwelijkPartnerschap: AangaanHuwelijkPartnerschap
 
+    backend_function_name = "get_partner"
+
     def get_geslachtsaanduiding_display(self):
         return GeslachtsaanduidingChoices.values[self.geslachtsaanduiding]
 
     def get_soortVerbintenis_display(self):
         return SoortVerbintenis.values[self.soortVerbintenis]
-
-    @classmethod
-    def list(cls, bsn):
-        class_instances = []
-        backend = import_string(settings.OPENPERSONEN_BACKEND)
-        instance_dicts = backend.get_partner(bsn)
-        for instance_dict in instance_dicts:
-            class_instances.append(cls(**instance_dict))
-        return class_instances
-
-    @classmethod
-    def retrieve(cls, bsn, id):
-        backend = import_string(settings.OPENPERSONEN_BACKEND)
-        instance_dicts = backend.get_partner(bsn, partner_bsn=id)
-        return cls(**instance_dicts[0])
