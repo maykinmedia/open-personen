@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
 from django.conf import settings
+from django.utils.module_loading import import_string
+
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices, OuderAanduiding
 from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
@@ -14,7 +16,7 @@ from .datum import Datum
 from .in_onderzoek import OuderInOnderzoek
 from .persoon import Persoon
 
-# backend = import_string(settings.OPENPERSONEN_BACKEND)
+backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 
 @dataclass
