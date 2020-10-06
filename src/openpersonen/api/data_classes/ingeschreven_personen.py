@@ -5,13 +5,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
-from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
-from openpersonen.contrib.stufbg.models import StufBGClient
 
-from .converters.ingeschreven_persoon import (
-    convert_client_response,
-    convert_model_instance_to_instance_dict,
-)
 from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
 from .in_onderzoek import IngeschrevenPersoonInOnderzoek
@@ -67,33 +61,12 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def list(cls, filters):
         class_instances = []
-        if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-
-            instances = backend.get_person(filters=filters)
-            for instance in instances:
-                instance_dict = convert_model_instance_to_instance_dict(instance)
-                class_instances.append(cls(**instance_dict))
-        else:
-            response = backend.get_person(filters=filters)
-            result = convert_client_response(response)
-            if isinstance(result, dict):
-                result = [result]
-            class_instances = [cls(**instance_dict) for instance_dict in result]
+        instance_dicts = backend.get_person(filters=filters)
+        for instance_dict in instance_dicts:
+            class_instances.append(cls(**instance_dict))
         return class_instances
 
     @classmethod
     def retrieve(cls, bsn):
-        if getattr(settings, "OPENPERSONEN_USE_LOCAL_DATABASE", False):
-            instance = backend.get_person(bsn=bsn)
-            result = convert_model_instance_to_instance_dict(instance)
-        else:
-            response = backend.get_person(bsn=bsn)
-            result = convert_client_response(response)
-
-            if not result:
-                return dict()
-
-            if isinstance(result, list) and len(result) > 0:
-                result = result[0]
-
-        return cls(**result)
+        instance_dicts = backend.get_person(bsn=bsn)
+        return cls(**instance_dicts[0])
