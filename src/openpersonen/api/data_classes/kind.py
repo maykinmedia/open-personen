@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from django.conf import settings
+from django.utils.module_loading import import_string
 
 from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
 from openpersonen.contrib.stufbg.models import StufBGClient
@@ -12,7 +13,8 @@ from .converters.kind import (
 from .in_onderzoek import KindInOnderzoek
 from .persoon import Persoon
 
-# backend = import_string(settings.OPENPERSONEN_BACKEND)
+
+backend = import_string(settings.OPENPERSONEN_BACKEND)
 
 
 @dataclass

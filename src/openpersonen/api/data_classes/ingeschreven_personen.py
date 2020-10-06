@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from django.conf import settings
+from django.utils.module_loading import import_string
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
 from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
@@ -23,7 +24,9 @@ from .persoon import Persoon
 from .verblijf_plaats import VerblijfPlaats
 from .verblijfs_titel import VerblijfsTitel
 
-# backend = import_string(settings.OPENPERSONEN_BACKEND)
+backend = import_string(settings.OPENPERSONEN_BACKEND)
+
+backend.print_hello()
 
 
 @dataclass
