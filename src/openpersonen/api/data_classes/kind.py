@@ -30,7 +30,7 @@ class Kind(Persoon):
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         else:
-            response = StufBGClient.get_solo().get_kind(bsn)
+            response = backend.get_kind(bsn)
             result = convert_client_response(response)
             if isinstance(result, dict):
                 result = [result]
@@ -43,7 +43,7 @@ class Kind(Persoon):
             instance = backend.get_kind(bsn, kind_bsn=id)
             result = convert_model_instance_to_instance_dict(instance)
         else:
-            response = StufBGClient.get_solo().get_kind(bsn)
+            response = backend.get_kind(bsn)
             result = convert_client_response(response, id)
 
             if not result:

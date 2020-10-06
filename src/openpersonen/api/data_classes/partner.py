@@ -4,7 +4,6 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices, SoortVerbintenis
-from openpersonen.contrib.demo.models import Persoon as PersoonDemoModel
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 from .aangaan_huwelijk_partnerschap import AangaanHuwelijkPartnerschap
@@ -40,7 +39,7 @@ class Partner(Persoon):
                 instance_dict = convert_model_instance_to_instance_dict(instance)
                 class_instances.append(cls(**instance_dict))
         else:
-            response = StufBGClient.get_solo().get_partner(bsn)
+            response = backend.get_partner(bsn)
             result = convert_client_response(response)
             if isinstance(result, dict):
                 result = [result]
@@ -53,7 +52,7 @@ class Partner(Persoon):
             instance = backend.get_partner(bsn, partner_bsn=id)
             result = convert_model_instance_to_instance_dict(instance)
         else:
-            response = StufBGClient.get_solo().get_partner(bsn)
+            response = backend.get_partner(bsn)
             result = convert_client_response(response, id)
 
             if not result:
