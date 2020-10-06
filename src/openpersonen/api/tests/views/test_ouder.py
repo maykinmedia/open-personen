@@ -15,7 +15,7 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
-@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
+@override_settings(OPENPERSONEN_BACKEND="openpersonen.contrib.stufbg.backend")
 class TestOuder(APITestCase):
     def setUp(self):
         super().setUp()
@@ -223,7 +223,6 @@ class TestOuder(APITestCase):
             )
 
 
-@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=True)
 class TestOuderWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()

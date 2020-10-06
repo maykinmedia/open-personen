@@ -27,7 +27,7 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
-@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
+@override_settings(OPENPERSONEN_BACKEND="openpersonen.contrib.stufbg.backend")
 class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
         super().setUp()
@@ -183,7 +183,6 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(view.get_filter_parameters(), [])
 
 
-@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=True)
 class TestIngeschrevenPersoonWithTestingModels(APITestCase):
     def setUp(self):
         super().setUp()
