@@ -16,6 +16,10 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
+@patch(
+    "openpersonen.api.data_classes.persoon.backend",
+    import_string("openpersonen.contrib.stufbg.backend"),
+)
 class TestOuder(APITestCase):
     def setUp(self):
         super().setUp()
@@ -34,10 +38,6 @@ class TestOuder(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_list_ouder(self, post_mock):
         post_mock.post(
             self.url,
@@ -66,10 +66,6 @@ class TestOuder(APITestCase):
         )
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_list_ouder_with_one_ouder(self, post_mock):
         post_mock.post(
             self.url,
@@ -93,10 +89,6 @@ class TestOuder(APITestCase):
         self.assertEqual(data[0]["burgerservicenummer"], str(self.ouder_bsn))
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ouder(self, post_mock):
         post_mock.post(
             self.url,
@@ -121,10 +113,6 @@ class TestOuder(APITestCase):
         self.assertEqual(response.json(), OUDER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ouders_BG_response(self, post_mock):
         fake_bsn = 123456780
         fake_ouder_bsn = 123456790
@@ -153,10 +141,6 @@ class TestOuder(APITestCase):
         self.assertEqual(response.json()["burgerservicenummer"], str(fake_ouder_bsn))
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ouder_when_id_does_not_match(self, post_mock):
         post_mock.post(
             self.url,
@@ -180,10 +164,6 @@ class TestOuder(APITestCase):
         self.assertTrue(post_mock.called)
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ouder_with_two_ouders(self, post_mock):
         post_mock.post(
             self.url,
@@ -208,10 +188,6 @@ class TestOuder(APITestCase):
         self.assertEqual(response.json(), OUDER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.persoon.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ouder_when_id_does_not_match_with_two_ouders(self, post_mock):
         post_mock.post(
             self.url,

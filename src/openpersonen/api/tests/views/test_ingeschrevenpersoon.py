@@ -29,6 +29,10 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
+@patch(
+    "openpersonen.api.data_classes.ingeschreven_personen.backend",
+    import_string("openpersonen.contrib.stufbg.backend"),
+)
 class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
         super().setUp()
@@ -78,10 +82,6 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.ingeschreven_personen.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_list_ingeschreven_persoon(self, post_mock):
         post_mock.post(
             self.url,
@@ -103,10 +103,6 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(len(data), 2)
 
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.ingeschreven_personen.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_list_ingeschreven_persoon_with_ingeschreven_persoon(self, post_mock):
         post_mock.post(
             self.url,
@@ -129,10 +125,6 @@ class TestIngeschrevenPersoon(APITestCase):
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.ingeschreven_personen.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ingeschreven_persoon(self, post_mock):
 
         post_mock.post(
@@ -157,10 +149,6 @@ class TestIngeschrevenPersoon(APITestCase):
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
-    @patch(
-        "openpersonen.api.data_classes.ingeschreven_personen.backend",
-        import_string("openpersonen.contrib.stufbg.backend"),
-    )
     def test_detail_ingeschreven_persoon_BG_response(self, post_mock):
         fake_bsn = 123456780
 
