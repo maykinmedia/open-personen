@@ -1,10 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from django.conf import settings
-from django.utils.module_loading import import_string
-
 from openpersonen.api.enum import GeslachtsaanduidingChoices
+from openpersonen.backends import backend
 
 from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
@@ -59,7 +57,6 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def list(cls, filters):
         class_instances = []
-        backend = import_string(settings.OPENPERSONEN_BACKEND)
         instance_dicts = backend.get_person(filters=filters)
         for instance_dict in instance_dicts:
             class_instances.append(cls(**instance_dict))
@@ -67,6 +64,5 @@ class IngeschrevenPersoon(Persoon):
 
     @classmethod
     def retrieve(cls, bsn):
-        backend = import_string(settings.OPENPERSONEN_BACKEND)
         instance_dicts = backend.get_person(bsn=bsn)
         return cls(**instance_dicts[0])

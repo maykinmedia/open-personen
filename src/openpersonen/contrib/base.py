@@ -1,5 +1,4 @@
 class BaseBackend:
-
     def get_person(self, bsn=None, filters=None):
         raise NotImplementedError
 

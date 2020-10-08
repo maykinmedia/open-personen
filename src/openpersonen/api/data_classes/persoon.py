@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from openpersonen.backends import get_backend
+from openpersonen.backends import backend
 
 from .geboorte import Geboorte
 from .naam import Naam
@@ -18,7 +18,7 @@ class Persoon:
     @classmethod
     def list(cls, bsn):
         class_instances = []
-        function = getattr(get_backend(), cls.backend_function_name)
+        function = getattr(backend, cls.backend_function_name)
 
         if not function:
             raise ValueError(f"No function found with name {cls.backend_function_name}")
@@ -30,7 +30,7 @@ class Persoon:
 
     @classmethod
     def retrieve(cls, bsn, id):
-        function = getattr(get_backend(), cls.backend_function_name)
+        function = getattr(backend, cls.backend_function_name)
 
         if not function:
             raise ValueError(f"No function found with name {cls.backend_function_name}")

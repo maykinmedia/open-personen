@@ -1,9 +1,11 @@
 from django.template import loader
 from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
+from django.utils.module_loading import import_string
 
 import requests_mock
 from freezegun import freeze_time
+from mock import patch
 from rest_framework.test import APITestCase
 
 from openpersonen.api.tests.factory_models import (
@@ -77,6 +79,10 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.ingeschreven_personen.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_list_ingeschreven_persoon(self, post_mock):
         post_mock.post(
             self.url,
@@ -98,6 +104,10 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(len(data), 2)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.ingeschreven_personen.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_list_ingeschreven_persoon_with_ingeschreven_persoon(self, post_mock):
         post_mock.post(
             self.url,
@@ -120,6 +130,10 @@ class TestIngeschrevenPersoon(APITestCase):
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.ingeschreven_personen.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_ingeschreven_persoon(self, post_mock):
 
         post_mock.post(
@@ -144,6 +158,10 @@ class TestIngeschrevenPersoon(APITestCase):
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.ingeschreven_personen.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_ingeschreven_persoon_BG_response(self, post_mock):
         fake_bsn = 123456780
 

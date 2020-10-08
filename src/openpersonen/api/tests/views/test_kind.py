@@ -1,12 +1,10 @@
-from mock import patch
-
 from django.template import loader
-from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
 from django.utils.module_loading import import_string
 
 import requests_mock
 from freezegun import freeze_time
+from mock import patch
 from rest_framework.test import APITestCase
 
 from openpersonen.api.tests.factory_models import (
@@ -19,7 +17,6 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
-@override_settings(OPENPERSONEN_BACKEND="openpersonen.contrib.stufbg.backend")
 class TestKind(APITestCase):
     def setUp(self):
         super().setUp()
@@ -38,6 +35,10 @@ class TestKind(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_list_kind(self, post_mock):
         post_mock.post(
             self.url,
@@ -64,6 +65,10 @@ class TestKind(APITestCase):
         self.assertTrue(second_bsn == "789123456" or second_bsn == str(self.kind_bsn))
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_list_kind_with_one_kind(self, post_mock):
         post_mock.post(
             self.url,
@@ -88,6 +93,10 @@ class TestKind(APITestCase):
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_kind(self, post_mock):
         post_mock.post(
             self.url,
@@ -112,6 +121,10 @@ class TestKind(APITestCase):
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_kind_BG_response(self, post_mock):
         fake_bsn = 123456780
         fake_kind_bsn = 123456781
@@ -140,6 +153,10 @@ class TestKind(APITestCase):
         self.assertEqual(response.json()["burgerservicenummer"], str(fake_kind_bsn))
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_kind_when_id_does_not_match(self, post_mock):
         post_mock.post(
             self.url,
@@ -163,6 +180,10 @@ class TestKind(APITestCase):
         self.assertTrue(post_mock.called)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_kind_with_two_kinderen(self, post_mock):
         post_mock.post(
             self.url,
@@ -187,6 +208,10 @@ class TestKind(APITestCase):
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_kind_when_id_does_not_match_with_two_kinderen(self, post_mock):
         post_mock.post(
             self.url,
