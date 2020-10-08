@@ -1,4 +1,3 @@
-
 def get_404_response(url):
     return {
         "type": "https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5 404 Not Found",

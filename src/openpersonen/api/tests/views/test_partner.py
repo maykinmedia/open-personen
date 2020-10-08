@@ -12,7 +12,7 @@ from openpersonen.api.tests.factory_models import (
     TokenFactory,
 )
 from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
-from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
+from openpersonen.api.views.generic_responses import get_404_response
 
 
 @override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
@@ -376,17 +376,18 @@ class TestPartnerWithTestingModels(APITestCase):
         )
 
     def test_detail_partner_404(self):
+        url = reverse(
+            "partners-detail",
+            kwargs={
+                "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
+                "id": 222222222,
+            },
+        )
 
         response = self.client.get(
-            reverse(
-                "partners-detail",
-                kwargs={
-                    "ingeschrevenpersonen_burgerservicenummer": self.persoon_bsn,
-                    "id": 222222222,
-                },
-            ),
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json(), RESPONSE_DATA_404)
+        self.assertEqual(response.json(), get_404_response(url))

@@ -24,7 +24,7 @@ from openpersonen.api.tests.factory_models import (
 )
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 from openpersonen.api.views import IngeschrevenPersoonViewSet
-from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
+from openpersonen.api.views.generic_responses import get_404_response
 
 
 @override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=False)
@@ -448,14 +448,15 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
 
     def test_not_found_detail_ingeschreven_persoon(self):
+        url = reverse(
+            "ingeschrevenpersonen-detail",
+            kwargs={"burgerservicenummer": 111111111},
+        )
 
         response = self.client.get(
-            reverse(
-                "ingeschrevenpersonen-detail",
-                kwargs={"burgerservicenummer": 111111111},
-            ),
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json(), RESPONSE_DATA_404)
+        self.assertEqual(response.json(), get_404_response(url))

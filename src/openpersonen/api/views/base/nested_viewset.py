@@ -21,7 +21,10 @@ class NestedViewSet(BaseViewSet):
         try:
             instances = self.instance_class.list(bsn)
         except ObjectDoesNotExist:
-            return Response(data=get_404_response(request.get_full_path()), status=HTTP_404_NOT_FOUND)
+            return Response(
+                data=get_404_response(request.get_full_path()),
+                status=HTTP_404_NOT_FOUND,
+            )
 
         serializer = self.serializer_class(instances, many=True)
 
@@ -35,7 +38,10 @@ class NestedViewSet(BaseViewSet):
         try:
             instance = self.instance_class.retrieve(bsn, id)
         except ObjectDoesNotExist:
-            return Response(data=get_404_response(request.get_full_path()), status=HTTP_404_NOT_FOUND)
+            return Response(
+                data=get_404_response(request.get_full_path()),
+                status=HTTP_404_NOT_FOUND,
+            )
 
         serializer = self.serializer_class(instance)
 
