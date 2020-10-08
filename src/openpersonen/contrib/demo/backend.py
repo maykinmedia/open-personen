@@ -99,3 +99,6 @@ class BackEnd(BaseBackend):
             instance_dicts.append(convert_partner_instance_to_dict(instance))
 
         return instance_dicts
+
+
+default = BackEnd()

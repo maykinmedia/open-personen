@@ -14,7 +14,7 @@ services:
       - SECRET_KEY=${SECRET_KEY:-%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#}
       - DB_USER=${DB_USER:-openpersonen}
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
-      - OPENPERSONEN_USE_LOCAL_DATABASE=${OPENPERSONEN_USE_LOCAL_DATABASE:-True}
+      - OPENPERSONEN_BACKEND=${OPENPERSONEN_BACKEND:-openpersonen.contrib.demo.backend.default}
       - OPENPERSONEN_USE_AUTHENTICATION=${OPENPERSONEN_USE_AUTHENTICATION:-False}
     ports:
       - 8000:8000

@@ -31,7 +31,7 @@ from openpersonen.contrib.stufbg.models import StufBGClient
 
 @patch(
     "openpersonen.api.data_classes.ingeschreven_personen.backend",
-    import_string("openpersonen.contrib.stufbg.backend"),
+    import_string("openpersonen.contrib.stufbg.backend.default"),
 )
 class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):

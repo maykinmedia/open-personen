@@ -9,7 +9,7 @@ class IsAuthenticated(_IsAuthenticated):
         if settings.OPENPERSONEN_USE_AUTHENTICATION:
             return super().has_permission(request, view)
         else:
-            if not settings.OPENPERSONEN_USE_LOCAL_DATABASE:
+            if settings.OPENPERSONEN_BACKEND != settings.OPENPERSONEN_DEFAULT_BACKEND:
                 raise ImproperlyConfigured(
                     "Must use authentication when not using local database"
                 )

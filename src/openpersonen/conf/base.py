@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from sentry_sdk.integrations import DidNotEnable, django, redis
 from vng_api_common.conf.api import *  # noqa - imports white-listed
 
+from openpersonen.conf.includes.environ import config
+
 try:
     from sentry_sdk.integrations import celery
 except DidNotEnable:  # no celery in this proejct
@@ -419,14 +421,8 @@ OPENPERSONEN_MONTH_END = 6
 OPENPERSONEN_DAY_START = 6
 OPENPERSONEN_DAY_END = 8
 
-OPENPERSONEN_BACKEND = os.getenv(
-    "OPENPERSONEN_BACKEND", "openpersonen.contrib.demo.backend"
-)
-OPENPERSONEN_USE_AUTHENTICATION = (
-    OPENPERSONEN_BACKEND == "openpersonen.contrib.demo.backend"
-)
+OPENPERSONEN_DEFAULT_BACKEND = "openpersonen.contrib.demo.backend.default"
 
-if os.getenv("OPENPERSONEN_USE_AUTHENTICATION"):
-    OPENPERSONEN_USE_AUTHENTICATION = (
-        os.getenv("OPENPERSONEN_USE_AUTHENTICATION") == "True"
-    )
+OPENPERSONEN_BACKEND = os.getenv("OPENPERSONEN_BACKEND", OPENPERSONEN_DEFAULT_BACKEND)
+
+OPENPERSONEN_USE_AUTHENTICATION = config("OPENPERSONEN_USE_AUTHENTICATION", True)
