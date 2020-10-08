@@ -36,4 +36,8 @@ class Persoon:
             raise ValueError(f"No function found with name {cls.backend_function_name}")
 
         instance_dicts = function(bsn, id=id)
+
+        if not instance_dicts:
+            raise ValueError("No instances found")
+
         return cls(**instance_dicts[0])

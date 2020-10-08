@@ -65,4 +65,8 @@ class IngeschrevenPersoon(Persoon):
     @classmethod
     def retrieve(cls, bsn):
         instance_dicts = backend.get_person(bsn=bsn)
+
+        if not instance_dicts:
+            raise ValueError("No instances found")
+
         return cls(**instance_dicts[0])

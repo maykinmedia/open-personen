@@ -124,7 +124,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(DJANGO_PROJECT_DIR, "templates"),
-            os.path.join(DJANGO_PROJECT_DIR, "api/../contrib/stufbg/request_templates"),
+            os.path.join(DJANGO_PROJECT_DIR, "contrib/stufbg/request_templates"),
             os.path.join(DJANGO_PROJECT_DIR, "api/tests/response_templates"),
         ],
         "APP_DIRS": False,  # conflicts with explicity specifying the loaders

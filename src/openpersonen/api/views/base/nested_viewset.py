@@ -18,13 +18,7 @@ class NestedViewSet(BaseViewSet):
     def list(self, request, *args, **kwargs):
         bsn = kwargs["ingeschrevenpersonen_burgerservicenummer"]
 
-        try:
-            instances = self.instance_class.list(bsn)
-        except ObjectDoesNotExist:
-            return Response(
-                data=get_404_response(request.get_full_path()),
-                status=HTTP_404_NOT_FOUND,
-            )
+        instances = self.instance_class.list(bsn)
 
         serializer = self.serializer_class(instances, many=True)
 
@@ -37,7 +31,7 @@ class NestedViewSet(BaseViewSet):
 
         try:
             instance = self.instance_class.retrieve(bsn, id)
-        except IndexError:
+        except ValueError:
             return Response(
                 data=get_404_response(request.get_full_path()),
                 status=HTTP_404_NOT_FOUND,
