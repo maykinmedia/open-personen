@@ -10,7 +10,7 @@ from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 from openpersonen.api.views.base import BaseViewSet
-from openpersonen.api.views.generic_responses import RESPONSE_DATA_404
+from openpersonen.api.views.generic_responses import get_404_response
 
 
 class IngeschrevenPersoonViewSet(BaseViewSet):
@@ -121,7 +121,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
         try:
             instance = IngeschrevenPersoon.retrieve(burgerservicenummer)
         except ObjectDoesNotExist:
-            return Response(data=RESPONSE_DATA_404, status=HTTP_404_NOT_FOUND)
+            return Response(data=get_404_response(request.get_full_path()), status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(instance)
 
