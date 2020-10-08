@@ -408,7 +408,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": ("djangorestframework_hal.parsers.HalJSONParser",),
 }
 
-# Based on STUF-BG date formats
+# Based on StUF-BG date formats
+#  StUF-BG dates are strings in the format YYYYMMDD
+#  These variables make it clear what portion of the date
+#  is being accessed from the string
 OPENPERSONEN_YEAR_START = 0
 OPENPERSONEN_YEAR_END = 4
 OPENPERSONEN_MONTH_START = 4

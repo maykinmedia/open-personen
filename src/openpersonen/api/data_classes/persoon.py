@@ -18,24 +18,24 @@ class Persoon:
     @classmethod
     def list(cls, bsn):
         class_instances = []
-        function = getattr(backend, cls.backend_function_name)
+        func = getattr(backend, cls.backend_function_name)
 
-        if not function:
+        if not func:
             raise ValueError(f"No function found with name {cls.backend_function_name}")
 
-        instance_dicts = function(bsn)
+        instance_dicts = func(bsn)
         for instance_dict in instance_dicts:
             class_instances.append(cls(**instance_dict))
         return class_instances
 
     @classmethod
     def retrieve(cls, bsn, id):
-        function = getattr(backend, cls.backend_function_name)
+        func = getattr(backend, cls.backend_function_name)
 
-        if not function:
+        if not func:
             raise ValueError(f"No function found with name {cls.backend_function_name}")
 
-        instance_dicts = function(bsn, id=id)
+        instance_dicts = func(bsn, id=id)
 
         if not instance_dicts:
             raise ValueError("No instances found")
