@@ -18,7 +18,7 @@ from openpersonen.contrib.stufbg.models import StufBGClient
 
 @patch(
     "openpersonen.api.data_classes.persoon.backend",
-    import_string("openpersonen.contrib.stufbg.backend"),
+    import_string("openpersonen.contrib.stufbg.backend.default"),
 )
 class TestOuder(APITestCase):
     def setUp(self):
