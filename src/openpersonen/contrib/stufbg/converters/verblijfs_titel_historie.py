@@ -2,7 +2,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.utils import convert_empty_instances
+from openpersonen.contrib.utils import convert_empty_instances
 
 
 def convert_response_to_verblijfs_titel_historie_dict(response):
