@@ -9,6 +9,7 @@ from vng_api_common.schema import SchemaView as _SchemaView
 
 from openpersonen.api.schema import info
 from openpersonen.api.views import (
+    APIRootView,
     IngeschrevenPersoonViewSet,
     KindViewSet,
     NationaliteitHistorieViewSet,
@@ -20,6 +21,7 @@ from openpersonen.api.views import (
 )
 
 router = routers.DefaultRouter()
+router.APIRootView = APIRootView
 
 
 router.register(

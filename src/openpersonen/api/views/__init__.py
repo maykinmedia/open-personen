@@ -1,3 +1,4 @@
+from .api_root import APIRootView
 from .ingeschreven_persoon import IngeschrevenPersoonViewSet
 from .kind import KindViewSet
 from .nationaliteit_historie import NationaliteitHistorieViewSet
