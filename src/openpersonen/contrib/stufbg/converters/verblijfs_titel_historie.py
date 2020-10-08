@@ -19,61 +19,51 @@ def convert_response_to_verblijfs_titel_historie_dict(response):
         },
         "datumEinde": {
             "dag": int(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:beginGeldigheid"
-                ][settings.OPENPERSONEN_DAY_START: settings.OPENPERSONEN_DAY_END]
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:beginGeldigheid"][
+                    settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                ]
             ),
             "datum": antwoord_dict_object["StUF:tijdvakGeldigheid"][
                 "StUF:beginGeldigheid"
             ],
             "jaar": int(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:beginGeldigheid"
-                ][settings.OPENPERSONEN_YEAR_START: settings.OPENPERSONEN_YEAR_END]
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:beginGeldigheid"][
+                    settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                ]
             ),
             "maand": int(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:beginGeldigheid"
-                ][
-                settings.OPENPERSONEN_MONTH_START: settings.OPENPERSONEN_MONTH_END
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:beginGeldigheid"][
+                    settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                 ]
             ),
         },
         "datumIngang": {
             "dag": int(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:eindGeldigheid"
-                ][settings.OPENPERSONEN_DAY_START: settings.OPENPERSONEN_DAY_END]
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:eindGeldigheid"][
+                    settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                ]
             ),
             "datum": antwoord_dict_object["StUF:tijdvakGeldigheid"][
                 "StUF:eindGeldigheid"
             ],
             "jaar": int(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:eindGeldigheid"
-                ][settings.OPENPERSONEN_YEAR_START: settings.OPENPERSONEN_YEAR_END]
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:eindGeldigheid"][
+                    settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                ]
             ),
             "maand": int(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:eindGeldigheid"
-                ][
-                settings.OPENPERSONEN_MONTH_START: settings.OPENPERSONEN_MONTH_END
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:eindGeldigheid"][
+                    settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                 ]
             ),
         },
         "inOnderzoek": {
-            "aanduiding": bool(
-                antwoord_dict_object["ns:vbt.aanduidingVerblijfstitel"]
-            ),
+            "aanduiding": bool(antwoord_dict_object["ns:vbt.aanduidingVerblijfstitel"]),
             "datumEinde": bool(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:eindGeldigheid"
-                ]
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:eindGeldigheid"]
             ),
             "datumIngang": bool(
-                antwoord_dict_object["StUF:tijdvakGeldigheid"][
-                    "StUF:beginGeldigheid"
-                ]
+                antwoord_dict_object["StUF:tijdvakGeldigheid"]["StUF:beginGeldigheid"]
             ),
             "datumIngangOnderzoek": {
                 "dag": 0,

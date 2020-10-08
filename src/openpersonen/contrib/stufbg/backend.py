@@ -5,7 +5,6 @@ from openpersonen.contrib.stufbg.converters import *
 
 
 class BackEnd(BaseBackend):
-
     def get_person(self, bsn=None, filters=None):
         if not bsn and not filters:
             raise ValueError("Either bsn or filters must be supplied")
