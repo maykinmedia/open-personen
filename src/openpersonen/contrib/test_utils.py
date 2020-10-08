@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from freezegun import freeze_time
 
-from openpersonen.api.utils import (
+from openpersonen.contrib.utils import (
     calculate_age,
     convert_empty_instances,
     is_valid_date_format,

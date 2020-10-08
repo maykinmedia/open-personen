@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from openpersonen.api.utils import is_valid_date_format
+from openpersonen.contrib.utils import is_valid_date_format
 
 
 def convert_ouder_instance_to_dict(ouder):

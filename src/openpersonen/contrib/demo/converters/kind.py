@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from openpersonen.api.utils import calculate_age, is_valid_date_format
+from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 
 
 def convert_kind_to_instance_dict(kind):
