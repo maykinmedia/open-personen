@@ -5,7 +5,6 @@ from openpersonen.contrib.stufbg.converters import *
 
 
 class BackEnd(BaseBackend):
-    # Note: All methods must return a list of dicts
 
     def get_person(self, bsn=None, filters=None):
         if not bsn and not filters:
@@ -39,6 +38,21 @@ class BackEnd(BaseBackend):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
         response = StufBGClient.get_solo().get_partner_historie(bsn, filters)
         return convert_response_to_partner_historie_dict(response)
+
+    def get_nationaliteit_historie(self, bsn, filters):
+        StufBGClient = apps.get_model("stufbg", "StufBGClient")
+        response = StufBGClient.get_solo().get_nationaliteit_historie(bsn, filters)
+        return convert_response_to_nationaliteit_historie_dict(response)
+
+    def get_verblijf_plaats_historie(self, bsn, filters):
+        StufBGClient = apps.get_model("stufbg", "StufBGClient")
+        response = StufBGClient.get_solo().get_verblijf_plaats_historie(bsn, filters)
+        return convert_response_to_verblijf_plaats_historie_dict(response)
+
+    def get_verblijfs_titel_historie(self, bsn, filters):
+        StufBGClient = apps.get_model("stufbg", "StufBGClient")
+        response = StufBGClient.get_solo().get_verblijfs_titel_historie(bsn, filters)
+        return convert_response_to_verblijfs_titel_historie_dict(response)
 
 
 default = BackEnd()
