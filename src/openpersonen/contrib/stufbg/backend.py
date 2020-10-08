@@ -35,5 +35,10 @@ class BackEnd(BaseBackend):
         response = StufBGClient.get_solo().get_partner(bsn)
         return convert_response_to_partner_dict(response, id=id)
 
+    def get_partner_historie(self, bsn, filters):
+        StufBGClient = apps.get_model("stufbg", "StufBGClient")
+        response = StufBGClient.get_solo().get_partner_historie(bsn, filters)
+        return convert_response_to_partner_historie_dict(response)
+
 
 default = BackEnd()
