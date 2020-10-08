@@ -8,9 +8,7 @@ def convert_response_to_verblijf_plaats_historie_dict(response):
 
     antwoord_dict_object = dict_object["soapenv:Envelope"]["soapenv:Body"][
         "ns:npsLa01"
-    ]["ns:antwoord"]["ns:object"]["ns:inp.verblijftIn"][
-        "ns:historieFormeelRelatie"
-    ][
+    ]["ns:antwoord"]["ns:object"]["ns:inp.verblijftIn"]["ns:historieFormeelRelatie"][
         "ns:gerelateerde"
     ][
         "ns:adresAanduidingGrp"

@@ -18,28 +18,22 @@ def convert_response_to_nationaliteit_historie_dict(response):
         ]["ns:aanduidingStrijdigheidNietigheid"],
         "datumIngangGeldigheid": {
             "dag": int(
-                antwoord_dict_object["ns:historieMaterieel"][
-                    "StUF:tijdvakGeldigheid"
-                ]["StUF:beginGeldigheid"][
-                settings.OPENPERSONEN_DAY_START: settings.OPENPERSONEN_DAY_END
-                ]
+                antwoord_dict_object["ns:historieMaterieel"]["StUF:tijdvakGeldigheid"][
+                    "StUF:beginGeldigheid"
+                ][settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
             ),
             "datum": antwoord_dict_object["ns:historieMaterieel"][
                 "StUF:tijdvakGeldigheid"
             ]["StUF:beginGeldigheid"],
             "jaar": int(
-                antwoord_dict_object["ns:historieMaterieel"][
-                    "StUF:tijdvakGeldigheid"
-                ]["StUF:beginGeldigheid"][
-                settings.OPENPERSONEN_YEAR_START: settings.OPENPERSONEN_YEAR_END
-                ]
+                antwoord_dict_object["ns:historieMaterieel"]["StUF:tijdvakGeldigheid"][
+                    "StUF:beginGeldigheid"
+                ][settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
             ),
             "maand": int(
-                antwoord_dict_object["ns:historieMaterieel"][
-                    "StUF:tijdvakGeldigheid"
-                ]["StUF:beginGeldigheid"][
-                settings.OPENPERSONEN_MONTH_START: settings.OPENPERSONEN_MONTH_END
-                ]
+                antwoord_dict_object["ns:historieMaterieel"]["StUF:tijdvakGeldigheid"][
+                    "StUF:beginGeldigheid"
+                ][settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END]
             ),
         },
         "nationaliteit": {"code": "0000", "omschrijving": "Nederland"},
@@ -71,28 +65,22 @@ def convert_response_to_nationaliteit_historie_dict(response):
         "geheimhoudingPersoonsgegevens": True,
         "datumEindeGeldigheid": {
             "dag": int(
-                antwoord_dict_object["ns:historieMaterieel"][
-                    "StUF:tijdvakGeldigheid"
-                ]["StUF:eindGeldigheid"][
-                settings.OPENPERSONEN_DAY_START: settings.OPENPERSONEN_DAY_END
-                ]
+                antwoord_dict_object["ns:historieMaterieel"]["StUF:tijdvakGeldigheid"][
+                    "StUF:eindGeldigheid"
+                ][settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
             ),
             "datum": antwoord_dict_object["ns:historieMaterieel"][
                 "StUF:tijdvakGeldigheid"
             ]["StUF:eindGeldigheid"],
             "jaar": int(
-                antwoord_dict_object["ns:historieMaterieel"][
-                    "StUF:tijdvakGeldigheid"
-                ]["StUF:eindGeldigheid"][
-                settings.OPENPERSONEN_YEAR_START: settings.OPENPERSONEN_YEAR_END
-                ]
+                antwoord_dict_object["ns:historieMaterieel"]["StUF:tijdvakGeldigheid"][
+                    "StUF:eindGeldigheid"
+                ][settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
             ),
             "maand": int(
-                antwoord_dict_object["ns:historieMaterieel"][
-                    "StUF:tijdvakGeldigheid"
-                ]["StUF:eindGeldigheid"][
-                settings.OPENPERSONEN_MONTH_START: settings.OPENPERSONEN_MONTH_END
-                ]
+                antwoord_dict_object["ns:historieMaterieel"]["StUF:tijdvakGeldigheid"][
+                    "StUF:eindGeldigheid"
+                ][settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END]
             ),
         },
         "redenBeeindigen": {

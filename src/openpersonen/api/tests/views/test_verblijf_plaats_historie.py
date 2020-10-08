@@ -1,8 +1,8 @@
 from django.template import loader
 from django.urls import reverse
+from django.utils.module_loading import import_string
 
 import requests_mock
-from django.utils.module_loading import import_string
 from mock import patch
 from rest_framework.test import APITestCase
 
