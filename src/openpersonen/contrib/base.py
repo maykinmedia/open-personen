@@ -14,8 +14,8 @@ class BaseBackend:
     def get_nationaliteit_historie(self, bsn, filters):
         raise NotImplementedError
 
-    # def get_partner_historie(self, bsn, filters):
-    #     raise NotImplementedError
+    def get_partner_historie(self, bsn, filters):
+        raise NotImplementedError
 
     def get_verblijf_plaats_historie(self, bsn, filters):
         raise NotImplementedError
