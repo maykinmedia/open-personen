@@ -1,6 +1,9 @@
+from mock import patch
+
 from django.template import loader
 from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
+from django.utils.module_loading import import_string
 
 import requests_mock
 from freezegun import freeze_time

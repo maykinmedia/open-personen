@@ -1,9 +1,10 @@
 from django.apps import apps
 
+from openpersonen.contrib.base import BaseBackend
 from openpersonen.contrib.stufbg.converters import *
 
 
-class BackEnd:
+class BackEnd(BaseBackend):
     # Note: All methods must return a list of dicts
 
     def get_person(self, bsn=None, filters=None):

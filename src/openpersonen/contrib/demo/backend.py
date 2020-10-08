@@ -1,9 +1,10 @@
 from django.apps import apps
 
+from openpersonen.contrib.base import BaseBackend
 from openpersonen.contrib.demo.converters import *
 
 
-class BackEnd:
+class BackEnd(BaseBackend):
     # Note: All methods must return a list of dicts
 
     @staticmethod
