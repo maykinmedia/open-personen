@@ -120,7 +120,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         try:
             instance = IngeschrevenPersoon.retrieve(burgerservicenummer)
-        except IndexError:
+        except ValueError:
             return Response(
                 data=get_404_response(request.get_full_path()),
                 status=HTTP_404_NOT_FOUND,

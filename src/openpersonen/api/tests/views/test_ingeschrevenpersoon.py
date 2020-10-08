@@ -29,7 +29,6 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
-@override_settings(OPENPERSONEN_BACKEND="openpersonen.contrib.stufbg.backend")
 class TestIngeschrevenPersoon(APITestCase):
     def setUp(self):
         super().setUp()
