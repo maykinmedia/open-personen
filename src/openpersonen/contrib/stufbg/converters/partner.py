@@ -2,7 +2,7 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.api.utils import convert_empty_instances, is_valid_date_format
+from openpersonen.api.utils import convert_empty_instances
 
 
 def _get_client_instance_dict(instance_xml_dict, prefix):

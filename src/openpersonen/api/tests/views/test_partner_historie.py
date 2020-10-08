@@ -1,7 +1,9 @@
 from django.template import loader
 from django.urls import reverse
+from django.utils.module_loading import import_string
 
 import requests_mock
+from mock import patch
 from rest_framework.test import APITestCase
 
 from openpersonen.api.tests.factory_models import TokenFactory
@@ -9,6 +11,10 @@ from openpersonen.api.tests.test_data import PARTNER_HISTORIE_DATA
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
+@patch(
+    "openpersonen.api.data_classes.partner_historie.backend",
+    import_string("openpersonen.contrib.stufbg.backend.default"),
+)
 class TestPartnerHistorie(APITestCase):
     def setUp(self):
         super().setUp()
