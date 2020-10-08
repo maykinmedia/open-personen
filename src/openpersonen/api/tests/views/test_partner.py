@@ -1,8 +1,9 @@
 from django.template import loader
-from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
+from django.utils.module_loading import import_string
 
 import requests_mock
+from mock import patch
 from rest_framework.test import APITestCase
 
 from openpersonen.api.tests.factory_models import (
@@ -15,7 +16,6 @@ from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
-@override_settings(OPENPERSONEN_BACKEND="openpersonen.contrib.stufbg.backend")
 class TestPartner(APITestCase):
     def setUp(self):
         super().setUp()
@@ -34,6 +34,10 @@ class TestPartner(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_list_partner(self, post_mock):
         post_mock.post(
             self.url,
@@ -62,6 +66,10 @@ class TestPartner(APITestCase):
         )
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_list_partner_with_one_partner(self, post_mock):
         post_mock.post(
             self.url,
@@ -85,6 +93,10 @@ class TestPartner(APITestCase):
         self.assertEqual(data[0]["burgerservicenummer"], str(self.partner_bsn))
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_partner(self, post_mock):
         post_mock.post(
             self.url,
@@ -109,6 +121,10 @@ class TestPartner(APITestCase):
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_partner_BG_response(self, post_mock):
         fake_bsn = 123456780
         fake_partner_bsn = 123456789
@@ -137,6 +153,10 @@ class TestPartner(APITestCase):
         self.assertEqual(response.json()["burgerservicenummer"], str(fake_partner_bsn))
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_partner_when_id_does_not_match(self, post_mock):
         post_mock.post(
             self.url,
@@ -160,6 +180,10 @@ class TestPartner(APITestCase):
         self.assertTrue(post_mock.called)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_partner_with_two_partners(self, post_mock):
         post_mock.post(
             self.url,
@@ -184,6 +208,10 @@ class TestPartner(APITestCase):
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
+    @patch(
+        "openpersonen.api.data_classes.persoon.backend",
+        import_string("openpersonen.contrib.stufbg.backend"),
+    )
     def test_detail_partner_when_id_does_not_match_with_two_partners(self, post_mock):
         post_mock.post(
             self.url,
