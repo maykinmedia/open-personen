@@ -463,3 +463,131 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json(), get_404_response(url))
+
+
+@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=True)
+class TestExpandParameter(APITestCase):
+    def setUp(self):
+        super().setUp()
+        self.bsn = 123456789
+        self.persoon = PersoonFactory.create(burgerservicenummer_persoon=self.bsn)
+        self.kind = KindFactory(persoon=self.persoon)
+        self.ouder = OuderFactory(persoon=self.persoon)
+        self.partnerschap = PartnerschapFactory(persoon=self.persoon)
+        self.token = TokenFactory.create()
+
+    def test_expand_parameter_not_included_relatives_not_included(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L45
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}"
+        )
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_expand_parameter_errors_when_not_allowed(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L53
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=true"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=true"
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_expand_parameter_errors_with_incorrect_resource(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L67
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=resourcebestaatniet"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=resourcebestaatniet"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=reisdocumenten"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=ouders.veldbestaatniet"
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_expand_parameter_errors_when_empty(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L80
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand="
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand="
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_expand_parameter_with_multiple_resources(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L85
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen"
+        )
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=partners,kinderen"
+        )
+        self.assertEqual(response.status_code, 200)
