@@ -43,6 +43,7 @@ django==2.2.15            # via -r requirements/ci.txt, ddt-api-calls, django-ap
 djangorestframework-camel-case==1.2.0  # via -r requirements/ci.txt, vng-api-common
 djangorestframework==3.9.4  # via -r requirements/ci.txt, djangorestframework-hal, drf-nested-routers, drf-yasg, vng-api-common
 docutils==0.16            # via recommonmark, sphinx
+drf-flex-fields==0.8.6    # via -r requirements/ci.txt
 drf-nested-routers==0.91  # via -r requirements/ci.txt, vng-api-common
 drf-yasg==1.16.0          # via -r requirements/ci.txt, vng-api-common
 elastic-apm==5.8.1        # via -r requirements/ci.txt
