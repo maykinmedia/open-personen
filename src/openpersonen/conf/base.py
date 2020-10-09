@@ -114,12 +114,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "openpersonen.urls"
 
-# List of callables that know how to import templates from various sources.
-RAW_TEMPLATE_LOADERS = (
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-    # 'admin_tools.template_loaders.Loader',
-)
 
 TEMPLATES = [
     {
@@ -129,7 +123,7 @@ TEMPLATES = [
             os.path.join(DJANGO_PROJECT_DIR, "contrib/stufbg/request_templates"),
             os.path.join(DJANGO_PROJECT_DIR, "api/tests/response_templates"),
         ],
-        "APP_DIRS": False,  # conflicts with explicity specifying the loaders
+        "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -138,7 +132,6 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "openpersonen.utils.context_processors.settings",
             ],
-            "loaders": RAW_TEMPLATE_LOADERS,
         },
     },
 ]
