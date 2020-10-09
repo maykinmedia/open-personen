@@ -4,6 +4,6 @@ def get_404_response(url):
         "title": "Opgevraagde resource bestaat niet.",
         "status": 404,
         "detail": "The server has not found anything matching the Request-URI.",
-        "instance": f"{url}",
+        "instance": url,
         "code": "notFound",
     }
