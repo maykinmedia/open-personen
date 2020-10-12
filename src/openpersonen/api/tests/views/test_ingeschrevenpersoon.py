@@ -481,14 +481,16 @@ class TestExpandParameter(APITestCase):
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L45
         """
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}"
+            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
 
@@ -498,7 +500,8 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=true"
+            + f"?burgerservicenummer={self.bsn}&expand=true",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -506,7 +509,8 @@ class TestExpandParameter(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=true"
+            + f"?expand=true",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -516,7 +520,8 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=resourcebestaatniet"
+            + f"?burgerservicenummer={self.bsn}&expand=resourcebestaatniet",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -524,13 +529,15 @@ class TestExpandParameter(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=resourcebestaatniet"
+            + f"?expand=resourcebestaatniet",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten"
+            + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -538,13 +545,15 @@ class TestExpandParameter(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=reisdocumenten"
+            + f"?expand=reisdocumenten",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet"
+            + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -552,7 +561,8 @@ class TestExpandParameter(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=ouders.veldbestaatniet"
+            + f"?expand=ouders.veldbestaatniet",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -562,7 +572,8 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand="
+            + f"?burgerservicenummer={self.bsn}&expand=",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -570,7 +581,8 @@ class TestExpandParameter(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand="
+            + f"?expand=",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
 
@@ -580,7 +592,8 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen"
+            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
 
@@ -588,6 +601,7 @@ class TestExpandParameter(APITestCase):
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=partners,kinderen"
+            + f"?expand=partners,kinderen",
+            HTTP_AUTHORIZATION = f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)

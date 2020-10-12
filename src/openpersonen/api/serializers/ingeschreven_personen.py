@@ -33,3 +33,18 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
     reisdocumenten = serializers.ListField(
         child=serializers.CharField(max_length=9), required=False
     )
+
+    expand_fields = {'kinderen', 'ouders', 'partners'}
+
+    def to_representation(self, instance):
+        result = super().to_representation(instance)
+
+        if 'expand' in self.context['request'].GET:
+            query_params = set(self.context['request'].GET['expand'].split(','))
+            if not query_params.issubset(self.expand_fields):
+                raise ValueError("Bad expand query params")
+
+            for param in query_params:
+                result[param] = getattr(instance, param)
+
+        return result
