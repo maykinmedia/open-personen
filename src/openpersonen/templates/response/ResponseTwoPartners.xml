@@ -44,9 +44,9 @@
          <!--Optional:-->
          <ns:antwoord>
             <!--1 or more repetitions:-->
-            <ns:object StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
-                <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?" StUF:aantalVoorkomens="?" StUF:aardAantal="?">
-                  <ns:gerelateerde StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
+            <ns:object StUF:entiteittype="NPS">
+                <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
+                  <ns:gerelateerde StUF:entiteittype="NPS">
                     <!--You have a CHOICE of the next 2 items at this level-->
                      <!--Optional:-->
                      <ns:inp.bsn>987654321</ns:inp.bsn>
@@ -70,8 +70,8 @@
                      <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
                   </ns:gerelateerde>
                </ns:inp.heeftAlsEchtgenootPartner>
-                <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:noValue="?" StUF:aantalVoorkomens="?" StUF:aardAantal="?">
-                  <ns:gerelateerde StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?">
+                <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
+                  <ns:gerelateerde StUF:entiteittype="NPS">
                     <!--You have a CHOICE of the next 2 items at this level-->
                      <!--Optional:-->
                      <ns:inp.bsn>123456789</ns:inp.bsn>

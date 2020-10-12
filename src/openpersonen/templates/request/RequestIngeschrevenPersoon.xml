@@ -1,4 +1,6 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:ns="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml">
     <soapenv:Header>
         <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
             <Timestamp>
@@ -11,173 +13,246 @@
             </UsernameToken>
         </Security>
     </soapenv:Header>
-   <soapenv:Body>
-      <ns:npsLv01>
-         <ns:stuurgegevens>
-            <StUF:berichtcode>?</StUF:berichtcode>
+    <soapenv:Body>
+        <ns:npsLv01>
+            <ns:stuurgegevens>
+                <StUF:berichtcode>?</StUF:berichtcode>
+                <!--Optional:-->
+                <StUF:zender>
+                    <!--Optional:-->
+                    <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+                    <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
+                    <!--Optional:-->
+                    <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
+                    <!--Optional:-->
+                    <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
+                </StUF:zender>
+                <!--Optional:-->
+                <StUF:ontvanger>
+                    <!--Optional:-->
+                    <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+                    <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
+                    <!--Optional:-->
+                    <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
+                    <!--Optional:-->
+                    <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
+                </StUF:ontvanger>
+                <!--Optional:-->
+                <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
+                <!--Optional:-->
+                <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
+                <StUF:entiteittype>?</StUF:entiteittype>
+            </ns:stuurgegevens>
+            <ns:parameters>
+                <StUF:sortering>?</StUF:sortering>
+                <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+                <!--Optional:-->
+                <StUF:maximumAantal>15</StUF:maximumAantal>
+                <!--Optional:-->
+                <StUF:indicatorAfnemerIndicatie>false</StUF:indicatorAfnemerIndicatie>
+                <!--Optional:-->
+                <StUF:indicatorAantal>false</StUF:indicatorAantal>
+            </ns:parameters>
             <!--Optional:-->
-            <StUF:zender>
-               <!--Optional:-->
-               <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
-               <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
-               <!--Optional:-->
-               <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
-               <!--Optional:-->
-               <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
-            </StUF:zender>
-            <!--Optional:-->
-            <StUF:ontvanger>
-               <!--Optional:-->
-               <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
-               <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
-               <!--Optional:-->
-               <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
-               <!--Optional:-->
-               <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
-            </StUF:ontvanger>
-            <!--Optional:-->
-            <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
-            <!--Optional:-->
-            <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
-            <StUF:entiteittype>?</StUF:entiteittype>
-         </ns:stuurgegevens>
-         <ns:parameters>
-            <StUF:sortering>?</StUF:sortering>
-            <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
-            <!--Optional:-->
-            <StUF:maximumAantal>15</StUF:maximumAantal>
-            <!--Optional:-->
-            <StUF:indicatorAfnemerIndicatie>false</StUF:indicatorAfnemerIndicatie>
-            <!--Optional:-->
-            <StUF:indicatorAantal>false</StUF:indicatorAantal>
-         </ns:parameters>
-         <!--Optional:-->
-          <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?"
-                     StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
-              {% if bsn %}
-                  <!--Optional:-->
-                  <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
-              {% endif %}
+            <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?"
+                       StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
+                {% if bsn %}
+                    <!--Optional:-->
+                    <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
+                {% endif %}
                 {% if burgerservicenummer %}
-                  <!--Optional:-->
-                  <ns:inp.bsn StUF:exact="true">{{ burgerservicenummer|escape }}</ns:inp.bsn>
-              {% endif %}
-              {% if geboorte__datum %}
-                  <!--Optional:-->
-                  <ns:geboortedatum StUF:exact="true" StUF:indOnvolledigeDatum="V">
-                      {{ geboorte__datum|escape }}
-                  </ns:geboortedatum>
-              {% endif %}
-              {% if geboorte__plaats %}
-                  <!--Optional:-->
-                  <ns:inp.geboorteplaats StUF:exact="true">{{ geboorte__plaats|escape }}</ns:inp.geboorteplaats>
-              {% endif %}
-              {% if geslachtsaanduiding %}
-                  <!--Optional:-->
-                  <ns:geslachtsaanduiding StUF:exact="true">{{ geslachtsaanduiding|escape }}</ns:geslachtsaanduiding>
-              {% endif %}
-              {% if naam__geslachtsnaam %}
-                  <!--Optional:-->
-                  <ns:geslachtsnaam StUF:exact="true">{{ naam__geslachtsnaam|escape }}</ns:geslachtsnaam>
-              {% endif %}
-              {% if naam__voornamen %}
-                  <!--Optional:-->
-                  <ns:voornamen StUF:exact="true">{{ naam__voornamen|escape }}</ns:voornamen>
-              {% endif %}
-              {% if verblijfplaats__gemeentevaninschrijving %}
-                  <!--Optional:-->
-                  <ns:inp.gemeenteVanInschrijving StUF:exact="true">
-                      {{ verblijfplaats__gemeentevaninschrijving|escape }}
-                  </ns:inp.gemeenteVanInschrijving>
-              {% endif %}
-              {% if naam__voorvoegsel %}
-                  <!--Optional:-->
-                  <ns:voorvoegselGeslachtsnaam StUF:exact="true">{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
-              {% endif %}
-              <!--Optional:-->
-              <ns:verblijfsadres>
-                  {% if verblijfplaats__huisletter %}
-                      <!--Optional:-->
-                      <ns:aoa.huisletter StUF:exact="true">{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
-                  {% endif %}
-                  {% if verblijfplaats__huisnummer %}
-                      <!--Optional:-->
-                      <ns:aoa.huisnummer StUF:exact="true">{{ verblijfplaats__huisnummer|escape }}</ns:aoa.huisnummer>
-                  {% endif %}
-                  {% if verblijfplaats__huisnummertoevoeging %}
-                      <!--Optional:-->
-                      <ns:aoa.huisnummertoevoeging StUF:exact="true">
-                          {{ verblijfplaats__huisnummertoevoeging|escape }}
-                      </ns:aoa.huisnummertoevoeging>
-                  {% endif %}
-                  {% if verblijfplaats__identificatiecodenummeraanduiding %}
-                      <!--Optional:-->
-                      <ns:aoa.identificatie StUF:exact="true">
-                          {{ verblijfplaats__identificatiecodenummeraanduiding|escape }}
-                      </ns:aoa.identificatie>
-                  {% endif %}
-                  {% if verblijfplaats__postcode %}
-                      <!--Optional:-->
-                      <ns:aoa.postcode StUF:exact="true">{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
-                  {% endif %}
-              </ns:verblijfsadres>
-          </ns:gelijk>
-         <!--Optional:-->
-         <ns:scope>
-            <ns:object StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
-               <!--You have a CHOICE of the next 2 items at this level-->
-               <!--Optional:-->
-               <ns:inp.bsn/>
-               <!--Optional:-->
-               <ns:geslachtsnaam/>
-               <!--Optional:-->
-               <ns:voorvoegselGeslachtsnaam/>
-               <!--Optional:-->
-               <ns:voorletters/>
-               <!--Optional:-->
-               <ns:voornamen/>
-               <!--Optional:-->
-               <ns:aanduidingNaamgebruik/>
-               <!--Optional:-->
-               <ns:aanhefAanschrijving/>
-               <!--Optional:-->
-               <ns:geslachtsaanduiding/>
-               <!--Optional:-->
-               <ns:geboortedatum/>
-               <!--Optional:-->
-               <ns:inp.geboorteplaats/>
-               <!--Optional:-->
-               <ns:inp.geboorteLand/>
-               <!--Optional:-->
-               <ns:overlijdensdatum/>
-               <!--Optional:-->
-               <ns:inp.overlijdenplaats/>
-               <!--Optional:-->
-               <ns:inp.overlijdenLand/>
-               <!--Optional:-->
-               <ns:verblijfsadres>
-                    <ns:wpl.woonplaatsNaam/>
                     <!--Optional:-->
-                    <ns:gor.straatnaam/>
+                    <ns:inp.bsn StUF:exact="true">{{ burgerservicenummer|escape }}</ns:inp.bsn>
+                {% endif %}
+                {% if geboorte__datum %}
                     <!--Optional:-->
-                    <ns:aoa.postcode/>
+                    <ns:geboortedatum StUF:exact="true" StUF:indOnvolledigeDatum="V">
+                        {{ geboorte__datum|escape }}
+                    </ns:geboortedatum>
+                {% endif %}
+                {% if geboorte__plaats %}
                     <!--Optional:-->
-                    <ns:aoa.huisnummer/>
+                    <ns:inp.geboorteplaats StUF:exact="true">{{ geboorte__plaats|escape }}</ns:inp.geboorteplaats>
+                {% endif %}
+                {% if geslachtsaanduiding %}
                     <!--Optional:-->
-                    <ns:aoa.huisletter/>
+                    <ns:geslachtsaanduiding StUF:exact="true">{{ geslachtsaanduiding|escape }}</ns:geslachtsaanduiding>
+                {% endif %}
+                {% if naam__geslachtsnaam %}
                     <!--Optional:-->
-                    <ns:aoa.huisnummertoevoeging/>
+                    <ns:geslachtsnaam StUF:exact="true">{{ naam__geslachtsnaam|escape }}</ns:geslachtsnaam>
+                {% endif %}
+                {% if naam__voornamen %}
+                    <!--Optional:-->
+                    <ns:voornamen StUF:exact="true">{{ naam__voornamen|escape }}</ns:voornamen>
+                {% endif %}
+                {% if verblijfplaats__gemeentevaninschrijving %}
+                    <!--Optional:-->
+                    <ns:inp.gemeenteVanInschrijving StUF:exact="true">
+                        {{ verblijfplaats__gemeentevaninschrijving|escape }}
+                    </ns:inp.gemeenteVanInschrijving>
+                {% endif %}
+                {% if naam__voorvoegsel %}
+                    <!--Optional:-->
+                    <ns:voorvoegselGeslachtsnaam
+                            StUF:exact="true">{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
+                {% endif %}
+                <!--Optional:-->
+                <ns:verblijfsadres>
+                    {% if verblijfplaats__huisletter %}
+                        <!--Optional:-->
+                        <ns:aoa.huisletter StUF:exact="true">{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
+                    {% endif %}
+                    {% if verblijfplaats__huisnummer %}
+                        <!--Optional:-->
+                        <ns:aoa.huisnummer StUF:exact="true">{{ verblijfplaats__huisnummer|escape }}</ns:aoa.huisnummer>
+                    {% endif %}
+                    {% if verblijfplaats__huisnummertoevoeging %}
+                        <!--Optional:-->
+                        <ns:aoa.huisnummertoevoeging StUF:exact="true">
+                            {{ verblijfplaats__huisnummertoevoeging|escape }}
+                        </ns:aoa.huisnummertoevoeging>
+                    {% endif %}
+                    {% if verblijfplaats__identificatiecodenummeraanduiding %}
+                        <!--Optional:-->
+                        <ns:aoa.identificatie StUF:exact="true">
+                            {{ verblijfplaats__identificatiecodenummeraanduiding|escape }}
+                        </ns:aoa.identificatie>
+                    {% endif %}
+                    {% if verblijfplaats__postcode %}
+                        <!--Optional:-->
+                        <ns:aoa.postcode StUF:exact="true">{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
+                    {% endif %}
                 </ns:verblijfsadres>
-               <!--Optional:-->
-               <ns:inp.datumInschrijving/>
-               <!--Optional:-->
-               <ns:ing.aanduidingEuropeesKiesrecht/>
-               <!--Optional:-->
-               <ns:ing.aanduidingUitgeslotenKiesrecht/>
-               <!--Optional:-->
-               <ns:inp.aanduidingBijzonderNederlanderschap/>
-            </ns:object>
-         </ns:scope>
-      </ns:npsLv01>
-   </soapenv:Body>
+            </ns:gelijk>
+            <!--Optional:-->
+            <ns:scope>
+                <ns:object StUF:entiteittype="NPS">
+                    <!--You have a CHOICE of the next 2 items at this level-->
+                    <!--Optional:-->
+                    <ns:inp.bsn/>
+                    <!--Optional:-->
+                    <ns:geslachtsnaam/>
+                    <!--Optional:-->
+                    <ns:voorvoegselGeslachtsnaam/>
+                    <!--Optional:-->
+                    <ns:voorletters/>
+                    <!--Optional:-->
+                    <ns:voornamen/>
+                    <!--Optional:-->
+                    <ns:aanduidingNaamgebruik/>
+                    <!--Optional:-->
+                    <ns:aanhefAanschrijving/>
+                    <!--Optional:-->
+                    <ns:geslachtsaanduiding/>
+                    <!--Optional:-->
+                    <ns:geboortedatum/>
+                    <!--Optional:-->
+                    <ns:inp.geboorteplaats/>
+                    <!--Optional:-->
+                    <ns:inp.geboorteLand/>
+                    <!--Optional:-->
+                    <ns:overlijdensdatum/>
+                    <!--Optional:-->
+                    <ns:inp.overlijdenplaats/>
+                    <!--Optional:-->
+                    <ns:inp.overlijdenLand/>
+                    <!--Optional:-->
+                    <ns:verblijfsadres>
+                        <ns:wpl.woonplaatsNaam/>
+                        <!--Optional:-->
+                        <ns:gor.straatnaam/>
+                        <!--Optional:-->
+                        <ns:aoa.postcode/>
+                        <!--Optional:-->
+                        <ns:aoa.huisnummer/>
+                        <!--Optional:-->
+                        <ns:aoa.huisletter/>
+                        <!--Optional:-->
+                        <ns:aoa.huisnummertoevoeging/>
+                    </ns:verblijfsadres>
+                    <!--Optional:-->
+                    <ns:inp.datumInschrijving/>
+                    <!--Optional:-->
+                    <ns:ing.aanduidingEuropeesKiesrecht/>
+                    <!--Optional:-->
+                    <ns:ing.aanduidingUitgeslotenKiesrecht/>
+                    <!--Optional:-->
+                    <ns:inp.aanduidingBijzonderNederlanderschap/>
+                    <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND">
+                        <ns:gerelateerde StUF:entiteittype="NPS">
+                            <!--Optional:-->
+                            <ns:inp.bsn/>
+                            <!--Optional:-->
+                            <ns:geslachtsnaam/>
+                            <!--Optional:-->
+                            <ns:voorvoegselGeslachtsnaam/>
+                            <!--Optional:-->
+                            <ns:voorletters/>
+                            <!--Optional:-->
+                            <ns:voornamen/>
+                            <!--Optional:-->
+                            <ns:geboortedatum/>
+                            <!--Optional:-->
+                            <ns:inp.geboorteplaats/>
+                            <!--Optional:-->
+                            <ns:inp.geboorteLand/>
+                        </ns:gerelateerde>
+                    </ns:inp.heeftAlsKinderen>
+                    <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
+                        <ns:gerelateerde StUF:entiteittype="NPS">
+                            <!--You have a CHOICE of the next 2 items at this level-->
+                            <!--Optional:-->
+                            <ns:inp.bsn/>
+                            <!--Optional:-->
+                            <ns:geslachtsaanduiding/>
+                            <!--Optional:-->
+                            <ns:ouderAanduiding/>
+                            <!--Optional:-->
+                            <ns:datumIngangFamilierechtelijkeBetrekking/>
+                            <!--Optional:-->
+                            <ns:geslachtsnaam/>
+                            <!--Optional:-->
+                            <ns:voorletters/>
+                            <!--Optional:-->
+                            <ns:voornamen/>
+                            <!--Optional:-->
+                            <ns:voorvoegselGeslachtsnaam/>
+                            <!--Optional:-->
+                            <ns:geboortedatum/>
+                            <!--Optional:-->
+                            <ns:inp.geboorteplaats/>
+                            <!--Optional:-->
+                            <ns:inp.geboorteLand/>
+                        </ns:gerelateerde>
+                    </ns:inp.heeftAlsOuders>
+                    <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSHUW">
+                        <ns:gerelateerde StUF:entiteittype="NPS">
+                            <!--You have a CHOICE of the next 2 items at this level-->
+                            <!--Optional:-->
+                            <ns:inp.bsn/>
+                            <!--Optional:-->
+                            <ns:geslachtsaanduiding/>
+                            <!--Optional:-->
+                            <ns:soortVerbintenis/>
+                            <!--Optional:-->
+                            <ns:geslachtsnaam/>
+                            <!--Optional:-->
+                            <ns:voorletters/>
+                            <!--Optional:-->
+                            <ns:voornamen/>
+                            <!--Optional:-->
+                            <ns:voorvoegselGeslachtsnaam/>
+                            <!--Optional:-->
+                            <ns:geboortedatum/>
+                            <!--Optional:-->
+                            <ns:inp.geboorteplaats/>
+                            <!--Optional:-->
+                            <ns:inp.geboorteLand/>
+                        </ns:gerelateerde>
+                    </ns:inp.heeftAlsEchtgenootPartner>
+                </ns:object>
+            </ns:scope>
+        </ns:npsLv01>
+    </soapenv:Body>
 </soapenv:Envelope>

@@ -99,7 +99,81 @@
                     <!--Optional:-->
                     <ns:ing.aanduidingUitgeslotenKiesrecht>20200924</ns:ing.aanduidingUitgeslotenKiesrecht>
                     <!--Optional:-->
-                    <ns:inp.aanduidingBijzonderNederlanderschap>behandeld_als_nederlander</ns:inp.aanduidingBijzonderNederlanderschap>
+                    <ns:inp.aanduidingBijzonderNederlanderschap>behandeld_als_nederlander
+                    </ns:inp.aanduidingBijzonderNederlanderschap>
+                    <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND">
+                        <ns:gerelateerde StUF:entiteittype="NPS">
+                            <!--Optional:-->
+                            <ns:inp.bsn>456789123</ns:inp.bsn>
+                            <!--Optional:-->
+                            <ns:geslachtsnaam>Maykin Kind</ns:geslachtsnaam>
+                            <!--Optional:-->
+                            <ns:voorvoegselGeslachtsnaam>van</ns:voorvoegselGeslachtsnaam>
+                            <!--Optional:-->
+                            <ns:voorletters>K</ns:voorletters>
+                            <!--Optional:-->
+                            <ns:voornamen>Media Kind</ns:voornamen>
+                            <!--Optional:-->
+                            <ns:geboortedatum>19990615</ns:geboortedatum>
+                            <!--Optional:-->
+                            <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
+                            <!--Optional:-->
+                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                        </ns:gerelateerde>
+                    </ns:inp.heeftAlsKinderen>
+                    <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
+                        <ns:gerelateerde StUF:entiteittype="NPS">
+                            <!--You have a CHOICE of the next 2 items at this level-->
+                            <!--Optional:-->
+                            <ns:inp.bsn>789123456</ns:inp.bsn>
+                            <!--Optional:-->
+                            <ns:geslachtsaanduiding>man</ns:geslachtsaanduiding>
+                            <!--Optional:-->
+                            <ns:ouderAanduiding>ouder1</ns:ouderAanduiding>
+                            <!--Optional:-->
+                            <ns:datumIngangFamilierechtelijkeBetrekking>19700604
+                            </ns:datumIngangFamilierechtelijkeBetrekking>
+                            <!--Optional:-->
+                            <ns:geslachtsnaam>Maykin Ouder</ns:geslachtsnaam>
+                            <!--Optional:-->
+                            <ns:voorletters>O</ns:voorletters>
+                            <!--Optional:-->
+                            <ns:voornamen>Media Ouder</ns:voornamen>
+                            <!--Optional:-->
+                            <ns:voorvoegselGeslachtsnaam>de</ns:voorvoegselGeslachtsnaam>
+                            <!--Optional:-->
+                            <ns:geboortedatum>19690507</ns:geboortedatum>
+                            <!--Optional:-->
+                            <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
+                            <!--Optional:-->
+                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                        </ns:gerelateerde>
+                    </ns:inp.heeftAlsOuders>
+                    <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
+                        <ns:gerelateerde StUF:entiteittype="NPS">
+                            <!--You have a CHOICE of the next 2 items at this level-->
+                            <!--Optional:-->
+                            <ns:inp.bsn>987654321</ns:inp.bsn>
+                            <!--Optional:-->
+                            <ns:geslachtsaanduiding>man</ns:geslachtsaanduiding>
+                            <!--Optional:-->
+                            <ns:soortVerbintenis>huwelijk</ns:soortVerbintenis>
+                            <!--Optional:-->
+                            <ns:geslachtsnaam>Maykin Partner</ns:geslachtsnaam>
+                            <!--Optional:-->
+                            <ns:voorletters>P</ns:voorletters>
+                            <!--Optional:-->
+                            <ns:voornamen>Media Partner</ns:voornamen>
+                            <!--Optional:-->
+                            <ns:voorvoegselGeslachtsnaam>de</ns:voorvoegselGeslachtsnaam>
+                            <!--Optional:-->
+                            <ns:geboortedatum>19690507</ns:geboortedatum>
+                            <!--Optional:-->
+                            <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
+                            <!--Optional:-->
+                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                        </ns:gerelateerde>
+                    </ns:inp.heeftAlsEchtgenootPartner>
                 </ns:object>
             </ns:antwoord>
         </ns:npsLa01>
