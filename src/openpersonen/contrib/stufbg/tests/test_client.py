@@ -35,7 +35,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseOneIngeschrevenPersoon.xml",
+                        "response/ResponseOneIngeschrevenPersoon.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -75,7 +75,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseOneKind.xml",
+                        "response/ResponseOneKind.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -115,7 +115,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseOneOuder.xml",
+                        "response/ResponseOneOuder.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -155,7 +155,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseOnePartner.xml",
+                        "response/ResponseOnePartner.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -195,7 +195,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseVerblijfPlaatsHistorie.xml",
+                        "response/ResponseVerblijfPlaatsHistorie.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -235,7 +235,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseVerblijfsTitelHistorie.xml",
+                        "response/ResponseVerblijfsTitelHistorie.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -275,7 +275,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponsePartnerHistorie.xml",
+                        "response/ResponsePartnerHistorie.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
@@ -315,7 +315,7 @@ class TestClient(TestCase):
                 self.url,
                 content=bytes(
                     loader.render_to_string(
-                        "ResponseNationaliteitHistorie.xml",
+                        "response/ResponseNationaliteitHistorie.xml",
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,

@@ -35,7 +35,8 @@ class TestPartnerHistorie(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponsePartnerHistorie.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponsePartnerHistorie.xml"),
+                encoding="utf-8",
             ),
         )
 

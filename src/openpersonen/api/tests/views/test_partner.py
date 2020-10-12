@@ -42,7 +42,8 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoPartners.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoPartners.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -70,7 +71,8 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOnePartner.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOnePartner.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -93,7 +95,8 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOnePartner.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOnePartner.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -120,7 +123,7 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseBG.xml"),
+                loader.render_to_string("response/ResponseBG.xml"),
                 encoding="utf-8",
             ),
         )
@@ -145,7 +148,8 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOnePartner.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOnePartner.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -168,7 +172,8 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoPartners.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoPartners.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -192,7 +197,8 @@ class TestPartner(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoPartners.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoPartners.xml"),
+                encoding="utf-8",
             ),
         )
 

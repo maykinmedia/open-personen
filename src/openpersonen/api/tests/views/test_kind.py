@@ -43,7 +43,8 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoKinderen.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoKinderen.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -69,7 +70,8 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneKind.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOneKind.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -93,7 +95,8 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneKind.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOneKind.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -120,7 +123,7 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseBG.xml"),
+                loader.render_to_string("response/ResponseBG.xml"),
                 encoding="utf-8",
             ),
         )
@@ -145,7 +148,8 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneKind.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOneKind.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -168,7 +172,8 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoKinderen.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoKinderen.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -192,7 +197,8 @@ class TestKind(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoKinderen.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoKinderen.xml"),
+                encoding="utf-8",
             ),
         )
 

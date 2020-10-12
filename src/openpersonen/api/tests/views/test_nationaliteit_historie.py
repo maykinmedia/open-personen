@@ -35,7 +35,7 @@ class TestNationaliteitHistorie(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseNationaliteitHistorie.xml"),
+                loader.render_to_string("response/ResponseNationaliteitHistorie.xml"),
                 encoding="utf-8",
             ),
         )

@@ -1,5 +1,4 @@
 from django.template import loader
-from django.test import override_settings
 from django.urls import NoReverseMatch, reverse
 from django.utils.module_loading import import_string
 
@@ -70,7 +69,7 @@ class TestIngeschrevenPersoon(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneIngeschrevenPersoon.xml"),
+                loader.render_to_string("response/ResponseOneIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
@@ -86,7 +85,7 @@ class TestIngeschrevenPersoon(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoIngeschrevenPersoon.xml"),
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
@@ -107,7 +106,7 @@ class TestIngeschrevenPersoon(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneIngeschrevenPersoon.xml"),
+                loader.render_to_string("response/ResponseOneIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
@@ -130,7 +129,7 @@ class TestIngeschrevenPersoon(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneIngeschrevenPersoon.xml"),
+                loader.render_to_string("response/ResponseOneIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
@@ -155,7 +154,7 @@ class TestIngeschrevenPersoon(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseBG.xml"),
+                loader.render_to_string("response/ResponseBG.xml"),
                 encoding="utf-8",
             ),
         )

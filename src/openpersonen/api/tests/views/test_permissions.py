@@ -43,7 +43,7 @@ class TestPermissions(APITestCase):
         post_mock.post(
             client_url,
             content=bytes(
-                loader.render_to_string("ResponseTwoIngeschrevenPersoon.xml"),
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
                 encoding="utf-8",
             ),
         )
