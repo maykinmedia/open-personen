@@ -4,8 +4,12 @@ import xmltodict
 
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
 
+from .kind import get_kind_instance_dict
+from .ouder import get_ouder_instance_dict
+from .partner import get_partner_instance_dict
 
-def _get_client_instance_dict(instance_xml_dict, prefix):
+
+def get_persoon_instance_dict(response, instance_xml_dict, prefix):
     ingeschreven_persoon_dict = {
         "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
         "geheimhoudingPersoonsgegevens": True,
@@ -394,6 +398,38 @@ def _get_client_instance_dict(instance_xml_dict, prefix):
         "reisdocumenten": ["string"],
     }
 
+    kinderen_info = instance_xml_dict[f"{prefix}:inp.heeftAlsKinderen"]
+    ouders_info = instance_xml_dict[f"{prefix}:inp.heeftAlsOuders"]
+    partners_info = instance_xml_dict[f"{prefix}:inp.heeftAlsEchtgenootPartner"]
+
+    if not isinstance(kinderen_info, list):
+        kinderen_info = [kinderen_info]
+
+    if not isinstance(ouders_info, list):
+        ouders_info = [ouders_info]
+
+    if not isinstance(partners_info, list):
+        partners_info = [partners_info]
+
+    ingeschreven_persoon_dict["kinderen"] = []
+    ingeschreven_persoon_dict["ouders"] = []
+    ingeschreven_persoon_dict["partners"] = []
+
+    for kind_info in kinderen_info:
+        ingeschreven_persoon_dict["kinderen"] = get_kind_instance_dict(
+            kind_info, prefix
+        )
+
+    for ouder_info in ouders_info:
+        ingeschreven_persoon_dict["ouders"] = get_ouder_instance_dict(
+            ouder_info, prefix
+        )
+
+    for partner_info in partners_info:
+        ingeschreven_persoon_dict["partners"] = get_partner_instance_dict(
+            partner_info, prefix
+        )
+
     convert_empty_instances(ingeschreven_persoon_dict)
 
     return ingeschreven_persoon_dict
@@ -416,9 +452,9 @@ def convert_response_to_persoon_dicts(response):
     if isinstance(antwoord_object, list):
         result = []
         for antwood_dict in antwoord_object:
-            result_dict = _get_client_instance_dict(antwood_dict, prefix)
+            result_dict = get_persoon_instance_dict(response, antwood_dict, prefix)
             result.append(result_dict)
     else:
-        result = [_get_client_instance_dict(antwoord_object, prefix)]
+        result = [get_persoon_instance_dict(response, antwoord_object, prefix)]
 
     return result

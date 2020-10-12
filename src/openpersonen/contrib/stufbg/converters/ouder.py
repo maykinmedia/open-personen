@@ -5,7 +5,7 @@ import xmltodict
 from openpersonen.contrib.utils import convert_empty_instances
 
 
-def _get_client_instance_dict(instance_xml_dict, prefix):
+def get_ouder_instance_dict(instance_xml_dict, prefix):
     ouder_dict = {
         "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
         "geslachtsaanduiding": instance_xml_dict.get(
@@ -152,14 +152,14 @@ def convert_response_to_ouder_dict(response, id=None):
     result = []
     if isinstance(antwoord_object, list):
         for antwood_dict in antwoord_object:
-            result_dict = _get_client_instance_dict(
+            result_dict = get_ouder_instance_dict(
                 antwood_dict[f"{prefix}:gerelateerde"], prefix
             )
             if not id or id == result_dict["burgerservicenummer"]:
                 result.append(result_dict)
     else:
         result.append(
-            _get_client_instance_dict(antwoord_object[f"{prefix}:gerelateerde"], prefix)
+            get_ouder_instance_dict(antwoord_object[f"{prefix}:gerelateerde"], prefix)
         )
         if id and result[0]["burgerservicenummer"] != id:
             result = []

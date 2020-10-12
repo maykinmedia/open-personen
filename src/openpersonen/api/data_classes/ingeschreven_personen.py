@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import List, Optional
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
 from openpersonen.backends import backend
@@ -8,10 +8,13 @@ from .datum import Datum
 from .gezags_verhouding import GezagsVerhouding
 from .in_onderzoek import IngeschrevenPersoonInOnderzoek
 from .kiesrecht import Kiesrecht
+from .kind import Kind
 from .naam import IngeschrevenPersoonNaam
 from .nationaliteit import Nationaliteit
 from .opschorting_bijhouding import OpschortingBijhouding
+from .ouder import Ouder
 from .overlijden import Overlijden
+from .partner import Partner
 from .persoon import Persoon
 from .verblijf_plaats import VerblijfPlaats
 from .verblijfs_titel import VerblijfsTitel
@@ -32,6 +35,11 @@ class IngeschrevenPersoon(Persoon):
     gezagsverhouding: Optional[GezagsVerhouding]
     verblijfstitel: Optional[VerblijfsTitel]
     reisdocumenten: list
+
+    # Potential 'expand' fields
+    kinderen: List[Kind]
+    partners: List[Partner]
+    ouders: List[Ouder]
 
     def get_geslachtsaanduiding_display(self):
         return GeslachtsaanduidingChoices.values[self.geslachtsaanduiding]
