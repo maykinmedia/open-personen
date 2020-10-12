@@ -3,7 +3,7 @@ from django.conf import settings
 from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 
 
-def convert_kind_to_instance_dict(kind):
+def convert_kind_instance_to_dict(kind):
 
     kind_dict = {
         "burgerservicenummer": kind.burgerservicenummer_kind,

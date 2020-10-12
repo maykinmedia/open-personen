@@ -2,6 +2,10 @@ from django.conf import settings
 
 from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 
+from .kind import convert_kind_instance_to_dict
+from .ouder import convert_ouder_instance_to_dict
+from .partner import convert_partner_instance_to_dict
+
 
 def convert_persoon_to_instance_dict(persoon):
 
@@ -638,12 +642,27 @@ def convert_persoon_to_instance_dict(persoon):
         )
 
     ingeschreven_persoon_dict["reisdocumenten"] = []
-
-    reisdocumenten = persoon.reisdocument_set.all()
-
-    for reisdocument in reisdocumenten:
+    for reisdocument in persoon.reisdocument_set.all():
         ingeschreven_persoon_dict["reisdocumenten"].append(
             reisdocument.nummer_nederlands_reisdocument
+        )
+
+    ingeschreven_persoon_dict["kinderen"] = []
+    for kind in persoon.kind_set.all():
+        ingeschreven_persoon_dict["kinderen"].append(
+            convert_kind_instance_to_dict(kind)
+        )
+
+    ingeschreven_persoon_dict["partners"] = []
+    for partner in persoon.partnerschap_set.all():
+        ingeschreven_persoon_dict["partners"].append(
+            convert_partner_instance_to_dict(partner)
+        )
+
+    ingeschreven_persoon_dict["ouders"] = []
+    for ouder in persoon.ouder_set.all():
+        ingeschreven_persoon_dict["ouders"].append(
+            convert_ouder_instance_to_dict(ouder)
         )
 
     return ingeschreven_persoon_dict

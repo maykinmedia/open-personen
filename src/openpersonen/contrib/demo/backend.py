@@ -58,7 +58,7 @@ class BackEnd(BaseBackend):
 
         instance_dicts = []
         for instance in instances:
-            instance_dicts.append(convert_kind_to_instance_dict(instance))
+            instance_dicts.append(convert_kind_instance_to_dict(instance))
 
         return instance_dicts
 
