@@ -118,11 +118,7 @@ ROOT_URLCONF = "openpersonen.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(DJANGO_PROJECT_DIR, "templates"),
-            os.path.join(DJANGO_PROJECT_DIR, "contrib/stufbg/request_templates"),
-            os.path.join(DJANGO_PROJECT_DIR, "api/tests/response_templates"),
-        ],
+        "DIRS": [os.path.join(DJANGO_PROJECT_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

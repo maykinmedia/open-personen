@@ -80,24 +80,30 @@ class StufBGClient(SingletonModel):
             additional_context.update(filters)
 
         return self._make_request(
-            "RequestIngeschrevenPersoon.xml",
+            "request/RequestIngeschrevenPersoon.xml",
             additional_context=additional_context,
         )
 
     def get_kind(self, bsn):
-        return self._make_request("RequestKind.xml", additional_context={"bsn": bsn})
+        return self._make_request(
+            "request/RequestKind.xml", additional_context={"bsn": bsn}
+        )
 
     def get_ouder(self, bsn):
-        return self._make_request("RequestOuder.xml", additional_context={"bsn": bsn})
+        return self._make_request(
+            "request/RequestOuder.xml", additional_context={"bsn": bsn}
+        )
 
     def get_partner(self, bsn):
-        return self._make_request("RequestPartner.xml", additional_context={"bsn": bsn})
+        return self._make_request(
+            "request/RequestPartner.xml", additional_context={"bsn": bsn}
+        )
 
     def get_verblijf_plaats_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_request(
-            "RequestVerblijfPlaatsHistorie.xml",
+            "request/RequestVerblijfPlaatsHistorie.xml",
             additional_context=additional_context,
         )
 
@@ -105,7 +111,7 @@ class StufBGClient(SingletonModel):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_request(
-            "RequestPartnerHistorie.xml",
+            "request/RequestPartnerHistorie.xml",
             additional_context=additional_context,
         )
 
@@ -113,7 +119,7 @@ class StufBGClient(SingletonModel):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_request(
-            "RequestVerblijfsTitelHistorie.xml",
+            "request/RequestVerblijfsTitelHistorie.xml",
             additional_context=additional_context,
         )
 
@@ -121,6 +127,6 @@ class StufBGClient(SingletonModel):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_request(
-            "RequestNationaliteitHistorie.xml",
+            "request/RequestNationaliteitHistorie.xml",
             additional_context=additional_context,
         )

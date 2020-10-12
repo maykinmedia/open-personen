@@ -35,7 +35,7 @@ class TestVerblijfPlaatsHistorie(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseVerblijfPlaatsHistorie.xml"),
+                loader.render_to_string("response/ResponseVerblijfPlaatsHistorie.xml"),
                 encoding="utf-8",
             ),
         )

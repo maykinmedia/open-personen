@@ -42,7 +42,8 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoOuders.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoOuders.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -70,7 +71,8 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneOuder.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOneOuder.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -93,7 +95,8 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneOuder.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOneOuder.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -120,7 +123,7 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseBG.xml"),
+                loader.render_to_string("response/ResponseBG.xml"),
                 encoding="utf-8",
             ),
         )
@@ -145,7 +148,8 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseOneOuder.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseOneOuder.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -168,7 +172,8 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoOuders.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoOuders.xml"),
+                encoding="utf-8",
             ),
         )
 
@@ -192,7 +197,8 @@ class TestOuder(APITestCase):
         post_mock.post(
             self.url,
             content=bytes(
-                loader.render_to_string("ResponseTwoOuders.xml"), encoding="utf-8"
+                loader.render_to_string("response/ResponseTwoOuders.xml"),
+                encoding="utf-8",
             ),
         )
 
