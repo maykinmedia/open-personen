@@ -109,9 +109,14 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         instances = IngeschrevenPersoon.list(filters)
 
-        serializer = self.serializer_class(instances, many=True)
+        serializer = self.serializer_class(instances, many=True, context={'request': request})
 
-        return Response(data=serializer.data, status=HTTP_200_OK)
+        try:
+            data = serializer.data
+        except ValueError:
+            return Response(status=HTTP_400_BAD_REQUEST)
+
+        return Response(data=data, status=HTTP_200_OK)
 
     @swagger_auto_schema(auto_schema=OpenPersonenAutoSchema)
     def retrieve(self, request, *args, **kwargs):
@@ -126,6 +131,11 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
                 status=HTTP_404_NOT_FOUND,
             )
 
-        serializer = self.serializer_class(instance)
+        serializer = self.serializer_class(instance, context={'request': request})
 
-        return Response(data=serializer.data, status=HTTP_200_OK)
+        try:
+            data = serializer.data
+        except ValueError:
+            return Response(status=HTTP_400_BAD_REQUEST)
+
+        return Response(data=data, status=HTTP_200_OK)
