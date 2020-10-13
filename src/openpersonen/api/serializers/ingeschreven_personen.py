@@ -54,17 +54,30 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     raise ValueError("Bad expand query params")
 
             for param in query_params:
+                _instance = instance
+                _result = result
                 if "." in param:
-                    if param.split(".")[0] not in result:
-                        result[param.split(".")[0]] = dict()
-                    field, attribute = param.split(".")
-                    attribute = self.to_camel_case(attribute)
-                    things = getattr(instance, field)
-                    for thing in things:
-                        try:
-                            result[param.split(".")[0]][attribute] = thing[attribute]
-                        except KeyError:
-                            raise ValueError("Bad expand query params")
+                    for index, x in enumerate(param.split(".")[:-1]):
+                        if x not in _result:
+                            _result[x] = dict()
+                        attribute = param.split(".")[index + 1]
+                        attribute = self.to_camel_case(attribute)
+
+                        if not isinstance(_instance, dict):
+                            things = getattr(_instance, x)
+                        else:
+                            things = [_instance]
+
+                        for thing in things:
+                            try:
+                                if index + 2 == len(param.split(".")):
+                                    _result[x][attribute] = thing[attribute]
+                                if attribute not in _result[x]:
+                                    _result[x][attribute] = dict()
+                                _result = _result[x]
+                                _instance = thing[attribute]
+                            except KeyError:
+                                raise ValueError("Bad expand query params")
                 else:
                     result[param] = getattr(instance, param)
 
