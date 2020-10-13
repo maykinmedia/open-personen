@@ -2,6 +2,7 @@ from django.template import loader
 from django.urls import NoReverseMatch, reverse
 from django.utils.module_loading import import_string
 
+import requests
 import requests_mock
 from freezegun import freeze_time
 from mock import patch
@@ -125,7 +126,6 @@ class TestIngeschrevenPersoon(APITestCase):
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
     def test_detail_ingeschreven_persoon(self, post_mock):
-
         post_mock.post(
             self.url,
             content=bytes(
@@ -172,7 +172,6 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.json()["burgerservicenummer"], str(fake_bsn))
 
     def test_detail_ingeschreven_persoon_with_bad_burgerservicenummer(self):
-
         with self.assertRaises(NoReverseMatch):
             self.client.get(
                 reverse(
@@ -210,7 +209,6 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_ingeschreven_persoon_with_token_and_proper_query_params(self):
-
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
@@ -324,7 +322,6 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
 
     def test_ingeschreven_persoon_with_token_and_incorrect_proper_query_params(self):
-
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + "?burgerservicenummer=1",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
@@ -333,7 +330,6 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(response.json()["_embedded"]["ingeschrevenpersonen"], [])
 
     def test_detail_ingeschreven_persoon(self):
-
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail",
@@ -474,11 +470,15 @@ class TestExpandParameter(APITestCase):
         self.ouder_bsn = 345678912
         self.partnerschap_bsn = 456789123
         self.persoon = PersoonFactory.create(burgerservicenummer_persoon=self.bsn)
-        self.kind = KindFactory(persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn)
-        self.ouder = OuderFactory(persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn)
+        self.kind = KindFactory(
+            persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn
+        )
+        self.ouder = OuderFactory(
+            persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn
+        )
         self.partnerschap = PartnerschapFactory(
             persoon=self.persoon,
-            burgerservicenummer_echtgenoot_geregistreerd_partner=self.partnerschap_bsn
+            burgerservicenummer_echtgenoot_geregistreerd_partner=self.partnerschap_bsn,
         )
         self.token = TokenFactory.create()
 
@@ -488,25 +488,25 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()['_embedded']['ingeschrevenpersonen'][0]['_embedded']
-        self.assertNotIn('kinderen', data)
-        self.assertNotIn('partners', data)
-        self.assertNotIn('ouders', data)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
+        self.assertNotIn("kinderen", data)
+        self.assertNotIn("partners", data)
+        self.assertNotIn("ouders", data)
 
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             ),
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()['_embedded']
-        self.assertNotIn('kinderen', data)
-        self.assertNotIn('partners', data)
-        self.assertNotIn('ouders', data)
+        data = response.json()["_embedded"]
+        self.assertNotIn("kinderen", data)
+        self.assertNotIn("partners", data)
+        self.assertNotIn("ouders", data)
 
     def test_expand_parameter_errors_when_not_allowed(self):
         """
@@ -515,7 +515,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=true",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -524,14 +524,14 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=true",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?naam__geslachtsnaam=groen&geboorte__datum=1983-05-26&expand=true",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            + f"?naam__geslachtsnaam={self.persoon.geslachtsnaam_persoon}&geboorte__datum={self.persoon.geboortedatum_persoon}&expand=true",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -542,7 +542,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=resourcebestaatniet",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -551,14 +551,14 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=resourcebestaatniet",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -567,14 +567,14 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=reisdocumenten",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -583,7 +583,7 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=ouders.veldbestaatniet",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -594,7 +594,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -603,7 +603,7 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
 
@@ -614,23 +614,27 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen,ouders",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()['_embedded']['ingeschrevenpersonen'][0]['_embedded']
-        self.assertEqual(data['kinderen'][0]['burgerservicenummer'], str(self.kind_bsn))
-        self.assertEqual(data['partners'][0]['burgerservicenummer'], str(self.partnerschap_bsn))
-        self.assertEqual(data['ouders'][0]['burgerservicenummer'], str(self.ouder_bsn))
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
+        self.assertEqual(data["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
+        self.assertEqual(
+            data["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
+        )
+        self.assertEqual(data["ouders"][0]["burgerservicenummer"], str(self.ouder_bsn))
 
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=partners,kinderen,ouders",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()['_embedded']
-        self.assertEqual(data['kinderen'][0]['burgerservicenummer'], str(self.kind_bsn))
-        self.assertEqual(data['partners'][0]['burgerservicenummer'], str(self.partnerschap_bsn))
-        self.assertEqual(data['ouders'][0]['burgerservicenummer'], str(self.ouder_bsn))
+        data = response.json()["_embedded"]
+        self.assertEqual(data["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
+        self.assertEqual(
+            data["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
+        )
+        self.assertEqual(data["ouders"][0]["burgerservicenummer"], str(self.ouder_bsn))

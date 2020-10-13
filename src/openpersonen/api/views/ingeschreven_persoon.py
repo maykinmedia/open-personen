@@ -109,7 +109,9 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         instances = IngeschrevenPersoon.list(filters)
 
-        serializer = self.serializer_class(instances, many=True, context={'request': request})
+        serializer = self.serializer_class(
+            instances, many=True, context={"request": request}
+        )
 
         try:
             data = serializer.data
@@ -131,7 +133,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
                 status=HTTP_404_NOT_FOUND,
             )
 
-        serializer = self.serializer_class(instance, context={'request': request})
+        serializer = self.serializer_class(instance, context={"request": request})
 
         try:
             data = serializer.data
