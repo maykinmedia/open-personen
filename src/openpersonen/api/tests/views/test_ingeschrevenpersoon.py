@@ -530,6 +530,22 @@ class TestExpandParameter(APITestCase):
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=True",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=True",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
             + f"?naam__geslachtsnaam={self.persoon.geslachtsnaam_persoon}&geboorte__datum={self.persoon.geboortedatum_persoon}&expand=true",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
@@ -613,7 +629,7 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen,ouders",
+            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
@@ -622,13 +638,13 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(
             data["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
         )
-        self.assertEqual(data["ouders"][0]["burgerservicenummer"], str(self.ouder_bsn))
+        self.assertIsNone(data.get("ouders"))
 
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=partners,kinderen,ouders",
+            + f"?expand=partners,kinderen",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
@@ -637,4 +653,40 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(
             data["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
         )
-        self.assertEqual(data["ouders"][0]["burgerservicenummer"], str(self.ouder_bsn))
+        self.assertIsNone(data.get("ouders"))
+
+    def test_expand_parameter_with_dot_notation(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L85
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=ouders.geslachtsaanduiding,ouders.burgerservicenummer",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
+        self.assertEqual(
+            self.ouder.geslachtsaanduiding_ouder, data["ouders"]["geslachtsaanduiding"]
+        )
+        self.assertEqual(
+            str(self.ouder.burgerservicenummer_ouder),
+            data["ouders"]["burgerservicenummer"],
+        )
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=ouders.geslachtsaanduiding,ouders.burgerservicenummer",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]
+        self.assertEqual(
+            self.ouder.geslachtsaanduiding_ouder, data["ouders"]["geslachtsaanduiding"]
+        )
+        self.assertEqual(
+            str(self.ouder.burgerservicenummer_ouder),
+            data["ouders"]["burgerservicenummer"],
+        )
