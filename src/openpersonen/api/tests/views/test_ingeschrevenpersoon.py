@@ -470,10 +470,16 @@ class TestExpandParameter(APITestCase):
     def setUp(self):
         super().setUp()
         self.bsn = 123456789
+        self.kind_bsn = 234567891
+        self.ouder_bsn = 345678912
+        self.partnerschap_bsn = 456789123
         self.persoon = PersoonFactory.create(burgerservicenummer_persoon=self.bsn)
-        self.kind = KindFactory(persoon=self.persoon)
-        self.ouder = OuderFactory(persoon=self.persoon)
-        self.partnerschap = PartnerschapFactory(persoon=self.persoon)
+        self.kind = KindFactory(persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn)
+        self.ouder = OuderFactory(persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn)
+        self.partnerschap = PartnerschapFactory(
+            persoon=self.persoon,
+            burgerservicenummer_echtgenoot_geregistreerd_partner=self.partnerschap_bsn
+        )
         self.token = TokenFactory.create()
 
     def test_expand_parameter_not_included_relatives_not_included(self):
@@ -485,6 +491,10 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
+        data = response.json()['_embedded']['ingeschrevenpersonen'][0]['_embedded']
+        self.assertNotIn('kinderen', data)
+        self.assertNotIn('partners', data)
+        self.assertNotIn('ouders', data)
 
         response = self.client.get(
             reverse(
@@ -493,6 +503,10 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
+        data = response.json()['_embedded']
+        self.assertNotIn('kinderen', data)
+        self.assertNotIn('partners', data)
+        self.assertNotIn('ouders', data)
 
     def test_expand_parameter_errors_when_not_allowed(self):
         """
@@ -510,6 +524,13 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
             + f"?expand=true",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
+        )
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?naam__geslachtsnaam=groen&geboorte__datum=1983-05-26&expand=true",
             HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 400)
@@ -592,16 +613,24 @@ class TestExpandParameter(APITestCase):
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen",
+            + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen,ouders",
             HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
+        data = response.json()['_embedded']['ingeschrevenpersonen'][0]['_embedded']
+        self.assertEqual(data['kinderen'][0]['burgerservicenummer'], str(self.kind_bsn))
+        self.assertEqual(data['partners'][0]['burgerservicenummer'], str(self.partnerschap_bsn))
+        self.assertEqual(data['ouders'][0]['burgerservicenummer'], str(self.ouder_bsn))
 
         response = self.client.get(
             reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             )
-            + f"?expand=partners,kinderen",
-            HTTP_AUTHORIZATION = f"Token {self.token.key}"
+            + f"?expand=partners,kinderen,ouders",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}"
         )
         self.assertEqual(response.status_code, 200)
+        data = response.json()['_embedded']
+        self.assertEqual(data['kinderen'][0]['burgerservicenummer'], str(self.kind_bsn))
+        self.assertEqual(data['partners'][0]['burgerservicenummer'], str(self.partnerschap_bsn))
+        self.assertEqual(data['ouders'][0]['burgerservicenummer'], str(self.ouder_bsn))
