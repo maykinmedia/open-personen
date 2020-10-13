@@ -34,13 +34,13 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         child=serializers.CharField(max_length=9), required=False
     )
 
-    expand_fields = {'kinderen', 'ouders', 'partners'}
+    expand_fields = {"kinderen", "ouders", "partners"}
 
     def to_representation(self, instance):
         result = super().to_representation(instance)
 
-        if 'expand' in self.context['request'].GET:
-            query_params = set(self.context['request'].GET['expand'].split(','))
+        if "expand" in self.context["request"].GET:
+            query_params = set(self.context["request"].GET["expand"].split(","))
             if not query_params.issubset(self.expand_fields):
                 raise ValueError("Bad expand query params")
 
