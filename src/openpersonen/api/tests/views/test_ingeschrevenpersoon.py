@@ -657,7 +657,7 @@ class TestExpandParameter(APITestCase):
 
     def test_expand_parameter_with_dot_notation(self):
         """
-        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L85
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L94
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
@@ -690,3 +690,115 @@ class TestExpandParameter(APITestCase):
             str(self.ouder.burgerservicenummer_ouder),
             data["ouders"]["burgerservicenummer"],
         )
+
+    def test_expand_parameter_with_dot_notation_of_entire_data_group(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L110
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam,kinderen.geboorte",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            self.kind.geslachtsnaam_kind,
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
+            self.kind.voorvoegsel_geslachtsnaam_kind,
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.kind.geboortedatum_kind),
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
+                "omschrijving"
+            ],
+            str(self.kind.geboorteland_kind),
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
+                "omschrijving"
+            ],
+            str(self.kind.geboorteplaats_kind),
+        )
+        self.assertIsNone(data["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(data.get("ouders"))
+        self.assertIsNone(data.get("partners"))
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + f"?expand=kinderen.naam,kinderen.geboorte",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            self.kind.geslachtsnaam_kind,
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
+            self.kind.voorvoegsel_geslachtsnaam_kind,
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            str(self.kind.geboortedatum_kind),
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
+                "omschrijving"
+            ],
+            str(self.kind.geboorteland_kind),
+        )
+        self.assertEqual(
+            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
+                "omschrijving"
+            ],
+            str(self.kind.geboorteplaats_kind),
+        )
+        self.assertIsNone(data["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(data.get("ouders"))
+        self.assertIsNone(data.get("partners"))
+
+    def test_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L128
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"][
+            "kinderen"
+        ]["_embedded"]["naam"]
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
+        self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["kinderen"]["_embedded"]["naam"]
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
+        self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
