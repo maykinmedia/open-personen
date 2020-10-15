@@ -1,5 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist
-
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
@@ -10,7 +8,7 @@ from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from openpersonen.api.serializers import IngeschrevenPersoonSerializer
 from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 from openpersonen.api.views.base import BaseViewSet
-from openpersonen.api.views.generic_responses import get_404_response
+from openpersonen.api.views.generic_responses import get_404_response, get_expand_400_response
 
 
 class IngeschrevenPersoonViewSet(BaseViewSet):
@@ -115,8 +113,9 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         try:
             data = serializer.data
-        except ValueError:
-            return Response(status=HTTP_400_BAD_REQUEST)
+        except ValueError as e:
+            query_param = str(e).replace('Invalid query param: ', '')
+            return Response(data=get_expand_400_response(request.get_full_path(), query_param), status=HTTP_400_BAD_REQUEST)
 
         return Response(data=data, status=HTTP_200_OK)
 
@@ -137,7 +136,8 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
 
         try:
             data = serializer.data
-        except ValueError:
-            return Response(status=HTTP_400_BAD_REQUEST)
+        except ValueError as e:
+            query_param = str(e).replace('Invalid query param: ', '')
+            return Response(data=get_expand_400_response(request.get_full_path(), query_param), status=HTTP_400_BAD_REQUEST)
 
         return Response(data=data, status=HTTP_200_OK)

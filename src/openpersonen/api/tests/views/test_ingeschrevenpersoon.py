@@ -2,7 +2,6 @@ from django.template import loader
 from django.urls import NoReverseMatch, reverse
 from django.utils.module_loading import import_string
 
-import requests
 import requests_mock
 from freezegun import freeze_time
 from mock import patch
@@ -25,7 +24,7 @@ from openpersonen.api.tests.factory_models import (
 )
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
 from openpersonen.api.views import IngeschrevenPersoonViewSet
-from openpersonen.api.views.generic_responses import get_404_response
+from openpersonen.api.views.generic_responses import get_404_response, get_expand_400_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
@@ -512,116 +511,105 @@ class TestExpandParameter(APITestCase):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L53
         """
-        response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=true",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
+        url = reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}&expand=true"
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}", )
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'true'))
 
-        response = self.client.get(
-            reverse(
-                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
-            + f"?expand=true",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
+        url = reverse("ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}) + f"?expand=true"
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'true'))
 
-        response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=True",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
+        url = reverse("ingeschrevenpersonen-list")+ f"?burgerservicenummer={self.bsn}&expand=True"
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'True'))
 
-        response = self.client.get(
-            reverse(
-                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
-            + f"?expand=True",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
+        url = reverse("ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}) + f"?expand=True"
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'True'))
 
-        response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?naam__geslachtsnaam={self.persoon.geslachtsnaam_persoon}&geboorte__datum={self.persoon.geboortedatum_persoon}&expand=true",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
+        url = reverse("ingeschrevenpersonen-list") + f"?naam__geslachtsnaam={self.persoon.geslachtsnaam_persoon}&geboorte__datum={self.persoon.geboortedatum_persoon}&expand=true"
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'true'))
 
     def test_expand_parameter_errors_with_incorrect_resource(self):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L67
         """
+        url = reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}&expand=resourcebestaatniet"
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'resourcebestaatniet'))
+
+        url = reverse("ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}) + f"?expand=resourcebestaatniet"
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=resourcebestaatniet",
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'resourcebestaatniet'))
 
+        url = reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten"
         response = self.client.get(
-            reverse(
+            url,
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'reisdocumenten'))
+
+        url = reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
-            + f"?expand=resourcebestaatniet",
+            )+ f"?expand=reisdocumenten"
+        response = self.client.get(
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'reisdocumenten'))
 
+        url = reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet"
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten",
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'veldbestaatniet'))
 
-        response = self.client.get(
-            reverse(
+        url = reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
-            + f"?expand=reisdocumenten",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
-        self.assertEqual(response.status_code, 400)
-
+            ) + f"?expand=ouders.veldbestaatniet"
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet",
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
-
-        response = self.client.get(
-            reverse(
-                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
-            + f"?expand=ouders.veldbestaatniet",
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
-        )
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, 'veldbestaatniet'))
 
     def test_expand_parameter_errors_when_empty(self):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L80
         """
+        url = reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}&expand="
         response = self.client.get(
-            reverse("ingeschrevenpersonen-list")
-            + f"?burgerservicenummer={self.bsn}&expand=",
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, ''))
 
-        response = self.client.get(
-            reverse(
+        url = reverse(
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
-            )
-            + f"?expand=",
+            ) + f"?expand="
+        response = self.client.get(
+            url,
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, ''))
 
     def test_expand_parameter_with_multiple_resources(self):
         """

@@ -72,7 +72,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     representation = representation[field_key]
                     instance = field[attribute]
                 except KeyError:
-                    raise ValueError(f"Invalid query param: {field_key}")
+                    raise ValueError(f"Invalid query param: {attribute}")
 
     def handle_expand_property(self, instance, representation):
         query_params = self.context["request"].GET["expand"].split(",")
