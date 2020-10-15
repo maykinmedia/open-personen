@@ -1,5 +1,3 @@
-from django.urls import reverse
-
 from rest_framework import serializers
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
@@ -49,12 +47,16 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         return letters[0] + "".join(letter.title() for letter in letters[1:])
 
     def get_links_url(self, id, param):
-        base_url = self.context['request'].build_absolute_uri().split('?')[0]
+        base_url = self.context["request"].build_absolute_uri().split("?")[0]
 
-        if 'testserver' in base_url:
-            base_url = base_url.replace('testserver', 'testserver.com')
+        if "testserver" in base_url:
+            base_url = base_url.replace("testserver", "testserver.com")
 
-        base_url += f'/{id}/{param}'
+        if id not in base_url:
+            base_url += f"/{id}/{param}"
+        else:
+            base_url += f"/{param}"
+
         return base_url
 
     def handle_dot_notation(self, param, representation, instance):
@@ -75,7 +77,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     if index + 2 == len(param.split(".")):
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
-                        representation[field_key][param] = self.get_links_url(instance.burgerservicenummer, param.split(".")[0])
+                        representation[field_key][param] = self.get_links_url(
+                            instance.burgerservicenummer, param.split(".")[0]
+                        )
                     if attribute not in representation[field_key]:
                         # Add attribute to representation so that we can add
                         #   the nested value later
@@ -99,12 +103,27 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             else:
                 attr = getattr(instance, param)
                 representation[param] = attr
-                representation[param][0][param] = self.get_links_url(instance.burgerservicenummer, param)
+                representation[param][0][param] = self.get_links_url(
+                    instance.burgerservicenummer, param
+                )
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
         if "expand" in self.context["request"].GET:
             self.handle_expand_property(instance, representation)
+
+        if "partners" not in representation:
+            representation["partners"] = self.get_links_url(
+                instance.burgerservicenummer, "partners"
+            )
+        if "kinderen" not in representation:
+            representation["kinderen"] = self.get_links_url(
+                instance.burgerservicenummer, "kinderen"
+            )
+        if "ouders" not in representation:
+            representation["ouders"] = self.get_links_url(
+                instance.burgerservicenummer, "ouders"
+            )
 
         return representation

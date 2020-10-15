@@ -493,10 +493,22 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
-        self.assertNotIn("kinderen", data)
-        self.assertNotIn("partners", data)
-        self.assertNotIn("ouders", data)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(
+            data["_links"]["partners"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+        )
+        self.assertEqual(
+            data["_links"]["kinderen"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+        )
+        self.assertEqual(
+            data["_links"]["ouders"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+        )
+        self.assertNotIn("kinderen", data["_embedded"])
+        self.assertNotIn("partners", data["_embedded"])
+        self.assertNotIn("ouders", data["_embedded"])
 
         response = self.client.get(
             reverse(
@@ -505,10 +517,22 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]
-        self.assertNotIn("kinderen", data)
-        self.assertNotIn("partners", data)
-        self.assertNotIn("ouders", data)
+        data = response.json()
+        self.assertEqual(
+            data["_links"]["partners"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+        )
+        self.assertEqual(
+            data["_links"]["kinderen"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+        )
+        self.assertEqual(
+            data["_links"]["ouders"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+        )
+        self.assertNotIn("kinderen", data["_embedded"])
+        self.assertNotIn("partners", data["_embedded"])
+        self.assertNotIn("ouders", data["_embedded"])
 
     def test_expand_parameter_errors_when_not_allowed(self):
         """
