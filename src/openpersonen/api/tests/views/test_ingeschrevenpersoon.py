@@ -495,15 +495,15 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
-            data["_links"]["partners"]["href"],
+            data["_links"]["partners_href"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
-            data["_links"]["kinderen"]["href"],
+            data["_links"]["kinderen_href"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
-            data["_links"]["ouders"]["href"],
+            data["_links"]["ouders_href"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertNotIn("kinderen", data["_embedded"])
@@ -519,15 +519,15 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(
-            data["_links"]["partners"]["href"],
+            data["_links"]["partners_href"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
-            data["_links"]["kinderen"]["href"],
+            data["_links"]["kinderen_href"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
-            data["_links"]["ouders"]["href"],
+            data["_links"]["ouders_href"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertNotIn("kinderen", data["_embedded"])
@@ -587,7 +587,7 @@ class TestExpandParameter(APITestCase):
 
     def test_expand_parameter_errors_with_incorrect_resource(self):
         """
-        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L67
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L66
         """
         url = (
             reverse("ingeschrevenpersonen-list")
@@ -708,12 +708,18 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
-        self.assertEqual(data["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(data["_embedded"]["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
         self.assertEqual(
-            data["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
+            data["_embedded"]["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
         )
         self.assertIsNone(data.get("ouders"))
+        self.assertEqual(data['_links']['partners_href']['href'],
+                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners")
+        self.assertEqual(data['_links']['ouders_href']['href'],
+                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders")
+        self.assertEqual(data['_links']['kinderen_href']['href'],
+                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen")
 
         response = self.client.get(
             reverse(
@@ -723,12 +729,18 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]
-        self.assertEqual(data["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
+        data = response.json()
+        self.assertEqual(data["_embedded"]["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
         self.assertEqual(
-            data["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
+            data["_embedded"]["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
         )
         self.assertIsNone(data.get("ouders"))
+        self.assertEqual(data['_links']['partners_href']['href'],
+                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners")
+        self.assertEqual(data['_links']['ouders_href']['href'],
+                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders")
+        self.assertEqual(data['_links']['kinderen_href']['href'],
+                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen")
 
     def test_expand_parameter_with_dot_notation(self):
         """
@@ -861,7 +873,7 @@ class TestExpandParameter(APITestCase):
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"][
             "kinderen"
         ]["_embedded"]["naam"]
-        self.assertEqual(len(data), 2)
+        self.assertEqual(len(data), 3)
         self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
         self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
 
@@ -874,6 +886,6 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["kinderen"]["_embedded"]["naam"]
-        self.assertEqual(len(data), 2)
+        self.assertEqual(len(data), 3)
         self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
         self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)

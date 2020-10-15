@@ -60,6 +60,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         return base_url
 
     def handle_dot_notation(self, param, representation, instance):
+        burgerservicenummer = instance.burgerservicenummer
         for index, field_key in enumerate(param.split(".")[:-1]):
             if field_key not in representation:
                 representation[field_key] = dict()
@@ -78,7 +79,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
                         representation[field_key][param] = self.get_links_url(
-                            instance.burgerservicenummer, param.split(".")[0]
+                            burgerservicenummer, param.split(".")[0]
                         )
                     if attribute not in representation[field_key]:
                         # Add attribute to representation so that we can add
@@ -90,7 +91,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 except KeyError:
                     raise ValueError(f"Invalid query param: {attribute}")
 
-    def handle_expand_property(self, instance, representation):
+    def add_expand_data(self, instance, representation):
         query_params = self.context["request"].GET["expand"].split(",")
 
         for param in query_params:
@@ -107,23 +108,26 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     instance.burgerservicenummer, param
                 )
 
+    def add_links(self, burgerservicenummer, representation):
+
+        representation["partners_href"] = self.get_links_url(
+            burgerservicenummer, "partners"
+        )
+
+        representation["kinderen_href"] = self.get_links_url(
+            burgerservicenummer, "kinderen"
+        )
+
+        representation["ouders_href"] = self.get_links_url(
+            burgerservicenummer, "ouders"
+        )
+
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
         if "expand" in self.context["request"].GET:
-            self.handle_expand_property(instance, representation)
+            self.add_expand_data(instance, representation)
 
-        if "partners" not in representation:
-            representation["partners"] = self.get_links_url(
-                instance.burgerservicenummer, "partners"
-            )
-        if "kinderen" not in representation:
-            representation["kinderen"] = self.get_links_url(
-                instance.burgerservicenummer, "kinderen"
-            )
-        if "ouders" not in representation:
-            representation["ouders"] = self.get_links_url(
-                instance.burgerservicenummer, "ouders"
-            )
+        self.add_links(instance.burgerservicenummer, representation)
 
         return representation
