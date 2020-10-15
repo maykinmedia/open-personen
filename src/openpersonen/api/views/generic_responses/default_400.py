@@ -11,7 +11,7 @@ def get_expand_400_response(url, query_param):
                 "type": "ongeldigParam",
                 "name": query_param,
                 "code": "ongeldigParam",
-                "reason": "Param is niet geldig."
+                "reason": "Param is niet geldig.",
             }
-        ]
+        ],
     }
