@@ -37,48 +37,60 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
     expand_fields = ["kinderen", "ouders", "partners"]
 
     @staticmethod
-    def to_camel_case(snake_str):
-        components = snake_str.split("_")
-        # We capitalize the first letter of each component except the first one
+    def to_camel_case(snake_string):
+        """
+        Eg. Converts an_example_string to anExampleString
+        """
+        letters = snake_string.split("_")
+        # Capitalize the first letter of each group of letters except the first one
         # with the 'title' method and join them together.
-        return components[0] + "".join(x.title() for x in components[1:])
+        return letters[0] + "".join(letter.title() for letter in letters[1:])
+
+    def handle_dot_notation(self, param, representation, instance):
+        for index, field_key in enumerate(param.split(".")[:-1]):
+            if field_key not in representation:
+                representation[field_key] = dict()
+
+            attribute = param.split(".")[index + 1]
+            attribute = self.to_camel_case(attribute)
+
+            if not isinstance(instance, dict):
+                fields = getattr(instance, field_key)
+            else:
+                fields = [instance]
+
+            for field in fields:
+                try:
+                    if index + 2 == len(param.split(".")):
+                        # At last value in dot notation so add to representation
+                        representation[field_key][attribute] = field[attribute]
+                    if attribute not in representation[field_key]:
+                        # Add attribute to representation so that we can add
+                        #   the nested value later
+                        representation[field_key][attribute] = dict()
+                    # Get next nested values
+                    representation = representation[field_key]
+                    instance = field[attribute]
+                except KeyError:
+                    raise ValueError(f"Invalid query param: {field_key}")
+
+    def handle_expand_property(self, instance, representation):
+        query_params = self.context["request"].GET["expand"].split(",")
+
+        for param in query_params:
+            if param.split(".")[0] not in self.expand_fields:
+                raise ValueError(f"Invalid query param: {param}")
+
+        for param in query_params:
+            if "." in param:
+                self.handle_dot_notation(param, representation, instance)
+            else:
+                representation[param] = getattr(instance, param)
 
     def to_representation(self, instance):
-        result = super().to_representation(instance)
+        representation = super().to_representation(instance)
 
         if "expand" in self.context["request"].GET:
-            query_params = self.context["request"].GET["expand"].split(",")
+            self.handle_expand_property(instance, representation)
 
-            for param in query_params:
-                if param.split(".")[0] not in self.expand_fields:
-                    raise ValueError("Bad expand query params")
-
-            for param in query_params:
-                _instance = instance
-                _result = result
-                if "." in param:
-                    for index, x in enumerate(param.split(".")[:-1]):
-                        if x not in _result:
-                            _result[x] = dict()
-                        attribute = param.split(".")[index + 1]
-                        attribute = self.to_camel_case(attribute)
-
-                        if not isinstance(_instance, dict):
-                            things = getattr(_instance, x)
-                        else:
-                            things = [_instance]
-
-                        for thing in things:
-                            try:
-                                if index + 2 == len(param.split(".")):
-                                    _result[x][attribute] = thing[attribute]
-                                if attribute not in _result[x]:
-                                    _result[x][attribute] = dict()
-                                _result = _result[x]
-                                _instance = thing[attribute]
-                            except KeyError:
-                                raise ValueError("Bad expand query params")
-                else:
-                    result[param] = getattr(instance, param)
-
-        return result
+        return representation
