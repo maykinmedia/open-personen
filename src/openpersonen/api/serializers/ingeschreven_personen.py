@@ -1,3 +1,5 @@
+from django.urls import reverse
+
 from rest_framework import serializers
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
@@ -46,6 +48,15 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         # with the 'title' method and join them together.
         return letters[0] + "".join(letter.title() for letter in letters[1:])
 
+    def get_links_url(self, id, param):
+        base_url = self.context['request'].build_absolute_uri().split('?')[0]
+
+        if 'testserver' in base_url:
+            base_url = base_url.replace('testserver', 'testserver.com')
+
+        base_url += f'/{id}/{param}'
+        return base_url
+
     def handle_dot_notation(self, param, representation, instance):
         for index, field_key in enumerate(param.split(".")[:-1]):
             if field_key not in representation:
@@ -64,6 +75,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     if index + 2 == len(param.split(".")):
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
+                        representation[field_key][param] = self.get_links_url(instance.burgerservicenummer, param.split(".")[0])
                     if attribute not in representation[field_key]:
                         # Add attribute to representation so that we can add
                         #   the nested value later
@@ -85,7 +97,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             if "." in param:
                 self.handle_dot_notation(param, representation, instance)
             else:
-                representation[param] = getattr(instance, param)
+                attr = getattr(instance, param)
+                representation[param] = attr
+                representation[param][0][param] = self.get_links_url(instance.burgerservicenummer, param)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
