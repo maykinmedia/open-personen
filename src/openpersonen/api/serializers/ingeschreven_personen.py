@@ -78,7 +78,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     if index + 2 == len(param.split(".")):
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
-                        representation[field_key][param] = self.get_links_url(
+                        representation['self'] = self.get_links_url(
                             burgerservicenummer, param.split(".")[0]
                         )
                     if attribute not in representation[field_key]:
@@ -110,17 +110,20 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     def add_links(self, burgerservicenummer, representation):
 
-        representation["partners_href"] = self.get_links_url(
-            burgerservicenummer, "partners"
-        )
+        if "partners" not in representation:
+            representation["partners"] = self.get_links_url(
+                burgerservicenummer, "partners"
+            )
 
-        representation["kinderen_href"] = self.get_links_url(
-            burgerservicenummer, "kinderen"
-        )
+        if "kinderen" not in representation:
+            representation["kinderen"] = self.get_links_url(
+                burgerservicenummer, "kinderen"
+            )
 
-        representation["ouders_href"] = self.get_links_url(
-            burgerservicenummer, "ouders"
-        )
+        if "ouders" not in representation:
+            representation["ouders"] = self.get_links_url(
+                burgerservicenummer, "ouders"
+            )
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

@@ -495,15 +495,15 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
-            data["_links"]["partners_href"]["href"],
+            data["_links"]["partners"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
-            data["_links"]["kinderen_href"]["href"],
+            data["_links"]["kinderen"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
-            data["_links"]["ouders_href"]["href"],
+            data["_links"]["ouders"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertNotIn("kinderen", data["_embedded"])
@@ -519,15 +519,15 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(
-            data["_links"]["partners_href"]["href"],
+            data["_links"]["partners"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
-            data["_links"]["kinderen_href"]["href"],
+            data["_links"]["kinderen"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
-            data["_links"]["ouders_href"]["href"],
+            data["_links"]["ouders"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertNotIn("kinderen", data["_embedded"])
@@ -714,11 +714,11 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
         )
         self.assertIsNone(data.get("ouders"))
-        self.assertEqual(data['_links']['partners_href']['href'],
+        self.assertEqual(data['_links']['partners']['href'],
                          f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners")
-        self.assertEqual(data['_links']['ouders_href']['href'],
+        self.assertEqual(data['_links']['ouders']['href'],
                          f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders")
-        self.assertEqual(data['_links']['kinderen_href']['href'],
+        self.assertEqual(data['_links']['kinderen']['href'],
                          f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen")
 
         response = self.client.get(
@@ -735,11 +735,11 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
         )
         self.assertIsNone(data.get("ouders"))
-        self.assertEqual(data['_links']['partners_href']['href'],
+        self.assertEqual(data['_links']['partners']['href'],
                          f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners")
-        self.assertEqual(data['_links']['ouders_href']['href'],
+        self.assertEqual(data['_links']['ouders']['href'],
                          f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders")
-        self.assertEqual(data['_links']['kinderen_href']['href'],
+        self.assertEqual(data['_links']['kinderen']['href'],
                          f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen")
 
     def test_expand_parameter_with_dot_notation(self):
@@ -873,7 +873,7 @@ class TestExpandParameter(APITestCase):
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"][
             "kinderen"
         ]["_embedded"]["naam"]
-        self.assertEqual(len(data), 3)
+        self.assertEqual(len(data), 2)
         self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
         self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
 
@@ -886,6 +886,6 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["kinderen"]["_embedded"]["naam"]
-        self.assertEqual(len(data), 3)
+        self.assertEqual(len(data), 2)
         self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
         self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
