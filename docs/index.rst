@@ -22,6 +22,7 @@ Getting started
 To get you started, you might find some of these links relevant:
 
 * New to this project? Have a look at the :ref:`introduction_index`
+* New to the API? Read up on the :ref:`api_index`.
 * Want to get started now? Follow the :ref:`installation_quickstart`
 * Want to know what data sources you can use? See the :ref:`backends_index`
 
@@ -31,5 +32,6 @@ To get you started, you might find some of these links relevant:
    :hidden:
 
    introduction/index
+   api/index
    installation/index
    backends/index
