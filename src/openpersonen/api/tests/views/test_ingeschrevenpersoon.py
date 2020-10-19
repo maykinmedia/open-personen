@@ -798,35 +798,43 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
-            data["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
             self.kind.geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
             self.kind.voorvoegsel_geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
             str(self.kind.geboortedatum_kind),
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
                 "omschrijving"
             ],
             str(self.kind.geboorteland_kind),
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
                 "omschrijving"
             ],
             str(self.kind.geboorteplaats_kind),
         )
-        self.assertIsNone(data["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigVan"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigTotEnMet"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("_links"))
+        self.assertIsNone(data["_embedded"].get("ouders"))
+        self.assertIsNone(data["_embedded"].get("partners"))
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
 
         response = self.client.get(
             reverse(
@@ -836,35 +844,43 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]
+        data = response.json()
         self.assertEqual(
-            data["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
             self.kind.geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
             self.kind.voorvoegsel_geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
             str(self.kind.geboortedatum_kind),
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
                 "omschrijving"
             ],
             str(self.kind.geboorteland_kind),
         )
         self.assertEqual(
-            data["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
                 "omschrijving"
             ],
             str(self.kind.geboorteplaats_kind),
         )
-        self.assertIsNone(data["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigVan"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigTotEnMet"))
+        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("_links"))
+        self.assertIsNone(data["_embedded"].get("ouders"))
+        self.assertIsNone(data["_embedded"].get("partners"))
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
 
     def test_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
         """
@@ -876,12 +892,15 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"][
-            "kinderen"
-        ]["_embedded"]["naam"]
-        self.assertEqual(len(data), 2)
-        self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
-        self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"], self.kind.geslachtsnaam_kind)
+        self.assertIsNotNone(data["_embedded"]["kinderen"]['_links'])
+        self.assertIsNone(data.get("ouders"))
+        self.assertIsNone(data.get("partners"))
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
 
         response = self.client.get(
             reverse(
@@ -891,7 +910,13 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]["kinderen"]["_embedded"]["naam"]
-        self.assertEqual(len(data), 2)
-        self.assertEqual(data["voornamen"], self.kind.voornamen_kind)
-        self.assertEqual(data["geslachtsnaam"], self.kind.geslachtsnaam_kind)
+        data = response.json()
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+                         self.kind.geslachtsnaam_kind)
+        self.assertIsNotNone(data["_embedded"]["kinderen"]['_links'])
+        self.assertIsNone(data.get("ouders"))
+        self.assertIsNone(data.get("partners"))
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
