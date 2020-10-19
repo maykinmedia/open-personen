@@ -4,9 +4,9 @@ Documentation
 Open Personen offers:
 
 * Implementation of the `Haal Centraal BRP bevragen API specification`_.
-* Extension to use as mock service to serve test data via the BRP API.
 * Extension to connect with a `StUF-BG`_ compatible service to serve real data
   via the BRP API.
+* Extension to use a local database to provide test data via the BRP API.
 * An additional Profile API to store and retrieve additional personal data that
   is not typically stored and exposed via the BRP API.
 
@@ -22,7 +22,8 @@ Getting started
 To get you started, you might find some of these links relevant:
 
 * New to this project? Have a look at the :ref:`introduction_index`
-
+* Want to get started now? Follow the :ref:`installation_quickstart`
+* Want to know what data sources you can use? See the :ref:`backends_index`
 
 
 .. toctree::
@@ -30,3 +31,5 @@ To get you started, you might find some of these links relevant:
    :hidden:
 
    introduction/index
+   installation/index
+   backends/index

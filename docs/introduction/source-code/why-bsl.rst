@@ -53,13 +53,13 @@ Can I use Open Personen?
 
 Yes! You personally, or your organization can use this project for demo and 
 test purposes or in pilot projects. If you want to use it in production, 
-`contact us`_ for an appropriate license.
+contact `Maykin Media`_ for an appropriate license.
 
 Can I use Open Personen in production?
 --------------------------------------
 
-Yes, just not with the BSL. You can `contact us`_ for an appropriate license to
-use it in production.
+Yes, just not with the BSL. You can contact `Maykin Media`_ for an appropriate 
+license to use it in production.
 
 Why did we choose BSL specifically?
 -----------------------------------
@@ -79,8 +79,8 @@ that require a product offering the Haal Centraal BRP API. These projects can
 benefit from your contributions.
 
 We understand though, that contributing to a project that is not completely 
-open source and free to use in production is less attractive. We really hope 
-that we can release the project under the `EUPL`_ as soon as possible.
+free to use in production is less attractive. We really hope that we can 
+release the project under the `EUPL`_ as soon as possible.
 
 What are alternative licenses?
 ------------------------------

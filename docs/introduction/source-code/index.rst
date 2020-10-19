@@ -13,7 +13,7 @@ parameters.
 After the *Change Date* the *Licensed Work*, being this project, will be 
 available under the `European Union Public Licence`_ (EUPL) 1.2.
 
-Want to know more? Read :ref:`introduction_source-code_why-bsl`.
+Want to know more? Read :ref:`introduction_source-code_why-bsl`
 
 This project makes use of various open-source `Python libraries`_ and 
 `npm packages`_ under the hood.
