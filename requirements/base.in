@@ -24,7 +24,6 @@ djangorestframework
 django-filter
 drf-yasg  # api documentation
 vng-api-common
-drf-flex-fields
 
 # WSGI servers & monitoring - production oriented
 uwsgi
