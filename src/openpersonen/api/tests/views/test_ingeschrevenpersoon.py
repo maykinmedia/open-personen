@@ -920,3 +920,40 @@ class TestExpandParameter(APITestCase):
         self.assertIsNotNone(data['_links']['ouders'])
         self.assertIsNotNone(data['_links']['partners'])
         self.assertIsNotNone(data['_links']['kinderen'])
+
+    def test_links_of_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L142
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertIsNone(data["_embedded"]["kinderen"]["_links"].get("ingeschrevenpersonen"))
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"], self.kind.geslachtsnaam_kind)
+        self.assertIsNotNone(data["_embedded"]["kinderen"]["_links"]["self"])
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIsNone(data["_embedded"]["kinderen"]["_links"].get("ingeschrevenpersonen"))
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
+        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+                         self.kind.geslachtsnaam_kind)
+        self.assertIsNotNone(data["_embedded"]["kinderen"]["_links"]["self"])
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
