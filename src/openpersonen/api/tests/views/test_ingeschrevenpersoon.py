@@ -1076,3 +1076,51 @@ class TestExpandParameter(APITestCase):
             data["_links"]["kinderen"][0]["_links"]["self"]["href"],
             f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen/{self.kind_bsn}",
         )
+
+
+class TestFieldParameter(APITestCase):
+    def setUp(self):
+        super().setUp()
+        self.bsn = 123456789
+        self.kind_bsn = 234567891
+        self.ouder_bsn = 345678912
+        self.partnerschap_bsn = 456789123
+        self.persoon = PersoonFactory.create(burgerservicenummer_persoon=self.bsn)
+        self.kind = KindFactory(
+            persoon=self.persoon, burgerservicenummer_kind=self.kind_bsn
+        )
+        self.ouder = OuderFactory(
+            persoon=self.persoon, burgerservicenummer_ouder=self.ouder_bsn
+        )
+        self.partnerschap = PartnerschapFactory(
+            persoon=self.persoon,
+            burgerservicenummer_echtgenoot_geregistreerd_partner=self.partnerschap_bsn,
+        )
+        self.token = TokenFactory.create()
+
+    def test_scenario_three(self):
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=burgerservicenummer,geslachtsaanduiding",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(len(data), 3)
+        self.assertIsNotNone(data['_links'])
+        self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
+        self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=burgerservicenummer,geslachtsaanduiding",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 3)
+        self.assertIsNotNone(data['_links'])
+        self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
+        self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))

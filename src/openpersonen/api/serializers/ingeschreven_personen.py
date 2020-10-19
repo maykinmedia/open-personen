@@ -109,6 +109,17 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 )
 
     def to_representation(self, instance):
+
+        if "fields" in self.context["request"].GET:
+            fields_to_keep = self.context["request"].GET["fields"].split(",")
+            fields_to_remove = []
+            for field in self.fields:
+                if field not in fields_to_keep:
+                    fields_to_remove.append(field)
+
+            for field in fields_to_remove:
+                self.fields.pop(field)
+
         representation = super().to_representation(instance)
 
         if "expand" in self.context["request"].GET:
