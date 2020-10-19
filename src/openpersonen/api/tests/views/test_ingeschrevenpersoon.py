@@ -506,9 +506,6 @@ class TestExpandParameter(APITestCase):
             data["_links"]["ouders"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
-        self.assertNotIn("kinderen", data["_embedded"])
-        self.assertNotIn("partners", data["_embedded"])
-        self.assertNotIn("ouders", data["_embedded"])
 
         response = self.client.get(
             reverse(
@@ -530,9 +527,6 @@ class TestExpandParameter(APITestCase):
             data["_links"]["ouders"]["href"],
             f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
-        self.assertNotIn("kinderen", data["_embedded"])
-        self.assertNotIn("partners", data["_embedded"])
-        self.assertNotIn("ouders", data["_embedded"])
 
     def test_expand_parameter_errors_when_not_allowed(self):
         """
@@ -752,14 +746,22 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]["_embedded"]
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
-            self.ouder.geslachtsaanduiding_ouder, data["ouders"]["geslachtsaanduiding"]
+            self.ouder.geslachtsaanduiding_ouder, data["_embedded"]["ouders"]["geslachtsaanduiding"]
         )
         self.assertEqual(
             str(self.ouder.burgerservicenummer_ouder),
-            data["ouders"]["burgerservicenummer"],
+            data["_embedded"]["ouders"]["burgerservicenummer"],
         )
+        self.assertIsNone(data["_embedded"]['ouders'].get('naam'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('geboorte'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('geldigVan'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('geldigTotEnMet'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('_links'))
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
 
         response = self.client.get(
             reverse(
@@ -769,14 +771,22 @@ class TestExpandParameter(APITestCase):
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
         self.assertEqual(response.status_code, 200)
-        data = response.json()["_embedded"]
+        data = response.json()
         self.assertEqual(
-            self.ouder.geslachtsaanduiding_ouder, data["ouders"]["geslachtsaanduiding"]
+            self.ouder.geslachtsaanduiding_ouder, data["_embedded"]["ouders"]["geslachtsaanduiding"]
         )
         self.assertEqual(
             str(self.ouder.burgerservicenummer_ouder),
-            data["ouders"]["burgerservicenummer"],
+            data["_embedded"]["ouders"]["burgerservicenummer"],
         )
+        self.assertIsNone(data["_embedded"]['ouders'].get('naam'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('geboorte'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('geldigVan'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('geldigTotEnMet'))
+        self.assertIsNone(data["_embedded"]['ouders'].get('_links'))
+        self.assertIsNotNone(data['_links']['ouders'])
+        self.assertIsNotNone(data['_links']['partners'])
+        self.assertIsNotNone(data['_links']['kinderen'])
 
     def test_expand_parameter_with_dot_notation_of_entire_data_group(self):
         """
@@ -817,8 +827,6 @@ class TestExpandParameter(APITestCase):
             str(self.kind.geboorteplaats_kind),
         )
         self.assertIsNone(data["kinderen"]["_embedded"].get("burgerservicenummer"))
-        self.assertIsNone(data.get("ouders"))
-        self.assertIsNone(data.get("partners"))
 
         response = self.client.get(
             reverse(
@@ -857,8 +865,6 @@ class TestExpandParameter(APITestCase):
             str(self.kind.geboorteplaats_kind),
         )
         self.assertIsNone(data["kinderen"]["_embedded"].get("burgerservicenummer"))
-        self.assertIsNone(data.get("ouders"))
-        self.assertIsNone(data.get("partners"))
 
     def test_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
         """

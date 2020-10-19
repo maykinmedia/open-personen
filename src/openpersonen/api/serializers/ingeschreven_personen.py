@@ -110,20 +110,17 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     def add_links(self, burgerservicenummer, representation):
 
-        if "partners" not in representation:
-            representation["partners"] = self.get_links_url(
-                burgerservicenummer, "partners"
-            )
+        representation["partners_links"] = self.get_links_url(
+            burgerservicenummer, "partners"
+        )
 
-        if "kinderen" not in representation:
-            representation["kinderen"] = self.get_links_url(
-                burgerservicenummer, "kinderen"
-            )
+        representation["kinderen_links"] = self.get_links_url(
+            burgerservicenummer, "kinderen"
+        )
 
-        if "ouders" not in representation:
-            representation["ouders"] = self.get_links_url(
-                burgerservicenummer, "ouders"
-            )
+        representation["ouders_links"] = self.get_links_url(
+            burgerservicenummer, "ouders"
+        )
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
