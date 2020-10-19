@@ -78,7 +78,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     if index + 2 == len(param.split(".")):
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
-                        representation['self'] = self.get_links_url(
+                        representation["self"] = self.get_links_url(
                             burgerservicenummer, param.split(".")[0]
                         )
                     if attribute not in representation[field_key]:

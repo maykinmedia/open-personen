@@ -463,7 +463,6 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(response.json(), get_404_response(url))
 
 
-@override_settings(OPENPERSONEN_USE_LOCAL_DATABASE=True)
 class TestExpandParameter(APITestCase):
     def setUp(self):
         super().setUp()
@@ -703,17 +702,26 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
-        self.assertEqual(data["_embedded"]["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
         self.assertEqual(
-            data["_embedded"]["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
+            data["_embedded"]["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn)
+        )
+        self.assertEqual(
+            data["_embedded"]["partners"][0]["burgerservicenummer"],
+            str(self.partnerschap_bsn),
         )
         self.assertIsNone(data.get("ouders"))
-        self.assertEqual(data['_links']['partners']['href'],
-                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners")
-        self.assertEqual(data['_links']['ouders']['href'],
-                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders")
-        self.assertEqual(data['_links']['kinderen']['href'],
-                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen")
+        self.assertEqual(
+            data["_links"]["partners"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+        )
+        self.assertEqual(
+            data["_links"]["ouders"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+        )
+        self.assertEqual(
+            data["_links"]["kinderen"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+        )
 
         response = self.client.get(
             reverse(
@@ -724,17 +732,26 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual(data["_embedded"]["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn))
         self.assertEqual(
-            data["_embedded"]["partners"][0]["burgerservicenummer"], str(self.partnerschap_bsn)
+            data["_embedded"]["kinderen"][0]["burgerservicenummer"], str(self.kind_bsn)
+        )
+        self.assertEqual(
+            data["_embedded"]["partners"][0]["burgerservicenummer"],
+            str(self.partnerschap_bsn),
         )
         self.assertIsNone(data.get("ouders"))
-        self.assertEqual(data['_links']['partners']['href'],
-                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners")
-        self.assertEqual(data['_links']['ouders']['href'],
-                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders")
-        self.assertEqual(data['_links']['kinderen']['href'],
-                         f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen")
+        self.assertEqual(
+            data["_links"]["partners"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+        )
+        self.assertEqual(
+            data["_links"]["ouders"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+        )
+        self.assertEqual(
+            data["_links"]["kinderen"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+        )
 
     def test_expand_parameter_with_dot_notation(self):
         """
@@ -748,20 +765,21 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
-            self.ouder.geslachtsaanduiding_ouder, data["_embedded"]["ouders"]["geslachtsaanduiding"]
+            self.ouder.geslachtsaanduiding_ouder,
+            data["_embedded"]["ouders"]["geslachtsaanduiding"],
         )
         self.assertEqual(
             str(self.ouder.burgerservicenummer_ouder),
             data["_embedded"]["ouders"]["burgerservicenummer"],
         )
-        self.assertIsNone(data["_embedded"]['ouders'].get('naam'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('geboorte'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('geldigVan'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('geldigTotEnMet'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('_links'))
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNone(data["_embedded"]["ouders"].get("naam"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("geboorte"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("geldigVan"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("geldigTotEnMet"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("_links"))
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
         response = self.client.get(
             reverse(
@@ -773,20 +791,21 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(
-            self.ouder.geslachtsaanduiding_ouder, data["_embedded"]["ouders"]["geslachtsaanduiding"]
+            self.ouder.geslachtsaanduiding_ouder,
+            data["_embedded"]["ouders"]["geslachtsaanduiding"],
         )
         self.assertEqual(
             str(self.ouder.burgerservicenummer_ouder),
             data["_embedded"]["ouders"]["burgerservicenummer"],
         )
-        self.assertIsNone(data["_embedded"]['ouders'].get('naam'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('geboorte'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('geldigVan'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('geldigTotEnMet'))
-        self.assertIsNone(data["_embedded"]['ouders'].get('_links'))
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNone(data["_embedded"]["ouders"].get("naam"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("geboorte"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("geldigVan"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("geldigTotEnMet"))
+        self.assertIsNone(data["_embedded"]["ouders"].get("_links"))
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
     def test_expand_parameter_with_dot_notation_of_entire_data_group(self):
         """
@@ -804,14 +823,17 @@ class TestExpandParameter(APITestCase):
             self.kind.geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"],
+            self.kind.voornamen_kind,
         )
         self.assertEqual(
             data["_embedded"]["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
             self.kind.voorvoegsel_geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
+                "datum"
+            ]["datum"],
             str(self.kind.geboortedatum_kind),
         )
         self.assertEqual(
@@ -821,20 +843,24 @@ class TestExpandParameter(APITestCase):
             str(self.kind.geboorteland_kind),
         )
         self.assertEqual(
-            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
-                "omschrijving"
-            ],
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
+                "plaats"
+            ]["omschrijving"],
             str(self.kind.geboorteplaats_kind),
         )
-        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(
+            data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer")
+        )
         self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigVan"))
-        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigTotEnMet"))
+        self.assertIsNone(
+            data["_embedded"]["kinderen"]["_embedded"].get("geldigTotEnMet")
+        )
         self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("_links"))
         self.assertIsNone(data["_embedded"].get("ouders"))
         self.assertIsNone(data["_embedded"].get("partners"))
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
         response = self.client.get(
             reverse(
@@ -850,14 +876,17 @@ class TestExpandParameter(APITestCase):
             self.kind.geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"],
+            self.kind.voornamen_kind,
         )
         self.assertEqual(
             data["_embedded"]["kinderen"]["_embedded"]["naam"]["voorvoegsel"],
             self.kind.voorvoegsel_geslachtsnaam_kind,
         )
         self.assertEqual(
-            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["datum"]["datum"],
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
+                "datum"
+            ]["datum"],
             str(self.kind.geboortedatum_kind),
         )
         self.assertEqual(
@@ -867,20 +896,24 @@ class TestExpandParameter(APITestCase):
             str(self.kind.geboorteland_kind),
         )
         self.assertEqual(
-            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["plaats"][
-                "omschrijving"
-            ],
+            data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
+                "plaats"
+            ]["omschrijving"],
             str(self.kind.geboorteplaats_kind),
         )
-        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer"))
+        self.assertIsNone(
+            data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer")
+        )
         self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigVan"))
-        self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("geldigTotEnMet"))
+        self.assertIsNone(
+            data["_embedded"]["kinderen"]["_embedded"].get("geldigTotEnMet")
+        )
         self.assertIsNone(data["_embedded"]["kinderen"]["_embedded"].get("_links"))
         self.assertIsNone(data["_embedded"].get("ouders"))
         self.assertIsNone(data["_embedded"].get("partners"))
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
     def test_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
         """
@@ -893,14 +926,20 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"], self.kind.geslachtsnaam_kind)
-        self.assertIsNotNone(data["_embedded"]["kinderen"]['_links'])
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"],
+            self.kind.voornamen_kind,
+        )
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            self.kind.geslachtsnaam_kind,
+        )
+        self.assertIsNotNone(data["_embedded"]["kinderen"]["_links"])
         self.assertIsNone(data.get("ouders"))
         self.assertIsNone(data.get("partners"))
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
         response = self.client.get(
             reverse(
@@ -911,15 +950,20 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
-                         self.kind.geslachtsnaam_kind)
-        self.assertIsNotNone(data["_embedded"]["kinderen"]['_links'])
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"],
+            self.kind.voornamen_kind,
+        )
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            self.kind.geslachtsnaam_kind,
+        )
+        self.assertIsNotNone(data["_embedded"]["kinderen"]["_links"])
         self.assertIsNone(data.get("ouders"))
         self.assertIsNone(data.get("partners"))
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
     def test_links_of_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
         """
@@ -932,13 +976,21 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
-        self.assertIsNone(data["_embedded"]["kinderen"]["_links"].get("ingeschrevenpersonen"))
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"], self.kind.geslachtsnaam_kind)
+        self.assertIsNone(
+            data["_embedded"]["kinderen"]["_links"].get("ingeschrevenpersonen")
+        )
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"],
+            self.kind.voornamen_kind,
+        )
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            self.kind.geslachtsnaam_kind,
+        )
         self.assertIsNotNone(data["_embedded"]["kinderen"]["_links"]["self"])
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
 
         response = self.client.get(
             reverse(
@@ -949,11 +1001,18 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
-        self.assertIsNone(data["_embedded"]["kinderen"]["_links"].get("ingeschrevenpersonen"))
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"], self.kind.voornamen_kind)
-        self.assertEqual(data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
-                         self.kind.geslachtsnaam_kind)
+        self.assertIsNone(
+            data["_embedded"]["kinderen"]["_links"].get("ingeschrevenpersonen")
+        )
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["voornamen"],
+            self.kind.voornamen_kind,
+        )
+        self.assertEqual(
+            data["_embedded"]["kinderen"]["_embedded"]["naam"]["geslachtsnaam"],
+            self.kind.geslachtsnaam_kind,
+        )
         self.assertIsNotNone(data["_embedded"]["kinderen"]["_links"]["self"])
-        self.assertIsNotNone(data['_links']['ouders'])
-        self.assertIsNotNone(data['_links']['partners'])
-        self.assertIsNotNone(data['_links']['kinderen'])
+        self.assertIsNotNone(data["_links"]["ouders"])
+        self.assertIsNotNone(data["_links"]["partners"])
+        self.assertIsNotNone(data["_links"]["kinderen"])
