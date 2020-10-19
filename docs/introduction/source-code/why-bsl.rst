@@ -79,8 +79,8 @@ that require a product offering the Haal Centraal BRP API. These projects can
 benefit from your contributions.
 
 We understand though, that contributing to a project that is not completely 
-open source and free to use in production is less attractive. We really hope 
-that we can release the project under the `EUPL`_ as soon as possible.
+free to use in production is less attractive. We really hope that we can 
+release the project under the `EUPL`_ as soon as possible.
 
 What are alternative licenses?
 ------------------------------
