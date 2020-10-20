@@ -37,12 +37,13 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     expand_fields = ["kinderen", "ouders", "partners"]
 
-    def get_links_url(self, id, param):
+    def get_links_url(self, id=None, param=None):
         base_url = self.context["request"].build_absolute_uri().split("?")[0]
 
-        if id not in base_url:
-            base_url += f"/{id}/{param}"
-        else:
+        if id and id not in base_url:
+            base_url += f"/{id}"
+
+        if param:
             base_url += f"/{param}"
 
         return base_url
@@ -125,6 +126,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         if "expand" in self.context["request"].GET:
             self.add_expand_data(instance, representation)
 
-        self.add_links(instance, representation)
+        if "fields" not in self.context["request"].GET:
+            self.add_links(instance, representation)
+
+        representation['url'] = self.get_links_url()
 
         return representation
