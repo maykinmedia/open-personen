@@ -59,35 +59,32 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
         return base_url
 
-    def handle_dot_notation(self, param, representation, instance):
+    def handle_dot_notation(self, param, instance, representation):
         burgerservicenummer = instance.burgerservicenummer
-        for index, field_key in enumerate(param.split(".")[:-1]):
+        field = instance
+        split_params = param.split(".")
+
+        for index, field_key in enumerate(split_params[:-1]):
             if field_key not in representation:
                 representation[field_key] = dict()
 
-            attribute = param.split(".")[index + 1]
+            attribute = split_params[index + 1]
             attribute = self.to_camel_case(attribute)
 
-            if not isinstance(instance, dict):
-                fields = getattr(instance, field_key)
-            else:
-                fields = [instance]
+            fields = getattr(field, field_key) if not isinstance(field, dict) else [field]
 
             for field in fields:
                 try:
-                    if index + 2 == len(param.split(".")):
+                    if index + 2 == len(split_params):
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
-                        representation["self"] = self.get_links_url(
-                            burgerservicenummer, param.split(".")[0]
+                        representation["url"] = self.get_links_url(
+                            burgerservicenummer, split_params[0]
                         )
-                    if attribute not in representation[field_key]:
-                        # Add attribute to representation so that we can add
-                        #   the nested value later
-                        representation[field_key][attribute] = dict()
-                    # Get next nested values
-                    representation = representation[field_key]
-                    instance = field[attribute]
+                    else:
+                        # Get next nested values
+                        representation = representation[field_key]
+                        field = field[attribute]
                 except KeyError:
                     raise ValueError(f"Invalid query param: {attribute}")
 
@@ -100,13 +97,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
         for param in query_params:
             if "." in param:
-                self.handle_dot_notation(param, representation, instance)
+                self.handle_dot_notation(param, instance, representation)
             else:
-                attr = getattr(instance, param)
-                representation[param] = attr
-                representation[param][0][param] = self.get_links_url(
-                    instance.burgerservicenummer, param
-                )
+                representation[param] = getattr(instance, param)
 
     def add_links(self, burgerservicenummer, representation):
 
