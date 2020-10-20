@@ -49,9 +49,6 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
     def get_links_url(self, id, param):
         base_url = self.context["request"].build_absolute_uri().split("?")[0]
 
-        if "testserver" in base_url:
-            base_url = base_url.replace("testserver", "testserver.com")
-
         if id not in base_url:
             base_url += f"/{id}/{param}"
         else:
@@ -71,7 +68,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             attribute = split_params[index + 1]
             attribute = self.to_camel_case(attribute)
 
-            fields = getattr(field, field_key) if not isinstance(field, dict) else [field]
+            fields = (
+                getattr(field, field_key) if not isinstance(field, dict) else [field]
+            )
 
             for field in fields:
                 try:
