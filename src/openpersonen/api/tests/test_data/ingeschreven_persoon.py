@@ -1,13 +1,13 @@
 INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
     "_links": {
         "partners": {
-            "href": "http://testserver.com/api/ingeschrevenpersonen/123456789/partners"
+            "href": "http://localhost/api/ingeschrevenpersonen/123456789/partners"
         },
         "kinderen": {
-            "href": "http://testserver.com/api/ingeschrevenpersonen/123456789/kinderen"
+            "href": "http://localhost/api/ingeschrevenpersonen/123456789/kinderen"
         },
         "ouders": {
-            "href": "http://testserver.com/api/ingeschrevenpersonen/123456789/ouders"
+            "href": "http://localhost/api/ingeschrevenpersonen/123456789/ouders"
         },
     },
     "_embedded": {

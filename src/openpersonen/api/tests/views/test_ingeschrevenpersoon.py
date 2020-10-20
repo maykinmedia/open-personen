@@ -142,6 +142,7 @@ class TestIngeschrevenPersoon(APITestCase):
                 kwargs={"burgerservicenummer": self.bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -490,20 +491,21 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
 
         response = self.client.get(
@@ -511,20 +513,21 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
 
     def test_expand_parameter_errors_when_not_allowed(self):
@@ -536,8 +539,7 @@ class TestExpandParameter(APITestCase):
             + f"?burgerservicenummer={self.bsn}&expand=true"
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), get_expand_400_response(url, "true"))
@@ -599,8 +601,7 @@ class TestExpandParameter(APITestCase):
             + f"?expand=resourcebestaatniet"
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -612,8 +613,7 @@ class TestExpandParameter(APITestCase):
             + f"?burgerservicenummer={self.bsn}&expand=reisdocumenten"
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -627,8 +627,7 @@ class TestExpandParameter(APITestCase):
             + f"?expand=reisdocumenten"
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -640,8 +639,7 @@ class TestExpandParameter(APITestCase):
             + f"?burgerservicenummer={self.bsn}&expand=ouders.veldbestaatniet"
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -655,8 +653,7 @@ class TestExpandParameter(APITestCase):
             + f"?expand=ouders.veldbestaatniet"
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
@@ -672,8 +669,7 @@ class TestExpandParameter(APITestCase):
             + f"?burgerservicenummer={self.bsn}&expand="
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), get_expand_400_response(url, ""))
@@ -685,8 +681,7 @@ class TestExpandParameter(APITestCase):
             + f"?expand="
         )
         response = self.client.get(
-            url,
-            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            url, HTTP_AUTHORIZATION=f"Token {self.token.key}", HTTP_HOST="localhost"
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), get_expand_400_response(url, ""))
@@ -699,6 +694,7 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -712,15 +708,15 @@ class TestExpandParameter(APITestCase):
         self.assertIsNone(data.get("ouders"))
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
 
         response = self.client.get(
@@ -729,6 +725,7 @@ class TestExpandParameter(APITestCase):
             )
             + f"?expand=partners,kinderen",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -742,15 +739,15 @@ class TestExpandParameter(APITestCase):
         self.assertIsNone(data.get("ouders"))
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://localhost/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
 
     def test_expand_parameter_with_dot_notation(self):
@@ -761,6 +758,7 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=ouders.geslachtsaanduiding,ouders.burgerservicenummer",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -787,6 +785,7 @@ class TestExpandParameter(APITestCase):
             )
             + f"?expand=ouders.geslachtsaanduiding,ouders.burgerservicenummer",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -815,6 +814,7 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam,kinderen.geboorte",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -868,6 +868,7 @@ class TestExpandParameter(APITestCase):
             )
             + f"?expand=kinderen.naam,kinderen.geboorte",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -923,6 +924,7 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -947,6 +949,7 @@ class TestExpandParameter(APITestCase):
             )
             + "?expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -973,6 +976,7 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -998,6 +1002,7 @@ class TestExpandParameter(APITestCase):
             )
             + "?expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
+            HTTP_HOST="localhost",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
