@@ -1098,6 +1098,80 @@ class TestFieldParameter(APITestCase):
         )
         self.token = TokenFactory.create()
 
+    def test_fields_parameter_not_included(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L46
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(
+            data["_links"]["partners"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+        )
+        self.assertEqual(
+            data["_links"]["kinderen"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+        )
+        self.assertEqual(
+            data["_links"]["ouders"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+        )
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(
+            data["_links"]["partners"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+        )
+        self.assertEqual(
+            data["_links"]["kinderen"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+        )
+        self.assertEqual(
+            data["_links"]["ouders"]["href"],
+            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+        )
+
+    def test_one_attribute_being_requested(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L52
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=geslachtsaanduiding",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(len(data), 2)
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=geslachtsaanduiding",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 2)
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
+
     def test_multiple_attributes_being_requested(self):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L57
@@ -1129,3 +1203,41 @@ class TestFieldParameter(APITestCase):
         self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
+
+    def test_fields_with_group_being_requested(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L62
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=burgerservicenummer,naam",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(len(data), 3)
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
+        self.assertEqual(data['_embedded']['naam']['geslachtsnaam'], self.persoon.geslachtsnaam_persoon)
+        self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
+        self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
+        self.assertEqual(data['_embedded']['naam']['aanduidingNaamgebruik'], self.persoon.aanduiding_naamgebruik)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=burgerservicenummer,naam",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 3)
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
+        self.assertEqual(data['_embedded']['naam']['geslachtsnaam'], self.persoon.geslachtsnaam_persoon)
+        self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
+        self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
+        self.assertEqual(data['_embedded']['naam']['aanduidingNaamgebruik'], self.persoon.aanduiding_naamgebruik)
