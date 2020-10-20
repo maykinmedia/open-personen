@@ -5,7 +5,7 @@
 #    pip-compile --no-emit-index-url requirements/base.in
 #
 -e git+git://github.com/django-webtest/django-webtest.git@e969cbc1b966785aa1a075c22a0678167f379713#egg=django-webtest  # via -r requirements/base.in
--e git+git://github.com/maykinmedia/djangorestframework-hal.git@f6692d2489645cfd71ebbd59cd2fdb53a311356b#egg=djangorestframework_hal  # via -r requirements/base.in
+-e git+git://github.com/maykinmedia/djangorestframework-hal.git@014ccbaba089f6e39ace81e29f73208c8fd44f21#egg=djangorestframework_hal  # via -r requirements/base.in
 beautifulsoup4==4.9.2     # via webtest
 certifi==2020.6.20        # via elastic-apm, requests, sentry-sdk
 chardet==3.0.4            # via requests
