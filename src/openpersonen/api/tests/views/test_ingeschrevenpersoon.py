@@ -1098,7 +1098,10 @@ class TestFieldParameter(APITestCase):
         )
         self.token = TokenFactory.create()
 
-    def test_scenario_three(self):
+    def test_multiple_attributes_being_requested(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L57
+        """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&fields=burgerservicenummer,geslachtsaanduiding",
@@ -1107,7 +1110,8 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 3)
-        self.assertIsNotNone(data['_links'])
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
 
@@ -1121,6 +1125,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 3)
-        self.assertIsNotNone(data['_links'])
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
