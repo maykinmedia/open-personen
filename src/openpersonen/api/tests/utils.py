@@ -1,5 +1,8 @@
 import itertools
 
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+
 
 def get_bsn():
 
@@ -27,3 +30,17 @@ def get_a_nummer():
         a_nummer = "".join(str(x) for x in ten_digits)
 
         yield a_nummer
+
+
+def is_url(value):
+
+    if "testserver" in value:
+        return True
+
+    if not isinstance(value, str):
+        return False
+    try:
+        URLValidator()(value)
+    except ValidationError:
+        return False
+    return True

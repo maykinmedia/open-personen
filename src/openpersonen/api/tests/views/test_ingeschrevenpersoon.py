@@ -23,6 +23,7 @@ from openpersonen.api.tests.factory_models import (
     VerblijfstitelFactory,
 )
 from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
+from openpersonen.api.tests.utils import is_url
 from openpersonen.api.views import IngeschrevenPersoonViewSet
 from openpersonen.api.views.generic_responses import (
     get_404_response,
@@ -127,7 +128,8 @@ class TestIngeschrevenPersoon(APITestCase):
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
-    def test_detail_ingeschreven_persoon(self, post_mock):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_detail_ingeschreven_persoon(self, post_mock, is_url_mock):
         post_mock.post(
             self.url,
             content=bytes(
@@ -142,7 +144,6 @@ class TestIngeschrevenPersoon(APITestCase):
                 kwargs={"burgerservicenummer": self.bsn},
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -484,28 +485,28 @@ class TestExpandParameter(APITestCase):
         )
         self.token = TokenFactory.create()
 
-    def test_expand_parameter_not_included_relatives_not_included(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_expand_parameter_not_included_relatives_not_included(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L45
         """
         response = self.client.get(
             reverse("ingeschrevenpersonen-list") + f"?burgerservicenummer={self.bsn}",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
 
         response = self.client.get(
@@ -513,21 +514,20 @@ class TestExpandParameter(APITestCase):
                 "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
             ),
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
 
     def test_expand_parameter_errors_when_not_allowed(self):
@@ -670,7 +670,8 @@ class TestExpandParameter(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), get_expand_400_response(url, ""))
 
-    def test_expand_parameter_with_multiple_resources(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_expand_parameter_with_multiple_resources(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.1.0/features/expand.feature#L85
         """
@@ -678,7 +679,6 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=partners,kinderen",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -692,15 +692,15 @@ class TestExpandParameter(APITestCase):
         self.assertIsNone(data.get("ouders"))
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
 
         response = self.client.get(
@@ -709,7 +709,6 @@ class TestExpandParameter(APITestCase):
             )
             + f"?expand=partners,kinderen",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -723,18 +722,19 @@ class TestExpandParameter(APITestCase):
         self.assertIsNone(data.get("ouders"))
         self.assertEqual(
             data["_links"]["partners"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/partners",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners",
         )
         self.assertEqual(
             data["_links"]["ouders"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/ouders",
         )
         self.assertEqual(
             data["_links"]["kinderen"]["href"],
-            f"http://127.0.0.1/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
 
-    def test_expand_parameter_with_dot_notation(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_expand_parameter_with_dot_notation(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L94
         """
@@ -742,7 +742,6 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=ouders.geslachtsaanduiding,ouders.burgerservicenummer",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -769,7 +768,6 @@ class TestExpandParameter(APITestCase):
             )
             + f"?expand=ouders.geslachtsaanduiding,ouders.burgerservicenummer",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -790,7 +788,8 @@ class TestExpandParameter(APITestCase):
         self.assertIsNotNone(data["_links"]["partners"])
         self.assertIsNotNone(data["_links"]["kinderen"])
 
-    def test_expand_parameter_with_dot_notation_of_entire_data_group(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_expand_parameter_with_dot_notation_of_entire_data_group(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L110
         """
@@ -798,7 +797,6 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam,kinderen.geboorte",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -852,7 +850,6 @@ class TestExpandParameter(APITestCase):
             )
             + f"?expand=kinderen.naam,kinderen.geboorte",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -900,7 +897,10 @@ class TestExpandParameter(APITestCase):
         self.assertIsNotNone(data["_links"]["partners"])
         self.assertIsNotNone(data["_links"]["kinderen"])
 
-    def test_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_expand_parameter_with_dot_notation_of_portion_of_data_group(
+        self, is_url_mock
+    ):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L128
         """
@@ -908,7 +908,6 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -933,7 +932,6 @@ class TestExpandParameter(APITestCase):
             )
             + "?expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -952,7 +950,10 @@ class TestExpandParameter(APITestCase):
         self.assertIsNotNone(data["_links"]["partners"])
         self.assertIsNotNone(data["_links"]["kinderen"])
 
-    def test_links_of_expand_parameter_with_dot_notation_of_portion_of_data_group(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_links_of_expand_parameter_with_dot_notation_of_portion_of_data_group(
+        self, is_url_mock
+    ):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/expand.feature#L142
         """
@@ -960,7 +961,6 @@ class TestExpandParameter(APITestCase):
             reverse("ingeschrevenpersonen-list")
             + f"?burgerservicenummer={self.bsn}&expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
@@ -986,7 +986,6 @@ class TestExpandParameter(APITestCase):
             )
             + "?expand=kinderen.naam.voornamen,kinderen.naam.geslachtsnaam",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
-            HTTP_HOST="127.0.0.1",
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()
