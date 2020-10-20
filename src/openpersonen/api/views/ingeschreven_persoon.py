@@ -117,9 +117,8 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
         try:
             data = serializer.data
         except ValueError as e:
-            query_param = str(e).replace("Invalid query param: ", "")
             return Response(
-                data=get_expand_400_response(request.get_full_path(), query_param),
+                data=get_expand_400_response(request.get_full_path(), str(e)),
                 status=HTTP_400_BAD_REQUEST,
             )
 
@@ -143,9 +142,8 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
         try:
             data = serializer.data
         except ValueError as e:
-            query_param = str(e).replace("Invalid query param: ", "")
             return Response(
-                data=get_expand_400_response(request.get_full_path(), query_param),
+                data=get_expand_400_response(request.get_full_path(), str(e)),
                 status=HTTP_400_BAD_REQUEST,
             )
 

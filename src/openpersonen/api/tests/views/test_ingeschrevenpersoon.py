@@ -645,7 +645,7 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "veldbestaatniet")
+            response.json(), get_expand_400_response(url, "ouders.veldbestaatniet")
         )
 
         url = (
@@ -660,7 +660,7 @@ class TestExpandParameter(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "veldbestaatniet")
+            response.json(), get_expand_400_response(url, "ouders.veldbestaatniet")
         )
 
     def test_expand_parameter_errors_when_empty(self):
