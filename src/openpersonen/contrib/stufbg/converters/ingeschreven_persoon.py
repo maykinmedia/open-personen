@@ -416,18 +416,18 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
     ingeschreven_persoon_dict["partners"] = []
 
     for kind_info in kinderen_info:
-        ingeschreven_persoon_dict["kinderen"] = get_kind_instance_dict(
-            kind_info, prefix
+        ingeschreven_persoon_dict["kinderen"].append(
+            get_kind_instance_dict(kind_info, prefix)
         )
 
     for ouder_info in ouders_info:
-        ingeschreven_persoon_dict["ouders"] = get_ouder_instance_dict(
-            ouder_info, prefix
+        ingeschreven_persoon_dict["ouders"].append(
+            get_ouder_instance_dict(ouder_info, prefix)
         )
 
     for partner_info in partners_info:
-        ingeschreven_persoon_dict["partners"] = get_partner_instance_dict(
-            partner_info, prefix
+        ingeschreven_persoon_dict["partners"].append(
+            get_partner_instance_dict(partner_info, prefix)
         )
 
     convert_empty_instances(ingeschreven_persoon_dict)
