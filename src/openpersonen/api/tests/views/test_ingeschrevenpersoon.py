@@ -1154,7 +1154,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data['_links']), 1)
+        self.assertEqual(len(data['_links']), 4)
         self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
 
@@ -1168,7 +1168,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data['_links']), 1)
+        self.assertEqual(len(data['_links']), 4)
         self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
 
@@ -1184,8 +1184,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data['_links']), 1)
-        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(len(data['_links']), 4)
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
 
@@ -1199,7 +1198,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data['_links']), 1)
+        self.assertEqual(len(data['_links']), 4)
         self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['geslachtsaanduiding'], str(self.persoon.geslachtsaanduiding))
@@ -1216,8 +1215,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data['_links']), 1)
-        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(len(data['_links']), 4)
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['_embedded']['naam']['geslachtsnaam'], self.persoon.geslachtsnaam_persoon)
         self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
@@ -1234,7 +1232,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data['_links']), 1)
+        self.assertEqual(len(data['_links']), 4)
         self.assertIsNotNone(data['_links'].get('self'))
         self.assertEqual(data['burgerservicenummer'], str(self.persoon.burgerservicenummer_persoon))
         self.assertEqual(data['_embedded']['naam']['geslachtsnaam'], self.persoon.geslachtsnaam_persoon)
@@ -1254,8 +1252,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data['_links']), 1)
-        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertEqual(len(data['_links']), 4)
         self.assertIsNone(data['_embedded']['naam'].get('geslachtsnaam'))
         self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
         self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
@@ -1271,9 +1268,42 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data['_links']), 1)
+        self.assertEqual(len(data['_links']), 4)
         self.assertIsNotNone(data['_links'].get('self'))
         self.assertIsNone(data['_embedded']['naam'].get('geslachtsnaam'))
         self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
         self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
         self.assertIsNone(data['_embedded']['naam'].get('aanduidingNaamgebruik'))
+
+    def test_fields_with__links_attribute(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L74
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=burgerservicenummer,naam,_links.partners",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()['_embedded']['ingeschrevenpersonen'][0]
+        self.assertEqual(len(data['_links']), 2)
+        self.assertEqual(data['_links']['self']['href'], 'http://testserver.com/api/ingeschrevenpersonen')
+        self.assertEqual(data['_links']['partners']['href'], f'http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners')
+        self.assertEqual(data['burgerservicenummer'], str(self.bsn))
+        self.assertIsInstance(data['_embedded']['naam'], dict)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=burgerservicenummer,naam,_links.partners",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data['_links']), 2)
+        self.assertEqual(data['_links']['self']['href'], f'http://testserver.com/api/ingeschrevenpersonen/{self.bsn}')
+        self.assertEqual(data['_links']['partners']['href'],
+                         f'http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners')
+        self.assertEqual(data['burgerservicenummer'], str(self.bsn))
+        self.assertIsInstance(data['_embedded']['naam'], dict)
