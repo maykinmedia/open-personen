@@ -99,20 +99,56 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 self.handle_dot_notation(param, instance, representation)
             else:
                 representation[param] = getattr(instance, param)
+                representation[param][0]["url"] = self.get_links_url(
+                    instance.burgerservicenummer, param
+                )
 
-    def add_links(self, burgerservicenummer, representation):
+    def add_links(self, instance, representation):
 
-        representation["partners_links"] = self.get_links_url(
-            burgerservicenummer, "partners"
-        )
+        representation["partners_links"] = []
+        for partner in instance.partners:
+            representation["partners_links"].append(
+                {
+                    "url": self.context["request"]
+                    .build_absolute_uri()
+                    .split("?")[0]
+                    .replace("/" + instance.burgerservicenummer, "")
+                    + "/"
+                    + instance.burgerservicenummer
+                    + "/partners/"
+                    + partner["burgerservicenummer"]
+                }
+            )
 
-        representation["kinderen_links"] = self.get_links_url(
-            burgerservicenummer, "kinderen"
-        )
+        representation["kinderen_links"] = []
+        for kind in instance.kinderen:
+            representation["kinderen_links"].append(
+                {
+                    "url": self.context["request"]
+                    .build_absolute_uri()
+                    .split("?")[0]
+                    .replace("/" + instance.burgerservicenummer, "")
+                    + "/"
+                    + instance.burgerservicenummer
+                    + "/kinderen/"
+                    + kind["burgerservicenummer"]
+                }
+            )
 
-        representation["ouders_links"] = self.get_links_url(
-            burgerservicenummer, "ouders"
-        )
+        representation["ouders_links"] = []
+        for ouder in instance.ouders:
+            representation["ouders_links"].append(
+                {
+                    "url": self.context["request"]
+                    .build_absolute_uri()
+                    .split("?")[0]
+                    .replace("/" + instance.burgerservicenummer, "")
+                    + "/"
+                    + instance.burgerservicenummer
+                    + "/ouders/"
+                    + ouder["burgerservicenummer"]
+                }
+            )
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -120,6 +156,6 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         if "expand" in self.context["request"].GET:
             self.add_expand_data(instance, representation)
 
-        self.add_links(instance.burgerservicenummer, representation)
+        self.add_links(instance, representation)
 
         return representation
