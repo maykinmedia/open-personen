@@ -97,17 +97,36 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     def add_links(self, instance, representation):
 
+        link_fields = []
+        for field in self.context['request'].GET.get('fields', '').split(','):
+            if '_links' in field:
+                link_fields.append(field)
+
         for field in self.expand_fields:
-            representation[f"{field}_links"] = []
-            for obj in getattr(instance, field):
-                representation[f"{field}_links"].append(
-                    {
-                        "url": self.context["request"]
-                        .build_absolute_uri(self.context["request"].path)
-                        .replace(f"/{instance.burgerservicenummer}", "")
-                        + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
-                    }
-                )
+            if link_fields:
+                for link_field in link_fields:
+                    if field in link_field.split('.')[1]:
+                        representation[f"{field}_links"] = []
+                        for obj in getattr(instance, field):
+                            representation[f"{field}_links"].append(
+                                {
+                                    "url": self.context["request"]
+                                               .build_absolute_uri(self.context["request"].path)
+                                               .replace(f"/{instance.burgerservicenummer}", "")
+                                           + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                                }
+                            )
+            else:
+                representation[f"{field}_links"] = []
+                for obj in getattr(instance, field):
+                    representation[f"{field}_links"].append(
+                        {
+                            "url": self.context["request"]
+                            .build_absolute_uri(self.context["request"].path)
+                            .replace(f"/{instance.burgerservicenummer}", "")
+                            + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                        }
+                    )
 
     def handle_fields(self):
 
@@ -135,9 +154,12 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         dot_fields_to_remove = dict()
         for field, inner_fields in dot_fields_to_keep.items():
             dot_fields_to_remove[field] = []
-            for _field in self.fields[field].fields:
-                if _field not in inner_fields:
-                    dot_fields_to_remove[field].append(_field)
+            try:
+                for _field in self.fields[field].fields:
+                    if _field not in inner_fields:
+                        dot_fields_to_remove[field].append(_field)
+            except KeyError:
+                pass
 
         for field, inner_fields in dot_fields_to_remove.items():
             for _field in inner_fields:
