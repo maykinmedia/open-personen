@@ -1241,3 +1241,39 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
         self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
         self.assertEqual(data['_embedded']['naam']['aanduidingNaamgebruik'], self.persoon.aanduiding_naamgebruik)
+
+    def test_fields_with_attributes_of_group_being_requested(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L62
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=naam.voorvoegsel,naam.voornamen",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(len(data), 2)
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertIsNone(data['_embedded']['naam'].get('geslachtsnaam'))
+        self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
+        self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
+        self.assertIsNone(data['_embedded']['naam'].get('aanduidingNaamgebruik'))
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=naam.voorvoegsel,naam.voornamen",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 2)
+        self.assertEqual(len(data['_links']), 1)
+        self.assertIsNotNone(data['_links'].get('self'))
+        self.assertIsNone(data['_embedded']['naam'].get('geslachtsnaam'))
+        self.assertEqual(data['_embedded']['naam']['voornamen'], self.persoon.voornamen_persoon)
+        self.assertEqual(data['_embedded']['naam']['voorvoegsel'], self.persoon.voorvoegsel_geslachtsnaam_persoon)
+        self.assertIsNone(data['_embedded']['naam'].get('aanduidingNaamgebruik'))

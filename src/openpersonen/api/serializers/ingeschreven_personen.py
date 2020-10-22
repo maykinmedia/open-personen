@@ -109,17 +109,45 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     }
                 )
 
+    def handle_fields(self):
+
+        fields_to_keep = []
+        dot_fields_to_keep = dict()
+        for field in self.context["request"].GET["fields"].split(","):
+            if '.' in field:
+                field_0, field_1 = field.split('.')
+                fields_to_keep.append(field_0)
+                if field_0 in dot_fields_to_keep:
+                    dot_fields_to_keep[field_0].append(field_1)
+                else:
+                    dot_fields_to_keep[field_0] = [field_1]
+            else:
+                fields_to_keep.append(field)
+
+        fields_to_remove = []
+        for field in self.fields:
+            if field not in fields_to_keep:
+                fields_to_remove.append(field)
+
+        for field in fields_to_remove:
+            self.fields.pop(field)
+
+        dot_fields_to_remove = dict()
+        for field, inner_fields in dot_fields_to_keep.items():
+            dot_fields_to_remove[field] = []
+            for _field in self.fields[field].fields:
+                if _field not in inner_fields:
+                    dot_fields_to_remove[field].append(_field)
+
+        for field, inner_fields in dot_fields_to_remove.items():
+            for _field in inner_fields:
+                self.fields[field].fields.pop(_field)
+
+
     def to_representation(self, instance):
 
         if "fields" in self.context["request"].GET:
-            fields_to_keep = self.context["request"].GET["fields"].split(",")
-            fields_to_remove = []
-            for field in self.fields:
-                if field not in fields_to_keep:
-                    fields_to_remove.append(field)
-
-            for field in fields_to_remove:
-                self.fields.pop(field)
+            self.handle_fields()
 
         representation = super().to_representation(instance)
 
