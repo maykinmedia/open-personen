@@ -106,15 +106,15 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         for field in self.expand_fields:
             if link_fields:
                 for link_field in link_fields:
-                    if field in link_field.split('.')[1]:
+                    if field in link_field.split(".")[1]:
                         representation[f"{field}_links"] = []
                         for obj in getattr(instance, field):
                             representation[f"{field}_links"].append(
                                 {
                                     "url": self.context["request"]
-                                               .build_absolute_uri(self.context["request"].path)
-                                               .replace(f"/{instance.burgerservicenummer}", "")
-                                           + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                                    .build_absolute_uri(self.context["request"].path)
+                                    .replace(f"/{instance.burgerservicenummer}", "")
+                                    + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
                                 }
                             )
             else:
