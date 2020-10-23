@@ -93,8 +93,20 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 for expand_field in representation[param]:
                     expand_field["url"] = self.get_links_url(
                         instance.burgerservicenummer,
-                        param + "/" + expand_field["burgerservicenummer"],
+                        f"{param}/{expand_field['burgerservicenummer']}",
                     )
+
+    def add_field_links(self, instance, representation, field):
+        representation[f"{field}_links"] = []
+        for obj in getattr(instance, field):
+            representation[f"{field}_links"].append(
+                {
+                    "url": self.context["request"]
+                               .build_absolute_uri(self.context["request"].path)
+                               .replace(f"/{instance.burgerservicenummer}", "")
+                           + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                }
+            )
 
     def add_links(self, instance, representation):
 
@@ -107,27 +119,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             if link_fields:
                 for link_field in link_fields:
                     if field in link_field.split(".")[1]:
-                        representation[f"{field}_links"] = []
-                        for obj in getattr(instance, field):
-                            representation[f"{field}_links"].append(
-                                {
-                                    "url": self.context["request"]
-                                    .build_absolute_uri(self.context["request"].path)
-                                    .replace(f"/{instance.burgerservicenummer}", "")
-                                    + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
-                                }
-                            )
+                        self.add_field_links(instance, representation, field)
             else:
-                representation[f"{field}_links"] = []
-                for obj in getattr(instance, field):
-                    representation[f"{field}_links"].append(
-                        {
-                            "url": self.context["request"]
-                            .build_absolute_uri(self.context["request"].path)
-                            .replace(f"/{instance.burgerservicenummer}", "")
-                            + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
-                        }
-                    )
+                self.add_field_links(instance, representation, field)
 
     def handle_fields(self):
 
@@ -145,10 +139,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 fields_to_keep.append(field)
 
         for field in fields_to_keep:
-            try:
-                if field != "_links":
-                    self.fields[field]
-            except KeyError:
+            if field != "_links" and field not in self.fields:
                 raise ValueError(field)
 
         fields_to_remove = []
@@ -175,10 +166,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     def to_representation(self, instance):
 
-        if (
-            "fields" in self.context["request"].GET
-            and self.context["request"].GET["fields"]
-        ):
+        if self.context["request"].GET.get("fields"):
             self.handle_fields()
 
         representation = super().to_representation(instance)
