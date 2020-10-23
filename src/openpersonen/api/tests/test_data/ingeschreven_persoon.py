@@ -37,12 +37,12 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                             "dag": 0,
                             "datum": "string",
                             "jaar": 0,
-                            "maand": 0,
+                            "maand": 0
                         }
                     },
                     "geslachtsnaam": True,
                     "voornamen": True,
-                    "voorvoegsel": True,
+                    "voorvoegsel": True
                 }
             },
             "geslachtsnaam": "Maykin",
@@ -52,33 +52,44 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "aanhef": "Media",
             "aanschrijfwijze": "string",
             "gebruikInLopendeTekst": "string",
-            "aanduidingNaamgebruik": "E",
+            "aanduidingNaamgebruik": "E"
         },
         "geboorte": {
             "_embedded": {
-                "datum": {"dag": 15, "datum": "19800915", "jaar": 1980, "maand": 9},
-                "land": {"code": "string", "omschrijving": "Nederland"},
-                "plaats": {"code": "string", "omschrijving": "Amsterdam"},
+                "datum": {
+                    "dag": 15,
+                    "datum": "19800915",
+                    "jaar": 1980,
+                    "maand": 9
+                },
+                "land": {
+                    "code": "string",
+                    "omschrijving": "Nederland"
+                },
+                "plaats": {
+                    "code": "string",
+                    "omschrijving": "Amsterdam"
+                },
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 0,
                             "datum": "string",
                             "jaar": 0,
-                            "maand": 0,
+                            "maand": 0
                         }
                     },
                     "datum": True,
                     "land": True,
-                    "plaats": True,
-                },
+                    "plaats": True
+                }
             }
         },
         "datumEersteInschrijvingGBA": {
             "dag": 16,
             "datum": "20051216",
             "jaar": 2005,
-            "maand": 12,
+            "maand": 12
         },
         "kiesrecht": {
             "_embedded": {
@@ -86,17 +97,17 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "dag": 24,
                     "datum": "20200924",
                     "jaar": 2020,
-                    "maand": 9,
+                    "maand": 9
                 },
                 "einddatumUitsluitingKiesrecht": {
                     "dag": 24,
                     "datum": "20200924",
                     "jaar": 2020,
-                    "maand": 9,
-                },
+                    "maand": 9
+                }
             },
             "europeesKiesrecht": True,
-            "uitgeslotenVanKiesrecht": True,
+            "uitgeslotenVanKiesrecht": True
         },
         "inOnderzoek": {
             "_embedded": {
@@ -104,11 +115,11 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "dag": 0,
                     "datum": "string",
                     "jaar": 0,
-                    "maand": 0,
+                    "maand": 0
                 }
             },
             "burgerservicenummer": True,
-            "geslachtsaanduiding": True,
+            "geslachtsaanduiding": True
         },
         "nationaliteit": [
             {
@@ -117,53 +128,75 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                         "dag": 0,
                         "datum": "string",
                         "jaar": 0,
-                        "maand": 0,
+                        "maand": 0
                     },
-                    "nationaliteit": {"code": "string", "omschrijving": "string"},
-                    "redenOpname": {"code": "string", "omschrijving": "string"},
+                    "nationaliteit": {
+                        "code": "string",
+                        "omschrijving": "string"
+                    },
+                    "redenOpname": {
+                        "code": "string",
+                        "omschrijving": "string"
+                    },
                     "inOnderzoek": {
                         "_embedded": {
                             "datumIngangOnderzoek": {
                                 "dag": 0,
                                 "datum": "string",
                                 "jaar": 0,
-                                "maand": 0,
+                                "maand": 0
                             }
                         },
                         "aanduidingBijzonderNederlanderschap": True,
                         "nationaliteit": True,
-                        "redenOpname": True,
-                    },
+                        "redenOpname": True
+                    }
                 },
-                "aanduidingBijzonderNederlanderschap": "behandeld_als_nederlander",
+                "aanduidingBijzonderNederlanderschap": "behandeld_als_nederlander"
             }
         ],
         "opschortingBijhouding": {
             "_embedded": {
-                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0}
+                "datum": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0
+                }
             },
-            "reden": "overlijden",
+            "reden": "overlijden"
         },
         "overlijden": {
             "_embedded": {
-                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
-                "land": {"code": "string", "omschrijving": None},
-                "plaats": {"code": "string", "omschrijving": None},
+                "datum": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0
+                },
+                "land": {
+                    "code": "string",
+                    "omschrijving": None
+                },
+                "plaats": {
+                    "code": "string",
+                    "omschrijving": None
+                },
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 0,
                             "datum": "string",
                             "jaar": 0,
-                            "maand": 0,
+                            "maand": 0
                         }
                     },
                     "datum": True,
                     "land": True,
-                    "plaats": True,
-                },
+                    "plaats": True
+                }
             },
-            "indicatieOverleden": True,
+            "indicatieOverleden": True
         },
         "verblijfplaats": {
             "_embedded": {
@@ -171,34 +204,45 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "dag": 0,
                     "datum": "string",
                     "jaar": 0,
-                    "maand": 0,
+                    "maand": 0
                 },
                 "datumIngangGeldigheid": {
                     "dag": 0,
                     "datum": "string",
                     "jaar": 0,
-                    "maand": 0,
+                    "maand": 0
                 },
                 "datumInschrijvingInGemeente": {
                     "dag": 0,
                     "datum": "string",
                     "jaar": 0,
-                    "maand": 0,
+                    "maand": 0
                 },
                 "datumVestigingInNederland": {
                     "dag": 0,
                     "datum": "string",
                     "jaar": 0,
-                    "maand": 0,
+                    "maand": 0
                 },
-                "gemeenteVanInschrijving": {"code": "string", "omschrijving": "string"},
-                "landVanwaarIngeschreven": {"code": "string", "omschrijving": "string"},
+                "gemeenteVanInschrijving": {
+                    "code": "string",
+                    "omschrijving": "string"
+                },
+                "landVanwaarIngeschreven": {
+                    "code": "string",
+                    "omschrijving": "string"
+                },
                 "verblijfBuitenland": {
-                    "_embedded": {"land": {"code": "string", "omschrijving": "string"}},
+                    "_embedded": {
+                        "land": {
+                            "code": "string",
+                            "omschrijving": "string"
+                        }
+                    },
                     "adresRegel1": "string",
                     "adresRegel2": "string",
                     "adresRegel3": "string",
-                    "vertrokkenOnbekendWaarheen": True,
+                    "vertrokkenOnbekendWaarheen": True
                 },
                 "inOnderzoek": {
                     "_embedded": {
@@ -206,7 +250,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                             "dag": 0,
                             "datum": "string",
                             "jaar": 0,
-                            "maand": 0,
+                            "maand": 0
                         }
                     },
                     "aanduidingBijHuisnummer": True,
@@ -227,8 +271,8 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "postcode": True,
                     "straatnaam": True,
                     "verblijfBuitenland": True,
-                    "woonplaatsnaam": True,
-                },
+                    "woonplaatsnaam": True
+                }
             },
             "functieAdres": "woonadres",
             "huisletter": "A",
@@ -243,7 +287,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "indicatieVestigingVanuitBuitenland": True,
             "locatiebeschrijving": "string",
             "straatnaam": "Straat",
-            "vanuitVertrokkenOnbekendWaarheen": True,
+            "vanuitVertrokkenOnbekendWaarheen": True
         },
         "gezagsverhouding": {
             "_embedded": {
@@ -253,40 +297,55 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                             "dag": 0,
                             "datum": "string",
                             "jaar": 0,
-                            "maand": 0,
+                            "maand": 0
                         }
                     },
                     "indicatieCurateleRegister": True,
-                    "indicatieGezagMinderjarige": True,
+                    "indicatieGezagMinderjarige": True
                 }
             },
             "indicatieCurateleRegister": True,
-            "indicatieGezagMinderjarige": "ouder1",
+            "indicatieGezagMinderjarige": "ouder1"
         },
         "verblijfstitel": {
             "_embedded": {
-                "aanduiding": {"code": "string", "omschrijving": "string"},
-                "datumEinde": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
-                "datumIngang": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+                "aanduiding": {
+                    "code": "string",
+                    "omschrijving": "string"
+                },
+                "datumEinde": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0
+                },
+                "datumIngang": {
+                    "dag": 0,
+                    "datum": "string",
+                    "jaar": 0,
+                    "maand": 0
+                },
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 0,
                             "datum": "string",
                             "jaar": 0,
-                            "maand": 0,
+                            "maand": 0
                         }
                     },
                     "aanduiding": True,
                     "datumEinde": True,
-                    "datumIngang": True,
-                },
+                    "datumIngang": True
+                }
             }
         },
-        "reisdocumenten": ["string"],
+        "reisdocumenten": [
+            "string"
+        ]
     },
     "burgerservicenummer": "123456789",
     "geheimhoudingPersoonsgegevens": True,
     "geslachtsaanduiding": "M",
-    "leeftijd": 39,
+    "leeftijd": 39
 }
