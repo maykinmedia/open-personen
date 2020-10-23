@@ -98,8 +98,8 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
     def add_links(self, instance, representation):
 
         link_fields = []
-        for field in self.context['request'].GET.get('fields', '').split(','):
-            if '_links' in field:
+        for field in self.context["request"].GET.get("fields", "").split(","):
+            if "_links" in field:
                 link_fields.append(field)
 
         for field in self.expand_fields:
@@ -133,8 +133,8 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         fields_to_keep = []
         dot_fields_to_keep = dict()
         for field in self.context["request"].GET["fields"].split(","):
-            if '.' in field:
-                field_0, field_1 = field.split('.')
+            if "." in field:
+                field_0, field_1 = field.split(".")
                 fields_to_keep.append(field_0)
                 if field_0 in dot_fields_to_keep:
                     dot_fields_to_keep[field_0].append(field_1)
@@ -165,7 +165,6 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             for _field in inner_fields:
                 self.fields[field].fields.pop(_field)
 
-
     def to_representation(self, instance):
 
         if "fields" in self.context["request"].GET:
@@ -179,6 +178,6 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         if "fields" not in self.context["request"].GET:
             self.add_links(instance, representation)
 
-        representation['url'] = self.get_links_url()
+        representation["url"] = self.get_links_url()
 
         return representation
