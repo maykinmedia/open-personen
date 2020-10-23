@@ -143,6 +143,13 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             else:
                 fields_to_keep.append(field)
 
+        for field in fields_to_keep:
+            try:
+                if field != '_links':
+                    self.fields[field]
+            except KeyError:
+                raise ValueError(field)
+
         fields_to_remove = []
         for field in self.fields:
             if field not in fields_to_keep:
@@ -167,7 +174,10 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     def to_representation(self, instance):
 
-        if "fields" in self.context["request"].GET:
+        if (
+            "fields" in self.context["request"].GET
+            and self.context["request"].GET["fields"]
+        ):
             self.handle_fields()
 
         representation = super().to_representation(instance)
