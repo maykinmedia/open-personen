@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from inflection import camelize
+
 from openpersonen.api.enum import GeslachtsaanduidingChoices
 
 from .datum import DatumSerializer
@@ -58,23 +60,22 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     def handle_dot_notation(self, param, instance, representation):
         burgerservicenummer = instance.burgerservicenummer
-        field = instance
+        _object = instance
         split_params = param.split(".")
 
         for index, field_key in enumerate(split_params[:-1]):
             if field_key not in representation:
                 representation[field_key] = dict()
 
-            attribute = split_params[index + 1]
-            attribute = self.to_camel_case(attribute)
+            attribute = camelize(split_params[index + 1], False)
 
             fields = (
-                getattr(field, field_key) if not isinstance(field, dict) else [field]
+                getattr(_object, field_key) if not isinstance(_object, dict) else [_object]
             )
 
             for field in fields:
                 try:
-                    if index + 2 == len(split_params):
+                    if attribute == split_params[-1]:
                         # At last value in dot notation so add to representation
                         representation[field_key][attribute] = field[attribute]
                         representation["url"] = self.get_links_url(
@@ -83,7 +84,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     else:
                         # Get next nested values
                         representation = representation[field_key]
-                        field = field[attribute]
+                        _object = field[attribute]
                 except KeyError:
                     raise ValueError(param)
 
@@ -93,63 +94,27 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         for param in query_params:
             if param.split(".")[0] not in self.expand_fields:
                 raise ValueError(param)
-
-        for param in query_params:
-            if "." in param:
+            elif "." in param:
                 self.handle_dot_notation(param, instance, representation)
             else:
                 representation[param] = getattr(instance, param)
-                for param in representation[param]:
-                    param["url"] = self.get_links_url(
-                        instance.burgerservicenummer, param
+                for expand_field in representation[param]:
+                    expand_field["url"] = self.get_links_url(
+                        instance.burgerservicenummer, expand_field
                     )
 
     def add_links(self, instance, representation):
 
-        representation["partners_links"] = []
-        for partner in instance.partners:
-            representation["partners_links"].append(
-                {
-                    "url": self.context["request"]
-                    .build_absolute_uri()
-                    .split("?")[0]
-                    .replace("/" + instance.burgerservicenummer, "")
-                    + "/"
-                    + instance.burgerservicenummer
-                    + "/partners/"
-                    + partner["burgerservicenummer"]
-                }
-            )
-
-        representation["kinderen_links"] = []
-        for kind in instance.kinderen:
-            representation["kinderen_links"].append(
-                {
-                    "url": self.context["request"]
-                    .build_absolute_uri()
-                    .split("?")[0]
-                    .replace("/" + instance.burgerservicenummer, "")
-                    + "/"
-                    + instance.burgerservicenummer
-                    + "/kinderen/"
-                    + kind["burgerservicenummer"]
-                }
-            )
-
-        representation["ouders_links"] = []
-        for ouder in instance.ouders:
-            representation["ouders_links"].append(
-                {
-                    "url": self.context["request"]
-                    .build_absolute_uri()
-                    .split("?")[0]
-                    .replace("/" + instance.burgerservicenummer, "")
-                    + "/"
-                    + instance.burgerservicenummer
-                    + "/ouders/"
-                    + ouder["burgerservicenummer"]
-                }
-            )
+        for field in self.expand_fields:
+            representation[f"{field}_links"] = []
+            for obj in getattr(instance, field):
+                representation[f"{field}_links"].append(
+                    {
+                        "url": self.context["request"].build_absolute_uri(self.context["request"].path).replace(
+                            f'/{instance.burgerservicenummer}', '')
+                               + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                    }
+                )
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
