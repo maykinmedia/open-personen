@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from inflection import camelize
+from rest_framework import serializers
 
 from openpersonen.api.enum import GeslachtsaanduidingChoices
 
@@ -70,7 +69,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             attribute = camelize(split_params[index + 1], False)
 
             fields = (
-                getattr(_object, field_key) if not isinstance(_object, dict) else [_object]
+                getattr(_object, field_key)
+                if not isinstance(_object, dict)
+                else [_object]
             )
 
             for field in fields:
@@ -110,9 +111,10 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             for obj in getattr(instance, field):
                 representation[f"{field}_links"].append(
                     {
-                        "url": self.context["request"].build_absolute_uri(self.context["request"].path).replace(
-                            f'/{instance.burgerservicenummer}', '')
-                               + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                        "url": self.context["request"]
+                        .build_absolute_uri(self.context["request"].path)
+                        .replace(f"/{instance.burgerservicenummer}", "")
+                        + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
                     }
                 )
 
