@@ -1,5 +1,6 @@
 INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
     "_links": {
+        "self": {"href": "http://testserver/api/ingeschrevenpersonen/123456789"},
         "partners": [
             {
                 "_links": {

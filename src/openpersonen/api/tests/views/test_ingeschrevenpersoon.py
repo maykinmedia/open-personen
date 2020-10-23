@@ -1098,7 +1098,8 @@ class TestFieldParameter(APITestCase):
         )
         self.token = TokenFactory.create()
 
-    def test_fields_parameter_not_included(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_parameter_not_included(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L46
         """
@@ -1109,16 +1110,16 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(
-            data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            data["_links"]["partners"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners/{self.partnerschap_bsn}",
         )
         self.assertEqual(
-            data["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            data["_links"]["kinderen"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen/{self.kind_bsn}",
         )
         self.assertEqual(
-            data["_links"]["ouders"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            data["_links"]["ouders"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/ouders/{self.ouder_bsn}",
         )
 
         response = self.client.get(
@@ -1130,19 +1131,20 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(
-            data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            data["_links"]["partners"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners/{self.partnerschap_bsn}",
         )
         self.assertEqual(
-            data["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            data["_links"]["kinderen"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen/{self.kind_bsn}",
         )
         self.assertEqual(
-            data["_links"]["ouders"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/ouders",
+            data["_links"]["ouders"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/ouders/{self.ouder_bsn}",
         )
 
-    def test_one_attribute_being_requested(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_one_attribute_being_requested(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L52
         """
@@ -1176,7 +1178,8 @@ class TestFieldParameter(APITestCase):
             data["geslachtsaanduiding"], str(self.persoon.geslachtsaanduiding)
         )
 
-    def test_multiple_attributes_being_requested(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_multiple_attributes_being_requested(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L57
         """
@@ -1215,7 +1218,8 @@ class TestFieldParameter(APITestCase):
             data["geslachtsaanduiding"], str(self.persoon.geslachtsaanduiding)
         )
 
-    def test_fields_with_group_being_requested(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_with_group_being_requested(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L62
         """
@@ -1278,7 +1282,8 @@ class TestFieldParameter(APITestCase):
             self.persoon.aanduiding_naamgebruik,
         )
 
-    def test_fields_with_attributes_of_group_being_requested(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_with_attributes_of_group_being_requested(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L62
         """
@@ -1323,7 +1328,8 @@ class TestFieldParameter(APITestCase):
         )
         self.assertIsNone(data["_embedded"]["naam"].get("aanduidingNaamgebruik"))
 
-    def test_fields_with__links_attribute(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_with__links_attribute(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L74
         """
@@ -1337,11 +1343,11 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(data["_links"]), 2)
         self.assertEqual(
             data["_links"]["self"]["href"],
-            "http://testserver.com/api/ingeschrevenpersonen",
+            "http://testserver/api/ingeschrevenpersonen",
         )
         self.assertEqual(
-            data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            data["_links"]["partners"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners/{self.partnerschap_bsn}",
         )
         self.assertEqual(data["burgerservicenummer"], str(self.bsn))
         self.assertIsInstance(data["_embedded"]["naam"], dict)
@@ -1358,16 +1364,17 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(data["_links"]), 2)
         self.assertEqual(
             data["_links"]["self"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}",
         )
         self.assertEqual(
-            data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            data["_links"]["partners"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners/{self.partnerschap_bsn}",
         )
         self.assertEqual(data["burgerservicenummer"], str(self.bsn))
         self.assertIsInstance(data["_embedded"]["naam"], dict)
 
-    def test_fields_with_expand_attribute(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_with_expand_attribute(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L80
         """
@@ -1384,8 +1391,8 @@ class TestFieldParameter(APITestCase):
         kind = data["_embedded"]["kinderen"][0]
         self.assertEqual(len(kind["_links"]), 1)
         self.assertEqual(
-            kind["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            kind["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen/{self.kind_bsn}",
         )
         self.assertEqual(kind["burgerservicenummer"], str(self.kind_bsn))
         self.assertEqual(len(kind["_embedded"]["naam"]), 5)
@@ -1408,8 +1415,8 @@ class TestFieldParameter(APITestCase):
         kind = data["_embedded"]["kinderen"][0]
         self.assertEqual(len(kind["_links"]), 1)
         self.assertEqual(
-            kind["_links"]["kinderen"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            kind["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen/{self.kind_bsn}",
         )
         self.assertEqual(kind["burgerservicenummer"], str(self.kind_bsn))
         self.assertEqual(len(kind["_embedded"]["naam"]), 5)
@@ -1417,7 +1424,8 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(kind["_embedded"]["geboorte"]["_embedded"]["plaats"]), 2)
         self.assertEqual(len(kind["_embedded"]["geboorte"]["_embedded"]["land"]), 2)
 
-    def test_fields_links_with_expand_attribute(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_links_with_expand_attribute(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L92
         """
@@ -1431,11 +1439,11 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(data["_links"]), 2)
         self.assertEqual(
             data["_links"]["self"]["href"],
-            "http://testserver.com/api/ingeschrevenpersonen",
+            "http://testserver/api/ingeschrevenpersonen",
         )
         self.assertEqual(
-            data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            data["_links"]["partners"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners/{self.partnerschap_bsn}",
         )
         self.assertEqual(len(data["_embedded"]), 1)
         self.assertIsInstance(data["_embedded"]["kinderen"], list)
@@ -1452,16 +1460,17 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(data["_links"]), 2)
         self.assertEqual(
             data["_links"]["self"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}",
         )
         self.assertEqual(
-            data["_links"]["partners"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/partners",
+            data["_links"]["partners"][0]["_links"]["self"]["href"],
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/partners/{self.partnerschap_bsn}",
         )
         self.assertEqual(len(data["_embedded"]), 1)
         self.assertIsInstance(data["_embedded"]["kinderen"], list)
 
-    def test_fields_links_with_expand_dot_attribute(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_links_with_expand_dot_attribute(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L92
         """
@@ -1484,7 +1493,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(data["_embedded"]["kinderen"]["_links"]["self"]), 1)
         self.assertEqual(
             data["_embedded"]["kinderen"]["_links"]["self"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
             data["_embedded"]["naam"]["voornamen"], self.persoon.voornamen_persoon
@@ -1519,7 +1528,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(len(data["_embedded"]["kinderen"]["_links"]["self"]), 1)
         self.assertEqual(
             data["_embedded"]["kinderen"]["_links"]["self"]["href"],
-            f"http://testserver.com/api/ingeschrevenpersonen/{self.bsn}/kinderen",
+            f"http://testserver/api/ingeschrevenpersonen/{self.bsn}/kinderen",
         )
         self.assertEqual(
             data["_embedded"]["naam"]["voornamen"], self.persoon.voornamen_persoon
@@ -1533,7 +1542,8 @@ class TestFieldParameter(APITestCase):
             self.persoon.voorvoegsel_geslachtsnaam_persoon,
         )
 
-    def test_fields_empty(self):
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_fields_empty(self, is_url_mock):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L113
         """
