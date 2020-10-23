@@ -145,7 +145,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
         for field in fields_to_keep:
             try:
-                if field != '_links':
+                if field != "_links":
                     self.fields[field]
             except KeyError:
                 raise ValueError(field)

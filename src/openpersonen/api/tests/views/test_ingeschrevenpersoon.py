@@ -1593,7 +1593,9 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "BurgerServiceNummer"))
+        self.assertEqual(
+            response.json(), get_expand_400_response(url, "BurgerServiceNummer")
+        )
 
         url = (
             reverse(
@@ -1603,9 +1605,33 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "BurgerServiceNummer"))
+        self.assertEqual(
+            response.json(), get_expand_400_response(url, "BurgerServiceNummer")
+        )
 
     def test_fields_and_expand_is_incorrect(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L121
+        """
+        url = (
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=kinderen&fields=kinderen.naam"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+
+        url = (
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?expand=kinderen&fields=kinderen.naam"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+
+    def test_fields_and_expand_with_incompatible_params(self):
         """
         https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L121
         """
