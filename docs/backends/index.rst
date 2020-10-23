@@ -18,4 +18,4 @@ There are currently 2 backends available:
    :caption: Further reading
 
    demo
-   stufbg
+   stufbg/index

@@ -7,11 +7,6 @@ Open Personen offers:
 * Extension to connect with a `StUF-BG`_ compatible service to serve real 
   personal data via the BRP API.
 * Extension to use a local database to provide test data via the BRP API.
-* Conversion service to convert BRP API requests to StUF-BG requests and 
-  StUF-BG responses to BRP API responses (future release).
-
-An additional Profile API to store and retrieve additional personal data that
-  is not typically stored and exposed via the BRP API.
 
 The :ref:`introduction_source-code` is available for non-commercial use.
 

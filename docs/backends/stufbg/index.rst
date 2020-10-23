@@ -61,3 +61,12 @@ Next steps
 ----------
 
 You can continue to read how to enable :ref:`installation_authorizations`.
+
+
+In depth
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+   implementation
