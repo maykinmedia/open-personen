@@ -15,9 +15,19 @@ With the above remarks in mind, let's go:
 
 1. Download the ``docker-compose`` file:
 
-   .. code:: shell
+   .. tabs::
 
-      $ wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose.yml
+      .. tab:: Linux
+
+         .. code:: shell
+
+            $ wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
+
+      .. tab:: Windows Powershell 3
+
+         .. code:: shell
+
+            PS> wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -Odocker-compose.yml
 
 2. Start the Docker containers:
 
