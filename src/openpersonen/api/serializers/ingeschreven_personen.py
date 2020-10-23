@@ -37,16 +37,6 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
 
     expand_fields = ["kinderen", "ouders", "partners"]
 
-    @staticmethod
-    def to_camel_case(snake_string):
-        """
-        Eg. Converts an_example_string to anExampleString
-        """
-        letters = snake_string.split("_")
-        # Capitalize the first letter of each group of letters except the first one
-        # with the 'title' method and join them together.
-        return letters[0] + "".join(letter.title() for letter in letters[1:])
-
     def get_links_url(self, id, param):
         base_url = self.context["request"].build_absolute_uri().split("?")[0]
 
