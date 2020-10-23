@@ -92,7 +92,8 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 representation[param] = getattr(instance, param)
                 for expand_field in representation[param]:
                     expand_field["url"] = self.get_links_url(
-                        instance.burgerservicenummer, expand_field
+                        instance.burgerservicenummer,
+                        param + "/" + expand_field["burgerservicenummer"],
                     )
 
     def add_links(self, instance, representation):
@@ -185,8 +186,7 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         if "expand" in self.context["request"].GET:
             self.add_expand_data(instance, representation)
 
-        if "fields" not in self.context["request"].GET:
-            self.add_links(instance, representation)
+        self.add_links(instance, representation)
 
         representation["url"] = self.get_links_url()
 
