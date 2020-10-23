@@ -99,9 +99,10 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 self.handle_dot_notation(param, instance, representation)
             else:
                 representation[param] = getattr(instance, param)
-                representation[param][0]["url"] = self.get_links_url(
-                    instance.burgerservicenummer, param
-                )
+                for param in representation[param]:
+                    param["url"] = self.get_links_url(
+                        instance.burgerservicenummer, param
+                    )
 
     def add_links(self, instance, representation):
 
