@@ -1532,3 +1532,97 @@ class TestFieldParameter(APITestCase):
             data["_embedded"]["naam"]["voorvoegsel"],
             self.persoon.voorvoegsel_geslachtsnaam_persoon,
         )
+
+    def test_fields_empty(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L113
+        """
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
+        self.assertEqual(len(data), 6)
+        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_embedded"]), 12)
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 6)
+        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_embedded"]), 12)
+
+    def test_fields_incorrect(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L117
+        """
+        url = (
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=burgerservicenummer,geslachtsaanduiding,bestaatniet"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "bestaatniet"))
+
+        url = (
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=burgerservicenummer,geslachtsaanduiding,bestaatniet"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "bestaatniet"))
+
+    def test_fields_incorrect_case(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L121
+        """
+        url = (
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&fields=BurgerServiceNummer"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "BurgerServiceNummer"))
+
+        url = (
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?fields=BurgerServiceNummer"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "BurgerServiceNummer"))
+
+    def test_fields_and_expand_is_incorrect(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature#L121
+        """
+        url = (
+            reverse("ingeschrevenpersonen-list")
+            + f"?burgerservicenummer={self.bsn}&expand=kinderen&fields=kinderen.naam"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+
+        url = (
+            reverse(
+                "ingeschrevenpersonen-detail", kwargs={"burgerservicenummer": self.bsn}
+            )
+            + "?expand=kinderen&fields=kinderen.naam"
+        )
+        response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
