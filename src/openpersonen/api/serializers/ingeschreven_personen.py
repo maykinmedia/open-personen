@@ -128,18 +128,19 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         fields_to_keep = []
         dot_fields_to_keep = dict()
         for field in self.context["request"].GET["fields"].split(","):
-            if "." in field:
-                field_0, field_1 = field.split(".")
-                fields_to_keep.append(field_0)
-                if field_0 in dot_fields_to_keep:
-                    dot_fields_to_keep[field_0].append(field_1)
+            if '_links' not in field:
+                if "." in field:
+                    field_0, field_1 = field.split(".")
+                    fields_to_keep.append(field_0)
+                    if field_0 in dot_fields_to_keep:
+                        dot_fields_to_keep[field_0].append(field_1)
+                    else:
+                        dot_fields_to_keep[field_0] = [field_1]
                 else:
-                    dot_fields_to_keep[field_0] = [field_1]
-            else:
-                fields_to_keep.append(field)
+                    fields_to_keep.append(field)
 
         for field in fields_to_keep:
-            if field != "_links" and field not in self.fields:
+            if field not in self.fields:
                 raise ValueError(field)
 
         fields_to_remove = []
@@ -153,16 +154,13 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         dot_fields_to_remove = dict()
         for field, inner_fields in dot_fields_to_keep.items():
             dot_fields_to_remove[field] = []
-            try:
-                for _field in self.fields[field].fields:
-                    if _field not in inner_fields:
-                        dot_fields_to_remove[field].append(_field)
-            except KeyError:
-                pass
+            for nested_field in self.fields[field].fields:
+                if nested_field not in inner_fields:
+                    dot_fields_to_remove[field].append(nested_field)
 
         for field, inner_fields in dot_fields_to_remove.items():
-            for _field in inner_fields:
-                self.fields[field].fields.pop(_field)
+            for inner_field in inner_fields:
+                self.fields[field].fields.pop(inner_field)
 
     def to_representation(self, instance):
 
