@@ -5,7 +5,7 @@
 #    pip-compile --no-emit-index-url --output-file=requirements/dev.txt requirements/ci.txt requirements/dev.in
 #
 -e git+git://github.com/django-webtest/django-webtest.git@e969cbc1b966785aa1a075c22a0678167f379713#egg=django-webtest  # via -r requirements/ci.txt
--e git+git://github.com/maykinmedia/djangorestframework-hal.git@014ccbaba089f6e39ace81e29f73208c8fd44f21#egg=djangorestframework_hal  # via -r requirements/ci.txt
+-e git+git://github.com/maykinmedia/djangorestframework-hal.git@9d1163aa75557b0e00fd7a38da6a2e1d6e660721#egg=djangorestframework_hal  # via -r requirements/ci.txt
 alabaster==0.7.12         # via sphinx
 appdirs==1.4.4            # via black
 attrs==19.3.0             # via black

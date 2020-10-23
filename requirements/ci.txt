@@ -5,7 +5,7 @@
 #    pip-compile --no-emit-index-url --output-file=requirements/ci.txt requirements/base.txt requirements/test-tools.in
 #
 -e git+git://github.com/django-webtest/django-webtest.git@e969cbc1b966785aa1a075c22a0678167f379713#egg=django-webtest  # via -r requirements/base.txt
--e git+git://github.com/maykinmedia/djangorestframework-hal.git@014ccbaba089f6e39ace81e29f73208c8fd44f21#egg=djangorestframework_hal  # via -r requirements/base.txt
+-e git+git://github.com/maykinmedia/djangorestframework-hal.git@9d1163aa75557b0e00fd7a38da6a2e1d6e660721#egg=djangorestframework_hal  # via -r requirements/base.txt
 beautifulsoup4==4.9.2     # via -r requirements/base.txt, webtest
 certifi==2020.6.20        # via -r requirements/base.txt, elastic-apm, requests, sentry-sdk
 chardet==3.0.4            # via -r requirements/base.txt, requests

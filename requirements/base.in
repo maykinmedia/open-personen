@@ -30,7 +30,7 @@ uwsgi
 sentry-sdk  # error monitoring
 elastic-apm  # Elastic APM integration
 
--e git+git://github.com/maykinmedia/djangorestframework-hal.git@014ccbaba089f6e39ace81e29f73208c8fd44f21#egg=djangorestframework_hal
+-e git+git://github.com/maykinmedia/djangorestframework-hal.git@9d1163aa75557b0e00fd7a38da6a2e1d6e660721#egg=djangorestframework_hal
 
 xmltodict  # Parse Soap XML to Python dict
 
