@@ -109,19 +109,17 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             )
 
     def add_links(self, instance, representation):
+        fields = self.context["request"].GET.get("fields")
 
-        link_fields = []
-        for field in self.context["request"].GET.get("fields", "").split(","):
-            if "_links" in field:
-                link_fields.append(field)
-
-        for field in self.expand_fields:
-            if link_fields:
-                for link_field in link_fields:
-                    if field in link_field.split(".")[1]:
-                        self.add_field_links(instance, representation, field)
+        for expand_field in self.expand_fields:
+            if fields:
+                for field in fields.split(","):
+                    # Only add if field is specified in `fields` parameter
+                    if "_links" in field and expand_field == field.split(".")[1]:
+                        self.add_field_links(instance, representation, expand_field)
             else:
-                self.add_field_links(instance, representation, field)
+                # No `fields` parameter supplied, simply add all fields
+                self.add_field_links(instance, representation, expand_field)
 
     def handle_fields(self):
 
@@ -135,13 +133,10 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                     if field not in dot_fields_to_keep:
                         dot_fields_to_keep[field] = []
                     dot_fields_to_keep[field].append(nested_field)
-
                 else:
                     fields_to_keep.append(field)
-
-        for field in fields_to_keep:
-            if field not in self.fields:
-                raise ValueError(field)
+                if field not in self.fields:
+                    raise ValueError(field)
 
         fields_to_remove = []
         for field in self.fields:
