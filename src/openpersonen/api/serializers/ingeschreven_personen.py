@@ -102,9 +102,9 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
             representation[f"{field}_links"].append(
                 {
                     "url": self.context["request"]
-                               .build_absolute_uri(self.context["request"].path)
-                               .replace(f"/{instance.burgerservicenummer}", "")
-                           + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
+                    .build_absolute_uri(self.context["request"].path)
+                    .replace(f"/{instance.burgerservicenummer}", "")
+                    + f"/{instance.burgerservicenummer}/{field}/{obj['burgerservicenummer']}"
                 }
             )
 
@@ -128,14 +128,14 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
         fields_to_keep = []
         dot_fields_to_keep = dict()
         for field in self.context["request"].GET["fields"].split(","):
-            if '_links' not in field:
+            if "_links" not in field:
                 if "." in field:
-                    field_0, field_1 = field.split(".")
-                    fields_to_keep.append(field_0)
-                    if field_0 in dot_fields_to_keep:
-                        dot_fields_to_keep[field_0].append(field_1)
-                    else:
-                        dot_fields_to_keep[field_0] = [field_1]
+                    field, nested_field = field.split(".")
+                    fields_to_keep.append(field)
+                    if field not in dot_fields_to_keep:
+                        dot_fields_to_keep[field] = []
+                    dot_fields_to_keep[field].append(nested_field)
+
                 else:
                     fields_to_keep.append(field)
 
