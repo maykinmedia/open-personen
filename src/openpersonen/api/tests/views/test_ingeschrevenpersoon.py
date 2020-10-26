@@ -27,7 +27,7 @@ from openpersonen.api.tests.utils import is_url
 from openpersonen.api.views import IngeschrevenPersoonViewSet
 from openpersonen.api.views.generic_responses import (
     get_404_response,
-    get_expand_400_response,
+    get_query_param_400_response,
 )
 from openpersonen.contrib.stufbg.models import StufBGClient
 
@@ -540,7 +540,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "true"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "true"))
 
         url = (
             reverse(
@@ -550,7 +550,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "true"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "true"))
 
         url = (
             reverse("ingeschrevenpersonen-list")
@@ -558,7 +558,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "True"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "True"))
 
         url = (
             reverse(
@@ -568,7 +568,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "True"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "True"))
 
         url = (
             reverse("ingeschrevenpersonen-list")
@@ -576,7 +576,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "true"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "true"))
 
     def test_expand_parameter_errors_with_incorrect_resource(self):
         """
@@ -589,7 +589,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "resourcebestaatniet")
+            response.json(), get_query_param_400_response(url, "resourcebestaatniet")
         )
 
         url = (
@@ -601,7 +601,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "resourcebestaatniet")
+            response.json(), get_query_param_400_response(url, "resourcebestaatniet")
         )
 
         url = (
@@ -611,7 +611,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "reisdocumenten")
+            response.json(), get_query_param_400_response(url, "reisdocumenten")
         )
 
         url = (
@@ -623,7 +623,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "reisdocumenten")
+            response.json(), get_query_param_400_response(url, "reisdocumenten")
         )
 
         url = (
@@ -633,7 +633,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "ouders.veldbestaatniet")
+            response.json(), get_query_param_400_response(url, "ouders.veldbestaatniet")
         )
 
         url = (
@@ -645,7 +645,7 @@ class TestExpandParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "ouders.veldbestaatniet")
+            response.json(), get_query_param_400_response(url, "ouders.veldbestaatniet")
         )
 
     def test_expand_parameter_errors_when_empty(self):
@@ -658,7 +658,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, ""))
+        self.assertEqual(response.json(), get_query_param_400_response(url, ""))
 
         url = (
             reverse(
@@ -668,7 +668,7 @@ class TestExpandParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, ""))
+        self.assertEqual(response.json(), get_query_param_400_response(url, ""))
 
     @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
     def test_expand_parameter_with_multiple_resources(self, is_url_mock):
@@ -1584,7 +1584,9 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "bestaatniet"))
+        self.assertEqual(
+            response.json(), get_query_param_400_response(url, "bestaatniet")
+        )
 
         url = (
             reverse(
@@ -1594,7 +1596,9 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "bestaatniet"))
+        self.assertEqual(
+            response.json(), get_query_param_400_response(url, "bestaatniet")
+        )
 
     def test_fields_incorrect_case(self):
         """
@@ -1607,7 +1611,7 @@ class TestFieldParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "BurgerServiceNummer")
+            response.json(), get_query_param_400_response(url, "BurgerServiceNummer")
         )
 
         url = (
@@ -1619,7 +1623,7 @@ class TestFieldParameter(APITestCase):
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.json(), get_expand_400_response(url, "BurgerServiceNummer")
+            response.json(), get_query_param_400_response(url, "BurgerServiceNummer")
         )
 
     def test_fields_and_expand_is_incorrect(self):
@@ -1632,7 +1636,7 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "kinderen"))
 
         url = (
             reverse(
@@ -1642,7 +1646,7 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "kinderen"))
 
     def test_fields_and_expand_with_incompatible_params(self):
         """
@@ -1654,7 +1658,7 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "kinderen"))
 
         url = (
             reverse(
@@ -1664,4 +1668,4 @@ class TestFieldParameter(APITestCase):
         )
         response = self.client.get(url, HTTP_AUTHORIZATION=f"Token {self.token.key}")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), get_expand_400_response(url, "kinderen"))
+        self.assertEqual(response.json(), get_query_param_400_response(url, "kinderen"))

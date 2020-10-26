@@ -1,4 +1,4 @@
-def get_expand_400_response(url, query_param):
+def get_query_param_400_response(url, query_param):
     return {
         "type": "https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1",
         "title": "Minstens één param is niet geldig.",

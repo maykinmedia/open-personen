@@ -10,7 +10,7 @@ from openpersonen.api.views.auto_schema import OpenPersonenAutoSchema
 from openpersonen.api.views.base import BaseViewSet
 from openpersonen.api.views.generic_responses import (
     get_404_response,
-    get_expand_400_response,
+    get_query_param_400_response,
 )
 
 
@@ -118,7 +118,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
             data = serializer.data
         except ValueError as e:
             return Response(
-                data=get_expand_400_response(request.get_full_path(), str(e)),
+                data=get_query_param_400_response(request.get_full_path(), str(e)),
                 status=HTTP_400_BAD_REQUEST,
             )
 
@@ -143,7 +143,7 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
             data = serializer.data
         except ValueError as e:
             return Response(
-                data=get_expand_400_response(request.get_full_path(), str(e)),
+                data=get_query_param_400_response(request.get_full_path(), str(e)),
                 status=HTTP_400_BAD_REQUEST,
             )
 
