@@ -1156,7 +1156,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
         self.assertIsNotNone(data["_links"].get("self"))
         self.assertEqual(
             data["geslachtsaanduiding"], str(self.persoon.geslachtsaanduiding)
@@ -1172,7 +1172,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
         self.assertIsNotNone(data["_links"].get("self"))
         self.assertEqual(
             data["geslachtsaanduiding"], str(self.persoon.geslachtsaanduiding)
@@ -1191,7 +1191,8 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
+        self.assertIsNotNone(data["_links"].get("self"))
         self.assertEqual(
             data["burgerservicenummer"], str(self.persoon.burgerservicenummer_persoon)
         )
@@ -1209,7 +1210,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
         self.assertIsNotNone(data["_links"].get("self"))
         self.assertEqual(
             data["burgerservicenummer"], str(self.persoon.burgerservicenummer_persoon)
@@ -1231,7 +1232,8 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
+        self.assertIsNotNone(data["_links"].get("self"))
         self.assertEqual(
             data["burgerservicenummer"], str(self.persoon.burgerservicenummer_persoon)
         )
@@ -1261,7 +1263,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 3)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
         self.assertIsNotNone(data["_links"].get("self"))
         self.assertEqual(
             data["burgerservicenummer"], str(self.persoon.burgerservicenummer_persoon)
@@ -1295,7 +1297,8 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()["_embedded"]["ingeschrevenpersonen"][0]
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
+        self.assertIsNotNone(data["_links"].get("self"))
         self.assertIsNone(data["_embedded"]["naam"].get("geslachtsnaam"))
         self.assertEqual(
             data["_embedded"]["naam"]["voornamen"], self.persoon.voornamen_persoon
@@ -1316,7 +1319,7 @@ class TestFieldParameter(APITestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 2)
-        self.assertEqual(len(data["_links"]), 4)
+        self.assertEqual(len(data["_links"]), 1)
         self.assertIsNotNone(data["_links"].get("self"))
         self.assertIsNone(data["_embedded"]["naam"].get("geslachtsnaam"))
         self.assertEqual(
