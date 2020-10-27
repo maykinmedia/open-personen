@@ -10,6 +10,11 @@ admin.site.site_header = "openpersonen admin"
 admin.site.site_title = "openpersonen admin"
 admin.site.index_title = "Welcome to the openpersonen admin"
 
+
+handler500 = "openpersonen.api.views.errors.handler500"
+handler404 = "openpersonen.api.views.errors.handler404"
+
+
 urlpatterns = [
     path(
         "admin/password_reset/",
