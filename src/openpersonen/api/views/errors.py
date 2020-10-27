@@ -3,18 +3,13 @@ from django.views.defaults import page_not_found
 
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR
 
+from openpersonen.api.views.generic_responses import get_404_response
+
 
 def handler404(request, exception):
     if request.path.startswith("/api"):
         return JsonResponse(
-            {
-                "type": "https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5 404 Not Found",
-                "title": "Opgevraagde resource bestaat niet.",
-                "status": 404,
-                "detail": "The server has not found anything matching the Request-URI.",
-                "instance": request.build_absolute_uri(),
-                "code": "notFound",
-            },
+            get_404_response(request.build_absolute_uri()),
             status=HTTP_404_NOT_FOUND,
         )
     else:
