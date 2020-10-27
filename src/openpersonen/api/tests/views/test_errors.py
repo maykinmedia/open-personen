@@ -3,6 +3,7 @@ from django.test import override_settings
 from rest_framework.test import APITestCase
 
 from openpersonen.api.tests.factory_models import TokenFactory
+from openpersonen.api.views.generic_responses import get_404_response
 
 
 @override_settings(DEBUG=False)
@@ -23,18 +24,7 @@ class Test404Response(APITestCase):
         )
 
         self.assertEqual(response.status_code, 404)
-        json_response = response.json()
         self.assertEqual(
-            json_response["type"],
-            "https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5 404 Not Found",
+            response.json(),
+            get_404_response("http://testserver/api/non-existant-endpoint"),
         )
-        self.assertEqual(json_response["title"], "Opgevraagde resource bestaat niet.")
-        self.assertEqual(json_response["status"], 404)
-        self.assertEqual(
-            json_response["detail"],
-            "The server has not found anything matching the Request-URI.",
-        )
-        self.assertEqual(
-            json_response["instance"], "http://testserver/api/non-existant-endpoint"
-        )
-        self.assertEqual(json_response["code"], "notFound")
