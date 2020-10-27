@@ -4,8 +4,8 @@ from django.views.defaults import page_not_found
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR
 
 
-def handler404(request, exception, **kwargs):
-    if "api" in request.build_absolute_uri():
+def handler404(request, exception):
+    if request.path.startswith("/api"):
         return JsonResponse(
             {
                 "type": "https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5 404 Not Found",
@@ -21,7 +21,7 @@ def handler404(request, exception, **kwargs):
         return page_not_found(request, exception)
 
 
-def handler500(request, *args, **kwargs):
+def handler500(request):
     return JsonResponse(
         {
             "type": "https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1",
