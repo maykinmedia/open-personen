@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from inflection import camelize
 from rest_framework import serializers
 
@@ -138,24 +140,14 @@ class IngeschrevenPersoonSerializer(PersoonSerializer):
                 if field not in self.fields:
                     raise ValueError(field)
 
-        fields_to_remove = []
-        for field in self.fields:
+        for field in deepcopy(self.fields.fields):
             if field not in fields_to_keep:
-                fields_to_remove.append(field)
+                self.fields.pop(field)
 
-        for field in fields_to_remove:
-            self.fields.pop(field)
-
-        dot_fields_to_remove = dict()
         for field, inner_fields in dot_fields_to_keep.items():
-            dot_fields_to_remove[field] = []
-            for nested_field in self.fields[field].fields:
+            for nested_field in deepcopy(self.fields[field].fields.fields):
                 if nested_field not in inner_fields:
-                    dot_fields_to_remove[field].append(nested_field)
-
-        for field, inner_fields in dot_fields_to_remove.items():
-            for inner_field in inner_fields:
-                self.fields[field].fields.pop(inner_field)
+                    self.fields[field].fields.pop(nested_field)
 
     def to_representation(self, instance):
 
