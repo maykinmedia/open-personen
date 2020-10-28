@@ -8,7 +8,6 @@ from openpersonen.api.views.generic_responses import get_404_response
 
 @override_settings(DEBUG=False)
 class Test404Response(APITestCase):
-
     def setUp(self):
         super().setUp()
         self.token = TokenFactory.create()
