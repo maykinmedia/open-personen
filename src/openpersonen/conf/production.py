@@ -24,9 +24,6 @@ DATABASES = {
     }
 }
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#"
-
 ALLOWED_HOSTS = []
 
 # Redis cache backend
