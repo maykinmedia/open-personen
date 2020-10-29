@@ -35,6 +35,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+IS_HTTPS = config("IS_HTTPS", default=not DEBUG)
+
 ALLOWED_HOSTS = []
 
 DATABASES = {
@@ -277,6 +279,13 @@ LOGGING = {
         },
     },
 }
+
+#
+# SECURITY settings
+#
+SESSION_COOKIE_SECURE = IS_HTTPS
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SECURE = IS_HTTPS
 
 #
 # Additional Django settings
