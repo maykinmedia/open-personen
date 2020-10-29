@@ -8,18 +8,25 @@ import privates.storages
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('stufbg', '0001_initial'),
+        ("stufbg", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='certificate',
-            field=privates.fields.PrivateMediaFileField(storage=privates.storages.PrivateMediaFileSystemStorage(), upload_to='certificate/'),
+            model_name="stufbgclient",
+            name="certificate",
+            field=privates.fields.PrivateMediaFileField(
+                storage=privates.storages.PrivateMediaFileSystemStorage(),
+                upload_to="certificate/",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='certificate_key',
-            field=privates.fields.PrivateMediaFileField(help_text='Private key for the certificate', storage=privates.storages.PrivateMediaFileSystemStorage(), upload_to='certificate/'),
+            model_name="stufbgclient",
+            name="certificate_key",
+            field=privates.fields.PrivateMediaFileField(
+                help_text="Private key for the certificate",
+                storage=privates.storages.PrivateMediaFileSystemStorage(),
+                upload_to="certificate/",
+            ),
         ),
     ]
