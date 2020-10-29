@@ -46,6 +46,6 @@ With the above remarks in mind, let's go:
 
    .. code:: 
 
-      http://localhost:8000/api/ingeschrevenpersonen/999990676/
+      http://localhost:8000/api/ingeschrevenpersonen/999990676
 
 .. _`RvIG`: https://www.rvig.nl/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v
