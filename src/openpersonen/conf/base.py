@@ -94,9 +94,10 @@ INSTALLED_APPS = [
     "solo",
     # Project applications.
     "openpersonen.accounts",
+    "openpersonen.api",
     "openpersonen.contrib.demo",
     "openpersonen.contrib.stufbg",
-    "openpersonen.api",
+    "openpersonen.token",
     "openpersonen.utils",
 ]
 
