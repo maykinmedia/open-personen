@@ -72,12 +72,6 @@ COPY --from=frontend-build /app/src/openpersonen/static /app/src/openpersonen/st
 # copy source code
 COPY ./src /app/src
 
-RUN useradd -M -u 1000 maykin
-RUN chown -R maykin /app
-
-# drop privileges
-USER maykin
-
 ARG COMMIT_HASH
 ENV GIT_SHA=${COMMIT_HASH}
 ENV DJANGO_SETTINGS_MODULE=openpersonen.conf.docker
