@@ -15,3 +15,9 @@ ENVIRONMENT = "CI"
 # Django-axes
 #
 AXES_BEHIND_REVERSE_PROXY = False
+
+
+INSTALLED_APPS += ["debug_toolbar"]
+MIDDLEWARE += [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+]
