@@ -51,7 +51,7 @@ jobs:
     - name: "Open API Check"
       before_install: skip
       install:
-        - pip install -r requirements/ci.txt
+        - pip install -r requirements/dev.txt
         - npm install -g swagger2openapi@5.2.5
         - npm install -g openapi-diff@0.23.3
       before_script: skip
