@@ -1,6 +1,9 @@
 version: '3'
 
 services:
+  busybox:
+    volumes:
+      - private_media:/private-media
   web:
     volumes:
       - private_media:/app/private-media

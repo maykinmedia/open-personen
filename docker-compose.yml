@@ -6,6 +6,11 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER:-openpersonen}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-openpersonen}
+
+  busybox:
+    image: busybox
+    command: /bin/chown -R 1000 /private-media
+
   web:
     build: .
     image: maykinmedia/open-personen
