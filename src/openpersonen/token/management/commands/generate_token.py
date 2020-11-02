@@ -14,5 +14,6 @@ class Command(BaseCommand):
         parser.add_argument('username', type=str)
 
     def handle(self, *args, **options):
-        user = User.objects.create(username=options['username'])
+        user, _ = User.objects.get_or_create(username=options['username'])
+        Token.objects.filter(user=user).delete()
         self.stdout.write(f'Generated token: {Token.objects.create(user=user).key}')
