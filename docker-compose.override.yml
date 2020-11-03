@@ -2,6 +2,7 @@ version: '3'
 
 services:
   busybox:
+    command: /bin/chown -R 1000 /private-media
     volumes:
       - private_media:/private-media
   web:
