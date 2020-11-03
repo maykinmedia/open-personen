@@ -1,0 +1,97 @@
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+
+name: Open Personen
+url: 'http://github.com/maykinmedia/open-personen.git'
+softwareType: intermediary
+softwareVersion: 1.0.0
+releaseDate: '2020-11-03'
+logo: 'https://github.com/maykinmedia/open-personen/blob/master/docs/logo.png'
+platforms:
+  - web
+  - linux
+  - windows
+  - mac
+
+categories:
+  - person-data-retrieval
+
+developmentStatus: beta
+
+description:
+  nl:
+    shortDescription: API's voor Open Personen werken
+    documentation: 'https://open-personen.readthedocs.io/'
+    apiDocumentation: 'https://github.com/maykinmedia/open-personen/tree/master/docs'
+    features:
+      - Open Personen API 1.0
+    genericName: API component
+    longDescription: >
+      # TODO @joeri :)
+
+  en:
+    shortDescription: API's for Open Personen to work
+    documentation: 'https://open-personen.readthedocs.io/'
+    apiDocumentation: 'https://github.com/maykinmedia/open-personen/tree/master/docs'
+    features:
+      - Open Personen API 1.0
+    genericName: API component
+    longDescription: >
+      **Open Personen** is a modern, open-source service to retrieve data from a BRP database.
+      Open Personen allows retrieving data from a BRP database through an API.
+
+      Open Personen exposes several API's to retrieve data:
+
+      - Open Personen API
+      ([Open Personen API-specifications 1.0](https://open-personen.readthedocs.io/en/latest/api/index.html))
+
+      Open Personen adheres to the API-specifications as described by the
+      [VNG standard for “Haal Centraal BRP bevragen”](https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen).
+
+legal:
+  license: BSL-1.1
+  mainCopyrightOwner: Maykin Media
+  repoOwner: Maykin Media
+
+dependsOn:
+  open:
+    - name: PostgreSQL
+      optional: true
+      versionMin: '12.0'
+    - name: Kubernetes
+      optional: true
+      versionMin: '1.12'
+    - name: Docker
+      optional: true
+      versionMin: '18.0'
+
+inputTypes:
+  - application/json
+
+outputTypes:
+  - application/json
+  - text/html
+
+intendedAudience:
+  countries:
+    - nl
+  scope:
+    - government
+
+isBasedOn:
+  - 'https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/specificatie/openapi.yaml'
+
+localisation:
+  availableLanguages:
+    - nl
+  localisationReady: true
+
+maintenance:
+  contacts:
+    - affiliation: Maykin Media
+      name: Joeri Bekker
+    - affiliation: Maykin Media
+      name: Shea Meyers
