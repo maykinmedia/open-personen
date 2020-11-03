@@ -57,7 +57,7 @@ jobs:
       before_script: skip
       script:
         - generate_schema
-        - wget https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/8afe4f2b3f89059b03d484b99647f0ec26eb55b6/specificatie/genereervariant/openapi.yaml
+        - wget https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/v1.0.0/specificatie/openapi.yaml
         - openapi-diff openapi.yaml src/openapi.yaml
 
     - stage: "Docker image"
