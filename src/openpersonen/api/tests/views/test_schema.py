@@ -1,3 +1,4 @@
+import logging
 from django.http import HttpRequest
 from django.urls import reverse
 
@@ -15,7 +16,10 @@ class TestSchemaView(APITestCase):
             info, "", "https://testserver.nl", None, None
         )
 
+        #  Disable logging for this function call as it logs a lot of text
+        logging.disable(logging.CRITICAL)
         schema = generator.get_schema(Request(request=HttpRequest()), True)
+        logging.disable(logging.NOTSET)
 
         self.assertEqual(schema.info, info)
 
