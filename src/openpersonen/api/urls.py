@@ -12,12 +12,8 @@ from openpersonen.api.views import (
     APIRootView,
     IngeschrevenPersoonViewSet,
     KindViewSet,
-    NationaliteitHistorieViewSet,
     OuderViewSet,
-    PartnerHistorieViewSet,
     PartnerViewSet,
-    VerblijfPlaatsHistorieViewSet,
-    VerblijfsTitelHistorieViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -44,26 +40,26 @@ router.register(
             PartnerViewSet,
             base_name="partners",
         ),
-        routers.nested(
-            "verblijfplaatshistorie",
-            VerblijfPlaatsHistorieViewSet,
-            base_name="verblijfplaatshistorie",
-        ),
-        routers.nested(
-            "partnerhistorie",
-            PartnerHistorieViewSet,
-            base_name="partnerhistorie",
-        ),
-        routers.nested(
-            "verblijfstitelhistorie",
-            VerblijfsTitelHistorieViewSet,
-            base_name="verblijfstitelhistorie",
-        ),
-        routers.nested(
-            "nationaliteithistorie",
-            NationaliteitHistorieViewSet,
-            base_name="nationaliteithistorie",
-        ),
+        # routers.nested(
+        #     "verblijfplaatshistorie",
+        #     VerblijfPlaatsHistorieViewSet,
+        #     base_name="verblijfplaatshistorie",
+        # ),
+        # routers.nested(
+        #     "partnerhistorie",
+        #     PartnerHistorieViewSet,
+        #     base_name="partnerhistorie",
+        # ),
+        # routers.nested(
+        #     "verblijfstitelhistorie",
+        #     VerblijfsTitelHistorieViewSet,
+        #     base_name="verblijfstitelhistorie",
+        # ),
+        # routers.nested(
+        #     "nationaliteithistorie",
+        #     NationaliteitHistorieViewSet,
+        #     base_name="nationaliteithistorie",
+        # ),
     ],
 )
 
