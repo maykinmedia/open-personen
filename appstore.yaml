@@ -8,7 +8,7 @@ name: Open Personen
 url: 'http://github.com/maykinmedia/open-personen.git'
 softwareType: intermediary
 softwareVersion: 1.0.0
-releaseDate: '2020-11-03'
+releaseDate: '2020-11-05'
 logo: 'https://github.com/maykinmedia/open-personen/blob/master/docs/logo.png'
 platforms:
   - web
@@ -23,7 +23,7 @@ developmentStatus: beta
 
 description:
   nl:
-    shortDescription: API's voor Open Personen werken
+    shortDescription: API's voor Open Personen ophalen
     documentation: 'https://open-personen.readthedocs.io/'
     apiDocumentation: 'https://github.com/maykinmedia/open-personen/tree/master/docs'
     features:
@@ -33,15 +33,15 @@ description:
       # TODO @joeri :)
 
   en:
-    shortDescription: API's for Open Personen to work
+    shortDescription: API's for Open Personen retrieval
     documentation: 'https://open-personen.readthedocs.io/'
     apiDocumentation: 'https://github.com/maykinmedia/open-personen/tree/master/docs'
     features:
       - Open Personen API 1.0
     genericName: API component
     longDescription: >
-      **Open Personen** is a modern, open-source service to retrieve data from a BRP database.
-      Open Personen allows retrieving data from a BRP database through an API.
+      **Open Personen** is a modern, open-source service to retrieve person data from a BRP database.
+      Open Personen allows retrieving person data from a BRP database through an API.
 
       Open Personen exposes several API's to retrieve data:
 
