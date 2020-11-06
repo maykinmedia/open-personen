@@ -12,11 +12,11 @@ StUF-BG attribute notation
 --------------------------
 
 * **`attribute`** - API value is derived directly from `attribute`.
-* **FUNCTION(`attribute`)** - API value is derived from `attribute` via a 
+* **FUNCTION(`attribute`)** - API value is derived from `attribute` via a
   specific FUNCTION. These FUNCTIONs should be self explanatory.
 * **"value"** - API value is staticly set to this "value".
 * ***(`attribute` == "value")*** - API value is derived from simple calculation.
-* ***(calculated)*** - API value is derived from complex calculation. The 
+* ***(calculated)*** - API value is derived from complex calculation. The
   remarks should indicate how exactly.
 
 
@@ -67,145 +67,145 @@ API attribute                                                           StUF-BG 
 `kiesrecht.europeesKiesrecht`                                           *(`ing.aanduidingEuropeesKiesrecht` == `2`)*                            StUF-BG value "2" evaluates to "true".
 `kiesrecht.uitgeslotenVanKiesrecht`                                     *(`ing.aanduidingUitgeslotenKiesrecht` == `A`)*                         StUF-BG value "A" evaluates to "true".
 
-`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.dag`                   `integer(ing.aanduidingEuropeesKiesrecht)`                              Day portion of date value
-`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.datum`                 `ing.aanduidingEuropeesKiesrecht`                                       Full date value
-`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.jaar`                  `integer(ing.aanduidingEuropeesKiesrecht)`                               Year portion of date value
-`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.maand`                 `integer(ing.aanduidingEuropeesKiesrecht)`                               Month portion of date value
-`kiesrecht.einddatumUitsluitingKiesrecht.dag`                           `integer(ing.aanduidingUitgeslotenKiesrecht)`                            Day portion of date value
-`kiesrecht.einddatumUitsluitingKiesrecht.datum`                         `ing.aanduidingUitgeslotenKiesrecht`                                    Full date value
-`kiesrecht.einddatumUitsluitingKiesrecht.jaar`                          `integer(ing.aanduidingUitgeslotenKiesrecht)`                            Year portion of date value
-`kiesrecht.einddatumUitsluitingKiesrecht.maand`                         `integer(ing.aanduidingUitgeslotenKiesrecht)`                            Month portion of date value
-`inOnderzoek.burgerservicenummer`                                       `boolean(inp.bsn)`
-`inOnderzoek.geslachtsaanduiding`                                       `boolean(geslachtsaanduiding)`
-`inOnderzoek.datumIngangOnderzoek.dag`                                  `0`
-`inOnderzoek.datumIngangOnderzoek.datum`                                `string`
-`inOnderzoek.datumIngangOnderzoek.jaar`                                 `0`
-`inOnderzoek.datumIngangOnderzoek.maand`                                `0`
-`nationaliteit.aanduidingBijzonderNederlanderschap`                     `inp.aanduidingBijzonderNederlanderschap`
-`nationaliteit.datumIngangGeldigheid.dag`                               `0`
-`nationaliteit.datumIngangGeldigheid.datum`                             `string`
-`nationaliteit.datumIngangGeldigheid.jaar`                              `0`
-`nationaliteit.datumIngangGeldigheid.maand`                             `0`
-`nationaliteit.nationaliteit.code`                                      `string`
-`nationaliteit.nationaliteit.omschrijving`                              `string`
-`nationaliteit.redenOpname.code`                                        `string`
-`nationaliteit.redenOpname.omschrijving`                                `string`
-`nationaliteit.inOnderzoek.aanduidingBijzonderNederlanderschap`         `boolean(inp.aanduidingBijzonderNederlanderschap)`
-`nationaliteit.inOnderzoek.nationaliteit`                               `True`
-`nationaliteit.inOnderzoek.redenOpname`                                 `True`
-`nationaliteit.inOnderzoek.datumIngangOnderzoek.dag`                    `0`
-`nationaliteit.inOnderzoek.datumIngangOnderzoek.datum`                  `string`
-`nationaliteit.inOnderzoek.datumIngangOnderzoek.jaar`                   `0`
-`nationaliteit.inOnderzoek.datumIngangOnderzoek.maand`                  `0`
-`opschortingBijhouding.reden`                                           `overlijden`
-`opschortingBijhouding.datum.dag`                                       `0`
-`opschortingBijhouding.datum.datum`                                     `string`
-`opschortingBijhouding.datum.jaar`                                      `0`
-`opschortingBijhouding.datum.maand`                                     `0`
-`overlijden.indicatieOverleden`                                         `True`
-`overlijden.datum.dag`                                                  `0`
-`overlijden.datum.datum`                                                `string`
-`overlijden.datum.jaar`                                                 `0`
-`overlijden.datum.maand`                                                `0`
-`overlijden.land.code`                                                  `string`
-`overlijden.land.omschrijving`                                          `inp.overlijdenLand`
-`overlijden.plaats.code`                                                `string`
-`overlijden.plaats.omschrijving`                                        `inp.overlijdenplaats`
-`overlijden.inOnderzoek.datum`                                          `boolean(overlijdensdatum)`
-`overlijden.inOnderzoek.land`                                           `boolean(inp.overlijdenLand)`
-`overlijden.inOnderzoek.plaats`                                         `boolean(inp.overlijdenplaats)`
-`overlijden.inOnderzoek.datumIngangOnderzoek.dag`                       `0`
-`overlijden.inOnderzoek.datumIngangOnderzoek.datum`                     `string`
-`overlijden.inOnderzoek.datumIngangOnderzoek.jaar`                      `0`
-`overlijden.inOnderzoek.datumIngangOnderzoek.maand`                     `0`
-`verblijfplaats.functieAdres`                                           `woonadres`
+`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.dag`                   `integer(ing.aanduidingEuropeesKiesrecht)`                              TODO
+`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.datum`                 `ing.aanduidingEuropeesKiesrecht`                                       TODO
+`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.jaar`                  `integer(ing.aanduidingEuropeesKiesrecht)`                              TODO
+`kiesrecht.einddatumUitsluitingEuropeesKiesrecht.maand`                 `integer(ing.aanduidingEuropeesKiesrecht)`                              TODO
+`kiesrecht.einddatumUitsluitingKiesrecht.dag`                           `integer(ing.aanduidingUitgeslotenKiesrecht)`                           TODO
+`kiesrecht.einddatumUitsluitingKiesrecht.datum`                         `ing.aanduidingUitgeslotenKiesrecht`                                    TODO
+`kiesrecht.einddatumUitsluitingKiesrecht.jaar`                          `integer(ing.aanduidingUitgeslotenKiesrecht)`                           TODO
+`kiesrecht.einddatumUitsluitingKiesrecht.maand`                         `integer(ing.aanduidingUitgeslotenKiesrecht)`                           TODO
+`inOnderzoek.burgerservicenummer`                                       `boolean(inp.bsn)`                                                      TODO
+`inOnderzoek.geslachtsaanduiding`                                       `boolean(geslachtsaanduiding)`                                          TODO
+`inOnderzoek.datumIngangOnderzoek.dag`                                  `0`                                                                     TODO
+`inOnderzoek.datumIngangOnderzoek.datum`                                `string`                                                                TODO
+`inOnderzoek.datumIngangOnderzoek.jaar`                                 `0`                                                                     TODO
+`inOnderzoek.datumIngangOnderzoek.maand`                                `0`                                                                     TODO
+`nationaliteit.aanduidingBijzonderNederlanderschap`                     `string`                                                                TODO
+`nationaliteit.datumIngangGeldigheid.dag`                               `0`                                                                     TODO
+`nationaliteit.datumIngangGeldigheid.datum`                             `string`                                                                TODO
+`nationaliteit.datumIngangGeldigheid.jaar`                              `0`                                                                     TODO
+`nationaliteit.datumIngangGeldigheid.maand`                             `0`                                                                     TODO
+`nationaliteit.nationaliteit.code`                                      `string`                                                                TODO
+`nationaliteit.nationaliteit.omschrijving`                              `string`                                                                TODO
+`nationaliteit.redenOpname.code`                                        `string`                                                                TODO
+`nationaliteit.redenOpname.omschrijving`                                `string`                                                                TODO
+`nationaliteit.inOnderzoek.aanduidingBijzonderNederlanderschap`         `True`                                                                  TODO
+`nationaliteit.inOnderzoek.nationaliteit`                               `True`                                                                  TODO
+`nationaliteit.inOnderzoek.redenOpname`                                 `True`                                                                  TODO
+`nationaliteit.inOnderzoek.datumIngangOnderzoek.dag`                    `0`                                                                     TODO
+`nationaliteit.inOnderzoek.datumIngangOnderzoek.datum`                  `string`                                                                TODO
+`nationaliteit.inOnderzoek.datumIngangOnderzoek.jaar`                   `0`                                                                     TODO
+`nationaliteit.inOnderzoek.datumIngangOnderzoek.maand`                  `0`                                                                     TODO
+`opschortingBijhouding.reden`                                           `inp.redenOpschortingBijhouding`
+`opschortingBijhouding.datum.dag`                                       `DAY(inp.datumOpschortingBijhouding)`
+`opschortingBijhouding.datum.datum`                                     `inp.datumOpschortingBijhouding`
+`opschortingBijhouding.datum.jaar`                                      `YEAR(inp.datumOpschortingBijhouding)`
+`opschortingBijhouding.datum.maand`                                     `MONTH(inp.datumOpschortingBijhouding)`
+`overlijden.indicatieOverleden`                                         `True`                                                                  TODO
+`overlijden.datum.dag`                                                  `DAY(overlijdensdatum)`
+`overlijden.datum.datum`                                                `overlijdensdatum`
+`overlijden.datum.jaar`                                                 `YEAR(overlijdensdatum)`
+`overlijden.datum.maand`                                                `MONTH(overlijdensdatum)`
+`overlijden.land.code`                                                  `inp.overlijdenLand`
+`overlijden.land.omschrijving`                                          `string`                                                                TODO
+`overlijden.plaats.code`                                                `inp.overlijdenplaats`
+`overlijden.plaats.omschrijving`                                        `string`                                                                TODO
+`overlijden.inOnderzoek.datum`                                          `True`                                                                  TODO
+`overlijden.inOnderzoek.land`                                           `True`                                                                  TODO
+`overlijden.inOnderzoek.plaats`                                         `True`                                                                  TODO
+`overlijden.inOnderzoek.datumIngangOnderzoek.dag`                       `0`                                                                     TODO
+`overlijden.inOnderzoek.datumIngangOnderzoek.datum`                     `string`                                                                TODO
+`overlijden.inOnderzoek.datumIngangOnderzoek.jaar`                      `0`                                                                     TODO
+`overlijden.inOnderzoek.datumIngangOnderzoek.maand`                     `0`                                                                     TODO
+`verblijfplaats.functieAdres`                                           `string`                                                                TODO
 `verblijfplaats.huisletter`                                             `verblijfsadres.aoa.huisletter`
 `verblijfplaats.huisnummer`                                             `verblijfsadres.aoa.huisnummer`
 `verblijfplaats.huisnummertoevoeging`                                   `verblijfsadres.aoa.huisnummertoevoeging`
-`verblijfplaats.aanduidingBijHuisnummer`                                `tegenover`
-`verblijfplaats.identificatiecodeNummeraanduiding`                      `string`
-`verblijfplaats.naamOpenbareRuimte`                                     `string`
+`verblijfplaats.aanduidingBijHuisnummer`                                `string`                                                                TODO
+`verblijfplaats.identificatiecodeNummeraanduiding`                      `verblijfsadres.aoa.identificatie`
+`verblijfplaats.naamOpenbareRuimte`                                     `verblijfsadres.gor.openbareRuimteNaam`
 `verblijfplaats.postcode`                                               `verblijfsadres.aoa.postcode`
 `verblijfplaats.woonplaatsnaam`                                         `verblijfsadres.wpl.woonplaatsNaam`
-`verblijfplaats.identificatiecodeAdresseerbaarObject`                   `string`
-`verblijfplaats.indicatieVestigingVanuitBuitenland`                     `True`
-`verblijfplaats.locatiebeschrijving`                                    `string`
+`verblijfplaats.identificatiecodeAdresseerbaarObject`                   `verblijfsadres.wpl.identificatie`
+`verblijfplaats.indicatieVestigingVanuitBuitenland`                     `True`                                                                  TODO
+`verblijfplaats.locatiebeschrijving`                                    `verblijfsadres.inp.locatiebeschrijving`
 `verblijfplaats.straatnaam`                                             `verblijfsadres.gor.straatnaam`
-`verblijfplaats.vanuitVertrokkenOnbekendWaarheen`                       `True`
-`verblijfplaats.datumAanvangAdreshouding.dag`                           `0`
-`verblijfplaats.datumAanvangAdreshouding.datum`                         `string`
-`verblijfplaats.datumAanvangAdreshouding.jaar`                          `0`
-`verblijfplaats.datumAanvangAdreshouding.maand`                         `0`
-`verblijfplaats.datumIngangGeldigheid.dag`                              `0`
-`verblijfplaats.datumIngangGeldigheid.datum`                            `string`
-`verblijfplaats.datumIngangGeldigheid.jaar`                             `0`
-`verblijfplaats.datumIngangGeldigheid.maand`                            `0`
-`verblijfplaats.datumInschrijvingInGemeente.dag`                        `0`
-`verblijfplaats.datumInschrijvingInGemeente.datum`                      `string`
-`verblijfplaats.datumInschrijvingInGemeente.jaar`                       `0`
-`verblijfplaats.datumInschrijvingInGemeente.maand`                      `0`
-`verblijfplaats.datumVestigingInNederland.dag`                          `0`
-`verblijfplaats.datumVestigingInNederland.datum`                        `string`
-`verblijfplaats.datumVestigingInNederland.jaar`                         `0`
-`verblijfplaats.datumVestigingInNederland.maand`                        `0`
-`verblijfplaats.gemeenteVanInschrijving.code`                           `string`
-`verblijfplaats.gemeenteVanInschrijving.omschrijving`                   `string`
-`verblijfplaats.landVanwaarIngeschreven.code`                           `string`
-`verblijfplaats.landVanwaarIngeschreven.omschrijving`                   `string`
-`verblijfplaats.verblijfBuitenland.adresRegel1`                         `string`
-`verblijfplaats.verblijfBuitenland.adresRegel2`                         `string`
-`verblijfplaats.verblijfBuitenland.adresRegel3`                         `string`
-`verblijfplaats.verblijfBuitenland.vertrokkenOnbekendWaarheen`          `True`
-`verblijfplaats.verblijfBuitenland.land.code`                           `string`
-`verblijfplaats.verblijfBuitenland.land.omschrijving`                   `string`
-`verblijfplaats.aanduidingBijHuisnummer`                                `True`
-`verblijfplaats.datumAanvangAdreshouding`                               `True`
-`verblijfplaats.datumIngangGeldigheid`                                  `True`
-`verblijfplaats.datumInschrijvingInGemeente`                            `True`
-`verblijfplaats.datumVestigingInNederland`                              `True`
-`verblijfplaats.functieAdres`                                           `True`
-`verblijfplaats.gemeenteVanInschrijving`                                `True`
-`verblijfplaats.huisletter`                                             `boolean(verblijfsadres.aoa.huisletter)`
-`verblijfplaats.huisnummer`                                             `boolean(verblijfsadres.aoa.huisnummer)`
-`verblijfplaats.huisnummertoevoeging`                                   `boolean(verblijfsadres.aoa.huisnummertoevoeging)`
-`verblijfplaats.identificatiecodeNummeraanduiding`                      `True`
-`verblijfplaats.identificatiecodeAdresseerbaarObject`                   `True`
-`verblijfplaats.landVanwaarIngeschreven`                                `True`
-`verblijfplaats.locatiebeschrijving`                                    `True`
-`verblijfplaats.naamOpenbareRuimte`                                     `True`
-`verblijfplaats.postcode`                                               `boolean(verblijfsadres.aoa.postcode)`
-`verblijfplaats.straatnaam`                                             `boolean(verblijfsadres.gor.straatnaam)`
-`verblijfplaats.verblijfBuitenland`                                     `True`
-`verblijfplaats.woonplaatsnaam`                                         `boolean(verblijfsadres.wpl.woonplaatsNaam)`
-`verblijfplaats.datumIngangOnderzoek.dag`                               `0`
-`verblijfplaats.datumIngangOnderzoek.datum`                             `string`
-`verblijfplaats.datumIngangOnderzoek.jaar`                              `0`
-`verblijfplaats.datumIngangOnderzoek.maand`                             `0`
-`gezagsverhouding.indicatieCurateleRegister`                            `True`
-`gezagsverhouding.indicatieGezagMinderjarige`                           `ouder1`
-`gezagsverhouding.inOnderzoek.indicatieCurateleRegister`                `True`
-`gezagsverhouding.inOnderzoek.indicatieGezagMinderjarige`               `True`
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 `0`
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.datum`               `string`
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.jaar`                `0`
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.maand`               `0`
-`verblijfstitel.aanduiding.code`                                        `string`
-`verblijfstitel.aanduiding.omschrijving`                                `string`
-`verblijfstitel.datumEinde.dag`                                         `0`
-`verblijfstitel.datumEinde.datum`                                       `string`
-`verblijfstitel.datumEinde.jaar`                                        `0`
-`verblijfstitel.datumEinde.maand`                                       `0`
-`verblijfstitel.datumIngang.dag`                                        `0`
-`verblijfstitel.datumIngang.datum`                                      `string`
-`verblijfstitel.datumIngang.jaar`                                       `0`
-`verblijfstitel.datumIngang.maand`                                      `0`
-`verblijfstitel.inOnderzoek.aanduiding`                                 `True`
-`verblijfstitel.inOnderzoek.datumEinde`                                 `True`
-`verblijfstitel.inOnderzoek.datumIngang`                                `True`
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.dag`                   `0`
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.datum`                 `string`
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.jaar`                  `0`
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.maand`                 `0`
+`verblijfplaats.vanuitVertrokkenOnbekendWaarheen`                       `True`                                                                  TODO
+`verblijfplaats.datumAanvangAdreshouding.dag`                           `0`                                                                     TODO
+`verblijfplaats.datumAanvangAdreshouding.datum`                         `string`                                                                TODO
+`verblijfplaats.datumAanvangAdreshouding.jaar`                          `0`                                                                     TODO
+`verblijfplaats.datumAanvangAdreshouding.maand`                         `0`                                                                     TODO
+`verblijfplaats.datumIngangGeldigheid.dag`                              `0`                                                                     TODO
+`verblijfplaats.datumIngangGeldigheid.datum`                            `string`                                                                TODO
+`verblijfplaats.datumIngangGeldigheid.jaar`                             `0`                                                                     TODO
+`verblijfplaats.datumIngangGeldigheid.maand`                            `0`                                                                     TODO
+`verblijfplaats.datumInschrijvingInGemeente.dag`                        `0`                                                                     TODO
+`verblijfplaats.datumInschrijvingInGemeente.datum`                      `string`                                                                TODO
+`verblijfplaats.datumInschrijvingInGemeente.jaar`                       `0`                                                                     TODO
+`verblijfplaats.datumInschrijvingInGemeente.maand`                      `0`                                                                     TODO
+`verblijfplaats.datumVestigingInNederland.dag`                          `0`                                                                     TODO
+`verblijfplaats.datumVestigingInNederland.datum`                        `string`                                                                TODO
+`verblijfplaats.datumVestigingInNederland.jaar`                         `0`                                                                     TODO
+`verblijfplaats.datumVestigingInNederland.maand`                        `0`                                                                     TODO
+`verblijfplaats.gemeenteVanInschrijving.code`                           `string`                                                                TODO
+`verblijfplaats.gemeenteVanInschrijving.omschrijving`                   `string`                                                                TODO
+`verblijfplaats.landVanwaarIngeschreven.code`                           `string`                                                                TODO
+`verblijfplaats.landVanwaarIngeschreven.omschrijving`                   `string`                                                                TODO
+`verblijfplaats.verblijfBuitenland.adresRegel1`                         `string`                                                                TODO
+`verblijfplaats.verblijfBuitenland.adresRegel2`                         `string`                                                                TODO
+`verblijfplaats.verblijfBuitenland.adresRegel3`                         `string`                                                                TODO
+`verblijfplaats.verblijfBuitenland.vertrokkenOnbekendWaarheen`          `True`                                                                  TODO
+`verblijfplaats.verblijfBuitenland.land.code`                           `string`                                                                TODO
+`verblijfplaats.verblijfBuitenland.land.omschrijving`                   `string`                                                                TODO
+`verblijfplaats.aanduidingBijHuisnummer`                                `True`                                                                  TODO
+`verblijfplaats.datumAanvangAdreshouding`                               `True`                                                                  TODO
+`verblijfplaats.datumIngangGeldigheid`                                  `True`                                                                  TODO
+`verblijfplaats.datumInschrijvingInGemeente`                            `True`                                                                  TODO
+`verblijfplaats.datumVestigingInNederland`                              `True`                                                                  TODO
+`verblijfplaats.functieAdres`                                           `True`                                                                  TODO
+`verblijfplaats.gemeenteVanInschrijving`                                `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.huisletter`                                 `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.huisnummer`                                 `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.huisnummertoevoeging`                       `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.identificatiecodeNummeraanduiding`          `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.identificatiecodeAdresseerbaarObject`       `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.landVanwaarIngeschreven`                    `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.locatiebeschrijving`                        `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.naamOpenbareRuimte`                         `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.postcode`                                   `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.straatnaam`                                 `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.verblijfBuitenland`                         `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.woonplaatsnaam`                             `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.dag`                   `0`                                                                     TODO
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.datum`                 `string`                                                                TODO
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.jaar`                  `0`                                                                     TODO
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.maand`                 `0`                                                                     TODO
+`gezagsverhouding.indicatieCurateleRegister`                            `True`                                                                  TODO
+`gezagsverhouding.indicatieGezagMinderjarige`                           `ouder1`                                                                TODO
+`gezagsverhouding.inOnderzoek.indicatieCurateleRegister`                `True`                                                                  TODO
+`gezagsverhouding.inOnderzoek.indicatieGezagMinderjarige`               `True`                                                                  TODO
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 `0`                                                                     TODO
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.datum`               `string`                                                                TODO
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.jaar`                `0`                                                                     TODO
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.maand`               `0`                                                                     TODO
+`verblijfstitel.aanduiding.code`                                        `vbt.aanduidingVerblijfstitel`
+`verblijfstitel.aanduiding.omschrijving`                                `string`                                                                TODO
+`verblijfstitel.datumEinde.dag`                                         `0`                                                                     TODO
+`verblijfstitel.datumEinde.datum`                                       `string`                                                                TODO
+`verblijfstitel.datumEinde.jaar`                                        `0`                                                                     TODO
+`verblijfstitel.datumEinde.maand`                                       `0`                                                                     TODO
+`verblijfstitel.datumIngang.dag`                                        `0`                                                                     TODO
+`verblijfstitel.datumIngang.datum`                                      `string`                                                                TODO
+`verblijfstitel.datumIngang.jaar`                                       `0`                                                                     TODO
+`verblijfstitel.datumIngang.maand`                                      `0`                                                                     TODO
+`verblijfstitel.inOnderzoek.aanduiding`                                 `True`                                                                  TODO
+`verblijfstitel.inOnderzoek.datumEinde`                                 `True`                                                                  TODO
+`verblijfstitel.inOnderzoek.datumIngang`                                `True`                                                                  TODO
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.dag`                   `0`                                                                     TODO
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.datum`                 `string`                                                                TODO
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.jaar`                  `0`                                                                     TODO
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.maand`                 `0`                                                                     TODO
 =====================================================================   =====================================================================   =====================================================================
 
 
