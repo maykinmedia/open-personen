@@ -66,7 +66,6 @@ API attribute                                                           StUF-BG 
 `datumEersteInschrijvingGBA.maand`                                      MONTH(`inp.datumInschrijving`)
 `kiesrecht.europeesKiesrecht`                                           *(`ing.aanduidingEuropeesKiesrecht` == `2`)*                            StUF-BG value "2" evaluates to "true".
 `kiesrecht.uitgeslotenVanKiesrecht`                                     *(`ing.aanduidingUitgeslotenKiesrecht` == `A`)*                         StUF-BG value "A" evaluates to "true".
-
 `kiesrecht.einddatumUitsluitingEuropeesKiesrecht.dag`                   1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 `kiesrecht.einddatumUitsluitingEuropeesKiesrecht.datum`                 "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
 `kiesrecht.einddatumUitsluitingEuropeesKiesrecht.jaar`                  1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
@@ -111,9 +110,9 @@ API attribute                                                           StUF-BG 
 `overlijden.land.omschrijving`                                          `string`                                                                TODO
 `overlijden.plaats.code`                                                `inp.overlijdenplaats`
 `overlijden.plaats.omschrijving`                                        `string`                                                                TODO
-`overlijden.inOnderzoek.datum`                                          *(`inOnderzoek.groepsnaam` == `Persoonsgegevens`)*                      One of the multiple inOnderzoek occurrances matches
-`overlijden.inOnderzoek.land`                                           *(`inOnderzoek.groepsnaam` == `Persoonsgegevens`)*                      One of the multiple inOnderzoek occurrances matches
-`overlijden.inOnderzoek.plaats`                                         *(`inOnderzoek.groepsnaam` == `Persoonsgegevens`)*                      One of the multiple inOnderzoek occurrances matches
+`overlijden.inOnderzoek.datum`                                          *(`inOnderzoek.groepsnaam` == `Overlijden`)*                      One of the multiple inOnderzoek occurrances matches
+`overlijden.inOnderzoek.land`                                           *(`inOnderzoek.groepsnaam` == `Overlijden`)*                      One of the multiple inOnderzoek occurrances matches
+`overlijden.inOnderzoek.plaats`                                         *(`inOnderzoek.groepsnaam` == `Overlijden`)*                      One of the multiple inOnderzoek occurrances matches
 `overlijden.inOnderzoek.datumIngangOnderzoek.dag`                       1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 `overlijden.inOnderzoek.datumIngangOnderzoek.datum`                     "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
 `overlijden.inOnderzoek.datumIngangOnderzoek.jaar`                      1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
@@ -163,35 +162,34 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.datumIngangGeldigheid`                                  `True`                                                                  TODO
 `verblijfplaats.datumInschrijvingInGemeente`                            `True`                                                                  TODO
 `verblijfplaats.datumVestigingInNederland`                              `True`                                                                  TODO
-
 `verblijfplaats.functieAdres`                                           `True`                                                                  TODO
 `verblijfplaats.gemeenteVanInschrijving`                                `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.huisletter`                                 *(`inOnderzoek.groepsnaam` == `Postadres`)*
-`verblijfplaats.inOnderzoek.huisnummer`                                 *(`inOnderzoek.groepsnaam` == `Postadres`)*
-`verblijfplaats.inOnderzoek.huisnummertoevoeging`                       *(`inOnderzoek.groepsnaam` == `Postadres`)*
-`verblijfplaats.inOnderzoek.identificatiecodeNummeraanduiding`          `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.identificatiecodeAdresseerbaarObject`       `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.landVanwaarIngeschreven`                    `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.locatiebeschrijving`                        `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.naamOpenbareRuimte`                         `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.postcode`                                   *(`inOnderzoek.groepsnaam` == `Postadres`)*
-`verblijfplaats.inOnderzoek.straatnaam`                                 *(`inOnderzoek.groepsnaam` == `Postadres`)*
-`verblijfplaats.inOnderzoek.verblijfBuitenland`                         `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.woonplaatsnaam`                             *(`inOnderzoek.groepsnaam` == `Postadres`)*
+`verblijfplaats.inOnderzoek.huisletter`                                 *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.huisnummer`                                 *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.huisnummertoevoeging`                       *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.identificatiecodeNummeraanduiding`          *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.identificatiecodeAdresseerbaarObject`       *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.landVanwaarIngeschreven`                    *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.locatiebeschrijving`                        *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.naamOpenbareRuimte`                         *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.postcode`                                   *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.straatnaam`                                 *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.verblijfBuitenland`                         *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
+`verblijfplaats.inOnderzoek.woonplaatsnaam`                             *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
 `verblijfplaats.inOnderzoek.datumIngangOnderzoek.dag`                   1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 `verblijfplaats.inOnderzoek.datumIngangOnderzoek.datum`                 "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
 `verblijfplaats.inOnderzoek.datumIngangOnderzoek.jaar`                  1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
 `verblijfplaats.inOnderzoek.datumIngangOnderzoek.maand`                 1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
-`gezagsverhouding.indicatieCurateleRegister`                            `True`                                                                  TODO
+`gezagsverhouding.indicatieCurateleRegister`                            `ing.indicatieCurateleRegister`
 `gezagsverhouding.indicatieGezagMinderjarige`                           `string`                                                                TODO
-`gezagsverhouding.inOnderzoek.indicatieCurateleRegister`                `True`                                                                  TODO
-`gezagsverhouding.inOnderzoek.indicatieGezagMinderjarige`               `True`                                                                  TODO
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.datum`               "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.jaar`                1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.maand`               1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`gezagsverhouding.inOnderzoek.indicatieCurateleRegister`                *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
+`gezagsverhouding.inOnderzoek.indicatieGezagMinderjarige`               *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.datum`               *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.jaar`                *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.maand`               *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
 `verblijfstitel.aanduiding.code`                                        `vbt.aanduidingVerblijfstitel`
-`verblijfstitel.aanduiding.omschrijving`                                `string`                                                                TODO
+`verblijfstitel.aanduiding.omschrijving`                                *(calculated)*                                                          Obtained from mapping https://publicaties.rvig.nl/dsresource?objectid=4801&type=org
 `verblijfstitel.datumEinde.dag`                                         DAY(`ing.datumVerliesVerblijfstitel`)
 `verblijfstitel.datumEinde.datum`                                       `ing.datumVerliesVerblijfstitel`
 `verblijfstitel.datumEinde.jaar`                                        YEAR(`ing.datumVerliesVerblijfstitel`)
