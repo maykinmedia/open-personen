@@ -106,10 +106,10 @@ API attribute                                                           StUF-BG 
 `overlijden.datum.datum`                                                `overlijdensdatum`
 `overlijden.datum.jaar`                                                 `YEAR(overlijdensdatum)`
 `overlijden.datum.maand`                                                `MONTH(overlijdensdatum)`
-`overlijden.land.code`                                                  `inp.overlijdenLand`
-`overlijden.land.omschrijving`                                          `string`                                                                TODO
-`overlijden.plaats.code`                                                `inp.overlijdenplaats`
-`overlijden.plaats.omschrijving`                                        `string`                                                                TODO
+`overlijden.land.code`                                                  COUNTRY_CODE(`inp.overlijdenLand`)
+`overlijden.land.omschrijving`                                          `inp.overlijdenLand`
+`overlijden.plaats.code`                                                CITY_CODE(`inp.overlijdenplaats`)
+`overlijden.plaats.omschrijving`                                        `inp.overlijdenplaats`
 `overlijden.inOnderzoek.datum`                                          *(`inOnderzoek.groepsnaam` == `Overlijden`)*                      One of the multiple inOnderzoek occurrances matches
 `overlijden.inOnderzoek.land`                                           *(`inOnderzoek.groepsnaam` == `Overlijden`)*                      One of the multiple inOnderzoek occurrances matches
 `overlijden.inOnderzoek.plaats`                                         *(`inOnderzoek.groepsnaam` == `Overlijden`)*                      One of the multiple inOnderzoek occurrances matches
@@ -214,40 +214,40 @@ Kind
 =====================================================================   =====================================================================   =====================================================================
 API attribute                                                           StUF-BG attribute                                                       Design decision  remarks
 =====================================================================   =====================================================================   =====================================================================
-burgerservicenummer                                                     `inp.bsn`
-geheimhoudingPersoonsgegevens                                           `inp.indicatieGeheim`
-naam.geslachtsnaam                                                      `geslachtsnaam`
-naam.voorletters                                                        `voorletters`
-naam.voornamen                                                          `voornamen`
-naam.voorvoegsel                                                        `voorvoegselGeslachtsnaam`
-naam.inOnderzoek.geslachtsnaam                                          `True`
-naam.inOnderzoek.voornamen                                              `True`
-naam.inOnderzoek.voorvoegsel                                            `True`
-naam.inOnderzoek.datumIngangOnderzoek.dag                               0
-naam.inOnderzoek.datumIngangOnderzoek.datum                             string
-naam.inOnderzoek.datumIngangOnderzoek.jaar                              0
-naam.inOnderzoek.datumIngangOnderzoek.maand                             0
-geboorte.datum.dag                                                      integer(geboortedatum)                                                  Day portion of date value
-geboorte.datum.datum                                                    geboortedatum                                                           Full date value
-geboorte.datum.jaar                                                     integer(geboortedatum)                                                  Year portion of date value
-geboorte.datum.maand                                                    integer(geboortedatum)                                                  Month portion of date value
-geboorte.land.code                                                      string
-geboorte.land.omschrijving                                              inp.geboorteLand
-geboorte.plaats.code                                                    string
-geboorte.plaats.omschrijving                                            inp.geboorteplaats
-geboorte.inOnderzoek.datum                                              True
-geboorte.inOnderzoek.land                                               True
-geboorte.inOnderzoek.plaats                                             True
-geboorte.inOnderzoek.datumIngangOnderzoek.dag                           0
-geboorte.inOnderzoek.datumIngangOnderzoek.datum                         string
-geboorte.inOnderzoek.datumIngangOnderzoek.jaar                          0
-geboorte.inOnderzoek.datumIngangOnderzoek.maand                         0
-leeftijd                                                                calculate_age(geboortedatum)                                            Age calculated from geboortedatum
-inOnderzoek.burgerservicenummer                                         boolean(inp.bsn)
-inOnderzoek.datumIngangOnderzoek.dag                                    0
-inOnderzoek.datumIngangOnderzoek.datum                                  string
-inOnderzoek.datumIngangOnderzoek.jaar                                   0
-inOnderzoek.datumIngangOnderzoek.maand                                  0
+burgerservicenummer                                                     `inp.heeftAlsKinderen.inp.bsn`
+geheimhoudingPersoonsgegevens                                           `inp.heeftAlsKinderen.inp.indicatieGeheim`
+naam.geslachtsnaam                                                      `inp.heeftAlsKinderen.geslachtsnaam`
+naam.voorletters                                                        `inp.heeftAlsKinderen.voorletters`
+naam.voornamen                                                          `inp.heeftAlsKinderen.voornamen`
+naam.voorvoegsel                                                        `inp.heeftAlsKinderen.voorvoegselGeslachtsnaam`
+naam.inOnderzoek.geslachtsnaam                                          *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+naam.inOnderzoek.voornamen                                              *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+naam.inOnderzoek.voorvoegsel                                            *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+naam.inOnderzoek.datumIngangOnderzoek.dag                               1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+naam.inOnderzoek.datumIngangOnderzoek.datum                             "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+naam.inOnderzoek.datumIngangOnderzoek.jaar                              1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+naam.inOnderzoek.datumIngangOnderzoek.maand                             1
+geboorte.datum.dag                                                      DAY(`inp.heeftAlsKinderen.geboortedatum`)
+geboorte.datum.datum                                                    `inp.heeftAlsKinderen.geboortedatum`
+geboorte.datum.jaar                                                     YEAR(`inp.heeftAlsKinderen.geboortedatum`)
+geboorte.datum.maand                                                    MONTH(`inp.heeftAlsKinderen.geboortedatum`)
+geboorte.land.code                                                      COUNTRY_CODE(`inp.heeftAlsKinderen.inp.geboorteLand`)
+geboorte.land.omschrijving                                              `inp.heeftAlsKinderen.inp.geboorteLand`
+geboorte.plaats.code                                                    CITY_CODE(`inp.heeftAlsKinderen.inp.geboorteplaats`)
+geboorte.plaats.omschrijving                                            `inp.heeftAlsKinderen.inp.geboorteplaats`
+geboorte.inOnderzoek.datum                                              *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+geboorte.inOnderzoek.land                                               *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+geboorte.inOnderzoek.plaats                                             *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+geboorte.inOnderzoek.datumIngangOnderzoek.dag                           1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+geboorte.inOnderzoek.datumIngangOnderzoek.datum                         "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+geboorte.inOnderzoek.datumIngangOnderzoek.jaar                          1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+geboorte.inOnderzoek.datumIngangOnderzoek.maand                         1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+leeftijd                                                                *(calculated)*                                                          See `features`_
+inOnderzoek.burgerservicenummer                                         *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)* One of the multiple inOnderzoek occurrances matches
+inOnderzoek.datumIngangOnderzoek.dag                                    1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+inOnderzoek.datumIngangOnderzoek.datum                                  "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+inOnderzoek.datumIngangOnderzoek.jaar                                   1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+inOnderzoek.datumIngangOnderzoek.maand                                  1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 =====================================================================   =====================================================================   =====================================================================
 
 
