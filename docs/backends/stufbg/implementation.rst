@@ -118,7 +118,6 @@ API attribute                                                           StUF-BG 
 `overlijden.inOnderzoek.datumIngangOnderzoek.datum`                     "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
 `overlijden.inOnderzoek.datumIngangOnderzoek.jaar`                      1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
 `overlijden.inOnderzoek.datumIngangOnderzoek.maand`                     1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
-
 `verblijfplaats.functieAdres`                                           `string`                                                                TODO
 `verblijfplaats.huisletter`                                             `verblijfsadres.aoa.huisletter`
 `verblijfplaats.huisnummer`                                             `verblijfsadres.aoa.huisnummer`
@@ -133,24 +132,24 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.locatiebeschrijving`                                    `verblijfsadres.inp.locatiebeschrijving`
 `verblijfplaats.straatnaam`                                             `verblijfsadres.gor.straatnaam`
 `verblijfplaats.vanuitVertrokkenOnbekendWaarheen`                       `True`                                                                  TODO
-`verblijfplaats.datumAanvangAdreshouding.dag`                           `0`                                                                     TODO
-`verblijfplaats.datumAanvangAdreshouding.datum`                         `string`                                                                TODO
-`verblijfplaats.datumAanvangAdreshouding.jaar`                          `0`                                                                     TODO
-`verblijfplaats.datumAanvangAdreshouding.maand`                         `0`                                                                     TODO
-`verblijfplaats.datumIngangGeldigheid.dag`                              `0`                                                                     TODO
-`verblijfplaats.datumIngangGeldigheid.datum`                            `string`                                                                TODO
-`verblijfplaats.datumIngangGeldigheid.jaar`                             `0`                                                                     TODO
-`verblijfplaats.datumIngangGeldigheid.maand`                            `0`                                                                     TODO
-`verblijfplaats.datumInschrijvingInGemeente.dag`                        `0`                                                                     TODO
-`verblijfplaats.datumInschrijvingInGemeente.datum`                      `string`                                                                TODO
-`verblijfplaats.datumInschrijvingInGemeente.jaar`                       `0`                                                                     TODO
-`verblijfplaats.datumInschrijvingInGemeente.maand`                      `0`                                                                     TODO
-`verblijfplaats.datumVestigingInNederland.dag`                          `0`                                                                     TODO
-`verblijfplaats.datumVestigingInNederland.datum`                        `string`                                                                TODO
-`verblijfplaats.datumVestigingInNederland.jaar`                         `0`                                                                     TODO
-`verblijfplaats.datumVestigingInNederland.maand`                        `0`                                                                     TODO
-`verblijfplaats.gemeenteVanInschrijving.code`                           `string`                                                                TODO
-`verblijfplaats.gemeenteVanInschrijving.omschrijving`                   `string`                                                                TODO
+`verblijfplaats.datumAanvangAdreshouding.dag`                           1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumAanvangAdreshouding.datum`                         "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumAanvangAdreshouding.jaar`                          1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumAanvangAdreshouding.maand`                         1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumIngangGeldigheid.dag`                              DAY(`inp.verblijftIn.gerelateerde.ingangsdatumObject`)
+`verblijfplaats.datumIngangGeldigheid.datum`                            `inp.verblijftIn.gerelateerde.ingangsdatumObject`
+`verblijfplaats.datumIngangGeldigheid.jaar`                             YEAR(`inp.verblijftIn.gerelateerde.ingangsdatumObject`)
+`verblijfplaats.datumIngangGeldigheid.maand`                            MONTH(`inp.verblijftIn.gerelateerde.ingangsdatumObject`)
+`verblijfplaats.datumInschrijvingInGemeente.dag`                        1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumInschrijvingInGemeente.datum`                      "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumInschrijvingInGemeente.jaar`                       1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumInschrijvingInGemeente.maand`                      1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumVestigingInNederland.dag`                          1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumVestigingInNederland.datum`                        "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumVestigingInNederland.jaar`                         1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumVestigingInNederland.maand`                        1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.gemeenteVanInschrijving.code`                           `inp.verblijftIn.gerelateerde.gemeenteCode`
+`verblijfplaats.gemeenteVanInschrijving.omschrijving`                   `inp.verblijftIn.gerelateerde.gemeenteNaam`
 `verblijfplaats.landVanwaarIngeschreven.code`                           `string`                                                                TODO
 `verblijfplaats.landVanwaarIngeschreven.omschrijving`                   `string`                                                                TODO
 `verblijfplaats.verblijfBuitenland.adresRegel1`                         `string`                                                                TODO
@@ -164,49 +163,50 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.datumIngangGeldigheid`                                  `True`                                                                  TODO
 `verblijfplaats.datumInschrijvingInGemeente`                            `True`                                                                  TODO
 `verblijfplaats.datumVestigingInNederland`                              `True`                                                                  TODO
+
 `verblijfplaats.functieAdres`                                           `True`                                                                  TODO
 `verblijfplaats.gemeenteVanInschrijving`                                `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.huisletter`                                 `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.huisnummer`                                 `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.huisnummertoevoeging`                       `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.huisletter`                                 *(`inOnderzoek.groepsnaam` == `Postadres`)*
+`verblijfplaats.inOnderzoek.huisnummer`                                 *(`inOnderzoek.groepsnaam` == `Postadres`)*
+`verblijfplaats.inOnderzoek.huisnummertoevoeging`                       *(`inOnderzoek.groepsnaam` == `Postadres`)*
 `verblijfplaats.inOnderzoek.identificatiecodeNummeraanduiding`          `True`                                                                  TODO
 `verblijfplaats.inOnderzoek.identificatiecodeAdresseerbaarObject`       `True`                                                                  TODO
 `verblijfplaats.inOnderzoek.landVanwaarIngeschreven`                    `True`                                                                  TODO
 `verblijfplaats.inOnderzoek.locatiebeschrijving`                        `True`                                                                  TODO
 `verblijfplaats.inOnderzoek.naamOpenbareRuimte`                         `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.postcode`                                   `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.straatnaam`                                 `True`                                                                  TODO
+`verblijfplaats.inOnderzoek.postcode`                                   *(`inOnderzoek.groepsnaam` == `Postadres`)*
+`verblijfplaats.inOnderzoek.straatnaam`                                 *(`inOnderzoek.groepsnaam` == `Postadres`)*
 `verblijfplaats.inOnderzoek.verblijfBuitenland`                         `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.woonplaatsnaam`                             `True`                                                                  TODO
-`verblijfplaats.inOnderzoek.datumIngangOnderzoek.dag`                   `0`                                                                     TODO
-`verblijfplaats.inOnderzoek.datumIngangOnderzoek.datum`                 `string`                                                                TODO
-`verblijfplaats.inOnderzoek.datumIngangOnderzoek.jaar`                  `0`                                                                     TODO
-`verblijfplaats.inOnderzoek.datumIngangOnderzoek.maand`                 `0`                                                                     TODO
+`verblijfplaats.inOnderzoek.woonplaatsnaam`                             *(`inOnderzoek.groepsnaam` == `Postadres`)*
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.dag`                   1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.datum`                 "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.jaar`                  1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.inOnderzoek.datumIngangOnderzoek.maand`                 1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 `gezagsverhouding.indicatieCurateleRegister`                            `True`                                                                  TODO
-`gezagsverhouding.indicatieGezagMinderjarige`                           `ouder1`                                                                TODO
+`gezagsverhouding.indicatieGezagMinderjarige`                           `string`                                                                TODO
 `gezagsverhouding.inOnderzoek.indicatieCurateleRegister`                `True`                                                                  TODO
 `gezagsverhouding.inOnderzoek.indicatieGezagMinderjarige`               `True`                                                                  TODO
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 `0`                                                                     TODO
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.datum`               `string`                                                                TODO
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.jaar`                `0`                                                                     TODO
-`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.maand`               `0`                                                                     TODO
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.datum`               "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.jaar`                1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+`gezagsverhouding.inOnderzoek.datumIngangOnderzoek.maand`               1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 `verblijfstitel.aanduiding.code`                                        `vbt.aanduidingVerblijfstitel`
 `verblijfstitel.aanduiding.omschrijving`                                `string`                                                                TODO
-`verblijfstitel.datumEinde.dag`                                         `0`                                                                     TODO
-`verblijfstitel.datumEinde.datum`                                       `string`                                                                TODO
-`verblijfstitel.datumEinde.jaar`                                        `0`                                                                     TODO
-`verblijfstitel.datumEinde.maand`                                       `0`                                                                     TODO
-`verblijfstitel.datumIngang.dag`                                        `0`                                                                     TODO
-`verblijfstitel.datumIngang.datum`                                      `string`                                                                TODO
-`verblijfstitel.datumIngang.jaar`                                       `0`                                                                     TODO
-`verblijfstitel.datumIngang.maand`                                      `0`                                                                     TODO
-`verblijfstitel.inOnderzoek.aanduiding`                                 `True`                                                                  TODO
-`verblijfstitel.inOnderzoek.datumEinde`                                 `True`                                                                  TODO
-`verblijfstitel.inOnderzoek.datumIngang`                                `True`                                                                  TODO
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.dag`                   `0`                                                                     TODO
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.datum`                 `string`                                                                TODO
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.jaar`                  `0`                                                                     TODO
-`verblijfstitel.inOnderzoek.datumIngangOnderzoek.maand`                 `0`                                                                     TODO
+`verblijfstitel.datumEinde.dag`                                         DAY(`ing.datumVerliesVerblijfstitel`)
+`verblijfstitel.datumEinde.datum`                                       `ing.datumVerliesVerblijfstitel`
+`verblijfstitel.datumEinde.jaar`                                        YEAR(`ing.datumVerliesVerblijfstitel`)
+`verblijfstitel.datumEinde.maand`                                       MONTH(`ing.datumVerliesVerblijfstitel`)
+`verblijfstitel.datumIngang.dag`                                        DAY(`ing.datumVerkrijgingVerblijfstitel`)
+`verblijfstitel.datumIngang.datum`                                      `ing.datumVerkrijgingVerblijfstitel`
+`verblijfstitel.datumIngang.jaar`                                       YEAR(`ing.datumVerkrijgingVerblijfstitel`)
+`verblijfstitel.datumIngang.maand`                                      MONTH(`ing.datumVerkrijgingVerblijfstitel`)
+`verblijfstitel.inOnderzoek.aanduiding`                                 *(`inOnderzoek.elementnaam` == `aanduidingVerblijfstitel`)*             One of the multiple inOnderzoek occurrances matches
+`verblijfstitel.inOnderzoek.datumEinde`                                 "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfstitel.inOnderzoek.datumIngang`                                "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.dag`                   1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.datum`                 "01-01-1900"                                                            Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.jaar`                  1900                                                                    Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfstitel.inOnderzoek.datumIngangOnderzoek.maand`                 1                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 =====================================================================   =====================================================================   =====================================================================
 
 
