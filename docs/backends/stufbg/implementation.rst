@@ -356,7 +356,7 @@ aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.datum      "01-01-1
 aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.jaar       1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.maand      1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 geheimhoudingPersoonsgegevens                                           `inp.heeftAlsEchtgenootPartner.inp.indicatieGeheim`
-=====================================================================   =====================================================================              =====================================================================
+=====================================================================   ================================================================================   =====================================================================
 
 
 .. _features: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/
