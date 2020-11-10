@@ -80,15 +80,15 @@ API attribute                                                           StUF-BG 
 `inOnderzoek.datumIngangOnderzoek.datum`                                "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 `inOnderzoek.datumIngangOnderzoek.jaar`                                 1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 `inOnderzoek.datumIngangOnderzoek.maand`                                1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
-`nationaliteit.aanduidingBijzonderNederlanderschap`                     "string"                                                                           TODO
+`nationaliteit.aanduidingBijzonderNederlanderschap`                     `inp.aanduidingBijzonderNederlanderschap`
 `nationaliteit.datumIngangGeldigheid.dag`                               DAY(`inp.heeftAlsNationaliteit.inp.datumVerkrijging`)
 `nationaliteit.datumIngangGeldigheid.datum`                             `inp.heeftAlsNationaliteit.inp.datumVerkrijging`
 `nationaliteit.datumIngangGeldigheid.jaar`                              YEAR(`inp.heeftAlsNationaliteit.inp.datumVerkrijging`)
 `nationaliteit.datumIngangGeldigheid.maand`                             MONTH(`inp.heeftAlsNationaliteit.inp.datumVerkrijging`)
-`nationaliteit.nationaliteit.code`                                      `string`                                                                           TODO
-`nationaliteit.nationaliteit.omschrijving`                              `string`                                                                           TODO
-`nationaliteit.redenOpname.code`                                        inp.heeftAlsNationaliteit.inp.redenVerkrijging
-`nationaliteit.redenOpname.omschrijving`                                `string`                                                                           TODO
+`nationaliteit.nationaliteit.code`                                      `inp.heeftAlsNationaliteit.gerelateerde.code`
+`nationaliteit.nationaliteit.omschrijving`                              `inp.heeftAlsNationaliteit.gerelateerde.omschrijving`
+`nationaliteit.redenOpname.code`                                        REDEN_CODE(`inp.heeftAlsNationaliteit.inp.redenVerkrijging`)                       TODO
+`nationaliteit.redenOpname.omschrijving`                                `inp.heeftAlsNationaliteit.inp.redenVerkrijging`
 `nationaliteit.inOnderzoek.aanduidingBijzonderNederlanderschap`         *(`inOnderzoek.elementnaam` == `aanduidingBijzonderNederlanderschap`)*             One of the multiple inOnderzoek occurrances matches
 `nationaliteit.inOnderzoek.nationaliteit`                               *(`inOnderzoek.groepsnaam` == `Nationaliteit`)*                                    One of the multiple inOnderzoek occurrances matches
 `nationaliteit.inOnderzoek.redenOpname`                                 `True`                                                                             TODO
@@ -131,10 +131,10 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.locatiebeschrijving`                                    `verblijfsadres.inp.locatiebeschrijving`
 `verblijfplaats.straatnaam`                                             `verblijfsadres.gor.straatnaam`
 `verblijfplaats.vanuitVertrokkenOnbekendWaarheen`                       `True`                                                                             TODO
-`verblijfplaats.datumAanvangAdreshouding.dag`                           1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
-`verblijfplaats.datumAanvangAdreshouding.datum`                         "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
-`verblijfplaats.datumAanvangAdreshouding.jaar`                          1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
-`verblijfplaats.datumAanvangAdreshouding.maand`                         1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
+`verblijfplaats.datumAanvangAdreshouding.dag`                           DAY(`verblijfsadres.begindatumVerblijf`)
+`verblijfplaats.datumAanvangAdreshouding.datum`                         `verblijfsadres.begindatumVerblijf`
+`verblijfplaats.datumAanvangAdreshouding.jaar`                          YEAR(`verblijfsadres.begindatumVerblijf`)
+`verblijfplaats.datumAanvangAdreshouding.maand`                         MONTH(`verblijfsadres.begindatumVerblijf`)
 `verblijfplaats.datumIngangGeldigheid.dag`                              DAY(`inp.verblijftIn.gerelateerde.ingangsdatumObject`)
 `verblijfplaats.datumIngangGeldigheid.datum`                            `inp.verblijftIn.gerelateerde.ingangsdatumObject`
 `verblijfplaats.datumIngangGeldigheid.jaar`                             YEAR(`inp.verblijftIn.gerelateerde.ingangsdatumObject`)
@@ -151,18 +151,16 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.gemeenteVanInschrijving.omschrijving`                   `inp.verblijftIn.gerelateerde.gemeenteNaam`
 `verblijfplaats.landVanwaarIngeschreven.code`                           `string`                                                                           TODO
 `verblijfplaats.landVanwaarIngeschreven.omschrijving`                   `string`                                                                           TODO
-`verblijfplaats.verblijfBuitenland.adresRegel1`                         `string`                                                                           TODO
-`verblijfplaats.verblijfBuitenland.adresRegel2`                         `string`                                                                           TODO
-`verblijfplaats.verblijfBuitenland.adresRegel3`                         `string`                                                                           TODO
+`verblijfplaats.verblijfBuitenland.adresRegel1`                         `sub.verblijfBuitenland.sub.adresBuitenland1`
+`verblijfplaats.verblijfBuitenland.adresRegel2`                         `sub.verblijfBuitenland.sub.adresBuitenland2`
+`verblijfplaats.verblijfBuitenland.adresRegel3`                         `sub.verblijfBuitenland.sub.adresBuitenland3`
 `verblijfplaats.verblijfBuitenland.vertrokkenOnbekendWaarheen`          `True`                                                                             TODO
-`verblijfplaats.verblijfBuitenland.land.code`                           `string`                                                                           TODO
-`verblijfplaats.verblijfBuitenland.land.omschrijving`                   `string`                                                                           TODO
-`verblijfplaats.aanduidingBijHuisnummer`                                `True`                                                                             TODO
+`verblijfplaats.verblijfBuitenland.land.code`                           COUNTRY_CODE(sub.verblijfBuitenland.lnd.landcode)
+`verblijfplaats.verblijfBuitenland.land.omschrijving`                   `sub.verblijfBuitenland.lnd.landcode`
 `verblijfplaats.datumAanvangAdreshouding`                               `True`                                                                             TODO
 `verblijfplaats.datumIngangGeldigheid`                                  `True`                                                                             TODO
 `verblijfplaats.datumInschrijvingInGemeente`                            `True`                                                                             TODO
 `verblijfplaats.datumVestigingInNederland`                              `True`                                                                             TODO
-`verblijfplaats.functieAdres`                                           `True`                                                                             TODO
 `verblijfplaats.gemeenteVanInschrijving`                                `True`                                                                             TODO
 `verblijfplaats.inOnderzoek.huisletter`                                 *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
 `verblijfplaats.inOnderzoek.huisnummer`                                 *(`inOnderzoek.groepsnaam` == `Verblijfsplaats`)*
@@ -181,7 +179,7 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.inOnderzoek.datumIngangOnderzoek.jaar`                  1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 `verblijfplaats.inOnderzoek.datumIngangOnderzoek.maand`                 1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 `gezagsverhouding.indicatieCurateleRegister`                            `ing.indicatieCurateleRegister`
-`gezagsverhouding.indicatieGezagMinderjarige`                           `string`                                                                           TODO
+`gezagsverhouding.indicatieGezagMinderjarige`                           `ing.indicatieGezagMinderjarige`
 `gezagsverhouding.inOnderzoek.indicatieCurateleRegister`                *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
 `gezagsverhouding.inOnderzoek.indicatieGezagMinderjarige`               *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
 `gezagsverhouding.inOnderzoek.datumIngangOnderzoek.dag`                 *(`inOnderzoek.groepsnaam` == `Gezagsverhouding`)*
@@ -214,13 +212,13 @@ Kind
 =====================================================================   ================================================================================   =====================================================================
 API attribute                                                           StUF-BG attribute                                                                  Design decision  remarks
 =====================================================================   ================================================================================   =====================================================================
-burgerservicenummer                                                     `inp.heeftAlsKinderen.inp.bsn`                                                     =
-geheimhoudingPersoonsgegevens                                           `inp.heeftAlsKinderen.inp.indicatieGeheim`                                         =
-naam.geslachtsnaam                                                      `inp.heeftAlsKinderen.geslachtsnaam`                                               =
-naam.voorletters                                                        `inp.heeftAlsKinderen.voorletters`                                                 =
-naam.voornamen                                                          `inp.heeftAlsKinderen.voornamen`                                                   =
-naam.voorvoegsel                                                        `inp.heeftAlsKinderen.voorvoegselGeslachtsnaam`                                    =
-naam.inOnderzoek.geslachtsnaam                                          *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*            =One of the multiple inOnderzoek occurrances matches
+burgerservicenummer                                                     `inp.heeftAlsKinderen.inp.bsn`
+geheimhoudingPersoonsgegevens                                           `inp.heeftAlsKinderen.inp.indicatieGeheim`
+naam.geslachtsnaam                                                      `inp.heeftAlsKinderen.geslachtsnaam`
+naam.voorletters                                                        `inp.heeftAlsKinderen.voorletters`
+naam.voornamen                                                          `inp.heeftAlsKinderen.voornamen`
+naam.voorvoegsel                                                        `inp.heeftAlsKinderen.voorvoegselGeslachtsnaam`
+naam.inOnderzoek.geslachtsnaam                                          *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*            One of the multiple inOnderzoek occurrances matches
 naam.inOnderzoek.voornamen                                              *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*            One of the multiple inOnderzoek occurrances matches
 naam.inOnderzoek.voorvoegsel                                            *(`inp.heeftAlsKinderen.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*            One of the multiple inOnderzoek occurrances matches
 naam.inOnderzoek.datumIngangOnderzoek.dag                               1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
@@ -276,8 +274,8 @@ naam.inOnderzoek.datumIngangOnderzoek.datum                             "01-01-1
 naam.inOnderzoek.datumIngangOnderzoek.jaar                              1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 naam.inOnderzoek.datumIngangOnderzoek.maand                             1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.burgerservicenummer                                         *(`inp.heeftAlsOuders.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*              One of the multiple inOnderzoek occurrances matches
-inOnderzoek.datumIngangFamilierechtelijkeBetrekking                     "string"                                                                           TODO
-inOnderzoek.geslachtsaanduiding                                         "string"                                                                           TODO
+inOnderzoek.datumIngangFamilierechtelijkeBetrekking                     "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
+inOnderzoek.geslachtsaanduiding                                         *(`inOnderzoek.groepsnaam` == `Persoonsgegevens`)*                                 One of the multiple inOnderzoek occurrances matches
 inOnderzoek.datumIngangOnderzoek.dag                                    1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.datumIngangOnderzoek.datum                                  "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.datumIngangOnderzoek.jaar                                   1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
@@ -336,8 +334,8 @@ geboorte.inOnderzoek.datumIngangOnderzoek.dag                           1       
 geboorte.inOnderzoek.datumIngangOnderzoek.datum                         "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 geboorte.inOnderzoek.datumIngangOnderzoek.jaar                          1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 geboorte.inOnderzoek.datumIngangOnderzoek.maand                         1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
-inOnderzoek.burgerservicenummer                                         *(`inp.heeftAlsOuders.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*              One of the multiple inOnderzoek occurrances matches
-inOnderzoek.geslachtsaanduiding                                         "string"                                                                           TODO
+inOnderzoek.burgerservicenummer                                         *(`inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*   One of the multiple inOnderzoek occurrances matches
+inOnderzoek.geslachtsaanduiding                                         *(`inOnderzoek.groepsnaam` == `Persoonsgegevens`)*                                 One of the multiple inOnderzoek occurrances matches
 inOnderzoek.datumIngangOnderzoek.dag                                    1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.datumIngangOnderzoek.datum                                  "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.datumIngangOnderzoek.jaar                                   1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
@@ -357,7 +355,7 @@ aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.dag        1       
 aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.datum      "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.jaar       1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 aangaanHuwelijkPartnerschap.inOnderzoek.datumIngangOnderzoek.maand      1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
-geheimhoudingPersoonsgegevens                                           True
+geheimhoudingPersoonsgegevens                                           `inp.heeftAlsEchtgenootPartner.inp.indicatieGeheim`
 =====================================================================   =====================================================================              =====================================================================
 
 
