@@ -6,7 +6,7 @@ publiccodeYmlVersion: '0.2'
 
 name: Open Personen
 url: 'http://github.com/maykinmedia/open-personen.git'
-softwareType: intermediary
+softwareType: addon
 softwareVersion: 1.0.0
 releaseDate: '2020-11-05'
 logo: 'https://github.com/maykinmedia/open-personen/blob/master/docs/logo.png'
@@ -87,9 +87,10 @@ isBasedOn:
 localisation:
   availableLanguages:
     - nl
-  localisationReady: true
+  localisationReady: false
 
 maintenance:
+  type: internal
   contacts:
     - affiliation: Maykin Media
       name: Joeri Bekker
