@@ -4,14 +4,14 @@ Introduction
 ============
 
 Open Personen offers an implementation of the 
-`Haal Centraal BRP bevragen API specification`_ and can optionally connect to 
-a `StUF-BG`_ service to retrieve locally stored personal data. It can also
-expose fake data for testing purposes.
+`Haal Centraal BRP bevragen API specification`_ and can connect to a `StUF-BG`_ 
+service to retrieve personal data. In addition, Open Personen can simply convert
+StUF-BG messages to BRP API messages without an actual connection. Finally, you 
+can use Open Personen with a testset that you either import or construct 
+yourself via the user interface.
 
 Open Personen meets the need for several other components to request personal 
-data and to link persons (e.g. to a zaak in the `Open Zaak`_). A so-called 
-Profile API is also available where additional, non-authentic, personal data 
-can be stored such as a phone number and an email address.
+data and to link persons (e.g. to a zaak in the `Open Zaak`_).
 
 The project is designed line with the `Common Ground`_ model and works well 
 with other API's and components in this model.

@@ -18,15 +18,17 @@ Ontwikkeld door `Maykin Media B.V.`_.
 Introductie
 ===========
 
-Een implementatie van de `Haal Centraal BRP bevragen API specificatie`_ met 
-`StUF-BG`_ koppeling voor het ontsluiten van lokale persoonsgegevens via een 
-moderne REST API.
+Open Personen biedt een implementatie van de 
+`Haal Centraal BRP bevragen API specificatie`_ en kan verbinden met een 
+`StUF-BG`_ koppeling voor het ontsluiten van persoonsgegevens. Ook kan Open 
+Personen eenvoudigweg StUF-BG berichten converteren naar BRP API berichten 
+zonder daadwerkelijke verbinding. Ten slotte kan Open Personen gebruikt worden
+met een testset die u kunt importeren of zelf aanmaken via de gebruikers
+interface.
 
 Open Personen voorziet in de behoefte van verschillende andere componenten om 
 persoonsgegevens op te vragen en personen te koppelen (bijv. aan een zaak in 
-de `Open Zaak`_). Tevens is een zogenoemde Profiel API beschikbaar waar 
-additionele, niet-authentieke, persoonsgegevens in kunnen worden opgeslagen 
-zoals telefoonnummer en e-mailadres.
+de `Open Zaak`_).
 
 .. _`Haal Centraal BRP bevragen API specificatie`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
 .. _`StUF-BG`: https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG
@@ -60,9 +62,9 @@ Licensed under the `Business Source License`_ (BSL) 1.1
 
 .. _`Business Source License`: LICENSE.md
 
-.. |build-status| image:: https://travis-ci.org/maykinmedia/open-personen.svg?branch=master
+.. |build-status| image:: https://travis-ci.com/maykinmedia/open-personen.svg?branch=master
     :alt: Build status
-    :target: https://travis-ci.org/maykinmedia/open-personen
+    :target: https://travis-ci.com/maykinmedia/open-personen
 
 .. |docs| image:: https://readthedocs.org/projects/open-personen/badge/?version=latest
     :target: https://open-personen.readthedocs.io/en/latest/?badge=latest
