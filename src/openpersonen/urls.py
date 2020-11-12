@@ -7,7 +7,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-
 handler500 = "openpersonen.api.views.errors.handler500"
 handler404 = "openpersonen.api.views.errors.handler404"
 

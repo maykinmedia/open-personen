@@ -19,5 +19,8 @@ admin.site.unregister(Token)
 @admin.register(Token)
 class _TokenAdmin(TokenAdmin):
     raw_id_fields = ("user",)
-    fields = ("key", "user",)
+    fields = (
+        "key",
+        "user",
+    )
     readonly_fields = ("key",)

@@ -111,7 +111,8 @@ class StufBGClient(SingletonModel):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_request(
-            "request/RequestPartnerHistorie.xml", additional_context=additional_context,
+            "request/RequestPartnerHistorie.xml",
+            additional_context=additional_context,
         )
 
     def get_verblijfs_titel_historie(self, bsn, filters):
