@@ -60,6 +60,16 @@ jobs:
         - wget https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/8afe4f2b3f89059b03d484b99647f0ec26eb55b6/specificatie/genereervariant/openapi.yaml
         - openapi-diff openapi.yaml src/openapi.yaml
 
+    - name: "Quickstart Steps"
+      services:
+        - docker
+      before_install:
+        - wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
+        - docker-compose up -d
+        - docker-compose exec web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20200709_Testset_persoonslijsten_proefomgeving_GBA-V.ods
+      script:
+        - wget http://localhost:8000/api/ingeschrevenpersonen/999990676
+
     - stage: "Docker image"
       name: Docker image build
       services:
