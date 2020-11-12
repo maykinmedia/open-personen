@@ -10,7 +10,8 @@ local database.
 Installation
 ------------
 
-Any backend change requires a change in the environment that are present when 
+Any backend change requires a change in the 
+:ref:`environment <installation_environment_config>` that are present when 
 the application is launched. Add this setting to use the Demo backend:
 
 .. code:: bash

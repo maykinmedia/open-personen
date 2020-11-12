@@ -1,3 +1,5 @@
+.. _installation_environment_config:
+
 ===================================
 Environment configuration reference
 ===================================

@@ -6,7 +6,8 @@ Authorizations
 Open Personen uses API-tokens as authorizations mechanism. You can connect an
 API-token to a user for identification.
 
-Any backend change requires a change in the environment that are present when 
+Any backend change requires a change in the 
+:ref:`environment <installation_environment_config>` that are present when 
 the application is launched. Add this setting to enable authorizations:
 
 .. code:: bash
