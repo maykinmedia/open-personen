@@ -30,7 +30,7 @@ class StufBGClient(SingletonModel):
     )
 
     class Meta:
-        verbose_name = _("Stuf BG Client")
+        verbose_name = _("StUF-BG Client")
 
     def _get_headers(self):
         credentials = f"{self.user}:{self.password}".encode("utf-8")
@@ -111,8 +111,7 @@ class StufBGClient(SingletonModel):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_request(
-            "request/RequestPartnerHistorie.xml",
-            additional_context=additional_context,
+            "request/RequestPartnerHistorie.xml", additional_context=additional_context,
         )
 
     def get_verblijfs_titel_historie(self, bsn, filters):

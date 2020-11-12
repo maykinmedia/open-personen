@@ -106,3 +106,7 @@ class Ouder(models.Model):
         help_text="Format YYYYMMDD",
         blank=True,
     )
+
+    class Meta:
+        verbose_name = "Ouder"
+        verbose_name_plural = "Ouders"

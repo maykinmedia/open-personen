@@ -83,3 +83,7 @@ class Kind(models.Model):
     registratie_betrekking = models.CharField(
         _("Registratie betrekking"), max_length=200, blank=True
     )
+
+    class Meta:
+        verbose_name = "Kind"
+        verbose_name_plural = "Kinderen"
