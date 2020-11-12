@@ -42,6 +42,6 @@ admin interface of Open Personen.
 
 3. Login with the username and password from step 1.
 
-4. Navigate to *Configuration* > *StUF BG-connection*
+4. Navigate to *StUF-BG backend* > *StUF-BG Client*
 
 5. Fill in all relevant fields.
