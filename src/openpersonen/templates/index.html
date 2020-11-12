@@ -1,0 +1,41 @@
+{% extends "master.html" %}
+
+{% block content %}
+
+  <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">{{ settings.PROJECT_NAME }}</h1>
+    <p class="lead">{{ settings.SITE_TITLE }}</p>
+  </div>
+
+  <div class="container text-center">
+
+    <p>
+      Open Personen biedt een implementatie van de 
+      <a href="https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen">
+        Haal Centraal BRP bevragen API specificatie</a> en kan verbinden met een 
+      <a href="https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG">
+        StUF-BG</a> koppeling voor het ontsluiten van persoonsgegevens. Ook kan 
+      Open Personen eenvoudigweg StUF-BG berichten converteren naar BRP API 
+      berichten zonder daadwerkelijke verbinding. Ten slotte kan Open Personen 
+      gebruikt worden met een testset die u kunt importeren of zelf aanmaken 
+      via de gebruikers interface.
+    </p>
+    <p>
+      Open Personen voorziet in de behoefte van verschillende andere componenten
+      om persoonsgegevens op te vragen en personen te koppelen (bijv. aan een 
+      zaak in de <a href="https://opengem.nl/producten/open-zaak/">Open Zaak
+      </a>).
+    </p>
+
+    <p>
+      <b>Licensed under the <a href="https://github.com/maykinmedia/open-personen/blob/master/LICENSE.md">
+        Business Source License (BSL) 1.1</a></b>
+    </p>
+
+    <p>
+      <a href="{% url 'admin:index' %}" class="btn btn-sm btn-danger"><i class="fas fa-lock"></i> Beheer</a>
+    </p>
+
+  </div>
+
+{% endblock %}

@@ -5,10 +5,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
-
-admin.site.site_header = "openpersonen admin"
-admin.site.site_title = "openpersonen admin"
-admin.site.index_title = "Welcome to the openpersonen admin"
+from django.views.generic import TemplateView
 
 
 handler500 = "openpersonen.api.views.errors.handler500"
@@ -16,6 +13,7 @@ handler404 = "openpersonen.api.views.errors.handler404"
 
 
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="index.html"), name="home"),
     path(
         "admin/password_reset/",
         auth_views.PasswordResetView.as_view(),
