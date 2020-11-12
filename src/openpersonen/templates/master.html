@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="{% static 'vng_api_common/libs/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vng_api_common/libs/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bundles/openpersonen-css.css' %}">
 
     <link rel="icon" type="image/png" href="{% static 'ico/favicon.png' %}">
 
@@ -35,7 +36,10 @@
           <div class="col-4 col-md">
             <img class="mb-2" src="{% static 'img/maykin_logo.png' %}" alt="Maykin Media logo">
             <img class="mb-2" src="{% static 'img/opengem_logo.png' %}" alt="Open Gemeente Initiatief logo">
-            <small class="d-block mb-3 text-muted">Ontwikkeld door <a href="https://www.maykinmedia.nl">Maykin Media</a><br>binnen het <a href="https://opengem.nl">Open Gemeente Initiatief</a> &copy; {% now "Y" %}</small>
+            <small class="d-block mb-3 text-muted">
+              Ontwikkeld door <a class="text-info" href="https://www.maykinmedia.nl">Maykin Media</a><br>
+              binnen het <a class="text-info" href="https://opengem.nl">Open Gemeente Initiatief</a> &copy; {% now "Y" %}
+            </small>
           </div>
           <div class="col-4 col-md">
             <h5>Open Personen</h5>

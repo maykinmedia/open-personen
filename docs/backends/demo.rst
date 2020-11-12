@@ -1,3 +1,5 @@
+.. _backends_demo_backend:
+
 Demo backend
 ============
 
@@ -8,8 +10,8 @@ local database.
 Installation
 ------------
 
-Any backend change requires a change in the environment or Python settings that 
-are present when the application is launched.
+Any backend change requires a change in the environment that are present when 
+the application is launched. Add this setting to use the Demo backend:
 
 .. code:: bash
 
@@ -116,3 +118,9 @@ test specific field values or relations between persons.
 4. Navigate to *Demo backend* > *Personen*
 
 5. You can edit, create or delete persons that become available via the API.
+
+
+Next steps
+----------
+
+You can continue to read how to enable :ref:`installation_authorizations`.

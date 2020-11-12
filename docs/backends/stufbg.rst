@@ -1,3 +1,5 @@
+.. _backends_stufbg_backend:
+
 StUF-BG backend
 ===============
 
@@ -7,12 +9,19 @@ retrieve person data.
 Installation
 ------------
 
-Any backend change requires a change in the environment or Python settings that 
-are present when the application is launched.
+Any backend change requires a change in the environment that are present when 
+the application is launched. Add this setting to use the StUF-BG backend:
 
 .. code:: bash
 
     OPENPERSONEN_BACKEND=openpersonen.contrib.stufbg.backend.default
+
+The StUF-BG backend requires authorizations to be enabled. You can do this by
+setting:
+
+.. code:: bash
+
+    OPENPERSONEN_USE_AUTHENTICATION=True
 
 Configuration
 -------------
@@ -44,4 +53,10 @@ admin interface of Open Personen.
 
 4. Navigate to *StUF-BG backend* > *StUF-BG Client*
 
-5. Fill in all relevant fields.
+5. Fill in all relevant fields and click on *OPSLAAN*.
+
+
+Next steps
+----------
+
+You can continue to read how to enable :ref:`installation_authorizations`.
