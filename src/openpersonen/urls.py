@@ -37,6 +37,7 @@ urlpatterns = [
     ),
     # App urls
     path("api/", include("openpersonen.api.urls")),
+    path("convert/", include("openpersonen.converters.urls")),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static
