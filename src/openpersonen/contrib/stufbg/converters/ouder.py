@@ -1,5 +1,3 @@
-from django.conf import settings
-
 import xmltodict
 
 from openpersonen.contrib.utils import convert_empty_instances
