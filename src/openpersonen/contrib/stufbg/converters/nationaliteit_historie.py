@@ -6,6 +6,7 @@ from openpersonen.contrib.utils import convert_empty_instances
 from openpersonen.features.reden_code_and_omschrijving.models import (
     RedenCodeAndOmschrijving,
 )
+from openpersonen.utils.helpers import convert_empty_instances
 
 
 def convert_response_to_nationaliteit_historie_dict(response):

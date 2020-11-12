@@ -1,6 +1,6 @@
 import xmltodict
 
-from openpersonen.contrib.utils import convert_empty_instances
+from openpersonen.utils.helpers import convert_empty_instances
 
 
 def convert_response_to_verblijf_plaats_historie_dict(response):

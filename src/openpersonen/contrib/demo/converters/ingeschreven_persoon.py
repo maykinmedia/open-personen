@@ -15,6 +15,7 @@ from openpersonen.features.gemeente_code_and_omschrijving.models import (
 from openpersonen.features.reden_code_and_omschrijving.models import (
     RedenCodeAndOmschrijving,
 )
+from openpersonen.utils.helpers import calculate_age, is_valid_date_format
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
