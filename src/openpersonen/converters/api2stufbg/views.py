@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-class Stufbg2ApiView(APIView):
+class PersoonView(APIView):
 
     renderer_classes = [JSONRenderer]
 
@@ -12,7 +12,23 @@ class Stufbg2ApiView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-class Api2StufbgView(APIView):
+class OuderView(APIView):
+
+    renderer_classes = [JSONRenderer]
+
+    def post(self, request):
+        return Response(status=status.HTTP_200_OK)
+
+
+class KindView(APIView):
+
+    renderer_classes = [JSONRenderer]
+
+    def post(self, request):
+        return Response(status=status.HTTP_200_OK)
+
+
+class PartnerView(APIView):
 
     renderer_classes = [JSONRenderer]
 

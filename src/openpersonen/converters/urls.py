@@ -1,8 +1,6 @@
-from django.urls import path
-
-from openpersonen.converters.views import Api2StufbgView, Stufbg2ApiView
+from django.urls import include, path
 
 urlpatterns = [
-    path("api2stufbg", Api2StufbgView.as_view(), name="api-2-stufbg"),
-    path("stufbg2api", Stufbg2ApiView.as_view(), name="stufbg-2-api"),
+    path("api2stufbg/", include(("openpersonen.converters.api2stufbg.urls", "openpersonen.converters"), namespace='api2stufbg')),
+    path("stufbg2api/", include(("openpersonen.converters.stufbg2api.urls", "openpersonen.converters"), namespace='stufbg2api')),
 ]
