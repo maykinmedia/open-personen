@@ -12,7 +12,9 @@ from .partner import get_partner_instance_dict
 def get_persoon_instance_dict(response, instance_xml_dict, prefix):
     ingeschreven_persoon_dict = {
         "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
-        "geheimhoudingPersoonsgegevens": True,
+        "geheimhoudingPersoonsgegevens": instance_xml_dict.get(
+            f"{prefix}:inp.indicatieGeheim", "string"
+        ),
         "naam": {
             "geslachtsnaam": instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string"),
             "voorletters": instance_xml_dict.get(f"{prefix}:voorletters", "string"),
@@ -21,22 +23,23 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 f"{prefix}:voorvoegselGeslachtsnaam", "string"
             ),
             "inOnderzoek": {
-                "geslachtsnaam": bool(
-                    instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string")
-                ),
-                "voornamen": bool(
-                    instance_xml_dict.get(f"{prefix}:voornamen", "string")
-                ),
-                "voorvoegsel": bool(
-                    instance_xml_dict.get(
-                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
-                    )
-                ),
+                "geslachtsnaam": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Persoonsgegevens",
+                "voornamen": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Persoonsgegevens",
+                "voorvoegsel": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Persoonsgegevens",
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1990",
+                    "jaar": 1990,
+                    "maand": 1,
                 },
             },
             "aanhef": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
@@ -66,26 +69,35 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 ),
             },
             "land": {
-                "code": "string",
+                "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
                 "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.geboorteLand", "string"
                 ),
             },
             "plaats": {
-                "code": "string",
+                "code": instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string"),
                 "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.geboorteplaats", "string"
                 ),
             },
             "inOnderzoek": {
-                "datum": True,
-                "land": True,
-                "plaats": True,
+                "datum": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Persoonsgegevens",
+                "land": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Persoonsgegevens",
+                "plaats": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Persoonsgegevens",
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1990",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
             },
         },
@@ -116,73 +128,41 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             ),
         },
         "kiesrecht": {
-            "europeesKiesrecht": bool(
-                instance_xml_dict.get(
-                    f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
-                )
-            ),
-            "uitgeslotenVanKiesrecht": bool(
-                instance_xml_dict.get(
-                    f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
-                )
-            ),
+            "europeesKiesrecht": instance_xml_dict.get(
+                f"{prefix}:ing.aanduidingEuropeesKiesrecht"
+            )
+            == "2",
+            "uitgeslotenVanKiesrecht": instance_xml_dict.get(
+                f"{prefix}:ing.aanduidingUitgeslotenKiesrecht"
+            )
+            == "A",
             "einddatumUitsluitingEuropeesKiesrecht": {
-                "dag": int(
-                    instance_xml_dict.get(
-                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
-                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
-                ),
-                "datum": instance_xml_dict.get(
-                    f"{prefix}:ing.aanduidingEuropeesKiesrecht", "string"
-                ),
-                "jaar": int(
-                    instance_xml_dict.get(
-                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
-                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
-                ),
-                "maand": int(
-                    instance_xml_dict.get(
-                        f"{prefix}:ing.aanduidingEuropeesKiesrecht", "00000000"
-                    )[
-                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
-                    ]
-                ),
+                "dag": 1,
+                "datum": "01-01-1990",
+                "jaar": 1990,
+                "maand": 1,
             },
             "einddatumUitsluitingKiesrecht": {
-                "dag": int(
-                    instance_xml_dict.get(
-                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
-                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
-                ),
-                "datum": instance_xml_dict.get(
-                    f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "string"
-                ),
-                "jaar": int(
-                    instance_xml_dict.get(
-                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
-                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
-                ),
-                "maand": int(
-                    instance_xml_dict.get(
-                        f"{prefix}:ing.aanduidingUitgeslotenKiesrecht", "00000000"
-                    )[
-                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
-                    ]
-                ),
+                "dag": 1,
+                "datum": "01-01-1990",
+                "jaar": 1990,
+                "maand": 1,
             },
         },
         "inOnderzoek": {
-            "burgerservicenummer": bool(
-                instance_xml_dict.get(f"{prefix}:inp.bsn", "string")
-            ),
-            "geslachtsaanduiding": bool(
-                instance_xml_dict.get(f"{prefix}:geslachtsaanduiding", "string")
-            ),
+            "burgerservicenummer": instance_xml_dict.get(
+                f"{prefix}:inOnderzoek", {}
+            ).get("groepsnaam")
+            == "Persoonsgegevens",
+            "geslachtsaanduiding": instance_xml_dict.get(
+                f"{prefix}:inOnderzoek", {}
+            ).get("groepsnaam")
+            == "Persoonsgegevens",
             "datumIngangOnderzoek": {
-                "dag": 0,
-                "datum": "string",
-                "jaar": 0,
-                "maand": 0,
+                "dag": 1,
+                "datum": "01-01-1990",
+                "jaar": 1990,
+                "maand": 1,
             },
         },
         "nationaliteit": [
@@ -191,65 +171,184 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     f"{prefix}:inp.aanduidingBijzonderNederlanderschap", "string"
                 ),
                 "datumIngangGeldigheid": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
-                },
-                "nationaliteit": {"code": "string", "omschrijving": "string"},
-                "redenOpname": {"code": "string", "omschrijving": "string"},
-                "inOnderzoek": {
-                    "aanduidingBijzonderNederlanderschap": bool(
+                    "dag": int(
                         instance_xml_dict.get(
-                            f"{prefix}:inp.aanduidingBijzonderNederlanderschap",
-                            "string",
-                        )
+                            f"{prefix}:inp.heeftAlsNationaliteit", {}
+                        ).get("inp.datumVerkrijging", "00000000")[
+                            settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                        ]
                     ),
-                    "nationaliteit": True,
+                    "datum": instance_xml_dict.get(
+                        f"{prefix}:inp.heeftAlsNationaliteit", {}
+                    ).get("inp.datumVerkrijging", "00000000"),
+                    "jaar": int(
+                        instance_xml_dict.get(
+                            f"{prefix}:inp.heeftAlsNationaliteit", {}
+                        ).get("inp.datumVerkrijging", "00000000")[
+                            settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                        ]
+                    ),
+                    "maand": int(
+                        instance_xml_dict.get(
+                            f"{prefix}:inp.heeftAlsNationaliteit", {}
+                        ).get("inp.datumVerkrijging", "00000000")[
+                            settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                        ]
+                    ),
+                },
+                "nationaliteit": {
+                    "code": instance_xml_dict.get(
+                        f"{prefix}:inp.heeftAlsNationaliteit", {}
+                    )
+                    .get("gerelateerde", {})
+                    .get("code"),
+                    "omschrijving": instance_xml_dict.get(
+                        f"{prefix}:inp.heeftAlsNationaliteit", {}
+                    )
+                    .get("gerelateerde", {})
+                    .get("omschrijving"),
+                },
+                "redenOpname": {
+                    "code": instance_xml_dict.get(
+                        f"{prefix}:inp.heeftAlsNationaliteit", {}
+                    ).get("inp.redenVerkrijging"),
+                    "omschrijving": instance_xml_dict.get(
+                        f"{prefix}:inp.heeftAlsNationaliteit", {}
+                    ).get("inp.redenVerkrijging"),
+                },
+                "inOnderzoek": {
+                    "aanduidingBijzonderNederlanderschap": instance_xml_dict.get(
+                        f"{prefix}:inOnderzoek", {}
+                    ).get("elementnaam")
+                    == "aanduidingBijzonderNederlanderschap",
+                    "nationaliteit": instance_xml_dict.get(
+                        f"{prefix}:inOnderzoek", {}
+                    ).get("groepsnaam")
+                    == "Nationaliteit",
                     "redenOpname": True,
                     "datumIngangOnderzoek": {
-                        "dag": 0,
-                        "datum": "string",
-                        "jaar": 0,
-                        "maand": 0,
+                        "dag": 1,
+                        "datum": "01-01-1990",
+                        "jaar": 1990,
+                        "maand": 1,
                     },
                 },
             }
         ],
         "opschortingBijhouding": {
-            "reden": "overlijden",
-            "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+            "reden": instance_xml_dict.get(
+                f"{prefix}:inp.redenOpschortingBijhouding", "string"
+            ),
+            "datum": {
+                "dag": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
+                ),
+                "datum": instance_xml_dict.get(
+                    f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                ),
+                "jaar": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
+                ),
+                "maand": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                    )[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
+                ),
+            },
         },
         "overlijden": {
-            "indicatieOverleden": True,
-            "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+            "indicatieOverleden": instance_xml_dict.get(
+                f"{prefix}:inp.redenOpschortingBijhouding"
+            )
+            == "O",
+            "datum": {
+                "dag": int(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
+                    if not isinstance(
+                        instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
+                    )
+                    else 0
+                ),
+                "datum": instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")
+                if not isinstance(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
+                )
+                else "00000000",
+                "jaar": int(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")[
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
+                    if not isinstance(
+                        instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
+                    )
+                    else 1990
+                ),
+                "maand": int(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
+                    if not isinstance(
+                        instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
+                    )
+                    else 1
+                ),
+            },
             "land": {
-                "code": "string",
+                "code": instance_xml_dict.get(f"{prefix}:inp.overlijdenLand", "string")
+                if not isinstance(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
+                )
+                else "string",
                 "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.overlijdenLand", "string"
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
+                )
+                else "string",
             },
             "plaats": {
-                "code": "string",
+                "code": instance_xml_dict.get(
+                    f"{prefix}:inp.overlijdenplaats", "string"
+                )
+                if not isinstance(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats"), dict
+                )
+                else "string",
                 "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.overlijdenplaats", "string"
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats"), dict
+                )
+                else "string",
             },
             "inOnderzoek": {
-                "datum": bool(
-                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "string")
-                ),
-                "land": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.overlijdenLand", "string")
-                ),
-                "plaats": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats", "string")
-                ),
+                "datum": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Overlijden",
+                "land": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Overlijden",
+                "plaats": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Overlijden",
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1990",
+                    "jaar": 1990,
+                    "maand": 1,
                 },
             },
         },
@@ -264,54 +363,118 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "huisnummertoevoeging": instance_xml_dict.get(
                 f"{prefix}:verblijfsadres", {}
             ).get(f"{prefix}:aoa.huisnummertoevoeging", "string"),
-            "aanduidingBijHuisnummer": "tegenover",
-            "identificatiecodeNummeraanduiding": "string",
-            "naamOpenbareRuimte": "string",
+            "aanduidingBijHuisnummer": None,
+            "identificatiecodeNummeraanduiding": instance_xml_dict.get(
+                f"{prefix}:verblijfsadres", {}
+            ).get(f"{prefix}:aoa.identificatie", "string"),
+            "naamOpenbareRuimte": instance_xml_dict.get(
+                f"{prefix}:verblijfsadres", {}
+            ).get(f"{prefix}:gor.openbareRuimteNaam", "string"),
             "postcode": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:aoa.postcode", "string"
             ),
             "woonplaatsnaam": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:wpl.woonplaatsNaam", "string"
             ),
-            "identificatiecodeAdresseerbaarObject": "string",
+            "identificatiecodeAdresseerbaarObject": instance_xml_dict.get(
+                f"{prefix}:verblijfsadres", {}
+            ).get(f"{prefix}:wpl.identificatie", "string"),
             "indicatieVestigingVanuitBuitenland": True,
-            "locatiebeschrijving": "string",
+            "locatiebeschrijving": instance_xml_dict.get(
+                f"{prefix}:verblijfsadres", {}
+            ).get(f"{prefix}:inp.locatiebeschrijving", "string"),
             "straatnaam": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
                 f"{prefix}:gor.straatnaam", "string"
             ),
             "vanuitVertrokkenOnbekendWaarheen": True,
             "datumAanvangAdreshouding": {
-                "dag": 0,
-                "datum": "string",
-                "jaar": 0,
-                "maand": 0,
+                "dag": int(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        "begindatumVerblijf", "00000000"
+                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
+                ),
+                "datum": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                    "begindatumVerblijf", "00000000"
+                ),
+                "jaar": int(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        "begindatumVerblijf", "00000000"
+                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
+                ),
+                "maand": int(
+                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
+                        "begindatumVerblijf", "00000000"
+                    )[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
+                ),
             },
             "datumIngangGeldigheid": {
-                "dag": 0,
-                "datum": "string",
-                "jaar": 0,
-                "maand": 0,
+                "dag": int(
+                    instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
+                    .get("gerelateerde", {})
+                    .get("ingangsdatumObject", "00000000")[
+                        settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
+                    ]
+                ),
+                "datum": instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
+                .get("gerelateerde", {})
+                .get("ingangsdatumObject", "00000000"),
+                "jaar": int(
+                    instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
+                    .get("gerelateerde", {})
+                    .get("ingangsdatumObject", "00000000")[
+                        settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
+                    ]
+                ),
+                "maand": int(
+                    instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
+                    .get("gerelateerde", {})
+                    .get("ingangsdatumObject", "00000000")[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
+                ),
             },
             "datumInschrijvingInGemeente": {
-                "dag": 0,
-                "datum": "string",
-                "jaar": 0,
-                "maand": 0,
+                "dag": 1,
+                "datum": "01-01-1990",
+                "jaar": 1990,
+                "maand": 1,
             },
             "datumVestigingInNederland": {
-                "dag": 0,
-                "datum": "string",
-                "jaar": 0,
-                "maand": 0,
+                "dag": 1,
+                "datum": "01-01-1990",
+                "jaar": 1990,
+                "maand": 1,
             },
-            "gemeenteVanInschrijving": {"code": "string", "omschrijving": "string"},
-            "landVanwaarIngeschreven": {"code": "string", "omschrijving": "string"},
+            "gemeenteVanInschrijving": {
+                "code": instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
+                .get("gerelateerde", {})
+                .get("gemeenteCode"),
+                "omschrijving": instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
+                .get("gerelateerde", {})
+                .get("gemeenteNaam"),
+            },
+            "landVanwaarIngeschreven": {"code": "", "omschrijving": ""},
             "verblijfBuitenland": {
-                "adresRegel1": "string",
-                "adresRegel2": "string",
-                "adresRegel3": "string",
+                "adresRegel1": instance_xml_dict.get(
+                    f"{prefix}:sub.verblijfBuitenland", {}
+                ).get("sub.adresBuitenland1"),
+                "adresRegel2": instance_xml_dict.get(
+                    f"{prefix}:sub.verblijfBuitenland", {}
+                ).get("sub.adresBuitenland2"),
+                "adresRegel3": instance_xml_dict.get(
+                    f"{prefix}:sub.verblijfBuitenland", {}
+                ).get("sub.adresBuitenland3"),
                 "vertrokkenOnbekendWaarheen": True,
-                "land": {"code": "string", "omschrijving": "string"},
+                "land": {
+                    "code": instance_xml_dict.get(
+                        f"{prefix}:sub.verblijfBuitenland", {}
+                    ).get("lnd.landcode"),
+                    "omschrijving": instance_xml_dict.get(
+                        f"{prefix}:sub.verblijfBuitenland", {}
+                    ).get("lnd.landcode"),
+                },
             },
             "inOnderzoek": {
                 "aanduidingBijHuisnummer": True,
@@ -321,77 +484,159 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 "datumVestigingInNederland": True,
                 "functieAdres": True,
                 "gemeenteVanInschrijving": True,
-                "huisletter": bool(
-                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        f"{prefix}:aoa.huisletter", "string"
-                    )
-                ),
-                "huisnummer": bool(
-                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        f"{prefix}:aoa.huisnummer", "string"
-                    )
-                ),
-                "huisnummertoevoeging": bool(
-                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        f"{prefix}:aoa.huisnummertoevoeging", "string"
-                    )
-                ),
-                "identificatiecodeNummeraanduiding": True,
-                "identificatiecodeAdresseerbaarObject": True,
-                "landVanwaarIngeschreven": True,
-                "locatiebeschrijving": True,
-                "naamOpenbareRuimte": True,
-                "postcode": bool(
-                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        f"{prefix}:aoa.postcode", "string"
-                    )
-                ),
-                "straatnaam": bool(
-                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        f"{prefix}:gor.straatnaam", "string"
-                    )
-                ),
-                "verblijfBuitenland": True,
-                "woonplaatsnaam": bool(
-                    instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        f"{prefix}:wpl.woonplaatsNaam", "string"
-                    )
-                ),
+                "huisletter": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Verblijfplaats",
+                "huisnummer": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Verblijfplaats",
+                "huisnummertoevoeging": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "identificatiecodeNummeraanduiding": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "identificatiecodeAdresseerbaarObject": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "landVanwaarIngeschreven": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "locatiebeschrijving": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "naamOpenbareRuimte": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "postcode": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Verblijfplaats",
+                "straatnaam": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "groepsnaam"
+                )
+                == "Verblijfplaats",
+                "verblijfBuitenland": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
+                "woonplaatsnaam": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Verblijfplaats",
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1990",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
             },
         },
         "gezagsverhouding": {
-            "indicatieCurateleRegister": True,
-            "indicatieGezagMinderjarige": "ouder1",
+            "indicatieCurateleRegister": instance_xml_dict.get(
+                f"{prefix}:ing.indicatieCurateleRegister", False
+            ),
+            "indicatieGezagMinderjarige": instance_xml_dict.get(
+                f"{prefix}:ing.indicatieGezagMinderjarige", False
+            ),
             "inOnderzoek": {
-                "indicatieCurateleRegister": True,
-                "indicatieGezagMinderjarige": True,
+                "indicatieCurateleRegister": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Gezagsverhouding",
+                "indicatieGezagMinderjarige": instance_xml_dict.get(
+                    f"{prefix}:inOnderzoek", {}
+                ).get("groepsnaam")
+                == "Gezagsverhouding",
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                        "groepsnaam"
+                    )
+                    == "Gezagsverhouding",
+                    "datum": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                        "groepsnaam"
+                    )
+                    == "Gezagsverhouding",
+                    "jaar": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                        "groepsnaam"
+                    )
+                    == "Gezagsverhouding",
+                    "maand": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                        "groepsnaam"
+                    )
+                    == "Gezagsverhouding",
                 },
             },
         },
         "verblijfstitel": {
-            "aanduiding": {"code": "string", "omschrijving": "string"},
-            "datumEinde": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
-            "datumIngang": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
+            "aanduiding": {
+                "code": instance_xml_dict.get(f"{prefix}:vbt.aanduidingVerblijfstitel"),
+                "omschrijving": "string",
+            },
+            "datumEinde": {
+                "dag": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
+                ),
+                "datum": instance_xml_dict.get(
+                    f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                ),
+                "jaar": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
+                ),
+                "maand": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                    )[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
+                ),
+            },
+            "datumIngang": {
+                "dag": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                    )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
+                ),
+                "datum": instance_xml_dict.get(
+                    f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                ),
+                "jaar": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                    )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
+                ),
+                "maand": int(
+                    instance_xml_dict.get(
+                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                    )[
+                        settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
+                    ]
+                ),
+            },
             "inOnderzoek": {
-                "aanduiding": True,
-                "datumEinde": True,
-                "datumIngang": True,
+                "aanduiding": instance_xml_dict.get(f"{prefix}:inOnderzoek", {}).get(
+                    "elementnaam"
+                )
+                == "aanduidingVerblijfstitel",
+                "datumEinde": "01-01-1990",
+                "datumIngang": "01-01-1990",
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1990",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
             },
         },
