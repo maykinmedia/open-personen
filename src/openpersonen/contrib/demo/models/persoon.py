@@ -119,3 +119,7 @@ class Persoon(models.Model):
         help_text="Format YYYYMMDD",
     )
     rni_deelnemer = models.CharField(_("RNI-deelnemer"), max_length=200, blank=True)
+
+    class Meta:
+        verbose_name = "Persoon"
+        verbose_name_plural = "Personen"

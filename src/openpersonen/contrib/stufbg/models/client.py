@@ -30,7 +30,7 @@ class StufBGClient(SingletonModel):
     )
 
     class Meta:
-        verbose_name = _("Stuf BG Client")
+        verbose_name = _("StUF-BG Client")
 
     def _get_headers(self):
         credentials = f"{self.user}:{self.password}".encode("utf-8")

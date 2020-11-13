@@ -82,6 +82,10 @@ ENVIRONMENT = "development"
 # Library settings
 #
 
+# Django-Admin-Index
+ADMIN_INDEX_SHOW_REMAINING_APPS_TO_SUPERUSERS = True
+
+# Elastic APM
 ELASTIC_APM["DEBUG"] = True
 
 # Django debug toolbar

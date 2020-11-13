@@ -17,8 +17,8 @@
     "url": "git+ssh://git@github.com/maykinmedia/open-personen"
   },
   "author": "Maykin Media",
-  "license": "UNLICENSED",
-  "homepage": "https://maykinmedia.nl",
+  "license": "Business Source License",
+  "homepage": "https://opengem.nl",
   "dependencies": {
     "microscope-sass": "^0.3.2"
   },

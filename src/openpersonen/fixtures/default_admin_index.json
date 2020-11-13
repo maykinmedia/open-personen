@@ -1,0 +1,102 @@
+[
+{
+    "model": "admin_index.appgroup",
+    "fields": {
+        "order": 0,
+        "name": "Accounts",
+        "slug": "accounts",
+        "models": [
+            [
+                "accounts",
+                "user"
+            ],
+            [
+                "auth",
+                "group"
+            ]
+        ]
+    }
+},
+{
+    "model": "admin_index.appgroup",
+    "fields": {
+        "order": 4,
+        "name": "Configuratie",
+        "slug": "configuratie",
+        "models": [
+            [
+                "admin_index",
+                "appgroup"
+            ],
+            [
+                "sites",
+                "site"
+            ]
+        ]
+    }
+},
+{
+    "model": "admin_index.appgroup",
+    "fields": {
+        "order": 1,
+        "name": "API Autorisaties",
+        "slug": "api-autorisaties",
+        "models": [
+            [
+                "authtoken",
+                "token"
+            ]
+        ]
+    }
+},
+{
+    "model": "admin_index.appgroup",
+    "fields": {
+        "order": 2,
+        "name": "Demo backend",
+        "slug": "demo",
+        "models": [
+            [
+                "demo",
+                "persoon"
+            ]
+        ]
+    }
+},
+{
+    "model": "admin_index.appgroup",
+    "fields": {
+        "order": 3,
+        "name": "StUF-BG backend",
+        "slug": "stuf-bg",
+        "models": [
+            [
+                "stufbg",
+                "stufbgclient"
+            ]
+        ]
+    }
+},
+{
+    "model": "admin_index.appgroup",
+    "fields": {
+        "order": 5,
+        "name": "Logging",
+        "slug": "sites",
+        "models": [
+            [
+                "admin",
+                "logentry"
+            ],
+            [
+                "axes",
+                "accessattempt"
+            ],
+            [
+                "axes",
+                "accesslog"
+            ]
+        ]
+    }
+}
+]

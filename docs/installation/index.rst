@@ -14,4 +14,5 @@ this.
    :caption: Further reading
 
    quickstart
+   authorizations
    config

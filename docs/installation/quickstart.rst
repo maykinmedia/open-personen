@@ -42,10 +42,21 @@ With the above remarks in mind, let's go:
 
       $ docker-compose exec web src/manage.py import_demodata --url <url>
 
-4. Retrieve a person via the BRP API in your webbrowser:
+4. The API should now be available on ``http://localhost:8000/api/``. You can 
+   retrieve a person via the BRP API in your webbrowser:
 
    .. code:: 
 
       http://localhost:8000/api/ingeschrevenpersonen/999990676
 
 .. _`RvIG`: https://www.rvig.nl/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v
+
+
+Next steps
+----------
+
+You can read how to add persons to this test dataset using this 
+:ref:`backends_demo_backend`. If you want to expose real persons you can connect
+Open Personen to a :ref:`backends_stufbg_backend`.
+
+You can also read on how to enable :ref:`installation_authorizations`.

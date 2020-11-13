@@ -307,7 +307,8 @@ AUTHENTICATION_BACKENDS = [
 #
 # Custom settings
 #
-PROJECT_NAME = "openpersonen"
+PROJECT_NAME = "Open Personen"
+SITE_TITLE = "Startpunt"
 ENVIRONMENT = None
 SHOW_ALERT = True
 
@@ -315,10 +316,8 @@ SHOW_ALERT = True
 # Library settings
 #
 
-
 # Django-Admin-Index
-ADMIN_INDEX_SHOW_REMAINING_APPS = True
-ADMIN_INDEX_AUTO_CREATE_APP_GROUP = True
+ADMIN_INDEX_SHOW_REMAINING_APPS_TO_SUPERUSERS = False
 
 # Django-Axes (4.0+)
 #
@@ -385,7 +384,6 @@ if SENTRY_DSN:
     )
 
 # Elastic APM
-
 ELASTIC_APM = {
     "SERVICE_NAME": "openpersonen",
     "SECRET_TOKEN": os.getenv("ELASTIC_APM_SECRET_TOKEN", "default"),
