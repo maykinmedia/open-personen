@@ -5,39 +5,39 @@ OUDER_RETRIEVE_DATA = {
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "geslachtsnaam": True,
-                    "voornamen": True,
-                    "voorvoegsel": True,
+                    "geslachtsnaam": False,
+                    "voornamen": False,
+                    "voorvoegsel": False,
                 }
             },
-            "geslachtsnaam": "Maykin Ouder",
-            "voorletters": "O",
-            "voornamen": "Media Ouder",
-            "voorvoegsel": "de",
+            "geslachtsnaam": "string",
+            "voorletters": "string",
+            "voornamen": "string",
+            "voorvoegsel": "string",
         },
         "geboorte": {
             "_embedded": {
                 "datum": {"dag": 7, "datum": "19690507", "jaar": 1969, "maand": 5},
-                "land": {"code": "0000", "omschrijving": "Nederland"},
-                "plaats": {"code": "0000", "omschrijving": "Amsterdam"},
+                "land": {"code": "Nederland", "omschrijving": "Nederland"},
+                "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": False,
+                    "land": False,
+                    "plaats": False,
                 },
             }
         },
@@ -50,19 +50,19 @@ OUDER_RETRIEVE_DATA = {
         "inOnderzoek": {
             "_embedded": {
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1990",
+                    "jaar": 1900,
+                    "maand": 1,
                 }
             },
-            "burgerservicenummer": True,
+            "burgerservicenummer": False,
             "datumIngangFamilierechtelijkeBetrekking": True,
-            "geslachtsaanduiding": True,
+            "geslachtsaanduiding": False,
         },
     },
     "burgerservicenummer": "789123456",
-    "geheimhoudingPersoonsgegevens": True,
+    "geheimhoudingPersoonsgegevens": False,
     "geslachtsaanduiding": "man",
     "ouderAanduiding": "ouder1",
 }

@@ -256,7 +256,7 @@ Ouder
 API attribute                                                           StUF-BG attribute                                                                  Design decision  remarks
 =====================================================================   ================================================================================   =====================================================================
 burgerservicenummer                                                     `inp.heeftAlsOuders.inp.bsn`
-geslachtsaanduiding                                                     `inp.heeftAlsOuders.inp.indicatieGeheim`
+geslachtsaanduiding                                                     `inp.heeftAlsOuders.geslachtsaanduiding`
 ouderAanduiding                                                         `inp.heeftAlsOuders.ouderAanduiding`
 datumIngangFamilierechtelijkeBetrekking.dag                             DAY(`inp.heeftAlsOuders.datumIngangFamilierechtelijkeBetrekking`)
 datumIngangFamilierechtelijkeBetrekking.datum                           inp.heeftAlsOuders.datumIngangFamilierechtelijkeBetrekking
@@ -306,7 +306,7 @@ Partner
 API attribute                                                           StUF-BG attribute                                                                  Design decision  remarks
 =====================================================================   ================================================================================   =====================================================================
 burgerservicenummer                                                     `inp.heeftAlsEchtgenootPartner.inp.bsn`
-geslachtsaanduiding                                                     `inp.heeftAlsEchtgenootPartner.inp.indicatieGeheim`
+geslachtsaanduiding                                                     `inp.heeftAlsEchtgenootPartner.geslachtsaanduiding`
 soortVerbintenis                                                        `inp.heeftAlsEchtgenootPartner.inp.soortVerbintenis`
 naam.geslachtsnaam                                                      `inp.heeftAlsEchtgenootPartner.gerelateerde.geslachtsnaam`
 naam.voorletters                                                        `inp.heeftAlsEchtgenootPartner.gerelateerde.voorletters`
@@ -335,7 +335,7 @@ geboorte.inOnderzoek.datumIngangOnderzoek.datum                         "01-01-1
 geboorte.inOnderzoek.datumIngangOnderzoek.jaar                          1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
 geboorte.inOnderzoek.datumIngangOnderzoek.maand                         1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.burgerservicenummer                                         *(`inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*   One of the multiple inOnderzoek occurrances matches
-inOnderzoek.geslachtsaanduiding                                         *(`inOnderzoek.groepsnaam` == `Persoonsgegevens`)*                                 One of the multiple inOnderzoek occurrances matches
+inOnderzoek.geslachtsaanduiding                                         *(`inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam` == `Persoonsgegevens`)*   One of the multiple inOnderzoek occurrances matches
 inOnderzoek.datumIngangOnderzoek.dag                                    1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.datumIngangOnderzoek.datum                                  "01-01-1900"                                                                       Fixed value since not in StUF-BG and cannot be `null`.
 inOnderzoek.datumIngangOnderzoek.jaar                                   1900                                                                               Fixed value since not in StUF-BG and cannot be `null`.
