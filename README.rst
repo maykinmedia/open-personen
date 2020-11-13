@@ -22,7 +22,7 @@ Open Personen offers an implementation of the
 `Haal Centraal BRP bevragen API specification`_ and can connect to a `StUF-BG`_ 
 service to retrieve personal data. In addition, Open Personen can simply convert
 StUF-BG messages to BRP API messages without an actual connection. Finally, you 
-can use Open Personen with a testset that you either import or construct 
+can use Open Personen with a test set that you either import or construct 
 yourself via the user interface.
 
 Open Personen meets the need for several other components to request personal 
