@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import PersoonView, KindView, OuderView, PartnerView
+from .views import KindView, OuderView, PartnerView, PersoonView
 
 urlpatterns = [
     path("persoon", PersoonView.as_view(), name="persoon"),
