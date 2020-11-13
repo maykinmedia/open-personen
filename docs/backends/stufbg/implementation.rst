@@ -149,8 +149,8 @@ API attribute                                                           StUF-BG 
 `verblijfplaats.datumVestigingInNederland.maand`                        1                                                                                  Fixed value since not in StUF-BG and cannot be `null`.
 `verblijfplaats.gemeenteVanInschrijving.code`                           `inp.verblijftIn.gerelateerde.gemeenteCode`
 `verblijfplaats.gemeenteVanInschrijving.omschrijving`                   `inp.verblijftIn.gerelateerde.gemeenteNaam`
-`verblijfplaats.landVanwaarIngeschreven.code`                           `string`                                                                           TODO
-`verblijfplaats.landVanwaarIngeschreven.omschrijving`                   `string`                                                                           TODO
+`verblijfplaats.landVanwaarIngeschreven.code`                           ""                                                                                 TODO
+`verblijfplaats.landVanwaarIngeschreven.omschrijving`                   ""                                                                                 TODO
 `verblijfplaats.verblijfBuitenland.adresRegel1`                         `sub.verblijfBuitenland.sub.adresBuitenland1`
 `verblijfplaats.verblijfBuitenland.adresRegel2`                         `sub.verblijfBuitenland.sub.adresBuitenland2`
 `verblijfplaats.verblijfBuitenland.adresRegel3`                         `sub.verblijfBuitenland.sub.adresBuitenland3`
