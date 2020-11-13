@@ -1,0 +1,121 @@
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+
+name: Open Personen
+url: 'http://github.com/maykinmedia/open-personen.git'
+softwareType: addon
+softwareVersion: 1.0.0
+releaseDate: '2020-11-27'
+logo: 'https://github.com/maykinmedia/open-personen/blob/master/docs/logo.png'
+platforms:
+  - web
+  - linux
+  - windows
+  - mac
+
+categories:
+  - digital-citizenship
+
+developmentStatus: beta
+
+description:
+  nl:
+    shortDescription: API's voor Open Personen ophalen
+    documentation: 'https://open-personen.readthedocs.io/'
+    apiDocumentation: 'https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/specificatie/openapi.yaml'
+    features:
+      - BRP API 1.0
+      - StUF-BG extensie
+      - Demo extensie
+      - Conversie service
+    genericName: API component
+    longDescription: >
+      **Open Personen** biedt een implementatie van de 
+      [Haal Centraal BRP bevragen API specificatie](https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen)
+      en kan verbinden met een 
+      [StUF-BG](https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG)
+      koppeling voor het ontsluiten van persoonsgegevens. Ook kan Open 
+      Personen eenvoudigweg StUF-BG berichten converteren naar BRP API berichten 
+      zonder daadwerkelijke verbinding. Ten slotte kan Open Personen gebruikt worden
+      met een testset die u kunt importeren of zelf aanmaken via de gebruikers
+      interface.
+      
+      Open Personen voorziet in de behoefte van verschillende andere componenten om 
+      persoonsgegevens op te vragen en personen te koppelen (bijv. aan een zaak in 
+      de [Open Zaak](https://opengem.nl/producten/open-zaak/)).
+
+  en:
+    shortDescription: A modern Basisregistratie Personen (BRP) API to retrieve personal data.
+    documentation: 'https://open-personen.readthedocs.io/'
+    apiDocumentation: 'https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/specificatie/openapi.yaml'
+    features:
+      - BRP API 1.0
+      - StUF-BG extension
+      - Demo extension
+      - Conversion service
+    genericName: API component
+    longDescription: >
+      **Open Personen** offers an implementation of the 
+      [Haal Centraal BRP bevragen API specification](https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen)
+      and can connect to a 
+      [StUF-BG](https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG) 
+      service to retrieve personal data. In addition, Open Personen can simply convert
+      StUF-BG messages to BRP API messages without an actual connection. Finally, you 
+      can use Open Personen with a test set that you either import or construct 
+      yourself via the user interface.
+      
+      Open Personen meets the need for several other components to request personal 
+      data and to link persons (e.g. to a zaak in the 
+      [Open Zaak](https://opengem.nl/producten/open-zaak/)).
+
+legal:
+  license: BSL-1.1
+  mainCopyrightOwner: Maykin Media
+  repoOwner: Maykin Media
+
+dependsOn:
+  open:
+    - name: PostgreSQL
+      optional: false
+      versionMin: '11.0'
+    - name: Kubernetes
+      optional: true
+      versionMin: '1.12'
+    - name: Docker
+      optional: true
+      versionMin: '18.0'
+
+inputTypes:
+  - application/json
+
+outputTypes:
+  - application/json
+  - text/html
+
+intendedAudience:
+  countries:
+    - nl
+  scope:
+    - government
+
+isBasedOn:
+  - 'https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/specificatie/openapi.yaml'
+
+localisation:
+  availableLanguages:
+    - nl
+    - en
+  localisationReady: false
+
+maintenance:
+  type: contract
+  contractors:
+  - name: Maykin Media
+    email: info@maykinmedia.nl
+    website: https://www.maykinmedia.nl/
+  contacts:
+  - name: Joeri Bekker
+    affiliation: Maykin Media
