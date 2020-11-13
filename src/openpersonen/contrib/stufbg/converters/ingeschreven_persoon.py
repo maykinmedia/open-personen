@@ -37,8 +37,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 == "Persoonsgegevens",
                 "datumIngangOnderzoek": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 },
             },
@@ -52,18 +52,18 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         "geboorte": {
             "datum": {
                 "dag": int(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "19000101")[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
@@ -95,7 +95,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 == "Persoonsgegevens",
                 "datumIngangOnderzoek": {
                     "dag": 1,
-                    "datum": "01-01-1990",
+                    "datum": "01-01-1900",
                     "jaar": 1900,
                     "maand": 1,
                 },
@@ -109,12 +109,12 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         ),
         "datumEersteInschrijvingGBA": {
             "dag": int(
-                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "00000000")[
+                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "19000101")[
                     settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                 ]
             ),
             "datum": instance_xml_dict.get(
-                f"{prefix}:inp.datumInschrijving", "00000000"
+                f"{prefix}:inp.datumInschrijving", "19000101"
             ),
             "jaar": int(
                 instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "string")[
@@ -122,7 +122,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 ]
             ),
             "maand": int(
-                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "00000000")[
+                instance_xml_dict.get(f"{prefix}:inp.datumInschrijving", "19000101")[
                     settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                 ]
             ),
@@ -138,14 +138,14 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             == "A",
             "einddatumUitsluitingEuropeesKiesrecht": {
                 "dag": 1,
-                "datum": "01-01-1990",
-                "jaar": 1990,
+                "datum": "01-01-1900",
+                "jaar": 1900,
                 "maand": 1,
             },
             "einddatumUitsluitingKiesrecht": {
                 "dag": 1,
-                "datum": "01-01-1990",
-                "jaar": 1990,
+                "datum": "01-01-1900",
+                "jaar": 1900,
                 "maand": 1,
             },
         },
@@ -160,8 +160,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             == "Persoonsgegevens",
             "datumIngangOnderzoek": {
                 "dag": 1,
-                "datum": "01-01-1990",
-                "jaar": 1990,
+                "datum": "01-01-1900",
+                "jaar": 1900,
                 "maand": 1,
             },
         },
@@ -174,24 +174,24 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     "dag": int(
                         instance_xml_dict.get(
                             f"{prefix}:inp.heeftAlsNationaliteit", {}
-                        ).get("inp.datumVerkrijging", "00000000")[
+                        ).get("inp.datumVerkrijging", "19000101")[
                             settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
                     ),
                     "datum": instance_xml_dict.get(
                         f"{prefix}:inp.heeftAlsNationaliteit", {}
-                    ).get("inp.datumVerkrijging", "00000000"),
+                    ).get("inp.datumVerkrijging", "19000101"),
                     "jaar": int(
                         instance_xml_dict.get(
                             f"{prefix}:inp.heeftAlsNationaliteit", {}
-                        ).get("inp.datumVerkrijging", "00000000")[
+                        ).get("inp.datumVerkrijging", "19000101")[
                             settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                         ]
                     ),
                     "maand": int(
                         instance_xml_dict.get(
                             f"{prefix}:inp.heeftAlsNationaliteit", {}
-                        ).get("inp.datumVerkrijging", "00000000")[
+                        ).get("inp.datumVerkrijging", "19000101")[
                             settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                         ]
                     ),
@@ -228,8 +228,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     "redenOpname": True,
                     "datumIngangOnderzoek": {
                         "dag": 1,
-                        "datum": "01-01-1990",
-                        "jaar": 1990,
+                        "datum": "01-01-1900",
+                        "jaar": 1900,
                         "maand": 1,
                     },
                 },
@@ -242,20 +242,20 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "datum": {
                 "dag": int(
                     instance_xml_dict.get(
-                        f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                        f"{prefix}:inp.datumOpschortingBijhouding", "19000101"
                     )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": instance_xml_dict.get(
-                    f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                    f"{prefix}:inp.datumOpschortingBijhouding", "19000101"
                 ),
                 "jaar": int(
                     instance_xml_dict.get(
-                        f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                        f"{prefix}:inp.datumOpschortingBijhouding", "19000101"
                     )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     instance_xml_dict.get(
-                        f"{prefix}:inp.datumOpschortingBijhouding", "00000000"
+                        f"{prefix}:inp.datumOpschortingBijhouding", "19000101"
                     )[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
@@ -269,7 +269,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             == "O",
             "datum": {
                 "dag": int(
-                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                     if not isinstance(
@@ -277,22 +277,22 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     )
                     else 0
                 ),
-                "datum": instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")
+                "datum": instance_xml_dict.get(f"{prefix}:overlijdensdatum", "19000101")
                 if not isinstance(
                     instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
                 )
-                else "00000000",
+                else "19000101",
                 "jaar": int(
-                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                     if not isinstance(
                         instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
                     )
-                    else 1990
+                    else 1900
                 ),
                 "maand": int(
-                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:overlijdensdatum", "19000101")[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                     if not isinstance(
@@ -346,8 +346,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 == "Overlijden",
                 "datumIngangOnderzoek": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 },
             },
@@ -390,20 +390,20 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "datumAanvangAdreshouding": {
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        "begindatumVerblijf", "00000000"
+                        "begindatumVerblijf", "19000101"
                     )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                    "begindatumVerblijf", "00000000"
+                    "begindatumVerblijf", "19000101"
                 ),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        "begindatumVerblijf", "00000000"
+                        "begindatumVerblijf", "19000101"
                     )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:verblijfsadres", {}).get(
-                        "begindatumVerblijf", "00000000"
+                        "begindatumVerblijf", "19000101"
                     )[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
@@ -413,38 +413,38 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 "dag": int(
                     instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
                     .get("gerelateerde", {})
-                    .get("ingangsdatumObject", "00000000")[
+                    .get("ingangsdatumObject", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
                 .get("gerelateerde", {})
-                .get("ingangsdatumObject", "00000000"),
+                .get("ingangsdatumObject", "19000101"),
                 "jaar": int(
                     instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
                     .get("gerelateerde", {})
-                    .get("ingangsdatumObject", "00000000")[
+                    .get("ingangsdatumObject", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
                     instance_xml_dict.get(f"{prefix}:inp.verblijftIn", {})
                     .get("gerelateerde", {})
-                    .get("ingangsdatumObject", "00000000")[
+                    .get("ingangsdatumObject", "19000101")[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
             },
             "datumInschrijvingInGemeente": {
                 "dag": 1,
-                "datum": "01-01-1990",
-                "jaar": 1990,
+                "datum": "01-01-1900",
+                "jaar": 1900,
                 "maand": 1,
             },
             "datumVestigingInNederland": {
                 "dag": 1,
-                "datum": "01-01-1990",
-                "jaar": 1990,
+                "datum": "01-01-1900",
+                "jaar": 1900,
                 "maand": 1,
             },
             "gemeenteVanInschrijving": {
@@ -534,7 +534,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                 == "Verblijfplaats",
                 "datumIngangOnderzoek": {
                     "dag": 1,
-                    "datum": "01-01-1990",
+                    "datum": "01-01-1900",
                     "jaar": 1900,
                     "maand": 1,
                 },
@@ -584,20 +584,20 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "datumEinde": {
                 "dag": int(
                     instance_xml_dict.get(
-                        f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                        f"{prefix}:ing.datumVerliesVerblijfstitel", "19000101"
                     )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": instance_xml_dict.get(
-                    f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                    f"{prefix}:ing.datumVerliesVerblijfstitel", "19000101"
                 ),
                 "jaar": int(
                     instance_xml_dict.get(
-                        f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                        f"{prefix}:ing.datumVerliesVerblijfstitel", "19000101"
                     )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     instance_xml_dict.get(
-                        f"{prefix}:ing.datumVerliesVerblijfstitel", "00000000"
+                        f"{prefix}:ing.datumVerliesVerblijfstitel", "19000101"
                     )[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
@@ -606,20 +606,20 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "datumIngang": {
                 "dag": int(
                     instance_xml_dict.get(
-                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "19000101"
                     )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
                 ),
                 "datum": instance_xml_dict.get(
-                    f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                    f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "19000101"
                 ),
                 "jaar": int(
                     instance_xml_dict.get(
-                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "19000101"
                     )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
                 ),
                 "maand": int(
                     instance_xml_dict.get(
-                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "00000000"
+                        f"{prefix}:ing.datumVerkrijgingVerblijfstitel", "19000101"
                     )[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
@@ -630,11 +630,11 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     "elementnaam"
                 )
                 == "aanduidingVerblijfstitel",
-                "datumEinde": "01-01-1990",
-                "datumIngang": "01-01-1990",
+                "datumEinde": "01-01-1900",
+                "datumIngang": "01-01-1900",
                 "datumIngangOnderzoek": {
                     "dag": 1,
-                    "datum": "01-01-1990",
+                    "datum": "01-01-1900",
                     "jaar": 1900,
                     "maand": 1,
                 },

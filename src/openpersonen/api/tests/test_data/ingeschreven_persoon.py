@@ -36,8 +36,8 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 1,
-                            "datum": "01-01-1990",
-                            "jaar": 1990,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
                             "maand": 1,
                         }
                     },
@@ -64,7 +64,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 1,
-                            "datum": "01-01-1990",
+                            "datum": "01-01-1900",
                             "jaar": 1900,
                             "maand": 1,
                         }
@@ -85,14 +85,14 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "_embedded": {
                 "einddatumUitsluitingEuropeesKiesrecht": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 },
                 "einddatumUitsluitingKiesrecht": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 },
             },
@@ -103,8 +103,8 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "_embedded": {
                 "datumIngangOnderzoek": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 }
             },
@@ -115,10 +115,10 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             {
                 "_embedded": {
                     "datumIngangGeldigheid": {
-                        "dag": 0,
-                        "datum": "00000000",
-                        "jaar": 0,
-                        "maand": 0,
+                        "dag": 1,
+                        "datum": "19000101",
+                        "jaar": 1900,
+                        "maand": 1,
                     },
                     "nationaliteit": {"code": None, "omschrijving": None},
                     "redenOpname": {"code": None, "omschrijving": None},
@@ -126,8 +126,8 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                         "_embedded": {
                             "datumIngangOnderzoek": {
                                 "dag": 1,
-                                "datum": "01-01-1990",
-                                "jaar": 1990,
+                                "datum": "01-01-1900",
+                                "jaar": 1900,
                                 "maand": 1,
                             }
                         },
@@ -141,21 +141,21 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
         ],
         "opschortingBijhouding": {
             "_embedded": {
-                "datum": {"dag": 0, "datum": "00000000", "jaar": 0, "maand": 0}
+                "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1}
             },
             "reden": "string",
         },
         "overlijden": {
             "_embedded": {
-                "datum": {"dag": 0, "datum": "00000000", "jaar": 0, "maand": 0},
+                "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
                 "land": {"code": "string", "omschrijving": "string"},
                 "plaats": {"code": "string", "omschrijving": "string"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 1,
-                            "datum": "01-01-1990",
-                            "jaar": 1990,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
                             "maand": 1,
                         }
                     },
@@ -169,27 +169,27 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
         "verblijfplaats": {
             "_embedded": {
                 "datumAanvangAdreshouding": {
-                    "dag": 0,
-                    "datum": "00000000",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "19000101",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
                 "datumIngangGeldigheid": {
-                    "dag": 0,
-                    "datum": "00000000",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "19000101",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
                 "datumInschrijvingInGemeente": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 },
                 "datumVestigingInNederland": {
                     "dag": 1,
-                    "datum": "01-01-1990",
-                    "jaar": 1990,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
                     "maand": 1,
                 },
                 "gemeenteVanInschrijving": {"code": None, "omschrijving": None},
@@ -205,7 +205,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 1,
-                            "datum": "01-01-1990",
+                            "datum": "01-01-1900",
                             "jaar": 1900,
                             "maand": 1,
                         }
@@ -267,13 +267,18 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
         "verblijfstitel": {
             "_embedded": {
                 "aanduiding": {"code": None, "omschrijving": "string"},
-                "datumEinde": {"dag": 0, "datum": "00000000", "jaar": 0, "maand": 0},
-                "datumIngang": {"dag": 0, "datum": "00000000", "jaar": 0, "maand": 0},
+                "datumEinde": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
+                "datumIngang": {
+                    "dag": 1,
+                    "datum": "19000101",
+                    "jaar": 1900,
+                    "maand": 1,
+                },
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
                             "dag": 1,
-                            "datum": "01-01-1990",
+                            "datum": "01-01-1900",
                             "jaar": 1900,
                             "maand": 1,
                         }
