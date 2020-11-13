@@ -10,6 +10,8 @@ os.environ.setdefault("DB_NAME", "openpersonen"),
 os.environ.setdefault("DB_USER", "openpersonen"),
 os.environ.setdefault("DB_PASSWORD", "openpersonen"),
 
+os.environ.setdefault("SENDFILE_BACKEND", "django_sendfile.backends.development"),
+
 from .base import *  # noqa isort:skip
 
 # Feel free to switch dev to sqlite3 for simple projects,

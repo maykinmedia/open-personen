@@ -13,6 +13,7 @@ django-axes
 django-choices
 django-hijack
 django-hijack-admin
+django-privates
 django-redis
 django-rosetta
 django-sniplates

@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  busybox:
+    command: /bin/chown -R 1000 /private-media
+    volumes:
+      - private_media:/private-media
+  web:
+    volumes:
+      - private_media:/app/private-media
+  nginx:
+    volumes:
+      - private_media:/private-media
+
+volumes:
+  private_media:

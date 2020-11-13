@@ -1,14 +1,19 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
+from privates.admin import PrivateMediaMixin
 from solo.admin import SingletonModelAdmin
 
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
 @admin.register(StufBGClient)
-class StufBGClientAdmin(SingletonModelAdmin):
-    # Details
+class StufBGClientAdmin(PrivateMediaMixin, SingletonModelAdmin):
+    private_media_fields = (
+        "certificate",
+        "certificate_key",
+    )
+
     fieldsets = (
         (
             _("Ontvanger"),

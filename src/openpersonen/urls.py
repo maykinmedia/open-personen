@@ -44,6 +44,9 @@ urlpatterns = [
 urlpatterns += staticfiles_urlpatterns() + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
+urlpatterns += static(
+    settings.PRIVATE_MEDIA_URL, document_root=settings.PRIVATE_MEDIA_ROOT
+)
 
 if settings.DEBUG and apps.is_installed("debug_toolbar"):
     import debug_toolbar

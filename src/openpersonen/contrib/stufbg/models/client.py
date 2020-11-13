@@ -8,6 +8,7 @@ from django.utils import dateformat, timezone
 from django.utils.translation import ugettext_lazy as _
 
 import requests
+from privates.fields import PrivateMediaFileField
 from solo.models import SingletonModel
 
 
@@ -24,8 +25,8 @@ class StufBGClient(SingletonModel):
     url = models.URLField(_("url"))
     user = models.CharField(_("user"), max_length=200)
     password = models.CharField(_("password"), max_length=200)
-    certificate = models.FileField(upload_to="certificate/")
-    certificate_key = models.FileField(
+    certificate = PrivateMediaFileField(upload_to="certificate/")
+    certificate_key = PrivateMediaFileField(
         upload_to="certificate/", help_text="Private key for the certificate"
     )
 

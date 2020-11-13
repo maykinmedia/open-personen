@@ -6,6 +6,10 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER:-openpersonen}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-openpersonen}
+
+  busybox:
+    image: busybox
+
   web:
     build: .
     image: maykinmedia/open-personen
@@ -20,3 +24,12 @@ services:
       - 8000:8000
     depends_on:
       - db
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "9000:80"
+    depends_on:
+      - web
