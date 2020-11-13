@@ -19,7 +19,10 @@ class Test404Response(APITestCase):
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertIn("<h1>Not Found</h1>", str(response.content))
+        self.assertIn(
+            "<h1>Sorry, the requested page could not be found (404)</h1>",
+            str(response.content),
+        )
 
     def test_custom_404_response(self):
         response = self.client.get(
