@@ -66,9 +66,9 @@ jobs:
       before_install:
         - wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
         - docker-compose up -d
-        - docker-compose exec web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20200709_Testset_persoonslijsten_proefomgeving_GBA-V.ods
+        - docker-compose exec web src/manage.py import_demodata --file src/test_ods_file_small.ods
       script:
-        - wget http://localhost:8000/api/ingeschrevenpersonen/999990676
+        - wget http://localhost:8000/api/ingeschrevenpersonen/999993653
 
     - stage: "Docker image"
       name: Docker image build

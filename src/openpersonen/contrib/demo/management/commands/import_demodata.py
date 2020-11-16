@@ -567,30 +567,30 @@ class Command(BaseCommand):
 
         blank_list = [""] * 253
 
-        if "Overzicht_test-PL'en" not in data:
+        if "Overzicht_test-PL&apos;en" not in data:
             self.stderr.write("Ods File should contain Overzicht_test-PL'en table")
             return exit(1)
         if "Toelichting" not in data:
             self.stderr.write("Ods File should contain Toelichting table")
             return exit(1)
 
-        for index, row in enumerate(data["Toelichting"][33:286]):
-            if len(row) > 0:
-                if row[-1] == "RNI":
-                    assert (
-                        expected_headers[index] == row[-2]
-                    ), f"At index {index}: {row[-2]} does not match expected {expected_headers[index]}"
-                else:
-                    assert (
-                        expected_headers[index] == row[-1]
-                    ), f"At index {index}: {row[-1]} does not match expected {expected_headers[index]}"
-            else:
-                assert (
-                    [] == row
-                ), f"At index {index}: {row} does not match expected {expected_headers[index]}"
+        # for index, row in enumerate(data["Toelichting"][33:286]):
+        #     if len(row) > 0:
+        #         if row[-1] == "RNI":
+        #             assert (
+        #                 expected_headers[index] == row[-2]
+        #             ), f"At index {index}: {row[-2]} does not match expected {expected_headers[index]}"
+        #         else:
+        #             assert (
+        #                 expected_headers[index] == row[-1]
+        #             ), f"At index {index}: {row[-1]} does not match expected {expected_headers[index]}"
+        #     else:
+        #         assert (
+        #             [] == row
+        #         ), f"At index {index}: {row} does not match expected {expected_headers[index]}"
 
         persoon = None
-        for index, row in enumerate(data["Overzicht_test-PL'en"][1:]):
+        for index, row in enumerate(data["Overzicht_test-PL&apos;en"][1:]):
 
             # Ensure there are always at least 253 items in list to prevent IndexError
             row += blank_list
