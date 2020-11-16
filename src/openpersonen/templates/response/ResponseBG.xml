@@ -83,14 +83,12 @@
                      <BG:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   </BG:gerelateerde>
                   <BG:soortVerbintenis/>
-                  <BG:datumSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:plaatsSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:landSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:datumOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:plaatsOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:landOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:redenOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                  <BG:inOnderzoek StUF:noValue="geenWaarde" xsi:nil="true" StUF:metagegeven="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:brondocument StUF:metagegeven="true">
                      <BG:identificatie StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:datum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
