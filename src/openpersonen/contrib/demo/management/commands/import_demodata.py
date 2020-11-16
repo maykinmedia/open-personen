@@ -548,6 +548,7 @@ class Command(BaseCommand):
     def handle(self, **options):
 
         self.stdout.write("Importing dataset")
+        self.stdout.write("Importing dataset 2")
 
         if options.get("url") and options.get("file"):
             self.stderr.write("Please specify a url or file, not both")
@@ -557,11 +558,18 @@ class Command(BaseCommand):
             return exit(1)
 
         if options.get("url"):
+            self.stdout.write("In if")
+            self.stdout.write("Making google request")
+            response = requests.get("http://google.com")
+            self.stdout.write("Making request")
             response = requests.get(options["url"])
-
+            self.stdout.write("Got request")
+            self.stdout.write("Creating buffer")
             buffer = BytesIO(response.content)
-
+            self.stdout.write("Made buffer")
+            self.stdout.write("Getting data")
             data = get_data(buffer)
+            self.stdout.write("Got data")
         else:
             data = get_data(options["file"])
 
@@ -591,7 +599,7 @@ class Command(BaseCommand):
 
         persoon = None
         for index, row in enumerate(data["Overzicht_test-PL'en"][1:]):
-
+            self.stdout.write(f"Imported line: {index}")
             # Ensure there are always at least 253 items in list to prevent IndexError
             row += blank_list
 
