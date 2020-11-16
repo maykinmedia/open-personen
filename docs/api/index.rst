@@ -25,3 +25,30 @@ API                     Specification version(s)
 ======================  ==========================================
 
 .. _`BRP bevragen API`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
+
+
+Unsupported API's
+=================
+
+Some of the Haal Centraal API's are related to the BRP bevragen API but have 
+not reached a stable version yet. We choose to only support stable API 
+specifications in Open Personen. They are mentioned here to give readers a 
+complete overview.
+
+**These API's are NOT available in Open Personen**
+
+==============================  ==========================================
+API                             Specification version(s)
+==============================  ==========================================
+`BRP update API`_               (unknown)
+`BRP bewoning API`_             (unknown)
+`BRP historie bevragen API`_    (unknown)
+`BRP tabellen bevragen API`_    (unknown)
+`Reisdocumenten bevragen API`_  (unknown)
+==============================  ==========================================
+
+.. _`BRP update API`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-Update-API
+.. _`BRP bewoning API`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bewoning
+.. _`BRP historie bevragen API`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-historie-bevragen
+.. _`BRP tabellen bevragen API`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-tabellen-bevragen
+.. _`Reisdocumenten bevragen API`: https://github.com/VNG-Realisatie/Haal-Centraal-Reisdocumenten-bevragen
