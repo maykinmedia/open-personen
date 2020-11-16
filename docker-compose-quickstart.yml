@@ -15,6 +15,7 @@ services:
 
   web:
     image: maykinmedia/open-personen
+    mem_limit: 2048m
     environment:
       - DJANGO_SETTINGS_MODULE=openpersonen.conf.docker
       - SECRET_KEY=${SECRET_KEY:-%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#}
