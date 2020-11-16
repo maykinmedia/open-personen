@@ -4,6 +4,7 @@ services:
   db:
     image: postgres:12-alpine
     environment:
+      - POSTGRES_DB=${DB_NAME:-openpersonen}
       - POSTGRES_USER=${DB_USER:-openpersonen}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-openpersonen}
 
@@ -18,6 +19,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=openpersonen.conf.docker
       - SECRET_KEY=${SECRET_KEY:-%9+dfjw+zd3@q)ehsx(pdwy-ueq0zt=90gb4+&qd^6ytpj@p7#}
+      - DB_NAME=${DB_NAME:-openpersonen}
       - DB_USER=${DB_USER:-openpersonen}
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
       - OPENPERSONEN_BACKEND=${OPENPERSONEN_BACKEND:-openpersonen.contrib.demo.backend.default}
