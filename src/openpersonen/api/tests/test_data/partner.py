@@ -5,77 +5,77 @@ PARTNER_RETRIEVE_DATA = {
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "geslachtsnaam": True,
-                    "voornamen": True,
-                    "voorvoegsel": True,
+                    "geslachtsnaam": False,
+                    "voornamen": False,
+                    "voorvoegsel": False,
                 }
             },
-            "geslachtsnaam": "Maykin Partner",
-            "voorletters": "P",
-            "voornamen": "Media Partner",
-            "voorvoegsel": "de",
+            "geslachtsnaam": None,
+            "voorletters": None,
+            "voornamen": None,
+            "voorvoegsel": None,
         },
         "geboorte": {
             "_embedded": {
                 "datum": {"dag": 7, "datum": "19690507", "jaar": 1969, "maand": 5},
-                "land": {"code": "0000", "omschrijving": "Nederland"},
-                "plaats": {"code": "0000", "omschrijving": "Amsterdam"},
+                "land": {"code": "Nederland", "omschrijving": "Nederland"},
+                "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": False,
+                    "land": False,
+                    "plaats": False,
                 },
             }
         },
         "inOnderzoek": {
             "_embedded": {
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
+                    "maand": 1,
                 }
             },
-            "burgerservicenummer": True,
-            "geslachtsaanduiding": True,
+            "burgerservicenummer": False,
+            "geslachtsaanduiding": False,
         },
         "aangaanHuwelijkPartnerschap": {
             "_embedded": {
-                "datum": {"dag": 0, "datum": "string", "jaar": 0, "maand": 0},
-                "land": {"code": "0000", "omschrijving": "string"},
-                "plaats": {"code": "0000", "omschrijving": "string"},
+                "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
+                "land": {"code": "string", "omschrijving": "string"},
+                "plaats": {"code": "string", "omschrijving": "string"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": False,
+                    "land": False,
+                    "plaats": False,
                 },
             }
         },
     },
     "burgerservicenummer": "987654321",
-    "geheimhoudingPersoonsgegevens": True,
+    "geheimhoudingPersoonsgegevens": False,
     "geslachtsaanduiding": "man",
-    "soortVerbintenis": "huwelijk",
+    "soortVerbintenis": "string",
 }

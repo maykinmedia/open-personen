@@ -70,15 +70,6 @@
                     <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                     <!--Optional:-->
                     <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
-                    <!--Optional:-->
-                    <ns:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true"
-                                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                    <!--Optional:-->
-                    <ns:inp.overlijdenplaats StUF:noValue="geenWaarde" xsi:nil="true"
-                                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                    <!--Optional:-->
-                    <ns:inp.overlijdenLand StUF:noValue="geenWaarde" xsi:nil="true"
-                                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                     <ns:verblijfsadres>
                         <ns:wpl.woonplaatsNaam>Amsterdam</ns:wpl.woonplaatsNaam>
                         <!--Optional:-->

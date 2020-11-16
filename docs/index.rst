@@ -10,9 +10,6 @@ Open Personen offers:
 * Conversion service to convert BRP API requests to StUF-BG requests and 
   StUF-BG responses to BRP API responses (future release).
 
-An additional Profile API to store and retrieve additional personal data that
-  is not typically stored and exposed via the BRP API.
-
 The :ref:`introduction_source-code` is available for non-commercial use.
 
 .. _`Haal Centraal BRP bevragen API specification`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen

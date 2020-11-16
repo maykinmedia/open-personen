@@ -5,15 +5,15 @@ KIND_RETRIEVE_DATA = {
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "geslachtsnaam": True,
-                    "voornamen": True,
-                    "voorvoegsel": True,
+                    "geslachtsnaam": False,
+                    "voornamen": False,
+                    "voorvoegsel": False,
                 }
             },
             "geslachtsnaam": "Maykin Kind",
@@ -24,33 +24,33 @@ KIND_RETRIEVE_DATA = {
         "geboorte": {
             "_embedded": {
                 "datum": {"dag": 15, "datum": "19990615", "jaar": 1999, "maand": 6},
-                "land": {"code": "string", "omschrijving": "Nederland"},
-                "plaats": {"code": "string", "omschrijving": "Amsterdam"},
+                "land": {"code": "Nederland", "omschrijving": "Nederland"},
+                "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
-                            "dag": 0,
-                            "datum": "string",
-                            "jaar": 0,
-                            "maand": 0,
+                            "dag": 1,
+                            "datum": "01-01-1900",
+                            "jaar": 1900,
+                            "maand": 1,
                         }
                     },
-                    "datum": True,
-                    "land": True,
-                    "plaats": True,
+                    "datum": False,
+                    "land": False,
+                    "plaats": False,
                 },
             }
         },
         "inOnderzoek": {
             "_embedded": {
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
+                    "maand": 1,
                 }
             },
-            "burgerservicenummer": True,
+            "burgerservicenummer": False,
         },
     },
     "burgerservicenummer": "456789123",
