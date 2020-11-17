@@ -6,20 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('demo', '0001_initial'),
+        ("demo", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='kind',
-            options={'verbose_name': 'Kind', 'verbose_name_plural': 'Kinderen'},
+            name="kind",
+            options={"verbose_name": "Kind", "verbose_name_plural": "Kinderen"},
         ),
         migrations.AlterModelOptions(
-            name='ouder',
-            options={'verbose_name': 'Ouder', 'verbose_name_plural': 'Ouders'},
+            name="ouder",
+            options={"verbose_name": "Ouder", "verbose_name_plural": "Ouders"},
         ),
         migrations.AlterModelOptions(
-            name='persoon',
-            options={'verbose_name': 'Persoon', 'verbose_name_plural': 'Personen'},
+            name="persoon",
+            options={"verbose_name": "Persoon", "verbose_name_plural": "Personen"},
         ),
     ]

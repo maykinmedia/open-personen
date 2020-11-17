@@ -8,57 +8,76 @@ import privates.storages
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('stufbg', '0002_auto_20201029_1103'),
+        ("stufbg", "0002_auto_20201029_1103"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='stufbgclient',
-            options={'verbose_name': 'StUF-BG Client'},
+            name="stufbgclient",
+            options={"verbose_name": "StUF-BG Client"},
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='certificate',
-            field=privates.fields.PrivateMediaFileField(blank=True, null=True, storage=privates.storages.PrivateMediaFileSystemStorage(), upload_to='certificate/'),
+            model_name="stufbgclient",
+            name="certificate",
+            field=privates.fields.PrivateMediaFileField(
+                blank=True,
+                null=True,
+                storage=privates.storages.PrivateMediaFileSystemStorage(),
+                upload_to="certificate/",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='certificate_key',
-            field=privates.fields.PrivateMediaFileField(blank=True, help_text='Private key for the certificate', null=True, storage=privates.storages.PrivateMediaFileSystemStorage(), upload_to='certificate/'),
+            model_name="stufbgclient",
+            name="certificate_key",
+            field=privates.fields.PrivateMediaFileField(
+                blank=True,
+                help_text="Private key for the certificate",
+                null=True,
+                storage=privates.storages.PrivateMediaFileSystemStorage(),
+                upload_to="certificate/",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='ontvanger_administratie',
-            field=models.CharField(blank=True, max_length=200, verbose_name='administratie'),
+            model_name="stufbgclient",
+            name="ontvanger_administratie",
+            field=models.CharField(
+                blank=True, max_length=200, verbose_name="administratie"
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='ontvanger_gebruiker',
-            field=models.CharField(blank=True, max_length=200, verbose_name='gebruiker'),
+            model_name="stufbgclient",
+            name="ontvanger_gebruiker",
+            field=models.CharField(
+                blank=True, max_length=200, verbose_name="gebruiker"
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='password',
-            field=models.CharField(blank=True, max_length=200, verbose_name='password'),
+            model_name="stufbgclient",
+            name="password",
+            field=models.CharField(blank=True, max_length=200, verbose_name="password"),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='url',
-            field=models.URLField(blank=True, verbose_name='url'),
+            model_name="stufbgclient",
+            name="url",
+            field=models.URLField(blank=True, verbose_name="url"),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='user',
-            field=models.CharField(blank=True, max_length=200, verbose_name='user'),
+            model_name="stufbgclient",
+            name="user",
+            field=models.CharField(blank=True, max_length=200, verbose_name="user"),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='zender_administratie',
-            field=models.CharField(blank=True, max_length=200, verbose_name='administratie'),
+            model_name="stufbgclient",
+            name="zender_administratie",
+            field=models.CharField(
+                blank=True, max_length=200, verbose_name="administratie"
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='zender_gebruiker',
-            field=models.CharField(blank=True, max_length=200, verbose_name='gebruiker'),
+            model_name="stufbgclient",
+            name="zender_gebruiker",
+            field=models.CharField(
+                blank=True, max_length=200, verbose_name="gebruiker"
+            ),
         ),
     ]
