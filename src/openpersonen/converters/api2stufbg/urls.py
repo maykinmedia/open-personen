@@ -1,10 +1,37 @@
 from django.urls import path
+from django.urls import include
 
-from .views import KindView, OuderView, PartnerView, PersoonView
+from vng_api_common import routers
+
+from .views import IngeschrevenPersoonViewSet, KindViewSet, OuderViewSet, PartnerViewSet
+
+
+router = routers.DefaultRouter()
+
+router.register(
+    "ingeschrevenpersonen",
+    IngeschrevenPersoonViewSet,
+    base_name="ingeschrevenpersonen",
+    nested=[
+        routers.nested(
+            "kinderen",
+            KindViewSet,
+            base_name="kinderen",
+        ),
+        routers.nested(
+            "ouders",
+            OuderViewSet,
+            base_name="ouders",
+        ),
+        routers.nested(
+            "partners",
+            PartnerViewSet,
+            base_name="partners",
+        ),
+    ],
+)
+
 
 urlpatterns = [
-    path("persoon", PersoonView.as_view(), name="persoon"),
-    path("kind", KindView.as_view(), name="kind"),
-    path("ouder", OuderView.as_view(), name="ouder"),
-    path("partner", PartnerView.as_view(), name="partner"),
+    path("", include(router.urls)),
 ]
