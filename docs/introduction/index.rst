@@ -21,6 +21,9 @@ with other API's and components in this model.
 .. _`Open Zaak`: https://open-zaak.readthedocs.io/
 .. _`Common Ground`: https://commonground.nl/
 
+.. image:: _assets/startpunt.png
+    :width: 100%
+    :alt: Welcome screen of Open Personen
 
 .. toctree::
    :maxdepth: 1
