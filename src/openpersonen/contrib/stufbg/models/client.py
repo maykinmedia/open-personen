@@ -15,19 +15,26 @@ from solo.models import SingletonModel
 class StufBGClient(SingletonModel):
 
     ontvanger_organisatie = models.CharField(_("organisatie"), max_length=200)
-    ontvanger_administratie = models.CharField(_("administratie"), max_length=200)
     ontvanger_applicatie = models.CharField(_("applicatie"), max_length=200)
-    ontvanger_gebruiker = models.CharField(_("gebruiker"), max_length=200)
+    ontvanger_administratie = models.CharField(
+        _("administratie"), max_length=200, blank=True
+    )
+    ontvanger_gebruiker = models.CharField(_("gebruiker"), max_length=200, blank=True)
     zender_organisatie = models.CharField(_("organisatie"), max_length=200)
-    zender_administratie = models.CharField(_("administratie"), max_length=200)
     zender_applicatie = models.CharField(_("applicatie"), max_length=200)
-    zender_gebruiker = models.CharField(_("gebruiker"), max_length=200)
-    url = models.URLField(_("url"))
-    user = models.CharField(_("user"), max_length=200)
-    password = models.CharField(_("password"), max_length=200)
-    certificate = PrivateMediaFileField(upload_to="certificate/")
+    zender_administratie = models.CharField(
+        _("administratie"), max_length=200, blank=True
+    )
+    zender_gebruiker = models.CharField(_("gebruiker"), max_length=200, blank=True)
+    url = models.URLField(_("url"), blank=True)
+    user = models.CharField(_("user"), max_length=200, blank=True)
+    password = models.CharField(_("password"), max_length=200, blank=True)
+    certificate = PrivateMediaFileField(upload_to="certificate/", blank=True, null=True)
     certificate_key = PrivateMediaFileField(
-        upload_to="certificate/", help_text="Private key for the certificate"
+        upload_to="certificate/",
+        help_text="Private key for the certificate",
+        blank=True,
+        null=True,
     )
 
     class Meta:

@@ -7,10 +7,16 @@
                 <Created>{{ created }}</Created>
                 <Expires>{{ expired }}</Expires>
             </Timestamp>
+            {% if username or password %}
             <UsernameToken>
-                <Username>{{ username }}</Username>
-                <Password>{{ password }}</Password>
+                {% if username %}
+                    <Username>{{ username }}</Username>
+                {% endif %}
+                {% if password %}
+                    <Password>{{ password }}</Password>
+                {% endif %}
             </UsernameToken>
+            {% endif %}
         </Security>
     </soapenv:Header>
     <soapenv:Body>
@@ -23,9 +29,13 @@
                     <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
                     <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
                     <!--Optional:-->
-                    <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
+                    {% if zender_administratie %}
+                        <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
+                    {% endif %}
                     <!--Optional:-->
-                    <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
+                    {% if zender_gebruiker %}
+                        <StUF:gebruiker>{{ zender_gebruiker }}</StUF:gebruiker>
+                    {% endif %}
                 </StUF:zender>
                 <!--Optional:-->
                 <StUF:ontvanger>
@@ -33,9 +43,13 @@
                     <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
                     <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
                     <!--Optional:-->
-                    <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
+                    {% if ontvanger_administratie %}
+                        <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
+                    {% endif %}
                     <!--Optional:-->
-                    <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
+                    {% if ontvanger_gebruiker %}
+                        <StUF:gebruiker>{{ ontvanger_gebruiker }}</StUF:gebruiker>
+                    {% endif %}
                 </StUF:ontvanger>
                 <!--Optional:-->
                 <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
