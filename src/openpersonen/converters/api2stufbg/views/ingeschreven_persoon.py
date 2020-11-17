@@ -1,10 +1,9 @@
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-
-from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from rest_framework.viewsets import ViewSet
 
+from openpersonen.api.filters import Backend, IngeschrevenPersoonFilter
 from openpersonen.contrib.stufbg.models import StufBGClient
 
 
@@ -106,6 +105,8 @@ class IngeschrevenPersoonViewSet(ViewSet):
 
     def retrieve(self, request, *args, **kwargs):
 
-        data = StufBGClient.get_solo().get_persoon_request_data(bsn=kwargs["burgerservicenummer"])
+        data = StufBGClient.get_solo().get_persoon_request_data(
+            bsn=kwargs["burgerservicenummer"]
+        )
 
         return Response(data=data, status=HTTP_200_OK)
