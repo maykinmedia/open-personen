@@ -2,6 +2,12 @@ from django.apps import apps
 
 from openpersonen.contrib.base import BaseBackend
 from openpersonen.contrib.stufbg.converters import *
+from openpersonen.utils.instance_dicts import (
+    convert_xml_to_kind_dict,
+    convert_xml_to_ouder_dict,
+    convert_xml_to_partner_dict,
+    convert_xml_to_persoon_dicts,
+)
 
 
 class BackEnd(BaseBackend):
@@ -16,22 +22,22 @@ class BackEnd(BaseBackend):
         else:
             response = StufBGClient.get_solo().get_ingeschreven_persoon(filters=filters)
 
-        return convert_response_to_persoon_dicts(response)
+        return convert_xml_to_persoon_dicts(response.content)
 
     def get_kind(self, bsn, id=None):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
         response = StufBGClient.get_solo().get_kind(bsn)
-        return convert_response_to_kind_dict(response, id=id)
+        return convert_xml_to_kind_dict(response.content, id=id)
 
     def get_ouder(self, bsn, id=None):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
         response = StufBGClient.get_solo().get_ouder(bsn)
-        return convert_response_to_ouder_dict(response, id=id)
+        return convert_xml_to_ouder_dict(response.content, id=id)
 
     def get_partner(self, bsn, id=None):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")
         response = StufBGClient.get_solo().get_partner(bsn)
-        return convert_response_to_partner_dict(response, id=id)
+        return convert_xml_to_partner_dict(response.content, id=id)
 
     def get_partner_historie(self, bsn, filters):
         StufBGClient = apps.get_model("stufbg", "StufBGClient")

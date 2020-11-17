@@ -1,5 +1,7 @@
 from django.conf import settings
 
+import xmltodict
+
 from openpersonen.utils.helpers import calculate_age, convert_empty_instances
 
 from .kind import get_kind_instance_dict
@@ -805,3 +807,28 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
     convert_empty_instances(ingeschreven_persoon_dict)
 
     return ingeschreven_persoon_dict
+
+
+def convert_xml_to_persoon_dicts(xml):
+    dict_object = xmltodict.parse(xml)
+
+    try:
+        antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
+            "ns:antwoord"
+        ]["ns:object"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["object"]
+        prefix = "BG"
+
+    if isinstance(antwoord_object, list):
+        result = []
+        for antwood_dict in antwoord_object:
+            result_dict = get_persoon_instance_dict(antwood_dict, prefix)
+            result.append(result_dict)
+    else:
+        result = [get_persoon_instance_dict(antwoord_object, prefix)]
+
+    return result

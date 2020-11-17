@@ -1,5 +1,7 @@
 from django.conf import settings
 
+import xmltodict
+
 from openpersonen.utils.helpers import convert_empty_instances
 
 
@@ -173,3 +175,35 @@ def get_ouder_instance_dict(instance_xml_dict, prefix):
     convert_empty_instances(ouder_dict)
 
     return ouder_dict
+
+
+def convert_xml_to_ouder_dict(xml, id=None):
+    dict_object = xmltodict.parse(xml)
+
+    try:
+        antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
+            "ns:antwoord"
+        ]["ns:object"]["ns:inp.heeftAlsOuders"]
+        prefix = "ns"
+    except KeyError:
+        antwoord_object = dict_object["env:Envelope"]["env:Body"]["npsLa01"][
+            "BG:antwoord"
+        ]["object"]["BG:inp.heeftAlsOuders"]
+        prefix = "BG"
+
+    result = []
+    if isinstance(antwoord_object, list):
+        for antwood_dict in antwoord_object:
+            result_dict = get_ouder_instance_dict(
+                antwood_dict[f"{prefix}:gerelateerde"], prefix
+            )
+            if not id or id == result_dict["burgerservicenummer"]:
+                result.append(result_dict)
+    else:
+        result.append(
+            get_ouder_instance_dict(antwoord_object[f"{prefix}:gerelateerde"], prefix)
+        )
+        if id and result[0]["burgerservicenummer"] != id:
+            result = []
+
+    return result
