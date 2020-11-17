@@ -1,10 +1,8 @@
-from django.urls import path
-from django.urls import include
+from django.urls import include, path
 
 from vng_api_common import routers
 
 from .views import IngeschrevenPersoonViewSet, KindViewSet, OuderViewSet, PartnerViewSet
-
 
 router = routers.DefaultRouter()
 

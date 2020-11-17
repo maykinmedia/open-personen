@@ -10,12 +10,12 @@ class NestedViewSet(ViewSet):
     lookup_field = "id"
     lookup_value_regex = "[0-9]{9}"
 
-    backend_function_name = None
+    backend_template_name = None
 
     def _get_response(self, bsn):
-        func = getattr(StufBGClient.get_solo(), self.backend_function_name)
-
-        data = func(bsn=bsn)
+        data = StufBGClient.get_solo().get_nested_request_data(
+            self.backend_template_name, bsn
+        )
 
         return Response(data=data, status=HTTP_200_OK)
 

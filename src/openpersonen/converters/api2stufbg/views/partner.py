@@ -2,4 +2,4 @@ from openpersonen.converters.api2stufbg.views.base import NestedViewSet
 
 
 class PartnerViewSet(NestedViewSet):
-    backend_function_name = 'get_partner'
+    backend_template_name = "request/RequestPartner.xml"
