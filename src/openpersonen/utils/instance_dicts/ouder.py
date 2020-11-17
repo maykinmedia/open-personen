@@ -13,7 +13,7 @@ def get_ouder_instance_dict(instance_xml_dict, prefix):
         "datumIngangFamilierechtelijkeBetrekking": {
             "dag": int(
                 instance_xml_dict.get(
-                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
+                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
             ),
             "datum": instance_xml_dict.get(
@@ -21,111 +21,153 @@ def get_ouder_instance_dict(instance_xml_dict, prefix):
             ),
             "jaar": int(
                 instance_xml_dict.get(
-                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
+                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
             ),
             "maand": int(
                 instance_xml_dict.get(
-                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "00000000"
+                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END]
             ),
         },
         "naam": {
-            "geslachtsnaam": instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string"),
-            "voorletters": instance_xml_dict.get(f"{prefix}:voorletters", "string"),
-            "voornamen": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
-            "voorvoegsel": instance_xml_dict.get(
+            "geslachtsnaam": instance_xml_dict.get("gerelateerde", {}).get(
+                f"{prefix}:geslachtsnaam", "string"
+            ),
+            "voorletters": instance_xml_dict.get("gerelateerde", {}).get(
+                f"{prefix}:voorletters", "string"
+            ),
+            "voornamen": instance_xml_dict.get("gerelateerde", {}).get(
+                f"{prefix}:voornamen", "string"
+            ),
+            "voorvoegsel": instance_xml_dict.get("gerelateerde", {}).get(
                 f"{prefix}:voorvoegselGeslachtsnaam", "string"
             ),
             "inOnderzoek": {
-                "geslachtsnaam": bool(
-                    instance_xml_dict.get(f"{prefix}:geslachtsnaam", "string")
+                "geslachtsnaam": any(
+                    [
+                        "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                        for in_onderzoek in instance_xml_dict.get(
+                            f"{prefix}:inOnderzoek", []
+                        )
+                    ]
                 ),
-                "voornamen": bool(
-                    instance_xml_dict.get(f"{prefix}:voornamen", "string")
+                "voornamen": any(
+                    [
+                        "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                        for in_onderzoek in instance_xml_dict.get(
+                            f"{prefix}:inOnderzoek", []
+                        )
+                    ]
                 ),
-                "voorvoegsel": bool(
-                    instance_xml_dict.get(
-                        f"{prefix}:voorvoegselGeslachtsnaam", "string"
-                    )
+                "voorvoegsel": any(
+                    [
+                        "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                        for in_onderzoek in instance_xml_dict.get(
+                            f"{prefix}:inOnderzoek", []
+                        )
+                    ]
                 ),
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
             },
         },
         "inOnderzoek": {
-            "burgerservicenummer": bool(
-                instance_xml_dict.get(f"{prefix}:inp.bsn", "string")
+            "burgerservicenummer": any(
+                [
+                    "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                    for in_onderzoek in instance_xml_dict.get(
+                        f"{prefix}:inOnderzoek", []
+                    )
+                ]
             ),
-            "datumIngangFamilierechtelijkeBetrekking": bool(
-                instance_xml_dict.get(
-                    f"{prefix}:datumIngangFamilierechtelijkeBetrekking", "string"
-                )
-            ),
-            "geslachtsaanduiding": bool(
-                instance_xml_dict.get(f"{prefix}:geslachtsaanduiding", "string")
+            "datumIngangFamilierechtelijkeBetrekking": "01-01-1990",
+            "geslachtsaanduiding": any(
+                [
+                    "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                    for in_onderzoek in instance_xml_dict.get(
+                        f"{prefix}:inOnderzoek", []
+                    )
+                ]
             ),
             "datumIngangOnderzoek": {
-                "dag": 0,
-                "datum": "string",
-                "jaar": 0,
-                "maand": 0,
+                "dag": 1,
+                "datum": "01-01-1990",
+                "jaar": 1900,
+                "maand": 1,
             },
         },
         "geboorte": {
             "datum": {
                 "dag": int(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
                 "datum": instance_xml_dict.get(f"{prefix}:geboortedatum", "string"),
                 "jaar": int(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
                 ),
                 "maand": int(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "00000000")[
+                    instance_xml_dict.get(f"{prefix}:geboortedatum", "19000101")[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
                 ),
             },
             "land": {
-                "code": "0000",
+                "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
                 "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.geboorteLand", "string"
                 ),
             },
             "plaats": {
-                "code": "0000",
+                "code": instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string"),
                 "omschrijving": instance_xml_dict.get(
                     f"{prefix}:inp.geboorteplaats", "string"
                 ),
             },
             "inOnderzoek": {
-                "datum": bool(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum", "string")
+                "datum": any(
+                    [
+                        "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                        for in_onderzoek in instance_xml_dict.get(
+                            f"{prefix}:inOnderzoek", []
+                        )
+                    ]
                 ),
-                "land": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string")
+                "land": any(
+                    [
+                        "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                        for in_onderzoek in instance_xml_dict.get(
+                            f"{prefix}:inOnderzoek", []
+                        )
+                    ]
                 ),
-                "plaats": bool(
-                    instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string")
+                "plaats": any(
+                    [
+                        "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
+                        for in_onderzoek in instance_xml_dict.get(
+                            f"{prefix}:inOnderzoek", []
+                        )
+                    ]
                 ),
                 "datumIngangOnderzoek": {
-                    "dag": 0,
-                    "datum": "string",
-                    "jaar": 0,
-                    "maand": 0,
+                    "dag": 1,
+                    "datum": "01-01-1900",
+                    "jaar": 1900,
+                    "maand": 1,
                 },
             },
         },
-        "geheimhoudingPersoonsgegevens": True,
+        "geheimhoudingPersoonsgegevens": instance_xml_dict.get(
+            "inp.indicatieGeheim", False
+        ),
     }
 
     convert_empty_instances(ouder_dict)
