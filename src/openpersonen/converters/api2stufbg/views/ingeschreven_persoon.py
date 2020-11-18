@@ -12,12 +12,6 @@ class IngeschrevenPersoonViewSet(ViewSet):
     lookup_field = "burgerservicenummer"
     lookup_value_regex = "[0-9]{9}"
     filter_class = IngeschrevenPersoonFilter
-    filter_backends = [
-        Backend,
-    ]
-
-    def get_filter_parameters(self):
-        return []
 
     @staticmethod
     def combination_1(filters_values_dict):
