@@ -25,6 +25,23 @@ class TestPersoonView(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, expected_data)
 
+    @freeze_time("2020-11-17")
+    @patch("uuid.uuid4")
+    def test_specific_persoon_view(self, uuid_mock):
+        uuid_mock.return_value = "00000000-0000-0000-0000-000000000000"
+        bsn = 123456789
+        expected_data = StufBGClient.get_solo().get_persoon_request_data(bsn=bsn)
+
+        response = self.client.get(
+            reverse(
+                "api2stufbg:ingeschrevenpersonen-detail",
+                kwargs={"burgerservicenummer": bsn},
+            )
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, expected_data)
+
 
 class TestOuderView(APITestCase):
     @freeze_time("2020-11-17")
