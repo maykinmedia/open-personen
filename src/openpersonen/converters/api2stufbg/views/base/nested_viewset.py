@@ -21,6 +21,3 @@ class NestedViewSet(ViewSet):
 
     def list(self, request, *args, **kwargs):
         return self._get_response(kwargs["ingeschrevenpersonen_burgerservicenummer"])
-
-    def retrieve(self, request, *args, **kwargs):
-        return self._get_response(kwargs["ingeschrevenpersonen_burgerservicenummer"])
