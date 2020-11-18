@@ -48,7 +48,7 @@ class StufBGClient(SingletonModel):
             "Content-Type": "application/soap+xml",
         }
 
-    def get_request_base_context(self):
+    def _get_request_base_context(self):
         return {
             "created": timezone.now(),
             "expired": timezone.now() + timedelta(minutes=5),
@@ -78,7 +78,7 @@ class StufBGClient(SingletonModel):
         return response
 
     def _make_historie_request(self, request_file, additional_context):
-        request_context = self.get_request_base_context()
+        request_context = self._get_request_base_context()
         request_context.update(additional_context)
 
         data = loader.render_to_string(request_file, request_context)
@@ -86,7 +86,7 @@ class StufBGClient(SingletonModel):
         return self._make_request(data)
 
     def get_persoon_request_data(self, bsn=None, filters=None):
-        context = self.get_request_base_context()
+        context = self._get_request_base_context()
         if bsn:
             context.update({"bsn": bsn})
         if filters:
@@ -97,7 +97,7 @@ class StufBGClient(SingletonModel):
         return loader.render_to_string(template, context)
 
     def get_nested_request_data(self, template, bsn):
-        context = self.get_request_base_context()
+        context = self._get_request_base_context()
         context.update({"bsn": bsn})
 
         return loader.render_to_string(template, context)
