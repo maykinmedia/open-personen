@@ -92,5 +92,4 @@ urlpatterns = [
     ),
     # actual API
     path("", include(router.urls)),
-    path("convert/", include("openpersonen.converters.urls")),
 ]
