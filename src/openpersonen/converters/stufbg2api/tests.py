@@ -16,7 +16,7 @@ class TestPersoonView(APITestCase):
         data = loader.render_to_string("response/ResponseOneIngeschrevenPersoon.xml")
 
         response = self.client.post(
-            reverse("stufbg2api:ingeschrevenpersonen-create"),
+            reverse("stufbg2api:ingeschrevenpersonen-list"),
             data,
             content_type="application/xml",
         )
@@ -29,7 +29,12 @@ class TestOuderView(APITestCase):
         data = loader.render_to_string("response/ResponseOneOuder.xml")
 
         response = self.client.post(
-            reverse("stufbg2api:ouders-create"), data, content_type="application/xml"
+            reverse(
+                "stufbg2api:ouders-list",
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 123456789},
+            ),
+            data,
+            content_type="application/xml",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -40,7 +45,12 @@ class TestKindView(APITestCase):
         data = loader.render_to_string("response/ResponseOneKind.xml")
 
         response = self.client.post(
-            reverse("stufbg2api:kinderen-create"), data, content_type="application/xml"
+            reverse(
+                "stufbg2api:kinderen-list",
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 123456789},
+            ),
+            data,
+            content_type="application/xml",
         )
 
         self.assertEqual(response.status_code, 200)
@@ -51,7 +61,12 @@ class TestPartnerView(APITestCase):
         data = loader.render_to_string("response/ResponseOnePartner.xml")
 
         response = self.client.post(
-            reverse("stufbg2api:partners-create"), data, content_type="application/xml"
+            reverse(
+                "stufbg2api:partners-list",
+                kwargs={"ingeschrevenpersonen_burgerservicenummer": 123456789},
+            ),
+            data,
+            content_type="application/xml",
         )
 
         self.assertEqual(response.status_code, 200)
