@@ -23,7 +23,7 @@ developmentStatus: beta
 
 description:
   nl:
-    shortDescription: API's voor Open Personen ophalen
+    shortDescription: Een moderne Basisregistratie Personen (BRP) API om persoonsgegevens op te halen.
     documentation: 'https://open-personen.readthedocs.io/'
     apiDocumentation: 'https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/specificatie/openapi.yaml'
     features:
