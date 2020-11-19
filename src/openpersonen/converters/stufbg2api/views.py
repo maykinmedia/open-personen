@@ -11,19 +11,19 @@ from openpersonen.utils.instance_dicts import (
 
 
 class PersoonView(APIView):
-    action = "list"
+    action = "create"
     basename = "ingeschrevenpersonen"
 
     def post(self, request):
         data = convert_xml_to_persoon_dicts(request.body)
         return Response(data=data, status=status.HTTP_200_OK)
 
-    def list(self, request):
-        pass
+    def create(self, request):
+        return self.post(request)
 
 
 class OuderView(APIView):
-    action = "list"
+    action = "create"
     basename = "ouders"
 
     def post(self, request):
@@ -31,12 +31,12 @@ class OuderView(APIView):
         data = convert_xml_to_ouder_dict(request.body)
         return Response(data=data, status=status.HTTP_200_OK)
 
-    def list(self, request):
-        pass
+    def create(self, request):
+        return self.post(request)
 
 
 class KindView(APIView):
-    action = "list"
+    action = "create"
     basename = "kinderen"
 
     def post(self, request):
@@ -44,12 +44,12 @@ class KindView(APIView):
         data = convert_xml_to_kind_dict(request.body)
         return Response(data=data, status=status.HTTP_200_OK)
 
-    def list(self, request):
-        pass
+    def create(self, request):
+        return self.post(request)
 
 
 class PartnerView(APIView):
-    action = "list"
+    action = "create"
     basename = "partners"
 
     def post(self, request):
@@ -57,5 +57,5 @@ class PartnerView(APIView):
         data = convert_xml_to_partner_dict(request.body)
         return Response(data=data, status=status.HTTP_200_OK)
 
-    def list(self, request):
-        pass
+    def create(self, request):
+        return self.post(request)

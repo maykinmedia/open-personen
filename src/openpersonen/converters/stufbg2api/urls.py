@@ -4,9 +4,11 @@ from .views import KindView, OuderView, PartnerView, PersoonView
 
 urlpatterns = [
     path(
-        "ingeschrevenpersonen", PersoonView.as_view(), name="ingeschrevenpersonen-list"
+        "ingeschrevenpersonen",
+        PersoonView.as_view(),
+        name="ingeschrevenpersonen-create",
     ),
-    path("kinderen", KindView.as_view(), name="kinderen-list"),
-    path("ouders", OuderView.as_view(), name="ouders-list"),
-    path("partners", PartnerView.as_view(), name="partners-list"),
+    path("kinderen", KindView.as_view(), name="kinderen-create"),
+    path("ouders", OuderView.as_view(), name="ouders-create"),
+    path("partners", PartnerView.as_view(), name="partners-create"),
 ]
