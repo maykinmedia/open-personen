@@ -1,8 +1,8 @@
 import os
 
-from django.urls import include, path
 from django.conf import settings
 from django.conf.urls import url
+from django.urls import include, path
 
 from vng_api_common.schema import SchemaView as _SchemaView
 
@@ -11,7 +11,9 @@ from openpersonen.converters.schema import info
 
 # set the path to schema file
 class SchemaView(_SchemaView):
-    schema_path = os.path.join(settings.BASE_DIR, "src", "openpersonen", "converters", "openapi.yaml")
+    schema_path = os.path.join(
+        settings.BASE_DIR, "src", "openpersonen", "converters", "openapi.yaml"
+    )
     info = info
 
     def get(self, request, version="", *args, **kwargs):
@@ -28,7 +30,7 @@ urlpatterns = [
         SchemaView.with_ui(
             # "redoc"
         ),
-        name="schema-ingeschreven-persoon",
+        name="schema-converters",
     ),
     path(
         "api2stufbg/",
