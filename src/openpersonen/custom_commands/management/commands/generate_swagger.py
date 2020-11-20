@@ -138,9 +138,6 @@ class Command(generate_swagger.Command):
         if request and api_version:
             request.version = api_version
 
-        # generator = self.get_schema_generator(
-        #     generator_class_name, info, settings.API_VERSION, api_url
-        # )
         generator_class = swagger_settings.DEFAULT_GENERATOR_CLASS
         generator = generator_class(
             info=info, version=api_version, url=api_url, urlconf=urlconf
