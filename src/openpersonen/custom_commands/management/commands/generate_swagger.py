@@ -88,7 +88,7 @@ class Command(generate_swagger.Command):
         private,
         generator_class_name,
         info=None,
-        urlconf='openpersonen.api.urls',
+        urlconf="openpersonen.api.urls",
         **options,
     ):
         # disable logs of WARNING and below
@@ -143,10 +143,7 @@ class Command(generate_swagger.Command):
         # )
         generator_class = swagger_settings.DEFAULT_GENERATOR_CLASS
         generator = generator_class(
-            info=info,
-            version=api_version,
-            url=api_url,
-            urlconf=urlconf
+            info=info, version=api_version, url=api_url, urlconf=urlconf
         )
 
         schema = self.get_schema(generator, request, not private)
