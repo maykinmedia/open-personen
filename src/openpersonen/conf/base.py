@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     # 'django.contrib.sitemaps',
     # External applications.
     "axes",
+    "openpersonen.custom_commands",  # before vng_api_common to override the management command
     "vng_api_common",  # before drf_yasg to override the management command
     "drf_yasg",
     "rest_framework",
