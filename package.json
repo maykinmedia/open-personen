@@ -10,7 +10,8 @@
     "test": "gulp test",
     "build": "gulp build",
     "watch": "gulp watch",
-    "convert": "swagger2openapi ./src/swagger2.0.json -o ./src/openapi.yaml"
+    "convert": "swagger2openapi ./src/swagger2.0.json -o ./src/openapi.yaml",
+    "convert-converters": "swagger2openapi ./src/openpersonen/converters/swagger2.0.json -o ./src/openpersonen/converters/openapi.yaml"
   },
   "repository": {
     "type": "git",

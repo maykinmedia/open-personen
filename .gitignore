@@ -42,3 +42,4 @@ src/openpersonen/static/js/
 # Auto generated files
 src/resources.md
 src/swagger2.0.json
+src/openpersonen/converters/swagger2.0.json

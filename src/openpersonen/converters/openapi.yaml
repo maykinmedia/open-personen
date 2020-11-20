@@ -1,0 +1,1298 @@
+openapi: 3.0.0
+info:
+  title: Bevragingen ingeschreven personen
+  description: >
+    
+    API voor het ontsluiten van gegevens van ingeschreven personen en aanverwante gegevens uit de GBA en RNI.
+
+    Met deze API worden de actuele gegevens van ingeschreven personen, hun kinderen, partners en ouders ontsloten.
+
+
+    Heeft een persoon bijvoorbeeld geen geldige nationaliteit, dan wordt nationaliteit niet geretourneerd.
+
+
+    Heeft een persoon een beëindigd partnerschap of huwelijk, dan wordt de partner niet geretourneerd.
+  contact:
+    url: https://www.maykinmedia.nl
+    email: support@maykinmedia.nl
+  license:
+    name: EUPL 1.2
+    url: https://opensource.org/licenses/EUPL-1.2
+  version: 1.0.0
+security:
+  - Basic: []
+paths:
+  /api2stufbg/ingeschrevenpersonen:
+    get:
+      operationId: api2stufbg_ingeschrevenpersonen_list
+      description: ""
+      responses:
+        "200":
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - api2stufbg
+    parameters: []
+  "/api2stufbg/ingeschrevenpersonen/{burgerservicenummer}":
+    get:
+      operationId: api2stufbg_ingeschrevenpersonen_read
+      description: ""
+      responses:
+        "200":
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "404":
+          description: Not found
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - api2stufbg
+    parameters:
+      - name: burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: "[0-9]{9}"
+  "/api2stufbg/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen":
+    get:
+      operationId: api2stufbg_ingeschrevenpersonen_kinderen_list
+      description: ""
+      responses:
+        "200":
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - api2stufbg
+    parameters:
+      - name: ingeschrevenpersonen_burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+  "/api2stufbg/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders":
+    get:
+      operationId: api2stufbg_ingeschrevenpersonen_ouders_list
+      description: ""
+      responses:
+        "200":
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - api2stufbg
+    parameters:
+      - name: ingeschrevenpersonen_burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+  "/api2stufbg/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners":
+    get:
+      operationId: api2stufbg_ingeschrevenpersonen_partners_list
+      description: ""
+      responses:
+        "200":
+          description: OK
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - api2stufbg
+    parameters:
+      - name: ingeschrevenpersonen_burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+  /stufbg2api/ingeschrevenpersonen:
+    post:
+      operationId: stufbg2api_ingeschrevenpersonen_create
+      description: ""
+      parameters:
+        - name: Content-Type
+          in: header
+          description: Content type van de verzoekinhoud.
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/hal+json
+      responses:
+        "201":
+          description: Created
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL waar de resource leeft.
+        "400":
+          description: Bad request
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ValidatieFout"
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - stufbg2api
+    parameters: []
+  "/stufbg2api/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/kinderen":
+    post:
+      operationId: stufbg2api_ingeschrevenpersonen_kinderen_create
+      description: ""
+      parameters:
+        - name: Content-Type
+          in: header
+          description: Content type van de verzoekinhoud.
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/hal+json
+      responses:
+        "201":
+          description: Created
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL waar de resource leeft.
+        "400":
+          description: Bad request
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ValidatieFout"
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - stufbg2api
+    parameters:
+      - name: ingeschrevenpersonen_burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+  "/stufbg2api/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/ouders":
+    post:
+      operationId: stufbg2api_ingeschrevenpersonen_ouders_create
+      description: ""
+      parameters:
+        - name: Content-Type
+          in: header
+          description: Content type van de verzoekinhoud.
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/hal+json
+      responses:
+        "201":
+          description: Created
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL waar de resource leeft.
+        "400":
+          description: Bad request
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ValidatieFout"
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - stufbg2api
+    parameters:
+      - name: ingeschrevenpersonen_burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+  "/stufbg2api/ingeschrevenpersonen/{ingeschrevenpersonen_burgerservicenummer}/partners":
+    post:
+      operationId: stufbg2api_ingeschrevenpersonen_partners_create
+      description: ""
+      parameters:
+        - name: Content-Type
+          in: header
+          description: Content type van de verzoekinhoud.
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/hal+json
+      responses:
+        "201":
+          description: Created
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL waar de resource leeft.
+        "400":
+          description: Bad request
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ValidatieFout"
+        "401":
+          description: Unauthorized
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "403":
+          description: Forbidden
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "406":
+          description: Not acceptable
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "409":
+          description: Conflict
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "410":
+          description: Gone
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "415":
+          description: Unsupported media type
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "429":
+          description: Too many requests
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+        "500":
+          description: Internal server error
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: "Geeft een specifieke API-versie aan in de context van een
+                specifieke aanroep. Voorbeeld: 1.2.1."
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Fout"
+      tags:
+        - stufbg2api
+    parameters:
+      - name: ingeschrevenpersonen_burgerservicenummer
+        in: path
+        required: true
+        schema:
+          type: string
+tags:
+  - name: ingeschrevenpersonen
+    description: ""
+servers:
+  - url: /
+components:
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+  schemas:
+    Fout:
+      required:
+        - code
+        - title
+        - status
+        - detail
+        - instance
+      type: object
+      properties:
+        type:
+          title: Type
+          description: URI referentie naar het type fout, bedoeld voor developers
+          type: string
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
+          minLength: 1
+        title:
+          title: Title
+          description: Generieke titel voor het type fout
+          type: string
+          minLength: 1
+        status:
+          title: Status
+          description: De HTTP status code
+          type: integer
+        detail:
+          title: Detail
+          description: Extra informatie bij de fout, indien beschikbaar
+          type: string
+          minLength: 1
+        instance:
+          title: Instance
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze
+            kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          type: string
+          minLength: 1
+    FieldValidationError:
+      required:
+        - name
+        - code
+        - reason
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Naam van het veld met ongeldige gegevens
+          type: string
+          minLength: 1
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
+          minLength: 1
+        reason:
+          title: Reason
+          description: Uitleg wat er precies fout is met de gegevens
+          type: string
+          minLength: 1
+    ValidatieFout:
+      required:
+        - code
+        - title
+        - status
+        - detail
+        - instance
+        - invalid_params
+      type: object
+      properties:
+        type:
+          title: Type
+          description: URI referentie naar het type fout, bedoeld voor developers
+          type: string
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
+          minLength: 1
+        title:
+          title: Title
+          description: Generieke titel voor het type fout
+          type: string
+          minLength: 1
+        status:
+          title: Status
+          description: De HTTP status code
+          type: integer
+        detail:
+          title: Detail
+          description: Extra informatie bij de fout, indien beschikbaar
+          type: string
+          minLength: 1
+        instance:
+          title: Instance
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze
+            kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          type: string
+          minLength: 1
+        invalid_params:
+          type: array
+          items:
+            $ref: "#/components/schemas/FieldValidationError"
