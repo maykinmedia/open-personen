@@ -1,17 +1,14 @@
 openapi: 3.0.0
 info:
-  title: Bevragingen ingeschreven personen
+  title: Converteren ingeschreven personen
   description: >
     
-    API voor het ontsluiten van gegevens van ingeschreven personen en aanverwante gegevens uit de GBA en RNI.
+    API voor het converteren van Open Personen API-verzoeken naar StUF-BG-verzoeken en
 
-    Met deze API worden de actuele gegevens van ingeschreven personen, hun kinderen, partners en ouders ontsloten.
-
-
-    Heeft een persoon bijvoorbeeld geen geldige nationaliteit, dan wordt nationaliteit niet geretourneerd.
+    StUF-BG-antwoorden naar Open Personen API-antwoorden.
 
 
-    Heeft een persoon een beëindigd partnerschap of huwelijk, dan wordt de partner niet geretourneerd.
+    Deze API geen externe verzoeken of data manipulatie te doen, zet het alleen data tussen verschillende formaten.
   contact:
     url: https://www.maykinmedia.nl
     email: support@maykinmedia.nl

@@ -16,6 +16,7 @@ echo "Generating Swagger schema"
     --format=json \
     --mock-request \
     --url https://example.com/api/v1 \
+    --info openpersonen.converters.schema.info \
     --urlconf openpersonen.converters.urls
 
 echo "Converting Swagger to OpenAPI 3.0..."
