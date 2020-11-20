@@ -61,7 +61,7 @@ class Command(generate_swagger.Command):
         parser.add_argument(
             "--urlconf",
             dest="urlconf",
-            default=None,
+            default="openpersonen.api.urls",
             help="Urlconf for schema generator",
         )
 
@@ -140,7 +140,7 @@ class Command(generate_swagger.Command):
 
         generator_class = swagger_settings.DEFAULT_GENERATOR_CLASS
         generator = generator_class(
-            info=info, version=api_version, url=api_url, urlconf="openpersonen.api.urls"
+            info=info, version=api_version, url=api_url, urlconf=urlconf
         )
 
         schema = self.get_schema(generator, request, not private)
