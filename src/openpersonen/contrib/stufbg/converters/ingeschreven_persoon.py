@@ -809,7 +809,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "adellijkeTitelPredikaat"
         )
 
-    ingeschreven_persoon_dict["aanhef"] = get_aanhef(
+    ingeschreven_persoon_dict["naam"]["aanhef"] = get_aanhef(
         ingeschreven_persoon_dict,
         instance_xml_dict.get("adellijkeTitelPredikaat"),
         partners_title,
