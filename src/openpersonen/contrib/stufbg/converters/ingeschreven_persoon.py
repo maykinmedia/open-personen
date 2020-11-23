@@ -3,6 +3,7 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
+from openpersonen.features import get_aanhef
 
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
@@ -803,6 +804,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         ingeschreven_persoon_dict["partners"].append(
             get_partner_instance_dict(partner_info, prefix)
         )
+
+    ingeschreven_persoon_dict["aanhef"] = get_aanhef(ingeschreven_persoon_dict)
 
     convert_empty_instances(ingeschreven_persoon_dict)
 

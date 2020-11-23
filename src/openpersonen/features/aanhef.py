@@ -1,7 +1,8 @@
 
 
-def get_aanhef(gender_designation):
+def get_aanhef(persoon_dict):
+    gender_designation = persoon_dict['geslachtsaanduiding']
     if gender_designation == "V":
-        return "Geachte mevrouw"
+        return "mevrouw"
     else:
-        return "Geachte heer"
+        return "heer"
