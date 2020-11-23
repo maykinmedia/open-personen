@@ -30,9 +30,29 @@ def get_saluation_from_title(title):
         return 'Hoogwelgeboren heer'
 
 
-def get_aanhef(persoon_dict, title):
+def get_saluation_from_partner_title(title):
+    """
+    Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L62-L71
+    """
+    if title == 'Baron':
+        return 'Hoogwelgeboren vrouwe'
+    if title == 'Graaf':
+        return 'Hooggeboren vrouwe'
+    if title == 'Hertog':
+        return 'Hoogwelgeboren vrouwe'
+    if title == 'Markies':
+        return 'Hoogwelgeboren vrouwe'
+    if title == 'Prins':
+        return 'Hoogheid'
+
+
+def get_aanhef(persoon_dict, title, partner_title):
 
     salutation = get_saluation_from_title(title)
+    if salutation:
+        return salutation
+
+    salutation = get_saluation_from_partner_title(partner_title)
     if salutation:
         return salutation
 
