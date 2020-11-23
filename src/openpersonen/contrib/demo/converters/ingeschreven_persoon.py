@@ -1,6 +1,7 @@
 from django.conf import settings
 
 from openpersonen.contrib.utils import calculate_age, is_valid_date_format
+from openpersonen.features import get_aanhef
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
@@ -46,7 +47,7 @@ def convert_persoon_to_instance_dict(persoon):
                     else 0,
                 },
             },
-            "aanhef": "string",
+            "aanhef": get_aanhef(persoon.geslachtsaanduiding),
             "aanschrijfwijze": "string",
             "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": persoon.aanduiding_naamgebruik,
