@@ -47,7 +47,6 @@ def convert_persoon_to_instance_dict(persoon):
                     else 0,
                 },
             },
-            "aanhef": get_aanhef(persoon.geslachtsaanduiding),
             "aanschrijfwijze": "string",
             "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": persoon.aanduiding_naamgebruik,
@@ -665,5 +664,7 @@ def convert_persoon_to_instance_dict(persoon):
         ingeschreven_persoon_dict["ouders"].append(
             convert_ouder_instance_to_dict(ouder)
         )
+
+    ingeschreven_persoon_dict["aanhef"] = get_aanhef(ingeschreven_persoon_dict)
 
     return ingeschreven_persoon_dict
