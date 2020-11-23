@@ -800,12 +800,16 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             get_ouder_instance_dict(ouder_info, prefix)
         )
 
+    partners_title = None
     for partner_info in partners_info:
         ingeschreven_persoon_dict["partners"].append(
             get_partner_instance_dict(partner_info, prefix)
         )
+        partners_title = partner_info[f'{prefix}:gerelateerde'].get('adellijkeTitelPredikaat')
 
-    ingeschreven_persoon_dict["aanhef"] = get_aanhef(ingeschreven_persoon_dict, instance_xml_dict.get('adellijkeTitelPredikaat'))
+    ingeschreven_persoon_dict["aanhef"] = get_aanhef(ingeschreven_persoon_dict,
+                                                     instance_xml_dict.get('adellijkeTitelPredikaat'),
+                                                     partners_title)
 
     convert_empty_instances(ingeschreven_persoon_dict)
 
