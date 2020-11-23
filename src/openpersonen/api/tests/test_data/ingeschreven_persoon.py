@@ -50,7 +50,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "voorletters": "M.",
             "voornamen": "Media",
             "voorvoegsel": "van",
-            "aanhef": "Media",
+            "aanhef": "Geachte heer",
             "aanschrijfwijze": "string",
             "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": "E",
