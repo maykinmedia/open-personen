@@ -805,11 +805,15 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         ingeschreven_persoon_dict["partners"].append(
             get_partner_instance_dict(partner_info, prefix)
         )
-        partners_title = partner_info[f'{prefix}:gerelateerde'].get('adellijkeTitelPredikaat')
+        partners_title = partner_info[f"{prefix}:gerelateerde"].get(
+            "adellijkeTitelPredikaat"
+        )
 
-    ingeschreven_persoon_dict["aanhef"] = get_aanhef(ingeschreven_persoon_dict,
-                                                     instance_xml_dict.get('adellijkeTitelPredikaat'),
-                                                     partners_title)
+    ingeschreven_persoon_dict["aanhef"] = get_aanhef(
+        ingeschreven_persoon_dict,
+        instance_xml_dict.get("adellijkeTitelPredikaat"),
+        partners_title,
+    )
 
     convert_empty_instances(ingeschreven_persoon_dict)
 

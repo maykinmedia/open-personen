@@ -659,7 +659,9 @@ def convert_persoon_to_instance_dict(persoon):
         ingeschreven_persoon_dict["partners"].append(
             convert_partner_instance_to_dict(partner)
         )
-        partners_title = partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
+        partners_title = (
+            partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
+        )
 
     ingeschreven_persoon_dict["ouders"] = []
     for ouder in persoon.ouder_set.all():
@@ -667,8 +669,10 @@ def convert_persoon_to_instance_dict(persoon):
             convert_ouder_instance_to_dict(ouder)
         )
 
-    ingeschreven_persoon_dict["aanhef"] = get_aanhef(ingeschreven_persoon_dict,
-                                                     persoon.adellijke_titel_predikaat_persoon,
-                                                     partners_title)
+    ingeschreven_persoon_dict["aanhef"] = get_aanhef(
+        ingeschreven_persoon_dict,
+        persoon.adellijke_titel_predikaat_persoon,
+        partners_title,
+    )
 
     return ingeschreven_persoon_dict
