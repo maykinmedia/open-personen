@@ -801,6 +801,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         )
 
     partners_title = None
+    partners_last_name_prefix = None
+    partners_last_name = None
     for partner_info in partners_info:
         ingeschreven_persoon_dict["partners"].append(
             get_partner_instance_dict(partner_info, prefix)
@@ -810,10 +812,18 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             partners_title = partner_info[f"{prefix}:gerelateerde"].get(
                 "adellijkeTitelPredikaat"
             )
+            partners_last_name_prefix = partner_info[f"{prefix}:gerelateerde"].get(
+                "voorvoegselGeslachtsnaam"
+            )
+            partners_last_name = partner_info[f"{prefix}:gerelateerde"].get(
+                "geslachtsnaam"
+            )
 
     ingeschreven_persoon_dict["naam"]["aanhef"] = get_aanhef(
         instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),
         instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
+        partners_last_name_prefix,
+        partners_last_name,
         instance_xml_dict.get(f"{prefix}:geslachtsaanduiding"),
         instance_xml_dict.get(f"{prefix}:adellijkeTitelPredikaat"),
         partners_title,

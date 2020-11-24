@@ -654,15 +654,17 @@ def convert_persoon_to_instance_dict(persoon):
         )
 
     partners_title = None
+    partners_last_name_prefix = None
+    partners_last_name = None
     ingeschreven_persoon_dict["partners"] = []
     for partner in persoon.partnerschap_set.all():
         ingeschreven_persoon_dict["partners"].append(
             convert_partner_instance_to_dict(partner)
         )
         if persoon.aanduiding_naamgebruik != "E":
-            partners_title = (
-                partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
-            )
+            partners_title = partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
+            partners_last_name_prefix = partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner
+            partners_last_name = partner.geslachtsnaam_echtgenoot_geregistreerd_partner
 
     ingeschreven_persoon_dict["ouders"] = []
     for ouder in persoon.ouder_set.all():
@@ -673,6 +675,8 @@ def convert_persoon_to_instance_dict(persoon):
     ingeschreven_persoon_dict["naam"]["aanhef"] = get_aanhef(
         persoon.voorvoegsel_geslachtsnaam_persoon,
         persoon.geslachtsnaam_persoon,
+        partners_last_name_prefix,
+        partners_last_name,
         persoon.geslachtsaanduiding,
         persoon.adellijke_titel_predikaat_persoon,
         partners_title,
