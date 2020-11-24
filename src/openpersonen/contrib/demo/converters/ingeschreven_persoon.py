@@ -662,8 +662,12 @@ def convert_persoon_to_instance_dict(persoon):
             convert_partner_instance_to_dict(partner)
         )
         if persoon.aanduiding_naamgebruik != "E":
-            partners_title = partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
-            partners_last_name_prefix = partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner
+            partners_title = (
+                partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
+            )
+            partners_last_name_prefix = (
+                partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner
+            )
             partners_last_name = partner.geslachtsnaam_echtgenoot_geregistreerd_partner
 
     ingeschreven_persoon_dict["ouders"] = []
@@ -677,6 +681,7 @@ def convert_persoon_to_instance_dict(persoon):
         persoon.geslachtsnaam_persoon,
         partners_last_name_prefix,
         partners_last_name,
+        persoon.aanduiding_naamgebruik,
         persoon.geslachtsaanduiding,
         persoon.adellijke_titel_predikaat_persoon,
         partners_title,

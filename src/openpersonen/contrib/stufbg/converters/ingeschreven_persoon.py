@@ -824,6 +824,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
         partners_last_name_prefix,
         partners_last_name,
+        instance_xml_dict.get(f"{prefix}:aanduidingNaamgebruik"),
         instance_xml_dict.get(f"{prefix}:geslachtsaanduiding"),
         instance_xml_dict.get(f"{prefix}:adellijkeTitelPredikaat"),
         partners_title,

@@ -33,7 +33,16 @@ def get_salutation_from_gender_designation(gender_designation):
         return "Geachte heer"
 
 
-def get_aanhef(last_name_prefix, last_name, partner_last_name_prefix, partner_last_name, gender_designation, title, partner_title):
+def get_aanhef(
+    last_name_prefix,
+    last_name,
+    partner_last_name_prefix,
+    partner_last_name,
+    indication_name_use,
+    gender_designation,
+    title,
+    partner_title,
+):
 
     salutation = get_salutation_from_title(title)
     if salutation:
