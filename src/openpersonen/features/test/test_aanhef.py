@@ -112,3 +112,35 @@ class TestAanhefWithPartnerTitle(TestCase):
         result = get_aanhef(None, None, None, None, "Prins")
 
         self.assertEqual(result, "Geachte Hoogheid")
+
+
+class TestGetAanHefWithoutTitle(TestCase):
+    def test_aanhef_without_title(self):
+        """
+        Testing examples given here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature
+        """
+        table_string = """
+        | aanduidingNaamgebruik | geslachtsaanduiding |samenstelling aanhef | aanschrijfwijze           | aanhef                                 |
+        | Eigen                 | Man                 | GA VV GN            | H. in het Veld            | Geachte heer In het Veld               |
+        | Eigen                 | Man                 | GA VV GN            | F. Groenen                | Geachte heer Groenen                   |
+        | Partner na eigen      | Vrouw               | GA VV GN-VP GP      | I. van Velzen-in het Veld | Geachte mevrouw Van Velzen-in het Veld |
+        | Partner na eigen      | Vrouw               | GA VV GN-VP GP      | F. Groenen-Groenink       | Geachte mevrouw Groenen-Groenink       |
+        | Partner               | Vrouw               | GA VP GP            | S. van Velzen             | Geachte mevrouw Van Velzen             |
+        | Partner               | Vrouw               | GA VP GP            | J.F.R. Groenen            | Geachte mevrouw Groenen                |
+        | Partner voor eigen    | Man                 | GA VP GP-VV GN      | F. in het Veld-van Velzen | Geachte heer In het Veld-van Velzen    |
+        | Partner voor eigen    | Man                 | GA VP GP-VV GN      | F. Groenen-Groenink       | Geachte heer Groenen-Groenink          |
+        """
+
+        aanduiding_naamgebruik_to_enumeration = {
+            "Eigen": "E",
+            "Partner na eigen": "N",
+            "Partner": "P",
+            "Partner voor eigen": "V",
+        }
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
