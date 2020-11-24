@@ -2,46 +2,26 @@ def get_saluation_from_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L4-L38
     """
-    if title == "Baron":
+    if title in ["Baron","Hertog" ,"Jonkheer" ,"Markies" ,"Ridder"]:
         return "Hoogwelgeboren heer"
-    if title == "Barones":
+    if title in ["Barones", "Hertogin" ,"Jonkvrouw" ,"Markiezin"]:
         return "Hoogwelgeboren vrouwe"
+    if title in ["Prins", "Prinses"]:
+        return "Hoogheid"
     if title == "Graaf":
         return "Hooggeboren heer"
     if title == "Gravin":
         return "Hooggeboren vrouwe"
-    if title == "Hertog":
-        return "Hoogwelgeboren heer"
-    if title == "Hertogin":
-        return "Hoogwelgeboren vrouwe"
-    if title == "Jonkheer":
-        return "Hoogwelgeboren heer"
-    if title == "Jonkvrouw":
-        return "Hoogwelgeboren vrouwe"
-    if title == "Markies":
-        return "Hoogwelgeboren heer"
-    if title == "Markiezin":
-        return "Hoogwelgeboren vrouwe"
-    if title == "Prins":
-        return "Hoogheid"
-    if title == "Prinses":
-        return "Hoogheid"
-    if title == "Ridder":
-        return "Hoogwelgeboren heer"
 
 
 def get_saluation_from_partner_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L62-L71
     """
-    if title == "Baron":
+    if title in ["Baron", "Hertog", "Markies"]:
         return "Hoogwelgeboren vrouwe"
     if title == "Graaf":
         return "Hooggeboren vrouwe"
-    if title == "Hertog":
-        return "Hoogwelgeboren vrouwe"
-    if title == "Markies":
-        return "Hoogwelgeboren vrouwe"
     if title == "Prins":
         return "Hoogheid"
 
