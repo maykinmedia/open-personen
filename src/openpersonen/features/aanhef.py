@@ -1,4 +1,4 @@
-def get_saluation_from_title(title):
+def get_salutation_from_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L4-L38
     """
@@ -14,7 +14,7 @@ def get_saluation_from_title(title):
         return "Hooggeboren vrouwe"
 
 
-def get_saluation_from_partner_title(title):
+def get_salutation_from_partner_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L62-L71
     """
@@ -26,21 +26,24 @@ def get_saluation_from_partner_title(title):
         return "Hoogheid"
 
 
+def get_salutation_from_gender_designation(gender_designation):
+    if gender_designation == "V":
+        return "Geachte mevrouw"
+    if gender_designation == "M":
+        return "Geachte heer"
+
+
 def get_aanhef(last_name_prefix, last_name, gender_designation, title, partner_title):
 
-    salutation = get_saluation_from_title(title)
+    salutation = get_salutation_from_title(title)
     if salutation:
         return f"Geachte {salutation}"
 
-    salutation = get_saluation_from_partner_title(partner_title)
+    salutation = get_salutation_from_partner_title(partner_title)
     if salutation:
         return f"Geachte {salutation}"
 
-    if gender_designation == "V":
-        salutation = "Geachte mevrouw"
-    if gender_designation == "M":
-        salutation = "Geachte heer"
-
+    salutation = get_salutation_from_gender_designation(gender_designation)
     if salutation:
         if last_name_prefix:
             salutation += f" {last_name_prefix.capitalize()}"
