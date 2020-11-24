@@ -2,9 +2,9 @@ def get_saluation_from_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L4-L38
     """
-    if title in ["Baron","Hertog" ,"Jonkheer" ,"Markies" ,"Ridder"]:
+    if title in ["Baron", "Hertog", "Jonkheer", "Markies", "Ridder"]:
         return "Hoogwelgeboren heer"
-    if title in ["Barones", "Hertogin" ,"Jonkvrouw" ,"Markiezin"]:
+    if title in ["Barones", "Hertogin", "Jonkvrouw", "Markiezin"]:
         return "Hoogwelgeboren vrouwe"
     if title in ["Prins", "Prinses"]:
         return "Hoogheid"
@@ -26,7 +26,7 @@ def get_saluation_from_partner_title(title):
         return "Hoogheid"
 
 
-def get_aanhef(persoon_dict, title, partner_title):
+def get_aanhef(last_name_prefix, last_name, gender_designation, title, partner_title):
 
     salutation = get_saluation_from_title(title)
     if salutation:
@@ -36,10 +36,16 @@ def get_aanhef(persoon_dict, title, partner_title):
     if salutation:
         return f"Geachte {salutation}"
 
-    gender_designation = persoon_dict["geslachtsaanduiding"]
     if gender_designation == "V":
-        return "Geachte mevrouw"
+        salutation = "Geachte mevrouw"
     if gender_designation == "M":
-        return "Geachte heer"
+        salutation = "Geachte heer"
+
+    if salutation:
+        if last_name_prefix:
+            salutation += f" {last_name_prefix.capitalize()}"
+        if last_name:
+            salutation += f" {last_name}"
+        return salutation
 
     return "string"
