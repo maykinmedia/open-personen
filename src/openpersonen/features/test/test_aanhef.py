@@ -5,12 +5,12 @@ from openpersonen.features import get_aanhef
 
 class TestAanhefWithOnlyGenderDesignation(TestCase):
     def test_aanhef_with_female_gender_designation(self):
-        result = get_aanhef("van", "Jong", None, None, None, "V", None, None)
+        result = get_aanhef("van", "Jong", None, None, "E", "V", None, None)
 
         self.assertEqual(result, "Geachte mevrouw Van Jong")
 
     def test_aanhef_with_male_gender_designation(self):
-        result = get_aanhef(None, "Jong", None, None, None, "M", None, None)
+        result = get_aanhef(None, "Jong", None, None, "E", "M", None, None)
 
         self.assertEqual(result, "Geachte heer Jong")
 
@@ -168,11 +168,33 @@ class TestGetAanHefWithoutTitle(TestCase):
                     last_name_prefix = " ".join(split_last_name[:-1])
                     last_name = split_last_name[-1]
             elif aanduiding_naamgebruik == "Partner na eigen":
-                pass
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                last_name, partner_last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
             elif aanduiding_naamgebruik == "Partner":
-                pass
+                partner_last_name = aanschrijfwijze.split(" ", 1)[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
             elif aanduiding_naamgebruik == "Partner voor eigen":
-                pass
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                partner_last_name, last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
 
             result = get_aanhef(
                 last_name_prefix,

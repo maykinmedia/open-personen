@@ -54,10 +54,35 @@ def get_aanhef(
 
     salutation = get_salutation_from_gender_designation(gender_designation)
     if salutation:
-        if last_name_prefix:
-            salutation += f" {last_name_prefix.capitalize()}"
-        if last_name:
-            salutation += f" {last_name}"
+        if indication_name_use == "E":  # Eigen
+            if last_name_prefix:
+                salutation += f" {last_name_prefix.capitalize()}"
+            if last_name:
+                salutation += f" {last_name}"
+        if indication_name_use == "N":  # Partner na eigen
+            if last_name_prefix:
+                salutation += f" {last_name_prefix.capitalize()}"
+            if last_name:
+                salutation += f" {last_name}-"
+            if partner_last_name_prefix:
+                salutation += f"{partner_last_name_prefix} "
+            if partner_last_name:
+                salutation += f"{partner_last_name}"
+        if indication_name_use == "P":  # Partner
+            if partner_last_name_prefix:
+                salutation += f" {partner_last_name_prefix.capitalize()}"
+            if partner_last_name:
+                salutation += f" {partner_last_name}"
+        if indication_name_use == "V":  # Partner voor eigen
+            if partner_last_name_prefix:
+                salutation += f" {partner_last_name_prefix.capitalize()}"
+            if partner_last_name:
+                salutation += f" {partner_last_name}-"
+            if last_name_prefix:
+                salutation += f"{last_name_prefix} "
+            if last_name:
+                salutation += f"{last_name}"
+
         return salutation
 
     return "string"
