@@ -670,7 +670,9 @@ def convert_persoon_to_instance_dict(persoon):
         )
 
     ingeschreven_persoon_dict["naam"]["aanhef"] = get_aanhef(
-        ingeschreven_persoon_dict,
+        persoon.voorvoegsel_geslachtsnaam_persoon,
+        persoon.geslachtsnaam_persoon,
+        persoon.geslachtsaanduiding,
         persoon.adellijke_titel_predikaat_persoon,
         partners_title,
     )
