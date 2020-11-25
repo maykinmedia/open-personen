@@ -57,7 +57,7 @@ class TestAanhefWithTitle(TestCase):
         self.assertEqual(result, "Hoogwelgeboren heer")
 
     def test_aanhef_with_jonkvrouw_title(self):
-        result = get_aanhef(None, None, None, None, None, None, "Jonkvrouw", None)
+        result = get_aanhef(None, None, None, None, 'E', None, "Jonkvrouw", None)
 
         self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
@@ -380,6 +380,117 @@ class TestGetAanHefWithTitle(TestCase):
                     split_partner_last_name = partner_last_name.split(" ")
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
+
+            result = get_aanhef(
+                last_name_prefix,
+                last_name,
+                partner_last_name_prefix,
+                partner_last_name,
+                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                gender_designation,
+                adellijke_titel_predikaat,
+                None,
+            )
+            self.assertEqual(aanhef, result)
+
+
+class TestGetAanHefWithPredikaat(TestCase):
+    def test_get_aanhef_with_predikaat(self):
+        table_string = """
+            | adellijkeTitel_predikaat | aanduidingNaamgebruik | partner | Ontbinding huwelijk/geregistreerd partnerschap | aanhef                                 |
+            | Jonkheer                 | Eigen                 | Geen    | Geen                                           | Hoogwelgeboren heer                    |
+            | Jonkheer                 | Eigen                 | Ja      | Geen                                           | Hoogwelgeboren heer                    |
+            | Jonkheer                 | Partner na eigen      | Ja      | Geen                                           | Hoogwelgeboren heer                    |
+            | Jonkheer                 | Partner               | Ja      | Geen                                           | Hoogwelgeboren heer                    |
+            | Jonkheer                 | Partner voor eigen    | Ja      | Geen                                           | Hoogwelgeboren heer                    |
+            | Jonkvrouw                | Eigen                 | Geen    | Geen                                           | Hoogwelgeboren vrouwe                  |
+            | Jonkvrouw                | Eigen                 | Ja      | Geen                                           | Geachte mevrouw Van Hoogh              |
+            | Jonkvrouw                | Partner na eigen      | Ja      | Geen                                           | Geachte mevrouw Van Hoogh-van der Veen |
+            | Jonkvrouw                | Partner               | Ja      | Geen                                           | Geachte mevrouw Van der Veen-van Hoogh |
+            | Jonkvrouw                | Partner voor eigen    | Ja      | Geen                                           | Geachte mevrouw Van der Veen           |
+            | Jonkvrouw                | Eigen                 | Ja      | Ja                                             | Hoogwelgeboren vrouwe                  |
+            | Jonkvrouw                | Partner na eigen      | Ja      | Ja                                             | Geachte mevrouw Van Hoogh-van der Veen |
+            | Jonkvrouw                | Partner               | Ja      | Ja                                             | Geachte mevrouw Van der Veen-van Hoogh |
+            | Jonkvrouw                | Partner voor eigen    | Ja      | Ja                                             | Geachte mevrouw Van der Veen           |
+        """
+
+        aanduiding_naamgebruik_to_enumeration = {
+            "Eigen": "E",
+            "Partner na eigen": "N",
+            "Partner": "P",
+            "Partner voor eigen": "V",
+        }
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            adellijke_titel_predikaat, aanduiding_naamgebruik, has_partner, is_dissolved, aanhef = row
+
+            last_name = aanhef
+            for title in ['Hoogwelgeboren heer', 'Hoogwelgeboren vrouwe', 'Geachte mevrouw ']:
+                last_name = last_name.replace(title, '')
+
+            gender_designation = None
+
+            if 'heer' in aanhef:
+                gender_designation = 'M'
+            if 'mevrouw' in aanhef:
+                gender_designation = 'V'
+
+            last_name_prefix = None
+            partner_last_name_prefix = None
+            partner_last_name = None
+
+            if last_name and aanduiding_naamgebruik == "Eigen":
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+            elif last_name and aanduiding_naamgebruik == "Partner na eigen":
+                last_name, partner_last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif last_name and aanduiding_naamgebruik == "Partner":
+                partner_last_name = last_name
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif last_name and aanduiding_naamgebruik == "Partner voor eigen":
+                if len(last_name.split('-')) > 1:
+                    partner_last_name, last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if partner_last_name and len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+                if not partner_last_name:
+                    partner_last_name = ''
+                    partner_last_name_prefix = ''
+
+            if has_partner == 'Geen':
+                partner_last_name_prefix = None
+                partner_last_name = None
+
+            if has_partner == 'Ja' and is_dissolved == 'Geen' and partner_last_name_prefix is None:
+                partner_last_name_prefix = 'van'
+
+            if has_partner == 'Ja' and is_dissolved == 'Geen' and partner_last_name is None:
+                partner_last_name = 'Maykin'
 
             result = get_aanhef(
                 last_name_prefix,

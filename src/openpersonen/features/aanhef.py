@@ -44,7 +44,13 @@ def get_aanhef(
     partner_title,
 ):
 
-    if indication_name_use != 'P':
+    if indication_name_use == 'P' and title != 'Jonkheer':
+        pass
+    elif title == 'Jonkvrouw' and (partner_last_name_prefix or partner_last_name):
+        pass
+    elif title == 'Jonkvrouw' and indication_name_use != 'E':
+        pass
+    else:
         salutation = get_salutation_from_title(title)
         if salutation:
             return salutation
@@ -71,7 +77,9 @@ def get_aanhef(
                 salutation += f"{partner_last_name}"
         if indication_name_use == "P":  # Partner
             if partner_last_name_prefix:
-                salutation += f" {partner_last_name_prefix.capitalize()}"
+                if not partner_last_name_prefix[0].isupper():
+                    partner_last_name_prefix = partner_last_name_prefix.capitalize()
+                salutation += f" {partner_last_name_prefix}"
             if partner_last_name:
                 salutation += f" {partner_last_name}"
         if indication_name_use == "V":  # Partner voor eigen
@@ -79,6 +87,8 @@ def get_aanhef(
                 salutation += f" {partner_last_name_prefix.capitalize()}"
             if partner_last_name:
                 salutation += f" {partner_last_name}-"
+            else:
+                salutation += f" "
             if last_name_prefix:
                 salutation += f"{last_name_prefix} "
             if last_name:
