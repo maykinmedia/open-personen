@@ -44,13 +44,14 @@ def get_aanhef(
     partner_title,
 ):
 
-    salutation = get_salutation_from_title(title)
-    if salutation:
-        return f"Geachte {salutation}"
+    if indication_name_use != 'P':
+        salutation = get_salutation_from_title(title)
+        if salutation:
+            return salutation
 
     salutation = get_salutation_from_partner_title(partner_title)
     if salutation:
-        return f"Geachte {salutation}"
+        return salutation
 
     salutation = get_salutation_from_gender_designation(gender_designation)
     if salutation:

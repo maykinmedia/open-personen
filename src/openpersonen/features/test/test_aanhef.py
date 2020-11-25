@@ -24,94 +24,94 @@ class TestAanhefWithTitle(TestCase):
     def test_aanhef_with_baron_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Baron", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren heer")
+        self.assertEqual(result, "Hoogwelgeboren heer")
 
     def test_aanhef_with_barones_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Barones", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_graaf_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Graaf", None)
 
-        self.assertEqual(result, "Geachte Hooggeboren heer")
+        self.assertEqual(result, "Hooggeboren heer")
 
     def test_aanhef_with_gravin_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Gravin", None)
 
-        self.assertEqual(result, "Geachte Hooggeboren vrouwe")
+        self.assertEqual(result, "Hooggeboren vrouwe")
 
     def test_aanhef_with_hertog_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Hertog", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren heer")
+        self.assertEqual(result, "Hoogwelgeboren heer")
 
     def test_aanhef_with_hertogin_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Hertogin", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_jonkheer_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Jonkheer", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren heer")
+        self.assertEqual(result, "Hoogwelgeboren heer")
 
     def test_aanhef_with_jonkvrouw_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Jonkvrouw", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_markies_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Markies", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren heer")
+        self.assertEqual(result, "Hoogwelgeboren heer")
 
     def test_aanhef_with_markiezin_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Markiezin", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_prins_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Prins", None)
 
-        self.assertEqual(result, "Geachte Hoogheid")
+        self.assertEqual(result, "Hoogheid")
 
     def test_aanhef_with_prinses_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Prinses", None)
 
-        self.assertEqual(result, "Geachte Hoogheid")
+        self.assertEqual(result, "Hoogheid")
 
     def test_aanhef_with_ridder_title(self):
         result = get_aanhef(None, None, None, None, None, None, "Ridder", None)
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren heer")
+        self.assertEqual(result, "Hoogwelgeboren heer")
 
 
 class TestAanhefWithPartnerTitle(TestCase):
     def test_aanhef_with_partner_baron_title(self):
         result = get_aanhef(None, None, None, None, None, None, None, "Baron")
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_partner_graaf_title(self):
         result = get_aanhef(None, None, None, None, None, None, None, "Graaf")
 
-        self.assertEqual(result, "Geachte Hooggeboren vrouwe")
+        self.assertEqual(result, "Hooggeboren vrouwe")
 
     def test_aanhef_with_partner_hertog_title(self):
         result = get_aanhef(None, None, None, None, None, None, None, "Hertog")
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_partner_markies_title(self):
         result = get_aanhef(None, None, None, None, None, None, None, "Markies")
 
-        self.assertEqual(result, "Geachte Hoogwelgeboren vrouwe")
+        self.assertEqual(result, "Hoogwelgeboren vrouwe")
 
     def test_aanhef_with_partner_prins_title(self):
         result = get_aanhef(None, None, None, None, None, None, None, "Prins")
 
-        self.assertEqual(result, "Geachte Hoogheid")
+        self.assertEqual(result, "Hoogheid")
 
 
 class TestGetAanHefWithoutTitle(TestCase):
@@ -206,11 +206,14 @@ class TestGetAanHefWithoutTitle(TestCase):
                 None,
                 None,
             )
-            self.assertEqual(result, aanhef)
+            self.assertEqual(aanhef, result)
 
 
-class TestGetAanHefWithCapitalOrSmallLeters(TestCase):
+class TestGetAanHefWithCapitalOrSmallLetters(TestCase):
     def test_get_aanhef_with_capital_or_small_letters(self):
+        """
+        Testing examples given here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L109-L114
+        """
         table_string = """
             | aanduidingNaamgebruik | geslachtsaanduiding |samenstelling aanhef | aanschrijfwijze           | aanhef                                 |
             | Eigen                 | Man                 | GA VV GN            | H. in het Veld            | Geachte heer In het Veld               |
@@ -298,4 +301,94 @@ class TestGetAanHefWithCapitalOrSmallLeters(TestCase):
                 None,
                 None,
             )
-            self.assertEqual(result, aanhef)
+            self.assertEqual(aanhef, result)
+
+
+class TestGetAanHefWithTitle(TestCase):
+    def test_get_aanhef_with_title(self):
+        table_string = """
+            | adellijkeTitel_predikaat | aanduidingNaamgebruik | aanschrijfwijze                             | aanhef                    |
+            | Baron                    | Eigen                 | H.W. baron van den Aedel                    | Hoogwelgeboren heer       |
+            | Barones                  | Partner na eigen      | W. barones van den Aedel-van der Veen       | Hoogwelgeboren vrouwe     |
+            | Graaf                    | Partner               | F. van der Veen                             | Geachte heer Van der Veen |
+            | Gravin                   | Partner voor eigen    | E.L. van der Veen-gravin van den Aedel      | Hooggeboren vrouwe        |
+            | Prins                    | Eigen                 | O.B.B. prins van Roodt de Wit Blaauw        | Hoogheid                  |
+            | Prinses                  | Eigen                 | E.M.V. prinses van Roodt de Wit Blaauw      | Hoogheid                  |
+            | Ridder                   | Eigen                 | M. ridder van Hoogh                         | Hoogwelgeboren heer       |
+        """
+
+        aanduiding_naamgebruik_to_enumeration = {
+            "Eigen": "E",
+            "Partner na eigen": "N",
+            "Partner": "P",
+            "Partner voor eigen": "V",
+        }
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            adellijke_titel_predikaat, aanduiding_naamgebruik, aanschrijfwijze, aanhef = row
+
+            gender_designation = None
+
+            if 'heer' in aanhef:
+                gender_designation = 'M'
+            if 'vrouwe' in aanhef:
+                gender_designation = 'V'
+
+            last_name_prefix = None
+            last_name = None
+            partner_last_name_prefix = None
+            partner_last_name = None
+
+            if aanduiding_naamgebruik == "Eigen":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner na eigen":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                last_name, partner_last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner":
+                partner_last_name = aanschrijfwijze.split(" ", 1)[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner voor eigen":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                partner_last_name, last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+
+            result = get_aanhef(
+                last_name_prefix,
+                last_name,
+                partner_last_name_prefix,
+                partner_last_name,
+                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                gender_designation,
+                adellijke_titel_predikaat,
+                None,
+            )
+            self.assertEqual(aanhef, result)
