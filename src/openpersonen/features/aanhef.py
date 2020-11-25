@@ -87,12 +87,15 @@ def get_aanhef(
     title,
     partner_title,
 ):
+    jonkheer_uses_partner_name = indication_name_use == "P" and title != "Jonkheer"
+    jonkvrouw_with_partner = title == "Jonkvrouw" and (
+        partner_last_name_prefix or partner_last_name
+    )
+    jonkvrouw_using_partner_name = title == "Jonkvrouw" and indication_name_use != "E"
     if (
-        not (indication_name_use == "P" and title != "Jonkheer")
-        and not (
-            title == "Jonkvrouw" and (partner_last_name_prefix or partner_last_name)
-        )
-        and not (title == "Jonkvrouw" and indication_name_use != "E")
+        not jonkheer_uses_partner_name
+        and not jonkvrouw_with_partner
+        and not jonkvrouw_using_partner_name
     ):
         salutation = get_salutation_from_title(title)
         if salutation:
