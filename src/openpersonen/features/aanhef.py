@@ -44,20 +44,21 @@ def get_aanhef(
     partner_title,
 ):
 
-    if indication_name_use == 'P' and title != 'Jonkheer':
+    if indication_name_use == "P" and title != "Jonkheer":
         pass
-    elif title == 'Jonkvrouw' and (partner_last_name_prefix or partner_last_name):
+    elif title == "Jonkvrouw" and (partner_last_name_prefix or partner_last_name):
         pass
-    elif title == 'Jonkvrouw' and indication_name_use != 'E':
+    elif title == "Jonkvrouw" and indication_name_use != "E":
         pass
     else:
         salutation = get_salutation_from_title(title)
         if salutation:
             return salutation
 
-    salutation = get_salutation_from_partner_title(partner_title)
-    if salutation:
-        return salutation
+    if gender_designation == "V" and indication_name_use != "E":
+        salutation = get_salutation_from_partner_title(partner_title)
+        if salutation:
+            return salutation
 
     salutation = get_salutation_from_gender_designation(gender_designation)
     if salutation:
