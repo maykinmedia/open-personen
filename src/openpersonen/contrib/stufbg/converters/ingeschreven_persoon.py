@@ -10,6 +10,15 @@ from .ouder import get_ouder_instance_dict
 from .partner import get_partner_instance_dict
 
 
+def _get_partner_info(partner_info, prefix):
+    return (
+        partner_info[f"{prefix}:gerelateerde"].get("adellijkeTitelPredikaat"),
+        partner_info[f"{prefix}:gerelateerde"].get("voorvoegselGeslachtsnaam"),
+        partner_info[f"{prefix}:gerelateerde"].get("geslachtsnaam"),
+        partner_info.get(f"{prefix}:datumSluiting"),
+    )
+
+
 def get_persoon_instance_dict(response, instance_xml_dict, prefix):
     ingeschreven_persoon_dict = {
         "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
@@ -803,17 +812,28 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
     partners_title = None
     partners_last_name_prefix = None
     partners_last_name = None
+    partners_date = None
     for partner_info in partners_info:
         ingeschreven_persoon_dict["partners"].append(
             get_partner_instance_dict(partner_info, prefix)
         )
-        partners_title = partner_info[f"{prefix}:gerelateerde"].get(
-            "adellijkeTitelPredikaat"
-        )
-        partners_last_name_prefix = partner_info[f"{prefix}:gerelateerde"].get(
-            "voorvoegselGeslachtsnaam"
-        )
-        partners_last_name = partner_info[f"{prefix}:gerelateerde"].get("geslachtsnaam")
+        if (
+            not partners_last_name
+            or (
+                partner_info.get(f"{prefix}:datumOntbinding")
+                and partners_date > partner_info[f"{prefix}:datumSluiting"]
+            )
+            or (
+                partner_info.get(f"{prefix}:datumOntbinding") is None
+                and partners_date < partner_info[f"{prefix}:datumSluiting"]
+            )
+        ):
+            (
+                partners_title,
+                partners_last_name_prefix,
+                partners_last_name,
+                partners_date,
+            ) = _get_partner_info(partner_info, prefix)
 
     ingeschreven_persoon_dict["naam"]["aanhef"] = get_aanhef(
         instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),

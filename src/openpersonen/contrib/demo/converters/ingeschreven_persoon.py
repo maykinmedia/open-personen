@@ -8,6 +8,15 @@ from .ouder import convert_ouder_instance_to_dict
 from .partner import convert_partner_instance_to_dict
 
 
+def _get_partner_info(partner):
+    return (
+        partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner,
+        partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner,
+        partner.geslachtsnaam_echtgenoot_geregistreerd_partner,
+        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+    )
+
+
 def convert_persoon_to_instance_dict(persoon):
 
     ingeschreven_persoon_dict = {
@@ -656,18 +665,29 @@ def convert_persoon_to_instance_dict(persoon):
     partners_title = None
     partners_last_name_prefix = None
     partners_last_name = None
+    partners_date = None
     ingeschreven_persoon_dict["partners"] = []
     for partner in persoon.partnerschap_set.all():
         ingeschreven_persoon_dict["partners"].append(
             convert_partner_instance_to_dict(partner)
         )
-        partners_title = (
-            partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner
+        if (
+            not partners_last_name
+            or (
+            partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap
+            and partners_date > partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
         )
-        partners_last_name_prefix = (
-            partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner
+            or (
+            partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap is ''
+            and partners_date < partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
         )
-        partners_last_name = partner.geslachtsnaam_echtgenoot_geregistreerd_partner
+        ):
+            (
+                partners_title,
+                partners_last_name_prefix,
+                partners_last_name,
+                partners_date,
+            ) = _get_partner_info(partner)
 
     ingeschreven_persoon_dict["ouders"] = []
     for ouder in persoon.ouder_set.all():
