@@ -466,6 +466,8 @@ class TestGetAanHefWithPredikaat(TestCase):
                     split_last_name = last_name.split(" ")
                     last_name_prefix = " ".join(split_last_name[:-1])
                     last_name = split_last_name[-1]
+                if has_partner == "Ja":
+                    partner_last_name = last_name
             elif last_name and aanduiding_naamgebruik == "Partner na eigen":
                 last_name, partner_last_name = last_name.split("-")
                 if len(last_name.split(" ")) > 1:
@@ -494,26 +496,6 @@ class TestGetAanHefWithPredikaat(TestCase):
                 if not partner_last_name:
                     partner_last_name = ""
                     partner_last_name_prefix = ""
-
-            if has_partner == "Geen":
-                partner_last_name_prefix = None
-                partner_last_name = None
-
-            if (
-                has_partner == "Ja"
-                and is_dissolved == "Geen"
-                and aanduiding_naamgebruik != 'Partner'
-                and partner_last_name_prefix is None
-            ):
-                partner_last_name_prefix = "van"
-
-            if (
-                has_partner == "Ja"
-                and is_dissolved == "Geen"
-                and aanduiding_naamgebruik != 'Partner'
-                and partner_last_name is None
-            ):
-                partner_last_name = "Maykin"
 
             result = get_aanhef(
                 last_name_prefix,
