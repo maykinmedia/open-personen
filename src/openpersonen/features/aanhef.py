@@ -44,24 +44,22 @@ def get_aanhef_last_name(
     if indication_name_use == "E":  # Eigen
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
-        if last_name:
-            aanhef_last_name += f" {last_name}"
+        aanhef_last_name += f" {last_name}"
     if indication_name_use == "N":  # Partner na eigen
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
         if last_name:
             aanhef_last_name += f" {last_name}-"
+        else:
+            aanhef_last_name += f" "
         if partner_last_name_prefix:
             aanhef_last_name += f"{partner_last_name_prefix} "
         if partner_last_name:
             aanhef_last_name += f"{partner_last_name}"
     if indication_name_use == "P":  # Partner
         if partner_last_name_prefix:
-            if not partner_last_name_prefix[0].isupper():
-                partner_last_name_prefix = partner_last_name_prefix.capitalize()
-            aanhef_last_name += f" {partner_last_name_prefix}"
-        if partner_last_name:
-            aanhef_last_name += f" {partner_last_name}"
+            aanhef_last_name += f" {partner_last_name_prefix.capitalize()}"
+        aanhef_last_name += f" {partner_last_name}"
     if indication_name_use == "V":  # Partner voor eigen
         if partner_last_name_prefix:
             aanhef_last_name += f" {partner_last_name_prefix.capitalize()}"
