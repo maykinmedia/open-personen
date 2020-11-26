@@ -1,7 +1,7 @@
 from django.conf import settings
 
 from openpersonen.contrib.utils import calculate_age, is_valid_date_format
-from openpersonen.features import get_aanhef
+from openpersonen.features.aanhef import get_aanhef
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
@@ -13,7 +13,7 @@ def _get_partner_info(partner):
         partner.adellijke_titel_predikaat_echtgenoot_geregistreerd_partner,
         partner.voorvoegsel_geslachtsnaam_echtgenoot_geregistreerd_partner,
         partner.geslachtsnaam_echtgenoot_geregistreerd_partner,
-        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+        partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
     )
 
 
@@ -674,13 +674,15 @@ def convert_persoon_to_instance_dict(persoon):
         if (
             not partners_last_name
             or (
-            partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap
-            and partners_date > partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
-        )
+                partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap
+                and partners_date
+                > partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+            )
             or (
-            partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap is ''
-            and partners_date < partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
-        )
+                partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap is ""
+                and partners_date
+                < partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+            )
         ):
             (
                 partners_title,

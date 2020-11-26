@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from openpersonen.features import get_aanhef
+from openpersonen.features.aanhef import get_aanhef
 
 
 class TestAanhefWithOnlyGenderDesignation(TestCase):
