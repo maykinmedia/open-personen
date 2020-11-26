@@ -3,7 +3,7 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
-from openpersonen.features import get_aanhef
+from openpersonen.features.aanhef import get_aanhef
 
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
