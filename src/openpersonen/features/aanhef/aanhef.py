@@ -1,17 +1,20 @@
+from .constants import *
+
+
 def get_salutation_from_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L4-L38
     """
     if title in ["Baron", "Hertog", "Jonkheer", "Markies", "Ridder"]:
-        return "Hoogwelgeboren heer"
+        return HOOGWELGEBOREN_HEER
     if title in ["Barones", "Hertogin", "Jonkvrouw", "Markiezin"]:
-        return "Hoogwelgeboren vrouwe"
+        return HOOGWELGEBOREN_VROUWE
     if title in ["Prins", "Prinses"]:
-        return "Hoogheid"
+        return HOOGHEID
     if title == "Graaf":
-        return "Hooggeboren heer"
+        return HOOGGEBOREN_HEER
     if title == "Gravin":
-        return "Hooggeboren vrouwe"
+        return HOOGGEBOREN_VROUWE
 
 
 def get_salutation_from_partner_title(title):
@@ -19,18 +22,18 @@ def get_salutation_from_partner_title(title):
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L62-L71
     """
     if title in ["Baron", "Hertog", "Markies"]:
-        return "Hoogwelgeboren vrouwe"
+        return HOOGWELGEBOREN_VROUWE
     if title == "Graaf":
-        return "Hooggeboren vrouwe"
+        return HOOGGEBOREN_VROUWE
     if title == "Prins":
-        return "Hoogheid"
+        return HOOGHEID
 
 
 def get_salutation_from_gender_designation(gender_designation):
     if gender_designation == "V":
-        return "Geachte mevrouw"
+        return GEACHTE_MEVROUW
     if gender_designation == "M":
-        return "Geachte heer"
+        return GEACHTE_HEER
 
 
 def get_aanhef_last_name(

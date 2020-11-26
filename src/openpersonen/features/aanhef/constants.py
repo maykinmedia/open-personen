@@ -1,0 +1,7 @@
+HOOGWELGEBOREN_HEER = "Hoogwelgeboren heer"
+HOOGWELGEBOREN_VROUWE = "Hoogwelgeboren vrouwe"
+HOOGHEID = "Hoogheid"
+HOOGGEBOREN_HEER = "Hooggeboren heer"
+HOOGGEBOREN_VROUWE = "Hooggeboren vrouwe"
+GEACHTE_MEVROUW = "Geachte mevrouw"
+GEACHTE_HEER = "Geachte heer"
