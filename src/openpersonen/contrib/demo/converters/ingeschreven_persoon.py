@@ -679,7 +679,7 @@ def convert_persoon_to_instance_dict(persoon):
                 > partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
             )
             or (
-                partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap is ""
+                partner.datum_ontbinding_huwelijk_geregistreerd_partnerschap == ""
                 and partners_date
                 < partner.datum_huwelijkssluiting_aangaan_geregistreerd_partnerschap
             )
