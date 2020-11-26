@@ -478,10 +478,8 @@ class TestGetAanHefWithPredikaat(TestCase):
                     partner_last_name = split_partner_last_name[-1]
             elif last_name and aanduiding_naamgebruik == "Partner":
                 partner_last_name = last_name
-                if len(partner_last_name.split(" ")) > 1:
-                    split_partner_last_name = partner_last_name.split(" ")
-                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
-                    partner_last_name = split_partner_last_name[-1]
+                last_name = None
+                last_name_prefix = None
             elif last_name and aanduiding_naamgebruik == "Partner voor eigen":
                 if len(last_name.split("-")) > 1:
                     partner_last_name, last_name = last_name.split("-")
@@ -504,6 +502,7 @@ class TestGetAanHefWithPredikaat(TestCase):
             if (
                 has_partner == "Ja"
                 and is_dissolved == "Geen"
+                and aanduiding_naamgebruik != 'Partner'
                 and partner_last_name_prefix is None
             ):
                 partner_last_name_prefix = "van"
@@ -511,6 +510,7 @@ class TestGetAanHefWithPredikaat(TestCase):
             if (
                 has_partner == "Ja"
                 and is_dissolved == "Geen"
+                and aanduiding_naamgebruik != 'Partner'
                 and partner_last_name is None
             ):
                 partner_last_name = "Maykin"
