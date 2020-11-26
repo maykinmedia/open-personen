@@ -39,7 +39,7 @@ API attribute                                                           StUF-BG 
 ``naam.inOnderzoek.datumIngangOnderzoek.datum``                         "01-01-1900"                                                                      Fixed value since not in StUF-BG and cannot be ``null``.
 ``naam.inOnderzoek.datumIngangOnderzoek.jaar``                          1900                                                                              Fixed value since not in StUF-BG and cannot be ``null``.
 ``naam.inOnderzoek.datumIngangOnderzoek.maand``                         1                                                                                 Fixed value since not in StUF-BG and cannot be ``null``.
-``naam.aanhef``                                                         (calculated)                                                                      See `features`_ (TODO)
+``naam.aanhef``                                                         (calculated)                                                                      See `features`_
 ``naam.aanschrijfwijze``                                                (calculated)                                                                      See `features`_ (TODO)
 ``naam.gebruikInLopendeTekst``                                          (calculated)                                                                      See `features`_ (TODO)
 ``naam.aanduidingNaamgebruik``                                          ``aanduidingNaamgebruik``
