@@ -3,8 +3,8 @@ from django.test import TestCase
 from openpersonen.features.aanschrijfwijze import get_aanschrijfwijze
 
 
-class TestGetAanschrijfwijzeWithoutTitle(TestCase):
-    def test_aanschrijfwijze_without_title(self):
+class TestGetAanschrijfwijzeWithPrefix(TestCase):
+    def test_aanschrijfwijze_with_prefix(self):
         table_string = """
             | aanduidingAanschrijving | samenstelling aanschrijfwijze | voorvoegsel | geslachtsnaam | voornamen | voorvoegsel partner | geslachtsnaam partner | aanschrijfwijze           |
             | E                       | VL VV GN                      | In het      | Veld          | Henk      | van                 | Velzen                | H. In het Veld            |
@@ -47,8 +47,8 @@ class TestGetAanschrijfwijzeWithoutTitle(TestCase):
             self.assertEqual(aanschrijfwijze, result)
 
 
-class TestGetAanschrijfwijzeWithTitle(TestCase):
-    def test_aanschrijfwijze_with_title(self):
+class TestGetAanschrijfwijzeWithoutPrefix(TestCase):
+    def test_aanschrijfwijze_without_prefix(self):
         table_string = """
             | aanduidingAanschrijving | samenstelling aanschrijfwijze | geslachtsnaam | voornamen          | aanschrijfwijze     |
             | E                       | VL GN                         | Groenen       | Franklin           | F. Groenen          |
@@ -56,15 +56,6 @@ class TestGetAanschrijfwijzeWithTitle(TestCase):
             | P                       | VL GP                         | Groenink      | Johan Frank Robert | J.F.R. Groenen      |
             | V                       | VL GP-GN                      | Groenlo       | Franka             | F. Groenen-Groenlo  |
         """
-
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
-
-        geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
 
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
