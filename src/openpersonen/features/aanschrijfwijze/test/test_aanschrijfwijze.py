@@ -96,3 +96,73 @@ class TestGetAanschrijfwijzeWithoutPrefix(TestCase):
             )
 
             self.assertEqual(aanschrijfwijze, result)
+
+
+class TestGetAanschrijfwijzePersonHasTitlePartnerDoesNot(TestCase):
+    def test_aanschrijfwijze_person_has_title_partner_does_not(self):
+        table_string = """
+            | aanduidingAanschrijving | samenstelling aanschrijfwijze | geslachtsnaam | voornamen      | aanschrijfwijze                        |
+            | E                       | VL AT VV GN                   | Aedel         | Hendrik Willem | H.W. graaf van den Aedel               |
+            | N                       | VL AT VV GN-VP GP             | Aedel         | Wilhelmina     | W. gravin van den Aedel-van der Veen   |
+            | P                       | VL VP GP                      | Aedel         | Frederique     | F. van der Veen                        |
+            | V                       | VL VP GP-AT VV GN             | Aedel         | Emma Louise    | E.L. van der Veen-gravin van den Aedel |
+        """
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            (
+                aanduiding_aanschrijving,
+                _,
+                geslachtsnaam,
+                voornamen,
+                aanschrijfwijze,
+            ) = row
+
+            last_name_prefix = None
+            partner_last_name_prefix = None
+            partner_last_name = None
+            if aanduiding_aanschrijving == "E":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                split_last_name = last_name.split(" ")
+                last_name_prefix = " ".join(split_last_name[:-1])
+            elif aanduiding_aanschrijving == "N":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                last_name, partner_last_name = last_name.split("-")
+                split_last_name = last_name.split(" ")
+                last_name_prefix = " ".join(split_last_name[:-1])
+                split_partner_last_name = partner_last_name.split(" ")
+                partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_aanschrijving == "P":
+                partner_last_name = aanschrijfwijze.split(" ", 1)[-1]
+                split_partner_last_name = partner_last_name.split(" ")
+                partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_aanschrijving == "V":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                partner_last_name, last_name = last_name.split("-")
+                split_last_name = last_name.split(" ")
+                last_name_prefix = " ".join(split_last_name[:-1])
+                split_partner_last_name = partner_last_name.split(" ")
+                partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                partner_last_name = split_partner_last_name[-1]
+
+            result = get_aanschrijfwijze(
+                last_name_prefix,
+                geslachtsnaam,
+                voornamen,
+                partner_last_name_prefix,
+                partner_last_name,
+                aanduiding_aanschrijving,
+                None,
+                None,
+                None,
+            )
+
+            self.assertEqual(aanschrijfwijze, result)
