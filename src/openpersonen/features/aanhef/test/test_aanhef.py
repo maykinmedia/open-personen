@@ -2,7 +2,6 @@ from django.test import TestCase
 
 from openpersonen.features.aanhef import get_aanhef
 
-
 aanduiding_naamgebruik_to_enumeration = {
     "Eigen": "E",
     "Partner na eigen": "N",
