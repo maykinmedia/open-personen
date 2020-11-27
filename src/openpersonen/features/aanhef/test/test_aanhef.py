@@ -3,6 +3,16 @@ from django.test import TestCase
 from openpersonen.features.aanhef import get_aanhef
 
 
+aanduiding_naamgebruik_to_enumeration = {
+    "Eigen": "E",
+    "Partner na eigen": "N",
+    "Partner": "P",
+    "Partner voor eigen": "V",
+}
+
+geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
+
+
 class TestGetAanHefWithoutTitle(TestCase):
     def test_aanhef_without_title(self):
         """
@@ -19,15 +29,6 @@ class TestGetAanHefWithoutTitle(TestCase):
             | Partner voor eigen    | Man                 | GA VP GP-VV GN      | F. in het Veld-van Velzen | Geachte heer In het Veld-van Velzen    |
             | Partner voor eigen    | Man                 | GA VP GP-VV GN      | F. Groenen-Groenink       | Geachte heer Groenen-Groenink          |
         """
-
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
-
-        geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
 
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
@@ -115,15 +116,6 @@ class TestGetAanHefWithCapitalOrSmallLetters(TestCase):
             | Partner voor eigen    | Man                 | GA VP GP-VV GN      | F. Groenen-Groenink       | Geachte heer Groenen-Groenink          |
         """
 
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
-
-        geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
-
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
             [item.strip() for item in row.strip().split("|") if item]
@@ -205,13 +197,6 @@ class TestGetAanHefWithTitle(TestCase):
             | Prinses                  | Eigen                 | E.M.V. prinses van Roodt de Wit Blaauw      | Hoogheid                  |
             | Ridder                   | Eigen                 | M. ridder van Hoogh                         | Hoogwelgeboren heer       |
         """
-
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
 
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
@@ -307,13 +292,6 @@ class TestGetAanHefWithPredikaat(TestCase):
             | Jonkvrouw                | Partner               | Ja      | Ja                                             | Geachte mevrouw Van der Veen-van Hoogh |
             | Jonkvrouw                | Partner voor eigen    | Ja      | Ja                                             | Geachte mevrouw Van der Veen           |
         """
-
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
 
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
@@ -420,13 +398,6 @@ class TestGetAanHefWithAdelijkeTitelOfPredikaat(TestCase):
               | V                   | M                           | Jonkheer                         | Partner               | A.C. van den Aedel                      | Geachte mevrouw Van den Aedel              |
               | V                   | M                           | Jonkheer                         | Partner voor eigen    | A.C. van den Aedel-van der Veen         | Geachte mevrouw Van den Aedel-van der Veen |
         """
-
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
 
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
