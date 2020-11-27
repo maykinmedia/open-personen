@@ -5,15 +5,16 @@ def get_salutation_from_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L4-L38
     """
-    if title in ["Baron", "Hertog", "Jonkheer", "Markies", "Ridder"]:
+
+    if title in [BARON, HERTOG, JONKHEER, MARKIES, RIDDER]:
         return HOOGWELGEBOREN_HEER
-    if title in ["Barones", "Hertogin", "Jonkvrouw", "Markiezin"]:
+    if title in [BARONES, HERTOGIN, JONKVROUW, MARKIEZIN]:
         return HOOGWELGEBOREN_VROUWE
-    if title in ["Prins", "Prinses"]:
+    if title in [PRINS, PRINSES]:
         return HOOGHEID
-    if title == "Graaf":
+    if title == GRAAF:
         return HOOGGEBOREN_HEER
-    if title == "Gravin":
+    if title == GRAVIN:
         return HOOGGEBOREN_VROUWE
 
 
@@ -21,18 +22,18 @@ def get_salutation_from_partner_title(title):
     """
     Described here: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/aanhef.feature#L62-L71
     """
-    if title in ["Baron", "Hertog", "Markies"]:
+    if title in [BARON, HERTOG, MARKIES]:
         return HOOGWELGEBOREN_VROUWE
-    if title == "Graaf":
+    if title == GRAAF:
         return HOOGGEBOREN_VROUWE
-    if title == "Prins":
+    if title == PRINS:
         return HOOGHEID
 
 
 def get_salutation_from_gender_designation(gender_designation):
-    if gender_designation == "V":
+    if gender_designation == FEMALE:
         return GEACHTE_MEVROUW
-    if gender_designation == "M":
+    if gender_designation == MALE:
         return GEACHTE_HEER
 
 
@@ -44,11 +45,11 @@ def get_aanhef_last_name(
     indication_name_use,
 ):
     aanhef_last_name = ""
-    if indication_name_use == "E":  # Eigen
+    if indication_name_use == EIGEN:
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
         aanhef_last_name += f" {last_name}"
-    if indication_name_use == "N":  # Partner na eigen
+    if indication_name_use == PARTNER_NA_EIGEN:  # Partner na eigen
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
         if last_name:
@@ -59,11 +60,11 @@ def get_aanhef_last_name(
             aanhef_last_name += f"{partner_last_name_prefix} "
         if partner_last_name:
             aanhef_last_name += f"{partner_last_name}"
-    if indication_name_use == "P":  # Partner
+    if indication_name_use == PARTNER:
         if partner_last_name_prefix:
             aanhef_last_name += f" {partner_last_name_prefix.capitalize()}"
         aanhef_last_name += f" {partner_last_name}"
-    if indication_name_use == "V":  # Partner voor eigen
+    if indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
             aanhef_last_name += f" {partner_last_name_prefix.capitalize()}"
         if partner_last_name:
@@ -88,11 +89,11 @@ def get_aanhef(
     title,
     partner_title,
 ):
-    jonkheer_uses_partner_name = indication_name_use == "P" and title != "Jonkheer"
-    jonkvrouw_with_partner = title == "Jonkvrouw" and (
+    jonkheer_uses_partner_name = indication_name_use == PARTNER and title != JONKHEER
+    jonkvrouw_with_partner = title == JONKVROUW and (
         partner_last_name_prefix or partner_last_name
     )
-    jonkvrouw_using_partner_name = title == "Jonkvrouw" and indication_name_use != "E"
+    jonkvrouw_using_partner_name = title == JONKVROUW and indication_name_use != EIGEN
     if (
         not jonkheer_uses_partner_name
         and not jonkvrouw_with_partner
@@ -102,7 +103,7 @@ def get_aanhef(
         if salutation:
             return salutation
 
-    if gender_designation == "V" and indication_name_use != "E":
+    if gender_designation == FEMALE and indication_name_use != EIGEN:
         salutation = get_salutation_from_partner_title(partner_title)
         if salutation:
             return salutation
