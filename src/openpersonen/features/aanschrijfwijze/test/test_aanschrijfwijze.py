@@ -258,3 +258,108 @@ class TestGetAanschrijfwijzePersonHasPredicatePartnerDoesNot(TestCase):
             )
 
             self.assertEqual(aanschrijfwijze, result)
+
+
+class TestGetAanschrijfwijzePartnerHasTitle(TestCase):
+    def test_aanschrijfwijze_partner_has_title(self):
+        table_string = """
+            | geslachtsaanduiding | geslachtsaanduiding partner | adellijkeTitel_predikaat partner | aanduidingAanschrijving | samenstelling aanschrijfwijze | geslachtsnaam | voornamen      | aanschrijfwijze                         |
+            | V                   | M                           | Baron                            | E                       | VL VV GN                      | Veen          | Anna Cornelia  | A.C. van der Veen                       |
+            | V                   | M                           | Baron                            | N                       | VL VV GN-AP VP GP             | Veen          | Anna Cornelia  | A.C. van der Veen-barones van den Aedel |
+            | V                   | M                           | Baron                            | P                       | VL AP VP GP                   | Veen          | Anna Cornelia  | A.C. barones van den Aedel              |
+            | V                   | M                           | Baron                            | V                       | VL AP VP GP-VV GN             | Veen          | Anna Cornelia  | A.C. barones van den Aedel-van der Veen |
+            | V                   | M                           | Prins                            | E                       | VL VV GN                      | Veen          | Anna Cornelia  | A.C. van der Veen                       |
+            | V                   | M                           | Prins                            | N                       | VL VV GN-AP VP GP             | Veen          | Anna Cornelia  | A.C. van der Veen-prinses van den Aedel |
+            | V                   | M                           | Prins                            | P                       | VL AP VP GP                   | Veen          | Anna Cornelia  | A.C. prinses van den Aedel              |
+            | V                   | M                           | Prins                            | V                       | VL AP VP GP-VV GN             | Veen          | Anna Cornelia  | A.C. prinses van den Aedel-van der Veen |
+            | M                   | V                           | Gravin                           | E                       | VL VV GN                      | Veen          | Johannes       | J. van der Veen                         |
+            | M                   | V                           | Gravin                           | N                       | VL VV GN-VP GP                | Veen          | Johannes       | J. van der Veen-van den Aedel           |
+            | M                   | V                           | Gravin                           | P                       | VL VP GP                      | Veen          | Johannes       | J. van den Aedel                        |
+            | M                   | V                           | Gravin                           | V                       | VL VP GP-VV GN                | Veen          | Johannes       | J. van den Aedel-van der Veen           |
+            | V                   | M                           | Ridder                           | E                       | VL VV GN                      | Veen          | Marlies        | M. van der Veen                         |
+            | V                   | M                           | Ridder                           | N                       | VL VV GN-VP GP                | Veen          | Marlies        | M. van der Veen-van den Aedel           |
+            | V                   | M                           | Ridder                           | P                       | VL VP GP                      | Veen          | Marlies        | M. van den Aedel                        |
+            | V                   | M                           | Ridder                           | V                       | VL VP GP-VV GN                | Veen          | Marlies        | M. van den Aedel-van der Veen           |
+            | V                   | V                           | Gravin                           | E                       | VL VV GN                      | Veen          | Sarah          | S. van der Veen                         |
+            | V                   | V                           | Gravin                           | N                       | VL VV GN-VP GP                | Veen          | Sarah          | S. van der Veen-van den Aedel           |
+            | V                   | V                           | Gravin                           | P                       | VL VP GP                      | Veen          | Sarah          | S. van den Aedel                        |
+            | V                   | V                           | Gravin                           | V                       | VL VP GP-VV GN                | Veen          | Sarah          | S. van den Aedel-van der Veen           |
+            | M                   | M                           | Baron                            | E                       | VL VV GN                      | Veen          | Willem         | W. van der Veen                         |
+            | M                   | M                           | Baron                            | N                       | VL VV GN-VP GP                | Veen          | Willem         | W. van der Veen-van den Aedel           |
+            | M                   | M                           | Baron                            | P                       | VL VP GP                      | Veen          | Willem         | W. van den Aedel                        |
+            | M                   | M                           | Baron                            | V                       | VL VP GP-VV GN                | Veen          | Willem         | W. van den Aedel-van der Veen           |
+        """
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            (
+                gender,
+                partner_gender,
+                partner_title,
+                aanduiding_aanschrijving,
+                _,
+                last_name,
+                first_name,
+                aanschrijfwijze
+            ) = row
+
+            name = aanschrijfwijze.replace('barones ', '')
+            name = name.replace('prinses ', '')
+            last_name = None
+            last_name_prefix = None
+            partner_last_name_prefix = None
+            partner_last_name = None
+            if aanduiding_aanschrijving == "E":
+                last_name = name.split(" ", 1)[-1]
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+            elif aanduiding_aanschrijving == "N":
+                last_name = name.split(" ", 1)[-1]
+                last_name, partner_last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_aanschrijving == "P":
+                partner_last_name = name.split(" ", 1)[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_aanschrijving == "V":
+                last_name = name.split(" ", 1)[-1]
+                partner_last_name, last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+
+            result = get_aanschrijfwijze(
+                last_name_prefix,
+                last_name,
+                first_name,
+                partner_last_name_prefix,
+                partner_last_name,
+                aanduiding_aanschrijving,
+                gender,
+                None,
+                partner_title,
+            )
+
+            self.assertEqual(aanschrijfwijze, result)
