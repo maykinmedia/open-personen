@@ -85,6 +85,11 @@ urlpatterns = [
         ),
         name="schema-ingeschreven-persoon",
     ),
+    url(
+        r"^schema/openapi(?P<format>\.json|\.yaml)$",
+        SchemaView.without_ui(),
+        name="schema-ingeschreven-persoon-no-ui",
+    ),
     # actual API
     path("", include(router.urls)),
 ]
