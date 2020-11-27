@@ -13,15 +13,6 @@ class TestGetAanschrijfwijzeWithoutTitle(TestCase):
             | V                       | VL VP GP-VV GN                | van         | Velzen        | Fred      | In het              | Veld                  | F. In het Veld-van Velzen |
         """
 
-        aanduiding_naamgebruik_to_enumeration = {
-            "Eigen": "E",
-            "Partner na eigen": "N",
-            "Partner": "P",
-            "Partner voor eigen": "V",
-        }
-
-        geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
-
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
             [item.strip() for item in row.strip().split("|") if item]
@@ -46,6 +37,66 @@ class TestGetAanschrijfwijzeWithoutTitle(TestCase):
                 geslachtsnaam,
                 voornamen,
                 voervoegsel_partner,
+                geslachtsnaam_partner,
+                aanduiding_aanschrijving,
+                None,
+                None,
+                None,
+            )
+
+            self.assertEqual(aanschrijfwijze, result)
+
+
+class TestGetAanschrijfwijzeWithTitle(TestCase):
+    def test_aanschrijfwijze_with_title(self):
+        table_string = """
+            | aanduidingAanschrijving | samenstelling aanschrijfwijze | geslachtsnaam | voornamen          | aanschrijfwijze     |
+            | E                       | VL GN                         | Groenen       | Franklin           | F. Groenen          |
+            | N                       | VL GN-GP                      | Groenen       | Franka             | F. Groenen-Groenink |
+            | P                       | VL GP                         | Groenink      | Johan Frank Robert | J.F.R. Groenen      |
+            | V                       | VL GP-GN                      | Groenlo       | Franka             | F. Groenen-Groenlo  |
+        """
+
+        aanduiding_naamgebruik_to_enumeration = {
+            "Eigen": "E",
+            "Partner na eigen": "N",
+            "Partner": "P",
+            "Partner voor eigen": "V",
+        }
+
+        geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            (
+                aanduiding_aanschrijving,
+                _,
+                geslachtsnaam,
+                voornamen,
+                aanschrijfwijze,
+            ) = row
+
+            geslachtsnaam_partner = None
+            if aanduiding_aanschrijving == "N":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                _, geslachtsnaam_partner = last_name.split("-")
+            elif aanduiding_aanschrijving == "P":
+                geslachtsnaam_partner = aanschrijfwijze.split(" ", 1)[-1]
+            elif aanduiding_aanschrijving == "V":
+                last_name = aanschrijfwijze.split(" ", 1)[-1]
+                geslachtsnaam_partner, _ = last_name.split("-")
+
+            result = get_aanschrijfwijze(
+                None,
+                geslachtsnaam,
+                voornamen,
+                None,
                 geslachtsnaam_partner,
                 aanduiding_aanschrijving,
                 None,
