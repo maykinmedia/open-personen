@@ -1,3 +1,12 @@
+def get_aanschrijfwijze_first_name(first_name):
+    split_first_name = first_name.split(' ')
+    aanschrijfwijze_first_name = ''
+
+    for name in split_first_name:
+        aanschrijfwijze_first_name += f'{name[0]}.'
+
+    return aanschrijfwijze_first_name
+
 def get_aanschrijfwijze(
     last_name_prefix,
     last_name,
@@ -11,12 +20,24 @@ def get_aanschrijfwijze(
 ):
     aanschrijfwijze = 'string'
     if indication_name_use == 'E':
-        aanschrijfwijze = f"{first_name[0]}. {last_name_prefix} {last_name}"
+        if last_name_prefix:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}"
+        else:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name}"
     elif indication_name_use == 'N':
-        aanschrijfwijze = f"{first_name[0]}. {last_name_prefix} {last_name}-{partner_last_name_prefix} {partner_last_name}"
+        if last_name_prefix and partner_last_name_prefix:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{partner_last_name_prefix} {partner_last_name}"
+        else:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name}-{partner_last_name}"
     elif indication_name_use == 'P':
-        aanschrijfwijze = f"{first_name[0]}. {partner_last_name_prefix} {partner_last_name}"
+        if partner_last_name_prefix:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}"
+        else:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}"
     elif indication_name_use == 'V':
-        aanschrijfwijze = f"{first_name[0]}. {partner_last_name_prefix} {partner_last_name}-{last_name_prefix} {last_name}"
+        if last_name_prefix and partner_last_name_prefix:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}-{last_name_prefix} {last_name}"
+        else:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}-{last_name}"
 
     return aanschrijfwijze
