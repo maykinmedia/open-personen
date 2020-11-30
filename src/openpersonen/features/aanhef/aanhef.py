@@ -49,7 +49,7 @@ def get_aanhef_last_name(
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
         aanhef_last_name += f" {last_name}"
-    if indication_name_use == PARTNER_NA_EIGEN:  # Partner na eigen
+    if indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
         if last_name:

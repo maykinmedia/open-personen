@@ -6,6 +6,8 @@ HOOGGEBOREN_HEER = "Hooggeboren heer"
 HOOGGEBOREN_VROUWE = "Hooggeboren vrouwe"
 GEACHTE_MEVROUW = "Geachte mevrouw"
 GEACHTE_HEER = "Geachte heer"
+MEVROUW = "mevrouw"
+DE_HEER = "de heer"
 
 # Title constants
 BARON = "Baron"
@@ -42,3 +44,4 @@ EIGEN = "E"
 PARTNER_NA_EIGEN = "N"
 PARTNER = "P"
 PARTNER_VOOR_EIGEN = "V"
+
