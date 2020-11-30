@@ -31,20 +31,20 @@ class TestGetAanschrijfwijzeWithPrefix(TestCase):
                 geslachtsnaam_partner,
                 aanschrijfwijze,
             ) = row
+            with self.subTest(aanduiding_aanschrijving=aanduiding_aanschrijving):
+                result = get_aanschrijfwijze(
+                    voervoegsel,
+                    geslachtsnaam,
+                    voornamen,
+                    voervoegsel_partner,
+                    geslachtsnaam_partner,
+                    aanduiding_aanschrijving,
+                    None,
+                    None,
+                    None,
+                )
 
-            result = get_aanschrijfwijze(
-                voervoegsel,
-                geslachtsnaam,
-                voornamen,
-                voervoegsel_partner,
-                geslachtsnaam_partner,
-                aanduiding_aanschrijving,
-                None,
-                None,
-                None,
-            )
-
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)
 
 
 class TestGetAanschrijfwijzeWithoutPrefix(TestCase):
@@ -83,19 +83,20 @@ class TestGetAanschrijfwijzeWithoutPrefix(TestCase):
                 last_name = aanschrijfwijze.split(" ", 1)[-1]
                 geslachtsnaam_partner, _ = last_name.split("-")
 
-            result = get_aanschrijfwijze(
-                None,
-                geslachtsnaam,
-                voornamen,
-                None,
-                geslachtsnaam_partner,
-                aanduiding_aanschrijving,
-                None,
-                None,
-                None,
-            )
+            with self.subTest(aanduiding_aanschrijving=aanduiding_aanschrijving):
+                result = get_aanschrijfwijze(
+                    None,
+                    geslachtsnaam,
+                    voornamen,
+                    None,
+                    geslachtsnaam_partner,
+                    aanduiding_aanschrijving,
+                    None,
+                    None,
+                    None,
+                )
 
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)
 
 
 class TestGetAanschrijfwijzePersonHasTitlePartnerDoesNot(TestCase):
@@ -153,19 +154,20 @@ class TestGetAanschrijfwijzePersonHasTitlePartnerDoesNot(TestCase):
                 partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                 partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanschrijfwijze(
-                last_name_prefix,
-                geslachtsnaam,
-                voornamen,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_aanschrijving,
-                None,
-                None,
-                None,
-            )
+            with self.subTest(aanduiding_aanschrijving=aanduiding_aanschrijving):
+                result = get_aanschrijfwijze(
+                    last_name_prefix,
+                    geslachtsnaam,
+                    voornamen,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_aanschrijving,
+                    None,
+                    None,
+                    None,
+                )
 
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)
 
 
 class TestGetAanschrijfwijzePersonHasPredicatePartnerDoesNot(TestCase):
@@ -245,19 +247,22 @@ class TestGetAanschrijfwijzePersonHasPredicatePartnerDoesNot(TestCase):
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanschrijfwijze(
-                last_name_prefix,
-                last_name,
-                voornamen,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
-                None,
-                title,
-                None,
-            )
+            with self.subTest(
+                title=title, aanduiding_naamgebruik=aanduiding_naamgebruik
+            ):
+                result = get_aanschrijfwijze(
+                    last_name_prefix,
+                    last_name,
+                    voornamen,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    None,
+                    title,
+                    None,
+                )
 
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)
 
 
 class TestGetAanschrijfwijzePartnerHasTitle(TestCase):
@@ -350,19 +355,23 @@ class TestGetAanschrijfwijzePartnerHasTitle(TestCase):
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanschrijfwijze(
-                last_name_prefix,
-                last_name,
-                first_name,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_aanschrijving,
-                gender,
-                None,
-                partner_title,
-            )
+            with self.subTest(
+                partner_title=partner_title,
+                aanduiding_aanschrijving=aanduiding_aanschrijving,
+            ):
+                result = get_aanschrijfwijze(
+                    last_name_prefix,
+                    last_name,
+                    first_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_aanschrijving,
+                    gender,
+                    None,
+                    partner_title,
+                )
 
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)
 
 
 class TestGetAanschrijfwijzePartnerHasPredicate(TestCase):
@@ -420,19 +429,20 @@ class TestGetAanschrijfwijzePartnerHasPredicate(TestCase):
                 partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                 partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanschrijfwijze(
-                last_name_prefix,
-                geslachtsnaam,
-                voornamen,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_aanschrijving,
-                None,
-                None,
-                None,
-            )
+            with self.subTest(aanduiding_aanschrijving=aanduiding_aanschrijving):
+                result = get_aanschrijfwijze(
+                    last_name_prefix,
+                    geslachtsnaam,
+                    voornamen,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_aanschrijving,
+                    None,
+                    None,
+                    None,
+                )
 
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)
 
 
 class TestGetAanschrijfwijzePersonAndPartnerHasTitle(TestCase):
@@ -490,16 +500,17 @@ class TestGetAanschrijfwijzePersonAndPartnerHasTitle(TestCase):
                 partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                 partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanschrijfwijze(
-                last_name_prefix,
-                geslachtsnaam,
-                voornamen,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_aanschrijving,
-                None,
-                None,
-                None,
-            )
+            with self.subTest(aanduiding_aanschrijving=aanduiding_aanschrijving):
+                result = get_aanschrijfwijze(
+                    last_name_prefix,
+                    geslachtsnaam,
+                    voornamen,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_aanschrijving,
+                    None,
+                    None,
+                    None,
+                )
 
-            self.assertEqual(aanschrijfwijze, result)
+                self.assertEqual(aanschrijfwijze, result)

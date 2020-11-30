@@ -2,13 +2,8 @@ from openpersonen.features.constants import *
 
 
 def get_aanschrijfwijze_first_name(first_name):
-    split_first_name = first_name.split(" ")
-    aanschrijfwijze_first_name = ""
-
-    for name in split_first_name:
-        aanschrijfwijze_first_name += f"{name[0]}."
-
-    return aanschrijfwijze_first_name
+    split_first_name = first_name.split()
+    return "".join(f"{name[0]}." for name in split_first_name)
 
 
 def get_aanschrijfwijze_with_title(
