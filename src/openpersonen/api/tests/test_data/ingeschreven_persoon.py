@@ -51,7 +51,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "voornamen": "Media",
             "voorvoegsel": "van",
             "aanhef": "Geachte heer Van Maykin",
-            "aanschrijfwijze": "string",
+            "aanschrijfwijze": "M. van Maykin",
             "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": "E",
         },
