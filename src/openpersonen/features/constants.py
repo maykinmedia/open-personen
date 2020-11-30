@@ -22,6 +22,17 @@ MARKIEZIN = "Markiezin"
 PRINSES = "Prinses"
 GRAVIN = "Gravin"
 
+
+MALE_TO_FEMALE_TITLES = {
+    BARON: BARONES,
+    HERTOG: HERTOGIN,
+    JONKHEER: JONKVROUW,
+    MARKIES: MARKIEZIN,
+    PRINS: PRINSES,
+    GRAAF: GRAVIN,
+}
+
+
 # Gender Designation
 MALE = "M"
 FEMALE = "V"

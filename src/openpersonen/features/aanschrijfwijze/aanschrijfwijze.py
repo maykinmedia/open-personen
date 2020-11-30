@@ -65,15 +65,9 @@ def get_aanschrijfwijze_based_on_partner_title(
     partner_last_name_prefix,
     partner_last_name,
     indication_name_use,
-    title,
     partner_title,
 ):
     aanschrijfwijze = ""
-
-    if partner_title == BARON:
-        title = BARONES.lower()
-    elif partner_title == PRINS:
-        title = PRINSES.lower()
 
     if indication_name_use == PARTNER_NA_EIGEN:
         aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
@@ -81,21 +75,23 @@ def get_aanschrijfwijze_based_on_partner_title(
         if last_name_prefix:
             aanschrijfwijze += f" {last_name_prefix}"
 
-        aanschrijfwijze += f" {last_name}-{title}"
+        aanschrijfwijze += (
+            f" {last_name}-{MALE_TO_FEMALE_TITLES[partner_title].lower()}"
+        )
 
         if partner_last_name_prefix:
             aanschrijfwijze += f" {partner_last_name_prefix}"
 
         aanschrijfwijze += f" {partner_last_name}"
     elif indication_name_use == PARTNER:
-        aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title}"
+        aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {MALE_TO_FEMALE_TITLES[partner_title].lower()}"
 
         if partner_last_name_prefix:
             aanschrijfwijze += f" {partner_last_name_prefix}"
 
         aanschrijfwijze += f" {partner_last_name}"
     elif indication_name_use == PARTNER_VOOR_EIGEN:
-        aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title}"
+        aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {MALE_TO_FEMALE_TITLES[partner_title].lower()}"
 
         if last_name_prefix and partner_last_name_prefix:
             aanschrijfwijze += f" {partner_last_name_prefix}"
@@ -199,7 +195,6 @@ def get_aanschrijfwijze(
             partner_last_name_prefix,
             partner_last_name,
             indication_name_use,
-            title,
             partner_title,
         )
     else:
