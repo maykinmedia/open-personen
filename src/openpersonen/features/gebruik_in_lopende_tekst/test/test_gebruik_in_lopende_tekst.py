@@ -2,7 +2,6 @@ from django.test import TestCase
 
 from openpersonen.features import get_gebruik_in_lopende_tekst
 
-
 aanduiding_naamgebruik_to_enumeration = {
     "Eigen": "E",
     "Partner na eigen": "N",
@@ -10,11 +9,16 @@ aanduiding_naamgebruik_to_enumeration = {
     "Partner voor eigen": "V",
 }
 
-geslachtsaanduiding_to_enumeration = {"Man": "M", "Vrouw": "V"}
+geslachtsaanduiding_to_enumeration = {
+    "Man": "M",
+    "Vrouw": "V",
+    "man": "M",
+    "vrouw": "V",
+}
 
 
-class TestGetGebruikInLopendeTekstWithPrefix(TestCase):
-    def test_gebruik_in_lopende_tekst_with_prefix(self):
+class TestGetGebruikInLopendeTekstWithoutTitleOrPredicate(TestCase):
+    def test_gebruik_in_lopende_tekst_without_title_or_predicate(self):
         table_string = """
             | aanduidingNaamgebruik | geslachtsaanduiding |samenstelling gebruikInLopendeTekst | aanschrijfwijze           | gebruikInLopendeTekst          |
             | Eigen                 | Man                 | GA VV GN                           | H. in het Veld            | de heer In het Veld            |
@@ -25,14 +29,14 @@ class TestGetGebruikInLopendeTekstWithPrefix(TestCase):
             | Partner               | Vrouw               | GA VP GP                           | J.F.R. Groenen            | mevrouw Groenen                |
             | Partner voor eigen    | Man                 | GA VP GP-VV GN                     | F. in het Veld-van Velzen | de heer In het Veld-van Velzen |
             | Partner voor eigen    | Man                 | GA VP GP-VV GN                     | F. Groenen-Groenink       | de heer Groenen-Groenink       |
-                """
+        """
 
         # Convert table string to rows and remove empty rows, white spaces, and header row
         table_rows = [
-                         [item.strip() for item in row.strip().split("|") if item]
-                         for row in table_string.split("\n")
-                         if row.strip()
-                     ][1:]
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
 
         for row in table_rows:
             (
@@ -40,7 +44,7 @@ class TestGetGebruikInLopendeTekstWithPrefix(TestCase):
                 gender,
                 _,
                 aanschrijfwijze,
-                gebruik_in_lopende_tekst
+                gebruik_in_lopende_tekst,
             ) = row
 
             last_name = None
@@ -90,6 +94,49 @@ class TestGetGebruikInLopendeTekstWithPrefix(TestCase):
                     partner_last_name_prefix,
                     partner_last_name,
                     aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    geslachtsaanduiding_to_enumeration[gender],
+                    None,
+                    None,
+                )
+
+                self.assertEqual(gebruik_in_lopende_tekst, result)
+
+
+class TestGetGebruikInLopendeTekstVoervoegselsWithSmallOrCapitalLetters(TestCase):
+    def test_gebruik_in_lopende_tekst_without_title_or_predicate(self):
+        table_string = """
+            | aanduidingAanschrijving | geslachtsaanduiding | VV     | GN     | VP     | GP     | gebruikInLopendeTekst          |
+            | E                       | man                 | In het | Veld   | van    | Velzen | de heer In het Veld            |
+            | N                       | vrouw               | van    | Velzen | In het | Veld   | mevrouw Van Velzen-In het Veld |
+            | P                       | vrouw               | In het | Veld   | van    | Velzen | mevrouw Van Velzen             |
+            | V                       | man                 | van    | Velzen | In het | Veld   | de heer In het Veld-van Velzen |
+        """
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            (
+                aanduiding_aanschrijving,
+                gender,
+                last_name_prefix,
+                last_name,
+                partner_last_name_prefix,
+                partner_last_name,
+                gebruik_in_lopende_tekst,
+            ) = row
+
+            with self.subTest(aanduiding_aanschrijving=aanduiding_aanschrijving):
+                result = get_gebruik_in_lopende_tekst(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_aanschrijving,
                     geslachtsaanduiding_to_enumeration[gender],
                     None,
                     None,
