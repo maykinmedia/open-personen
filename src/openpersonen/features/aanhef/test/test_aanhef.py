@@ -85,17 +85,18 @@ class TestGetAanHefWithoutTitle(TestCase):
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanhef(
-                last_name_prefix,
-                last_name,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
-                geslachtsaanduiding_to_enumeration[geslachtsaanduiding],
-                None,
-                None,
-            )
-            self.assertEqual(aanhef, result)
+            with self.subTest(aanhef=aanhef):
+                result = get_aanhef(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    geslachtsaanduiding_to_enumeration[geslachtsaanduiding],
+                    None,
+                    None,
+                )
+                self.assertEqual(aanhef, result)
 
 
 class TestGetAanHefWithCapitalOrSmallLetters(TestCase):
@@ -171,17 +172,18 @@ class TestGetAanHefWithCapitalOrSmallLetters(TestCase):
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanhef(
-                last_name_prefix,
-                last_name,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
-                geslachtsaanduiding_to_enumeration[geslachtsaanduiding],
-                None,
-                None,
-            )
-            self.assertEqual(aanhef, result)
+            with self.subTest(aanhef=aanhef):
+                result = get_aanhef(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    geslachtsaanduiding_to_enumeration[geslachtsaanduiding],
+                    None,
+                    None,
+                )
+                self.assertEqual(aanhef, result)
 
 
 class TestGetAanHefWithTitle(TestCase):
@@ -259,17 +261,18 @@ class TestGetAanHefWithTitle(TestCase):
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanhef(
-                last_name_prefix,
-                last_name,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
-                gender_designation,
-                adellijke_titel_predikaat,
-                None,
-            )
-            self.assertEqual(aanhef, result)
+            with self.subTest(adellijke_titel_predikaat=adellijke_titel_predikaat):
+                result = get_aanhef(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    gender_designation,
+                    adellijke_titel_predikaat,
+                    None,
+                )
+                self.assertEqual(aanhef, result)
 
 
 class TestGetAanHefWithPredikaat(TestCase):
@@ -363,17 +366,22 @@ class TestGetAanHefWithPredikaat(TestCase):
                     partner_last_name = ""
                     partner_last_name_prefix = ""
 
-            result = get_aanhef(
-                last_name_prefix,
-                last_name,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
-                gender_designation,
-                adellijke_titel_predikaat,
-                None,
-            )
-            self.assertEqual(aanhef, result)
+            with self.subTest(
+                adellijke_titel_predikaat=adellijke_titel_predikaat,
+                aanduiding_naamgebruik=aanduiding_naamgebruik,
+                has_partner=has_partner,
+            ):
+                result = get_aanhef(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    gender_designation,
+                    adellijke_titel_predikaat,
+                    None,
+                )
+                self.assertEqual(aanhef, result)
 
 
 class TestGetAanHefWithAdelijkeTitelOfPredikaat(TestCase):
@@ -462,14 +470,20 @@ class TestGetAanHefWithAdelijkeTitelOfPredikaat(TestCase):
                     partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
                     partner_last_name = split_partner_last_name[-1]
 
-            result = get_aanhef(
-                last_name_prefix,
-                last_name,
-                partner_last_name_prefix,
-                partner_last_name,
-                aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
-                gender_designation,
-                None,
-                adelijke_title_predikaat_partner,
-            )
-            self.assertEqual(aanhef, result)
+            with self.subTest(
+                gender_designation=gender_designation,
+                geslachtsaanduiding_partner=geslachtsaanduiding_partner,
+                adelijke_title_predikaat_partner=adelijke_title_predikaat_partner,
+                aanduiding_naamgebruik=aanduiding_naamgebruik,
+            ):
+                result = get_aanhef(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    gender_designation,
+                    None,
+                    adelijke_title_predikaat_partner,
+                )
+                self.assertEqual(aanhef, result)
