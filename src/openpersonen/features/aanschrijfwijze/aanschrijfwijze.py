@@ -1,3 +1,6 @@
+from openpersonen.features.constants import *
+
+
 def get_aanschrijfwijze_first_name(first_name):
     split_first_name = first_name.split(" ")
     aanschrijfwijze_first_name = ""
@@ -21,69 +24,69 @@ def get_aanschrijfwijze(
 ):
     aanschrijfwijze = "string"
 
-    use_own_name = title in ["Jonkheer", "Jonkvrouw"] and indication_name_use != "P"
+    use_own_name = title in [JONKHEER, JONKVROUW] and indication_name_use != PARTNER
 
     if use_own_name:
-        if indication_name_use == "E":
+        if indication_name_use == EIGEN:
             if last_name_prefix:
                 aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}"
             else:
                 aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name}"
-        elif indication_name_use == "N":
+        elif indication_name_use == PARTNER_NA_EIGEN:
             if last_name_prefix and partner_last_name_prefix:
                 aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{partner_last_name_prefix} {partner_last_name}"
             else:
                 aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name}-{partner_last_name}"
-        elif indication_name_use == "V":
+        elif indication_name_use == PARTNER_VOOR_EIGEN:
             if last_name_prefix and partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}-{title.lower()} {last_name_prefix} {last_name}"
             else:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}-{title.lower()} {last_name}"
     elif (
-        partner_title in ["Baron", "Prins"]
-        and gender_designation == "V"
-        and indication_name_use != "E"
+        partner_title in [BARON, PRINS]
+        and gender_designation == FEMALE
+        and indication_name_use != EIGEN
     ):
-        if partner_title == "Baron":
-            title = "barones"
-        elif partner_title == "Prins":
-            title = "prinses"
-        if indication_name_use == "N":
+        if partner_title == BARON:
+            title = BARONES.lower()
+        elif partner_title == PRINS:
+            title = PRINSES.lower()
+        if indication_name_use == PARTNER_NA_EIGEN:
             if last_name_prefix and partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{title} {partner_last_name_prefix} {partner_last_name}"
             else:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name}-{title} {partner_last_name}"
-        elif indication_name_use == "P":
+        elif indication_name_use == PARTNER:
             if partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name_prefix} {partner_last_name}"
             else:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name}"
-        elif indication_name_use == "V":
+        elif indication_name_use == PARTNER_VOOR_EIGEN:
             if last_name_prefix and partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name_prefix} {partner_last_name}-{last_name_prefix} {last_name}"
             else:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name}-{last_name}"
     else:
-        if indication_name_use == "E":
+        if indication_name_use == EIGEN:
             if last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}"
             else:
                 aanschrijfwijze = (
                     f"{get_aanschrijfwijze_first_name(first_name)} {last_name}"
                 )
-        elif indication_name_use == "N":
+        elif indication_name_use == PARTNER_NA_EIGEN:
             if last_name_prefix and partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{partner_last_name_prefix} {partner_last_name}"
             else:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name}-{partner_last_name}"
-        elif indication_name_use == "P":
+        elif indication_name_use == PARTNER:
             if partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}"
             else:
                 aanschrijfwijze = (
                     f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}"
                 )
-        elif indication_name_use == "V":
+        elif indication_name_use == PARTNER_VOOR_EIGEN:
             if last_name_prefix and partner_last_name_prefix:
                 aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}-{last_name_prefix} {last_name}"
             else:
