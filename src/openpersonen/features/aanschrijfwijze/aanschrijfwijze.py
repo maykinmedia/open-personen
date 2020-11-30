@@ -25,71 +25,115 @@ def get_aanschrijfwijze(
     aanschrijfwijze = "string"
 
     use_own_name = title in [JONKHEER, JONKVROUW] and indication_name_use != PARTNER
-
-    if use_own_name:
-        if indication_name_use == EIGEN:
-            if last_name_prefix:
-                aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}"
-            else:
-                aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name}"
-        elif indication_name_use == PARTNER_NA_EIGEN:
-            if last_name_prefix and partner_last_name_prefix:
-                aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{partner_last_name_prefix} {partner_last_name}"
-            else:
-                aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)} {last_name}-{partner_last_name}"
-        elif indication_name_use == PARTNER_VOOR_EIGEN:
-            if last_name_prefix and partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}-{title.lower()} {last_name_prefix} {last_name}"
-            else:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}-{title.lower()} {last_name}"
-    elif (
+    title_based_on_partner = (
         partner_title in [BARON, PRINS]
         and gender_designation == FEMALE
         and indication_name_use != EIGEN
-    ):
+    )
+
+    if use_own_name:
+        if indication_name_use == EIGEN:
+            aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)}"
+            if last_name_prefix:
+                 aanschrijfwijze += f" {last_name_prefix}"
+            aanschrijfwijze += f" {last_name}"
+        elif indication_name_use == PARTNER_NA_EIGEN:
+            aanschrijfwijze = f"{title.lower()} {get_aanschrijfwijze_first_name(first_name)}"
+            if last_name_prefix:
+                aanschrijfwijze += f" {last_name_prefix}"
+
+            aanschrijfwijze += f" {last_name}-"
+
+            if partner_last_name_prefix:
+                aanschrijfwijze += f"{partner_last_name_prefix} "
+
+            aanschrijfwijze += f"{partner_last_name}"
+        elif indication_name_use == PARTNER_VOOR_EIGEN:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
+
+            if partner_last_name_prefix:
+                aanschrijfwijze += f" {partner_last_name_prefix}"
+
+            aanschrijfwijze += f" {partner_last_name}-{title.lower()}"
+
+            if last_name_prefix:
+                aanschrijfwijze += f" {last_name_prefix}"
+
+            aanschrijfwijze += f" {last_name}"
+    elif title_based_on_partner:
         if partner_title == BARON:
             title = BARONES.lower()
         elif partner_title == PRINS:
             title = PRINSES.lower()
         if indication_name_use == PARTNER_NA_EIGEN:
-            if last_name_prefix and partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{title} {partner_last_name_prefix} {partner_last_name}"
-            else:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name}-{title} {partner_last_name}"
-        elif indication_name_use == PARTNER:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
+
+            if last_name_prefix:
+                aanschrijfwijze += f" {last_name_prefix}"
+
+            aanschrijfwijze += f" {last_name}-{title}"
+
             if partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name_prefix} {partner_last_name}"
-            else:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name}"
+                aanschrijfwijze += f" {partner_last_name_prefix}"
+
+            aanschrijfwijze += f" {partner_last_name}"
+        elif indication_name_use == PARTNER:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title}"
+
+            if partner_last_name_prefix:
+                aanschrijfwijze += f" {partner_last_name_prefix}"
+
+            aanschrijfwijze += f" {partner_last_name}"
         elif indication_name_use == PARTNER_VOOR_EIGEN:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title}"
+
             if last_name_prefix and partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name_prefix} {partner_last_name}-{last_name_prefix} {last_name}"
-            else:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {title} {partner_last_name}-{last_name}"
+                aanschrijfwijze += f" {partner_last_name_prefix}"
+
+            aanschrijfwijze += f" {partner_last_name}-"
+
+            if last_name_prefix:
+                aanschrijfwijze += f"{last_name_prefix} "
+
+            aanschrijfwijze += f"{last_name}"
     else:
         if indication_name_use == EIGEN:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
+
             if last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}"
-            else:
-                aanschrijfwijze = (
-                    f"{get_aanschrijfwijze_first_name(first_name)} {last_name}"
-                )
+                aanschrijfwijze += f" {last_name_prefix}"
+
+            aanschrijfwijze += f" {last_name}"
         elif indication_name_use == PARTNER_NA_EIGEN:
-            if last_name_prefix and partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name_prefix} {last_name}-{partner_last_name_prefix} {partner_last_name}"
-            else:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {last_name}-{partner_last_name}"
-        elif indication_name_use == PARTNER:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
+
+            if last_name_prefix:
+                aanschrijfwijze += f" {last_name_prefix}"
+
+            aanschrijfwijze += f" {last_name}-"
+
             if partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}"
-            else:
-                aanschrijfwijze = (
-                    f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}"
-                )
+                aanschrijfwijze += f"{partner_last_name_prefix} "
+
+            aanschrijfwijze += f"{partner_last_name}"
+        elif indication_name_use == PARTNER:
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
+
+            if partner_last_name_prefix:
+                aanschrijfwijze += f" {partner_last_name_prefix}"
+
+            aanschrijfwijze += f" {partner_last_name}"
         elif indication_name_use == PARTNER_VOOR_EIGEN:
-            if last_name_prefix and partner_last_name_prefix:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name_prefix} {partner_last_name}-{last_name_prefix} {last_name}"
-            else:
-                aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)} {partner_last_name}-{last_name}"
+            aanschrijfwijze = f"{get_aanschrijfwijze_first_name(first_name)}"
+
+            if partner_last_name_prefix:
+                aanschrijfwijze += f" {partner_last_name_prefix}"
+
+            aanschrijfwijze += f" {partner_last_name}-"
+
+            if last_name_prefix:
+                aanschrijfwijze += f"{last_name_prefix} "
+
+            aanschrijfwijze += f"{last_name}"
 
     return aanschrijfwijze
