@@ -1,4 +1,4 @@
-from .constants import *
+from openpersonen.features.constants import *
 
 
 def get_salutation_from_title(title):
