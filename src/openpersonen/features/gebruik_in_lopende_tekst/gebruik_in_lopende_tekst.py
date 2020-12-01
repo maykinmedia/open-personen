@@ -212,6 +212,7 @@ def get_gebruik_in_lopende_tekst(
 
     is_not_exclude_title = title not in [GRAAF, GRAVIN, JONKHEER, JONKVROUW]
     is_predicate = title in [JONKHEER, JONKVROUW]
+    use_partner_title = partner_title and gender_designation != "M"
 
     if title and is_not_exclude_title:
         gebruik_in_lopende_tekst = get_gebruik_in_lopende_tekst_with_title(
@@ -231,7 +232,7 @@ def get_gebruik_in_lopende_tekst(
             indication_name_use,
             title,
         )
-    elif partner_title and gender_designation != "M":
+    elif use_partner_title:
         gebruik_in_lopende_tekst = (
             get_gebruik_in_lopende_tekst_with_partner_title_or_predicate(
                 last_name_prefix,

@@ -148,6 +148,7 @@ class TestIngeschrevenPersoon(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     @freeze_time("2020-09-12")

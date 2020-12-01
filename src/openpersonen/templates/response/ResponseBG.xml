@@ -38,7 +38,7 @@
                <BG:aanduidingNaamgebruik>E</BG:aanduidingNaamgebruik>
                <BG:geslachtsnaamPartner>Vliet</BG:geslachtsnaamPartner>
                <BG:voorvoegselGeslachtsnaamPartner>van</BG:voorvoegselGeslachtsnaamPartner>
-               <BG:adellijkeTitelPredikaat StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+               <BG:adellijkeTitelPredikaat>Jonkheer</BG:adellijkeTitelPredikaat>
                <BG:geslachtsaanduiding>M</BG:geslachtsaanduiding>
                <BG:geboortedatum>19800915</BG:geboortedatum>
                <BG:inp.geboorteplaats>Amsterdam</BG:inp.geboorteplaats>
