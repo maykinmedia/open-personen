@@ -20,6 +20,9 @@ geslachtsaanduiding_to_enumeration = {
 
 class TestGetGebruikInLopendeTekstWithoutTitleOrPredicate(TestCase):
     def test_gebruik_in_lopende_tekst_without_title_or_predicate(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/gebruik_in_lopende_tekst.feature#L73-L82
+        """
         table_string = """
             | aanduidingNaamgebruik | geslachtsaanduiding |samenstelling gebruikInLopendeTekst | aanschrijfwijze           | gebruikInLopendeTekst          |
             | Eigen                 | Man                 | GA VV GN                           | H. in het Veld            | de heer In het Veld            |
@@ -105,6 +108,9 @@ class TestGetGebruikInLopendeTekstWithoutTitleOrPredicate(TestCase):
 
 class TestGetGebruikInLopendeTekstVoervoegselsWithSmallOrCapitalLetters(TestCase):
     def test_gebruik_in_lopende_tekst_without_title_or_predicate(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/gebruik_in_lopende_tekst.feature#L84-L89
+        """
         table_string = """
             | aanduidingAanschrijving | geslachtsaanduiding | VV     | GN     | VP     | GP     | gebruikInLopendeTekst          |
             | E                       | man                 | In het | Veld   | van    | Velzen | de heer In het Veld            |
@@ -148,6 +154,9 @@ class TestGetGebruikInLopendeTekstVoervoegselsWithSmallOrCapitalLetters(TestCase
 
 class TestGetGebruikInLopendeTekstWithAdelijkeTitel(TestCase):
     def test_gebruik_in_lopende_tekst_with_adelijke_title(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/gebruik_in_lopende_tekst.feature#L91-L99
+        """
         table_string = """
             | adellijkeTitel_predikaat | aanduidingNaamgebruik | geslachtsaanduiding | samenstelling gebruikInLopendeTekst | gebruikInLopendeTekst                        |
             | Baron                    | Eigen                 | Man                 | AT VV GN                            | baron Van den Aedel                          |
@@ -240,6 +249,9 @@ class TestGetGebruikInLopendeTekstWithAdelijkeTitel(TestCase):
 
 class TestGetGebruikInLopendeTekstWithPredikaat(TestCase):
     def test_gebruik_in_lopende_tekst_with_predikaat(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/gebruik_in_lopende_tekst.feature#L101-L109
+        """
         table_string = """
             | adellijkeTitel_predikaat | aanduidingNaamgebruik | partner | aanhef                                  |
             | Jonkheer                 | Eigen                 | Geen    | jonkheer Van Hoogh                      |
@@ -337,6 +349,9 @@ class TestGetGebruikInLopendeTekstWithPredikaat(TestCase):
 
 class TestGetGebruikInLopendeTekstPartnerTitleOrPredikaat(TestCase):
     def test_gebruik_in_lopende_tekst_partner_title_or_predikaat(self):
+        """
+        https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/v1.0.0/features/gebruik_in_lopende_tekst.feature#L111-L127
+        """
         table_string = """
             | geslachtsaanduiding | geslachtsaanduiding partner | adellijkeTitel_predikaat partner | aanduidingNaamgebruik | aanschrijfwijze                         | gebruikInLopendeTekst                      |
             | V                   | M                           | Baron                            | Eigen                 | A.C. van der Veen                       | mevrouw Van der Veen                       |
