@@ -4,17 +4,17 @@ from openpersonen.features import get_gebruik_in_lopende_tekst
 from openpersonen.features.constants import *
 
 aanduiding_naamgebruik_to_enumeration = {
-    "Eigen": "E",
-    "Partner na eigen": "N",
-    "Partner": "P",
-    "Partner voor eigen": "V",
+    "Eigen": EIGEN,
+    "Partner na eigen": PARTNER_NA_EIGEN,
+    "Partner": PARTNER,
+    "Partner voor eigen": PARTNER_VOOR_EIGEN,
 }
 
 geslachtsaanduiding_to_enumeration = {
-    "Man": "M",
-    "Vrouw": "V",
-    "man": "M",
-    "vrouw": "V",
+    "Man": MALE,
+    "Vrouw": FEMALE,
+    "man": MALE,
+    "vrouw": FEMALE,
 }
 
 
