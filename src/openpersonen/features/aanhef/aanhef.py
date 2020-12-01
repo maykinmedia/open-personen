@@ -52,14 +52,13 @@ def get_aanhef_last_name(
     if indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
             aanhef_last_name += f" {last_name_prefix.capitalize()}"
-        if last_name:
-            aanhef_last_name += f" {last_name}-"
-        else:
-            aanhef_last_name += f" "
+
+        aanhef_last_name += f" {last_name}-"
+
         if partner_last_name_prefix:
             aanhef_last_name += f"{partner_last_name_prefix} "
-        if partner_last_name:
-            aanhef_last_name += f"{partner_last_name}"
+
+        aanhef_last_name += f"{partner_last_name}"
     if indication_name_use == PARTNER:
         if partner_last_name_prefix:
             aanhef_last_name += f" {partner_last_name_prefix.capitalize()}"
@@ -73,8 +72,8 @@ def get_aanhef_last_name(
             aanhef_last_name += f" "
         if last_name_prefix:
             aanhef_last_name += f"{last_name_prefix} "
-        if last_name:
-            aanhef_last_name += f"{last_name}"
+
+        aanhef_last_name += f"{last_name}"
 
     return aanhef_last_name
 
