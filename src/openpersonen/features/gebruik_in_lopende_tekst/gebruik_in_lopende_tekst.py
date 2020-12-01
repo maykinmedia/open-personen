@@ -69,19 +69,13 @@ def get_gebruik_in_lopende_tekst_with_predicate(
 
         gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER:
-        if title == JONKHEER:
-            gebruik_in_lopende_tekst = title.lower()
-        else:
-            gebruik_in_lopende_tekst = MEVROUW
+        gebruik_in_lopende_tekst = MEVROUW
 
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
         gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER_VOOR_EIGEN:
-        if title == JONKHEER:
-            gebruik_in_lopende_tekst = DE_HEER
-        else:
-            gebruik_in_lopende_tekst = MEVROUW
+        gebruik_in_lopende_tekst = MEVROUW
 
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
