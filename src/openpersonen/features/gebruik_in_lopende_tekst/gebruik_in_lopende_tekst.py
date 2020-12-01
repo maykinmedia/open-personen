@@ -45,6 +45,63 @@ def get_gebruik_in_lopende_tekst_with_title(
     return gebruik_in_lopende_tekst
 
 
+def get_gebruik_in_lopende_tekst_with_predicate(
+    last_name_prefix,
+    last_name,
+    partner_last_name_prefix,
+    partner_last_name,
+    indication_name_use,
+    title,
+):
+    gebruik_in_lopende_tekst = ""
+
+    if indication_name_use == EIGEN:
+        gebruik_in_lopende_tekst = title.lower()
+        if last_name_prefix:
+            gebruik_in_lopende_tekst += f" {last_name_prefix}"
+        gebruik_in_lopende_tekst += f" {last_name}"
+    if indication_name_use == PARTNER_NA_EIGEN:
+        gebruik_in_lopende_tekst = title.lower()
+        if last_name_prefix:
+            gebruik_in_lopende_tekst += f" {last_name_prefix}"
+        if last_name:
+            gebruik_in_lopende_tekst += f" {last_name}-"
+        else:
+            gebruik_in_lopende_tekst += f" "
+        if partner_last_name_prefix:
+            gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
+        if partner_last_name:
+            gebruik_in_lopende_tekst += f"{partner_last_name}"
+    if indication_name_use == PARTNER:
+        if title == JONKHEER:
+            gebruik_in_lopende_tekst = title.lower()
+        else:
+            gebruik_in_lopende_tekst = MEVROUW
+
+        if partner_last_name_prefix:
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
+        gebruik_in_lopende_tekst += f" {partner_last_name}"
+    if indication_name_use == PARTNER_VOOR_EIGEN:
+        if title == JONKHEER:
+            gebruik_in_lopende_tekst = DE_HEER
+        else:
+            gebruik_in_lopende_tekst = MEVROUW
+
+        if partner_last_name_prefix:
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
+        if partner_last_name:
+            gebruik_in_lopende_tekst += f" {partner_last_name}-"
+        else:
+            gebruik_in_lopende_tekst += f" "
+        gebruik_in_lopende_tekst += f"{title.lower()} "
+        if last_name_prefix:
+            gebruik_in_lopende_tekst += f"{last_name_prefix} "
+        if last_name:
+            gebruik_in_lopende_tekst += f"{last_name}"
+
+    return gebruik_in_lopende_tekst
+
+
 def get_default_gebruik_in_lopende_tekst(
     last_name_prefix,
     last_name,
@@ -105,8 +162,20 @@ def get_gebruik_in_lopende_tekst(
     partner_title,
 ):
 
-    if title and title not in [GRAAF, GRAVIN]:
+    is_not_exclude_title = title not in [GRAAF, GRAVIN, JONKHEER, JONKVROUW]
+    is_predicate = title in [JONKHEER, JONKVROUW]
+
+    if title and is_not_exclude_title:
         gebruik_in_lopende_tekst = get_gebruik_in_lopende_tekst_with_title(
+            last_name_prefix,
+            last_name,
+            partner_last_name_prefix,
+            partner_last_name,
+            indication_name_use,
+            title,
+        )
+    elif is_predicate:
+        gebruik_in_lopende_tekst = get_gebruik_in_lopende_tekst_with_predicate(
             last_name_prefix,
             last_name,
             partner_last_name_prefix,

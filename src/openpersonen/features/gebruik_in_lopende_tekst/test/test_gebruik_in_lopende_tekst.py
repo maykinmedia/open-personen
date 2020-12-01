@@ -1,6 +1,8 @@
 from django.test import TestCase
 
 from openpersonen.features import get_gebruik_in_lopende_tekst
+from openpersonen.features.constants import *
+
 
 aanduiding_naamgebruik_to_enumeration = {
     "Eigen": "E",
@@ -230,6 +232,102 @@ class TestGetGebruikInLopendeTekstWithAdelijkeTitel(TestCase):
                     partner_last_name,
                     aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
                     geslachtsaanduiding_to_enumeration[gender],
+                    title,
+                    None,
+                )
+
+                self.assertEqual(gebruik_in_lopende_tekst, result)
+
+
+class TestGetGebruikInLopendeTekstWithPredikaat(TestCase):
+    def test_gebruik_in_lopende_tekst_with_predikaat(self):
+        table_string = """
+            | adellijkeTitel_predikaat | aanduidingNaamgebruik | partner | aanhef                                  |
+            | Jonkheer                 | Eigen                 | Geen    | jonkheer Van Hoogh                      |
+            | Jonkvrouw                | Eigen                 | Geen    | jonkvrouw Van Hoogh                     |
+            | Jonkheer                 | Eigen                 | Ja      | jonkheer Van Hoogh                      |
+            | Jonkvrouw                | Eigen                 | Ja      | jonkvrouw Van Hoogh                     |
+            | Jonkvrouw                | Partner na eigen      | Ja      | jonkvrouw Van Hoogh-in het Veld         |
+            | Jonkvrouw                | Partner               | Ja      | mevrouw In het Veld                     |
+            | Jonkvrouw                | Partner voor eigen    | Ja      | mevrouw In het Veld-jonkvrouw van Hoogh |
+        """
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            (
+                title,
+                aanduiding_naamgebruik,
+                has_partner,
+                gebruik_in_lopende_tekst,
+            ) = row
+
+            last_name = gebruik_in_lopende_tekst
+            for salutation in [
+                "jonkheer ",
+                "jonkvrouw ",
+                "mevrouw ",
+            ]:
+                last_name = last_name.replace(salutation, "")
+
+            if title == JONKHEER:
+                gender = MALE
+            elif title == JONKVROUW:
+                gender = FEMALE
+
+            last_name_prefix = None
+            partner_last_name_prefix = None
+            partner_last_name = None
+
+            if aanduiding_naamgebruik == "Eigen":
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner na eigen":
+                last_name, partner_last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner":
+                partner_last_name = last_name
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner voor eigen":
+                partner_last_name, last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+
+            with self.subTest(
+                title=title,
+                aanduiding_naamgebruik=aanduiding_naamgebruik,
+                has_partner=has_partner,
+            ):
+                result = get_gebruik_in_lopende_tekst(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    gender,
                     title,
                     None,
                 )
