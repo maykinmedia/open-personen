@@ -143,3 +143,95 @@ class TestGetGebruikInLopendeTekstVoervoegselsWithSmallOrCapitalLetters(TestCase
                 )
 
                 self.assertEqual(gebruik_in_lopende_tekst, result)
+
+
+class TestGetGebruikInLopendeTekstWithAdelijkeTitel(TestCase):
+    def test_gebruik_in_lopende_tekst_with_adelijke_title(self):
+        table_string = """
+            | adellijkeTitel_predikaat | aanduidingNaamgebruik | geslachtsaanduiding | samenstelling gebruikInLopendeTekst | gebruikInLopendeTekst                        |
+            | Baron                    | Eigen                 | Man                 | AT VV GN                            | baron Van den Aedel                          |
+            | Barones                  | Partner na eigen      | Vrouw               | AT VV GN-VP GP                      | barones Van den Aedel-van der Veen           |
+            | Graaf                    | Partner               | Man                 | GA VP GP                            | de heer Van der Veen                         |
+            | Gravin                   | Partner voor eigen    | Vrouw               | GA VP GP-AT VV GN                   | mevrouw Van der Veen-gravin van den Aedel    |
+            | Prins                    | Eigen                 | Man                 | AT VV GN                            | prins Van Roodt de Wit Blaauw                |
+            | Prinses                  | Eigen                 | Vrouw               | AT VV GN                            | prinses Van Roodt de Wit Blaauw              |
+            | Ridder                   | Eigen                 | Man                 | T VV GN                             | ridder Van Hoogh                             |
+        """
+
+        # Convert table string to rows and remove empty rows, white spaces, and header row
+        table_rows = [
+            [item.strip() for item in row.strip().split("|") if item]
+            for row in table_string.split("\n")
+            if row.strip()
+        ][1:]
+
+        for row in table_rows:
+            (
+                title,
+                aanduiding_naamgebruik,
+                gender,
+                _,
+                gebruik_in_lopende_tekst,
+            ) = row
+
+            last_name = gebruik_in_lopende_tekst
+            for salutation in [
+                "baron ",
+                "barones ",
+                "de heer ",
+                "mevrouw ",
+                "prins ",
+                "prinses ",
+                "ridder ",
+            ]:
+                last_name = last_name.replace(salutation, "")
+
+            last_name_prefix = None
+            partner_last_name_prefix = None
+            partner_last_name = None
+
+            if aanduiding_naamgebruik == "Eigen":
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner na eigen":
+                last_name, partner_last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner":
+                partner_last_name = last_name
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+            elif aanduiding_naamgebruik == "Partner voor eigen":
+                partner_last_name, last_name = last_name.split("-")
+                if len(last_name.split(" ")) > 1:
+                    split_last_name = last_name.split(" ")
+                    last_name_prefix = " ".join(split_last_name[:-1])
+                    last_name = split_last_name[-1]
+                if len(partner_last_name.split(" ")) > 1:
+                    split_partner_last_name = partner_last_name.split(" ")
+                    partner_last_name_prefix = " ".join(split_partner_last_name[:-1])
+                    partner_last_name = split_partner_last_name[-1]
+
+            with self.subTest(title=title):
+                result = get_gebruik_in_lopende_tekst(
+                    last_name_prefix,
+                    last_name,
+                    partner_last_name_prefix,
+                    partner_last_name,
+                    aanduiding_naamgebruik_to_enumeration[aanduiding_naamgebruik],
+                    geslachtsaanduiding_to_enumeration[gender],
+                    title,
+                    None,
+                )
+
+                self.assertEqual(gebruik_in_lopende_tekst, result)
