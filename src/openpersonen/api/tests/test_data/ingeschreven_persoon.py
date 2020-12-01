@@ -52,7 +52,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "voorvoegsel": "van",
             "aanhef": "Geachte heer Van Maykin",
             "aanschrijfwijze": "M. van Maykin",
-            "gebruikInLopendeTekst": "string",
+            "gebruikInLopendeTekst": "de heer Van Maykin",
             "aanduidingNaamgebruik": "E",
         },
         "geboorte": {

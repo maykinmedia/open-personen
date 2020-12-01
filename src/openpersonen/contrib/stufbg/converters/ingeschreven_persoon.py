@@ -3,7 +3,11 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
-from openpersonen.features import get_aanhef, get_aanschrijfwijze
+from openpersonen.features import (
+    get_aanhef,
+    get_aanschrijfwijze,
+    get_gebruik_in_lopende_tekst,
+)
 
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
@@ -64,7 +68,6 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     "maand": 1,
                 },
             },
-            "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": instance_xml_dict.get(
                 f"{prefix}:aanduidingNaamgebruik", "string"
             ),
@@ -848,6 +851,19 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
         instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),
         instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
         instance_xml_dict.get(f"{prefix}:voornamen"),
+        partners_last_name_prefix,
+        partners_last_name,
+        instance_xml_dict.get(f"{prefix}:aanduidingNaamgebruik"),
+        instance_xml_dict.get(f"{prefix}:geslachtsaanduiding"),
+        instance_xml_dict.get(f"{prefix}:adellijkeTitelPredikaat"),
+        partners_title,
+    )
+
+    ingeschreven_persoon_dict["naam"][
+        "gebruikInLopendeTekst"
+    ] = get_gebruik_in_lopende_tekst(
+        instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),
+        instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
         partners_last_name_prefix,
         partners_last_name,
         instance_xml_dict.get(f"{prefix}:aanduidingNaamgebruik"),
