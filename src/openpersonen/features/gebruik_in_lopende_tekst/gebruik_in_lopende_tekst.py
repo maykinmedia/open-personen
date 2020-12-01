@@ -17,30 +17,27 @@ def get_gebruik_in_lopende_tekst_with_title(
         gebruik_in_lopende_tekst += f" {last_name}"
     if indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
-            gebruik_in_lopende_tekst += f" {last_name_prefix}"
-        if last_name:
-            gebruik_in_lopende_tekst += f" {last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+            gebruik_in_lopende_tekst += f" {last_name_prefix} "
+
+        gebruik_in_lopende_tekst += f"{last_name}-"
+
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f"{partner_last_name}"
+
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER:
         if partner_last_name_prefix:
-            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
-        gebruik_in_lopende_tekst += f" {partner_last_name}"
+            gebruik_in_lopende_tekst = f" {partner_last_name_prefix} "
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
-            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f" {partner_last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
+        gebruik_in_lopende_tekst += f"{partner_last_name}-"
+
         if last_name_prefix:
             gebruik_in_lopende_tekst += f"{last_name_prefix} "
-        if last_name:
-            gebruik_in_lopende_tekst += f"{last_name}"
+
+        gebruik_in_lopende_tekst += f"{last_name}"
 
     return gebruik_in_lopende_tekst
 
@@ -58,20 +55,19 @@ def get_gebruik_in_lopende_tekst_with_predicate(
     if indication_name_use == EIGEN:
         gebruik_in_lopende_tekst = title.lower()
         if last_name_prefix:
-            gebruik_in_lopende_tekst += f" {last_name_prefix}"
-        gebruik_in_lopende_tekst += f" {last_name}"
+            gebruik_in_lopende_tekst += f" {last_name_prefix} "
+        gebruik_in_lopende_tekst += f"{last_name}"
     if indication_name_use == PARTNER_NA_EIGEN:
         gebruik_in_lopende_tekst = title.lower()
         if last_name_prefix:
-            gebruik_in_lopende_tekst += f" {last_name_prefix}"
-        if last_name:
-            gebruik_in_lopende_tekst += f" {last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+            gebruik_in_lopende_tekst += f" {last_name_prefix} "
+
+        gebruik_in_lopende_tekst += f"{last_name}-"
+
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f"{partner_last_name}"
+
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER:
         if title == JONKHEER:
             gebruik_in_lopende_tekst = title.lower()
@@ -79,8 +75,8 @@ def get_gebruik_in_lopende_tekst_with_predicate(
             gebruik_in_lopende_tekst = MEVROUW
 
         if partner_last_name_prefix:
-            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
-        gebruik_in_lopende_tekst += f" {partner_last_name}"
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER_VOOR_EIGEN:
         if title == JONKHEER:
             gebruik_in_lopende_tekst = DE_HEER
@@ -88,16 +84,16 @@ def get_gebruik_in_lopende_tekst_with_predicate(
             gebruik_in_lopende_tekst = MEVROUW
 
         if partner_last_name_prefix:
-            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
         if partner_last_name:
-            gebruik_in_lopende_tekst += f" {partner_last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+            gebruik_in_lopende_tekst += f"{partner_last_name}-"
+
         gebruik_in_lopende_tekst += f"{title.lower()} "
+
         if last_name_prefix:
             gebruik_in_lopende_tekst += f"{last_name_prefix} "
-        if last_name:
-            gebruik_in_lopende_tekst += f"{last_name}"
+
+        gebruik_in_lopende_tekst += f"{last_name}"
 
     return gebruik_in_lopende_tekst
 
@@ -108,60 +104,50 @@ def get_gebruik_in_lopende_tekst_with_partner_title_or_predicate(
     partner_last_name_prefix,
     partner_last_name,
     indication_name_use,
-    gender_designation,
     partner_title,
 ):
 
-    if (
-        gender_designation == FEMALE
-        and partner_title != JONKHEER
-        and indication_name_use not in [EIGEN, PARTNER_NA_EIGEN]
-    ):
+    if partner_title != JONKHEER and indication_name_use not in [
+        EIGEN,
+        PARTNER_NA_EIGEN,
+    ]:
         gebruik_in_lopende_tekst = MALE_TO_FEMALE_TITLES[partner_title].lower()
     else:
         gebruik_in_lopende_tekst = MEVROUW
 
     if indication_name_use == EIGEN:
         if last_name_prefix:
-            gebruik_in_lopende_tekst += f" {last_name_prefix}"
-        gebruik_in_lopende_tekst += f" {last_name}"
+            gebruik_in_lopende_tekst += f" {last_name_prefix} "
+        gebruik_in_lopende_tekst += f"{last_name}"
     if indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
-            gebruik_in_lopende_tekst += f" {last_name_prefix}"
-        if last_name:
-            gebruik_in_lopende_tekst += f" {last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+            gebruik_in_lopende_tekst += f" {last_name_prefix} "
 
-        if (
-            gender_designation == FEMALE
-            and partner_title in MALE_TO_FEMALE_TITLES
-            and partner_title != JONKHEER
-        ):
+        gebruik_in_lopende_tekst += f"{last_name}-"
+
+        if partner_title != JONKHEER and partner_title in MALE_TO_FEMALE_TITLES:
             gebruik_in_lopende_tekst += (
                 f"{MALE_TO_FEMALE_TITLES[partner_title].lower()} "
             )
 
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f"{partner_last_name}"
+
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER:
         if partner_last_name_prefix:
-            gebruik_in_lopende_tekst += f" {partner_last_name_prefix}"
-        gebruik_in_lopende_tekst += f" {partner_last_name}"
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
-            gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()}"
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f" {partner_last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+            gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()} "
+
+        gebruik_in_lopende_tekst += f"{partner_last_name}-"
 
         if last_name_prefix:
             gebruik_in_lopende_tekst += f"{last_name_prefix} "
-        if last_name:
-            gebruik_in_lopende_tekst += f"{last_name}"
+
+        gebruik_in_lopende_tekst += f"{last_name}"
 
     return gebruik_in_lopende_tekst
 
@@ -188,14 +174,13 @@ def get_default_gebruik_in_lopende_tekst(
     if indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix.capitalize()}"
-        if last_name:
-            gebruik_in_lopende_tekst += f" {last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+
+        gebruik_in_lopende_tekst += f" {last_name}-"
+
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f"{partner_last_name}"
+
+        gebruik_in_lopende_tekst += f"{partner_last_name}"
     if indication_name_use == PARTNER:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()}"
@@ -203,14 +188,13 @@ def get_default_gebruik_in_lopende_tekst(
     if indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()}"
-        if partner_last_name:
-            gebruik_in_lopende_tekst += f" {partner_last_name}-"
-        else:
-            gebruik_in_lopende_tekst += f" "
+
+        gebruik_in_lopende_tekst += f" {partner_last_name}-"
+
         if last_name_prefix:
             gebruik_in_lopende_tekst += f"{last_name_prefix} "
-        if last_name:
-            gebruik_in_lopende_tekst += f"{last_name}"
+
+        gebruik_in_lopende_tekst += f"{last_name}"
 
     return gebruik_in_lopende_tekst
 
@@ -255,7 +239,6 @@ def get_gebruik_in_lopende_tekst(
                 partner_last_name_prefix,
                 partner_last_name,
                 indication_name_use,
-                gender_designation,
                 partner_title,
             )
         )
