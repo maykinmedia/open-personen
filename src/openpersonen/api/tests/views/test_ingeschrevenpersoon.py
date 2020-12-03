@@ -30,6 +30,7 @@ from openpersonen.api.views.generic_responses import (
     get_query_param_400_response,
 )
 from openpersonen.contrib.stufbg.models import StufBGClient
+from openpersonen.features.country_code.factory_models import CountryCodeFactory
 
 
 @patch(
@@ -42,6 +43,7 @@ class TestIngeschrevenPersoon(APITestCase):
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
         self.bsn = 123456789
+        CountryCodeFactory.create()
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -148,6 +150,7 @@ class TestIngeschrevenPersoon(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     @freeze_time("2020-09-12")

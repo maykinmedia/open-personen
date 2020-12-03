@@ -21,4 +21,4 @@ class CodeAndOmschrijving(models.Model):
         try:
             return cls.objects.get(code=code).omschrijving
         except ObjectDoesNotExist:
-            return 'Onbekend'
+            return "Onbekend"

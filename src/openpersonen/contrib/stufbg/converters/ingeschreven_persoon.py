@@ -5,8 +5,7 @@ import xmltodict
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
 from openpersonen.features import (
     get_aanhef,
-    get_aanschrijfwijze,
-    get_gebruik_in_lopende_tekst,
+    get_aanschrijfwijze
 )
 
 from .kind import get_kind_instance_dict
@@ -93,8 +92,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             },
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteLand", "string"
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string")
                 ),
             },
             "plaats": {
@@ -359,8 +358,8 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
                 )
                 else "string",
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.overlijdenLand", "string"
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenLand", 0)
                 )
                 if not isinstance(
                     instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict

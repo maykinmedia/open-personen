@@ -69,7 +69,7 @@
                     <!--Optional:-->
                     <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                     <!--Optional:-->
-                    <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                    <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                     <!--Optional:-->
                     <ns:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true"
                                          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -128,7 +128,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsKinderen>
                     <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND">
@@ -148,7 +148,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsKinderen>
                     <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
@@ -176,7 +176,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsOuders>
                     <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
@@ -204,7 +204,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsOuders>
                     <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
@@ -229,7 +229,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsEchtgenootPartner>
                     <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
@@ -254,7 +254,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsEchtgenootPartner>
                 </ns:object>
@@ -281,7 +281,7 @@
                     <!--Optional:-->
                     <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                     <!--Optional:-->
-                    <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                    <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                     <!--Optional:-->
                     <ns:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true"
                                          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -340,7 +340,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsKinderen>
                     <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND">
@@ -360,7 +360,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsKinderen>
                     <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
@@ -388,7 +388,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsOuders>
                     <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
@@ -416,7 +416,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsOuders>
                     <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
@@ -441,7 +441,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsEchtgenootPartner>
                     <ns:inp.heeftAlsEchtgenootPartner StUF:entiteittype="NPSNPSOUD">
@@ -466,7 +466,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsEchtgenootPartner>
                 </ns:object>
