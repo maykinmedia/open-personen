@@ -24,7 +24,7 @@ PARTNER_RETRIEVE_DATA = {
         "geboorte": {
             "_embedded": {
                 "datum": {"dag": 7, "datum": "19690507", "jaar": 1969, "maand": 5},
-                "land": {"code": "Nederland", "omschrijving": "Nederland"},
+                "land": {"code": "6030", "omschrijving": "Nederland"},
                 "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
                 "inOnderzoek": {
                     "_embedded": {
@@ -56,7 +56,7 @@ PARTNER_RETRIEVE_DATA = {
         "aangaanHuwelijkPartnerschap": {
             "_embedded": {
                 "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
-                "land": {"code": "string", "omschrijving": "string"},
+                "land": {"code": "string", "omschrijving": "Onbekend"},
                 "plaats": {"code": "string", "omschrijving": "string"},
                 "inOnderzoek": {
                     "_embedded": {

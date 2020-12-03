@@ -24,7 +24,7 @@ OUDER_RETRIEVE_DATA = {
         "geboorte": {
             "_embedded": {
                 "datum": {"dag": 7, "datum": "19690507", "jaar": 1969, "maand": 5},
-                "land": {"code": "Nederland", "omschrijving": "Nederland"},
+                "land": {"code": "6030", "omschrijving": "Nederland"},
                 "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
                 "inOnderzoek": {
                     "_embedded": {

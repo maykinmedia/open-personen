@@ -14,6 +14,7 @@ from openpersonen.api.tests.factory_models import (
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
+from openpersonen.features.country_code.factory_models import CountryCodeFactory
 
 
 @patch(
@@ -27,6 +28,7 @@ class TestOuder(APITestCase):
         self.ouder_bsn = 789123456
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
+        CountryCodeFactory.create()
 
     def test_ouder_without_token(self):
         response = self.client.get(

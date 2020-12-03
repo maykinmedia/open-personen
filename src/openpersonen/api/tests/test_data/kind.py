@@ -24,7 +24,7 @@ KIND_RETRIEVE_DATA = {
         "geboorte": {
             "_embedded": {
                 "datum": {"dag": 15, "datum": "19990615", "jaar": 1999, "maand": 6},
-                "land": {"code": "Nederland", "omschrijving": "Nederland"},
+                "land": {"code": "6030", "omschrijving": "Nederland"},
                 "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
                 "inOnderzoek": {
                     "_embedded": {

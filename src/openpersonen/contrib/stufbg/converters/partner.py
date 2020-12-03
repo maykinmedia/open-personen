@@ -3,6 +3,7 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import convert_empty_instances
+from openpersonen.features.country_code.models import CountryCode
 
 
 def get_partner_instance_dict(instance_xml_dict, prefix):
@@ -81,8 +82,8 @@ def get_partner_instance_dict(instance_xml_dict, prefix):
             },
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteLand", "string"
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", 0)
                 ),
             },
             "plaats": {
@@ -169,8 +170,8 @@ def get_partner_instance_dict(instance_xml_dict, prefix):
             },
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:landSluiting", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:landSluiting", "string"
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:landSluiting", 0)
                 ),
             },
             "plaats": {
