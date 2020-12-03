@@ -16,6 +16,7 @@ from openpersonen.api.tests.test_data import KIND_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.features.country_code.factory_models import CountryCodeFactory
+from openpersonen.features.country_code.models import CountryCode
 
 
 @patch(
@@ -292,7 +293,7 @@ class TestKindWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(self.kind.geboorteland_kind),
+            str(CountryCode.get_omschrijving_from_code(self.kind.geboorteland_kind)),
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
@@ -333,7 +334,7 @@ class TestKindWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(self.kind.geboorteland_kind),
+            str(CountryCode.get_omschrijving_from_code(self.kind.geboorteland_kind)),
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],

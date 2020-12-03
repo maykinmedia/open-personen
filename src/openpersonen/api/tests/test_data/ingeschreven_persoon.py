@@ -195,7 +195,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                 "gemeenteVanInschrijving": {"code": None, "omschrijving": None},
                 "landVanwaarIngeschreven": {"code": "", "omschrijving": ""},
                 "verblijfBuitenland": {
-                    "_embedded": {"land": {"code": None, "omschrijving": None}},
+                    "_embedded": {"land": {"code": None, "omschrijving": "Onbekend"}},
                     "adresRegel1": None,
                     "adresRegel2": None,
                     "adresRegel3": None,

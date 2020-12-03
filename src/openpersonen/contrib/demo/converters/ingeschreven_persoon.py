@@ -4,8 +4,8 @@ from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 from openpersonen.features import (
     get_aanhef,
     get_aanschrijfwijze,
-    get_gebruik_in_lopende_tekst,
 )
+from openpersonen.features import get_aanhef, get_aanschrijfwijze
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
@@ -88,8 +88,10 @@ def convert_persoon_to_instance_dict(persoon):
                 else 0,
             },
             "land": {
-                "code": "string",
-                "omschrijving": persoon.geboorteland_persoon,
+                "code": persoon.geboorteland_persoon,
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    persoon.geboorteland_persoon
+                ),
             },
             "plaats": {
                 "code": "string",
@@ -223,8 +225,10 @@ def convert_persoon_to_instance_dict(persoon):
                 else 0,
             },
             "land": {
-                "code": "string",
-                "omschrijving": overlijden.land_overlijden,
+                "code": overlijden.land_overlijden,
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    overlijden.land_overlijden
+                ),
             },
             "plaats": {
                 "code": "string",

@@ -15,6 +15,7 @@ from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.features.country_code.factory_models import CountryCodeFactory
+from openpersonen.features.country_code.models import CountryCode
 
 
 @patch(
@@ -291,7 +292,7 @@ class TestOuderWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(self.ouder.geboorteland_ouder),
+            str(CountryCode.get_omschrijving_from_code(self.ouder.geboorteland_ouder)),
         )
         self.assertEqual(
             data["_embedded"]["datumIngangFamilierechtelijkeBetrekking"]["datum"],
@@ -332,7 +333,7 @@ class TestOuderWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(self.ouder.geboorteland_ouder),
+            str(CountryCode.get_omschrijving_from_code(self.ouder.geboorteland_ouder)),
         )
         self.assertEqual(
             data["_embedded"]["datumIngangFamilierechtelijkeBetrekking"]["datum"],

@@ -534,9 +534,11 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     "code": instance_xml_dict.get(
                         f"{prefix}:sub.verblijfBuitenland", {}
                     ).get("lnd.landcode"),
-                    "omschrijving": instance_xml_dict.get(
-                        f"{prefix}:sub.verblijfBuitenland", {}
-                    ).get("lnd.landcode"),
+                    "omschrijving": CountryCode.get_omschrijving_from_code(
+                        instance_xml_dict.get(
+                            f"{prefix}:sub.verblijfBuitenland", {}
+                        ).get("lnd.landcode", 0)
+                    ),
                 },
             },
             "inOnderzoek": {
