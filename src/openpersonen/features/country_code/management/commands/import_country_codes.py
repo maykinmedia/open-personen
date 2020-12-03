@@ -4,12 +4,15 @@ import requests
 
 from django.core.management import BaseCommand
 
+from openpersonen.features.country_code.models import CountryCode
+
 
 class Command(BaseCommand):
     """
-    Run using python src/manage import_demodata --url=https://www.example.com/file.csv
-    or using docker
-    docker-compose run web python src/manage.py import_demodata --url=https://www.example.com/file.csv
+    Run using
+    python src/manage.py import_country_codes --url='https://publicaties.rvig.nl/dsresource?objectid=16994'
+    or
+    python src/manage.py import_country_codes --file=/Users/shea/Downloads/Tabel34.csv
     """
 
     help = "Read in an ods file from a url and populate models to use for demo data"
@@ -34,17 +37,24 @@ class Command(BaseCommand):
         if options.get("url"):
             with requests.Session() as s:
                 download = s.get(options["url"])
-
                 decoded_content = download.content.decode('utf-16')
-
-                cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-                my_list = list(cr)
-                for row in my_list:
-                    print(row)
+                rows = list(csv.reader(decoded_content.splitlines(), delimiter=','))
         else:
             with open(options["file"], 'r', newline='\n', encoding='utf-16') as csvfile:
-                rows = csv.reader(csvfile, delimiter=',', quotechar='"')
-                for row in rows:
-                    print(', '.join(row))
+                rows = list(csv.reader(csvfile, delimiter=',', quotechar='"'))
 
-        self.stdout.write("Done!")
+        header_row = rows.pop(0)
+
+        if 'Landcode' not in header_row[0]:
+            self.stderr.write("Landcode should be the first column in your csv")
+            return exit(1)
+        if 'Omschrijving' not in header_row[1]:
+            self.stderr.write("Omschrijving should be the first column in your csv")
+            return exit(1)
+
+        num_rows = 0
+        for row in rows:
+            CountryCode.objects.create(code=row[0], omschrijving=row[1])
+            num_rows += 1
+
+        self.stdout.write(f"Done! {num_rows} imported!")
