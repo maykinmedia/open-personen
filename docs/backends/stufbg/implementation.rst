@@ -47,7 +47,7 @@ API attribute                                                           StUF-BG 
 ``geboorte.datum.datum``                                                ``geboortedatum``
 ``geboorte.datum.jaar``                                                 YEAR(``geboortedatum``)
 ``geboorte.datum.maand``                                                MONTH(``geboortedatum``)
-``geboorte.land.code``                                                  COUNTRY_CODE(``inp.geboorteLand``)                                                TODO
+``geboorte.land.code``                                                  COUNTRY_CODE(``inp.geboorteLand``)
 ``geboorte.land.omschrijving``                                          ``inp.geboorteLand``
 ``geboorte.plaats.code``                                                CITY_CODE(``inp.geboorteplaats``)                                                 TODO
 ``geboorte.plaats.omschrijving``                                        ``inp.geboorteplaats``
@@ -106,7 +106,7 @@ API attribute                                                           StUF-BG 
 ``overlijden.datum.datum``                                              ``overlijdensdatum``
 ``overlijden.datum.jaar``                                               YEAR(``overlijdensdatum``)
 ``overlijden.datum.maand``                                              MONTH(``overlijdensdatum``)
-``overlijden.land.code``                                                COUNTRY_CODE(``inp.overlijdenLand``)                                              TODO
+``overlijden.land.code``                                                COUNTRY_CODE(``inp.overlijdenLand``)
 ``overlijden.land.omschrijving``                                        ``inp.overlijdenLand``
 ``overlijden.plaats.code``                                              CITY_CODE(``inp.overlijdenplaats``)                                               TODO
 ``overlijden.plaats.omschrijving``                                      ``inp.overlijdenplaats``
@@ -155,7 +155,7 @@ API attribute                                                           StUF-BG 
 ``verblijfplaats.verblijfBuitenland.adresRegel2``                       ``sub.verblijfBuitenland.sub.adresBuitenland2``
 ``verblijfplaats.verblijfBuitenland.adresRegel3``                       ``sub.verblijfBuitenland.sub.adresBuitenland3``
 ``verblijfplaats.verblijfBuitenland.vertrokkenOnbekendWaarheen``        ``True``                                                                          TODO
-``verblijfplaats.verblijfBuitenland.land.code``                         COUNTRY_CODE(sub.verblijfBuitenland.lnd.landcode)                                 TODO
+``verblijfplaats.verblijfBuitenland.land.code``                         COUNTRY_CODE(sub.verblijfBuitenland.lnd.landcode)
 ``verblijfplaats.verblijfBuitenland.land.omschrijving``                 ``sub.verblijfBuitenland.lnd.landcode``
 ``verblijfplaats.datumAanvangAdreshouding``                             ``True``                                                                          TODO
 ``verblijfplaats.datumIngangGeldigheid``                                ``True``                                                                          TODO
@@ -229,7 +229,7 @@ geboorte.datum.dag                                                      DAY(``in
 geboorte.datum.datum                                                    ``inp.heeftAlsKinderen.geboortedatum``
 geboorte.datum.jaar                                                     YEAR(``inp.heeftAlsKinderen.geboortedatum``)
 geboorte.datum.maand                                                    MONTH(``inp.heeftAlsKinderen.geboortedatum``)
-geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsKinderen.inp.geboorteLand``)                           TODO
+geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsKinderen.inp.geboorteLand``)
 geboorte.land.omschrijving                                              ``inp.heeftAlsKinderen.inp.geboorteLand``
 geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsKinderen.inp.geboorteplaats``)                            TODO
 geboorte.plaats.omschrijving                                            ``inp.heeftAlsKinderen.inp.geboorteplaats``
@@ -284,7 +284,7 @@ geboorte.datum.dag                                                      DAY(``in
 geboorte.datum.datum                                                    ``inp.heeftAlsOuders.geboortedatum``
 geboorte.datum.jaar                                                     YEAR(``inp.heeftAlsOuders.geboortedatum``)
 geboorte.datum.maand                                                    MONTH(``inp.heeftAlsOuders.geboortedatum``)
-geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsOuders.inp.geboorteLand``)                             TODO
+geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsOuders.inp.geboorteLand``)
 geboorte.land.omschrijving                                              ``inp.heeftAlsOuders.inp.geboorteLand``
 geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsOuders.inp.geboorteplaats``)                              TODO
 geboorte.plaats.omschrijving                                            ``inp.heeftAlsOuders.inp.geboorteplaats``
@@ -323,7 +323,7 @@ geboorte.datum.dag                                                      DAY(``in
 geboorte.datum.datum                                                    ``inp.heeftAlsEchtgenootPartner.geboortedatum``
 geboorte.datum.jaar                                                     YEAR(``inp.heeftAlsEchtgenootPartner.geboortedatum``)
 geboorte.datum.maand                                                    MONTH(``inp.heeftAlsEchtgenootPartner.geboortedatum``)
-geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsEchtgenootPartner.inp.geboorteLand``)                        TODO
+geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsEchtgenootPartner.inp.geboorteLand``)
 geboorte.land.omschrijving                                              ``inp.heeftAlsEchtgenootPartner.inp.geboorteLand``
 geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsEchtgenootPartner.inp.geboorteplaats``)                         TODO
 geboorte.plaats.omschrijving                                            ``inp.heeftAlsEchtgenootPartner.inp.geboorteplaats``
@@ -344,7 +344,7 @@ aangaanHuwelijkPartnerschap.datum.dag                                   DAY(``in
 aangaanHuwelijkPartnerschap.datum.datum                                 ``inp.heeftAlsEchtgenootPartner.datumSluiting``
 aangaanHuwelijkPartnerschap.datum.jaar                                  YEAR(``inp.heeftAlsEchtgenootPartner.datumSluiting``)
 aangaanHuwelijkPartnerschap.datum.maand                                 MONTH(``inp.heeftAlsEchtgenootPartner.datumSluiting``)
-aangaanHuwelijkPartnerschap.land.code                                   COUNTRY_CODE(``inp.heeftAlsEchtgenootPartner.landSluiting``)                            TODO
+aangaanHuwelijkPartnerschap.land.code                                   COUNTRY_CODE(``inp.heeftAlsEchtgenootPartner.landSluiting``)
 aangaanHuwelijkPartnerschap.land.omschrijving                           ``inp.heeftAlsEchtgenootPartner.landSluiting``
 aangaanHuwelijkPartnerschap.plaats.code                                 CITY_CODE(``inp.heeftAlsEchtgenootPartner.plaatsSluiting``)                             TODO
 aangaanHuwelijkPartnerschap.plaats.omschrijving                         ``inp.heeftAlsEchtgenootPartner.plaatsSluiting``
