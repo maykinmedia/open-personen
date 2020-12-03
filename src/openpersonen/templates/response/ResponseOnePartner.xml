@@ -69,7 +69,7 @@
                             <!--Optional:-->
                             <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
-                            <ns:inp.geboorteLand>Nederland</ns:inp.geboorteLand>
+                            <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
                     </ns:inp.heeftAlsEchtgenootPartner>
                 </ns:object>

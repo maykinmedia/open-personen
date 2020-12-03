@@ -79,12 +79,12 @@
                      <BG:geslachtsaanduiding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:geboortedatum>19730922</BG:geboortedatum>
                      <BG:inp.geboorteplaats StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                     <BG:inp.geboorteLand StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                     <BG:inp.geboorteLand>6030</BG:inp.geboorteLand>
                      <BG:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   </BG:gerelateerde>
                   <BG:soortVerbintenis/>
                   <BG:plaatsSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                  <BG:landSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <BG:landSluiting>6030</BG:landSluiting>
                   <BG:datumOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:plaatsOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:landOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -100,7 +100,7 @@
                      <BG:soortVerbintenis StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:datumSluiting>20040427</BG:datumSluiting>
                      <BG:plaatsSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                     <BG:landSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                     <BG:landSluiting>6030</BG:landSluiting>
                      <StUF:tijdvakGeldigheid>
                         <StUF:beginGeldigheid/>
                         <StUF:eindGeldigheid/>

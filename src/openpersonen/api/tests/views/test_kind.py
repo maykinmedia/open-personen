@@ -15,6 +15,7 @@ from openpersonen.api.tests.factory_models import (
 from openpersonen.api.tests.test_data import KIND_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
+from openpersonen.features.country_code.factory_models import CountryCodeFactory
 
 
 @patch(
@@ -28,6 +29,7 @@ class TestKind(APITestCase):
         self.kind_bsn = 456789123
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
+        CountryCodeFactory.create()
 
     def test_kind_without_token(self):
         response = self.client.get(
@@ -190,6 +192,7 @@ class TestKind(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
