@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     "openpersonen.api",
     "openpersonen.contrib.demo",
     "openpersonen.contrib.stufbg",
+    "openpersonen.features.country_code",
     "openpersonen.token",
     "openpersonen.utils",
 ]
