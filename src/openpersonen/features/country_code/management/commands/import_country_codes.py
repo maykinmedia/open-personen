@@ -10,9 +10,9 @@ from openpersonen.features.country_code.models import CountryCode
 class Command(BaseCommand):
     """
     Run using
-    python src/manage.py import_country_codes --url='https://publicaties.rvig.nl/dsresource?objectid=16994'
+    python src/manage.py import_country_codes --url='https://url.com/file.csv'
     or
-    python src/manage.py import_country_codes --file=/Users/shea/Downloads/Tabel34.csv
+    python src/manage.py import_country_codes --file=/path/To/file.csv
     """
 
     help = "Read in an ods file from a url and populate models to use for demo data"
