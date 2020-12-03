@@ -1,6 +1,7 @@
 from django.conf import settings
 
 from openpersonen.contrib.utils import is_valid_date_format
+from openpersonen.features.country_code.models import CountryCode
 
 
 def convert_ouder_instance_to_dict(ouder):
@@ -112,8 +113,10 @@ def convert_ouder_instance_to_dict(ouder):
                 else 0,
             },
             "land": {
-                "code": "0000",
-                "omschrijving": ouder.geboorteland_ouder,
+                "code": ouder.geboorteland_ouder,
+                "omschrijving": CountryCode.get_omschrijving_from_code(
+                    ouder.geboorteland_ouder
+                ),
             },
             "plaats": {
                 "code": "0000",

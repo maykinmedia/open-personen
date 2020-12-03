@@ -15,6 +15,7 @@ from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
 from openpersonen.features.country_code.factory_models import CountryCodeFactory
+from openpersonen.features.country_code.models import CountryCode
 
 
 @patch(
@@ -294,7 +295,11 @@ class TestPartnerWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner),
+            str(
+                CountryCode.get_omschrijving_from_code(
+                    self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
@@ -314,7 +319,11 @@ class TestPartnerWithTestingModels(APITestCase):
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap),
+            str(
+                CountryCode.get_omschrijving_from_code(
+                    self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"][
@@ -354,7 +363,11 @@ class TestPartnerWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner),
+            str(
+                CountryCode.get_omschrijving_from_code(
+                    self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
@@ -374,7 +387,11 @@ class TestPartnerWithTestingModels(APITestCase):
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap),
+            str(
+                CountryCode.get_omschrijving_from_code(
+                    self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"][
