@@ -89,7 +89,7 @@ def convert_persoon_to_instance_dict(persoon):
             },
             "land": {
                 "code": persoon.geboorteland_persoon,
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     persoon.geboorteland_persoon
                 ),
             },
@@ -226,7 +226,7 @@ def convert_persoon_to_instance_dict(persoon):
             },
             "land": {
                 "code": overlijden.land_overlijden,
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     overlijden.land_overlijden
                 ),
             },

@@ -30,8 +30,12 @@ from openpersonen.api.views.generic_responses import (
     get_query_param_400_response,
 )
 from openpersonen.contrib.stufbg.models import StufBGClient
-from openpersonen.features.country_code.factory_models import CountryCodeFactory
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.factory_models import (
+    CountryCodeAndOmschrijvingFactory,
+)
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -44,7 +48,7 @@ class TestIngeschrevenPersoon(APITestCase):
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
         self.bsn = 123456789
-        CountryCodeFactory.create()
+        CountryCodeAndOmschrijvingFactory.create()
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -210,7 +214,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.verblijfplaats = VerblijfplaatsFactory(persoon=self.persoon)
         self.verblijfstitel = VerblijfstitelFactory(persoon=self.persoon)
         self.token = TokenFactory.create()
-        CountryCodeFactory.create()
+        CountryCodeAndOmschrijvingFactory.create()
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -241,7 +245,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
             str(
-                CountryCode.get_omschrijving_from_code(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     self.persoon.geboorteland_persoon
                 )
             ),
@@ -293,7 +297,9 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(
             data["_embedded"]["overlijden"]["_embedded"]["land"]["omschrijving"],
             str(
-                CountryCode.get_omschrijving_from_code(self.overlijden.land_overlijden)
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.overlijden.land_overlijden
+                )
             ),
         )
         self.assertEqual(
@@ -372,7 +378,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
             str(
-                CountryCode.get_omschrijving_from_code(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     self.persoon.geboorteland_persoon
                 )
             ),
@@ -424,7 +430,9 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.assertEqual(
             data["_embedded"]["overlijden"]["_embedded"]["land"]["omschrijving"],
             str(
-                CountryCode.get_omschrijving_from_code(self.overlijden.land_overlijden)
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.overlijden.land_overlijden
+                )
             ),
         )
         self.assertEqual(
@@ -856,7 +864,11 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(CountryCode.get_omschrijving_from_code(self.kind.geboorteland_kind)),
+            str(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.kind.geboorteland_kind
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
@@ -918,7 +930,11 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(CountryCode.get_omschrijving_from_code(self.kind.geboorteland_kind)),
+            str(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.kind.geboorteland_kind
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][

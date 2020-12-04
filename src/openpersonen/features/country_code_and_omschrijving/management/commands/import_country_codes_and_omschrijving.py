@@ -4,15 +4,17 @@ from django.core.management import BaseCommand
 
 import requests
 
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 class Command(BaseCommand):
     """
     Run using
-    python src/manage.py import_country_codes --url='https://url.com/file.csv'
+    python src/manage.py import_country_codes_and_omschrijving --url='https://url.com/file.csv'
     or
-    python src/manage.py import_country_codes --file=/path/To/file.csv
+    python src/manage.py import_country_codes_and_omschrijving --file=/path/To/file.csv
     """
 
     help = "Read in an ods file from a url and populate models to use for demo data"
@@ -54,7 +56,7 @@ class Command(BaseCommand):
 
         num_rows = 0
         for row in rows:
-            CountryCode.objects.create(code=row[0], omschrijving=row[1])
+            CountryCodeAndOmschrijving.objects.create(code=row[0], omschrijving=row[1])
             num_rows += 1
 
         self.stdout.write(f"Done! {num_rows} imported!")

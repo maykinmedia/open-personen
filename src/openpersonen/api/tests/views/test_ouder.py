@@ -14,8 +14,12 @@ from openpersonen.api.tests.factory_models import (
 from openpersonen.api.tests.test_data import OUDER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
-from openpersonen.features.country_code.factory_models import CountryCodeFactory
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.factory_models import (
+    CountryCodeAndOmschrijvingFactory,
+)
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -29,7 +33,7 @@ class TestOuder(APITestCase):
         self.ouder_bsn = 789123456
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
-        CountryCodeFactory.create()
+        CountryCodeAndOmschrijvingFactory.create()
 
     def test_ouder_without_token(self):
         response = self.client.get(
@@ -292,7 +296,11 @@ class TestOuderWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(CountryCode.get_omschrijving_from_code(self.ouder.geboorteland_ouder)),
+            str(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.ouder.geboorteland_ouder
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["datumIngangFamilierechtelijkeBetrekking"]["datum"],
@@ -333,7 +341,11 @@ class TestOuderWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(CountryCode.get_omschrijving_from_code(self.ouder.geboorteland_ouder)),
+            str(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.ouder.geboorteland_ouder
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["datumIngangFamilierechtelijkeBetrekking"]["datum"],

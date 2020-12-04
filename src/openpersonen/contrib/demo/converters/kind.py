@@ -1,7 +1,9 @@
 from django.conf import settings
 
 from openpersonen.contrib.utils import calculate_age, is_valid_date_format
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 def convert_kind_instance_to_dict(kind):
@@ -53,7 +55,7 @@ def convert_kind_instance_to_dict(kind):
             },
             "land": {
                 "code": kind.geboorteland_kind,
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     kind.geboorteland_kind
                 ),
             },

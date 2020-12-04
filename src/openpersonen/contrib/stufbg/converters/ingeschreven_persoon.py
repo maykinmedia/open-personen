@@ -3,6 +3,7 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
+
 from openpersonen.features import (
     get_aanhef,
     get_aanschrijfwijze
@@ -92,7 +93,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             },
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string")
                 ),
             },
@@ -358,7 +359,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
                 )
                 else "string",
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     instance_xml_dict.get(f"{prefix}:inp.overlijdenLand", 0)
                 )
                 if not isinstance(
@@ -534,7 +535,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
                     "code": instance_xml_dict.get(
                         f"{prefix}:sub.verblijfBuitenland", {}
                     ).get("lnd.landcode"),
-                    "omschrijving": CountryCode.get_omschrijving_from_code(
+                    "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                         instance_xml_dict.get(
                             f"{prefix}:sub.verblijfBuitenland", {}
                         ).get("lnd.landcode", 0)

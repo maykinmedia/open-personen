@@ -1,7 +1,9 @@
 from django.conf import settings
 
 from openpersonen.contrib.utils import is_valid_date_format
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 def convert_partner_instance_to_dict(partner):
@@ -64,7 +66,7 @@ def convert_partner_instance_to_dict(partner):
             },
             "land": {
                 "code": partner.geboorteland_echtgenoot_geregistreerd_partner,
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     partner.geboorteland_echtgenoot_geregistreerd_partner
                 ),
             },
@@ -149,7 +151,7 @@ def convert_partner_instance_to_dict(partner):
             },
             "land": {
                 "code": partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     partner.land_huwelijkssluiting_aangaan_geregistreerd_partnerschap
                 ),
             },

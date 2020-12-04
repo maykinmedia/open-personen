@@ -14,8 +14,12 @@ from openpersonen.api.tests.factory_models import (
 from openpersonen.api.tests.test_data import PARTNER_RETRIEVE_DATA
 from openpersonen.api.views.generic_responses import get_404_response
 from openpersonen.contrib.stufbg.models import StufBGClient
-from openpersonen.features.country_code.factory_models import CountryCodeFactory
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.factory_models import (
+    CountryCodeAndOmschrijvingFactory,
+)
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -29,7 +33,7 @@ class TestPartner(APITestCase):
         self.persoon_bsn = 123456789
         self.partner_bsn = 987654321
         self.token = TokenFactory.create()
-        CountryCodeFactory.create()
+        CountryCodeAndOmschrijvingFactory.create()
 
     def test_partner_without_token(self):
         response = self.client.get(
@@ -295,7 +299,7 @@ class TestPartnerWithTestingModels(APITestCase):
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
             str(
-                CountryCode.get_omschrijving_from_code(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
                 )
             ),
@@ -319,7 +323,7 @@ class TestPartnerWithTestingModels(APITestCase):
                 "omschrijving"
             ],
             str(
-                CountryCode.get_omschrijving_from_code(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
                 )
             ),
@@ -363,7 +367,7 @@ class TestPartnerWithTestingModels(APITestCase):
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
             str(
-                CountryCode.get_omschrijving_from_code(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
                 )
             ),
@@ -387,7 +391,7 @@ class TestPartnerWithTestingModels(APITestCase):
                 "omschrijving"
             ],
             str(
-                CountryCode.get_omschrijving_from_code(
+                CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
                 )
             ),
