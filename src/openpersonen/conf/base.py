@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     "openpersonen.contrib.stufbg",
     "openpersonen.features.country_code_and_omschrijving",
     "openpersonen.features.gemeente_code_and_omschrijving",
+    "openpersonen.features.reden_code_and_omschrijving",
     "openpersonen.token",
     "openpersonen.utils",
 ]
