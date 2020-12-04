@@ -4,6 +4,9 @@ from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 def convert_kind_instance_to_dict(kind):
@@ -60,8 +63,10 @@ def convert_kind_instance_to_dict(kind):
                 ),
             },
             "plaats": {
-                "code": "string",
-                "omschrijving": kind.geboorteplaats_kind,
+                "code": kind.geboorteplaats_kind,
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    kind.geboorteplaats_kind
+                ),
             },
             "inOnderzoek": {
                 "datum": True,

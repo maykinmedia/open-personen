@@ -59,7 +59,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "_embedded": {
                 "datum": {"dag": 15, "datum": "19800915", "jaar": 1980, "maand": 9},
                 "land": {"code": "6030", "omschrijving": "Nederland"},
-                "plaats": {"code": "Amsterdam", "omschrijving": "Amsterdam"},
+                "plaats": {"code": "624", "omschrijving": "Voorburg"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
@@ -149,7 +149,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "_embedded": {
                 "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
                 "land": {"code": "string", "omschrijving": "Onbekend"},
-                "plaats": {"code": "string", "omschrijving": "string"},
+                "plaats": {"code": "string", "omschrijving": "Onbekend"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {

@@ -4,6 +4,9 @@ from openpersonen.contrib.utils import is_valid_date_format
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 def convert_ouder_instance_to_dict(ouder):
@@ -121,8 +124,10 @@ def convert_ouder_instance_to_dict(ouder):
                 ),
             },
             "plaats": {
-                "code": "0000",
-                "omschrijving": ouder.geboorteplaats_ouder,
+                "code": ouder.geboorteplaats_ouder,
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    ouder.geboorteplaats_ouder
+                ),
             },
             "inOnderzoek": {
                 "datum": bool(ouder.geboortedatum_ouder),

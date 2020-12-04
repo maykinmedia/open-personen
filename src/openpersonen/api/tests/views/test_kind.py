@@ -21,6 +21,12 @@ from openpersonen.features.country_code_and_omschrijving.factory_models import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.factory_models import (
+    GemeenteCodeAndOmschrijvingFactory,
+)
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -35,6 +41,7 @@ class TestKind(APITestCase):
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
         CountryCodeAndOmschrijvingFactory.create()
+        GemeenteCodeAndOmschrijvingFactory.create()
 
     def test_kind_without_token(self):
         response = self.client.get(
@@ -302,7 +309,11 @@ class TestKindWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.kind.geboorteplaats_kind),
+            str(
+                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.kind.geboorteplaats_kind
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][
@@ -345,7 +356,11 @@ class TestKindWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.kind.geboorteplaats_kind),
+            str(
+                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.kind.geboorteplaats_kind
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["inOnderzoek"]["_embedded"]["datumIngangOnderzoek"][

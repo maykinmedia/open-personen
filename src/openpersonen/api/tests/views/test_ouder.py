@@ -20,6 +20,9 @@ from openpersonen.features.country_code_and_omschrijving.factory_models import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.factory_models import (
+    GemeenteCodeAndOmschrijvingFactory,
+)
 
 
 @patch(
@@ -34,6 +37,7 @@ class TestOuder(APITestCase):
         self.url = StufBGClient.get_solo().url
         self.token = TokenFactory.create()
         CountryCodeAndOmschrijvingFactory.create()
+        GemeenteCodeAndOmschrijvingFactory.create()
 
     def test_ouder_without_token(self):
         response = self.client.get(

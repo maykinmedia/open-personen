@@ -20,6 +20,12 @@ from openpersonen.features.country_code_and_omschrijving.factory_models import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.factory_models import (
+    GemeenteCodeAndOmschrijvingFactory,
+)
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -34,6 +40,7 @@ class TestPartner(APITestCase):
         self.partner_bsn = 987654321
         self.token = TokenFactory.create()
         CountryCodeAndOmschrijvingFactory.create()
+        GemeenteCodeAndOmschrijvingFactory.create()
 
     def test_partner_without_token(self):
         response = self.client.get(
@@ -120,6 +127,7 @@ class TestPartner(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
@@ -197,6 +205,7 @@ class TestPartner(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), PARTNER_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
@@ -328,7 +337,7 @@ class TestPartnerWithTestingModels(APITestCase):
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"][
                 "omschrijving"
             ],
-            str(
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
                 self.partnerschap.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
             ),
         )
@@ -392,7 +401,7 @@ class TestPartnerWithTestingModels(APITestCase):
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["plaats"][
                 "omschrijving"
             ],
-            str(
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
                 self.partnerschap.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
             ),
         )
