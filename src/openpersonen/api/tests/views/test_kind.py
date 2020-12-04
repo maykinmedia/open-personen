@@ -193,7 +193,6 @@ class TestKind(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.maxDiff = None
         self.assertEqual(response.json(), KIND_RETRIEVE_DATA)
 
     @requests_mock.Mocker()
