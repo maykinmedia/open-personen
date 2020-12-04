@@ -6,6 +6,9 @@ from openpersonen.contrib.utils import convert_empty_instances
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 def convert_response_to_partner_historie_dict(response):
@@ -68,8 +71,10 @@ def convert_response_to_partner_historie_dict(response):
                 ),
             },
             "plaats": {
-                "code": "0000",
-                "omschrijving": antwoord_dict_object["ns:inp.geboorteplaats"],
+                "code": antwoord_dict_object["ns:inp.geboorteplaats"],
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    antwoord_dict_object["ns:inp.geboorteplaats"]
+                ),
             },
             "inOnderzoek": {
                 "datum": bool(antwoord_dict_object["ns:geboortedatum"]),

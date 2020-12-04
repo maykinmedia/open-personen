@@ -9,6 +9,9 @@ from openpersonen.features import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
@@ -97,8 +100,10 @@ def convert_persoon_to_instance_dict(persoon):
                 ),
             },
             "plaats": {
-                "code": "string",
-                "omschrijving": persoon.geboorteplaats_persoon,
+                "code": persoon.geboorteplaats_persoon,
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    persoon.geboorteplaats_persoon
+                ),
             },
             "inOnderzoek": {
                 "datum": True,
@@ -234,8 +239,10 @@ def convert_persoon_to_instance_dict(persoon):
                 ),
             },
             "plaats": {
-                "code": "string",
-                "omschrijving": overlijden.plaats_overlijden,
+                "code": overlijden.plaats_overlijden,
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    overlijden.plaats_overlijden
+                ),
             },
             "inOnderzoek": {
                 "datum": bool(overlijden.datum_overlijden),

@@ -65,7 +65,7 @@
                      <!--Optional:-->
                      <ns:geboortedatum>19690507</ns:geboortedatum>
                      <!--Optional:-->
-                     <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
+                     <ns:inp.geboorteplaats>624</ns:inp.geboorteplaats>
                      <!--Optional:-->
                      <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                   </ns:gerelateerde>
@@ -90,7 +90,7 @@
                      <!--Optional:-->
                      <ns:geboortedatum>19670309</ns:geboortedatum>
                      <!--Optional:-->
-                     <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
+                     <ns:inp.geboorteplaats>624</ns:inp.geboorteplaats>
                      <!--Optional:-->
                      <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                   </ns:gerelateerde>

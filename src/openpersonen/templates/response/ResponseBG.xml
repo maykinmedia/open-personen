@@ -41,10 +41,10 @@
                <BG:adellijkeTitelPredikaat>Jonkheer</BG:adellijkeTitelPredikaat>
                <BG:geslachtsaanduiding>M</BG:geslachtsaanduiding>
                <BG:geboortedatum>19800915</BG:geboortedatum>
-               <BG:inp.geboorteplaats>Amsterdam</BG:inp.geboorteplaats>
+               <BG:inp.geboorteplaats>624</BG:inp.geboorteplaats>
                <BG:inp.geboorteLand>6030</BG:inp.geboorteLand>
                <BG:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-               <BG:inp.overlijdenplaats StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+               <BG:inp.overlijdenplaats>624</BG:inp.overlijdenplaats>
                <BG:inp.overlijdenLand StUF:noValue="nietOndersteund" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                <BG:verblijfsadres>
                   <BG:wpl.identificatie>Haarlem</BG:wpl.identificatie>
@@ -78,15 +78,15 @@
                      <BG:adellijkeTitelPredikaat StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:geslachtsaanduiding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:geboortedatum>19730922</BG:geboortedatum>
-                     <BG:inp.geboorteplaats StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                     <BG:inp.geboorteplaats>624</BG:inp.geboorteplaats>
                      <BG:inp.geboorteLand>6030</BG:inp.geboorteLand>
                      <BG:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   </BG:gerelateerde>
                   <BG:soortVerbintenis/>
-                  <BG:plaatsSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <BG:plaatsSluiting>624</BG:plaatsSluiting>
                   <BG:landSluiting>6030</BG:landSluiting>
                   <BG:datumOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                  <BG:plaatsOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <BG:plaatsOntbinding>624</BG:plaatsOntbinding>
                   <BG:landOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:redenOntbinding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   <BG:brondocument StUF:metagegeven="true">
@@ -99,7 +99,7 @@
                   <BG:historieMaterieel>
                      <BG:soortVerbintenis StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:datumSluiting>20040427</BG:datumSluiting>
-                     <BG:plaatsSluiting StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                     <BG:plaatsSluiting>624</BG:plaatsSluiting>
                      <BG:landSluiting>6030</BG:landSluiting>
                      <StUF:tijdvakGeldigheid>
                         <StUF:beginGeldigheid/>

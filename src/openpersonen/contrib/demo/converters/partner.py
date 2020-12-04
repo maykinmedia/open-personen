@@ -4,6 +4,9 @@ from openpersonen.contrib.utils import is_valid_date_format
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 def convert_partner_instance_to_dict(partner):
@@ -71,8 +74,10 @@ def convert_partner_instance_to_dict(partner):
                 ),
             },
             "plaats": {
-                "code": "0000",
-                "omschrijving": partner.geboorteplaats_echtgenoot_geregistreerd_partner,
+                "code": partner.geboorteplaats_echtgenoot_geregistreerd_partner,
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    partner.geboorteplaats_echtgenoot_geregistreerd_partner
+                ),
             },
             "inOnderzoek": {
                 "datum": bool(partner.geboortedatum_echtgenoot_geregistreerd_partner),
@@ -156,8 +161,10 @@ def convert_partner_instance_to_dict(partner):
                 ),
             },
             "plaats": {
-                "code": "0000",
-                "omschrijving": partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
+                "code": partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap,
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    partner.plaats_huwelijkssluiting_aangaan_geregistreerd_partnerschap
+                ),
             },
             "inOnderzoek": {
                 "datum": bool(

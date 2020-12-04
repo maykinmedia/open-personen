@@ -6,6 +6,9 @@ from openpersonen.contrib.utils import calculate_age, convert_empty_instances
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 def get_kind_instance_dict(instance_xml_dict, prefix):
@@ -81,8 +84,8 @@ def get_kind_instance_dict(instance_xml_dict, prefix):
             },
             "plaats": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteplaats", "string"
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", 0)
                 ),
             },
             "inOnderzoek": {

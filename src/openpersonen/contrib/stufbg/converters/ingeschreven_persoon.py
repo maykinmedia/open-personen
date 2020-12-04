@@ -11,6 +11,9 @@ from openpersonen.features import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
@@ -102,8 +105,8 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
             },
             "plaats": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteplaats", "string"
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", 0)
                 ),
             },
             "inOnderzoek": {
@@ -378,8 +381,8 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                     instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats"), dict
                 )
                 else "string",
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.overlijdenplaats", "string"
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats", 0)
                 )
                 if not isinstance(
                     instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats"), dict

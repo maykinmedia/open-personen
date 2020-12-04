@@ -36,6 +36,12 @@ from openpersonen.features.country_code_and_omschrijving.factory_models import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.gemeente_code_and_omschrijving.factory_models import (
+    GemeenteCodeAndOmschrijvingFactory,
+)
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -49,6 +55,7 @@ class TestIngeschrevenPersoon(APITestCase):
         self.token = TokenFactory.create()
         self.bsn = 123456789
         CountryCodeAndOmschrijvingFactory.create()
+        GemeenteCodeAndOmschrijvingFactory.create()
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -155,6 +162,7 @@ class TestIngeschrevenPersoon(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
+        self.maxDiff = None
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     @freeze_time("2020-09-12")
@@ -215,6 +223,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         self.verblijfstitel = VerblijfstitelFactory(persoon=self.persoon)
         self.token = TokenFactory.create()
         CountryCodeAndOmschrijvingFactory.create()
+        GemeenteCodeAndOmschrijvingFactory.create()
 
     def test_ingeschreven_persoon_without_token(self):
         response = self.client.get(reverse("ingeschrevenpersonen-list"))
@@ -250,7 +259,11 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.persoon.geboorteplaats_persoon),
+            str(
+                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.persoon.geboorteplaats_persoon
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["kiesrecht"]["_embedded"][
@@ -300,7 +313,9 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["overlijden"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.overlijden.plaats_overlijden),
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                self.overlijden.plaats_overlijden
+            ),
         )
         self.assertEqual(
             data["_embedded"]["verblijfplaats"]["identificatiecodeNummeraanduiding"],
@@ -379,7 +394,11 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.persoon.geboorteplaats_persoon),
+            str(
+                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.persoon.geboorteplaats_persoon
+                )
+            ),
         )
         self.assertEqual(
             data["_embedded"]["kiesrecht"]["_embedded"][
@@ -429,7 +448,9 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["overlijden"]["_embedded"]["plaats"]["omschrijving"],
-            str(self.overlijden.plaats_overlijden),
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                self.overlijden.plaats_overlijden
+            ),
         )
         self.assertEqual(
             data["_embedded"]["verblijfplaats"]["identificatiecodeNummeraanduiding"],
@@ -864,7 +885,9 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
                 "plaats"
             ]["omschrijving"],
-            str(self.kind.geboorteplaats_kind),
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                self.kind.geboorteplaats_kind
+            ),
         )
         self.assertIsNone(
             data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer")
@@ -928,7 +951,11 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
                 "plaats"
             ]["omschrijving"],
-            str(self.kind.geboorteplaats_kind),
+            str(
+                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.kind.geboorteplaats_kind
+                )
+            ),
         )
         self.assertIsNone(
             data["_embedded"]["kinderen"]["_embedded"].get("burgerservicenummer")
