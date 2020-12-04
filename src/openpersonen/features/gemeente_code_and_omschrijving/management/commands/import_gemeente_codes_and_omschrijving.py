@@ -48,7 +48,7 @@ class Command(BaseCommand):
         header_row = rows.pop(0)
 
         if "Gemeentecode" not in header_row[0]:
-            self.stderr.write("Landcode should be the first column in your csv")
+            self.stderr.write("Gemeentecode should be the first column in your csv")
             return exit(1)
         if "Omschrijving" not in header_row[1]:
             self.stderr.write("Omschrijving should be the first column in your csv")
