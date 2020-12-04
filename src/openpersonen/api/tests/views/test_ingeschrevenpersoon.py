@@ -162,7 +162,6 @@ class TestIngeschrevenPersoon(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
-        self.maxDiff = None
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     @freeze_time("2020-09-12")
@@ -259,10 +258,8 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
-            str(
-                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.persoon.geboorteplaats_persoon
-                )
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                self.persoon.geboorteplaats_persoon
             ),
         )
         self.assertEqual(
@@ -394,10 +391,8 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["plaats"]["omschrijving"],
-            str(
-                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.persoon.geboorteplaats_persoon
-                )
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                self.persoon.geboorteplaats_persoon
             ),
         )
         self.assertEqual(
@@ -951,10 +946,8 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"][
                 "plaats"
             ]["omschrijving"],
-            str(
-                GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.kind.geboorteplaats_kind
-                )
+            GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                self.kind.geboorteplaats_kind
             ),
         )
         self.assertIsNone(
