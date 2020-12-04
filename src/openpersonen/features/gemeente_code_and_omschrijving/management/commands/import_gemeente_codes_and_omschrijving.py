@@ -17,7 +17,7 @@ class Command(BaseCommand):
     python src/manage.py import_gemeente_codes_and_omschrijving --file=/path/To/file.csv
     """
 
-    help = "Read in an ods file from a url and populate models to use for demo data"
+    help = "Read in a csv file from a url or file path and populate models"
 
     def add_arguments(self, parser):
         parser.add_argument("--url", help="Url to csv file")
