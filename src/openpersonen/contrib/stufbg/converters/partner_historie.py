@@ -3,7 +3,9 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import convert_empty_instances
-from openpersonen.features.country_code.models import CountryCode
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 
 def convert_response_to_partner_historie_dict(response):
@@ -61,7 +63,7 @@ def convert_response_to_partner_historie_dict(response):
             },
             "land": {
                 "code": antwoord_dict_object["ns:inp.geboorteLand"],
-                "omschrijving": CountryCode.get_omschrijving_from_code(
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     antwoord_dict_object["ns:inp.geboorteLand"]
                 ),
             },

@@ -1,5 +1,5 @@
 from openpersonen.features.models import CodeAndOmschrijving
 
 
-class CountryCode(CodeAndOmschrijving):
+class CountryCodeAndOmschrijving(CodeAndOmschrijving):
     pass
