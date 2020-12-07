@@ -263,7 +263,7 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                 "redenOpname": {
                     "code": instance_xml_dict.get(
                         f"{prefix}:inp.heeftAlsNationaliteit", {}
-                    ).get("inp.redenVerkrijging"),
+                    ).get("inp.redenVerkrijging", "."),
                     "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
                         instance_xml_dict.get(
                             f"{prefix}:inp.heeftAlsNationaliteit", {}
