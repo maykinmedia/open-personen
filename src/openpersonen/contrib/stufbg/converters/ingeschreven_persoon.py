@@ -3,10 +3,13 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import calculate_age, convert_empty_instances
-
 from openpersonen.features import (
     get_aanhef,
-    get_aanschrijfwijze
+    get_aanschrijfwijze,
+    get_gebruik_in_lopende_tekst,
+)
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
 )
 
 from .kind import get_kind_instance_dict
@@ -23,7 +26,7 @@ def _get_partner_info(partner_info, prefix):
     )
 
 
-def get_persoon_instance_dict(response, instance_xml_dict, prefix):
+def get_persoon_instance_dict(instance_xml_dict, prefix):
     ingeschreven_persoon_dict = {
         "burgerservicenummer": instance_xml_dict.get(f"{prefix}:inp.bsn", "string"),
         "geheimhoudingPersoonsgegevens": instance_xml_dict.get(
@@ -896,9 +899,9 @@ def convert_response_to_persoon_dicts(response):
     if isinstance(antwoord_object, list):
         result = []
         for antwood_dict in antwoord_object:
-            result_dict = get_persoon_instance_dict(response, antwood_dict, prefix)
+            result_dict = get_persoon_instance_dict(antwood_dict, prefix)
             result.append(result_dict)
     else:
-        result = [get_persoon_instance_dict(response, antwoord_object, prefix)]
+        result = [get_persoon_instance_dict(antwoord_object, prefix)]
 
     return result
