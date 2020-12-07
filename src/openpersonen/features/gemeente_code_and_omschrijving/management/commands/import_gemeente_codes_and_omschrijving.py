@@ -50,7 +50,10 @@ class Command(BaseCommand):
         if "Omschrijving" not in header_row[1]:
             raise CommandError("Omschrijving should be the second column in your csv")
 
-        gemeenten = [GemeenteCodeAndOmschrijving(code=row[0], omschrijving=row[1]) for row in rows]
+        gemeenten = [
+            GemeenteCodeAndOmschrijving(code=row[0], omschrijving=row[1])
+            for row in rows
+        ]
         GemeenteCodeAndOmschrijving.objects.bulk_create(gemeenten)
 
         self.stdout.write(f"Done! {len(gemeenten)} imported!")
