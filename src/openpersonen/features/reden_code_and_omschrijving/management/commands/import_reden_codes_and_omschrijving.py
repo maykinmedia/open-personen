@@ -34,7 +34,7 @@ class Command(BaseCommand):
             self.stderr.write("Must give a url or file")
             return exit(1)
 
-        self.stdout.write("Importing country codes")
+        self.stdout.write("Importing reden codes")
 
         if options.get("url"):
             with requests.Session() as s:
