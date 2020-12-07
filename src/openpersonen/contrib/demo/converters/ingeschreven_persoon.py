@@ -4,8 +4,11 @@ from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 from openpersonen.features import (
     get_aanhef,
     get_aanschrijfwijze,
+    get_gebruik_in_lopende_tekst,
 )
-from openpersonen.features import get_aanhef, get_aanschrijfwijze
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
