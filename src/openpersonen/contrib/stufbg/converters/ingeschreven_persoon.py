@@ -11,11 +11,11 @@ from openpersonen.features import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
-from openpersonen.features.reden_code_and_omschrijving.models import (
-    RedenCodeAndOmschrijving,
-)
 from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
+)
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
 )
 
 from .kind import get_kind_instance_dict
