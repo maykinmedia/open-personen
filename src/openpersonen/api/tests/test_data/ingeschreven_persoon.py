@@ -121,7 +121,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                         "maand": 1,
                     },
                     "nationaliteit": {"code": None, "omschrijving": None},
-                    "redenOpname": {"code": None, "omschrijving": "Onbekend"},
+                    "redenOpname": {"code": ".", "omschrijving": "Onbekend"},
                     "inOnderzoek": {
                         "_embedded": {
                             "datumIngangOnderzoek": {
