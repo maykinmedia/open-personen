@@ -87,7 +87,7 @@ API attribute                                                           StUF-BG 
 ``nationaliteit.datumIngangGeldigheid.maand``                           MONTH(``inp.heeftAlsNationaliteit.inp.datumVerkrijging``)
 ``nationaliteit.nationaliteit.code``                                    ``inp.heeftAlsNationaliteit.gerelateerde.code``
 ``nationaliteit.nationaliteit.omschrijving``                            ``inp.heeftAlsNationaliteit.gerelateerde.omschrijving``
-``nationaliteit.redenOpname.code``                                      REDEN_CODE(``inp.heeftAlsNationaliteit.inp.redenVerkrijging``)                    TODO
+``nationaliteit.redenOpname.code``                                      REDEN_CODE(``inp.heeftAlsNationaliteit.inp.redenVerkrijging``)
 ``nationaliteit.redenOpname.omschrijving``                              ``inp.heeftAlsNationaliteit.inp.redenVerkrijging``
 ``nationaliteit.inOnderzoek.aanduidingBijzonderNederlanderschap``       (``inOnderzoek.elementnaam`` == ``aanduidingBijzonderNederlanderschap``)          One of the multiple inOnderzoek occurrances matches
 ``nationaliteit.inOnderzoek.nationaliteit``                             (``inOnderzoek.groepsnaam`` == ``Nationaliteit``)                                 One of the multiple inOnderzoek occurrances matches
