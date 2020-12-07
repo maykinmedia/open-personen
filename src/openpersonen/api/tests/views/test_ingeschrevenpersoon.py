@@ -42,6 +42,9 @@ from openpersonen.features.gemeente_code_and_omschrijving.factory_models import 
 from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
 )
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
+)
 
 
 @patch(
@@ -291,7 +294,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
                 "omschrijving"
             ],
             RedenCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.nationaliteit.reden_opname_nationaliteit
+                self.nationaliteit.reden_opname_nationaliteit
             ),
         )
         self.assertEqual(
@@ -426,7 +429,7 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
                 "omschrijving"
             ],
             RedenCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.nationaliteit.reden_opname_nationaliteit
+                self.nationaliteit.reden_opname_nationaliteit
             ),
         )
         self.assertEqual(

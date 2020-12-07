@@ -1,11 +1,11 @@
 import factory
 
-from .models import CountryCode
+from .models import CountryCodeAndOmschrijving
 
 
-class CountryCodeFactory(factory.django.DjangoModelFactory):
+class CountryCodeAndOmschrijvingFactory(factory.django.DjangoModelFactory):
     code = 6030
     omschrijving = "Nederland"
 
     class Meta:
-        model = CountryCode
+        model = CountryCodeAndOmschrijving
