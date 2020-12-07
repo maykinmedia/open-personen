@@ -49,7 +49,7 @@ API attribute                                                           StUF-BG 
 ``geboorte.datum.maand``                                                MONTH(``geboortedatum``)
 ``geboorte.land.code``                                                  COUNTRY_CODE(``inp.geboorteLand``)
 ``geboorte.land.omschrijving``                                          ``inp.geboorteLand``
-``geboorte.plaats.code``                                                CITY_CODE(``inp.geboorteplaats``)                                                 TODO
+``geboorte.plaats.code``                                                CITY_CODE(``inp.geboorteplaats``)
 ``geboorte.plaats.omschrijving``                                        ``inp.geboorteplaats``
 ``geboorte.inOnderzoek.datum``                                          (``inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)                              One of the multiple inOnderzoek occurrances matches
 ``geboorte.inOnderzoek.land``                                           (``inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)                              One of the multiple inOnderzoek occurrances matches
@@ -108,7 +108,7 @@ API attribute                                                           StUF-BG 
 ``overlijden.datum.maand``                                              MONTH(``overlijdensdatum``)
 ``overlijden.land.code``                                                COUNTRY_CODE(``inp.overlijdenLand``)
 ``overlijden.land.omschrijving``                                        ``inp.overlijdenLand``
-``overlijden.plaats.code``                                              CITY_CODE(``inp.overlijdenplaats``)                                               TODO
+``overlijden.plaats.code``                                              CITY_CODE(``inp.overlijdenplaats``)
 ``overlijden.plaats.omschrijving``                                      ``inp.overlijdenplaats``
 ``overlijden.inOnderzoek.datum``                                        (``inOnderzoek.groepsnaam`` == ``Overlijden``)                                    One of the multiple inOnderzoek occurrances matches
 ``overlijden.inOnderzoek.land``                                         (``inOnderzoek.groepsnaam`` == ``Overlijden``)                                    One of the multiple inOnderzoek occurrances matches
@@ -231,7 +231,7 @@ geboorte.datum.jaar                                                     YEAR(``i
 geboorte.datum.maand                                                    MONTH(``inp.heeftAlsKinderen.geboortedatum``)
 geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsKinderen.inp.geboorteLand``)
 geboorte.land.omschrijving                                              ``inp.heeftAlsKinderen.inp.geboorteLand``
-geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsKinderen.inp.geboorteplaats``)                            TODO
+geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsKinderen.inp.geboorteplaats``)
 geboorte.plaats.omschrijving                                            ``inp.heeftAlsKinderen.inp.geboorteplaats``
 geboorte.inOnderzoek.datum                                              (``inp.heeftAlsKinderen.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)         One of the multiple inOnderzoek occurrances matches
 geboorte.inOnderzoek.land                                               (``inp.heeftAlsKinderen.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)         One of the multiple inOnderzoek occurrances matches
@@ -286,7 +286,7 @@ geboorte.datum.jaar                                                     YEAR(``i
 geboorte.datum.maand                                                    MONTH(``inp.heeftAlsOuders.geboortedatum``)
 geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsOuders.inp.geboorteLand``)
 geboorte.land.omschrijving                                              ``inp.heeftAlsOuders.inp.geboorteLand``
-geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsOuders.inp.geboorteplaats``)                              TODO
+geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsOuders.inp.geboorteplaats``)
 geboorte.plaats.omschrijving                                            ``inp.heeftAlsOuders.inp.geboorteplaats``
 geboorte.inOnderzoek.datum                                              (``inp.heeftAlsOuders.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)           One of the multiple inOnderzoek occurrances matches
 geboorte.inOnderzoek.land                                               (``inp.heeftAlsOuders.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)           One of the multiple inOnderzoek occurrances matches
@@ -325,7 +325,7 @@ geboorte.datum.jaar                                                     YEAR(``i
 geboorte.datum.maand                                                    MONTH(``inp.heeftAlsEchtgenootPartner.geboortedatum``)
 geboorte.land.code                                                      COUNTRY_CODE(``inp.heeftAlsEchtgenootPartner.inp.geboorteLand``)
 geboorte.land.omschrijving                                              ``inp.heeftAlsEchtgenootPartner.inp.geboorteLand``
-geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsEchtgenootPartner.inp.geboorteplaats``)                         TODO
+geboorte.plaats.code                                                    CITY_CODE(``inp.heeftAlsEchtgenootPartner.inp.geboorteplaats``)
 geboorte.plaats.omschrijving                                            ``inp.heeftAlsEchtgenootPartner.inp.geboorteplaats``
 geboorte.inOnderzoek.datum                                              (``inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)      One of the multiple inOnderzoek occurrances matches
 geboorte.inOnderzoek.land                                               (``inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)      One of the multiple inOnderzoek occurrances matches
@@ -346,7 +346,7 @@ aangaanHuwelijkPartnerschap.datum.jaar                                  YEAR(``i
 aangaanHuwelijkPartnerschap.datum.maand                                 MONTH(``inp.heeftAlsEchtgenootPartner.datumSluiting``)
 aangaanHuwelijkPartnerschap.land.code                                   COUNTRY_CODE(``inp.heeftAlsEchtgenootPartner.landSluiting``)
 aangaanHuwelijkPartnerschap.land.omschrijving                           ``inp.heeftAlsEchtgenootPartner.landSluiting``
-aangaanHuwelijkPartnerschap.plaats.code                                 CITY_CODE(``inp.heeftAlsEchtgenootPartner.plaatsSluiting``)                             TODO
+aangaanHuwelijkPartnerschap.plaats.code                                 CITY_CODE(``inp.heeftAlsEchtgenootPartner.plaatsSluiting``)
 aangaanHuwelijkPartnerschap.plaats.omschrijving                         ``inp.heeftAlsEchtgenootPartner.plaatsSluiting``
 aangaanHuwelijkPartnerschap.inOnderzoek.datum                           (``inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)      One of the multiple inOnderzoek occurrances matches
 aangaanHuwelijkPartnerschap.inOnderzoek.land                            (``inp.heeftAlsEchtgenootPartner.inOnderzoek.groepsnaam`` == ``Persoonsgegevens``)      One of the multiple inOnderzoek occurrances matches
