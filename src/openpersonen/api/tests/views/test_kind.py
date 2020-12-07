@@ -296,10 +296,8 @@ class TestKindWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.kind.geboorteland_kind
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.kind.geboorteland_kind
             ),
         )
         self.assertEqual(
@@ -341,10 +339,8 @@ class TestKindWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.kind.geboorteland_kind
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.kind.geboorteland_kind
             ),
         )
         self.assertEqual(
