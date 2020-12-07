@@ -1,6 +1,6 @@
 import csv
 
-from django.core.management import BaseCommand
+from django.core.management import BaseCommand, CommandError
 
 import requests
 
@@ -28,11 +28,9 @@ class Command(BaseCommand):
     def handle(self, **options):
 
         if options.get("url") and options.get("file"):
-            self.stderr.write("Please specify a url or file, not both")
-            return exit(1)
+            raise CommandError("Please specify a url or file, not both")
         if not options.get("url") and not options.get("file"):
-            self.stderr.write("Must give a url or file")
-            return exit(1)
+            raise CommandError("Must give a url or file")
 
         self.stdout.write("Importing country codes")
 
@@ -48,15 +46,14 @@ class Command(BaseCommand):
         header_row = rows.pop(0)
 
         if "Landcode" not in header_row[0]:
-            self.stderr.write("Landcode should be the first column in your csv")
-            return exit(1)
+            raise CommandError("Landcode should be the first column in your csv")
         if "Omschrijving" not in header_row[1]:
-            self.stderr.write("Omschrijving should be the first column in your csv")
-            return exit(1)
+            raise CommandError("Omschrijving should be the first column in your csv")
 
-        num_rows = 0
-        for row in rows:
-            CountryCodeAndOmschrijving.objects.create(code=row[0], omschrijving=row[1])
-            num_rows += 1
+        countries = [
+            CountryCodeAndOmschrijving(code=row[0], omschrijving=row[1]) for row in rows
+        ]
 
-        self.stdout.write(f"Done! {num_rows} imported!")
+        CountryCodeAndOmschrijving.objects.bulk_create(countries)
+
+        self.stdout.write(f"Done! {len(countries)} imported!")
