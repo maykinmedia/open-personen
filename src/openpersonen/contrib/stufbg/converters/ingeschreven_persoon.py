@@ -11,6 +11,9 @@ from openpersonen.features import (
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
+)
 from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
 )
@@ -261,9 +264,11 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                     "code": instance_xml_dict.get(
                         f"{prefix}:inp.heeftAlsNationaliteit", {}
                     ).get("inp.redenVerkrijging"),
-                    "omschrijving": instance_xml_dict.get(
-                        f"{prefix}:inp.heeftAlsNationaliteit", {}
-                    ).get("inp.redenVerkrijging"),
+                    "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                        instance_xml_dict.get(
+                            f"{prefix}:inp.heeftAlsNationaliteit", {}
+                        ).get("inp.redenVerkrijging", 0)
+                    ),
                 },
                 "inOnderzoek": {
                     "aanduidingBijzonderNederlanderschap": any(

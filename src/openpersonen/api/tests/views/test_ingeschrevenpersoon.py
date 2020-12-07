@@ -290,7 +290,9 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
             data["_embedded"]["nationaliteit"][0]["_embedded"]["redenOpname"][
                 "omschrijving"
             ],
-            str(self.nationaliteit.reden_opname_nationaliteit),
+            RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.nationaliteit.reden_opname_nationaliteit
+            ),
         )
         self.assertEqual(
             data["_embedded"]["nationaliteit"][0]["_embedded"]["inOnderzoek"][
@@ -423,7 +425,9 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
             data["_embedded"]["nationaliteit"][0]["_embedded"]["redenOpname"][
                 "omschrijving"
             ],
-            str(self.nationaliteit.reden_opname_nationaliteit),
+            RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                    self.nationaliteit.reden_opname_nationaliteit
+            ),
         )
         self.assertEqual(
             data["_embedded"]["nationaliteit"][0]["_embedded"]["inOnderzoek"][

@@ -12,6 +12,9 @@ from openpersonen.features.country_code_and_omschrijving.models import (
 from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
 )
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
+)
 
 from .kind import convert_kind_instance_to_dict
 from .ouder import convert_ouder_instance_to_dict
@@ -629,8 +632,10 @@ def convert_persoon_to_instance_dict(persoon):
                     "omschrijving": nationaliteit.nationaliteit,
                 },
                 "redenOpname": {
-                    "code": "string",
-                    "omschrijving": nationaliteit.reden_opname_nationaliteit,
+                    "code": nationaliteit.reden_opname_nationaliteit,
+                    "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                        nationaliteit.reden_opname_nationaliteit
+                    ),
                 },
                 "inOnderzoek": {
                     "aanduidingBijzonderNederlanderschap": bool(
