@@ -3,6 +3,9 @@ from django.conf import settings
 import xmltodict
 
 from openpersonen.contrib.utils import convert_empty_instances
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
+)
 
 
 def convert_response_to_nationaliteit_historie_dict(response):
@@ -38,10 +41,14 @@ def convert_response_to_nationaliteit_historie_dict(response):
         },
         "nationaliteit": {"code": "0000", "omschrijving": "Nederland"},
         "redenOpname": {
-            "code": "0000",
-            "omschrijving": antwoord_dict_object["ns:historieFormeelRelatie"][
+            "code": antwoord_dict_object["ns:historieFormeelRelatie"][
                 "ns:inp.redenVerkrijging"
             ],
+            "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                antwoord_dict_object["ns:historieFormeelRelatie"][
+                    "ns:inp.redenVerkrijging"
+                ]
+            ),
         },
         "inOnderzoek": {
             "aanduidingBijzonderNederlanderschap": bool(
@@ -84,10 +91,12 @@ def convert_response_to_nationaliteit_historie_dict(response):
             ),
         },
         "redenBeeindigen": {
-            "code": "0000",
-            "omschrijving": antwoord_dict_object["ns:historieFormeelRelatie"][
+            "code": antwoord_dict_object["ns:historieFormeelRelatie"][
                 "ns:inp.redenVerlies"
             ],
+            "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                antwoord_dict_object["ns:historieFormeelRelatie"]["ns:inp.redenVerlies"]
+            ),
         },
         "indicatieNationaliteitBeeindigd": True,
     }
