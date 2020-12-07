@@ -94,7 +94,7 @@ def get_persoon_instance_dict(response, instance_xml_dict, prefix):
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
                 "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string")
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", 0)
                 ),
             },
             "plaats": {
