@@ -15,7 +15,7 @@ def get_gebruik_in_lopende_tekst_with_title(
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix}"
         gebruik_in_lopende_tekst += f" {last_name}"
-    if indication_name_use == PARTNER_NA_EIGEN:
+    elif indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix} "
 
@@ -25,11 +25,11 @@ def get_gebruik_in_lopende_tekst_with_title(
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
 
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER:
+    elif indication_name_use == PARTNER:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst = f" {partner_last_name_prefix} "
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER_VOOR_EIGEN:
+    elif indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
         gebruik_in_lopende_tekst += f"{partner_last_name}-"
@@ -57,7 +57,7 @@ def get_gebruik_in_lopende_tekst_with_predicate(
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix} "
         gebruik_in_lopende_tekst += f"{last_name}"
-    if indication_name_use == PARTNER_NA_EIGEN:
+    elif indication_name_use == PARTNER_NA_EIGEN:
         gebruik_in_lopende_tekst = title.lower()
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix} "
@@ -68,13 +68,13 @@ def get_gebruik_in_lopende_tekst_with_predicate(
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
 
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER:
+    elif indication_name_use == PARTNER:
         gebruik_in_lopende_tekst = MEVROUW
 
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER_VOOR_EIGEN:
+    elif indication_name_use == PARTNER_VOOR_EIGEN:
         gebruik_in_lopende_tekst = MEVROUW
 
         if partner_last_name_prefix:
@@ -113,7 +113,7 @@ def get_gebruik_in_lopende_tekst_with_partner_title_or_predicate(
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix} "
         gebruik_in_lopende_tekst += f"{last_name}"
-    if indication_name_use == PARTNER_NA_EIGEN:
+    elif indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix} "
 
@@ -128,11 +128,11 @@ def get_gebruik_in_lopende_tekst_with_partner_title_or_predicate(
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
 
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER:
+    elif indication_name_use == PARTNER:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix} "
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER_VOOR_EIGEN:
+    elif indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()} "
 
@@ -165,7 +165,7 @@ def get_default_gebruik_in_lopende_tekst(
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix.capitalize()}"
         gebruik_in_lopende_tekst += f" {last_name}"
-    if indication_name_use == PARTNER_NA_EIGEN:
+    elif indication_name_use == PARTNER_NA_EIGEN:
         if last_name_prefix:
             gebruik_in_lopende_tekst += f" {last_name_prefix.capitalize()}"
 
@@ -175,11 +175,11 @@ def get_default_gebruik_in_lopende_tekst(
             gebruik_in_lopende_tekst += f"{partner_last_name_prefix} "
 
         gebruik_in_lopende_tekst += f"{partner_last_name}"
-    if indication_name_use == PARTNER:
+    elif indication_name_use == PARTNER:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()}"
         gebruik_in_lopende_tekst += f" {partner_last_name}"
-    if indication_name_use == PARTNER_VOOR_EIGEN:
+    elif indication_name_use == PARTNER_VOOR_EIGEN:
         if partner_last_name_prefix:
             gebruik_in_lopende_tekst += f" {partner_last_name_prefix.capitalize()}"
 
