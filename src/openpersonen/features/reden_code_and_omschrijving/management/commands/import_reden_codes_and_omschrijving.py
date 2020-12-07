@@ -4,8 +4,8 @@ from django.core.management import BaseCommand
 
 import requests
 
-from openpersonen.features.country_code_and_omschrijving.models import (
-    CountryCodeAndOmschrijving,
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
 )
 
 
@@ -56,7 +56,7 @@ class Command(BaseCommand):
 
         num_rows = 0
         for row in rows:
-            CountryCodeAndOmschrijving.objects.create(code=row[0], omschrijving=row[1])
+            RedenCodeAndOmschrijving.objects.create(code=row[0], omschrijving=row[1])
             num_rows += 1
 
         self.stdout.write(f"Done! {num_rows} imported!")
