@@ -298,10 +298,8 @@ class TestPartnerWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
             ),
         )
         self.assertEqual(
@@ -322,10 +320,8 @@ class TestPartnerWithTestingModels(APITestCase):
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
             ),
         )
         self.assertEqual(
@@ -366,10 +362,8 @@ class TestPartnerWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.partnerschap.geboorteland_echtgenoot_geregistreerd_partner
             ),
         )
         self.assertEqual(
@@ -390,10 +384,8 @@ class TestPartnerWithTestingModels(APITestCase):
             data["_embedded"]["aangaanHuwelijkPartnerschap"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.partnerschap.land_ontbinding_huwelijk_geregistreerd_partnerschap
             ),
         )
         self.assertEqual(

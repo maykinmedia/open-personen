@@ -296,10 +296,8 @@ class TestOuderWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.ouder.geboorteland_ouder
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.ouder.geboorteland_ouder
             ),
         )
         self.assertEqual(
@@ -341,10 +339,8 @@ class TestOuderWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.ouder.geboorteland_ouder
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.ouder.geboorteland_ouder
             ),
         )
         self.assertEqual(

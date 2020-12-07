@@ -244,10 +244,8 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.persoon.geboorteland_persoon
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.persoon.geboorteland_persoon
             ),
         )
         self.assertEqual(
@@ -296,10 +294,8 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["overlijden"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.overlijden.land_overlijden
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.overlijden.land_overlijden
             ),
         )
         self.assertEqual(
@@ -377,10 +373,8 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["geboorte"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.persoon.geboorteland_persoon
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.persoon.geboorteland_persoon
             ),
         )
         self.assertEqual(
@@ -429,10 +423,8 @@ class TestIngeschrevenPersoonWithTestingModels(APITestCase):
         )
         self.assertEqual(
             data["_embedded"]["overlijden"]["_embedded"]["land"]["omschrijving"],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.overlijden.land_overlijden
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.overlijden.land_overlijden
             ),
         )
         self.assertEqual(
@@ -864,10 +856,8 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.kind.geboorteland_kind
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.kind.geboorteland_kind
             ),
         )
         self.assertEqual(
@@ -930,10 +920,8 @@ class TestExpandParameter(APITestCase):
             data["_embedded"]["kinderen"]["_embedded"]["geboorte"]["_embedded"]["land"][
                 "omschrijving"
             ],
-            str(
-                CountryCodeAndOmschrijving.get_omschrijving_from_code(
-                    self.kind.geboorteland_kind
-                )
+            CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                self.kind.geboorteland_kind
             ),
         )
         self.assertEqual(
