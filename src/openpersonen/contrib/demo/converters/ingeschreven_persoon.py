@@ -1,6 +1,5 @@
 from django.conf import settings
 
-from openpersonen.contrib.utils import calculate_age, is_valid_date_format
 from openpersonen.features import (
     get_aanhef,
     get_aanschrijfwijze,

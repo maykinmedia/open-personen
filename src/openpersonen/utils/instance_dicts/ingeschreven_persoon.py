@@ -2,11 +2,34 @@ from django.conf import settings
 
 import xmltodict
 
+from openpersonen.features import (
+    get_aanhef,
+    get_aanschrijfwijze,
+    get_gebruik_in_lopende_tekst,
+)
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
+from openpersonen.features.reden_code_and_omschrijving.models import (
+    RedenCodeAndOmschrijving,
+)
 from openpersonen.utils.helpers import calculate_age, convert_empty_instances
 
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
 from .partner import get_partner_instance_dict
+
+
+def _get_partner_info(partner_info, prefix):
+    return (
+        partner_info[f"{prefix}:gerelateerde"].get("adellijkeTitelPredikaat"),
+        partner_info[f"{prefix}:gerelateerde"].get("voorvoegselGeslachtsnaam"),
+        partner_info[f"{prefix}:gerelateerde"].get("geslachtsnaam"),
+        partner_info.get(f"{prefix}:datumSluiting"),
+    )
 
 
 def get_persoon_instance_dict(instance_xml_dict, prefix):
@@ -54,9 +77,6 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                     "maand": 1,
                 },
             },
-            "aanhef": instance_xml_dict.get(f"{prefix}:voornamen", "string"),
-            "aanschrijfwijze": "string",
-            "gebruikInLopendeTekst": "string",
             "aanduidingNaamgebruik": instance_xml_dict.get(
                 f"{prefix}:aanduidingNaamgebruik", "string"
             ),
@@ -82,14 +102,14 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
             },
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteLand", "string"
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", 0)
                 ),
             },
             "plaats": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteplaats", "string"
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", 0)
                 ),
             },
             "inOnderzoek": {
@@ -243,10 +263,12 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                 "redenOpname": {
                     "code": instance_xml_dict.get(
                         f"{prefix}:inp.heeftAlsNationaliteit", {}
-                    ).get("inp.redenVerkrijging"),
-                    "omschrijving": instance_xml_dict.get(
-                        f"{prefix}:inp.heeftAlsNationaliteit", {}
-                    ).get("inp.redenVerkrijging"),
+                    ).get("inp.redenVerkrijging", "."),
+                    "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
+                        instance_xml_dict.get(
+                            f"{prefix}:inp.heeftAlsNationaliteit", {}
+                        ).get("inp.redenVerkrijging", 0)
+                    ),
                 },
                 "inOnderzoek": {
                     "aanduidingBijzonderNederlanderschap": any(
@@ -348,8 +370,8 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                     instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
                 )
                 else "string",
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.overlijdenLand", "string"
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenLand", 0)
                 )
                 if not isinstance(
                     instance_xml_dict.get(f"{prefix}:overlijdensdatum"), dict
@@ -364,8 +386,8 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                     instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats"), dict
                 )
                 else "string",
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.overlijdenplaats", "string"
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats", 0)
                 )
                 if not isinstance(
                     instance_xml_dict.get(f"{prefix}:inp.overlijdenplaats"), dict
@@ -524,9 +546,11 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
                     "code": instance_xml_dict.get(
                         f"{prefix}:sub.verblijfBuitenland", {}
                     ).get("lnd.landcode"),
-                    "omschrijving": instance_xml_dict.get(
-                        f"{prefix}:sub.verblijfBuitenland", {}
-                    ).get("lnd.landcode"),
+                    "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                        instance_xml_dict.get(
+                            f"{prefix}:sub.verblijfBuitenland", {}
+                        ).get("lnd.landcode", 0)
+                    ),
                 },
             },
             "inOnderzoek": {
@@ -799,10 +823,67 @@ def get_persoon_instance_dict(instance_xml_dict, prefix):
             get_ouder_instance_dict(ouder_info, prefix)
         )
 
+    partners_title = None
+    partners_last_name_prefix = None
+    partners_last_name = None
+    partners_date = None
     for partner_info in partners_info:
         ingeschreven_persoon_dict["partners"].append(
             get_partner_instance_dict(partner_info, prefix)
         )
+        if (
+            not partners_last_name
+            or (
+                partner_info.get(f"{prefix}:datumOntbinding")
+                and partners_date > partner_info[f"{prefix}:datumSluiting"]
+            )
+            or (
+                partner_info.get(f"{prefix}:datumOntbinding") is None
+                and partners_date < partner_info[f"{prefix}:datumSluiting"]
+            )
+        ):
+            (
+                partners_title,
+                partners_last_name_prefix,
+                partners_last_name,
+                partners_date,
+            ) = _get_partner_info(partner_info, prefix)
+
+    ingeschreven_persoon_dict["naam"]["aanhef"] = get_aanhef(
+        instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),
+        instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
+        partners_last_name_prefix,
+        partners_last_name,
+        instance_xml_dict.get(f"{prefix}:aanduidingNaamgebruik"),
+        instance_xml_dict.get(f"{prefix}:geslachtsaanduiding"),
+        instance_xml_dict.get(f"{prefix}:adellijkeTitelPredikaat"),
+        partners_title,
+    )
+
+    ingeschreven_persoon_dict["naam"]["aanschrijfwijze"] = get_aanschrijfwijze(
+        instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),
+        instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
+        instance_xml_dict.get(f"{prefix}:voornamen"),
+        partners_last_name_prefix,
+        partners_last_name,
+        instance_xml_dict.get(f"{prefix}:aanduidingNaamgebruik"),
+        instance_xml_dict.get(f"{prefix}:geslachtsaanduiding"),
+        instance_xml_dict.get(f"{prefix}:adellijkeTitelPredikaat"),
+        partners_title,
+    )
+
+    ingeschreven_persoon_dict["naam"][
+        "gebruikInLopendeTekst"
+    ] = get_gebruik_in_lopende_tekst(
+        instance_xml_dict.get(f"{prefix}:voorvoegselGeslachtsnaam"),
+        instance_xml_dict.get(f"{prefix}:geslachtsnaam"),
+        partners_last_name_prefix,
+        partners_last_name,
+        instance_xml_dict.get(f"{prefix}:aanduidingNaamgebruik"),
+        instance_xml_dict.get(f"{prefix}:geslachtsaanduiding"),
+        instance_xml_dict.get(f"{prefix}:adellijkeTitelPredikaat"),
+        partners_title,
+    )
 
     convert_empty_instances(ingeschreven_persoon_dict)
 

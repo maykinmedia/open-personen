@@ -1,6 +1,5 @@
 from django.conf import settings
 
-from openpersonen.contrib.utils import is_valid_date_format
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
