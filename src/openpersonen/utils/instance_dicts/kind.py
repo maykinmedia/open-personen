@@ -2,6 +2,12 @@ from django.conf import settings
 
 import xmltodict
 
+from openpersonen.features.country_code_and_omschrijving.models import (
+    CountryCodeAndOmschrijving,
+)
+from openpersonen.features.gemeente_code_and_omschrijving.models import (
+    GemeenteCodeAndOmschrijving,
+)
 from openpersonen.utils.helpers import calculate_age, convert_empty_instances
 
 
@@ -72,14 +78,14 @@ def get_kind_instance_dict(instance_xml_dict, prefix):
             },
             "land": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteLand", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteLand", "string"
+                "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteLand", 0)
                 ),
             },
             "plaats": {
                 "code": instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", "string"),
-                "omschrijving": instance_xml_dict.get(
-                    f"{prefix}:inp.geboorteplaats", "string"
+                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                    instance_xml_dict.get(f"{prefix}:inp.geboorteplaats", 0)
                 ),
             },
             "inOnderzoek": {

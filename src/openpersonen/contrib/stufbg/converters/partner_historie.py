@@ -2,7 +2,6 @@ from django.conf import settings
 
 import xmltodict
 
-from openpersonen.contrib.utils import convert_empty_instances
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
