@@ -3,7 +3,14 @@
 Quickstart
 ==========
 
-The default ``docker-compose`` settings have some convenience settings to get 
+.. warning::
+    The quickstart instructions are only intended for development and testing purposes.
+    Do not use the quickstart instructions in a production setting.
+    The certificate and certificate key stored in the StUF-BG Client will be exposed
+    when making an API call to an external StUF-BG service.
+
+
+The default ``docker-compose`` settings have some convenience settings to get
 started quickly and these should never be used for anything besides testing:
 
 * A default secret is set in the ``SECRET_KEY`` environment variable
@@ -35,17 +42,17 @@ With the above remarks in mind, let's go:
 
       $ docker-compose up -d
 
-3. Import a test dataset of persons. You can use the test dataset provided by 
+3. Import a test dataset of persons. You can use the test dataset provided by
    the `RvIG`_. Just copy the ODS-file URL to the command below:
 
    .. code:: shell
 
       $ docker-compose exec web src/manage.py import_demodata --url <url>
 
-4. The API should now be available on ``http://localhost:8000/api/``. You can 
+4. The API should now be available on ``http://localhost:8000/api/``. You can
    retrieve a person via the BRP API in your webbrowser:
 
-   .. code:: 
+   .. code::
 
       http://localhost:8000/api/ingeschrevenpersonen/999990676
 
@@ -55,7 +62,7 @@ With the above remarks in mind, let's go:
 Next steps
 ----------
 
-You can read how to add persons to this test dataset using this 
+You can read how to add persons to this test dataset using this
 :ref:`backends_demo_backend`. If you want to expose real persons you can connect
 Open Personen to a :ref:`backends_stufbg_backend`.
 
