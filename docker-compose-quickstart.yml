@@ -8,12 +8,6 @@ services:
       - POSTGRES_USER=${DB_USER:-openpersonen}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-openpersonen}
 
-  busybox:
-    image: busybox
-    command: /bin/chown -R 1000 /private-media
-    volumes:
-      - private_media:/private-media
-
   web:
     image: maykinmedia/open-personen
     environment:
@@ -24,22 +18,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD:-openpersonen}
       - OPENPERSONEN_BACKEND=${OPENPERSONEN_BACKEND:-openpersonen.contrib.demo.backend.default}
       - OPENPERSONEN_USE_AUTHENTICATION=${OPENPERSONEN_USE_AUTHENTICATION:-False}
-    volumes:
-      - private_media:/app/private-media
     ports:
       - 8000:8000
     depends_on:
       - db
-
-  nginx:
-    image: nginx
-    volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-      - private_media:/private-media
-    ports:
-      - "9000:80"
-    depends_on:
-      - web
-
-volumes:
-  private_media:
