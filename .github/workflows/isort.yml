@@ -28,6 +28,6 @@ jobs:
         run: |
           pip install -r requirements/ci.txt
           pip install isort
-      - name: Run black
+      - name: Run isort
         run: |
-          isort . --check-only --diff
+          isort src/openpersonen --check-only --diff
