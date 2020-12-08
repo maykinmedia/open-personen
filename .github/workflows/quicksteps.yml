@@ -24,11 +24,9 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Install dependencies
+      - name: Run openapi check
         run: |
           wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
           docker-compose up -d
           docker-compose exec web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20201126_Testset_persoonslijsten_proefomgeving_GBA-V.ods
-      - name: Run openapi check
-        run: |
           wget http://localhost:8000/api/ingeschrevenpersonen/999990676
