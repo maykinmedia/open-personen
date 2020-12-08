@@ -26,6 +26,6 @@ jobs:
           python-version: '3.8'
       - uses: isort/isort-action@v0.1.0
         with:
-          requirementsFiles: requirements/dev.txt
-          sortPaths: "src doc"
+          requirementsFiles: requirements/ci.txt
+          sortPaths: "."
           configuration: '--check-only --diff'
