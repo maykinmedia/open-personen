@@ -35,4 +35,5 @@ jobs:
           wget https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/v1.0.0/specificatie/openapi.yaml
           openapi-diff openapi.yaml src/openapi.yaml
         env:
+          DJANGO_SETTINGS_MODULE: openpersonen.conf.ci
           VIRTUAL_ENV: fake/env
