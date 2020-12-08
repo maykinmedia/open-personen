@@ -27,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements/ci.txt
-          npm install -g swagger2openapi@5.2.5
-          npm install -g openapi-diff@0.23.3
+          sudo npm install -g swagger2openapi@5.2.5
+          sudo npm install -g openapi-diff@0.23.3
       - name: Run openapi check
         run: |
           generate_schema
