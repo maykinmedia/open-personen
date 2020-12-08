@@ -16,7 +16,7 @@ on: push
 
 jobs:
   isort:
-    name: Check import sorting
+    name: Check unit tests
     runs-on: ubuntu-latest
 
     services:

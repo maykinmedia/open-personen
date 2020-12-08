@@ -16,7 +16,7 @@ on: push
 
 jobs:
   isort:
-    name: Check isort
+    name: Check quickstart steps
     runs-on: ubuntu-latest
 
     steps:
@@ -26,14 +26,9 @@ jobs:
           python-version: '3.8'
       - name: Install dependencies
         run: |
-          pip install -r requirements/ci.txt
-          sudo npm install -g swagger2openapi@5.2.5
-          sudo npm install -g openapi-diff@0.23.3
+          wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
+          docker-compose up -d
+          docker-compose exec web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20201126_Testset_persoonslijsten_proefomgeving_GBA-V.ods
       - name: Run openapi check
         run: |
-          generate_schema
-          wget https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/v1.0.0/specificatie/openapi.yaml
-          openapi-diff openapi.yaml src/openapi.yaml
-        env:
-          DJANGO_SETTINGS_MODULE: openpersonen.conf.ci
-          VIRTUAL_ENV: fake/env
+          wget http://localhost:8000/api/ingeschrevenpersonen/999990676
