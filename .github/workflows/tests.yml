@@ -24,6 +24,9 @@ jobs:
         image: postgres:10
         env:
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -44,3 +47,7 @@ jobs:
           coverage run src/manage.py test src
         env:
           DJANGO_SETTINGS_MODULE: openpersonen.conf.ci
+          SECRET_KEY: dummy
+          DB_NAME: postgres
+          DB_PASSWORD: postgres
+          DB_USER: postgres
