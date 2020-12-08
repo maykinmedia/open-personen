@@ -1,0 +1,36 @@
+name: Isort
+
+## Run this workflow every time a new commit pushed to your repository
+#on:
+#  push:
+#    branches:
+#      - master
+#    tags:
+#    paths:
+#      - '**.py'
+#  pull_request:
+#    paths:
+#      - '**.py'
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  isort:
+    name: Check import sorting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements/ci.txt
+          npm install -g swagger2openapi@5.2.5
+          npm install -g openapi-diff@0.23.3
+      - name: Run openapi check
+        run: |
+          generate_schema
+          wget https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/v1.0.0/specificatie/openapi.yaml
+          openapi-diff openapi.yaml src/openapi.yaml
