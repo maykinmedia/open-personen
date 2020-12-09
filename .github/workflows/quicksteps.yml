@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Run openapi check
+      - name: Run quickstart steps
         run: |
           wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
           docker-compose up -d
