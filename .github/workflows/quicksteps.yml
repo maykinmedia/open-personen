@@ -19,6 +19,19 @@ jobs:
     name: Check quickstart steps
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:10
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -30,5 +43,3 @@ jobs:
           docker-compose up -d
           docker-compose exec web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20201126_Testset_persoonslijsten_proefomgeving_GBA-V.ods
           wget http://localhost:8000/api/ingeschrevenpersonen/999990676
-        env:
-          COMPOSE_INTERACTIVE_NO_CLI: 1
