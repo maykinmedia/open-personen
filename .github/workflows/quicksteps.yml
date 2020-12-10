@@ -43,5 +43,3 @@ jobs:
           docker-compose up -d
           docker-compose exec -T web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20201126_Testset_persoonslijsten_proefomgeving_GBA-V.ods
           wget http://localhost:8000/api/ingeschrevenpersonen/999990676
-        env:
-          COMPOSE_INTERACTIVE_NO_CLI: 1
