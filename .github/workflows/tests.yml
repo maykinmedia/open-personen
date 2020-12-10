@@ -14,8 +14,13 @@ name: Isort
 # Run this workflow every time a new commit pushed to your repository
 on: push
 
+
+env:
+  IMAGE_NAME: maykinmedia/open-personen
+
+
 jobs:
-  isort:
+  tests:
     name: Check unit tests
     runs-on: ubuntu-latest
 

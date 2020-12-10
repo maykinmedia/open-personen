@@ -15,7 +15,7 @@ name: Isort
 on: push
 
 jobs:
-  isort:
+  quicksteps:
     name: Check quickstart steps
     runs-on: ubuntu-latest
 

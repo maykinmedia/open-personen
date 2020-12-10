@@ -15,7 +15,7 @@ name: Isort
 on: push
 
 jobs:
-  isort:
+  openapiCheck:
     name: Check isort
     runs-on: ubuntu-latest
 
