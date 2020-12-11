@@ -103,3 +103,43 @@ jobs:
           DB_NAME: postgres
           DB_PASSWORD: postgres
           DB_USER: postgres
+
+  docker:
+    needs: [openapiCheck, quicksteps, tests]
+
+    name: Build (and push) Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set tag
+        id: vars
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name (if present at all)
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo ::set-output name=tag::${VERSION}
+      - name: Test printing steps vars outputs tag (remove this)
+        run: echo ${{ steps.vars.outputs.tag }}
+
+      - name: Build the Docker image
+        env:
+          #          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+          RELEASE_VERSION: 'github-actions-test'
+        run: docker build . --tag $IMAGE_NAME:$RELEASE_VERSION
+
+      - name: Log into registry
+        #        if: github.event_name == 'push'  # exclude PRs
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Push the Docker image
+        #        if: github.event_name == 'push'  # exclude PRs
+        env:
+          #          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+          RELEASE_VERSION: 'github-actions-test'
+        run: docker push $IMAGE_NAME:$RELEASE_VERSION
+
