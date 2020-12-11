@@ -1,18 +1,18 @@
 name: Isort
 
-## Run this workflow every time a new commit pushed to your repository
-#on:
-#  push:
-#    branches:
-#      - master
-#    tags:
-#    paths:
-#      - '**.py'
-#  pull_request:
-#    paths:
-#      - '**.py'
 # Run this workflow every time a new commit pushed to your repository
-on: push
+on:
+  push:
+    branches:
+      - master
+    tags:
+    paths:
+      - '**.py'
+  pull_request:
+    paths:
+      - '**.py'
+# Run this workflow every time a new commit pushed to your repository
+#on: push
 
 jobs:
   isort:
