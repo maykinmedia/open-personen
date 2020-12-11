@@ -7,9 +7,9 @@ Open Personen
 :Keywords: Basisregistratie personen, BRP, VNG, StUF-BG, Common Ground
 :PythonVersion: 3.7
 
-|build-status| |docs| |coverage| |black| |docker| |python-versions|
+|code-quality| |build-status| |coverage| |black| |docker| |python-versions|
 
-Een moderne Basisregistratie Personen (BRP) API voor het bevragen van 
+Een moderne Basisregistratie Personen (BRP) API voor het bevragen van
 persoonsgegevens. (`English version`_)
 
 Ontwikkeld door `Maykin Media B.V.`_.
@@ -18,16 +18,16 @@ Ontwikkeld door `Maykin Media B.V.`_.
 Introductie
 ===========
 
-Open Personen biedt een implementatie van de 
-`Haal Centraal BRP bevragen API specificatie`_ en kan verbinden met een 
-`StUF-BG`_ koppeling voor het ontsluiten van persoonsgegevens. Ook kan Open 
-Personen eenvoudigweg StUF-BG berichten converteren naar BRP API berichten 
+Open Personen biedt een implementatie van de
+`Haal Centraal BRP bevragen API specificatie`_ en kan verbinden met een
+`StUF-BG`_ koppeling voor het ontsluiten van persoonsgegevens. Ook kan Open
+Personen eenvoudigweg StUF-BG berichten converteren naar BRP API berichten
 zonder daadwerkelijke verbinding. Ten slotte kan Open Personen gebruikt worden
 met een testset die u kunt importeren of zelf aanmaken via de gebruikers
 interface.
 
-Open Personen voorziet in de behoefte van verschillende andere componenten om 
-persoonsgegevens op te vragen en personen te koppelen (bijv. aan een zaak in 
+Open Personen voorziet in de behoefte van verschillende andere componenten om
+persoonsgegevens op te vragen en personen te koppelen (bijv. aan een zaak in
 de `Open Zaak`_).
 
 .. _`Haal Centraal BRP bevragen API specificatie`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
@@ -52,7 +52,7 @@ Copyright © Maykin Media B.V., 2020
 
 Licensed under the `Business Source License`_ (BSL) 1.1
 
-* `Waarom deze licentie?`_ :bulb: 
+* `Waarom deze licentie?`_ :bulb:
 
 .. _`Waarom deze licentie?`: https://open-personen.readthedocs.io/en/latest/introduction/source-code/why-bsl.html
 
@@ -62,9 +62,13 @@ Licensed under the `Business Source License`_ (BSL) 1.1
 
 .. _`Business Source License`: LICENSE.md
 
-.. |build-status| image:: https://travis-ci.com/maykinmedia/open-personen.svg?branch=master
+.. |code-quality| image:: https://github.com/maykinmedia/open-personen/workflows/Code%20Quality/badge.svg
     :alt: Build status
-    :target: https://travis-ci.com/maykinmedia/open-personen
+    :target: https://github.com/maykinmedia/open-personen/actions
+
+.. |build-status| image:: https://github.com/maykinmedia/open-personen/workflows/Continuous%20Integration/badge.svg
+    :alt: Build status
+    :target: https://github.com/maykinmedia/open-personen/actions
 
 .. |docs| image:: https://readthedocs.org/projects/open-personen/badge/?version=latest
     :target: https://open-personen.readthedocs.io/en/latest/?badge=latest
