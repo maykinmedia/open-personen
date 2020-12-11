@@ -1,18 +1,7 @@
-name: Isort
+name: Code Quality
 
-# Run this workflow every time a new commit pushed to your repository
-on:
-  push:
-    branches:
-      - master
-    tags:
-    paths:
-      - '**.py'
-  pull_request:
-    paths:
-      - '**.py'
-# Run this workflow every time a new commit pushed to your repository
-#on: push
+ Run this workflow every time a new commit pushed to your repository
+on: push
 
 jobs:
   isort:
