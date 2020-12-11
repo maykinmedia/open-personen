@@ -115,8 +115,6 @@ jobs:
           # Use Docker `latest` tag convention
           [ "$VERSION" == "master" ] && VERSION=latest
           echo ::set-output name=tag::${VERSION}
-      - name: Test printing steps vars outputs tag (remove this)
-        run: echo ${{ steps.vars.outputs.tag }}
 
       - name: Build the Docker image
         env:
