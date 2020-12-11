@@ -7,7 +7,7 @@ Open Personen
 :Keywords: Basisregistratie personen, BRP, VNG, StUF-BG, Common Ground
 :PythonVersion: 3.7
 
-|build-status| |docs| |coverage| |black| |docker| |python-versions|
+|code-quality| |build-status| |docs| |coverage| |black| |docker| |python-versions|
 
 A modern Basisregistratie Personen (BRP) API to retrieve personal data.
 (`Nederlandse versie`_)
@@ -18,15 +18,15 @@ Developed by `Maykin Media B.V.`_.
 Introduction
 ============
 
-Open Personen offers an implementation of the 
-`Haal Centraal BRP bevragen API specification`_ and can connect to a `StUF-BG`_ 
+Open Personen offers an implementation of the
+`Haal Centraal BRP bevragen API specification`_ and can connect to a `StUF-BG`_
 service to retrieve personal data. In addition, Open Personen can simply convert
-StUF-BG messages to BRP API messages without an actual connection. Finally, you 
-can use Open Personen with a test set that you either import or construct 
+StUF-BG messages to BRP API messages without an actual connection. Finally, you
+can use Open Personen with a test set that you either import or construct
 yourself via the user interface.
 
-Open Personen meets the need for several other components to request personal 
-data and to link persons (e.g. to a zaak in the `Open Zaak`_). 
+Open Personen meets the need for several other components to request personal
+data and to link persons (e.g. to a zaak in the `Open Zaak`_).
 
 .. _`Haal Centraal BRP bevragen API specification`: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen
 .. _`StUF-BG`: https://www.gemmaonline.nl/index.php/Sectormodel_Basisgegevens:_StUF-BG
@@ -50,7 +50,7 @@ Copyright © Maykin Media B.V., 2020
 
 Licensed under the `Business Source License`_ (BSL) 1.1
 
-* `Why this license?`_ :bulb: 
+* `Why this license?`_ :bulb:
 
 .. _`Why this license?`: https://open-personen.readthedocs.io/en/latest/introduction/source-code/why-bsl.html
 
@@ -60,9 +60,13 @@ Licensed under the `Business Source License`_ (BSL) 1.1
 
 .. _`Business Source License`: LICENSE.md
 
-.. |build-status| image:: https://travis-ci.com/maykinmedia/open-personen.svg?branch=master
+.. |code-quality| image:: https://github.com/maykinmedia/open-personen/workflows/Code%20Quality/badge.svg
     :alt: Build status
-    :target: https://travis-ci.com/maykinmedia/open-personen
+    :target: https://github.com/maykinmedia/open-personen/actions
+
+.. |build-status| image:: https://github.com/maykinmedia/open-personen/workflows/Continuous%20Integration/badge.svg
+    :alt: Build status
+    :target: https://github.com/maykinmedia/open-personen/actions
 
 .. |docs| image:: https://readthedocs.org/projects/open-personen/badge/?version=latest
     :target: https://open-personen.readthedocs.io/en/latest/?badge=latest
