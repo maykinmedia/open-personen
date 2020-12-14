@@ -54,6 +54,8 @@ jobs:
           python-version: '3.8'
       - name: Run quickstart steps
         run: |
+          mkdir temp
+          cd temp
           wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
           cat docker-compose.yml
           docker-compose up -d
