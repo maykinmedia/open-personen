@@ -54,10 +54,9 @@ jobs:
           python-version: '3.8'
       - name: Run quickstart steps
         run: |
-          mkdir temp
-          cd temp
+          mkdir quickstart-steps
+          cd quickstart-steps
           wget https://raw.githubusercontent.com/maykinmedia/open-personen/master/docker-compose-quickstart.yml -O docker-compose.yml
-          cat docker-compose.yml
           docker-compose up -d
           docker-compose exec -T web src/manage.py import_demodata --url https://www.rvig.nl/binaries/rvig/documenten/richtlijnen/2018/09/20/testdataset-persoonslijsten-proefomgevingen-gba-v/20201126_Testset_persoonslijsten_proefomgeving_GBA-V.ods
           wget http://localhost:8000/api/ingeschrevenpersonen/999990676
