@@ -7,7 +7,7 @@ Open Personen
 :Keywords: Basisregistratie personen, BRP, VNG, StUF-BG, Common Ground
 :PythonVersion: 3.7
 
-|code-quality| |build-status| |docs| |coverage| |black| |docker| |python-versions|
+|build-status| |code-quality| |docs| |coverage| |black| |docker| |python-versions|
 
 Een moderne Basisregistratie Personen (BRP) API voor het bevragen van 
 persoonsgegevens. (`English version`_)
@@ -62,12 +62,12 @@ Licensed under the `Business Source License`_ (BSL) 1.1
 
 .. _`Business Source License`: LICENSE.md
 
-.. |code-quality| image:: https://github.com/maykinmedia/open-personen/workflows/Code%20Quality/badge.svg
-    :alt: Code quality
-    :target: https://github.com/maykinmedia/open-personen/actions
-
 .. |build-status| image:: https://github.com/maykinmedia/open-personen/workflows/Continuous%20Integration/badge.svg
     :alt: Build status
+    :target: https://github.com/maykinmedia/open-personen/actions
+
+.. |code-quality| image:: https://github.com/maykinmedia/open-personen/workflows/Code%20Quality/badge.svg
+    :alt: Code quality
     :target: https://github.com/maykinmedia/open-personen/actions
 
 .. |docs| image:: https://readthedocs.org/projects/open-personen/badge/?version=latest
