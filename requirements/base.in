@@ -24,7 +24,7 @@ djangorestframework < 3.10
 # django-extra-fields
 django-filter
 drf-yasg == 1.16.0  # api documentation
-vng-api-common
+vng-api-common == 1.5.6
 
 # WSGI servers & monitoring - production oriented
 uwsgi
