@@ -1,5 +1,7 @@
+.. _convert_index:
+
 ==================
-API-specifications
+Convert Service
 ==================
 
 The conversion service allows converting Open Personen API requests to StUF-BG requests and
