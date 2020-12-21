@@ -8,121 +8,119 @@
 -e git+git://github.com/maykinmedia/djangorestframework-hal.git@9d1163aa75557b0e00fd7a38da6a2e1d6e660721#egg=djangorestframework_hal  # via -r requirements/ci.txt
 alabaster==0.7.12         # via sphinx
 appdirs==1.4.4            # via black
-attrs==19.3.0             # via black
-babel==2.8.0              # via sphinx
-beautifulsoup4==4.9.2     # via -r requirements/ci.txt, webtest
-black==19.10b0            # via -r requirements/dev.in
-bump2version==1.0.0       # via -r requirements/dev.in
-certifi==2020.6.20        # via -r requirements/ci.txt, elastic-apm, requests, sentry-sdk
-chardet==3.0.4            # via -r requirements/ci.txt, requests
+babel==2.9.0              # via sphinx
+beautifulsoup4==4.9.3     # via -r requirements/ci.txt, webtest
+black==20.8b1             # via -r requirements/dev.in
+bump2version==1.0.1       # via -r requirements/dev.in
+certifi==2020.12.5        # via -r requirements/ci.txt, elastic-apm, requests, sentry-sdk
+chardet==4.0.0            # via -r requirements/ci.txt, requests
 click==7.1.2              # via black, pip-tools
 commonmark==0.9.1         # via recommonmark
 coreapi==2.3.3            # via -r requirements/ci.txt, drf-yasg
 coreschema==0.0.4         # via -r requirements/ci.txt, coreapi, drf-yasg
 coverage==4.5.4           # via -r requirements/ci.txt
 cssselect==1.1.0          # via -r requirements/ci.txt, pyquery
-ddt-api-calls==0.2.0      # via -r requirements/dev.in
+ddt-api-calls==0.3.0      # via -r requirements/dev.in
 django-admin-index==1.4.0  # via -r requirements/ci.txt
-django-appconf==1.0.4     # via -r requirements/ci.txt, django-axes
-django-axes==5.4.2        # via -r requirements/ci.txt
+django-axes==5.10.0       # via -r requirements/ci.txt
 django-choices==1.7.1     # via -r requirements/ci.txt, vng-api-common
 django-compat==1.0.15     # via -r requirements/ci.txt, django-hijack, django-hijack-admin
-django-debug-toolbar==2.2  # via -r requirements/dev.in
-django-extensions==3.0.3  # via -r requirements/dev.in
-django-filter==2.3.0      # via -r requirements/ci.txt, vng-api-common
+django-debug-toolbar==3.2  # via -r requirements/dev.in
+django-extensions==3.1.0  # via -r requirements/dev.in
+django-filter==2.4.0      # via -r requirements/ci.txt, vng-api-common
 django-hijack-admin==2.1.10  # via -r requirements/ci.txt
 django-hijack==2.1.10     # via -r requirements/ci.txt, django-hijack-admin
-django-ipware==3.0.0      # via -r requirements/ci.txt, django-axes
+django-ipware==3.0.2      # via -r requirements/ci.txt, django-axes
 django-ordered-model==3.4.1  # via -r requirements/ci.txt, django-admin-index
 django-privates==1.2.1    # via -r requirements/ci.txt
 django-redis==4.12.1      # via -r requirements/ci.txt
 django-rest-framework-condition==0.1.1  # via -r requirements/ci.txt, vng-api-common
-django-rosetta==0.9.4     # via -r requirements/ci.txt
+django-rosetta==0.9.5     # via -r requirements/ci.txt
 django-sendfile2==0.6.0   # via -r requirements/ci.txt, django-privates
 django-sniplates==0.7.0   # via -r requirements/ci.txt
-django-solo==1.1.3        # via -r requirements/ci.txt, vng-api-common
-django==2.2.15            # via -r requirements/ci.txt, ddt-api-calls, django-appconf, django-axes, django-choices, django-debug-toolbar, django-filter, django-privates, django-redis, django-rest-framework-condition, django-rosetta, django-sendfile2, django-sniplates, djangorestframework-hal, drf-nested-routers, drf-yasg, vng-api-common
+django-solo==1.1.5        # via -r requirements/ci.txt, vng-api-common
+django==2.2.17            # via -r requirements/ci.txt, ddt-api-calls, django-axes, django-choices, django-debug-toolbar, django-filter, django-privates, django-redis, django-rest-framework-condition, django-rosetta, django-sendfile2, django-sniplates, djangorestframework-hal, drf-nested-routers, drf-yasg, vng-api-common
 djangorestframework-camel-case==1.2.0  # via -r requirements/ci.txt, vng-api-common
 djangorestframework==3.9.4  # via -r requirements/ci.txt, djangorestframework-hal, drf-nested-routers, drf-yasg, vng-api-common
 docutils==0.16            # via recommonmark, sphinx
-drf-nested-routers==0.91  # via -r requirements/ci.txt, vng-api-common
+drf-nested-routers==0.92.5  # via -r requirements/ci.txt, vng-api-common
 drf-yasg==1.16.0          # via -r requirements/ci.txt, vng-api-common
-elastic-apm==5.8.1        # via -r requirements/ci.txt
-factory-boy==3.0.1        # via -r requirements/ci.txt
-faker==4.1.3              # via -r requirements/ci.txt, factory-boy
-flake8==3.8.3             # via -r requirements/dev.in
+elastic-apm==5.10.0       # via -r requirements/ci.txt
+factory-boy==3.1.0        # via -r requirements/ci.txt
+faker==5.0.2              # via -r requirements/ci.txt, factory-boy
+flake8==3.8.4             # via -r requirements/dev.in
 freezegun==1.0.0          # via -r requirements/ci.txt
-gemma-zds-client==0.13.2  # via -r requirements/ci.txt, vng-api-common
+gemma-zds-client==0.13.4  # via -r requirements/ci.txt, vng-api-common
 idna==2.10                # via -r requirements/ci.txt, requests
 imagesize==1.2.0          # via sphinx
-importlib-metadata==2.0.0  # via flake8
-inflection==0.5.0         # via -r requirements/ci.txt, drf-yasg
+inflection==0.5.1         # via -r requirements/ci.txt, drf-yasg
 iso-639==0.4.5            # via -r requirements/ci.txt, vng-api-common
 isodate==0.6.0            # via -r requirements/ci.txt, vng-api-common
-isort==5.2.2              # via -r requirements/dev.in
+isort==5.6.4              # via -r requirements/dev.in
 itypes==1.2.0             # via -r requirements/ci.txt, coreapi
 jinja2==2.11.2            # via -r requirements/ci.txt, coreschema, sphinx
-lml==0.0.9                # via -r requirements/ci.txt, pyexcel-io
-lxml==4.5.2               # via -r requirements/ci.txt, pyexcel-odsr, pyquery
+lml==0.1.0                # via -r requirements/ci.txt, pyexcel-io
+lxml==4.6.2               # via -r requirements/ci.txt, pyexcel-odsr, pyquery
 markupsafe==1.1.1         # via -r requirements/ci.txt, jinja2
 mccabe==0.6.1             # via flake8
-mock==4.0.2               # via -r requirements/ci.txt
-oyaml==0.9                # via -r requirements/ci.txt, vng-api-common
-packaging==20.4           # via sphinx
-pathspec==0.8.0           # via black
+mock==4.0.3               # via -r requirements/ci.txt
+mypy-extensions==0.4.3    # via black
+oyaml==1.0                # via -r requirements/ci.txt, vng-api-common
+packaging==20.8           # via sphinx
+pathspec==0.8.1           # via black
 pep8==1.7.1               # via -r requirements/ci.txt
-pillow==7.2.0             # via -r requirements/ci.txt
-pip-tools==5.3.1          # via -r requirements/dev.in
+pillow==8.0.1             # via -r requirements/ci.txt
+pip-tools==5.4.0          # via -r requirements/dev.in
 polib==1.1.0              # via -r requirements/ci.txt, django-rosetta
-psycopg2==2.8.5           # via -r requirements/ci.txt
+psycopg2==2.8.6           # via -r requirements/ci.txt
 pycodestyle==2.6.0        # via flake8
-pyexcel-io==0.5.20        # via -r requirements/ci.txt, pyexcel-odsr
-pyexcel-odsr==0.5.2       # via -r requirements/ci.txt
+pyexcel-io==0.6.4         # via -r requirements/ci.txt, pyexcel-odsr
+pyexcel-odsr==0.6.0       # via -r requirements/ci.txt
 pyflakes==2.2.0           # via flake8
-pygments==2.6.1           # via sphinx, sphinx-tabs
+pygments==2.7.3           # via sphinx, sphinx-tabs
 pyjwt==1.7.1              # via -r requirements/ci.txt, gemma-zds-client, vng-api-common
 pyparsing==2.4.7          # via packaging
-pyquery==1.4.1            # via -r requirements/ci.txt
+pyquery==1.4.3            # via -r requirements/ci.txt
 python-dateutil==2.8.1    # via -r requirements/ci.txt, faker, freezegun
 python-decouple==3.3      # via -r requirements/ci.txt
-python-dotenv==0.14.0     # via -r requirements/ci.txt
-pytz==2020.1              # via -r requirements/ci.txt, babel, django
+python-dotenv==0.15.0     # via -r requirements/ci.txt
+pytz==2020.4              # via -r requirements/ci.txt, babel, django
 pyyaml==5.3.1             # via -r requirements/ci.txt, gemma-zds-client, oyaml, vng-api-common
-recommonmark==0.6.0       # via -r requirements/dev.in
+recommonmark==0.7.1       # via -r requirements/dev.in
 redis==3.5.3              # via -r requirements/ci.txt, django-redis
-regex==2020.7.14          # via black
+regex==2020.11.13         # via black
 requests-mock==1.8.0      # via -r requirements/ci.txt, ddt-api-calls
-requests==2.24.0          # via -r requirements/ci.txt, coreapi, ddt-api-calls, django-rosetta, gemma-zds-client, requests-mock, sphinx, vng-api-common
-ruamel.yaml.clib==0.2.0   # via -r requirements/ci.txt, ruamel.yaml
-ruamel.yaml==0.16.10      # via -r requirements/ci.txt, drf-yasg
-sentry-sdk==0.16.3        # via -r requirements/ci.txt
-six==1.15.0               # via -r requirements/ci.txt, django-choices, django-compat, django-extensions, django-rosetta, drf-yasg, isodate, packaging, pip-tools, python-dateutil, requests-mock, webtest
+requests==2.25.1          # via -r requirements/ci.txt, coreapi, ddt-api-calls, django-rosetta, gemma-zds-client, requests-mock, sphinx, vng-api-common
+ruamel.yaml.clib==0.2.2   # via -r requirements/ci.txt, ruamel.yaml
+ruamel.yaml==0.16.12      # via -r requirements/ci.txt, drf-yasg
+sentry-sdk==0.19.5        # via -r requirements/ci.txt
+six==1.15.0               # via -r requirements/ci.txt, django-choices, django-compat, django-rosetta, drf-yasg, isodate, pip-tools, python-dateutil, requests-mock, webtest
 snowballstemmer==2.0.0    # via sphinx
-soupsieve==2.0.1          # via -r requirements/ci.txt, beautifulsoup4
+soupsieve==2.1            # via -r requirements/ci.txt, beautifulsoup4
 sphinx-rtd-theme==0.5.0   # via -r requirements/dev.in
 sphinx-tabs==1.3.0        # via -r requirements/dev.in
-sphinx==3.1.2             # via -r requirements/dev.in, recommonmark, sphinx-rtd-theme, sphinx-tabs
+sphinx==3.4.0             # via -r requirements/dev.in, recommonmark, sphinx-rtd-theme, sphinx-tabs
 sphinxcontrib-applehelp==1.0.2  # via sphinx
 sphinxcontrib-devhelp==1.0.2  # via sphinx
 sphinxcontrib-htmlhelp==1.0.3  # via sphinx
 sphinxcontrib-jsmath==1.0.1  # via sphinx
 sphinxcontrib-qthelp==1.0.3  # via sphinx
 sphinxcontrib-serializinghtml==1.1.4  # via sphinx
-sqlparse==0.3.1           # via -r requirements/ci.txt, django, django-debug-toolbar
+sqlparse==0.4.1           # via -r requirements/ci.txt, django, django-debug-toolbar
 tblib==1.7.0              # via -r requirements/ci.txt
 text-unidecode==1.3       # via -r requirements/ci.txt, faker
-toml==0.10.1              # via black
+toml==0.10.2              # via black
 typed-ast==1.4.1          # via black
-unidecode==1.1.1          # via -r requirements/ci.txt, vng-api-common
+typing-extensions==3.7.4.3  # via black
+unidecode==1.1.2          # via -r requirements/ci.txt, vng-api-common
 uritemplate==3.0.1        # via -r requirements/ci.txt, coreapi, drf-yasg
-urllib3==1.25.10          # via -r requirements/ci.txt, elastic-apm, requests, sentry-sdk
+urllib3==1.26.2           # via -r requirements/ci.txt, elastic-apm, requests, sentry-sdk
 uwsgi==2.0.19.1           # via -r requirements/ci.txt
-vng-api-common==1.5.6     # via -r requirements/ci.txt
+vng-api-common==1.5.8     # via -r requirements/ci.txt
 waitress==1.4.4           # via -r requirements/ci.txt, webtest
 webob==1.8.6              # via -r requirements/ci.txt, webtest
 webtest==2.0.35           # via -r requirements/ci.txt, django-webtest
 xmltodict==0.12.0         # via -r requirements/ci.txt
-zipp==3.4.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

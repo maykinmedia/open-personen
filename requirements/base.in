@@ -20,10 +20,10 @@ django-sniplates
 django-solo
 
 # API libraries
-djangorestframework
+djangorestframework < 3.10
 # django-extra-fields
 django-filter
-drf-yasg  # api documentation
+drf-yasg == 1.16.0  # api documentation
 vng-api-common
 
 # WSGI servers & monitoring - production oriented
