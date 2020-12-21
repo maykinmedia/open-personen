@@ -1,11 +1,11 @@
-.. _convert_index:
+.. _conversion_index:
 
 ==================
-Convert Service
+Conversion service
 ==================
 
-The conversion service allows converting Open Personen API requests to StUF-BG requests and
-StUF-BG responses to Open Personen API responses.  The conversion service does not make any
+The conversion service allows converting BRP API requests to StUF-BG requests and
+StUF-BG responses to BRP API responses.  The conversion service does not make any
 external requests or manipulate any stored data but just converts given information between
 different formats.
 

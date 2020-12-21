@@ -4,10 +4,10 @@ Documentation
 Open Personen offers:
 
 * Implementation of the `Haal Centraal BRP bevragen API specification`_.
-* Extension to connect with a `StUF-BG`_ compatible service to serve real 
+* Extension to connect with a `StUF-BG`_ compatible service to serve real
   personal data via the BRP API.
 * Extension to use a local database to provide test data via the BRP API.
-* Conversion service to convert BRP API requests to StUF-BG requests and 
+* Conversion service to convert BRP API requests to StUF-BG requests and
   StUF-BG responses to BRP API responses (future release).
 
 The :ref:`introduction_source-code` is available for non-commercial use.
@@ -35,4 +35,4 @@ To get you started, you might find some of these links relevant:
    api/index
    installation/index
    backends/index
-   convert/index
+   conversion/index
