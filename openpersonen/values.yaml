@@ -77,3 +77,16 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+settings:
+  secretKey: NOT-A-SECRET
+  allowedHosts: "*"
+  backend: openpersonen.contrib.demo.backend.default
+  useAuthentication: False
+
+  database:
+    host: deploy-postgresql
+    port: 5432
+    username: openpersonen
+    password: openpersonen
+    name: openpersonen
