@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "openpersonen.fullname" . }}
+  labels:
+    {{- include "openpersonen.labels" . | nindent 4 }}
+data:
+  DJANGO_SETTINGS_MODULE: "openpersonen.conf.docker"
+  ALLOWED_HOSTS: {{ .Values.settings.allowedHosts | quote }}
+  OPENPERSONEN_BACKEND: {{ .Values.settings.backend | toString | b64enc | quote }}
+  OPENPERSONEN_USE_AUTHENTICATION: {{ .Values.settings.useAuthentication | toString | b64enc | quote }}
+  DB_HOST: {{ .Values.settings.database.host | toString | quote }}
+  DB_PORT: {{ .Values.settings.database.port | toString | quote }}
+  DB_USER: {{ .Values.settings.database.username | toString | quote }}
+  DB_NAME: {{ .Values.settings.database.name | toString | quote }}
