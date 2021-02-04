@@ -8,7 +8,7 @@ image:
   repository: maykinmedia/open-personen
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: hackathon
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
