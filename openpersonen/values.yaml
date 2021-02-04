@@ -42,15 +42,16 @@ service:
 
 ingress:
   enabled: true
-  annotations: {}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: openpersonen.maykin.fieldlab.demoground.nl
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: openpersonen-tls
+      hosts:
+        - openpersonen.maykin.fieldlab.demoground.nl
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
