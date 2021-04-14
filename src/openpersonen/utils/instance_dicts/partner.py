@@ -9,7 +9,7 @@ from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
 )
 from openpersonen.utils.helpers import convert_empty_instances
-from src.openpersonen.utils.instance_dicts import NAMESPACE_REPLACEMENTS
+from openpersonen.utils.instance_dicts import NAMESPACE_REPLACEMENTS
 
 
 def get_partner_instance_dict(instance_xml_dict):
