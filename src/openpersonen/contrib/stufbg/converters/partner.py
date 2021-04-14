@@ -1,16 +1,16 @@
 import xmltodict
 
-from openpersonen.utils.instance_dicts import get_partner_instance_dict
+from openpersonen.utils.instance_dicts import (
+    NAMESPACE_REPLACEMENTS,
+    get_partner_instance_dict,
+)
 
 
 def convert_response_to_partner_dict(response, id=None):
     dict_object = xmltodict.parse(
         response.content,
         process_namespaces=True,
-        namespaces={
-            "http://schemas.xmlsoap.org/soap/envelope/": None,
-            "http://www.egem.nl/StUF/sector/bg/0310": None,
-        },
+        namespaces=NAMESPACE_REPLACEMENTS,
     )
 
     antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"][
