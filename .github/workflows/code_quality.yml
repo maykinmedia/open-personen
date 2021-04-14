@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements/ci.txt
-          pip install isort
+          pip install isort==5.2.2
       - name: Run isort
         run: |
           isort src/openpersonen --check-only --diff
