@@ -75,7 +75,10 @@ class StufBGClient(SingletonModel):
         )
 
         response = requests.post(
-            self.url, data=data, headers=self._get_headers(), cert=cert,
+            self.url,
+            data=data,
+            headers=self._get_headers(),
+            cert=cert,
         )
 
         return response
@@ -133,26 +136,30 @@ class StufBGClient(SingletonModel):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_historie_request(
-            "request/RequestVerblijfPlaatsHistorie.xml", additional_context,
+            "request/RequestVerblijfPlaatsHistorie.xml",
+            additional_context,
         )
 
     def get_partner_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_historie_request(
-            "request/RequestPartnerHistorie.xml", additional_context,
+            "request/RequestPartnerHistorie.xml",
+            additional_context,
         )
 
     def get_verblijfs_titel_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_historie_request(
-            "request/RequestVerblijfsTitelHistorie.xml", additional_context,
+            "request/RequestVerblijfsTitelHistorie.xml",
+            additional_context,
         )
 
     def get_nationaliteit_historie(self, bsn, filters):
         additional_context = {"bsn": bsn}
         additional_context.update(filters)
         return self._make_historie_request(
-            "request/RequestNationaliteitHistorie.xml", additional_context,
+            "request/RequestNationaliteitHistorie.xml",
+            additional_context,
         )
