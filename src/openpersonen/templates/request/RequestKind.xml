@@ -66,12 +66,12 @@
             <StUF:indicatorAantal>false</StUF:indicatorAantal>
          </ns:parameters>
          <!--Optional:-->
-         <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
+         <ns:gelijk StUF:entiteittype="NPS">
             <ns:inp.bsn>{{ bsn|escape }}</ns:inp.bsn>
          </ns:gelijk>
          <!--Optional:-->
          <ns:scope>
-            <ns:object StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?" StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
+            <ns:object StUF:entiteittype="NPS">
                <!--Optional:-->
                <ns:inp.heeftAlsKinderen StUF:entiteittype="NPSNPSKND" >
                   <ns:gerelateerde StUF:entiteittype="NPS" >

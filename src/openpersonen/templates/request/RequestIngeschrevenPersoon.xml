@@ -68,8 +68,7 @@
                 <StUF:indicatorAantal>false</StUF:indicatorAantal>
             </ns:parameters>
             <!--Optional:-->
-            <ns:gelijk StUF:entiteittype="NPS" StUF:sleutelVerzendend="?" StUF:sleutelOntvangend="?"
-                       StUF:sleutelGegevensbeheer="?" StUF:sleutelSynchronisatie="?" StUF:scope="?">
+            <ns:gelijk StUF:entiteittype="NPS">
                 {% if bsn %}
                     <!--Optional:-->
                     <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
