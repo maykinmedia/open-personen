@@ -733,10 +733,12 @@ def get_persoon_instance_dict(instance_xml_dict):
             not partners_last_name
             or (
                 partner_info.get("datumOntbinding")
+                and partners_date
                 and partners_date > partner_info["datumSluiting"]
             )
             or (
                 partner_info.get("datumOntbinding") is None
+                and partners_date
                 and partners_date < partner_info["datumSluiting"]
             )
         ):
