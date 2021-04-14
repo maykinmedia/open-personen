@@ -14,14 +14,14 @@ from solo.models import SingletonModel
 
 class StufBGClient(SingletonModel):
 
-    ontvanger_organisatie = models.CharField(_("organisatie"), max_length=200)
-    ontvanger_applicatie = models.CharField(_("applicatie"), max_length=200)
+    ontvanger_organisatie = models.CharField(_("organisatie"), max_length=200, blank=True)
+    ontvanger_applicatie = models.CharField(_("applicatie"), max_length=200, blank=True)
     ontvanger_administratie = models.CharField(
         _("administratie"), max_length=200, blank=True
     )
     ontvanger_gebruiker = models.CharField(_("gebruiker"), max_length=200, blank=True)
-    zender_organisatie = models.CharField(_("organisatie"), max_length=200)
-    zender_applicatie = models.CharField(_("applicatie"), max_length=200)
+    zender_organisatie = models.CharField(_("organisatie"), max_length=200, blank=True)
+    zender_applicatie = models.CharField(_("applicatie"), max_length=200, blank=True)
     zender_administratie = models.CharField(
         _("administratie"), max_length=200, blank=True
     )

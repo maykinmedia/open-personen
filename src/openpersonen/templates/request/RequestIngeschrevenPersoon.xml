@@ -26,8 +26,12 @@
                 <!--Optional:-->
                 <StUF:zender>
                     <!--Optional:-->
-                    <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
-                    <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
+                    {% if zender_organisatie %}
+                        <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+                    {% endif %}
+                    {% if zender_applicatie %}
+                        <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
+                    {% endif %}
                     <!--Optional:-->
                     {% if zender_administratie %}
                         <StUF:administratie>{{ zender_administratie }}</StUF:administratie>
@@ -40,8 +44,12 @@
                 <!--Optional:-->
                 <StUF:ontvanger>
                     <!--Optional:-->
-                    <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
-                    <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
+                    {% if ontvanger_organisatie %}
+                        <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+                    {% endif %}
+                    {% if ontvanger_applicatie %}
+                        <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
+                    {% endif %}
                     <!--Optional:-->
                     {% if ontvanger_administratie %}
                         <StUF:administratie>{{ ontvanger_administratie }}</StUF:administratie>
