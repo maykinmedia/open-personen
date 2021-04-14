@@ -18,6 +18,7 @@ from openpersonen.features.reden_code_and_omschrijving.models import (
 )
 from openpersonen.utils.helpers import calculate_age, convert_empty_instances
 
+from .constants import NAMESPACE_REPLACEMENTS
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
 from .partner import get_partner_instance_dict
@@ -794,10 +795,7 @@ def convert_xml_to_persoon_dicts(xml):
     dict_object = xmltodict.parse(
         xml,
         process_namespaces=True,
-        namespaces={
-            "http://schemas.xmlsoap.org/soap/envelope/": None,
-            "http://www.egem.nl/StUF/sector/bg/0310": None,
-        },
+        namespaces=NAMESPACE_REPLACEMENTS,
     )
 
     antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"]

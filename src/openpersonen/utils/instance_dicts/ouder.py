@@ -9,6 +9,7 @@ from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
 )
 from openpersonen.utils.helpers import convert_empty_instances
+from src.openpersonen.utils.instance_dicts import NAMESPACE_REPLACEMENTS
 
 
 def get_ouder_instance_dict(instance_xml_dict):
@@ -169,10 +170,7 @@ def convert_xml_to_ouder_dict(xml, id=None):
     dict_object = xmltodict.parse(
         xml,
         process_namespaces=True,
-        namespaces={
-            "http://schemas.xmlsoap.org/soap/envelope/": None,
-            "http://www.egem.nl/StUF/sector/bg/0310": None,
-        },
+        namespaces=NAMESPACE_REPLACEMENTS,
     )
 
     antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"][
