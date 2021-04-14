@@ -79,70 +79,70 @@
             <ns:gelijk StUF:entiteittype="NPS">
                 {% if bsn %}
                     <!--Optional:-->
-                    <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
+                    <ns:inp.bsn>{{ bsn|escape }}</ns:inp.bsn>
                 {% endif %}
                 {% if burgerservicenummer %}
                     <!--Optional:-->
-                    <ns:inp.bsn StUF:exact="true">{{ burgerservicenummer|escape }}</ns:inp.bsn>
+                    <ns:inp.bsn>{{ burgerservicenummer|escape }}</ns:inp.bsn>
                 {% endif %}
                 {% if geboorte__datum %}
                     <!--Optional:-->
-                    <ns:geboortedatum StUF:exact="true" StUF:indOnvolledigeDatum="V">
+                    <ns:geboortedatum StUF:indOnvolledigeDatum="V">
                         {{ geboorte__datum|escape }}
                     </ns:geboortedatum>
                 {% endif %}
                 {% if geboorte__plaats %}
                     <!--Optional:-->
-                    <ns:inp.geboorteplaats StUF:exact="true">{{ geboorte__plaats|escape }}</ns:inp.geboorteplaats>
+                    <ns:inp.geboorteplaats>{{ geboorte__plaats|escape }}</ns:inp.geboorteplaats>
                 {% endif %}
                 {% if geslachtsaanduiding %}
                     <!--Optional:-->
-                    <ns:geslachtsaanduiding StUF:exact="true">{{ geslachtsaanduiding|escape }}</ns:geslachtsaanduiding>
+                    <ns:geslachtsaanduiding>{{ geslachtsaanduiding|escape }}</ns:geslachtsaanduiding>
                 {% endif %}
                 {% if naam__geslachtsnaam %}
                     <!--Optional:-->
-                    <ns:geslachtsnaam StUF:exact="true">{{ naam__geslachtsnaam|escape }}</ns:geslachtsnaam>
+                    <ns:geslachtsnaam>{{ naam__geslachtsnaam|escape }}</ns:geslachtsnaam>
                 {% endif %}
                 {% if naam__voornamen %}
                     <!--Optional:-->
-                    <ns:voornamen StUF:exact="true">{{ naam__voornamen|escape }}</ns:voornamen>
+                    <ns:voornamen>{{ naam__voornamen|escape }}</ns:voornamen>
                 {% endif %}
                 {% if verblijfplaats__gemeentevaninschrijving %}
                     <!--Optional:-->
-                    <ns:inp.gemeenteVanInschrijving StUF:exact="true">
+                    <ns:inp.gemeenteVanInschrijving>
                         {{ verblijfplaats__gemeentevaninschrijving|escape }}
                     </ns:inp.gemeenteVanInschrijving>
                 {% endif %}
                 {% if naam__voorvoegsel %}
                     <!--Optional:-->
                     <ns:voorvoegselGeslachtsnaam
-                            StUF:exact="true">{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
+                           >{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
                 {% endif %}
                 <!--Optional:-->
                 <ns:verblijfsadres>
                     {% if verblijfplaats__huisletter %}
                         <!--Optional:-->
-                        <ns:aoa.huisletter StUF:exact="true">{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
+                        <ns:aoa.huisletter>{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
                     {% endif %}
                     {% if verblijfplaats__huisnummer %}
                         <!--Optional:-->
-                        <ns:aoa.huisnummer StUF:exact="true">{{ verblijfplaats__huisnummer|escape }}</ns:aoa.huisnummer>
+                        <ns:aoa.huisnummer>{{ verblijfplaats__huisnummer|escape }}</ns:aoa.huisnummer>
                     {% endif %}
                     {% if verblijfplaats__huisnummertoevoeging %}
                         <!--Optional:-->
-                        <ns:aoa.huisnummertoevoeging StUF:exact="true">
+                        <ns:aoa.huisnummertoevoeging>
                             {{ verblijfplaats__huisnummertoevoeging|escape }}
                         </ns:aoa.huisnummertoevoeging>
                     {% endif %}
                     {% if verblijfplaats__identificatiecodenummeraanduiding %}
                         <!--Optional:-->
-                        <ns:aoa.identificatie StUF:exact="true">
+                        <ns:aoa.identificatie>
                             {{ verblijfplaats__identificatiecodenummeraanduiding|escape }}
                         </ns:aoa.identificatie>
                     {% endif %}
                     {% if verblijfplaats__postcode %}
                         <!--Optional:-->
-                        <ns:aoa.postcode StUF:exact="true">{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
+                        <ns:aoa.postcode>{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
                     {% endif %}
                 </ns:verblijfsadres>
             </ns:gelijk>

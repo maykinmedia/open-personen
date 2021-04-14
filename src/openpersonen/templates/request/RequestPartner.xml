@@ -75,7 +75,7 @@
          </ns:parameters>
          <!--Optional:-->
          <ns:gelijk StUF:entiteittype="NPS">
-            <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
+            <ns:inp.bsn>{{ bsn|escape }}</ns:inp.bsn>
          </ns:gelijk>
          <ns:scope>
             <ns:object StUF:entiteittype="NPS">
