@@ -26,9 +26,20 @@ class StufBGClient(SingletonModel):
         _("administratie"), max_length=200, blank=True
     )
     zender_gebruiker = models.CharField(_("gebruiker"), max_length=200, blank=True)
-    url = models.URLField(_("url"), blank=True)
-    user = models.CharField(_("user"), max_length=200, blank=True)
-    password = models.CharField(_("password"), max_length=200, blank=True)
+    url = models.URLField(
+        _("url"),
+        blank=True,
+        help_text="Url of the server this client will make requests to",
+    )
+    user = models.CharField(
+        _("user"), max_length=200, blank=True, help_text="Username to access the server"
+    )
+    password = models.CharField(
+        _("password"),
+        max_length=200,
+        blank=True,
+        help_text="Password to access the server",
+    )
     certificate = PrivateMediaFileField(upload_to="certificate/", blank=True, null=True)
     certificate_key = PrivateMediaFileField(
         upload_to="certificate/",
