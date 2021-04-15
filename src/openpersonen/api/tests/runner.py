@@ -19,6 +19,8 @@ class DiscoverRunner(_DiscoverRunner):
         client.url = "http://fake.test.url"
         client.certificate.name = "media/certificate/fake.cert"
         client.certificate_key.name = "media/certificate/fake.key"
+        client.ontvanger_applicatie = "Ontvanger applicatie"
+        client.zender_applicatie = "Zender applicatie"
         client.save()
 
         return result

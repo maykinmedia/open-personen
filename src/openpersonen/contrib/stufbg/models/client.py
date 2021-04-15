@@ -1,13 +1,16 @@
 import base64
 import uuid
 from datetime import timedelta
+from io import BytesIO
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
 from django.utils.translation import ugettext_lazy as _
 
 import requests
+from lxml import etree
 from privates.fields import PrivateMediaFileField
 from solo.models import SingletonModel
 
@@ -73,6 +76,16 @@ class StufBGClient(SingletonModel):
             if self.certificate and self.certificate_key
             else (None, None)
         )
+
+        with open('src/openpersonen/templates/xsds/bg0310/vraagAntwoord/test.xsd', 'r') as f:
+            xmlschema_doc = etree.parse(f)
+            xmlschema = etree.XMLSchema(xmlschema_doc)
+
+        doc = etree.parse(BytesIO(bytes(data, encoding='UTF-8')))
+        el = doc.getroot().xpath("soap:Body",
+                                 namespaces={"soap": "http://schemas.xmlsoap.org/soap/envelope/"})[0].getchildren()[0]
+        if not xmlschema.validate(el):
+            raise ValidationError('The XML is not valid against our XSDs')
 
         response = requests.post(
             self.url,

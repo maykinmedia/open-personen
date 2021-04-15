@@ -20,7 +20,7 @@
    <soapenv:Body>
       <ns:npsLv01>
          <ns:stuurgegevens>
-            <StUF:berichtcode>?</StUF:berichtcode>
+            <StUF:berichtcode>Lv01</StUF:berichtcode>
             <!--Optional:-->
             <StUF:zender>
                     <!--Optional:-->
@@ -53,10 +53,10 @@
             <StUF:referentienummer>{{ referentienummer }}</StUF:referentienummer>
             <!--Optional:-->
             <StUF:tijdstipBericht>{{ tijdstip_bericht }}</StUF:tijdstipBericht>
-            <StUF:entiteittype>?</StUF:entiteittype>
+            <StUF:entiteittype>NPS</StUF:entiteittype>
          </ns:stuurgegevens>
          <ns:parameters>
-            <StUF:sortering>?</StUF:sortering>
+            <StUF:sortering>0</StUF:sortering>
             <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
             <!--Optional:-->
             <StUF:maximumAantal>15</StUF:maximumAantal>
@@ -67,41 +67,12 @@
          </ns:parameters>
          <!--Optional:-->
          <ns:gelijk StUF:entiteittype="NPS">
-            <ns:inp.bsn StUF:noValue="?" StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
+            <ns:inp.bsn StUF:exact="true">{{ bsn|escape }}</ns:inp.bsn>
          </ns:gelijk>
          <!--Optional:-->
-         <ns:scope>
-            <ns:object StUF:entiteittype="NPS">
-                <!--Optional:-->
-                <ns:inp.heeftAlsOuders StUF:entiteittype="NPSNPSOUD">
-                  <ns:gerelateerde StUF:entiteittype="NPS">
-                     <!--You have a CHOICE of the next 2 items at this level-->
-                     <!--Optional:-->
-                     <ns:inp.bsn/>
-                     <!--Optional:-->
-                     <ns:geslachtsaanduiding/>
-                     <!--Optional:-->
-                     <ns:ouderAanduiding/>
-                     <!--Optional:-->
-                     <ns:datumIngangFamilierechtelijkeBetrekking/>
-                     <!--Optional:-->
-                     <ns:geslachtsnaam />
-                     <!--Optional:-->
-                     <ns:voorletters />
-                     <!--Optional:-->
-                     <ns:voornamen />
-                     <!--Optional:-->
-                     <ns:voorvoegselGeslachtsnaam />
-                     <!--Optional:-->
-                     <ns:geboortedatum />
-                     <!--Optional:-->
-                     <ns:inp.geboorteplaats />
-                     <!--Optional:-->
-                     <ns:inp.geboorteLand />
-                  </ns:gerelateerde>
-               </ns:inp.heeftAlsOuders>
-            </ns:object>
-         </ns:scope>
+          <ns:scope>
+              <ns:object StUF:entiteittype="NPS" StUF:scope="alles"/>
+          </ns:scope>
       </ns:npsLv01>
    </soapenv:Body>
 </soapenv:Envelope>
