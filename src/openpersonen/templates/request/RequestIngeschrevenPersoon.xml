@@ -115,32 +115,34 @@
                     >{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
                 {% endif %}
                 <!--Optional:-->
-                <ns:verblijfsadres>
-                    {% if verblijfplaats__huisletter %}
-                        <!--Optional:-->
-                        <ns:aoa.huisletter>{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
-                    {% endif %}
-                    {% if verblijfplaats__huisnummer %}
-                        <!--Optional:-->
-                        <ns:aoa.huisnummer>{{ verblijfplaats__huisnummer|escape }}</ns:aoa.huisnummer>
-                    {% endif %}
-                    {% if verblijfplaats__huisnummertoevoeging %}
-                        <!--Optional:-->
-                        <ns:aoa.huisnummertoevoeging>
-                            {{ verblijfplaats__huisnummertoevoeging|escape }}
-                        </ns:aoa.huisnummertoevoeging>
-                    {% endif %}
-                    {% if verblijfplaats__identificatiecodenummeraanduiding %}
-                        <!--Optional:-->
-                        <ns:aoa.identificatie>
-                            {{ verblijfplaats__identificatiecodenummeraanduiding|escape }}
-                        </ns:aoa.identificatie>
-                    {% endif %}
-                    {% if verblijfplaats__postcode %}
-                        <!--Optional:-->
-                        <ns:aoa.postcode>{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
-                    {% endif %}
-                </ns:verblijfsadres>
+                {% if verblijfplaats__huisletter or verblijfplaats__huisnummer or verblijfplaats__huisnummertoevoeging or verblijfplaats__identificatiecodenummeraanduiding or verblijfplaats__postcode %}
+                    <ns:verblijfsadres>
+                        {% if verblijfplaats__huisletter %}
+                            <!--Optional:-->
+                            <ns:aoa.huisletter>{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
+                        {% endif %}
+                        {% if verblijfplaats__huisnummer %}
+                            <!--Optional:-->
+                            <ns:aoa.huisnummer>{{ verblijfplaats__huisnummer|escape }}</ns:aoa.huisnummer>
+                        {% endif %}
+                        {% if verblijfplaats__huisnummertoevoeging %}
+                            <!--Optional:-->
+                            <ns:aoa.huisnummertoevoeging>
+                                {{ verblijfplaats__huisnummertoevoeging|escape }}
+                            </ns:aoa.huisnummertoevoeging>
+                        {% endif %}
+                        {% if verblijfplaats__identificatiecodenummeraanduiding %}
+                            <!--Optional:-->
+                            <ns:aoa.identificatie>
+                                {{ verblijfplaats__identificatiecodenummeraanduiding|escape }}
+                            </ns:aoa.identificatie>
+                        {% endif %}
+                        {% if verblijfplaats__postcode %}
+                            <!--Optional:-->
+                            <ns:aoa.postcode>{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
+                        {% endif %}
+                    </ns:verblijfsadres>
+                {% endif %}
             </ns:gelijk>
             <!--Optional:-->
             <ns:scope>
