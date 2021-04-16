@@ -17,7 +17,9 @@ from solo.models import SingletonModel
 
 class StufBGClient(SingletonModel):
 
-    ontvanger_organisatie = models.CharField(_("organisatie"), max_length=200, blank=True)
+    ontvanger_organisatie = models.CharField(
+        _("organisatie"), max_length=200, blank=True
+    )
     ontvanger_applicatie = models.CharField(_("applicatie"), max_length=200)
     ontvanger_administratie = models.CharField(
         _("administratie"), max_length=200, blank=True
@@ -77,15 +79,23 @@ class StufBGClient(SingletonModel):
             else (None, None)
         )
 
-        with open('src/openpersonen/templates/xsds/bg0310/vraagAntwoord/test.xsd', 'r') as f:
+        with open(
+            "src/openpersonen/templates/xsds/bg0310/vraagAntwoord/test.xsd", "r"
+        ) as f:
             xmlschema_doc = etree.parse(f)
             xmlschema = etree.XMLSchema(xmlschema_doc)
 
-        doc = etree.parse(BytesIO(bytes(data, encoding='UTF-8')))
-        el = doc.getroot().xpath("soap:Body",
-                                 namespaces={"soap": "http://schemas.xmlsoap.org/soap/envelope/"})[0].getchildren()[0]
+        doc = etree.parse(BytesIO(bytes(data, encoding="UTF-8")))
+        el = (
+            doc.getroot()
+            .xpath(
+                "soap:Body",
+                namespaces={"soap": "http://schemas.xmlsoap.org/soap/envelope/"},
+            )[0]
+            .getchildren()[0]
+        )
         if not xmlschema.validate(el):
-            raise ValidationError('The XML is not valid against our XSDs')
+            raise ValidationError("The XML is not valid against our XSDs")
 
         response = requests.post(
             self.url,

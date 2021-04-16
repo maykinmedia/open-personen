@@ -1,3 +1,5 @@
+from unittest import skip
+
 from django.template import loader
 from django.test import TestCase
 
@@ -39,6 +41,14 @@ class TestClient(TestCase):
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
+                            "zender_organisatie": self.ontvanger_organisatie,
+                            "zender_applicatie": self.ontvanger_applicatie,
+                            "zender_administratie": self.ontvanger_administratie,
+                            "zender_gebruiker": self.ontvanger_gebruiker,
+                            "ontvanger_organisatie": self.zender_organisatie,
+                            "ontvanger_applicatie": self.zender_applicatie,
+                            "ontvanger_administratie": self.zender_administratie,
+                            "ontvanger_gebruiker": self.zender_gebruiker,
                         },
                     ),
                     encoding="utf-8",
@@ -122,6 +132,14 @@ class TestClient(TestCase):
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
+                            "zender_organisatie": self.ontvanger_organisatie,
+                            "zender_applicatie": self.ontvanger_applicatie,
+                            "zender_administratie": self.ontvanger_administratie,
+                            "zender_gebruiker": self.ontvanger_gebruiker,
+                            "ontvanger_organisatie": self.zender_organisatie,
+                            "ontvanger_applicatie": self.zender_applicatie,
+                            "ontvanger_administratie": self.zender_administratie,
+                            "ontvanger_gebruiker": self.zender_gebruiker,
                         },
                     ),
                     encoding="utf-8",
@@ -162,6 +180,14 @@ class TestClient(TestCase):
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
+                            "zender_organisatie": self.ontvanger_organisatie,
+                            "zender_applicatie": self.ontvanger_applicatie,
+                            "zender_administratie": self.ontvanger_administratie,
+                            "zender_gebruiker": self.ontvanger_gebruiker,
+                            "ontvanger_organisatie": self.zender_organisatie,
+                            "ontvanger_applicatie": self.zender_applicatie,
+                            "ontvanger_administratie": self.zender_administratie,
+                            "ontvanger_gebruiker": self.zender_gebruiker,
                         },
                     ),
                     encoding="utf-8",
@@ -202,6 +228,14 @@ class TestClient(TestCase):
                         context={
                             "referentienummer": test_uuid,
                             "tijdstip_bericht": test_dateformat,
+                            "zender_organisatie": self.ontvanger_organisatie,
+                            "zender_applicatie": self.ontvanger_applicatie,
+                            "zender_administratie": self.ontvanger_administratie,
+                            "zender_gebruiker": self.ontvanger_gebruiker,
+                            "ontvanger_organisatie": self.zender_organisatie,
+                            "ontvanger_applicatie": self.zender_applicatie,
+                            "ontvanger_administratie": self.zender_administratie,
+                            "ontvanger_gebruiker": self.zender_gebruiker,
                         },
                     ),
                     encoding="utf-8",
@@ -226,6 +260,7 @@ class TestClient(TestCase):
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
+    @skip(reason="Endpoints are commented out")
     def test_get_verblijf_plaats_historie(self, uuid_mock, dateformat_mock):
         test_bsn = 123456789
         test_uuid = "00000000-0000-0000-0000-000000000000"
@@ -266,6 +301,7 @@ class TestClient(TestCase):
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
+    @skip(reason="Endpoints are commented out")
     def test_get_verblijfs_titel_historie(self, uuid_mock, dateformat_mock):
         test_bsn = 123456789
         test_uuid = "00000000-0000-0000-0000-000000000000"
@@ -306,6 +342,7 @@ class TestClient(TestCase):
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
+    @skip(reason="Endpoints are commented out")
     def test_get_partner_historie(self, uuid_mock, dateformat_mock):
         test_bsn = 123456789
         test_uuid = "00000000-0000-0000-0000-000000000000"
@@ -346,6 +383,7 @@ class TestClient(TestCase):
 
     @patch("django.utils.dateformat.format")
     @patch("uuid.uuid4")
+    @skip(reason="Endpoints are commented out")
     def test_get_nationaliteit_historie(self, uuid_mock, dateformat_mock):
         test_bsn = 123456789
         test_uuid = "00000000-0000-0000-0000-000000000000"
