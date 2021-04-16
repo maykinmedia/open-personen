@@ -100,7 +100,8 @@ class StufBGClient(SingletonModel):
         )
 
         with open(
-            f"{settings.DJANGO_PROJECT_DIR}/templates/xsds/bg0310/vraagAntwoord/bg0310_namespace.xsd", "r"
+            f"{settings.DJANGO_PROJECT_DIR}/templates/xsds/bg0310/vraagAntwoord/bg0310_namespace.xsd",
+            "r",
         ) as f:
             xmlschema_doc = etree.parse(f)
             xmlschema = etree.XMLSchema(xmlschema_doc)
