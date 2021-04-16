@@ -13,9 +13,7 @@ def convert_response_to_persoon_dicts(response):
         namespaces=NAMESPACE_REPLACEMENTS,
     )
 
-    antwoord_object = dict_object["soapenv:Envelope"]["soapenv:Body"]["ns:npsLa01"][
-        "ns:antwoord"
-    ]["ns:object"]
+    antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"]
 
     if isinstance(antwoord_object, list):
         result = []
