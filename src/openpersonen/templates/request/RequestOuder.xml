@@ -24,7 +24,9 @@
             <!--Optional:-->
             <StUF:zender>
                     <!--Optional:-->
-                    <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+                    {% if zender_organisatie %}
+                        <StUF:organisatie>{{ zender_organisatie }}</StUF:organisatie>
+                    {% endif %}
                     <StUF:applicatie>{{ zender_applicatie }}</StUF:applicatie>
                     <!--Optional:-->
                     {% if zender_administratie %}
@@ -38,7 +40,9 @@
                 <!--Optional:-->
                 <StUF:ontvanger>
                     <!--Optional:-->
-                    <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+                    {% if ontvanger_organisatie %}
+                        <StUF:organisatie>{{ ontvanger_organisatie }}</StUF:organisatie>
+                    {% endif %}
                     <StUF:applicatie>{{ ontvanger_applicatie }}</StUF:applicatie>
                     <!--Optional:-->
                     {% if ontvanger_administratie %}
