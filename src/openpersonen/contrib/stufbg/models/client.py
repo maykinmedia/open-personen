@@ -3,6 +3,7 @@ import uuid
 from datetime import timedelta
 from io import BytesIO
 
+from django.conf import settings
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
@@ -99,7 +100,7 @@ class StufBGClient(SingletonModel):
         )
 
         with open(
-            "src/openpersonen/templates/xsds/bg0310/vraagAntwoord/test.xsd", "r"
+            f"{settings.DJANGO_PROJECT_DIR}/templates/xsds/bg0310/vraagAntwoord/bg0310_namespace.xsd", "r"
         ) as f:
             xmlschema_doc = etree.parse(f)
             xmlschema = etree.XMLSchema(xmlschema_doc)
