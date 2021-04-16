@@ -97,8 +97,7 @@ class StufBGClient(SingletonModel):
             .getchildren()[0]
         )
         if not xmlschema.validate(el):
-            error_message = xmlschema.error_log.last_error.message
-            raise ValidationError(error_message)
+            raise ValidationError(xmlschema.error_log.last_error.message)
 
         response = requests.post(
             self.url,
