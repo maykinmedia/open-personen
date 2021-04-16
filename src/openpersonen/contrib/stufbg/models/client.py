@@ -3,7 +3,6 @@ import uuid
 from datetime import timedelta
 from io import BytesIO
 
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.template import loader
 from django.utils import dateformat, timezone
@@ -12,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 import requests
 from lxml import etree
 from privates.fields import PrivateMediaFileField
+from rest_framework.exceptions import ValidationError
 from solo.models import SingletonModel
 
 
@@ -114,7 +114,8 @@ class StufBGClient(SingletonModel):
             .getchildren()[0]
         )
         if not xmlschema.validate(el):
-            raise ValidationError("The XML is not valid against our XSDs")
+            error_message = xmlschema.error_log.last_error.message
+            raise ValidationError(error_message)
 
         response = requests.post(
             self.url,

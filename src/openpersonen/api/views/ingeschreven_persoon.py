@@ -108,7 +108,15 @@ class IngeschrevenPersoonViewSet(BaseViewSet):
         except ValidationError as e:
             return Response(data=e.detail[0], status=HTTP_400_BAD_REQUEST)
 
-        instances = IngeschrevenPersoon.list(filters)
+        try:
+            instances = IngeschrevenPersoon.list(filters)
+        except ValidationError:
+            return Response(
+                data=get_query_param_400_response(
+                    request.get_full_path(), str(filters)
+                ),
+                status=HTTP_400_BAD_REQUEST,
+            )
 
         serializer = self.serializer_class(
             instances, many=True, context={"request": request}

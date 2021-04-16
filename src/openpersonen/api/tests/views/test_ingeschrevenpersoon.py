@@ -123,6 +123,34 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(len(data), 2)
 
     @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon_invalid_xml(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        url = (
+            reverse("ingeschrevenpersonen-list")
+            + "?verblijfplaats__identificatiecodenummeraanduiding=A"
+        )
+        response = self.client.get(
+            url,
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(post_mock.called)
+        self.assertEqual(
+            response.json(),
+            get_query_param_400_response(
+                url, str({"verblijfplaats__identificatiecodenummeraanduiding": "A"})
+            ),
+        )
+
+    @requests_mock.Mocker()
     def test_list_ingeschreven_persoon_with_ingeschreven_persoon(self, post_mock):
         post_mock.post(
             self.url,
