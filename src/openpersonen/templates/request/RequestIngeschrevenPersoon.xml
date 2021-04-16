@@ -105,14 +105,11 @@
                 {% endif %}
                 {% if verblijfplaats__gemeentevaninschrijving %}
                     <!--Optional:-->
-                    <ns:inp.gemeenteVanInschrijving>
-                        {{ verblijfplaats__gemeentevaninschrijving|escape }}
-                    </ns:inp.gemeenteVanInschrijving>
+                    <ns:inp.gemeenteVanInschrijving>{{ verblijfplaats__gemeentevaninschrijving|escape }}</ns:inp.gemeenteVanInschrijving>
                 {% endif %}
                 {% if naam__voorvoegsel %}
                     <!--Optional:-->
-                    <ns:voorvoegselGeslachtsnaam
-                    >{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
+                    <ns:voorvoegselGeslachtsnaam>{{ naam__voorvoegsel|escape }}</ns:voorvoegselGeslachtsnaam>
                 {% endif %}
                 <!--Optional:-->
                 {% if verblijfplaats__huisletter or verblijfplaats__huisnummer or verblijfplaats__huisnummertoevoeging or verblijfplaats__identificatiecodenummeraanduiding or verblijfplaats__postcode %}
@@ -127,15 +124,11 @@
                         {% endif %}
                         {% if verblijfplaats__huisnummertoevoeging %}
                             <!--Optional:-->
-                            <ns:aoa.huisnummertoevoeging>
-                                {{ verblijfplaats__huisnummertoevoeging|escape }}
-                            </ns:aoa.huisnummertoevoeging>
+                            <ns:aoa.huisnummertoevoeging>{{ verblijfplaats__huisnummertoevoeging|escape }}</ns:aoa.huisnummertoevoeging>
                         {% endif %}
                         {% if verblijfplaats__identificatiecodenummeraanduiding %}
                             <!--Optional:-->
-                            <ns:aoa.identificatie>
-                                {{ verblijfplaats__identificatiecodenummeraanduiding|escape }}
-                            </ns:aoa.identificatie>
+                            <ns:aoa.identificatie>{{ verblijfplaats__identificatiecodenummeraanduiding|escape }}</ns:aoa.identificatie>
                         {% endif %}
                         {% if verblijfplaats__postcode %}
                             <!--Optional:-->

@@ -113,7 +113,7 @@ class TestIngeschrevenPersoon(APITestCase):
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + "?verblijfplaats__identificatiecodenummeraanduiding=A",
+            + "?verblijfplaats__identificatiecodenummeraanduiding=0518200000366054",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
@@ -134,7 +134,7 @@ class TestIngeschrevenPersoon(APITestCase):
 
         response = self.client.get(
             reverse("ingeschrevenpersonen-list")
-            + "?verblijfplaats__identificatiecodenummeraanduiding=A",
+            + "?verblijfplaats__identificatiecodenummeraanduiding=0518200000366054",
             HTTP_AUTHORIZATION=f"Token {self.token.key}",
         )
 
