@@ -90,10 +90,18 @@ def get_aanhef(
 ):
     last_name_prefix = last_name_prefix if isinstance(last_name_prefix, str) else None
     last_name = last_name if isinstance(last_name, str) else None
-    partner_last_name_prefix = partner_last_name_prefix if isinstance(partner_last_name_prefix, str) else None
-    partner_last_name = partner_last_name if isinstance(partner_last_name, str) else None
-    indication_name_use = indication_name_use if isinstance(indication_name_use, str) else None
-    gender_designation = gender_designation if isinstance(gender_designation, str) else None
+    partner_last_name_prefix = (
+        partner_last_name_prefix if isinstance(partner_last_name_prefix, str) else None
+    )
+    partner_last_name = (
+        partner_last_name if isinstance(partner_last_name, str) else None
+    )
+    indication_name_use = (
+        indication_name_use if isinstance(indication_name_use, str) else None
+    )
+    gender_designation = (
+        gender_designation if isinstance(gender_designation, str) else None
+    )
     title = title if isinstance(title, str) else None
     partner_title = partner_title if isinstance(partner_title, str) else None
 

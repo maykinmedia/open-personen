@@ -113,8 +113,8 @@ def get_persoon_instance_dict(instance_xml_dict):
                 ),
             },
             "plaats": {
-                "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(instance_xml_dict.get("inp.geboorteplaats", "string")),
-                "omschrijving": instance_xml_dict.get("inp.geboorteplaats", 0),
+                "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(instance_xml_dict.get("inp.geboorteplaats", 0)),
+                "omschrijving": instance_xml_dict.get("inp.geboorteplaats", "string"),
             },
             "inOnderzoek": {
                 "datum": any(

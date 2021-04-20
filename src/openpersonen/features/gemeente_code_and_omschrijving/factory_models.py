@@ -5,7 +5,7 @@ from .models import GemeenteCodeAndOmschrijving
 
 class GemeenteCodeAndOmschrijvingFactory(factory.django.DjangoModelFactory):
     code = 624
-    omschrijving = "Voorburg"
+    omschrijving = "Amsterdam"
 
     class Meta:
         model = GemeenteCodeAndOmschrijving

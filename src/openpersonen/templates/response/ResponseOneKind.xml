@@ -62,7 +62,7 @@
                             <!--Optional:-->
                             <ns:geboortedatum>19990615</ns:geboortedatum>
                             <!--Optional:-->
-                            <ns:inp.geboorteplaats>624</ns:inp.geboorteplaats>
+                            <ns:inp.geboorteplaats>Amsterdam</ns:inp.geboorteplaats>
                             <!--Optional:-->
                             <ns:inp.geboorteLand>6030</ns:inp.geboorteLand>
                         </ns:gerelateerde>
