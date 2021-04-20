@@ -161,9 +161,11 @@ def get_ouder_instance_dict(instance_xml_dict):
                 ),
             },
             "plaats": {
-                "code": instance_xml_dict.get("inp.geboorteplaats", "string"),
-                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(
                     instance_xml_dict.get("inp.geboorteplaats", 0)
+                ),
+                "omschrijving": instance_xml_dict.get(
+                    "inp.geboorteplaats", "string"
                 ),
             },
             "inOnderzoek": {
