@@ -29,18 +29,21 @@ def get_partner_instance_dict(instance_xml_dict):
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "voornamen": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "voorvoegsel": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -87,18 +90,21 @@ def get_partner_instance_dict(instance_xml_dict):
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "land": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "plaats": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -114,12 +120,14 @@ def get_partner_instance_dict(instance_xml_dict):
                 [
                     "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                     for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                    if isinstance(in_onderzoek, dict)
                 ]
             ),
             "geslachtsaanduiding": any(
                 [
                     "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                     for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                    if isinstance(in_onderzoek, dict)
                 ]
             ),
             "datumIngangOnderzoek": {
@@ -165,18 +173,21 @@ def get_partner_instance_dict(instance_xml_dict):
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "land": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "plaats": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {

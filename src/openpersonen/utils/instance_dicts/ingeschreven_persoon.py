@@ -47,18 +47,21 @@ def get_persoon_instance_dict(instance_xml_dict):
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "voornamen": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "voorvoegsel": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -108,18 +111,21 @@ def get_persoon_instance_dict(instance_xml_dict):
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "land": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "plaats": any(
                     [
                         "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -177,12 +183,14 @@ def get_persoon_instance_dict(instance_xml_dict):
                 [
                     "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                     for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                    if isinstance(in_onderzoek, dict)
                 ]
             ),
             "geslachtsaanduiding": any(
                 [
                     "Persoonsgegevens" == in_onderzoek.get("groepsnaam")
                     for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                    if isinstance(in_onderzoek, dict)
                 ]
             ),
             "datumIngangOnderzoek": {
@@ -255,6 +263,7 @@ def get_persoon_instance_dict(instance_xml_dict):
                         [
                             "Nationaliteit" == in_onderzoek.get("groepsnaam")
                             for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                            if isinstance(in_onderzoek, dict)
                         ]
                     ),
                     "redenOpname": True,
@@ -346,18 +355,21 @@ def get_persoon_instance_dict(instance_xml_dict):
                     [
                         "Overlijden" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "land": any(
                     [
                         "Overlijden" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "plaats": any(
                     [
                         "Overlijden" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -506,72 +518,84 @@ def get_persoon_instance_dict(instance_xml_dict):
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "huisnummer": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "huisnummertoevoeging": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "identificatiecodeNummeraanduiding": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "identificatiecodeAdresseerbaarObject": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "landVanwaarIngeschreven": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "locatiebeschrijving": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "naamOpenbareRuimte": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "postcode": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "straatnaam": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "verblijfBuitenland": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "woonplaatsnaam": any(
                     [
                         "Verblijfplaats" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -594,12 +618,14 @@ def get_persoon_instance_dict(instance_xml_dict):
                     [
                         "Gezagsverhouding" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "indicatieGezagMinderjarige": any(
                     [
                         "Gezagsverhouding" == in_onderzoek.get("groepsnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumIngangOnderzoek": {
@@ -607,24 +633,28 @@ def get_persoon_instance_dict(instance_xml_dict):
                         [
                             "Gezagsverhouding" == in_onderzoek.get("groepsnaam")
                             for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                            if isinstance(in_onderzoek, dict)
                         ]
                     ),
                     "datum": any(
                         [
                             "Gezagsverhouding" == in_onderzoek.get("groepsnaam")
                             for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                            if isinstance(in_onderzoek, dict)
                         ]
                     ),
                     "jaar": any(
                         [
                             "Gezagsverhouding" == in_onderzoek.get("groepsnaam")
                             for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                            if isinstance(in_onderzoek, dict)
                         ]
                     ),
                     "maand": any(
                         [
                             "Gezagsverhouding" == in_onderzoek.get("groepsnaam")
                             for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                            if isinstance(in_onderzoek, dict)
                         ]
                     ),
                 },
