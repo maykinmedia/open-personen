@@ -58,17 +58,30 @@ def get_kind_instance_dict(instance_xml_dict):
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
-                "datum": instance_xml_dict.get("geboortedatum", "19000101"),
+                "datum": instance_xml_dict.get("geboortedatum", "19000101")
+                if not isinstance(
+                    instance_xml_dict.get("geboortedatum"), dict
+                )
+                else 1
+                ,
                 "jaar": int(
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get("geboortedatum"), dict
+                )
+                else 1900,
                 "maand": int(
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get("geboortedatum"), dict
+                )
+                else 1,
             },
             "land": {
                 "code": instance_xml_dict.get("inp.geboorteLand", "string"),
