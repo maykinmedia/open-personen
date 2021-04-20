@@ -20,8 +20,14 @@ def get_ouder_instance_dict(instance_xml_dict):
                 instance_xml_dict.get(
                     "datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
-                if is_valid_date_format(instance_xml_dict.get(f"{prefix}:geboortedatum")) else 0
-            ),
+            )
+            if not isinstance(
+                instance_xml_dict.get(
+                    "datumIngangFamilierechtelijkeBetrekking"
+                ),
+                dict,
+            )
+            else 1,
             "datum": instance_xml_dict.get(
                 "datumIngangFamilierechtelijkeBetrekking", "string"
             ),
@@ -29,12 +35,26 @@ def get_ouder_instance_dict(instance_xml_dict):
                 instance_xml_dict.get(
                     "datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END]
-            ),
+            )
+            if not isinstance(
+                instance_xml_dict.get(
+                    "datumIngangFamilierechtelijkeBetrekking"
+                ),
+                dict,
+            )
+            else 1900,
             "maand": int(
                 instance_xml_dict.get(
                     "datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END]
-            ),
+            )
+            if not isinstance(
+                instance_xml_dict.get(
+                    "datumIngangFamilierechtelijkeBetrekking"
+                ),
+                dict,
+            )
+            else 1,
         },
         "naam": {
             "geslachtsnaam": instance_xml_dict.get("gerelateerde", {}).get(
@@ -109,17 +129,30 @@ def get_ouder_instance_dict(instance_xml_dict):
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
                 ),
-                "datum": instance_xml_dict.get("geboortedatum", "string"),
+                "datum": instance_xml_dict.get("geboortedatum", "string")
+                if not isinstance(
+                    instance_xml_dict.get("geboortedatum"), dict
+                )
+                else 1
+                ,
                 "jaar": int(
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
                     ]
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get("geboortedatum"), dict
+                )
+                else 1900,
                 "maand": int(
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_MONTH_START : settings.OPENPERSONEN_MONTH_END
                     ]
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get("geboortedatum"), dict
+                )
+                else 1,
             },
             "land": {
                 "code": instance_xml_dict.get("inp.geboorteLand", "string"),
