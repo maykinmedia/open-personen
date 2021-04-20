@@ -20,6 +20,7 @@ def get_ouder_instance_dict(instance_xml_dict):
                 instance_xml_dict.get(
                     "datumIngangFamilierechtelijkeBetrekking", "19000101"
                 )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
+                if is_valid_date_format(instance_xml_dict.get(f"{prefix}:geboortedatum")) else 0
             ),
             "datum": instance_xml_dict.get(
                 "datumIngangFamilierechtelijkeBetrekking", "string"

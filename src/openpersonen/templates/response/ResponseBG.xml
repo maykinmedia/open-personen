@@ -41,7 +41,7 @@
                <BG:adellijkeTitelPredikaat>Jonkheer</BG:adellijkeTitelPredikaat>
                <BG:geslachtsaanduiding>M</BG:geslachtsaanduiding>
                <BG:geboortedatum>19800915</BG:geboortedatum>
-               <BG:inp.geboorteplaats>624</BG:inp.geboorteplaats>
+               <BG:inp.geboorteplaats>Amsterdam</BG:inp.geboorteplaats>
                <BG:inp.geboorteLand>6030</BG:inp.geboorteLand>
                <BG:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                <BG:inp.overlijdenplaats>624</BG:inp.overlijdenplaats>
@@ -78,7 +78,7 @@
                      <BG:adellijkeTitelPredikaat StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:geslachtsaanduiding StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                      <BG:geboortedatum>19730922</BG:geboortedatum>
-                     <BG:inp.geboorteplaats>624</BG:inp.geboorteplaats>
+                     <BG:inp.geboorteplaats>Amsterdam</BG:inp.geboorteplaats>
                      <BG:inp.geboorteLand>6030</BG:inp.geboorteLand>
                      <BG:overlijdensdatum StUF:noValue="geenWaarde" xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                   </BG:gerelateerde>
