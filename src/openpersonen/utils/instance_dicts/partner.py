@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.conf import settings
 
 from openpersonen.features.country_code_and_omschrijving.models import (
@@ -63,7 +65,7 @@ def get_partner_instance_dict(instance_xml_dict):
                 ),
                 "datum": instance_xml_dict.get("geboortedatum", "19000101")
                 if not isinstance(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum"), dict
+                    instance_xml_dict.get("geboortedatum"), dict
                 )
                 else 1
                 ,
@@ -73,7 +75,7 @@ def get_partner_instance_dict(instance_xml_dict):
                     ]
                 )
                 if not isinstance(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum"), dict
+                    instance_xml_dict.get("geboortedatum"), dict
                 )
                 else 1900,
                 "maand": int(
@@ -82,7 +84,7 @@ def get_partner_instance_dict(instance_xml_dict):
                     ]
                 )
                 if not isinstance(
-                    instance_xml_dict.get(f"{prefix}:geboortedatum"), dict
+                    instance_xml_dict.get("geboortedatum"), dict
                 )
                 else 1,
             },
@@ -90,12 +92,18 @@ def get_partner_instance_dict(instance_xml_dict):
                 "code": instance_xml_dict.get("inp.geboorteLand", "string"),
                 "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     instance_xml_dict.get("inp.geboorteLand", 0)
-                ),
+                )                if not isinstance(
+                    instance_xml_dict.get("inp.geboorteLand"), dict
+                )
+                else 0,
             },
             "plaats": {
                 "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(
                     instance_xml_dict.get("inp.geboorteplaats", 0)
-                ),
+                )                if not isinstance(
+                    instance_xml_dict.get("inp.geboorteplaats"), dict
+                )
+                else 0,
                 "omschrijving": instance_xml_dict.get(
                     "inp.geboorteplaats", "string"
                 ),
@@ -161,7 +169,7 @@ def get_partner_instance_dict(instance_xml_dict):
                 ),
                 "datum": instance_xml_dict.get("datumSluiting", "19000101")
                 if not isinstance(
-                    instance_xml_dict.get(f"{prefix}:datumSluiting"), dict
+                    instance_xml_dict.get("datumSluiting"), dict
                 )
                 else 1
                 ,
@@ -171,7 +179,7 @@ def get_partner_instance_dict(instance_xml_dict):
                     ]
                 )
                 if not isinstance(
-                    instance_xml_dict.get(f"{prefix}:datumSluiting"), dict
+                    instance_xml_dict.get("datumSluiting"), dict
                 )
                 else 1900,
                 "maand": int(
@@ -180,7 +188,7 @@ def get_partner_instance_dict(instance_xml_dict):
                     ]
                 )
                 if not isinstance(
-                    instance_xml_dict.get(f"{prefix}:datumSluiting"), dict
+                    instance_xml_dict.get("datumSluiting"), dict
                 )
                 else 1,
             },
@@ -188,14 +196,14 @@ def get_partner_instance_dict(instance_xml_dict):
                 "code": instance_xml_dict.get("landSluiting", "string"),
                 "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     instance_xml_dict.get("landSluiting", 0)
-                )                if not isinstance(instance_xml_dict.get(f"{prefix}:landSluiting"), dict)
+                )                if not isinstance(instance_xml_dict.get("landSluiting"), dict)
                 else 0,
             },
             "plaats": {
                 "code": instance_xml_dict.get("plaatsSluiting", "string"),
                 "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
                     instance_xml_dict.get("plaatsSluiting", 0)
-                )                if not isinstance(instance_xml_dict.get(f"{prefix}:landSluiting"), dict)
+                )                if not isinstance(instance_xml_dict.get("plaatsSluiting"), dict)
                 else 0,
             },
             "inOnderzoek": {

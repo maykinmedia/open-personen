@@ -110,10 +110,18 @@ def get_persoon_instance_dict(instance_xml_dict):
                 "code": instance_xml_dict.get("inp.geboorteLand", "string"),
                 "omschrijving": CountryCodeAndOmschrijving.get_omschrijving_from_code(
                     instance_xml_dict.get("inp.geboorteLand", 0)
-                ),
+                )                if not isinstance(
+                    instance_xml_dict.get("inp.geboorteLand"), dict
+                )
+                else 0,
             },
             "plaats": {
-                "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(instance_xml_dict.get("inp.geboorteplaats", 0)),
+                "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(instance_xml_dict.get("inp.geboorteplaats", 0))
+                if not isinstance(
+                    instance_xml_dict.get("inp.geboorteplaats"), dict
+                )
+                else 0
+                ,
                 "omschrijving": instance_xml_dict.get("inp.geboorteplaats", "string"),
             },
             "inOnderzoek": {
@@ -292,7 +300,15 @@ def get_persoon_instance_dict(instance_xml_dict):
                         instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
                             "inp.redenVerkrijging", 0
                         )
-                    ),
+                    )
+                    if not isinstance(
+                        instance_xml_dict.get(
+                            "inp.heeftAlsNationaliteit", {}
+                        ).get("inp.redenVerkrijging"),
+                        dict,
+                    )
+                    else 0
+                    ,
                 },
                 "inOnderzoek": {
                     "aanduidingBijzonderNederlanderschap": any(
@@ -587,7 +603,15 @@ def get_persoon_instance_dict(instance_xml_dict):
                         instance_xml_dict.get("sub.verblijfBuitenland", {}).get(
                             "lnd.landcode", 0
                         )
-                    ),
+                    )
+                    if not isinstance(
+                        instance_xml_dict.get(
+                            "sub.verblijfBuitenland", {}
+                        ).get("lnd.landcode"),
+                        dict,
+                    )
+                    else 0
+                    ,
                 },
             },
             "inOnderzoek": {
