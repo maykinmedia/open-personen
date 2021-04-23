@@ -57,7 +57,7 @@ PARTNER_RETRIEVE_DATA = {
             "_embedded": {
                 "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
                 "land": {"code": "string", "omschrijving": "Onbekend"},
-                "plaats": {"code": "string", "omschrijving": "Onbekend"},
+                "plaats": {"code": "0", "omschrijving": "string"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {

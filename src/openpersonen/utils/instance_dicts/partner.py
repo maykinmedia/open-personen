@@ -183,12 +183,12 @@ def get_partner_instance_dict(instance_xml_dict):
                 else 0,
             },
             "plaats": {
-                "code": instance_xml_dict.get("plaatsSluiting", "string"),
-                "omschrijving": GemeenteCodeAndOmschrijving.get_omschrijving_from_code(
+                "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(
                     instance_xml_dict.get("plaatsSluiting", 0)
                 )
                 if not isinstance(instance_xml_dict.get("plaatsSluiting"), dict)
                 else 0,
+                "omschrijving": instance_xml_dict.get("plaatsSluiting", "string"),
             },
             "inOnderzoek": {
                 "datum": any(

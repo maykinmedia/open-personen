@@ -1,15 +1,6 @@
 INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
     "_links": {
         "self": {"href": "http://testserver/api/ingeschrevenpersonen/123456789"},
-        "partners": [
-            {
-                "_links": {
-                    "self": {
-                        "href": "http://testserver/api/ingeschrevenpersonen/123456789/partners/string"
-                    }
-                }
-            }
-        ],
         "kinderen": [
             {
                 "_links": {
@@ -24,6 +15,15 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
                 "_links": {
                     "self": {
                         "href": "http://testserver/api/ingeschrevenpersonen/123456789/ouders/string"
+                    }
+                }
+            }
+        ],
+        "partners": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://testserver/api/ingeschrevenpersonen/123456789/partners/string"
                     }
                 }
             }
@@ -149,7 +149,7 @@ INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "_embedded": {
                 "datum": {"dag": 1, "datum": "19000101", "jaar": 1900, "maand": 1},
                 "land": {"code": "string", "omschrijving": "Onbekend"},
-                "plaats": {"code": "string", "omschrijving": "Onbekend"},
+                "plaats": {"code": "0", "omschrijving": "0"},
                 "inOnderzoek": {
                     "_embedded": {
                         "datumIngangOnderzoek": {
