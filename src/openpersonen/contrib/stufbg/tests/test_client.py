@@ -387,21 +387,3 @@ class TestClient(TestCase):
         self.assertIn(self.ontvanger_gebruiker, response_content)
         self.assertIn(test_uuid, response_content)
         self.assertIn(test_dateformat, response_content)
-
-
-class TestClientMakeRequest(LiveServerTestCase):
-    def test_making_request_with_cert(self):
-        ssl_crt = os.path.join(os.path.dirname(__file__), "certs", "mocks.crt")
-        ssl_key = os.path.join(os.path.dirname(__file__), "certs", "mocks.key")
-        response = requests.post(
-            self.live_server_url, data={"foo": "bar"}, cert=(ssl_crt, ssl_key)
-        )
-        self.assertEqual(response.status_code, 403)
-
-    def test_making_request_without_cert(self):
-        ssl_crt = None
-        ssl_key = None
-        response = requests.post(
-            self.live_server_url, data={"foo": "bar"}, cert=(ssl_crt, ssl_key)
-        )
-        self.assertEqual(response.status_code, 403)
