@@ -1,15 +1,13 @@
 from django.conf import settings
 
-import xmltodict
-
 from openpersonen.features.country_code_and_omschrijving.models import (
     CountryCodeAndOmschrijving,
 )
 from openpersonen.features.gemeente_code_and_omschrijving.models import (
     GemeenteCodeAndOmschrijving,
 )
+from openpersonen.utils.converters import convert_xml_to_dict
 from openpersonen.utils.helpers import convert_empty_instances
-from openpersonen.utils.instance_dicts import NAMESPACE_REPLACEMENTS
 
 
 def get_partner_instance_dict(instance_xml_dict):
@@ -200,11 +198,7 @@ def get_partner_instance_dict(instance_xml_dict):
 
 
 def convert_xml_to_partner_dict(xml, id=None):
-    dict_object = xmltodict.parse(
-        xml,
-        process_namespaces=True,
-        namespaces=NAMESPACE_REPLACEMENTS,
-    )
+    dict_object = convert_xml_to_dict(xml)
 
     antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"][
         "inp.heeftAlsEchtgenootPartner"

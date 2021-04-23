@@ -1,7 +1,5 @@
 from django.conf import settings
 
-import xmltodict
-
 from openpersonen.features import (
     get_aanhef,
     get_aanschrijfwijze,
@@ -16,9 +14,9 @@ from openpersonen.features.gemeente_code_and_omschrijving.models import (
 from openpersonen.features.reden_code_and_omschrijving.models import (
     RedenCodeAndOmschrijving,
 )
+from openpersonen.utils.converters import convert_xml_to_dict
 from openpersonen.utils.helpers import calculate_age, convert_empty_instances
 
-from .constants import NAMESPACE_REPLACEMENTS
 from .kind import get_kind_instance_dict
 from .ouder import get_ouder_instance_dict
 from .partner import get_partner_instance_dict
@@ -792,11 +790,7 @@ def get_persoon_instance_dict(instance_xml_dict):
 
 
 def convert_xml_to_persoon_dicts(xml):
-    dict_object = xmltodict.parse(
-        xml,
-        process_namespaces=True,
-        namespaces=NAMESPACE_REPLACEMENTS,
-    )
+    dict_object = convert_xml_to_dict(xml)
 
     antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"]
 
