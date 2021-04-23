@@ -41,7 +41,7 @@ class StufBGClient(SingletonModel):
         _("password"),
         max_length=200,
         blank=True,
-        help_text="Passwordto use in the XML security context.",
+        help_text="Password to use in the XML security context.",
     )
     certificate = PrivateMediaFileField(
         upload_to="certificate/",
