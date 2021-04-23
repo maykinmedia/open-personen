@@ -1,5 +1,4 @@
-import xmltodict
-
+from openpersonen.utils.converters import convert_xml_to_dict
 from openpersonen.utils.instance_dicts import (
     NAMESPACE_REPLACEMENTS,
     get_partner_instance_dict,
@@ -7,11 +6,7 @@ from openpersonen.utils.instance_dicts import (
 
 
 def convert_response_to_partner_dict(response, id=None):
-    dict_object = xmltodict.parse(
-        response.content,
-        process_namespaces=True,
-        namespaces=NAMESPACE_REPLACEMENTS,
-    )
+    dict_object = convert_xml_to_dict(response.content)
 
     antwoord_object = dict_object["Envelope"]["Body"]["npsLa01"]["antwoord"]["object"][
         "inp.heeftAlsEchtgenootPartner"

@@ -1,4 +1,3 @@
-from .constants import *
 from .ingeschreven_persoon import *
 from .kind import *
 from .ouder import *
