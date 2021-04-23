@@ -71,7 +71,7 @@ class StufBGClient(SingletonModel):
         cert = (
             (self.certificate.path, self.certificate_key.path)
             if self.certificate and self.certificate_key
-            else None
+            else (None, None)
         )
 
         response = requests.post(
