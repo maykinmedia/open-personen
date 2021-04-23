@@ -1,10 +1,6 @@
-import os
-
 from django.template import loader
 from django.test import TestCase
-from django.test.testcases import LiveServerTestCase
 
-import requests
 import requests_mock
 from mock import patch
 
