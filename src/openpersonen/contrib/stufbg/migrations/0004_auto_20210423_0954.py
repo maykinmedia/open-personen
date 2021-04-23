@@ -8,33 +8,59 @@ import privates.storages
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('stufbg', '0003_auto_20201117_1144'),
+        ("stufbg", "0003_auto_20201117_1144"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='certificate',
-            field=privates.fields.PrivateMediaFileField(blank=True, help_text='The SSL certificate file used for client identification. If left empty, mutual TLS is disabled.', null=True, storage=privates.storages.PrivateMediaFileSystemStorage(), upload_to='certificate/'),
+            model_name="stufbgclient",
+            name="certificate",
+            field=privates.fields.PrivateMediaFileField(
+                blank=True,
+                help_text="The SSL certificate file used for client identification. If left empty, mutual TLS is disabled.",
+                null=True,
+                storage=privates.storages.PrivateMediaFileSystemStorage(),
+                upload_to="certificate/",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='certificate_key',
-            field=privates.fields.PrivateMediaFileField(blank=True, help_text='The SSL certificate key file used for client identification. If left empty, mutual TLS is disabled.', null=True, storage=privates.storages.PrivateMediaFileSystemStorage(), upload_to='certificate/'),
+            model_name="stufbgclient",
+            name="certificate_key",
+            field=privates.fields.PrivateMediaFileField(
+                blank=True,
+                help_text="The SSL certificate key file used for client identification. If left empty, mutual TLS is disabled.",
+                null=True,
+                storage=privates.storages.PrivateMediaFileSystemStorage(),
+                upload_to="certificate/",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='password',
-            field=models.CharField(blank=True, help_text='Passwordto use in the XML security context.', max_length=200, verbose_name='password'),
+            model_name="stufbgclient",
+            name="password",
+            field=models.CharField(
+                blank=True,
+                help_text="Passwordto use in the XML security context.",
+                max_length=200,
+                verbose_name="password",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='url',
-            field=models.URLField(blank=True, help_text='URL of the StUF-BG service to connect to.', verbose_name='url'),
+            model_name="stufbgclient",
+            name="url",
+            field=models.URLField(
+                blank=True,
+                help_text="URL of the StUF-BG service to connect to.",
+                verbose_name="url",
+            ),
         ),
         migrations.AlterField(
-            model_name='stufbgclient',
-            name='user',
-            field=models.CharField(blank=True, help_text='Username to use in the XML security context.', max_length=200, verbose_name='user'),
+            model_name="stufbgclient",
+            name="user",
+            field=models.CharField(
+                blank=True,
+                help_text="Username to use in the XML security context.",
+                max_length=200,
+                verbose_name="user",
+            ),
         ),
     ]
