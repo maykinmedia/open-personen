@@ -81,11 +81,13 @@
                     <!--Optional:-->
                     <ns:inp.bsn>{{ burgerservicenummer|escape }}</ns:inp.bsn>
                 {% endif %}
+                {% if naam__geslachtsnaam %}
+                    <!--Optional:-->
+                    <ns:geslachtsnaam>{{ naam__geslachtsnaam|escape }}</ns:geslachtsnaam>
+                {% endif %}
                 {% if geboorte__datum %}
                     <!--Optional:-->
-                    <ns:geboortedatum StUF:indOnvolledigeDatum="V">
-                        {{ geboorte__datum|escape }}
-                    </ns:geboortedatum>
+                    <ns:geboortedatum StUF:indOnvolledigeDatum="V">{{ geboorte__datum|escape }}</ns:geboortedatum>
                 {% endif %}
                 {% if geboorte__plaats %}
                     <!--Optional:-->
@@ -95,17 +97,9 @@
                     <!--Optional:-->
                     <ns:geslachtsaanduiding>{{ geslachtsaanduiding|escape }}</ns:geslachtsaanduiding>
                 {% endif %}
-                {% if naam__geslachtsnaam %}
-                    <!--Optional:-->
-                    <ns:geslachtsnaam>{{ naam__geslachtsnaam|escape }}</ns:geslachtsnaam>
-                {% endif %}
                 {% if naam__voornamen %}
                     <!--Optional:-->
                     <ns:voornamen>{{ naam__voornamen|escape }}</ns:voornamen>
-                {% endif %}
-                {% if verblijfplaats__gemeentevaninschrijving %}
-                    <!--Optional:-->
-                    <ns:inp.gemeenteVanInschrijving>{{ verblijfplaats__gemeentevaninschrijving|escape }}</ns:inp.gemeenteVanInschrijving>
                 {% endif %}
                 {% if naam__voorvoegsel %}
                     <!--Optional:-->
@@ -114,6 +108,14 @@
                 <!--Optional:-->
                 {% if verblijfplaats__huisletter or verblijfplaats__huisnummer or verblijfplaats__huisnummertoevoeging or verblijfplaats__identificatiecodenummeraanduiding or verblijfplaats__postcode %}
                     <ns:verblijfsadres>
+                        {% if verblijfplaats__identificatiecodenummeraanduiding %}
+                            <!--Optional:-->
+                            <ns:aoa.identificatie>{{ verblijfplaats__identificatiecodenummeraanduiding|escape }}</ns:aoa.identificatie>
+                        {% endif %}
+                        {% if verblijfplaats__postcode %}
+                            <!--Optional:-->
+                            <ns:aoa.postcode>{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
+                        {% endif %}
                         {% if verblijfplaats__huisletter %}
                             <!--Optional:-->
                             <ns:aoa.huisletter>{{ verblijfplaats__huisletter|escape }}</ns:aoa.huisletter>
@@ -126,15 +128,14 @@
                             <!--Optional:-->
                             <ns:aoa.huisnummertoevoeging>{{ verblijfplaats__huisnummertoevoeging|escape }}</ns:aoa.huisnummertoevoeging>
                         {% endif %}
-                        {% if verblijfplaats__identificatiecodenummeraanduiding %}
-                            <!--Optional:-->
-                            <ns:aoa.identificatie>{{ verblijfplaats__identificatiecodenummeraanduiding|escape }}</ns:aoa.identificatie>
-                        {% endif %}
-                        {% if verblijfplaats__postcode %}
-                            <!--Optional:-->
-                            <ns:aoa.postcode>{{ verblijfplaats__postcode|escape }}</ns:aoa.postcode>
-                        {% endif %}
                     </ns:verblijfsadres>
+                {% endif %}
+                {% if verblijfplaats__gemeentevaninschrijving %}
+                    <!--Optional:-->
+                    <ns:inp.gemeenteVanInschrijving>{{ verblijfplaats__gemeentevaninschrijving|escape }}</ns:inp.gemeenteVanInschrijving>
+                {% endif %}
+                {% if verblijfplaats__naam_openbare_ruimte %}
+                    <gor.openbareRuimteNaam>{{ verblijfplaats__naam_openbare_ruimte }}</gor.openbareRuimteNaam>
                 {% endif %}
             </ns:gelijk>
             <!--Optional:-->

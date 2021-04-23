@@ -123,6 +123,91 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(len(data), 2)
 
     @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon_with_birth_date_and_last_name(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?geboorte__datum=19800915&naam__geslachtsnaam=Vliet",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"]
+        self.assertEqual(len(data), 2)
+
+    @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon_with_gemeente_and_last_name(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?verblijfplaats__gemeentevaninschrijving=0392&naam__geslachtsnaam=Vliet",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"]
+        self.assertEqual(len(data), 2)
+
+    @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon_with_postcode_and_house_number(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?verblijfplaats__postcode=2011RD&verblijfplaats__huisnummer=2",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"]
+        self.assertEqual(len(data), 2)
+
+    @requests_mock.Mocker()
+    def test_list_ingeschreven_persoon_with_verblijfplaats_values(self, post_mock):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("response/ResponseTwoIngeschrevenPersoon.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse("ingeschrevenpersonen-list")
+            + "?verblijfplaats__naamopenbareruimte=Grote Markt&"
+            "verblijfplaats__gemeentevaninschrijving=0392&verblijfplaats__huisnummer=2",
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        data = response.json()["_embedded"]["ingeschrevenpersonen"]
+        self.assertEqual(len(data), 2)
+
+    @requests_mock.Mocker()
     def test_list_ingeschreven_persoon_invalid_xml(self, post_mock):
         post_mock.post(
             self.url,
