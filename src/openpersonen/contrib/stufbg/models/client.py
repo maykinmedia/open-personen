@@ -29,21 +29,29 @@ class StufBGClient(SingletonModel):
     url = models.URLField(
         _("url"),
         blank=True,
-        help_text="Url of the server this client will make requests to",
+        help_text="URL of the StUF-BG service to connect to.",
     )
     user = models.CharField(
-        _("user"), max_length=200, blank=True, help_text="Username to access the server"
+        _("user"),
+        max_length=200,
+        blank=True,
+        help_text="Username to use in the XML security context.",
     )
     password = models.CharField(
         _("password"),
         max_length=200,
         blank=True,
-        help_text="Password to access the server",
+        help_text="Passwordto use in the XML security context.",
     )
-    certificate = PrivateMediaFileField(upload_to="certificate/", blank=True, null=True)
+    certificate = PrivateMediaFileField(
+        upload_to="certificate/",
+        blank=True,
+        null=True,
+        help_text="The SSL certificate file used for client identification. If left empty, mutual TLS is disabled.",
+    )
     certificate_key = PrivateMediaFileField(
         upload_to="certificate/",
-        help_text="Private key for the certificate",
+        help_text="The SSL certificate key file used for client identification. If left empty, mutual TLS is disabled.",
         blank=True,
         null=True,
     )
