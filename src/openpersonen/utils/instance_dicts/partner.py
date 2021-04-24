@@ -62,10 +62,10 @@ def get_partner_instance_dict(instance_xml_dict):
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
-                ),
-                "datum": instance_xml_dict.get("geboortedatum", "19000101")
+                )
                 if not isinstance(instance_xml_dict.get("geboortedatum"), dict)
                 else 1,
+                "datum": instance_xml_dict.get("geboortedatum", "19000101"),
                 "jaar": int(
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
@@ -155,10 +155,10 @@ def get_partner_instance_dict(instance_xml_dict):
                     instance_xml_dict.get("datumSluiting", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
-                ),
-                "datum": instance_xml_dict.get("datumSluiting", "19000101")
+                )
                 if not isinstance(instance_xml_dict.get("datumSluiting"), dict)
                 else 1,
+                "datum": instance_xml_dict.get("datumSluiting", "19000101"),
                 "jaar": int(
                     instance_xml_dict.get("datumSluiting", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END

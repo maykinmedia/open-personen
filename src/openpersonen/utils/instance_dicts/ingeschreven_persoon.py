@@ -81,10 +81,10 @@ def get_persoon_instance_dict(instance_xml_dict):
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                     ]
-                ),
-                "datum": instance_xml_dict.get("geboortedatum", "string")
+                )
                 if not isinstance(instance_xml_dict.get("geboortedatum"), dict)
                 else 1,
+                "datum": instance_xml_dict.get("geboortedatum", "string"),
                 "jaar": int(
                     instance_xml_dict.get("geboortedatum", "19000101")[
                         settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
@@ -153,10 +153,10 @@ def get_persoon_instance_dict(instance_xml_dict):
                 instance_xml_dict.get("inp.datumInschrijving", "19000101")[
                     settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                 ]
-            ),
-            "datum": instance_xml_dict.get("inp.datumInschrijving", "19000101")
+            )
             if not isinstance(instance_xml_dict.get("datumInschrijving"), dict)
             else 1,
+            "datum": instance_xml_dict.get("inp.datumInschrijving", "19000101"),
             "jaar": int(
                 instance_xml_dict.get("inp.datumInschrijving", "string")[
                     settings.OPENPERSONEN_YEAR_START : settings.OPENPERSONEN_YEAR_END
@@ -228,9 +228,6 @@ def get_persoon_instance_dict(instance_xml_dict):
                         )[
                             settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END
                         ]
-                    ),
-                    "datum": instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
-                        "inp.datumVerkrijging", "19000101"
                     )
                     if not isinstance(
                         instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
@@ -239,6 +236,9 @@ def get_persoon_instance_dict(instance_xml_dict):
                         dict,
                     )
                     else 1,
+                    "datum": instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
+                        "inp.datumVerkrijging", "19000101"
+                    ),
                     "jaar": int(
                         instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
                             "inp.datumVerkrijging", "19000101"
@@ -474,9 +474,6 @@ def get_persoon_instance_dict(instance_xml_dict):
                     instance_xml_dict.get("verblijfsadres", {}).get(
                         "begindatumVerblijf", "19000101"
                     )[settings.OPENPERSONEN_DAY_START : settings.OPENPERSONEN_DAY_END]
-                ),
-                "datum": instance_xml_dict.get("verblijfsadres", {}).get(
-                    "begindatumVerblijf", "19000101"
                 )
                 if not isinstance(
                     instance_xml_dict.get("verblijfsadres", {}).get(
@@ -485,6 +482,9 @@ def get_persoon_instance_dict(instance_xml_dict):
                     dict,
                 )
                 else 1,
+                "datum": instance_xml_dict.get("verblijfsadres", {}).get(
+                    "begindatumVerblijf", "19000101"
+                ),
                 "jaar": int(
                     instance_xml_dict.get("verblijfsadres", {}).get(
                         "begindatumVerblijf", "19000101"
