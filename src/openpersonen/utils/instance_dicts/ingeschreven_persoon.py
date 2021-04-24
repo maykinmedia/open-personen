@@ -398,11 +398,13 @@ def get_persoon_instance_dict(instance_xml_dict):
             },
             "plaats": {
                 "code": GemeenteCodeAndOmschrijving.get_code_from_omschrijving(
-                    instance_xml_dict.get("inp.overlijdenplaats", "string")
+                    instance_xml_dict.get("inp.overlijdenplaats", 0)
                 )
                 if not isinstance(instance_xml_dict.get("inp.overlijdenplaats"), dict)
-                else "string",
-                "omschrijving": (instance_xml_dict.get("inp.overlijdenplaats", 0)),
+                else 0,
+                "omschrijving": (
+                    instance_xml_dict.get("inp.overlijdenplaats", "string")
+                ),
             },
             "inOnderzoek": {
                 "datum": any(
