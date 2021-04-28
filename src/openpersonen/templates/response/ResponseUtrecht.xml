@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soap:Body>
+        <BG:npsLa01 xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301">
+            <BG:stuurgegevens>
+                <StUF:berichtcode>La01</StUF:berichtcode>
+                <StUF:zender>
+                    <StUF:organisatie>Utrecht</StUF:organisatie>
+                    <StUF:applicatie>SBS</StUF:applicatie>
+                </StUF:zender>
+                <StUF:ontvanger>
+                    <StUF:applicatie>UDD</StUF:applicatie>
+                </StUF:ontvanger>
+                <StUF:referentienummer>${=java.util.UUID.randomUUID()}</StUF:referentienummer>
+                <StUF:tijdstipBericht>20210428145654950</StUF:tijdstipBericht>
+                <StUF:crossRefnummer>${=java.util.UUID.randomUUID()}</StUF:crossRefnummer>
+                <StUF:entiteittype>NPS</StUF:entiteittype>
+            </BG:stuurgegevens>
+            <bg310:parameters xmlns:bg310="http://www.egem.nl/StUF/sector/bg/0310">
+                <stuf301:indicatorVervolgvraag xmlns:stuf301="http://www.egem.nl/StUF/StUF0301">false
+                </stuf301:indicatorVervolgvraag>
+                <stuf301:indicatorAfnemerIndicatie xmlns:stuf301="http://www.egem.nl/StUF/StUF0301">false
+                </stuf301:indicatorAfnemerIndicatie>
+            </bg310:parameters>
+
+            <BG:antwoord>
+                <bg310:object xmlns:bg310="http://www.egem.nl/StUF/sector/bg/0310"
+                              xmlns:stuf301="http://www.egem.nl/StUF/StUF0301" stuf301:entiteittype="NPS"
+                              stuf301:sleutelVerzendend="-999994177">
+                    <bg310:inp.bsn>999994177</bg310:inp.bsn>
+                    <bg310:authentiek stuf301:metagegeven="true" stuf301:noValue="nietOndersteund" xsi:nil="true"/>
+                    <bg310:inp.a-nummer>9999941771</bg310:inp.a-nummer>
+                    <bg310:geslachtsnaam>Kik</bg310:geslachtsnaam>
+                    <bg310:voorvoegselGeslachtsnaam stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:voorletters>P.</bg310:voorletters>
+                    <bg310:voornamen>Peter</bg310:voornamen>
+                    <bg310:aanduidingNaamgebruik>E</bg310:aanduidingNaamgebruik>
+                    <bg310:adellijkeTitelPredikaat stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:geslachtsaanduiding>M</bg310:geslachtsaanduiding>
+                    <bg310:geboortedatum>19700101</bg310:geboortedatum>
+                    <bg310:inp.geboorteLand>6030</bg310:inp.geboorteLand>
+                    <bg310:overlijdensdatum stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:verblijfsadres>
+                        <bg310:authentiek stuf301:metagegeven="true">N</bg310:authentiek>
+                        <bg310:wpl.woonplaatsNaam stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:gor.straatnaam>Veldweg</bg310:gor.straatnaam>
+                        <bg310:aoa.postcode>3500AA</bg310:aoa.postcode>
+                        <bg310:aoa.huisnummer>1</bg310:aoa.huisnummer>
+                        <bg310:aoa.huisletter stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:aoa.huisnummertoevoeging stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:inp.locatiebeschrijving stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:begindatumVerblijf>20100101</bg310:begindatumVerblijf>
+                    </bg310:verblijfsadres>
+                    <bg310:inp.burgerlijkeStaat>1</bg310:inp.burgerlijkeStaat>
+                    <bg310:inp.gemeenteVanInschrijving>344</bg310:inp.gemeenteVanInschrijving>
+                    <bg310:vbt.aanduidingVerblijfstitel stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:ing.datumVerkrijgingVerblijfstitel stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:ing.datumVerliesVerblijfstitel stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:inp.datumVestigingInNederland stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:inp.immigratieLand stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:inp.datumVertrekUitNederland stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    <bg310:inp.indicatieGeheim>0</bg310:inp.indicatieGeheim>
+                    <bg310:inp.heeftAlsEchtgenootPartner stuf301:entiteittype="NPSNPSHUW" stuf301:noValue="geenWaarde"
+                                                         xsi:nil="true"/>
+                    <bg310:inp.heeftAlsKinderen stuf301:entiteittype="NPSNPSKND" stuf301:noValue="geenWaarde"
+                                                xsi:nil="true"/>
+                    <bg310:inp.heeftAlsOuders stuf301:entiteittype="NPSNPSOUD">
+                        <bg310:gerelateerde stuf301:entiteittype="NPS" stuf301:sleutelVerzendend="-666666666">
+                            <bg310:inp.bsn>666666666</bg310:inp.bsn>
+                            <bg310:inp.a-nummer>1035612636</bg310:inp.a-nummer>
+                            <bg310:geslachtsnaam>Burgerzaken</bg310:geslachtsnaam>
+                            <bg310:voorvoegselGeslachtsnaam stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                            <bg310:voorletters>A.</bg310:voorletters>
+                            <bg310:voornamen>Alexia</bg310:voornamen>
+                            <bg310:adellijkeTitelPredikaat stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                            <bg310:geslachtsaanduiding>V</bg310:geslachtsaanduiding>
+                            <bg310:geboortedatum>19500101</bg310:geboortedatum>
+                        </bg310:gerelateerde>
+                        <bg310:ouderAanduiding stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:datumIngangFamilierechtelijkeBetrekking stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:datumEindeFamilierechtelijkeBetrekking stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    </bg310:inp.heeftAlsOuders>
+                    <bg310:inp.heeftAlsOuders stuf301:entiteittype="NPSNPSOUD">
+                        <bg310:gerelateerde stuf301:entiteittype="NPS" stuf301:sleutelVerzendend="-099999999">
+                            <bg310:inp.bsn>099999999</bg310:inp.bsn>
+                            <bg310:inp.a-nummer>5555555555</bg310:inp.a-nummer>
+                            <bg310:geslachtsnaam>Kik</bg310:geslachtsnaam>
+                            <bg310:voorvoegselGeslachtsnaam stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                            <bg310:voorletters>J.</bg310:voorletters>
+                            <bg310:voornamen>Jan</bg310:voornamen>
+                            <bg310:adellijkeTitelPredikaat stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                            <bg310:geslachtsaanduiding>M</bg310:geslachtsaanduiding>
+                            <bg310:geboortedatum>19500101</bg310:geboortedatum>
+                        </bg310:gerelateerde>
+                        <bg310:ouderAanduiding stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:datumIngangFamilierechtelijkeBetrekking stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                        <bg310:datumEindeFamilierechtelijkeBetrekking stuf301:noValue="geenWaarde" xsi:nil="true"/>
+                    </bg310:inp.heeftAlsOuders>
+                    <bg310:inp.heeftAlsNationaliteit stuf301:entiteittype="NPSNAT">
+                        <bg310:gerelateerde stuf301:entiteittype="NAT">
+                            <bg310:code>0001</bg310:code>
+                        </bg310:gerelateerde>
+                    </bg310:inp.heeftAlsNationaliteit>
+                </bg310:object>
+            </BG:antwoord>
+        </BG:npsLa01>
+    </soap:Body>
+</soap:Envelope>

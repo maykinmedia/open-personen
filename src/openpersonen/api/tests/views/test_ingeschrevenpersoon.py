@@ -22,7 +22,10 @@ from openpersonen.api.tests.factory_models import (
     VerblijfplaatsFactory,
     VerblijfstitelFactory,
 )
-from openpersonen.api.tests.test_data import INGESCHREVEN_PERSOON_RETRIEVE_DATA
+from openpersonen.api.tests.test_data import (
+    INGESCHREVEN_PERSOON_RETRIEVE_DATA,
+    UTRECHT_INGESCHREVEN_PERSOON_RETRIEVE_DATA,
+)
 from openpersonen.api.tests.utils import is_url
 from openpersonen.api.views import IngeschrevenPersoonViewSet
 from openpersonen.api.views.generic_responses import (
@@ -279,6 +282,32 @@ class TestIngeschrevenPersoon(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(post_mock.called)
         self.assertEqual(response.json(), INGESCHREVEN_PERSOON_RETRIEVE_DATA)
+
+    @freeze_time("2020-09-12")
+    @requests_mock.Mocker()
+    @patch("djangorestframework_hal.utils.is_url", side_effect=is_url)
+    def test_detail_ingeschreven_persoon_with_utrecht_response(
+        self, post_mock, is_url_mock
+    ):
+        post_mock.post(
+            self.url,
+            content=bytes(
+                loader.render_to_string("response/ResponseUtrecht.xml"),
+                encoding="utf-8",
+            ),
+        )
+
+        response = self.client.get(
+            reverse(
+                "ingeschrevenpersonen-detail",
+                kwargs={"burgerservicenummer": "999994177"},
+            ),
+            HTTP_AUTHORIZATION=f"Token {self.token.key}",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(post_mock.called)
+        self.assertEqual(response.json(), UTRECHT_INGESCHREVEN_PERSOON_RETRIEVE_DATA)
 
     @freeze_time("2020-09-12")
     @requests_mock.Mocker()
