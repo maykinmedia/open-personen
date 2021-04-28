@@ -2,6 +2,15 @@
 Changelog
 =========
 
+1.0.0
+=====
+
+- Implementation of the Haal Centraal BRP API 1.0.0 specification.
+- Extension to use as mock service to serve test data via the BRP API.
+- Extension to connect with a StUF-BG compatible service to serve real data
+  via the BRP API.
+- A conversion service to convert BRP API requests to StUF-BG requests and
+  StUF-BG responses to BRP API responses
 
 0.1.0
 =====
