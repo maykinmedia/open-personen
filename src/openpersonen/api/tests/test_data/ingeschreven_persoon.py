@@ -358,7 +358,7 @@ UTRECHT_INGESCHREVEN_PERSOON_RETRIEVE_DATA = {
             "voornamen": "Peter",
             "voorvoegsel": None,
             "aanhef": "Geachte heer Kik",
-            "aanschrijfwijze": "P. OrderedDict([('@noValue', 'geenWaarde'), ('@http://www.w3.org/2001/XMLSchema-instance:nil', 'true')]) Kik",
+            "aanschrijfwijze": "P. Kik",
             "gebruikInLopendeTekst": "de heer Kik",
             "aanduidingNaamgebruik": "E",
         },

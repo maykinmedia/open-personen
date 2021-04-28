@@ -207,12 +207,14 @@ def convert_xml_to_ouder_dict(xml, id=None):
     result = []
     if isinstance(antwoord_object, list):
         for antwood_dict in antwoord_object:
-            result_dict = get_ouder_instance_dict(antwood_dict["gerelateerde"])
-            if not id or id == result_dict["burgerservicenummer"]:
-                result.append(result_dict)
+            if antwood_dict.get("gerelateerde"):
+                result_dict = get_ouder_instance_dict(antwood_dict["gerelateerde"])
+                if not id or id == result_dict["burgerservicenummer"]:
+                    result.append(result_dict)
     else:
-        result.append(get_ouder_instance_dict(antwoord_object["gerelateerde"]))
-        if id and result[0]["burgerservicenummer"] != id:
-            result = []
+        if antwoord_object.get("gerelateerde"):
+            result.append(get_ouder_instance_dict(antwoord_object["gerelateerde"]))
+            if id and result[0]["burgerservicenummer"] != id:
+                result = []
 
     return result

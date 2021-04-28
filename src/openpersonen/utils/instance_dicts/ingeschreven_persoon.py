@@ -220,7 +220,12 @@ def get_persoon_instance_dict(instance_xml_dict):
             {
                 "aanduidingBijzonderNederlanderschap": instance_xml_dict.get(
                     "inp.aanduidingBijzonderNederlanderschap", "string"
-                ),
+                )
+                if not isinstance(
+                    instance_xml_dict.get("inp.aanduidingBijzonderNederlanderschap"),
+                    dict,
+                )
+                else 1,
                 "datumIngangGeldigheid": {
                     "dag": int(
                         instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
@@ -238,7 +243,14 @@ def get_persoon_instance_dict(instance_xml_dict):
                     else 1,
                     "datum": instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
                         "inp.datumVerkrijging", "19000101"
-                    ),
+                    )
+                    if not isinstance(
+                        instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
+                            "inp.datumVerkrijging"
+                        ),
+                        dict,
+                    )
+                    else "string",
                     "jaar": int(
                         instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
                             "inp.datumVerkrijging", "19000101"
@@ -281,7 +293,14 @@ def get_persoon_instance_dict(instance_xml_dict):
                 "redenOpname": {
                     "code": instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
                         "inp.redenVerkrijging", "."
-                    ),
+                    )
+                    if not isinstance(
+                        instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
+                            "inp.redenVerkrijging"
+                        ),
+                        dict,
+                    )
+                    else "string",
                     "omschrijving": RedenCodeAndOmschrijving.get_omschrijving_from_code(
                         instance_xml_dict.get("inp.heeftAlsNationaliteit", {}).get(
                             "inp.redenVerkrijging", 0
