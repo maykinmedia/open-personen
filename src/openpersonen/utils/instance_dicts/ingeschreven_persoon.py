@@ -301,6 +301,7 @@ def get_persoon_instance_dict(instance_xml_dict):
                             "aanduidingBijzonderNederlanderschap"
                             == in_onderzoek.get("elementnaam")
                             for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                            if isinstance(in_onderzoek, dict)
                         ]
                     ),
                     "nationaliteit": any(
@@ -837,6 +838,7 @@ def get_persoon_instance_dict(instance_xml_dict):
                     [
                         "aanduidingVerblijfstitel" == in_onderzoek.get("elementnaam")
                         for in_onderzoek in instance_xml_dict.get("inOnderzoek", [])
+                        if isinstance(in_onderzoek, dict)
                     ]
                 ),
                 "datumEinde": "01-01-1900",
